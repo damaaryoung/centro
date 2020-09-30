@@ -312,6 +312,15 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 		
 		return $query->result_array();
 	}
+	public function selectKodeKantor(){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
+				FROM dpm_online.`app_kode_kantor` AKK;
+               ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+	}
 
 	//verifikasi
 	public function verifikasiHeader($idHeader,$verifHeader,$verifDokument,$varIdAgunanDokument,$idDokument){
@@ -337,7 +346,7 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 	}
 
 	//search list data
-	public function searching($search){
+	public function searching($search,$status,$kode_kantor){
 	    $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT 
 					id,
@@ -372,15 +381,15 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 								WHERE agunan_id <> '' #AND verifikasi = 0 
 										) jd 
 					ON jd.no_reff2 = jaminan_header.no_reff 
-				WHERE STATUS = 'MASUK' 
-					AND jaminan_header.kode_kantor = '00' 
+				WHERE STATUS = '$status' 
+					AND jaminan_header.kode_kantor = '$kode_kantor' 
 					AND (
 					jaminan_header.nomor LIKE '%$search%' 
 					OR nama LIKE '%$search%'
 					) 
 				#ORDER BY jaminan_header.nomor DESC 
 				ORDER BY jaminan_header.id DESC 
-				LIMIT 0, 25
+				LIMIT 0, 100
 				";
 		$query = $this->db2->query($str);
 		

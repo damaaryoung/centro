@@ -564,19 +564,24 @@ function verifikasiHeader(){
     });    
 }
 
-function searchAtas(){
+function serchDataVerif(){
     $('#employeeTable').DataTable().clear();
     $('#employeeTable').DataTable().destroy();
     var search = $('#search').val(); 
+    var status = $('#status').val();  
+    var kode_kantor = $('#kode_kantor').val();
     dataTableeee = [];
-    console.log('berubah ' + search);
+    console.log('berubah :  ' + search + ' ' + status + ' ' + kode_kantor);
     $('#loading').show(); 
 
     $.ajax({
             url : base_url + "index.php/AsetDokumenVerifikasiController/getDataSearch",
             type : "POST",
             dataType : "json",
-            data : {"search"    : search},
+            data : {"search"    : search,
+                    "status"    : status,
+                    "kode_kantor" : kode_kantor
+                    },
 
             success : function(response) {
                 //console.log(response);  

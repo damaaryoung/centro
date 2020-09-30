@@ -7,6 +7,7 @@ var iat = '';
 var exp = '';
 var usename = '';
 var userIdLogin = '';
+var kd_cabang = '';
 var base_url = $('#base_url').val();
 
 
@@ -36,15 +37,16 @@ $('#btn-log-in').click(function(){
       success : function(response){
         console.log(response);
 
-        status  = response['status'];
-        nama    = response['payload']['nama'];
-        nik     = response['payload']['nik'];
-        jabatan = response['payload']['jabatan'];
-        email   = response['payload']['email'];
-        iat     = response['payload']['iat'];
-        exp     = response['payload']['exp'];
-        usename = response['payload']['usename'];
+        status      = response['status'];
+        nama        = response['payload']['nama'];
+        nik         = response['payload']['nik'];
+        jabatan     = response['payload']['jabatan'];
+        email       = response['payload']['email'];
+        iat         = response['payload']['iat'];
+        exp         = response['payload']['exp'];
+        usename     = response['payload']['usename'];
         userIdLogin = response['payload']['id'];
+        kd_cabang   = response['user']['kd_cabang'];
         loginfunction2(nama,
                        nik,
                        jabatan,
@@ -52,7 +54,8 @@ $('#btn-log-in').click(function(){
                        iat,
                        exp,
                        usename,
-                       userIdLogin);
+                       userIdLogin,
+                       kd_cabang);
       },
       error: function (response) {
         console.log(response);
@@ -64,7 +67,8 @@ $('#btn-log-in').click(function(){
                        iat,
                        exp,
                        usename,
-                       userIdLogin);       
+                       userIdLogin,
+                       kd_cabang);       
       }
     });
 
@@ -77,7 +81,8 @@ function loginfunction2(nama,
                        iat,
                        exp,
                        usename,
-                       userIdLogin){
+                       userIdLogin,
+                       kd_cabang){
       console.log(nama);
          $.ajax({
               url : base_url +"index.php/LoginController/login_process",
@@ -90,7 +95,9 @@ function loginfunction2(nama,
                       "iat" : iat,
                       "exp" : exp,
                       "usename" : usename,
-                      "userIdLogin" : userIdLogin},
+                      "userIdLogin" : userIdLogin,
+                      "kd_cabang"   : kd_cabang
+                    },
 
               success : function(response) {
                  console.log('harusnya bisa');

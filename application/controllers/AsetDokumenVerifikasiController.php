@@ -17,6 +17,7 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 		$data['sidebar'] = $this->load->view('templates/sidebar.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('templates/footer.php', NULL, TRUE);
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
+		$data['selectKodeKantor'] = $this->AsetDokumenVerifikasiModel->selectKodeKantor();
 
 		$data['VerifikasiMainModal'] = $this->load->view('ViewAsetDokumen/Verifikasi/VerifikasiMainModal.php', NULL, TRUE);
 		$data['VerifikasiModalSertifikat'] = $this->load->view('ViewAsetDokumen/Verifikasi/VerifikasiDataSertifikat.php', NULL, TRUE);
@@ -71,8 +72,10 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 	}
 	public function getDataSearch(){
 		$search 	= $this->input->post('search');
+		$status     = $this->input->post('status');
+        $kode_kantor = $this->input->post('kode_kantor');
 		//$searchlist	= $this->AsetDokumenVerifikasiModel->searching($search);
-		$searchlist = $this->AsetDokumenVerifikasiModel->searching($search);
+		$searchlist = $this->AsetDokumenVerifikasiModel->searching($search,$status,$kode_kantor);
 		foreach ($searchlist as $row) :
 			$nomor              = $row['nomor'];
 			$tgl                = $row['tgl'];

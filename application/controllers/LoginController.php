@@ -39,7 +39,8 @@ class LoginController extends CI_Controller {
 			'iat' => $this->input->post('iat'),
 			'exp' => $this->input->post('exp'),
 			'usename' => $this->input->post('usename'),
-			'userIdLogin' => $this->input->post('userIdLogin')
+			'userIdLogin' => $this->input->post('userIdLogin'),
+			'kd_cabang' => $this->input->post('kd_cabang')
 		);
 
 		

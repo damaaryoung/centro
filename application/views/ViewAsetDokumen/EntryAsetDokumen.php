@@ -43,44 +43,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
       </div>
 
-          <!-- From card Bawah -->
-            <!-- Horizontal Form -->
-            <div class="card card-info">
-              <div class="card-header with-border">
-                <h3 class="card-title">Filter</h3>
-              </div>
-              <!-- /.card-header -->
-                <!-- /.card-body -->
-                <div class="card-footer text-center">
-                  <form class="form-inline" action="/action_page.php">
-                      <div class="form-group">
-                        <label for="email">Area Kerja</label> &nbsp;&nbsp;
-                        <select class="form-control select2" id="filter_area_kerja1" name="filter_area_kerja1" style="width: 200px;">
-                              <option value="" selected disabled hidden>Silahkan Pilih</option>
-                           
-                        </select>&nbsp;&nbsp;
-                      </div>
-                      <div class="form-group">
-                        <label for="pwd">Status</label> &nbsp;&nbsp;
-                        <select class="form-control select2" id="filter_status" name="filter_status" style="width: 200px;">
-                              <option value="" selected disabled hidden>Silahkan Pilih</option>
-                            
-                        </select> &nbsp;&nbsp;
-                      </div>
-                      <div class="form-group">
-                        <label for="pwd">Jenis</label> &nbsp;&nbsp;
-                        <select class="form-control select2" id="filter_jenis" name="filter_jenis" style="width: 200px;">
-                              <option value="" selected disabled hidden>Silahkan Pilih</option>
-                              
-                        </select>&nbsp;&nbsp;
-                      </div>                    
-                      <button type="submit" class="btn btn-primary btn-sm"> <i class="fa fa-search"></i></button>
-                  </form>
+      <!-- From card Bawah -->
+          <!-- Horizontal Form -->
+          <div class="card card-info">
+            <div class="card-header with-border">
+              <h3 class="card-title">Filter</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body text-center">  
+
+               <div class="form-inline">
+                    <div class="form-group">
+                      <label for="email">Search</label> &nbsp; &nbsp;
+                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchDataVerif()"> 
+                     &nbsp;&nbsp;
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Kode Kantor</label> &nbsp;&nbsp;
+                      <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 200px;"  onchange="serchDataVerif()">
+                            <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
+                            <?php foreach ($selectKodeKantor as $row) : ?>
+                              <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
+                            <?php endforeach;?>
+                      </select>&nbsp;&nbsp;
+                    </div>   
+                    <div class="form-group">
+                      <label for="pwd">Status</label> &nbsp;&nbsp;
+                      <select class="form-control select2" id="status" name="status" style="width: 200px;"  onchange="serchDataVerif()">
+                              <option value="MASUK">MASUK</option>
+                              <option value="KELUAR">KELUAR</option>
+                              <option value="PINJAM">PINJAM</option>
+                              <option value="WAITING">WAITING</option>
+                              <option value="IN TRANSIT">IN TRANSIT</option>
+                              <option value="KEMNALI">KEMNALI</option>
+                      </select> &nbsp;&nbsp;
+                    </div>   
+                    <div class="form-group">
+                      <label for="pwd">Jenis</label> &nbsp;&nbsp;
+                      <select class="form-control select2" id="status" name="status" style="width: 200px;"  onchange="serchDataVerif()">
+                              <option value="SERTIFIKAT">SERTIFIKAT</option>
+                              <option value="BPKB">BPKB</option>
+                              <option value="EMAS">EMAS</option>
+                      </select> &nbsp;&nbsp;
+                    </div>                 
                 </div>
-                <!-- /.card-footer -->
+                   
+            </div>            
           </div>
-            <!-- /.card -->
-            <!-- From card Bawah -->
+          <!-- /.card -->
+          <!-- From card Bawah -->
 
           <div class="card">
             <div class="card-header">
