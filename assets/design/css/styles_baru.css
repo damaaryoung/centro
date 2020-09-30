@@ -1,0 +1,103 @@
+header .notification-bar {
+  margin-top: 0;
+}
+.modal-backdrop.in {
+  opacity: 0.5;
+}
+.pull-right {
+  margin-top: 4px;
+  margin-right: 8px;
+}
+.btn-warning {
+  background: #f0ad4e;
+  border: 1px solid #f0ad4e;
+}
+.btn-primary {
+  background: #003D79;
+  border: 1px solid #003D79;
+}
+.btn-success {
+  background: #5cb85c;
+  border: 1px solid #5cb85c;
+}
+.btn-info {
+  background: #2ecc71;
+  border: 1px solid #2ecc71;
+}
+.btn-info:hover {
+  background: #2ecc71;
+  opacity: 0.8;
+  border: 1px solid #2ecc71;
+}
+.mt-0 {
+  margin-top: 0!important;
+}
+.section-title {
+  margin-top: 50px;
+  position: relative;
+}
+.section-title span.add-btn {
+  position: absolute;
+  top: -10px;
+  right: 0;
+}
+.section-title h2 {
+  position: static;
+  margin: 0 0 20px;
+  height: 30px;
+  border-bottom: 2px solid;
+  border-bottom-color: #DCDCDC;
+  font-weight: 500;
+  font-size: 20px;
+}
+.section-title h2 span {
+  display: inline-table;
+  height: 30px;
+  border-bottom: 2px solid;
+  border-bottom-color: #F44336;
+  /*#03396c*/
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0;
+}
+#loading-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+#loading-ajax {
+  position: fixed;
+  z-index: 1999;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background: #fff;
+  opacity: 0.5;
+  filter: alpha(opacity=80);
+}
+.datetimepicker {
+  z-index: 1151 !important;
+}
+.modal-alert {
+  z-index: 1150;
+}
+.panel-dp {
+  margin-bottom: 5px;
+}
+.datatable-dp {
+  margin-top: 17px;
+}
+.button-dp {
+  margin-right: 10px;
+}
+.radio-abnormal {
+  border: 1px solid #DCDCDC;
+  border-radius: 10px;
+  margin-left: 15px;
+  right: 260px;
+  top: 10px;
+}
+/*# sourceMappingURL=styles_baru.css.map */
+/*# sourceMappingURL=styles_baru.css.map */
+/*# sourceMappingURL=styles_baru.css.map */

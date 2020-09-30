@@ -1,0 +1,39 @@
+{
+    "Data":
+    [
+      {
+        "branch_code": "A001",
+        "branch_name": "PLAZA BAPINDO",
+        "dealer_code": "A005",
+        "dealer_name": "CV MITRA SEHATI JAYA",
+        "address": "65697 Lakewood Gardens Road",
+        "dp_total": 4000000,
+        "paid_adm_fee": 224000,
+        "paid_ins_fee": 19000,
+        "first_installment": 491300,
+        "dp_net": 3105700,
+        "principal": 5510300,
+        "paid_fiducia": 0,
+        "fiducia_financed": 115000,
+        "paid_insr_2": 110000,
+        "fin_insr_2": 200000,
+        "ref_adm": 0,
+        "disk_and_kom": 210000,
+        "bbn_mu": 0,
+        "discount": 100000,
+        "komisi_langsung": 110000,
+        "notaris": 0,
+        "provisi_paid": 50000,
+        "provisi_fin": 50000,
+        "jp": 300000,
+        "adm": 100000,
+        "bbn_dealer": 0,
+        "subsidi_dp": 0,
+        "subsidi_rate": "0-TIDAK ADA",
+        "subsidi_potong_pelunasan": 0,
+        "subsidi_klaim_atmp": 0,
+        "rate_eff_b4_subsidy": 0,
+        "rate_flat_b4_subsidy": 0
+    }
+]
+}
