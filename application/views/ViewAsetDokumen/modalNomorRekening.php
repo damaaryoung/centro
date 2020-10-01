@@ -14,6 +14,13 @@
 
     <!-- Data Tables -->
     <div class="card">
+      <div class="form-inline" style="padding : 10px; float: right">
+                    <div class="form-group">
+                      <label for="email">Search</label> &nbsp; &nbsp;
+                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchDataRekening()"> 
+                     &nbsp;&nbsp;
+                    </div>
+      </div>
     <div id="loading2">
               <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
       </div>

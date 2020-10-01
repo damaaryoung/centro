@@ -62,6 +62,9 @@
 //  var dashboard =  $('#dashboard').val();
 //var agunan = ;
 
+  function zoom() {
+    document.body.style.zoom = "90%" 
+  }
   $('#dashboard').click(function(){   
     var dashboard = document.getElementById('dashboard');
     dashboard.className = dashboard.className + ' active';

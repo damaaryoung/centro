@@ -58,3 +58,46 @@ $('#btn_kembali_norek_modal').click(function ()  {
 $('#btn_kembali_norek_modal2').click(function () {
     $('#modalNomorRekening').modal('hide');
 });
+
+
+
+function serchDataRekening(){
+    $('#TableNoRek').DataTable().clear();
+    $('#TableNoRek').DataTable().destroy();
+    var search = $('#search').val(); 
+    dataTableeee = [];
+    console.log('berubah :  ' + search + ' ');
+    $('#loading2').show(); 
+
+    $.ajax({
+            url : base_url + "index.php/AsetDokumenEntryController/getDataSearchRekening",
+            type : "POST",
+            dataType : "json",
+            data : {"search"    : search},
+
+            success : function(response) {
+                //console.log(response);  
+                        
+                dataTableeee.push(response); 
+
+                console.log(dataTableeee);
+                $('#TableNoRek > tbody:first').html(dataTableeee);
+                $(document).ready(function() {
+                    $('#TableNoRek').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "aaSorting" : []
+                    } );
+                } );
+                $('#loading2').hide();  
+                console.log("FINISH");
+                
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Data Tidak Ditemukan');
+            }
+    });    
+}

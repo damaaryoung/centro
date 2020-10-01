@@ -249,10 +249,17 @@
 
     <!-- Data Tables -->
     <div class="box">
+    <div class="form-inline" style="padding : 10px; float: right">
+                    <div class="form-group">
+                      <label for="email">Search</label> &nbsp; &nbsp;
+                      <input type="text" class="form-control" name="searchRekeningUpdate" id="searchRekeningUpdate" onchange="serchDataRekening()"> 
+                     &nbsp;&nbsp;
+                    </div>
+      </div>
     <div id="loading7">
               <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
       </div>
-            <div class="box-body">
+        <div class="card-body">
             <table id="TableNoRek" class="table table-striped table-bordered" style="width:100% text-align:center" >
               <thead>
                   <tr>

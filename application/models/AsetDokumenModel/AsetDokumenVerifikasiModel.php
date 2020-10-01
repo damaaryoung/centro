@@ -389,7 +389,7 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 					) 
 				#ORDER BY jaminan_header.nomor DESC 
 				ORDER BY jaminan_header.id DESC 
-				LIMIT 0, 100
+				LIMIT 0, 25
 				";
 		$query = $this->db2->query($str);
 		

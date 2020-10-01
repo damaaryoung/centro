@@ -456,8 +456,10 @@ $('#bodyJenisPengurusan').on('click','.btnPiliJenis', function () {
     $('#mainTanggalRencanaKembaliPinjam').val(kembali);
     $('#ListJaminanPengurusanModal').modal('hide');
 });
+
+
 //// BUTTON DI MAIN VIEW TABLE ////
-$('.btnUpdate').click(function () {
+$('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
     nomor = $(this).data("nomor");
     noref = $(this).data("noref");
     status = $(this).data("status");
@@ -538,7 +540,8 @@ $('.btnUpdate').click(function () {
         }
     });
 });
-$('.btnDelete').click(function () {
+
+$('#bodyTableAsetDokumen').on('click','.btnDelete', function () {
     nomor = $(this).data("nomor");
     noref = $(this).data("noref");
     status = $(this).data("status");
@@ -551,7 +554,8 @@ $('.btnDelete').click(function () {
             alert('Data Batal Di Delete');
         }
 });
-$('.btnPinjam').click(function () {
+
+$('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
     nomor = $(this).data("nomor");
     noref = $(this).data("noref");
     status = $(this).data("status");
@@ -608,7 +612,8 @@ $('.btnPinjam').click(function () {
         }
     });   
 });
-$('.btnKembaliDokumen').click(function () {
+
+$('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
     nomor = $(this).data("nomor");
     noref = $(this).data("noref");
     status = $(this).data("status");
@@ -668,7 +673,8 @@ $('.btnKembaliDokumen').click(function () {
         }
     });    
 });
-$('.btnDueDate').click(function () {
+
+$('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
     nomor = $(this).data("nomor");
     noref = $(this).data("noref");
     status = $(this).data("status");
@@ -710,29 +716,7 @@ $('.btnDueDate').click(function () {
         }
     }); 
 });
-$('.btnCetak').click(function () {
-    nomor = $(this).data("nomor");
-    noref = $(this).data("noref");
-    status = $(this).data("status");
-    idAgunan = $(this).data("agunan");
-    console.log(nomor,noref,status,idAgunan);
 
-    console.log(nomor + ' ' + noref + ' ' + status + ' ' + base_url + ' ' + idAgunan );
-   // $('#loading').show();
-
-    // var doc = new jsPDF();
-    // doc.text(20,20,'TEST !!');
-    // doc.save('Test.pdf');
-
-    html2canvas(document.body, {
-        onrendered: function(canvas){
-            var img = canvas.toDataURL("image/png");
-            var doc = new jsPDF();
-            doc.addImage(img,'JPEG',20,20);
-            doc.save('test.pdf');
-        }
-    });
-});
 $('#mainBtnSearchRekening').click(function () {
     $('#modalNomorRekening').modal('show');
     dataTableeee = [];
@@ -778,6 +762,13 @@ $('#bodyNomorRekening').on('click','.btnPilihRekening', function () {
     $('#mainNamaNasabah').val(namaNasabah);
     $('#modalNomorRekening').modal('hide');
 });
+$('#btn_kembali_norek_modal').click(function ()  {
+    $('#modalNomorRekening').modal('hide');
+});
+$('#btn_kembali_norek_modal2').click(function () {
+    $('#modalNomorRekening').modal('hide');
+});
+
 
 function mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument){
               
@@ -2147,4 +2138,142 @@ function checkBPKB(){
     }else{
         bpkb_check_skt = 'N';
     }
+}
+
+function serchAsetDokumen(){
+    $('#employeeTable').DataTable().clear();
+    $('#employeeTable').DataTable().destroy();
+    var search = $('#search').val(); 
+    var status = $('#status').val();  
+    var kode_kantor = $('#kode_kantor').val();
+    var jenis       = $('#jenis').val();
+    dataTableeee = [];
+    console.log(jenis + ' ' + search + ' ' + status + ' ' + kode_kantor);
+    $('#loading').show(); 
+
+    $.ajax({
+            url : base_url + "index.php/AsetDokumenEntryController/getDataSearchA",
+            type : "POST",
+            dataType : "json",
+            data : {"search"    : search,
+                    "status"    : status,
+                    "kode_kantor" : kode_kantor,
+                    "jenis"     : jenis
+                    },
+
+            success : function(response) {
+                console.log(response);  
+                        
+                dataTableeee.push(response); 
+
+                console.log(dataTableeee);
+                $('#employeeTable > tbody:first').html(dataTableeee);
+                $(document).ready(function() {
+                    $('#employeeTable').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "aaSorting" : []
+                    } );
+                } );
+                $('#loading').hide();  
+                console.log("FINISH");
+                
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Data Tidak Ditemukan');
+                $('#loading').hide();
+            }
+    });    
+}
+function serchAsetDokumenB(){
+    $('#employeeTable').DataTable().clear();
+    $('#employeeTable').DataTable().destroy();
+    var search = $('#search').val(); 
+    var status = $('#status').val();  
+    var kode_kantor = $('#kode_kantor').val();
+    var jenis       = $('#jenis').val();
+    dataTableeee = [];
+    console.log(jenis + ' ' + search + ' ' + status + ' ' + kode_kantor);
+    $('#loading').show(); 
+
+    $.ajax({
+            url : base_url + "index.php/AsetDokumenEntryController/getDataSearchB",
+            type : "POST",
+            dataType : "json",
+            data : {"search"    : search,
+                    "status"    : status,
+                    "kode_kantor" : kode_kantor,
+                    "jenis"     : jenis
+                    },
+
+            success : function(response) {
+                console.log(response);  
+                        
+                dataTableeee.push(response); 
+
+                console.log(dataTableeee);
+                $('#employeeTable > tbody:first').html(dataTableeee);
+                $(document).ready(function() {
+                    $('#employeeTable').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "aaSorting" : []
+                    } );
+                } );
+                $('#loading').hide();  
+                console.log("FINISH");
+                
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Data Tidak Ditemukan');
+                $('#loading').hide();
+            }
+    });    
+}
+function serchDataRekening(){
+    $('#TableNoRek').DataTable().clear();
+    $('#TableNoRek').DataTable().destroy();
+    var search = $('#searchRekeningUpdate').val(); 
+    dataTableeee = [];
+    console.log('berubah :  ' + search + ' ');
+    $('#loading7').show(); 
+
+    //// bareng pakai function search nya di controller Aset Dokumen Entry
+    $.ajax({
+            url : base_url + "index.php/AsetDokumenEntryController/getDataSearchRekening",
+            type : "POST",
+            dataType : "json",
+            data : {"search"    : search},
+
+            success : function(response) {
+                //console.log(response);  
+                        
+                dataTableeee.push(response); 
+
+                console.log(dataTableeee);
+                $('#TableNoRek > tbody:first').html(dataTableeee);
+                $(document).ready(function() {
+                    $('#TableNoRek').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "aaSorting" : []
+                    } );
+                } );
+                $('#loading7').hide();  
+                console.log("FINISH");
+                
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Data Tidak Ditemukan');
+            }
+    });    
 }

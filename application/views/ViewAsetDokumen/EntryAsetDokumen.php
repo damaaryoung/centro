@@ -55,12 +55,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                <div class="form-inline">
                     <div class="form-group">
                       <label for="email">Search</label> &nbsp; &nbsp;
-                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchDataVerif()"> 
+                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchAsetDokumen()"> 
                      &nbsp;&nbsp;
                     </div>
                     <div class="form-group">
                       <label for="pwd">Kode Kantor</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 200px;"  onchange="serchDataVerif()">
+                      <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 200px;">
                             <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
                             <?php foreach ($selectKodeKantor as $row) : ?>
                               <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
@@ -69,18 +69,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>   
                     <div class="form-group">
                       <label for="pwd">Status</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="status" name="status" style="width: 200px;"  onchange="serchDataVerif()">
+                      <select class="form-control select2" id="status" name="status" style="width: 200px;"  onchange="serchAsetDokumenB()">
                               <option value="MASUK">MASUK</option>
                               <option value="KELUAR">KELUAR</option>
                               <option value="PINJAM">PINJAM</option>
                               <option value="WAITING">WAITING</option>
                               <option value="IN TRANSIT">IN TRANSIT</option>
-                              <option value="KEMNALI">KEMNALI</option>
+                              <option value="KEMBALI">KEMBALI</option>
                       </select> &nbsp;&nbsp;
                     </div>   
                     <div class="form-group">
                       <label for="pwd">Jenis</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="status" name="status" style="width: 200px;"  onchange="serchDataVerif()">
+                      <select class="form-control select2" id="jenis" name="jenis" style="width: 200px;"  onchange="serchAsetDokumenB()">
                               <option value="SERTIFIKAT">SERTIFIKAT</option>
                               <option value="BPKB">BPKB</option>
                               <option value="EMAS">EMAS</option>
@@ -117,7 +117,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th style="width:230px;">Action</th>
                   </tr>
               </thead>
-              <tbody>
+              <tbody id="bodyTableAsetDokumen">
               <?php
                          $idx = 1;
                             foreach ($ListAsset as $row) :
@@ -307,6 +307,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $('#employeeTable').DataTable( {
                 "scrollX": true,
                 "autoWidth" : true,
+                "searching": false,
                 "aaSorting" : []
             } );
         } );

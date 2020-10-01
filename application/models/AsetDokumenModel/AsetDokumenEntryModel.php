@@ -18,6 +18,18 @@ class AsetDokumenEntryModel extends CI_Model{
         
         return $query->result_array();
 	}
+	public function searchNoRek($search){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+			$str = "SELECT * 
+					FROM `vmicro_browse_kredit` 
+					WHERE no_rekening LIKE '$search%' 
+					#OR nasabah_id LIKE '$search%'
+					OR nama_nasabah LIKE '%$search%'
+					ORDER BY tgl_realisasi DESC LIMIT 25;";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+	}
 	public function sysdate(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
@@ -99,57 +111,56 @@ class AsetDokumenEntryModel extends CI_Model{
 		
 		return $query->result_array();
 	}
-	public function listAsetDokumen(){
+	public function listAsetDokumen($kode_kantor){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT * FROM
-					(SELECT 
+		$str = "SELECT 
 					`jaminan_dokument`.`agunan_id`,
 					LEFT(
-						IF(
+					IF(
 						`jenis` = 'SERTIFIKAT',
 						CONCAT(
-							IF(
+						IF(
 							IFNULL(`no_shm`, '') <> '',
 							'SHM',
 							IF(
-								IFNULL(`no_shgb`, '') <> '',
-								'SHGB',
-								'AJB'
+							IFNULL(`no_shgb`, '') <> '',
+							'SHGB',
+							'AJB'
 							)
-							),
-							' NO. ',
-							IF(
+						),
+						' NO. ',
+						IF(
 							IFNULL(`no_shm`, '') <> '',
 							`no_shm`,
 							IF(
-								IFNULL(`no_shgb`, '') <> '',
-								`no_shgb`,
-								`no_ajb`
+							IFNULL(`no_shgb`, '') <> '',
+							`no_shgb`,
+							`no_ajb`
 							)
-							),
-							' A/N : ',
-							`nama_pemilik_sertifikat`,
-							' ALAMAT : ',
-							`alamat_sertifikat`
+						),
+						' A/N : ',
+						`nama_pemilik_sertifikat`,
+						' ALAMAT : ',
+						`alamat_sertifikat`
 						),
 						CONCAT(
-							'BPKB NO. ',
-							IFNULL(`nomor_bpkb`, ''),
-							' A/N : ',
-							`nama_bpkb`,
-							' ALAMAT : ',
-							`alamat_bpkb`,
-							' NO RANGKA : ',
-							`no_rangka`,
-							' NO MESIN : ',
-							`no_mesin`,
-							' TAHUN ',
-							`tahun`,
-							' NO. POL : ',
-							`no_polisi`
+						'BPKB NO. ',
+						IFNULL(`nomor_bpkb`, ''),
+						' A/N : ',
+						`nama_bpkb`,
+						' ALAMAT : ',
+						`alamat_bpkb`,
+						' NO RANGKA : ',
+						`no_rangka`,
+						' NO MESIN : ',
+						`no_mesin`,
+						' TAHUN ',
+						`tahun`,
+						' NO. POL : ',
+						`no_polisi`
 						)
-						),
-						450
+					),
+					450
 					) AS deskripsi_ringkas_jaminan,
 					`flg_cetak`.`nomor` AS nomor_cetak,
 					jaminan_header.id,
@@ -157,14 +168,14 @@ class AsetDokumenEntryModel extends CI_Model{
 					LEFT(jaminan_header.no_reff, 10) AS no_reff,
 					jaminan_header.tgl,
 					IF(
-						jaminan_header.`status` = 'PINJAM',
-						CONCAT(
+					jaminan_header.`status` = 'PINJAM',
+					CONCAT(
 						jaminan_header.nama,
 						' (Nasabah a.n:',
 						`jaminan_history`.nama_nasabah,
 						')'
-						),
-						jaminan_header.nama
+					),
+					jaminan_header.nama
 					) AS nama,
 					LEFT(jaminan_header.alamat, 200) AS alamat,
 					jaminan_header.kelurahan,
@@ -186,32 +197,32 @@ class AsetDokumenEntryModel extends CI_Model{
 					`jaminan_history`.nama_nasabah,
 					jaminan_dokument.kode_kantor_lokasi_jaminan,
 					jaminan_dokument.`lokasi_penyimpanan` #, app_kode_kantor.nama_kantor 
-					FROM
+				FROM
 					jaminan_header 
 					LEFT JOIN `flg_cetak` 
-						ON `flg_cetak`.nomor = jaminan_header.nomor 
-						AND `flg_cetak`.setting = IF(
+					ON `flg_cetak`.nomor = jaminan_header.nomor 
+					AND `flg_cetak`.setting = IF(
 						jaminan_header.status = 'MASUK',
 						'ASSET_IN',
 						IF(
-							jaminan_header.status = 'KELUAR',
-							'ASSET_OUT',
-							'ASSET_TEMP_OUT'
+						jaminan_header.status = 'KELUAR',
+						'ASSET_OUT',
+						'ASSET_TEMP_OUT'
 						)
-						) 
+					) 
 					LEFT JOIN 
-						(SELECT DISTINCT 
+					(SELECT DISTINCT 
 						kode_kantor AS kd_kantor,
 						nomor,
 						no_reff,
 						nama AS nama_nasabah 
-						FROM
+					FROM
 						`jaminan_history` 
-						WHERE `status` = 'MASUK') `jaminan_history` 
-						ON `jaminan_history`.kd_kantor = jaminan_header.kode_kantor 
-						AND `jaminan_history`.no_reff = jaminan_header.no_reff 
+					WHERE `status` = 'MASUK') `jaminan_history` 
+					ON `jaminan_history`.kd_kantor = jaminan_header.kode_kantor 
+					AND `jaminan_history`.no_reff = jaminan_header.no_reff 
 					LEFT JOIN 
-						(SELECT 
+					(SELECT 
 						no_reff,
 						agunan_id,
 						jenis,
@@ -229,167 +240,15 @@ class AsetDokumenEntryModel extends CI_Model{
 						no_polisi,
 						kode_kantor_lokasi_jaminan,
 						lokasi_penyimpanan 
-						FROM
-						jaminan_dokument) jaminan_dokument 
-						ON jaminan_dokument.no_reff = jaminan_header.no_reff #WHERE jaminan_header.status='PINJAM'
-						#LEFT JOIN app_kode_kantor ON app_kode_kantor.kode_kantor = jaminan_dokument.kode_kantor_lokasi_jaminan 
-					WHERE #jaminan_header.kode_kantor = '00' 
-					#and 
-					jaminan_header.status = 'PINJAM' 
-					AND jaminan_header.jenis_jaminan IN ('SERTIFIKAT', 'BPKB', 'EMAS') 
-					ORDER BY jaminan_header.id DESC 
-					LIMIT 0, 100) AS a 
-					UNION ALL
-					SELECT * FROM
-					(SELECT 
-					`jaminan_dokument`.`agunan_id`,
-					LEFT(
-						IF(
-						`jenis` = 'SERTIFIKAT',
-						CONCAT(
-							IF(
-							IFNULL(`no_shm`, '') <> '',
-							'SHM',
-							IF(
-								IFNULL(`no_shgb`, '') <> '',
-								'SHGB',
-								'AJB'
-							)
-							),
-							' NO. ',
-							IF(
-							IFNULL(`no_shm`, '') <> '',
-							`no_shm`,
-							IF(
-								IFNULL(`no_shgb`, '') <> '',
-								`no_shgb`,
-								`no_ajb`
-							)
-							),
-							' A/N : ',
-							`nama_pemilik_sertifikat`,
-							' ALAMAT : ',
-							`alamat_sertifikat`
-						),
-						CONCAT(
-							'BPKB NO. ',
-							IFNULL(`nomor_bpkb`, ''),
-							' A/N : ',
-							`nama_bpkb`,
-							' ALAMAT : ',
-							`alamat_bpkb`,
-							' NO RANGKA : ',
-							`no_rangka`,
-							' NO MESIN : ',
-							`no_mesin`,
-							' TAHUN ',
-							`tahun`,
-							' NO. POL : ',
-							`no_polisi`
-						)
-						),
-						450
-					) AS deskripsi_ringkas_jaminan,
-					`flg_cetak`.`nomor` AS nomor_cetak,
-					jaminan_header.id,
-					LEFT(jaminan_header.nomor, 10) AS nomor,
-					LEFT(jaminan_header.no_reff, 10) AS no_reff,
-					jaminan_header.tgl,
-					IF(
-						jaminan_header.`status` = 'PINJAM',
-						CONCAT(
-						jaminan_header.nama,
-						' (Nasabah a.n:',
-						`jaminan_history`.nama_nasabah,
-						')'
-						),
-						jaminan_header.nama
-					) AS nama,
-					LEFT(jaminan_header.alamat, 200) AS alamat,
-					jaminan_header.kelurahan,
-					jaminan_header.kecamatan,
-					jaminan_header.kota,
-					jaminan_header.propinsi,
-					jaminan_header.kode_pos,
-					jaminan_header.jenis_jaminan,
-					jaminan_header.roda_kendaraan,
-					jaminan_header.status,
-					jaminan_header.kontrak_status,
-					jaminan_header.ket,
-					jaminan_header.no_rekening,
-					jaminan_header.tgl_realisasi,
-					jaminan_header.kode_kantor,
-					jaminan_header.tgl_rencana_kembali,
-					jaminan_header.jenis_pengurusan,
-					jaminan_header.verifikasi,
-					`jaminan_history`.nama_nasabah,
-					jaminan_dokument.kode_kantor_lokasi_jaminan,
-					jaminan_pemindahan.`lokasi_penyimpanan` AS lokasi_penyimpanan #, app_kode_kantor.nama_kantor 
 					FROM
-					jaminan_header 
-					LEFT JOIN `flg_cetak` 
-						ON `flg_cetak`.nomor = jaminan_header.nomor 
-						AND `flg_cetak`.setting = IF(
-						jaminan_header.status = 'MASUK',
-						'ASSET_IN',
-						IF(
-							jaminan_header.status = 'KELUAR',
-							'ASSET_OUT',
-							'ASSET_TEMP_OUT'
-						)
-						) 
-					LEFT JOIN 
-						(SELECT DISTINCT 
-						kode_kantor AS kd_kantor,
-						nomor,
-						no_reff,
-						nama AS nama_nasabah 
-						FROM
-						`jaminan_history` 
-						WHERE `status` = 'MASUK') `jaminan_history` 
-						ON `jaminan_history`.kd_kantor = jaminan_header.kode_kantor 
-						AND `jaminan_history`.no_reff = jaminan_header.no_reff 
-					LEFT JOIN 
-						(SELECT 
-						no_reff,
-						agunan_id,
-						jenis,
-						no_shm,
-						no_shgb,
-						no_ajb,
-						nama_pemilik_sertifikat,
-						alamat_sertifikat,
-						nomor_bpkb,
-						nama_bpkb,
-						alamat_bpkb,
-						no_rangka,
-						no_mesin,
-						tahun,
-						no_polisi,
-						kode_kantor_lokasi_jaminan 
-						FROM
 						jaminan_dokument) jaminan_dokument 
-						ON jaminan_dokument.no_reff = jaminan_header.no_reff 
-					LEFT JOIN 
-						(SELECT 
-						jpd.nomor,
-						jpd.no_reff,
-						jpd.agunan_id,
-						jaminan_pemindahan.lokasi_penyimpanan,
-						jaminan_pemindahan.`ket` 
-						FROM
-						`jaminan_pemindahan` 
-						INNER JOIN `jaminan_pemindahan_detail` jpd 
-							ON jpd.`nomor` = jaminan_pemindahan.`nomor`) jaminan_pemindahan 
-						ON jaminan_pemindahan.no_reff = jaminan_header.nomor #WHERE jaminan_header.status='PINJAM'
-					LEFT JOIN app_kode_kantor 
-						ON app_kode_kantor.kode_kantor = jaminan_dokument.kode_kantor_lokasi_jaminan 
-					WHERE #jaminan_header.kode_kantor = '00' 
-					#AND 
-					jaminan_header.status = 'MASUK' 
-					AND jaminan_header.jenis_jaminan IN ('SERTIFIKAT','BPKB', 'EMAS') #ORDER BY jaminan_header.nomor DESC 
-					ORDER BY jaminan_header.id DESC 
-					LIMIT 0, 100) AS b ;";
+					ON jaminan_dokument.no_reff = jaminan_header.no_reff #WHERE jaminan_header.status='PINJAM'
+					#LEFT JOIN app_kode_kantor ON app_kode_kantor.kode_kantor = jaminan_dokument.kode_kantor_lokasi_jaminan 
+				WHERE jaminan_header.kode_kantor = '$kode_kantor' 
+					AND jaminan_header.status = 'MASUK' 
+					AND jaminan_header.jenis_jaminan = 'SERTIFIKAT' 
+				ORDER BY jaminan_header.nomor DESC 
+				LIMIT 0, 25  ";
 		$query = $this->db2->query($str);
 		return $query->result_array();
 	}
@@ -1229,161 +1088,298 @@ class AsetDokumenEntryModel extends CI_Model{
 		// }
 	}
 	
+	/// searhing ///
+	public function querySearchA($search,$kode_kantor){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT 
+					`jaminan_dokument`.`agunan_id`,
+					LEFT(
+					IF(
+						`jenis` = 'SERTIFIKAT',
+						CONCAT(
+						IF(
+							IFNULL(`no_shm`, '') <> '',
+							'SHM',
+							IF(
+							IFNULL(`no_shgb`, '') <> '',
+							'SHGB',
+							'AJB'
+							)
+						),
+						' NO. ',
+						IF(
+							IFNULL(`no_shm`, '') <> '',
+							`no_shm`,
+							IF(
+							IFNULL(`no_shgb`, '') <> '',
+							`no_shgb`,
+							`no_ajb`
+							)
+						),
+						' A/N : ',
+						`nama_pemilik_sertifikat`,
+						' ALAMAT : ',
+						`alamat_sertifikat`
+						),
+						CONCAT(
+						'BPKB NO. ',
+						IFNULL(`nomor_bpkb`, ''),
+						' A/N : ',
+						`nama_bpkb`,
+						' ALAMAT : ',
+						`alamat_bpkb`,
+						' NO RANGKA : ',
+						`no_rangka`,
+						' NO MESIN : ',
+						`no_mesin`,
+						' TAHUN ',
+						`tahun`,
+						' NO. POL : ',
+						`no_polisi`
+						)
+					),
+					450
+					) AS deskripsi_ringkas_jaminan,
+					`flg_cetak`.`nomor` AS nomor_cetak,
+					jaminan_header.id,
+					LEFT(jaminan_header.nomor, 10) AS nomor,
+					LEFT(jaminan_header.no_reff, 10) AS no_reff,
+					jaminan_header.tgl,
+					IF(
+					jaminan_header.`status` = 'PINJAM',
+					CONCAT(
+						jaminan_header.nama,
+						' (Nasabah a.n:',
+						`jaminan_history`.nama_nasabah,
+						')'
+					),
+					jaminan_header.nama
+					) AS nama,
+					LEFT(jaminan_header.alamat, 200) AS alamat,
+					jaminan_header.kelurahan,
+					jaminan_header.kecamatan,
+					jaminan_header.kota,
+					jaminan_header.propinsi,
+					jaminan_header.kode_pos,
+					jaminan_header.jenis_jaminan,
+					jaminan_header.roda_kendaraan,
+					jaminan_header.status,
+					jaminan_header.kontrak_status,
+					jaminan_header.ket,
+					jaminan_header.no_rekening,
+					jaminan_header.tgl_realisasi,
+					jaminan_header.kode_kantor,
+					jaminan_header.tgl_rencana_kembali,
+					jaminan_header.jenis_pengurusan,
+					jaminan_header.verifikasi,
+					`jaminan_history`.nama_nasabah,
+					jaminan_dokument.kode_kantor_lokasi_jaminan,
+					jaminan_dokument.`lokasi_penyimpanan` #, app_kode_kantor.nama_kantor 
+				FROM
+					jaminan_header 
+					LEFT JOIN `flg_cetak` 
+					ON `flg_cetak`.nomor = jaminan_header.nomor 
+					AND `flg_cetak`.setting = IF(
+						jaminan_header.status = 'MASUK',
+						'ASSET_IN',
+						IF(
+						jaminan_header.status = 'KELUAR',
+						'ASSET_OUT',
+						'ASSET_TEMP_OUT'
+						)
+					) 
+					LEFT JOIN 
+					(SELECT DISTINCT 
+						kode_kantor AS kd_kantor,
+						nomor,
+						no_reff,
+						nama AS nama_nasabah 
+					FROM
+						`jaminan_history` 
+					WHERE `status` = 'MASUK') `jaminan_history` 
+					ON `jaminan_history`.kd_kantor = jaminan_header.kode_kantor 
+					AND `jaminan_history`.no_reff = jaminan_header.no_reff 
+					LEFT JOIN 
+					(SELECT 
+						no_reff,
+						agunan_id,
+						jenis,
+						no_shm,
+						no_shgb,
+						no_ajb,
+						nama_pemilik_sertifikat,
+						alamat_sertifikat,
+						nomor_bpkb,
+						nama_bpkb,
+						alamat_bpkb,
+						no_rangka,
+						no_mesin,
+						tahun,
+						no_polisi,
+						kode_kantor_lokasi_jaminan,
+						lokasi_penyimpanan 
+					FROM
+						jaminan_dokument) jaminan_dokument 
+					ON jaminan_dokument.no_reff = jaminan_header.no_reff #WHERE jaminan_header.status='PINJAM'
+					#LEFT JOIN app_kode_kantor ON app_kode_kantor.kode_kantor = jaminan_dokument.kode_kantor_lokasi_jaminan 
+				WHERE jaminan_header.kode_kantor = '$kode_kantor' 
+					AND (
+					jaminan_header.nomor LIKE '%$search%' 
+					OR jaminan_header.nama LIKE '%$search%' 
+					OR jaminan_dokument.agunan_id LIKE '$search%'
+					) 
+				ORDER BY jaminan_header.nomor DESC 
+				LIMIT 0, 25 ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+	}
+	public function querySearchB($status,$kode_kantor,$jenis){
+	    $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT 
+					`jaminan_dokument`.`agunan_id`,
+					LEFT(
+					IF(
+						`jenis` = 'SERTIFIKAT',
+						CONCAT(
+						IF(
+							IFNULL(`no_shm`, '') <> '',
+							'SHM',
+							IF(
+							IFNULL(`no_shgb`, '') <> '',
+							'SHGB',
+							'AJB'
+							)
+						),
+						' NO. ',
+						IF(
+							IFNULL(`no_shm`, '') <> '',
+							`no_shm`,
+							IF(
+							IFNULL(`no_shgb`, '') <> '',
+							`no_shgb`,
+							`no_ajb`
+							)
+						),
+						' A/N : ',
+						`nama_pemilik_sertifikat`,
+						' ALAMAT : ',
+						`alamat_sertifikat`
+						),
+						CONCAT(
+						'BPKB NO. ',
+						IFNULL(`nomor_bpkb`, ''),
+						' A/N : ',
+						`nama_bpkb`,
+						' ALAMAT : ',
+						`alamat_bpkb`,
+						' NO RANGKA : ',
+						`no_rangka`,
+						' NO MESIN : ',
+						`no_mesin`,
+						' TAHUN ',
+						`tahun`,
+						' NO. POL : ',
+						`no_polisi`
+						)
+					),
+					450
+					) AS deskripsi_ringkas_jaminan,
+					`flg_cetak`.`nomor` AS nomor_cetak,
+					jaminan_header.id,
+					LEFT(jaminan_header.nomor, 10) AS nomor,
+					LEFT(jaminan_header.no_reff, 10) AS no_reff,
+					jaminan_header.tgl,
+					IF(
+					jaminan_header.`status` = 'PINJAM',
+					CONCAT(
+						jaminan_header.nama,
+						' (Nasabah a.n:',
+						`jaminan_history`.nama_nasabah,
+						')'
+					),
+					jaminan_header.nama
+					) AS nama,
+					LEFT(jaminan_header.alamat, 200) AS alamat,
+					jaminan_header.kelurahan,
+					jaminan_header.kecamatan,
+					jaminan_header.kota,
+					jaminan_header.propinsi,
+					jaminan_header.kode_pos,
+					jaminan_header.jenis_jaminan,
+					jaminan_header.roda_kendaraan,
+					jaminan_header.status,
+					jaminan_header.kontrak_status,
+					jaminan_header.ket,
+					jaminan_header.no_rekening,
+					jaminan_header.tgl_realisasi,
+					jaminan_header.kode_kantor,
+					jaminan_header.tgl_rencana_kembali,
+					jaminan_header.jenis_pengurusan,
+					jaminan_header.verifikasi,
+					`jaminan_history`.nama_nasabah,
+					jaminan_dokument.kode_kantor_lokasi_jaminan,
+					jaminan_dokument.`lokasi_penyimpanan` #, app_kode_kantor.nama_kantor 
+				FROM
+					jaminan_header 
+					LEFT JOIN `flg_cetak` 
+					ON `flg_cetak`.nomor = jaminan_header.nomor 
+					AND `flg_cetak`.setting = IF(
+						jaminan_header.status = 'MASUK',
+						'ASSET_IN',
+						IF(
+						jaminan_header.status = 'KELUAR',
+						'ASSET_OUT',
+						'ASSET_TEMP_OUT'
+						)
+					) 
+					LEFT JOIN 
+					(SELECT DISTINCT 
+						kode_kantor AS kd_kantor,
+						nomor,
+						no_reff,
+						nama AS nama_nasabah 
+					FROM
+						`jaminan_history` 
+					WHERE `status` = 'MASUK') `jaminan_history` 
+					ON `jaminan_history`.kd_kantor = jaminan_header.kode_kantor 
+					AND `jaminan_history`.no_reff = jaminan_header.no_reff 
+					LEFT JOIN 
+					(SELECT 
+						no_reff,
+						agunan_id,
+						jenis,
+						no_shm,
+						no_shgb,
+						no_ajb,
+						nama_pemilik_sertifikat,
+						alamat_sertifikat,
+						nomor_bpkb,
+						nama_bpkb,
+						alamat_bpkb,
+						no_rangka,
+						no_mesin,
+						tahun,
+						no_polisi,
+						kode_kantor_lokasi_jaminan,
+						lokasi_penyimpanan 
+					FROM
+						jaminan_dokument) jaminan_dokument 
+					ON jaminan_dokument.no_reff = jaminan_header.no_reff #WHERE jaminan_header.status='PINJAM'
+					#LEFT JOIN app_kode_kantor ON app_kode_kantor.kode_kantor = jaminan_dokument.kode_kantor_lokasi_jaminan 
+				WHERE jaminan_header.kode_kantor = '$kode_kantor' 
+					AND jaminan_header.status = '$status' 
+					AND jaminan_header.jenis_jaminan = '$jenis' 
+				ORDER BY jaminan_header.nomor DESC 
+				LIMIT 0, 25 
+				";
+		$query = $this->db2->query($str);
+		
+		return $query->result_array();
+	}
+
 
 	
 
 
 }
-
-
-
-// SELECT 
-//   `jaminan_dokument`.`agunan_id`,
-//   LEFT(
-//     IF(
-//       `jenis` = 'SERTIFIKAT',
-//       CONCAT(
-//         IF(
-//           IFNULL(`no_shm`, '') <> '',
-//           'SHM',
-//           IF(
-//             IFNULL(`no_shgb`, '') <> '',
-//             'SHGB',
-//             'AJB'
-//           )
-//         ),
-//         ' NO. ',
-//         IF(
-//           IFNULL(`no_shm`, '') <> '',
-//           `no_shm`,
-//           IF(
-//             IFNULL(`no_shgb`, '') <> '',
-//             `no_shgb`,
-//             `no_ajb`
-//           )
-//         ),
-//         ' A/N : ',
-//         `nama_pemilik_sertifikat`,
-//         ' ALAMAT : ',
-//         `alamat_sertifikat`
-//       ),
-//       CONCAT(
-//         'BPKB NO. ',
-//         IFNULL(`nomor_bpkb`, ''),
-//         ' A/N : ',
-//         `nama_bpkb`,
-//         ' ALAMAT : ',
-//         `alamat_bpkb`,
-//         ' NO RANGKA : ',
-//         `no_rangka`,
-//         ' NO MESIN : ',
-//         `no_mesin`,
-//         ' TAHUN ',
-//         `tahun`,
-//         ' NO. POL : ',
-//         `no_polisi`
-//       )
-//     ),
-//     450
-//   ) AS deskripsi_ringkas_jaminan,
-//   `flg_cetak`.`nomor` AS nomor_cetak,
-//   jaminan_header.id,
-//   LEFT(jaminan_header.nomor, 10) AS nomor,
-//   LEFT(jaminan_header.no_reff, 10) AS no_reff,
-//   jaminan_header.tgl,
-//   IF(
-//     jaminan_header.`status` = 'PINJAM',
-//     CONCAT(
-//       jaminan_header.nama,
-//       ' (Nasabah a.n:',
-//       `jaminan_history`.nama_nasabah,
-//       ')'
-//     ),
-//     jaminan_header.nama
-//   ) AS nama,
-//   LEFT(jaminan_header.alamat, 200) AS alamat,
-//   jaminan_header.kelurahan,
-//   jaminan_header.kecamatan,
-//   jaminan_header.kota,
-//   jaminan_header.propinsi,
-//   jaminan_header.kode_pos,
-//   jaminan_header.jenis_jaminan,
-//   jaminan_header.roda_kendaraan,
-//   jaminan_header.status,
-//   jaminan_header.kontrak_status,
-//   jaminan_header.ket,
-//   jaminan_header.no_rekening,
-//   jaminan_header.tgl_realisasi,
-//   jaminan_header.kode_kantor,
-//   jaminan_header.tgl_rencana_kembali,
-//   jaminan_header.jenis_pengurusan,
-//   jaminan_header.verifikasi,
-//   `jaminan_history`.nama_nasabah,
-//   jaminan_dokument.kode_kantor_lokasi_jaminan,
-//   jaminan_pemindahan.`lokasi_penyimpanan` AS lokasi_penyimpanan #, app_kode_kantor.nama_kantor 
-// FROM
-//   jaminan_header 
-//   LEFT JOIN `flg_cetak` 
-//     ON `flg_cetak`.nomor = jaminan_header.nomor 
-//     AND `flg_cetak`.setting = IF(
-//       jaminan_header.status = 'MASUK',
-//       'ASSET_IN',
-//       IF(
-//         jaminan_header.status = 'KELUAR',
-//         'ASSET_OUT',
-//         'ASSET_TEMP_OUT'
-//       )
-//     ) 
-//   LEFT JOIN 
-//     (SELECT DISTINCT 
-//       kode_kantor AS kd_kantor,
-//       nomor,
-//       no_reff,
-//       nama AS nama_nasabah 
-//     FROM
-//       `jaminan_history` 
-//     WHERE `status` = 'MASUK') `jaminan_history` 
-//     ON `jaminan_history`.kd_kantor = jaminan_header.kode_kantor 
-//     AND `jaminan_history`.no_reff = jaminan_header.no_reff 
-//   LEFT JOIN 
-//     (SELECT 
-//       no_reff,
-//       agunan_id,
-//       jenis,
-//       no_shm,
-//       no_shgb,
-//       no_ajb,
-//       nama_pemilik_sertifikat,
-//       alamat_sertifikat,
-//       nomor_bpkb,
-//       nama_bpkb,
-//       alamat_bpkb,
-//       no_rangka,
-//       no_mesin,
-//       tahun,
-//       no_polisi,
-//       kode_kantor_lokasi_jaminan 
-//     FROM
-//       jaminan_dokument) jaminan_dokument 
-//     ON jaminan_dokument.no_reff = jaminan_header.no_reff 
-//   LEFT JOIN 
-//     (SELECT 
-//       jpd.nomor,
-//       jpd.no_reff,
-//       jpd.agunan_id,
-//       jaminan_pemindahan.lokasi_penyimpanan,
-//       jaminan_pemindahan.`ket` 
-//     FROM
-//       `jaminan_pemindahan` 
-//       INNER JOIN `jaminan_pemindahan_detail` jpd 
-//         ON jpd.`nomor` = jaminan_pemindahan.`nomor`) jaminan_pemindahan 
-//     ON jaminan_pemindahan.no_reff = jaminan_header.nomor #WHERE jaminan_header.status='PINJAM'
-//   LEFT JOIN app_kode_kantor 
-//     ON app_kode_kantor.kode_kantor = jaminan_dokument.kode_kantor_lokasi_jaminan 
-// WHERE #jaminan_header.kode_kantor = '00' 
-//   #AND 
-//   jaminan_header.status = 'MASUK' 
-//   AND jaminan_header.jenis_jaminan IN ('SERTIFIKAT', 'BPKB', 'EMAS') #ORDER BY jaminan_header.nomor DESC 
-// ORDER BY jaminan_header.id DESC 
-// LIMIT 0, 25 ;
-

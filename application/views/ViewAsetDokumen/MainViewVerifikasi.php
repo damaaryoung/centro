@@ -34,8 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <small>Transaksi Aset Dokumen</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+     
       </ol>
     </section>
 
@@ -115,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th style="width:100px;">Action</th>
                     </tr>
                 </thead>
-                <tbody id="tableTest">
+                <tbody id="bodyTableVerif">
                 <?php
                             $idx = 1;
                                 foreach ($ListAssetVerifikasi as $row) :
@@ -232,6 +231,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $('#employeeTable').DataTable( {
                 "scrollX": true,
                 "autoWidth" : true,
+                "searching": false,
                 "aaSorting" : []
             } );
         } );

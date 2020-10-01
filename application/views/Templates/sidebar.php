@@ -1,5 +1,5 @@
  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #9A0303;" >
     <!-- Brand Logo -->
     <a href="<?php echo base_url(); ?>index.php/DashboardController/index" class="brand-link">
       <img src="<?php echo base_url(); ?>assets/design/images/kmi_logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -27,7 +27,7 @@
 
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>index.php/DashboardController/index" class="nav-link">
-             <i class="nav-icon fas fa-tachometer-alt"></i>
+             <i style="color : #FFD700" class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
                 <span class="right badge badge-danger">Dashboard</span>
@@ -38,7 +38,7 @@
           <?php  if($this->session->userdata('dokumen') == '2'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
                 <p>
                   Asset Dokumen
                   <i class="fas fa-angle-left right"></i>
@@ -69,7 +69,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
               <p>
                 User Access
                 <i class="fas fa-angle-left right"></i>

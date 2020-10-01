@@ -21,7 +21,8 @@ var jenis_verifikasi_list = '<option value="0">0</option>' +
 var base_url = $('#base_url').val();
 
 
-$('.btnVerifikasi').click(function () {
+
+$('#bodyTableVerif').on('click','.btnVerifikasi', function () {
     nomor = $(this).data("nomor");
     noref = $(this).data("noref");
     status = $(this).data("status");
@@ -86,9 +87,9 @@ $('.btnVerifikasi').click(function () {
             $('#loading1').hide();
             window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';
         }
-    });    
-
+    });  
 });
+
 //main
 $('#btn_kembali_verifikasi_modal').click(function () { 
     $('#mainVerifikasiModal').modal('hide'); 

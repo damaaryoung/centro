@@ -62,7 +62,7 @@
                     </div>
                     <div></div>
                     <div class="col-sm-6 text-right">
-                      <button type ='button'class="btn btn-primary" style="background-color:rgba(80,0,121,0.92)" id="btn-log-in">Login<span class="fa fa-arrow-circle-right" style="padding-left:8px;"></span></button>
+                      <button type ='button'class="btn btn-primary" style="background-color:rgba(200, 0, 0, 0.8);" id="btn-log-in">Login<span class="fa fa-arrow-circle-right" style="padding-left:8px;"></span></button>
                     </div>
                   </div>
                   <div class="col-sm-12 page-title">
