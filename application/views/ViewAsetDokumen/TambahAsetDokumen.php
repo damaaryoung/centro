@@ -180,9 +180,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
                               
             <div class="tab">
-              <button type='button' class="tablinks" onclick="openTab(event, 'BPKB')">BPKB</button>
-              <button type='button' class="tablinks" onclick="openTab(event, 'Sertifikat')">Sertifikat</button>
-              <button type='button' class="tablinks" onclick="openTab(event, 'Emas')">Emas</button>
+              <button type='button' class="tablinks" id='main_tab_bpkb' onclick="openTab(event, 'BPKB')">BPKB</button>
+              <button type='button' class="tablinks" id='main_tab_sert' onclick="openTab(event, 'Sertifikat')">Sertifikat</button>
+              <button type='button' class="tablinks" id='main_tab_emas' onclick="openTab(event, 'Emas')">Emas</button>
             </div>
 
             <!-- Start BPKB -->
@@ -201,13 +201,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </thead>
                       <tbody>
                           <tr>
-                              <td><?php echo $bpkbAgunanID; ?></td> 
-                              <td><?php echo $bpkbNoBPKB; ?></td> 
-                              <td><?php echo $bpkbNamaPemilik; ?></td> 
-                              <td><?php echo $bpkbAlamatPemlik; ?></td>
-                              <td><?php echo $bpkbNoPolisi; ?></td> 
-                              <td><?php echo 'Verifikasi'; ?></td> 
-                              <td><?php echo 'Action'; ?></td> 
+                              <td><p id='rowBPKBAgunanID'><?php echo $bpkbAgunanID; ?></p></td> 
+                              <td><p id='rowBPKBNoBpkb'><?php echo $bpkbNoBPKB; ?></p></p></td> 
+                              <td><p id='rowBPKBNamaPemilik'><?php echo $bpkbNamaPemilik; ?></p></td> 
+                              <td><p id='rowBPKBAlamat'><?php echo $bpkbAlamatPemlik; ?></p></td>
+                              <td><p id='rowBPKBNoPolisi'><?php echo $bpkbNoPolisi; ?></p></td> 
+                              <td><p id='rowBPKBVerif'><?php echo 'Verifikasi'; ?></p></td>   
+                              <td> 
+                                <button type="button" class="btn btn-danger btn-sm" 
+                                        id="deleteTempBPKB"
+                                        data-toggle="tooltip" 
+                                        data-placement="bottom" 
+                                        title="Hapus"
+                                        name="deleteTempBPKB"> 
+                                        <i class="fa fa-trash"></i>
+                                </button>
+                              </td> 
                              
                           </tr>
                       </tbody>
@@ -233,14 +242,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo $sertAgunanID; ?></td> 
-                            <td><?php echo $sertNoSert;?></td>
-                            <td><?php echo $sertJenisSertifikat; ?></td> 
-                            <td><?php echo $sertTanggalSertifikat; ?></td>
-                            <td><?php echo $sertLuasTanah; ?></td>
-                            <td><?php echo $sertNamaPemilik; ?></td>
-                            <td>Verifikasi</td>
-                            <td>Action</td>
+                            <td><p id='rowSertAgunanID'><?php echo $sertAgunanID; ?></p></td> 
+                            <td><p id='rowSertNoSertif'><?php echo $sertNoSert;?></p></td>
+                            <td><p id='rowSertJenis'><?php echo $sertJenisSertifikat; ?></p></td> 
+                            <td><p id='rowSertTanggal'><?php echo $sertTanggalSertifikat; ?></p></td>
+                            <td><p id='rowSertLuasTanah'><?php echo $sertLuasTanah; ?></p></td>
+                            <td><p id='rowSertPemilik'><?php echo $sertNamaPemilik; ?></p></td>
+                            <td><p id='rowSertVerif'><?php echo 'Verifikasi'; ?></p></td>
+                            <td><button type="button" class="btn btn-danger btn-sm" 
+                                      id="delTempSert"
+                                      data-toggle="tooltip" 
+                                      data-placement="bottom" 
+                                      title="Hapus"
+                                      name="delTempSert"> 
+                                      <i class="fa fa-trash"></i>
+                              </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -269,14 +286,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </thead>
                     <tbody>
                         <tr>
-                          <td><?php echo $emasAgunanID; ?></td>
-                          <td><?php echo $emasNoSeri; ?></td>
-                          <td><?php echo $emasJenisEmas; ?></td>
-                          <td><?php echo $emasKarat; ?></td>
-                          <td><?php echo $emasBerat; ?></td>
-                          <td><?php echo $emasHargaPasar; ?></td>
-                          <td><?php echo 'Verifikasi'; ?></td>
-                          <td><?php echo 'Action'; ?></td>
+                          <td><p id='rowEmasAgunanID'><?php echo $emasAgunanID; ?></p></td>
+                          <td><p id='rowEmasNoSeri'><?php echo $emasNoSeri; ?></p></td>
+                          <td><p id='rowEmasJenis'><?php echo $emasJenisEmas; ?></p></td>
+                          <td><p id='rowEmasKarat'><?php echo $emasBerat; ?></p></td>
+                          <td><p id='rowEmasGram'><?php echo $emasBerat; ?></p></td>
+                          <td><p id='rowEmasHargaPasar'><?php echo $emasHargaPasar; ?></p></td>
+                          <td><p id='rowEmasVerif'><?php echo 'Verifikasi'; ?></p></td>
+                          <td> 
+                              <button type="button" class="btn btn-danger btn-sm" 
+                                      id="delTempEmas"
+                                      data-toggle="tooltip" 
+                                      data-placement="bottom" 
+                                      title="Hapus"
+                                      name="delTempEmas"> 
+                                      <i class="fa fa-trash"></i>
+                              </button>
+                          </td>
                         </tr>
                     </tbody>
                 </table>
@@ -455,14 +481,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
              ?>
              <!--END Test keluarin variable -->
-                <input type="hidden" name="test" value="<?php// echo $user_access_id;?>">
-
-
-                <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/index" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
-                <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
-            </div>
-            <!-- /.card-footer -->
+                <button type="submit" 
+                        id='btnSubmit' 
+                        style="float: left; margin-left:42%; margin-top:5px; margin-right:20px;" 
+                        class="btn btn-info">
+                        Simpan
+                </button>
             </form>
+            <form method="post" class='form-inline' action="<?php echo base_url("index.php/AsetDokumenEntryController/buttonBack")?>">
+                <button type="submit" id='btnKembali' style="margin:5px;" class="btn btn-danger">Kembali</button>
+            </form>
+          </div>
+          <!-- /.card-footer -->
       </div>
     </section>
     <!-- /.content -->

@@ -8,10 +8,17 @@ var exp = '';
 var usename = '';
 var userIdLogin = '';
 var kd_cabang = '';
+var divisi_id = '';
 var base_url = $('#base_url').val();
 
+  $('input').keypress(function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+      loginfunction();
+    }
+  }); 
 
-$('#btn-log-in').click(function(){   
+  $('#btn-log-in').click(function(){   
       console.log('button di click');
       loginfunction();
   });
@@ -36,7 +43,7 @@ $('#btn-log-in').click(function(){
       dataType: 'json',
       success : function(response){
         console.log(response);
-
+        debugger;
         status      = response['status'];
         nama        = response['payload']['nama'];
         nik         = response['payload']['nik'];
@@ -46,6 +53,7 @@ $('#btn-log-in').click(function(){
         exp         = response['payload']['exp'];
         usename     = response['payload']['usename'];
         userIdLogin = response['payload']['id'];
+        divisi_id   = response['payload']['divisi_id'];
         kd_cabang   = response['user']['kd_cabang'];
         loginfunction2(nama,
                        nik,
@@ -55,6 +63,7 @@ $('#btn-log-in').click(function(){
                        exp,
                        usename,
                        userIdLogin,
+                       divisi_id,
                        kd_cabang);
       },
       error: function (response) {
@@ -68,6 +77,7 @@ $('#btn-log-in').click(function(){
                        exp,
                        usename,
                        userIdLogin,
+                       divisi_id,
                        kd_cabang);       
       }
     });
@@ -82,6 +92,7 @@ function loginfunction2(nama,
                        exp,
                        usename,
                        userIdLogin,
+                       divisi_id,
                        kd_cabang){
       console.log(nama);
          $.ajax({
@@ -96,6 +107,7 @@ function loginfunction2(nama,
                       "exp" : exp,
                       "usename" : usename,
                       "userIdLogin" : userIdLogin,
+                      "divisi_id"  : divisi_id,
                       "kd_cabang"   : kd_cabang
                     },
 

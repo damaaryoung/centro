@@ -89,7 +89,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-7">
                                       <select class="form-control select2" id="bpkbKantorLokasi" name="bpkbKantorLokasi">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php if($this->session->tempdata('bpkbKantorLokasi') != NULL ) {
+                                                            echo '<option selected value="'. $this->session->tempdata('bpkbKantorLokasi') .'">'. $this->session->tempdata('bpkbKantorLokasi') .'</option>';
+                                                      } else{
+                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                      }
+                                                ?>
                                                 <?php foreach ($ListKodeKantor as $row) : ?>
                                                 <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
                                                 <?php endforeach;?>
@@ -102,7 +107,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-7">
                                       <select class="form-control select2" id="bpkbKodeJenisAgunan" name="bpkbKodeJenisAgunan">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php if($this->session->tempdata('bpkbKodeJenisAgunan') != NULL ) {
+                                                            echo '<option selected value="'. $this->session->tempdata('bpkbKodeJenisAgunan') .'">'. $this->session->tempdata('bpkbKodeJenisAgunan') .'</option>';
+                                                      } else{
+                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                      }
+                                                ?>
                                                 <?php foreach ($KreKodeJenisAgunan as $row) : ?>
                                                 <option value="<?php echo $row['kode_jenis_agunan'];?>"><?php echo $row['jenis_agunan'];?> </option>
                                                 <?php endforeach;?>
@@ -115,7 +125,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-7">
                                     <select class="form-control select2" id="bpkbKodeIkatanAgunan" name="bpkbKodeIkatanAgunan">
-                                        <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php if($this->session->tempdata('bpkbKodeIkatanAgunan') != NULL ) {
+                                                            echo '<option selected value="'. $this->session->tempdata('bpkbKodeIkatanAgunan') .'">'. $this->session->tempdata('bpkbKodeIkatanAgunan') .'</option>';
+                                                      } else{
+                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                      }
+                                                ?>
                                         <?php foreach ($KreKodeIkatanHukumAgunan as $row) : ?>
                                         <option value="<?php echo $row['kode_ikatan_hukum'];?>" data-persen="<?php echo $row['persen_default'];?>"><?php echo $row['ikatan_agunan'];?> </option>
                                         <?php endforeach;?>
@@ -127,13 +142,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbNilaiTaksasiAgunan">Nilai Taksasi Agunan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="bpkbNilaiTaksasiAgunan" name="bpkbNilaiTaksasiAgunan">
+                                      <input type="number" class="form-control" id="bpkbNilaiTaksasiAgunan" name="bpkbNilaiTaksasiAgunan"  value="<?php echo $this->session->tempdata('bpkbNilaiTaksasiAgunan'); ?>" >
                                   </div>
                                   <div class="col-sm-1">
                                       <label type="number" class="control-label" style="padding-top: 5px;">NJOP</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="bpkbNJOP" name="bpkbNJOP" >
+                                      <input type="number" class="form-control" id="bpkbNJOP" name="bpkbNJOP"  value="<?php echo $this->session->tempdata('bpkbNJOP'); ?>" >
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -141,13 +156,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbHargaPasar">Harga Pasar</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="bpkbHargaPasar" name="bpkbHargaPasar">
+                                      <input type="number" class="form-control" id="bpkbHargaPasar" name="bpkbHargaPasar"  value="<?php echo $this->session->tempdata('bpkbHargaPasar'); ?>" >
                                   </div>
                                   <div class="col-sm-1">
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbAPHT">APHT</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="bpkbAPHT" name="bpkbAPHT">
+                                      <input type="number" class="form-control" id="bpkbAPHT" name="bpkbAPHT"  value="<?php echo $this->session->tempdata('bpkbAPHT'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -188,7 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbNoBPKB">No. BPKB</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="bpkbNoBPKB" name="bpkbNoBPKB" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbNoBPKB" name="bpkbNoBPKB" value="<?php echo $this->session->tempdata('bpkbNoBPKB'); ?>"> 
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -196,7 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbNamaPemilik">Nama Pemilik</label>
                                   </div>
                                   <div class="col-sm-7">
-                                      <input type="text" class="form-control" id="bpkbNamaPemilik" name="bpkbNamaPemilik" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbNamaPemilik" name="bpkbNamaPemilik" value="<?php echo $this->session->tempdata('bpkbNamaPemilik'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -204,7 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbAlamatPemlik">Alamat Pemilik</label>
                                   </div>
                                   <div class="col-sm-7">
-                                    <textarea style="height: 75px;" type="text" class="form-control" id="bpkbAlamatPemlik" name="bpkbAlamatPemlik"></textarea>
+                                    <textarea style="height: 75px;" type="text" class="form-control" id="bpkbAlamatPemlik" name="bpkbAlamatPemlik"><?php echo $this->session->tempdata('bpkbAlamatPemlik'); ?></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -212,7 +227,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbKotaPemilik">Kota Pemilik</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbKotaPemilik" name="bpkbKotaPemilik" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbKotaPemilik" name="bpkbKotaPemilik" value="<?php echo $this->session->tempdata('bpkbKotaPemilik'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -221,7 +236,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-4">
                                     <select class="form-control select2" id="bpkbMerk" name="bpkbMerk">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php if($this->session->tempdata('bpkbMerk') != NULL ) {
+                                                            echo '<option selected value="'. $this->session->tempdata('bpkbMerk') .'">'. $this->session->tempdata('bpkbMerk') .'</option>';
+                                                      } else{
+                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                      }
+                                                ?>
                                                 <?php foreach ($MerkKend as $row) : ?>
                                                 <option value="<?php echo $row['kd_merk'];?>"><?php echo  $row['nm_merk'];?></option>
                                                 <?php endforeach;?>
@@ -229,7 +249,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-4">
                                         <select class="form-control select2" id="bpkbType" name="bpkbType">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php if($this->session->tempdata('bpkbType') != NULL ) {
+                                                            echo '<option selected value="'. $this->session->tempdata('bpkbType') .'">'. $this->session->tempdata('bpkbType') .'</option>';
+                                                      } else{
+                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                      }
+                                                ?>
                                                 <?php foreach ($TypeKend as $row) : ?>
                                                 <option value="<?php echo $row['kd_type'];?>"><?php echo  $row['nm_type'];?></option>
                                                 <?php endforeach;?>
@@ -242,14 +267,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-4">
                                     <select class="form-control select2" id="bpkbJenis" name="bpkbJenis">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php if($this->session->tempdata('bpkbJenis') != NULL ) {
+                                                            echo '<option selected value="'. $this->session->tempdata('bpkbJenis') .'">'. $this->session->tempdata('bpkbJenis') .'</option>';
+                                                      } else{
+                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                      }
+                                                ?>
                                                 <?php foreach ($JenisKend as $row) : ?>
                                                 <option value="<?php echo $row['kd_jenis'];?>"><?php echo  $row['nm_jenis'];?></option>
                                                 <?php endforeach;?>
                                     </select>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="number" class="form-control" id="bpkbSilinder" name="bpkbSilinder" placeholder="Silinder"> 
+                                    <input type="number" class="form-control" id="bpkbSilinder" name="bpkbSilinder" placeholder="Silinder" value="<?php echo $this->session->tempdata('bpkbSilinder'); ?>"> 
                                   </div>
                                   <div class="col-sm-1">
                                     <label class="control-label" style="padding-top: 6px;" for="">CC</label>
@@ -260,7 +290,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbNoRangka">No. Rangka</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbNoRangka" name="bpkbNoRangka" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbNoRangka" name="bpkbNoRangka" value="<?php echo $this->session->tempdata('bpkbNoRangka'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -268,7 +298,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbNoMesin">No. Mesin</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbNoMesin" name="bpkbNoMesin" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbNoMesin" name="bpkbNoMesin" value="<?php echo $this->session->tempdata('bpkbNoMesin'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -276,13 +306,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbTahun">Tahun</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="number" class="form-control" id="bpkbTahun" name="bpkbTahun" placeholder="Tahun" min="1500" max="2999">
+                                    <input type="number" class="form-control" id="bpkbTahun" name="bpkbTahun" value="<?php echo $this->session->tempdata('bpkbTahun'); ?>" min="1500" max="2999">
                                   </div>
                                   <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbTglExpPajak">Tgl. Exp Pajak</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="date" class="form-control" id="bpkbTglExpPajak" name="bpkbTglExpPajak">
+                                      <input type="date" class="form-control" id="bpkbTglExpPajak" name="bpkbTglExpPajak"  value="<?php echo $this->session->tempdata('bpkbTglExpPajak'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -290,7 +320,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbTahun">Warna</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="bpkbWarna" name="bpkbWarna">
+                                    <input type="text" class="form-control" id="bpkbWarna" name="bpkbWarna"  value="<?php echo $this->session->tempdata('bpkbWarna'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -298,13 +328,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbNoPolisi">No. Polisi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="bpkbNoPolisi" name="bpkbNoPolisi" placeholder="">
+                                    <input type="text" class="form-control" id="bpkbNoPolisi" name="bpkbNoPolisi"  value="<?php echo $this->session->tempdata('bpkbNoPolisi'); ?>">
                                   </div>
                                   <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Tgl. Exp STNK</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="date" class="form-control" id="bpkbTglExpSTNK" name="bpkbTglExpSTNK">
+                                      <input type="date" class="form-control" id="bpkbTglExpSTNK" name="bpkbTglExpSTNK" value="<?php echo $this->session->tempdata('bpkbTglExpSTNK'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -312,7 +342,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="">No. STNK</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbNoSTNK" name="bpkbNoSTNK">
+                                      <input type="text" class="form-control" id="bpkbNoSTNK" name="bpkbNoSTNK" value="<?php echo $this->session->tempdata('bpkbNoSTNK'); ?>">
                                   </div>
                               </div>
                           <!-- Form ATAS -->
@@ -332,67 +362,151 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="form-group row">
                                 <div class="col-sm-2">
                                     <select class="form-control select2" id="bpkbDokKwitansiBlanko" name="bpkbDokKwitansiBlanko">
-                                            <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                            <?php if($this->session->tempdata('bpkbDokKwitansiBlanko') != NULL ) {
+                                                        echo '<option selected value="'. $this->session->tempdata('bpkbDokKwitansiBlanko') .'">'
+                                                        . (($this->session->tempdata('bpkbDokKwitansiBlanko') == '1')? 'ASLI':'COPY')
+                                                        .'</option>';
+                                                } else{
+                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                }
+                                            ?>
                                             <option value="1">ASLI</option>
                                             <option value="2">COPY</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
-                                    <input type="checkbox"  value="Y" id="check_kw_blanko" name="check_kw_blanko">&nbsp;Kwitansi Blanko</label>
+                                    <?php if($this->session->tempdata('blanko') != NULL ) {
+                                                    if($this->session->tempdata('blanko') == 'N' ) {
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                             <input type="checkbox"  value="Y" id="check_kw_blanko" name="check_kw_blanko">&nbsp;Kwitansi Blanko</label>';
+                                                    } else{
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                              <input type="checkbox"  value="Y" id="check_kw_blanko" name="check_kw_blanko" checked>&nbsp;Kwitansi Blanko</label>';
+                                                     }   
+                                            } else{
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                              <input type="checkbox"  value="Y" id="check_kw_blanko" name="check_kw_blanko">&nbsp;Kwitansi Blanko</label>';
+                                            }
+                                    ?>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                             <div class="col-sm-2">
                                     <select class="form-control select2" id="bpkbDokFakturPemilik" name="bpkbDokFakturPemilik">
-                                            <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                            <?php if($this->session->tempdata('bpkbDokFakturPemilik') != NULL ) {
+                                                        echo '<option selected value="'. $this->session->tempdata('bpkbDokFakturPemilik') .'">'
+                                                        . (($this->session->tempdata('bpkbDokFakturPemilik') == '1')? 'ASLI':'COPY')
+                                                        .'</option>';
+                                                } else{
+                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                }
+                                            ?>
                                             <option value="1">ASLI</option>
                                             <option value="2">COPY</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
-                                    <input type="checkbox"  value="Y" id="check_faktur_pemilik" name="check_faktur_pemilik">&nbsp;Faktur Pemilik</label>
+                                    
+                                    <?php if($this->session->tempdata('faktur_pemilik') != NULL ) {
+                                                    if($this->session->tempdata('faktur_pemilik') == 'N' ) {
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                              <input type="checkbox"  value="Y" id="check_faktur_pemilik" name="check_faktur_pemilik">&nbsp;Faktur Pemilik</label>';
+                                                    } else{
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                              <input type="checkbox"  value="Y" id="check_faktur_pemilik" name="check_faktur_pemilik" checked>&nbsp;Faktur Pemilik</label>';
+                                                     }   
+                                            } else{
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                              <input type="checkbox"  value="Y" id="check_faktur_pemilik" name="check_faktur_pemilik">&nbsp;Faktur Pemilik</label>';
+                                            }
+                                    ?>
                                 </div>
                                 <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbNoFakturPemilik">&nbsp;No. Faktur Pemilik</label>
                                 </div>
                                 <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbNoFakturPemilik" name="bpkbNoFakturPemilik" disabled>
+                                      <?php if($this->session->tempdata('bpkbNoFakturPemilik') != NULL ) {
+                                                        echo '<input type="text" class="form-control" id="bpkbNoFakturPemilik" name="bpkbNoFakturPemilik"  value="'. $this->session->tempdata('bpkbNoFakturPemilik') .'">';
+                                                } else{
+                                                        echo '<input type="text" class="form-control" id="bpkbNoFakturPemilik" name="bpkbNoFakturPemilik" disabled>';
+                                                }
+                                      ?> 
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
                                     <select class="form-control select2" id="bpkbDokKwJualBeli" name="bpkbDokKwJualBeli">
-                                            <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                            <?php if($this->session->tempdata('bpkbDokKwJualBeli') != NULL ) {
+                                                        echo '<option selected value="'. $this->session->tempdata('bpkbDokKwJualBeli') .'">'
+                                                        . (($this->session->tempdata('bpkbDokKwJualBeli') == '1')? 'ASLI':'COPY')
+                                                        .'</option>';
+                                                } else{
+                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                }
+                                            ?>
                                             <option value="1">ASLI</option>
                                             <option value="2">COPY</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
-                                    <input type="checkbox" value="Y" id="check_kw_jual_beli" name="check_kw_jual_beli">&nbsp;Kwitansi Jual Beli</label>
+                                    
+                                    <?php if($this->session->tempdata('kwitansi_jb') != NULL ) {
+                                                    if($this->session->tempdata('kwitansi_jb') == 'N' ) {
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                        <input type="checkbox" value="Y" id="check_kw_jual_beli" name="check_kw_jual_beli">&nbsp;Kwitansi Jual Beli</label>';
+                                                    } else{
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                        <input type="checkbox" value="Y" id="check_kw_jual_beli" name="check_kw_jual_beli" checked>&nbsp;Kwitansi Jual Beli</label>';
+                                                     }   
+                                            } else{
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                        <input type="checkbox" value="Y" id="check_kw_jual_beli" name="check_kw_jual_beli">&nbsp;Kwitansi Jual Beli</label>';
+                                            }
+                                    ?>
                                 </div>
                             </div>
                             <!-- SK TRAYEK -->
                             <div class="form-group row">
                                 <div class="col-sm-2">
                                     <select class="form-control select2" id="bpkbDokSKTrayek" name="bpkbDokSKTrayek">
-                                            <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                            <?php if($this->session->tempdata('bpkbDokSKTrayek') != NULL ) {
+                                                        echo '<option selected value="'. $this->session->tempdata('bpkbDokSKTrayek') .'">'
+                                                        . (($this->session->tempdata('bpkbDokSKTrayek') == '1')? 'ASLI':'COPY')
+                                                        .'</option>';
+                                                } else{
+                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                }
+                                            ?>
                                             <option value="1">ASLI</option>
                                             <option value="2">COPY</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
-                                    <input type="checkbox" value="Y" id="check_sk_trayek" name="check_sk_trayek">&nbsp;SK Trayek</label>
+                                    <?php if($this->session->tempdata('sk_trayek') != NULL ) {
+                                                    if($this->session->tempdata('sk_trayek') == 'N' ) {
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                        <input type="checkbox" value="Y" id="check_sk_trayek" name="check_sk_trayek">&nbsp;SK Trayek</label>';
+                                                    } else{
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                        <input type="checkbox" value="Y" id="check_sk_trayek" name="check_sk_trayek" checked>&nbsp;SK Trayek</label>';
+                                                     }   
+                                            } else{
+                                                        echo '<label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
+                                                        <input type="checkbox" value="Y" id="check_sk_trayek" name="check_sk_trayek">&nbsp;SK Trayek</label>';
+                                            }
+                                    ?>
                                 </div>
                                 <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">No. SK Trayek</label>
                                 </div>
                                 <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="noSKTrayek" name="noSKTrayek" disabled>
+                                      <?php if($this->session->tempdata('noSKTrayek') != NULL ) {
+                                                        echo '<input type="text" class="form-control" id="noSKTrayek" name="noSKTrayek"  value="'. $this->session->tempdata('noSKTrayek') .'">';
+                                                } else{
+                                                        echo '<input type="text" class="form-control" id="noSKTrayek" name="noSKTrayek" disabled>';
+                                                }
+                                      ?>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -406,7 +520,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="">Berlaku s/d</label>
                                 </div>
                                 <div class="col-sm-3">
-                                      <input type="date" class="form-control" id="bpkbBerlakuSD" name="bpkbBerlakuSD" disabled>
+                                      <?php if($this->session->tempdata('bpkbBerlakuSD') != NULL ) {
+                                                        echo '<input type="date" class="form-control" id="bpkbBerlakuSD" name="bpkbBerlakuSD"  value="'. $this->session->tempdata('bpkbBerlakuSD') .'">';
+                                                } else{
+                                                        echo '<input type="date" class="form-control" id="bpkbBerlakuSD" name="bpkbBerlakuSD" disabled>';
+                                                }
+                                      ?>
                                 </div>
                             </div>
                             <!-- SK TRAYEK -->
@@ -557,8 +676,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- END SID -->
             <div class="card-footer text-center">
-                <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
                 <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
+                <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
             </div>
             </form>
             <!-- /.card-footer -->

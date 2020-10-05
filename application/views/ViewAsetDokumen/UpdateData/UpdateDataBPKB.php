@@ -15,7 +15,16 @@
             <div class="container py-5">
                     <div class="row">
                             <div class="col-md-10 mx-auto">
-                                <form method="post" action="<?php echo base_url("index.php/AsetDokumenEntryController/handleUserInputBPKB")?>">
+                                    <div class="form-group row">
+                                        <div class="col-sm-7">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbVerifikasi">Verifikasi</label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input class="form-control select2" id="bpkbVerifikasi" name="bpkbVerifikasi" disabled>
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-sm-2">
                                             <label class="control-label" style="padding-top: 5px;"  for="bpkbTglRegister">Tanggal Register</label>

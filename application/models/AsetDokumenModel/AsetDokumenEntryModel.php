@@ -595,7 +595,8 @@ class AsetDokumenEntryModel extends CI_Model{
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT  kd_type, nm_type, flg_aktif, kd_merk
 				FROM jaminan_type_kendaraan
-				WHERE flg_aktif=1 #and kd_merk='0000000126'
+				WHERE flg_aktif=1 
+				#and kd_merk='0000000126'
 				ORDER BY kd_type";
         $query = $this->db2->query($str);
         

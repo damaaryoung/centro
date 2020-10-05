@@ -1,11 +1,6 @@
 var dataTableeee = [];
 var base_url = $('#base_url').val();
 
-
-
-
-
-
 $('#mainBtnSearchRekening').click(function () {
     $('#modalNomorRekening').modal('show');
     dataTableeee = [];
@@ -101,3 +96,91 @@ function serchDataRekening(){
             }
     });    
 }
+
+
+$(document).ready(function () {     
+    
+    console.log($('#rowSertNoSertif').val());
+
+    if($('#rowSertNoSertif').text() != ''){
+        $('#main_tab_bpkb').hide(); 
+        $('#main_tab_emas').hide(); 
+        $('#main_tab_sert').show();
+    } else  if($('#rowBPKBNoBpkb').text() != ''){
+        $('#main_tab_bpkb').show(); 
+        $('#main_tab_emas').hide(); 
+        $('#main_tab_sert').hide();
+    } else  if($('#rowEmasNoSeri').text() != ''){
+        $('#main_tab_bpkb').hide(); 
+        $('#main_tab_emas').show(); 
+        $('#main_tab_sert').hide();
+    }
+
+
+});
+
+$('#delTempSert').click(function () {
+    $('#loading').show();
+    $.ajax({
+        url : base_url + "index.php/AsetDokumenEntryController/deleteTempSert",
+        type : "POST",
+        dataType : "json",
+        data : {"data"    : "data"},
+
+        success : function(response) {
+            console.log(response);
+            alert('Data Sukses Di Hapus');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
+        },
+        error : function(response) {
+            alert('Data Gagal Di Hapus');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+        }
+    }); 
+});
+
+$('#deleteTempBPKB').click(function () {
+    $('#loading').show();
+    $.ajax({
+        url : base_url + "index.php/AsetDokumenEntryController/deleteTempBPKB",
+        type : "POST",
+        dataType : "json",
+        data : {"data"    : "data"},
+
+        success : function(response) {
+            console.log(response);
+            alert('Data Sukses Di Hapus');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
+        },
+        error : function(response) {
+            alert('Data Gagal Di Hapus');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+        }
+    }); 
+});
+
+$('#delTempEmas').click(function () {
+    $('#loading').show();
+    $.ajax({
+        url : base_url + "index.php/AsetDokumenEntryController/deleteTempEmas",
+        type : "POST",
+        dataType : "json",
+        data : {"data"    : "data"},
+
+        success : function(response) {
+            console.log(response);
+            alert('Data Sukses Di Hapus');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
+        },
+        error : function(response) {
+            alert('Data Gagal Di Hapus');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+        }
+    }); 
+});

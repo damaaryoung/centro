@@ -31,6 +31,17 @@ class LoginModel extends CI_Model{
         
         return $query->result_array();
 	}
+	public function aksesAdmin($userId){
+		$this->db3 = $this->load->database('DB_TEST', true);
+		$str = "SELECT access_id
+				FROM test.`user_access_centro`
+				WHERE ACCESS_ID = 1
+				AND user_id = $userId; 
+			   ";
+		$query = $this->db3->query($str);
+        
+        return $query->result_array();
+	}
 	// select menu customer dummy
 	public function aksesCustomer($userId){
 		$this->db3 = $this->load->database('DB_TEST', true);

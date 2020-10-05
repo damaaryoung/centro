@@ -53,6 +53,41 @@ $('#sertKodeIkatanAgunan').change(function(){
    $('#sertPersenDijamin').val(persenDefault);
 });
 
+$(function(){
+    $('#check_ajb').on('click', function(){                  
+       $("#sertNomorAJB").prop("disabled", !this.checked); 
+    });
+    $('#check_imb').on('click', function(){                  
+        $("#sertNomorIMB").prop("disabled", !this.checked); 
+    });
+    $('#check_sppt').on('click', function(){                  
+        $("#sertNomorSPPT").prop("disabled", !this.checked); 
+        $("#sertTahunSPPT").prop("disabled", !this.checked); 
+    });
+    $('#check_sht').on('click', function(){                  
+        $("#sertNoSHT").prop("disabled", !this.checked); 
+        $("#sertPropinsiSHT").prop("disabled", !this.checked); 
+        $("#sertKotaSHT").prop("disabled", !this.checked); 
+    });
+    $('#check_stts').on('click', function(){                  
+        $("#sertTahunSTTS").prop("disabled", !this.checked); 
+    });
+    $('#check_ssb_bpht').on('click', function(){                  
+        $("#sertAtasNamaSSBBPHTB").prop("disabled", !this.checked); 
+    });
+
+    
+    $('#check_faktur_pemilik').on('click', function(){                  
+        $("#bpkbNoFakturPemilik").prop("disabled", !this.checked); 
+    });
+    $('#check_sk_trayek').on('click', function(){                  
+        $("#noSKTrayek").prop("disabled", !this.checked); 
+        $("#bpkbBerlakuSD").prop("disabled", !this.checked); 
+    });
+});
+
+
+
 // modal uodate
 $('#btn_simpan_update_modal').click(function () {
    
@@ -512,6 +547,7 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
             $('#mainId').val(JaminanHeader.id);
             $('#mainNomor').val(JaminanHeader.nomor);
             $('#mainNoReff').val(JaminanHeader.no_reff);
+            $('#mainVerifikasi').val(JaminanHeader.verifikasi);
            
 
             $.each(ListKodeKantor,function(i,data){
@@ -851,6 +887,7 @@ function mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanH
                 $('#sertKota').val(JaminanDokument.kota_sertifikat);
                 $('#sertPorpinsi').val(JaminanDokument.propinsi_sertifikat);
                 $('#sertBatasTanah').val(JaminanDokument.batas_tanah);
+                $('#sertVerifikasi').val(JaminanDokument.verifikasi);
 
                 $('#rowSertAgunanID').html(JaminanDokument.agunan_id);
                 $('#rowSertTanggal').html(JaminanDokument.tgl_sertifikat);
@@ -922,24 +959,31 @@ function mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanH
                 }
                 else{
                     $("#check_ajb").prop("checked", false);
+                    $("#sertNomorAJB").prop("disabled", true);
                 }
                 if(JaminanDokument.imb == 'Y'){
                     $("#check_imb").prop("checked", true);
                 }
                 else{
                     $("#check_imb").prop("checked", false);
+                    $("#sertNomorIMB").prop("disabled", true); 
                 }
                 if(JaminanDokument.sppt == 'Y'){
                     $("#check_sppt").prop("checked", true);
                 }
                 else{
                     $("#check_sppt").prop("checked", false);
+                    $("#sertNomorSPPT").prop("disabled", true); 
+                    $("#sertTahunSPPT").prop("disabled", true); 
                 }
                 if(JaminanDokument.skmht == 'Y'){
                     $("#check_skmht").prop("checked", true);
                 }
                 else{
                     $("#check_skmht").prop("checked", false);
+                    $("#sertNoSHT").prop("disabled", true); 
+                    $("#sertPropinsiSHT").prop("disabled", true); 
+                    $("#sertKotaSHT").prop("disabled", true); 
                 }
                 if(JaminanDokument.gambar_denah == 'Y'){
                     $("#check_denah").prop("checked", true);
@@ -964,12 +1008,14 @@ function mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanH
                 }
                 else{
                     $("#check_stts").prop("checked", false);
+                    $("#sertTahunSTTS").prop("disabled", true); 
                 }
                 if(JaminanDokument.ssb == 'Y'){
                     $("#check_ssb_bpht").prop("checked", true);
                 }
                 else{
                     $("#check_ssb_bpht").prop("checked", false);
+                    $("#sertAtasNamaSSBBPHTB").prop("disabled", true);
                 }
                 
 
@@ -982,6 +1028,7 @@ function mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanH
                 $.each(KreKodeIkatanHukumAgunan,function(i,data){
                     $('#sertKodeIkatanAgunan').append('<option value="'+data.kode_ikatan_hukum+'" data-persen="'+data.persen_default+'">' + data.ikatan_agunan +'</option>');
                 });
+                
 }
 function mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument){
     $('#main_tab_sert').hide(); 
@@ -1017,6 +1064,7 @@ function mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
 
 
     ///untuk bpkb
+    $('#bpkbVerifikasi').val(JaminanDokument.verifikasi)
     $('#bpkbTglRegister').val(JaminanDokument.tgl_register);
     //bpkbTglPenilaian tgl penilaian dari SID belum di develop
     $('#bpkbKantorLokasi').append('<option value="' + JaminanDokument.kode_kantor_lokasi_jaminan + '" selected>'+ JaminanDokument.app_kode_kantor + ' - ' + JaminanDokument.app_nama_kantor +'</option>'); 
@@ -1089,6 +1137,8 @@ function mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
     }
     else{
         $("#check_faktur_pemilik").prop("checked", false);
+        
+        $("#bpkbNoFakturPemilik").prop("disabled", true); 
     }
     if(JaminanDokument.kwitansi_jb == 'Y'){
         $("#check_kw_jual_beli").prop("checked", true);
@@ -1101,6 +1151,8 @@ function mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
     }
     else{
         $("#check_sk_trayek").prop("checked", false);
+        $("#noSKTrayek").prop("disabled", true); 
+        $("#bpkbBerlakuSD").prop("disabled", true); 
     }
     
     $.each(MerkKend,function(i,data){
@@ -1141,6 +1193,7 @@ function mappingFieldEmas(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
     $('#emasHargaTaksasi').val(JaminanDokument.harga_taksasi); 
     $('#emasID').val(JaminanDokument.id); 
     $('#emasNoReff').val(JaminanDokument.no_reff); 
+    $('#emasVerifikasi').val(JaminanDokument.verifikasi)
 
     $('#rowEmasAgunanID').html(JaminanDokument.agunan_id);
     $('#rowEmasNoSeri').html(JaminanDokument.no_seri); 

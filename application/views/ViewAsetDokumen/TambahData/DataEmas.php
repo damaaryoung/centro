@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;"  for="emasNoSeri">No Seri</label>
                                   </div>
                                   <div class="col-sm-5">
-                                  <input type="text" class="form-control" id="emasNoSeri" name="emasNoSeri" placeholder="" required>
+                                  <input type="text" class="form-control" id="emasNoSeri" name="emasNoSeri" value="<?php echo $this->session->tempdata('emasNoSeri'); ?>" required>
                                   </div>
                               </div>
 
@@ -92,7 +92,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-5">
                                         <select class="form-control select2" id="emasJenisEmas" name="emasJenisEmas">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php if($this->session->tempdata('emasJenisEmas') != NULL ) {
+                                                            echo '<option selected value="'. $this->session->tempdata('emasJenisEmas') .'">'. $this->session->tempdata('emasJenisEmas')  .'</option>';
+                                                      } else{
+                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                      }
+                                                ?>
                                                 <option value="BATANGAN">BATANGAN</option>
                                                 <option value="COIN">COIN</option>
                                                 <option value="LAIN">LAIN</option>
@@ -105,7 +110,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;"  for="emasKarat">Karat</label>
                                   </div>
                                   <div class="col-sm-2">
-                                  <input type="number" class="form-control" id="emasKarat" name='emasKarat' placeholder="">
+                                  <input type="number" class="form-control" id="emasKarat" name='emasKarat' value="<?php echo $this->session->tempdata('emasKarat'); ?>">
                                   </div>
                               </div>
 
@@ -114,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;"  for="inputFirstname">Berat (Gram)</label>
                                   </div>
                                   <div class="col-sm-2">
-                                  <input type="number" class="form-control" id="emasBerat" name="emasBerat" placeholder="">
+                                  <input type="number" class="form-control" id="emasBerat" name="emasBerat" value="<?php echo $this->session->tempdata('emasBerat'); ?>">
                                   </div>
                               </div>
 
@@ -123,7 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;"  for="inputFirstname">Harga Pasar</label>
                                   </div>
                                   <div class="col-sm-5">
-                                  <input type="number" class="form-control" id="emasHargaPasar" name='emasHargaPasar' placeholder="">
+                                  <input type="number" class="form-control" id="emasHargaPasar" name='emasHargaPasar' value="<?php echo $this->session->tempdata('emasHargaPasar'); ?>">
                                   </div>
                               </div>
 
@@ -132,7 +137,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;"  for="inputFirstname">Harga Taksasi</label>
                                   </div>
                                   <div class="col-sm-5">
-                                  <input type="number" class="form-control" id="emasHargaTaksasi" name='emasHargaTaksasi' placeholder="">
+                                  <input type="number" class="form-control" id="emasHargaTaksasi" name='emasHargaTaksasi' value="<?php echo $this->session->tempdata('emasHargaTaksasi'); ?>">
                                   </div>
                               </div>
                           <!-- Form ATAS -->
@@ -276,8 +281,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- END SID -->
             <div class="card-footer text-center">
-                <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
                 <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
+                <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
             </div>
             </form>
             <!-- /.card-footer -->

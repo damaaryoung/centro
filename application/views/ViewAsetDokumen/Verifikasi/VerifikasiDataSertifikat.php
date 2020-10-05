@@ -410,7 +410,7 @@
                                                 
                                     </select>
                                 </div>
-                                <div class="col-sm-1">
+                                <div class="col-sm-2">
                                     <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_stts" name='check_stts' value="Y" readonly>STTS</label>
                                 </div>
                                 <div class="col-sm-2">
@@ -426,13 +426,13 @@
                                               
                                     </select>
                                 </div>
-                                <div class="col-sm-1">
+                                <div class="col-sm-2">
                                     <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_ssb_bpht" name='check_ssb_bpht' value="Y" readonly>SSB/BPHTB</label>
                                 </div>
                                 <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="inputFirstname">Atas Nama</label>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-5">
                                   <input type="text" class="form-control" id="sertAtasNamaSSBBPHTB" name="sertAtasNamaSSBBPHTB" placeholder="Atas Nama" readonly>
                                 </div>
                             </div>

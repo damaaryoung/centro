@@ -5,16 +5,22 @@ var jenisSertifikat = '';
 
 $(document).ready(function () {     
     $('#sertKodeIkatanAgunan').change(function(){
-         persenDefault = $(this).find('option:selected').attr('data-persen');//find(':selected').data('pesen'); //getAttribute('data-persen'); 
-        // $('#sertPersenDijamin').val(persenDefault);
+         persenDefault = $(this).find('option:selected').attr('data-persen');
         $('#sertPersenDijamin').val(persenDefault);
     });
 
-    $('#sertJTSHGB').hide();
-    $('#sertJTSHGBlbl').hide();
+    jenisSertifikat = $('#sertJenisSertifikat').val();
+    if(jenisSertifikat != 'SHGB'){
+        $('#sertJTSHGB').hide(); 
+        $('#sertJTSHGBlbl').hide();
+    }
+    else if (jenisSertifikat == 'SHGB'){
+        $('#sertJTSHGB').show();
+        $('#sertJTSHGBlbl').show();
+    }
+    
     $('#sertJenisSertifikat').change(function(){
-        jenisSertifikat = $(this).val(); 
-        console.log(jenisSertifikat);
+        jenisSertifikat = $('#sertJenisSertifikat').val();
         if(jenisSertifikat != 'SHGB'){
             $('#sertJTSHGB').hide(); 
             $('#sertJTSHGBlbl').hide();
@@ -25,6 +31,8 @@ $(document).ready(function () {
         }
        
     });
+
+    
 
 
 });
@@ -61,6 +69,8 @@ $(function(){
         $("#bpkbBerlakuSD").prop("disabled", !this.checked); 
     });
 });
+
+
 
 
 

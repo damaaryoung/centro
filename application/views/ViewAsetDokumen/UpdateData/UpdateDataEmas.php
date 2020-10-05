@@ -21,13 +21,18 @@
             <div id="DataEmas" class="tabcontent">
                 <div class="row">
                       <div class="col-md-10 mx-auto">
-                          <form method="post" action="<?php echo base_url("index.php/AsetDokumenEntryController/handleUserInputEmas")?>">
                               <div class="form-group row">
                                   <div class="col-sm-3">
                                       <label class="control-label" style="padding-top: 5px;"  for="emasAgunanID">Agunan ID</label>
                                   </div>
                                   <div class="col-sm-5">
                                   <input type="text" class="form-control" id="emasAgunanID" name='emasAgunanID' readonly>
+                                  </div>
+                                  <div class="col-sm-1">
+                                      <label class="control-label" style="padding-top: 5px;" for="emasVerifikasi">Verifikasi</label>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <input class="form-control select2" id="emasVerifikasi" name="emasVerifikasi" disabled>
                                   </div>
                               </div>
 

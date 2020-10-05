@@ -14,7 +14,7 @@ class LoginController extends CI_Controller {
 	{
 		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
-		$this->load->view('LoginView/LoginView.php', $data);
+		$this->load->view('LoginView/NewLogin.php', $data);
 	}
 
 	//Setelah dapat json object dari js akan di set apakah mendapatkan session atau tidak
@@ -28,7 +28,9 @@ class LoginController extends CI_Controller {
 			'email' => $this->input->post('email'),
 			'iat' => $this->input->post('iat'),
 			'exp' => $this->input->post('exp'),
-			'usename' => $this->input->post('usename')
+			'divisi_id' => $this->input->post('divisi_id'),
+			'usename' => $this->input->post('usename'),
+			'kd_cabang' => $this->input->post('kd_cabang')
 		);
 
 		$data1 = array(
@@ -40,13 +42,20 @@ class LoginController extends CI_Controller {
 			'exp' => $this->input->post('exp'),
 			'usename' => $this->input->post('usename'),
 			'userIdLogin' => $this->input->post('userIdLogin'),
+			'divisi_id' => $this->input->post('divisi_id'),
 			'kd_cabang' => $this->input->post('kd_cabang')
 		);
 
 		
 
 		if($this->input->post('nama') != ''){ //ada data di parsing -> set session login
-			//akses menu
+			//akses menu admin
+			$AksesCustomer = $this->LoginModel->aksesAdmin($userId);
+			foreach ($AksesCustomer as $row) :
+                $data1['admin']    = $row['access_id'];
+			endforeach;	
+
+			//akses menu aset dokumen
 			$AksesDokumen = $this->LoginModel->aksesDokumen($userId);
 			foreach ($AksesDokumen as $row) :
                 $data1['dokumen']    = $row['access_id'];

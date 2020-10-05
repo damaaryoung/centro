@@ -1606,6 +1606,189 @@ class AsetDokumenEntryController extends CI_Controller {
 			echo json_encode($data1);
 	}
 
+	public function buttonBack(){
+
+		redirect('AsetDokumenEntryController/index'); 
+	}
+
+
+
+	public function deleteTempEmas(){
+			//UNSET EMAS
+			$this->session->unset_tempdata('emasAgunanID');
+			$this->session->unset_tempdata('emasNoSeri');
+			$this->session->unset_tempdata('emasJenisEmas');
+			$this->session->unset_tempdata('emasKarat');
+			$this->session->unset_tempdata('emasBerat');
+			$this->session->unset_tempdata('emasHargaPasar');
+			$this->session->unset_tempdata('emasHargaTaksasi');
+	
+			$this->session->unset_tempdata('emasSIDNamaPemilikAgunan');
+			$this->session->unset_tempdata('emasSIDStatus');
+			$this->session->unset_tempdata('emasSIDAlamat');
+			$this->session->unset_tempdata('emasSIDNJOP');
+			$this->session->unset_tempdata('emasSIDBank');
+			$this->session->unset_tempdata('emasSIDNilaiIndependen');
+			$this->session->unset_tempdata('emasSIDNamaIndependen');
+			$this->session->unset_tempdata('emasSIDTglPenilaian');
+			$this->session->unset_tempdata('emasSIDParipasu');
+			$this->session->unset_tempdata('emasSIDAsuransi');
+			$data1['sukses'] = 'sukses';
+			echo json_encode($data1);
+	}
+
+	public function deleteTempSert(){
+		//// UNSET SESSION /////
+		$this->session->unset_tempdata('sertAgunanID');
+		$this->session->unset_tempdata('sertTglRegister'); 
+		$this->session->unset_tempdata('sertTglPenilaian'); 
+		$this->session->unset_tempdata('sertKantorLokasi'); 
+		$this->session->unset_tempdata('sertKodeJenisAgunan');
+		$this->session->unset_tempdata('sertKodeIkatanAgunan');    
+		$this->session->unset_tempdata('sertNilaiTaksasiAgunan');  
+		$this->session->unset_tempdata('sertNJOP');    
+		$this->session->unset_tempdata('sertHargaPasar');
+		$this->session->unset_tempdata('sertAPHT'); 
+		$this->session->unset_tempdata('sertPersenDijamin');
+		// DATA SERTIFIKAT
+		$this->session->unset_tempdata('sertAgunanID');
+		$this->session->unset_tempdata('sertID');
+		$this->session->unset_tempdata('sertNoSert');
+		$this->session->unset_tempdata('sertKOHIR');
+		$this->session->unset_tempdata('sertJenisSertifikat');
+		$this->session->unset_tempdata('sertNoPERSIL');
+		$this->session->unset_tempdata('sertTanggalSertifikat');
+		$this->session->unset_tempdata('sertJTSHGB');
+		$this->session->unset_tempdata('sertNoSuratUkur');
+		$this->session->unset_tempdata('sertPLBangunan');
+		$this->session->unset_tempdata('sertLuasTanah');
+		$this->session->unset_tempdata('sertNamaPPAT');
+		$this->session->unset_tempdata('sertNamaPemilik');
+		$this->session->unset_tempdata('sertAlamatSertifikat');
+		$this->session->unset_tempdata('sertKelurahan');
+		$this->session->unset_tempdata('sertKecamatan');
+		$this->session->unset_tempdata('sertKota');
+		$this->session->unset_tempdata('sertPorpinsi');
+		$this->session->unset_tempdata('sertBatasTanah');
+		// DATA LAMPIRAN
+		$this->session->unset_tempdata('sertDokAJB');
+		$this->session->unset_tempdata('sertNomorAJB');
+		$this->session->unset_tempdata('sertTanggalAJB');
+		$this->session->unset_tempdata('sertDokIMB');
+		$this->session->unset_tempdata('sertNomorIMB');
+		$this->session->unset_tempdata('sertDokSPPT');
+		$this->session->unset_tempdata('sertNomorSPPT');
+		$this->session->unset_tempdata('sertTahunSPPT');
+		$this->session->unset_tempdata('sertDokSKHMT');
+		$this->session->unset_tempdata('sertDokDenah');
+		$this->session->unset_tempdata('sertDokRoya');
+		$this->session->unset_tempdata('sertDokSHT');
+		$this->session->unset_tempdata('sertNoSHT');
+		$this->session->unset_tempdata('sertPropinsiSHT');
+		$this->session->unset_tempdata('sertKotaSHT');
+		$this->session->unset_tempdata('sertDokSTTS');
+		$this->session->unset_tempdata('sertTahunSTTS');
+		$this->session->unset_tempdata('sertDokSSB');
+		$this->session->unset_tempdata('sertAtasNamaSSBBPHTB');
+		$this->session->unset_tempdata('sertLainnya');
+		///check BOX
+		$this->session->unset_tempdata('ajb');
+		$this->session->unset_tempdata('imb');
+		$this->session->unset_tempdata('sppt');
+		$this->session->unset_tempdata('skmht');
+		$this->session->unset_tempdata('denah');
+		$this->session->unset_tempdata('roya');
+		$this->session->unset_tempdata('sht');
+		$this->session->unset_tempdata('stts');
+		$this->session->unset_tempdata('ssb_bpht');
+		///end check box///
+		// DATA SID
+		$this->session->unset_tempdata('sertSIDJenisAgunan');
+		$this->session->unset_tempdata('sertSIDPeringkatSurat');
+		$this->session->unset_tempdata('sertJenisPengikatan');
+		$this->session->unset_tempdata('sertSIDNamaPemilikAgunan');
+		$this->session->unset_tempdata('sertSIDBuktiPemilikAgunan');
+		$this->session->unset_tempdata('sertSIDAlamat');
+		$this->session->unset_tempdata('sertSIDLokasi');
+		$this->session->unset_tempdata('sertNilaiNJOP');
+		$this->session->unset_tempdata('sertNilaiBank');
+		$this->session->unset_tempdata('sertNilaiIndependen');
+		$this->session->unset_tempdata('sertNamaIndependen');
+		$this->session->unset_tempdata('sertParipasu');
+		$this->session->unset_tempdata('sertAsuransi');
+		/// END FORM TAMBAH SERTIFIKAT ///
+		$data1['sukses'] = 'sukses';
+		echo json_encode($data1);
+	}
+	public function deleteTempBPKB(){
+		
+
+		// UNSET SESISON DATA
+
+		$this->session->unset_tempdata('bpkbTglRegister');
+		$this->session->unset_tempdata('bpkbTglPenilaian');
+		$this->session->unset_tempdata('bpkbKantorLokasi');
+		$this->session->unset_tempdata('bpkbKodeJenisAgunan');
+		$this->session->unset_tempdata('bpkbKodeIkatanAgunan');
+		$this->session->unset_tempdata('bpkbNilaiTaksasiAgunan');
+		$this->session->unset_tempdata('bpkbNJOP');
+		$this->session->unset_tempdata('bpkbHargaPasar');
+		$this->session->unset_tempdata('bpkbAPHT');
+		$this->session->unset_tempdata('bpkbPersenDijamin');
+
+		$this->session->unset_tempdata('bpkbAgunanID');
+		$this->session->unset_tempdata('bpkbNoBPKB');
+		$this->session->unset_tempdata('bpkbNamaPemilik');
+		$this->session->unset_tempdata('bpkbAlamatPemlik');
+		$this->session->unset_tempdata('bpkbKotaPemilik');
+		$this->session->unset_tempdata('bpkbMerk');
+		$this->session->unset_tempdata('bpkbType');
+		$this->session->unset_tempdata('bpkbJenis');
+		$this->session->unset_tempdata('bpkbSilinder');
+		$this->session->unset_tempdata('bpkbNoRangka');
+		$this->session->unset_tempdata('bpkbNoMesin');
+		$this->session->unset_tempdata('bpkbTahun');
+		$this->session->unset_tempdata('bpkbWarna');
+		$this->session->unset_tempdata('bpkbTglExpPajak');
+		$this->session->unset_tempdata('bpkbNoPolisi');
+		$this->session->unset_tempdata('bpkbTglExpSTNK');
+		$this->session->unset_tempdata('bpkbNoSTNK');
+
+		$this->session->unset_tempdata('bpkbDokKwitansiBlanko');
+		$this->session->unset_tempdata('bpkbDokFakturPemilik');
+		$this->session->unset_tempdata('bpkbDokKwJualBeli');
+		$this->session->unset_tempdata('bpkbDokSKTrayek');
+		$this->session->unset_tempdata('blanko');
+		$this->session->unset_tempdata('faktur_pemilik');
+		$this->session->unset_tempdata('kwitansi_jb');
+		$this->session->unset_tempdata('sk_trayek');
+		$this->session->unset_tempdata('bpkbNoFakturPemilik');
+		$this->session->unset_tempdata('noSKTrayek');
+		$this->session->unset_tempdata('bpkbBerlakuSD');
+		$this->session->unset_tempdata('bpkbLainnya');
+
+		$this->session->unset_tempdata('bpkbSIDJenisAgunan');
+		$this->session->unset_tempdata('bpkbSIDPengikatSurat');
+		$this->session->unset_tempdata('bpkbSIDJenisPengikatan');
+		$this->session->unset_tempdata('bpkbSIDNamaPemilikAgunan');
+		$this->session->unset_tempdata('bpkbSIDStatusBuktiKepemilikan');
+		$this->session->unset_tempdata('bpkbSIDAlamat');
+		$this->session->unset_tempdata('bpkbSIDLokasi');
+		$this->session->unset_tempdata('bpkbSIDNJOP');
+		$this->session->unset_tempdata('nilaiSIDAgunanBank');
+		$this->session->unset_tempdata('bpkbSIDNilaiIndependen');
+		$this->session->unset_tempdata('bpkbSIDNamaIndependen');
+		$this->session->unset_tempdata('bpkbSIDParipasu');
+		$this->session->unset_tempdata('bpkbSIDAsuransi');
+
+	
+
+		$data1['sukses'] = 'sukses';
+		echo json_encode($data1); 
+	}
+
+	
+
 	
 }
 	

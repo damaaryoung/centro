@@ -34,7 +34,7 @@
               </p>
             </a>
           </li>     
-
+          <!-- START MENU ASET DOKUMEN -->
           <?php  if($this->session->userdata('dokumen') == '2'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
@@ -66,24 +66,46 @@
               </ul>
             </li>
           <?php } else{} ?>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
-              <p>
-                User Access
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo base_url(); ?>index.php/UserAccessController/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List User Access</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          <!-- END MENU ASET DOKUMEN -->
+          <!-- START MENU USER ACCESS -->
+          <?php  if($this->session->userdata('divisi_id') == 'IT'){ ?>
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <p>
+                  User Access
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/UserAccessController/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>List User Access</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <?php } else if($this->session->userdata('admin') == '1'){ ?>
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <p>
+                  User Access
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/UserAccessController/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>List User Access</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <?php } else{} ?>
+          <!-- END MENU USER ACCESS -->
 
         </ul>
       </nav>
