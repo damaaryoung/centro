@@ -98,10 +98,10 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomorRekening">Nomor Rekening</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainNomorRekening" name="mainNomorRekening">
+                                    <input type="text" class="form-control" id="mainNomorRekening" name="mainNomorRekening" readonly>
                                   </div>
                                   <div class="col-sm-1">
-                                      <button type="button" class="btn btn-success btn-sm" id="mainBtnSearchRekening"> <i class="fa fa-search"> </i></button>
+                                      <button type="button" class="btn btn-success btn-sm" id="mainBtnSearchRekening" disabled> <i class="fa fa-search"> </i></button>
                                   </div>
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Tanggal Realisasi</label>

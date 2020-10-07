@@ -1,45 +1,45 @@
 <!-- Modal -->
-<div class="modal fade" id="PeminjamanMainModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="PenyerahanMainModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl"
        style=" width:1300px; overflow-y:auto;" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Peminjaman Data Aset Dokumen</h3>
-        <button type="button" class="close" id="btn_kembali_pinjam_modal2" aria-label="Close">
+        <h3 class="modal-title" id="exampleModalLabel">Penyerahan Data Aset Dokumen</h3>
+        <button type="button" class="close" id="btn_kembali_penyerahan_modal2" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       
-      <div id="loading2">
+      <div id="loadingPenyerahan">
               <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
       </div>
            <!--- FORM ATAS ------>
            <div class="row">
                   <div class="col-md-11 mx-auto">
-                              <div class="form-group row">
+                             <div class="form-group row">
                                   <div class="col-sm-7">
                                   </div>
                                   <div class="col-sm-1">
-                                    <label style="padding-top: 6px;" class="control-label" for="mainVerifikasiPinjam">Verifikasi</label>
+                                    <label style="padding-top: 6px;" class="control-label" for="mainVerifikasiPenyerahan">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input class="form-control select2" id="mainVerifikasiPinjam" name="mainVerifikasiPinjam" disabled>
+                                    <input class="form-control select2" id="mainVerifikasiPenyerahan" name="mainVerifikasiPenyerahan" disabled>
                                   </div>
-                              </div>
+                              </div>                                
                               <div class="form-group row">
                                   <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerja">Area Kerja</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <select class="form-control select2" id="mainAreaKerjaPinjam" name="mainAreaKerjaPinjam" required>
+                                    <select class="form-control select2" id="mainAreaKerjaPenyerahan" name="mainAreaKerjaPenyerahan" required>
                                     </select>
                                   </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggal">Tanggal</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input readonly type="date" class="form-control" id="mainTanggalPinjam" name='mainTanggalPinjam' >
+                                      <input readonly type="date" class="form-control" id="mainTanggalPenyerahan" name='mainTanggalPenyerahan' >
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -47,8 +47,8 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainTransaksi">Transaksi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="mainTransaksiPinjam" name="mainTransaksi" readonly>
-                                          <option value="PINJAM">PINJAM</option> 
+                                        <select class="form-control select2" id="mainTransaksiPenyerahan" name="mainTransaksi" readonly>
+                                          <option value="KELUAR">KELUAR</option> 
                                         </select>
                                   </div>
                                   <div class="col-sm-3">
@@ -57,10 +57,10 @@
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 6px;" class="control-label" for="mainNamaPinjam">Nama</label>
+                                      <label style="padding-top: 6px;" class="control-label" for="mainNamaPenyerahan">Nama</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainNamaPinjam" name='mainNamaPinjam' readonly>
+                                    <input type="text" class="form-control" id="mainNamaPenyerahan" name='mainNamaPenyerahan' readonly>
                                   </div>
                                   <div class="col-sm-1">
                                     <button type="button" class="btn btn-sm btn-success" id="btn_cari_notaris" data-toggle="modal" >
@@ -71,23 +71,23 @@
                                       <label style="padding-top: 5px;" class="control-label" for="mainKeterangan">Keterangan</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <textarea style="height: 100px;" type="text" class="form-control" id="mainKeteranganPinjam" name='mainKeteranganPinjam' ></textarea>
+                                    <textarea style="height: 100px;" type="text" class="form-control" id="mainKeteranganPenyerahan" name='mainKeteranganPenyerahan' ></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 6px;" class="control-label" for="mainAlamatPinjam">Alamat</label>
+                                      <label style="padding-top: 6px;" class="control-label" for="mainAlamatPenyerahan">Alamat</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <textarea style="height: 100px;" type="text" class="form-control" id="mainAlamatPinjam" name="mainAlamatPinjam" readonly></textarea>
+                                    <textarea style="height: 100px;" type="text" class="form-control" id="mainAlamatPenyerahan" name="mainAlamatPenyerahan" readonly></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 6px;" class="control-label" for="mainKotaPinjam">Kota</label>
+                                      <label style="padding-top: 6px;" class="control-label" for="mainKotaPenyerahan">Kota</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="mainKotaPinjam" name="mainKotaPinjam" readonly>
+                                    <input type="text" class="form-control" id="mainKotaPenyerahan" name="mainKotaPenyerahan" readonly>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -95,16 +95,16 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainJenisPengurusan">Jenis Pengurusan</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainJenisPengurusanPinjam" name="mainJenisPengurusanPinjam" readonly>
+                                    <input type="text" class="form-control" id="mainJenisPengurusanPenyerahan" name="mainJenisPengurusanPenyerahan" readonly>
                                   </div>
                                   <div class="col-sm-1">
                                     <button type="button" class="btn btn-sm btn-success" id="btn_cari_jenis_pengurusan"><i class="fa fa-search"></i></button>
                                   </div>
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="mainTanggalRencanaKembaliPinjam">Tanggal Rencana Kembali</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="mainTanggalRencanaKembaliPenyerahan">Tanggal Rencana Kembali</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input readonly type="date" class="form-control" id="mainTanggalRencanaKembaliPinjam" name="mainTanggalRencanaKembaliPinjam" value="">
+                                      <input readonly type="date" class="form-control" id="mainTanggalRencanaKembaliPenyerahan" name="mainTanggalRencanaKembaliPenyerahan" value="">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -112,16 +112,16 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomorRekening">Nomor Rekening</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainNomorRekeningPinjam" name="mainNomorRekeningPinjam">
+                                    <input type="text" class="form-control" id="mainNomorRekeningPenyerahan" name="mainNomorRekeningPenyerahan" readonly>
                                   </div>
                                   <div class="col-sm-1">
                                       <button type="button" class="btn btn-success btn-sm"> <i class="fa fa-search"> </i></button>
                                   </div>
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasiPinjam">Tanggal Realisasi</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasiPenyerahan">Tanggal Realisasi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input readonly type="date" class="form-control" id="mainTanggalRealisasiPinjam" name="mainTanggalRealisasiPinjam" value="">
+                                      <input readonly type="date" class="form-control" id="mainTanggalRealisasiPenyerahan" name="mainTanggalRealisasiPenyerahan" value="">
                                   </div>
                               </div>
                           <!-- Form ATAS -->
@@ -129,13 +129,13 @@
                   </div>
 
                   <div class="tab">
-                    <button type='button' class="tablinks" id='main_tab_bpkbPinjam' onclick="openTab(event, 'pinjamBPKB')">BPKB</button>
-                    <button type='button' class="tablinks" id='main_tab_sertPinjam' onclick="openTab(event, 'pinjamSertifikat')">Sertifikat</button>
-                    <button type='button' class="tablinks" id='main_tab_emasPinjam' onclick="openTab(event, 'pinjamEmas')">Emas</button>
+                    <button type='button' class="tablinks" id='main_tab_bpkbPenyerahan' onclick="openTab(event, 'penyerahanBPKB')">BPKB</button>
+                    <button type='button' class="tablinks" id='main_tab_sertPenyerahan' onclick="openTab(event, 'penyerahanSertifikat')">Sertifikat</button>
+                    <button type='button' class="tablinks" id='main_tab_emasPenyerahan' onclick="openTab(event, 'penyerahanEmas')">Emas</button>
                   </div>
 
                   <!-- Start BPKB -->
-                  <div id="pinjamBPKB" class="tabcontent">
+                  <div id="penyerahanBPKB" class="tabcontent">
                     <table id="" class="table table-striped table-bordered display" style="width:100%">
                             <thead>
                                 <tr>
@@ -149,24 +149,24 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><p id='rowBPKBAgunanIDPinjam'></p></td> 
-                                    <td><p id='rowBPKBNoBpkbPinjam'></p></td> 
-                                    <td><p id='rowBPKBNamaPemilikPinjam'></p></td> 
-                                    <td><p id='rowBPKBAlamatPinjam'></p></td>
-                                    <td><p id='rowBPKBNoPolisiPinjam'></p></td> 
-                                    <td><p id='rowBPKBVerifPinjam'></p></td>
+                                    <td><p id='rowBPKBAgunanIDPenyerahan'></p></td> 
+                                    <td><p id='rowBPKBNoBpkbPenyerahan'></p></td> 
+                                    <td><p id='rowBPKBNamaPemilikPenyerahan'></p></td> 
+                                    <td><p id='rowBPKBAlamatPenyerahan'></p></td>
+                                    <td><p id='rowBPKBNoPolisiPenyerahan'></p></td> 
+                                    <td><p id='rowBPKBVerifPenyerahan'></p></td>
                                 </tr>
                             </tbody>
                     </table>
-                        <a type="button" data-toggle="modal" data-target="#peminjamanBPKBModal"
-                            class="btn btn-primary btn-sm" id="btnPinjamBPKB" >  
+                        <a type="button" data-toggle="modal" data-target="#penyerahanBPKBModal"
+                            class="btn btn-primary btn-sm" id="btnPenyerahanBPKB" >  
                         <i class="fa fa-pencil-square-o"></i> Detail</a>  
                                       
                   </div>
                   <!-- END BPKB -->
 
                   <!-- Start Sertifikat -->
-                  <div id="pinjamSertifikat" class="tabcontent">
+                  <div id="penyerahanSertifikat" class="tabcontent">
                       <table id="" class="table table-striped table-bordered display" style="width:100%">
                           <thead>
                               <tr>
@@ -181,24 +181,24 @@
                           </thead>
                           <tbody>
                               <tr>
-                                  <td><p id='rowSertAgunanIDPinjam'></p></td> 
-                                  <td><p id='rowSertNoSertifPinjam'></p></td>
-                                  <td><p id='rowSertJenisPinjam'></p></td> 
-                                  <td><p id='rowSertTanggalPinjam'></p></td>
-                                  <td><p id='rowSertLuasTanahPinjam'></p></td>
-                                  <td><p id='rowSertPemilikPinjam'></p></td>
-                                  <td><p id='rowSertVerifPinjam'></p></td>
+                                  <td><p id='rowSertAgunanIDPenyerahan'></p></td> 
+                                  <td><p id='rowSertNoSertifPenyerahan'></p></td>
+                                  <td><p id='rowSertJenisPenyerahan'></p></td> 
+                                  <td><p id='rowSertTanggalPenyerahan'></p></td>
+                                  <td><p id='rowSertLuasTanahPenyerahan'></p></td>
+                                  <td><p id='rowSertPemilikPenyerahan'></p></td>
+                                  <td><p id='rowSertVerifPenyerahan'></p></td>
                               </tr>
                           </tbody>
                       </table>
-                        <a type="button" data-toggle="modal" data-target="#pinjamSertifikatModal"
-                            class="btn btn-primary btn-sm" id="btnPinjamSertif" >  
+                        <a type="button" data-toggle="modal" data-target="#penyerahanSertifikatModal"
+                            class="btn btn-primary btn-sm" id="btnPenyerahanSertif" >  
                          <i class="fa fa-pencil-square-o"></i> Detail</a>  
                   </div>
                   <!-- End Sertifikat -->
 
                   <!-- Start Emas -->
-                  <div id="pinjamEmas" class="tabcontent">
+                  <div id="penyerahanEmas" class="tabcontent">
 
                     <table id="" class="table table-striped table-bordered display" style="width:100%">
                             <thead>
@@ -214,34 +214,34 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                  <td><p id='rowEmasAgunanIDPinjam'></p></td>
-                                  <td><p id='rowEmasNoSeriPinjam'></p></td>
-                                  <td><p id='rowEmasJenisPinjam'></p></td>
-                                  <td><p id='rowEmasKaratPinjam'></p></td>
-                                  <td><p id='rowEmasGramPinjam'></p></td>
-                                  <td><p id='rowEmasHargaPasarPinjam'></p></td>
-                                  <td><p id='rowEmasVerifPinjam'></p></td>
+                                  <td><p id='rowEmasAgunanIDPenyerahan'></p></td>
+                                  <td><p id='rowEmasNoSeriPenyerahan'></p></td>
+                                  <td><p id='rowEmasJenisPenyerahan'></p></td>
+                                  <td><p id='rowEmasKaratPenyerahan'></p></td>
+                                  <td><p id='rowEmasGramPenyerahan'></p></td>
+                                  <td><p id='rowEmasHargaPasarPenyerahan'></p></td>
+                                  <td><p id='rowEmasVerifPenyerahan'></p></td>
                                 </tr>
                             </tbody>
                         </table>
-                          <a type="button" data-toggle="modal" data-target="#peminjamanEmasModal"
-                              class="btn btn-primary btn-sm" id="btnPinjamSertif" >  
+                          <a type="button" data-toggle="modal" data-target="#penyerahanEmasModal"
+                              class="btn btn-primary btn-sm" id="btnPenyerahanSertif" >  
                           <i class="fa fa-pencil-square-o"></i> Detail</a> 
                   </div>
                     <!-- END Emas -->
 
 
               <!--- END FORM ATAS --------->
-              <input type="hidden" class="form-control" id="mainIdPinjam" name="mainId">
-              <input type="hidden" class="form-control" id="mainNomorPinjam" name="mainNomor">
-              <input type="hidden" class="form-control" id="mainNoReffPinjam" name="mainNoReff">
+              <input type="hidden" class="form-control" id="mainIdPenyerahan" name="mainId">
+              <input type="hidden" class="form-control" id="mainNomorPenyerahan" name="mainNomor">
+              <input type="hidden" class="form-control" id="mainNoReffPenyerahan" name="mainNoReff">
 
 
 
       </div>
       <div class="modal-footer text-center" style="margin: 0 auto;">
-        <button type="button" class="btn btn-danger"  id="btn_kembali_pinjam_modal">Kembali</button>
-        <button type="button" class="btn btn-primary" id="btn_simpan_modal_pinjam" >Simpan</button>
+        <button type="button" class="btn btn-danger"  id="btn_kembali_penyerahan_modal">Kembali</button>
+        <button type="button" class="btn btn-primary" id="btn_simpan_modal_penyerahan" >Simpan</button>
       </div>
     </div>
   </div>

@@ -17,7 +17,7 @@
               <button type='button' class="tablinks" onclick="openTab(event, 'SIDEmasKembali')">SID</button>
             </div>
 
-            <!-- Start Data Emas -->
+            <!-- Start Data Emas --> 
             <div id="DataEmasKembali" class="tabcontent">
                 <div class="row">
                       <div class="col-md-10 mx-auto">
@@ -28,6 +28,12 @@
                                   </div>
                                   <div class="col-sm-5">
                                   <input type="text" class="form-control" id="emasAgunanIDKembali" name='emasAgunanIDKembali' readonly>
+                                  </div>
+                                  <div class="col-sm-1">
+                                      <label class="control-label" style="padding-top: 5px;" for="emasVerifikasiKembali">Verifikasi</label>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <input class="form-control select2" id="emasVerifikasiKembali" name="emasVerifikasiKembali" disabled>
                                   </div>
                               </div>
 

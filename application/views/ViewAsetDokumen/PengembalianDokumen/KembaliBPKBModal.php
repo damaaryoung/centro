@@ -15,7 +15,16 @@
             <div class="container py-5">
                     <div class="row">
                             <div class="col-md-11 mx-auto">
-                             
+                                    <div class="form-group row">
+                                        <div class="col-sm-7">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbVerifikasiKembali">Verifikasi</label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input class="form-control select2" id="bpkbVerifikasiKembali" name="bpkbVerifikasiKembali" disabled>
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-sm-2">
                                             <label class="control-label" style="padding-top: 5px;"  for="bpkbTglRegisterKembali">Tanggal Register</label>

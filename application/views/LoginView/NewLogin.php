@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CENTRO | Kredit Mandiri Indonesia</title>
-    <link rel="shortcut icon" href="<?php echo base_url('assets/dist/img/favicon1.ico') ?>">
+    <!-- <link rel="shortcut icon" href="<?php //echo base_url('assets/dist/img/favicon1.ico') ?>"> -->
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/fontawesome-free/css/all.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/adminlte.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/adminlte.css') ?>">
-    <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.jpg" />
+    <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
     <style type="text/css">
         html,
         body {
@@ -59,7 +59,7 @@
 <body>
     <div class="login-box">
         <div class="login-logo">
-            <img style="width: 200px" src="<?php echo base_url() ?>assets/design/images/kmi_logo.jpg">
+            <img style="width: 200px" src="<?php echo base_url() ?>assets/design/images/kmi_logo.png">
         </div>
         <div>
             <div class="myForm">
@@ -107,10 +107,8 @@
     <script src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url('assets/dist/js/adminlte.min.js') ?>"></script>
-    <script src="<?php echo base_url('assets/dist/js/index.js') ?>"></script>
-    <script src="<?php echo $this->config->base_url('assets/'); ?>dist/js/jsrsasign.min.js"></script>
-    <script src="<?php echo $this->config->base_url('assets/'); ?>dist/js/bootbox.min.js"></script>
-    <script src="<?php echo $this->config->base_url('assets/'); ?>dist/nprogress/nprogress.js"></script>
+  
+    
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/login_menu.js"></script>
 </body>
 

@@ -2,7 +2,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modalNomorRekening" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl"
-       style="width:1500px; overflow-y:auto; height: 700px;" role="document">
+       style="width:1700px; overflow-y:auto; height: 700px;" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel">Daftar Rekening Kredit</h3>

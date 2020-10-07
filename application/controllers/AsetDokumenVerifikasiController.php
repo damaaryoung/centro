@@ -11,6 +11,7 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 	/// START DISPLAY CONTROL///
 	public function index(){
 		$session = $this->session->userdata('nama');
+		$kode_kantor = $this->session->userdata('kd_cabang');
 		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
 		$data['navbar'] = $this->load->view('templates/navbar.php', NULL, TRUE);
@@ -27,7 +28,7 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 
 		if($session != ''){
 			//$data['ListAsset'] = $this->AsetDokumenVerifikasiModel->listAsetDokumen();
-			$data['ListAssetVerifikasi'] = $this->AsetDokumenVerifikasiModel->listDokumenVerifikasi();
+			$data['ListAssetVerifikasi'] = $this->AsetDokumenVerifikasiModel->listDokumenVerifikasi($kode_kantor);
 			
 			$this->load->view('ViewAsetDokumen/MainViewVerifikasi.php', $data);
 		}

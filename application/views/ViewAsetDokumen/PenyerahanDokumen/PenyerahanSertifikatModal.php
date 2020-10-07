@@ -1,11 +1,11 @@
 <!-- Modal SERTIFIKAT -->
-<div class="modal fade" id="pinjamSertifikatModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="penyerahanSertifikatModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl"
        style="margin-bottom:50px; width:1300px; overflow-y:auto;" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Peminjaman Aset Data Sertifikat</h3>
-        <button type="button" class="close" id="sert_button_kembali_pinjam2" aria-label="Close">
+        <h3 class="modal-title" id="exampleModalLabel">Penyerahan Aset Data Sertifikat</h3>
+        <button type="button" class="close" id="sert_button_kembali_penyerahan2" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -18,92 +18,92 @@
                                   <div class="col-sm-7">
                                   </div>
                                   <div class="col-sm-1">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertVerifikasiPinjam">Verifikasi</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertVerifikasiPenyerahan">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-2">
-                                      <input class="form-control select2" id="sertVerifikasiPinjam" name="sertVerifikasiPinjam" disabled>
+                                      <input class="form-control select2" id="sertVerifikasiPenyerahan" name="sertVerifikasiPenyerahan" disabled>
                                   </div>
                               </div> 
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;"  for="sertTglRegisterPinjam">Tanggal Register</label>
+                                      <label class="control-label" style="padding-top: 5px;"  for="sertTglRegisterPenyerahan">Tanggal Register</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <input type="date" class="form-control" id="sertTglRegisterPinjam" name="sertTglRegisterPinjam" value="" readonly>
+                                        <input type="date" class="form-control" id="sertTglRegisterPenyerahan" name="sertTglRegisterPenyerahan" value="" readonly>
                                     
                                   </div>
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="sertTglPenilaianPinjam">Tanggal Penilaian</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="sertTglPenilaianPenyerahan">Tanggal Penilaian</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <input type="date" class="form-control" id="sertTglPenilaianPinjam" name="sertTglPenilaianPinjam" value="" >
+                                        <input type="date" class="form-control" id="sertTglPenilaianPenyerahan" name="sertTglPenilaianPenyerahan" value="" >
                                    
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertKantorLokasiPinjam">Kantor Lokasi Jaminan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertKantorLokasiPenyerahan">Kantor Lokasi Jaminan</label>
                                   </div>
                                   <div class="col-sm-7">
-                                      <select class="form-control select2" id="sertKantorLokasiPinjam" name="sertKantorLokasiPinjam">
+                                      <select class="form-control select2" id="sertKantorLokasiPenyerahan" name="sertKantorLokasiPenyerahan">
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                       </select>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertKodeJenisAgunanPinjam">Jenis Agunan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertKodeJenisAgunanPenyerahan">Jenis Agunan</label>
                                   </div>
                                   <div class="col-sm-7">
-                                      <select class="form-control select2" id="sertKodeJenisAgunanPinjam" name="sertKodeJenisAgunanPinjam">
+                                      <select class="form-control select2" id="sertKodeJenisAgunanPenyerahan" name="sertKodeJenisAgunanPenyerahan">
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                       </select>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertKodeIkatanAgunanPinjam">Ikatan Agunan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertKodeIkatanAgunanPenyerahan">Ikatan Agunan</label>
                                   </div>
                                   <div class="col-sm-7">
-                                    <select class="form-control select2" id="sertKodeIkatanAgunanPinjam" name="sertKodeIkatanAgunanPinjam">
+                                    <select class="form-control select2" id="sertKodeIkatanAgunanPenyerahan" name="sertKodeIkatanAgunanPenyerahan">
                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                     </select>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertNilaiTaksasiAgunanPinjam">Nilai Taksasi Agunan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertNilaiTaksasiAgunanPenyerahan">Nilai Taksasi Agunan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="sertNilaiTaksasiAgunanPinjam" name="sertNilaiTaksasiAgunanPinjam">
+                                      <input type="number" class="form-control" id="sertNilaiTaksasiAgunanPenyerahan" name="sertNilaiTaksasiAgunanPenyerahan">
                                   </div>
                                   <div class="col-sm-1">
                                       <label type="number" class="control-label" style="padding-top: 5px;">NJOP</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="sertNJOPPinjam" name="sertNJOPPinjam" >
+                                      <input type="number" class="form-control" id="sertNJOPPenyerahan" name="sertNJOPPenyerahan" >
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertHargaPasarPinjam">Harga Pasar</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertHargaPasarPenyerahan">Harga Pasar</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="sertHargaPasarPinjam" name="sertHargaPasarPinjam">
+                                      <input type="number" class="form-control" id="sertHargaPasarPenyerahan" name="sertHargaPasarPenyerahan">
                                   </div>
                                   <div class="col-sm-1">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertAPHTPinjam">APHT</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertAPHTPenyerahan">APHT</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="sertAPHTPinjam" name="sertAPHTPinjam">
+                                      <input type="number" class="form-control" id="sertAPHTPenyerahan" name="sertAPHTPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertPersenDijaminPinjam">Persen Dijamin</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertPersenDijaminPenyerahan">Persen Dijamin</label>
                                   </div>
                                   <div class="col-sm-2">
-                                      <input type="number" class="form-control" id="sertPersenDijaminPinjam" name="sertPersenDijaminPinjam" readonly>
+                                      <input type="number" class="form-control" id="sertPersenDijaminPenyerahan" name="sertPersenDijaminPenyerahan" readonly>
                                   </div>
                               </div>
                              
@@ -112,153 +112,153 @@
             </div>
 
             <div class="tab">
-              <button type="button" class="tablinks" onclick="openTab(event, 'DataSertifikatPinjam')">Data Sertifikat</button>
-              <button type="button" class="tablinks" onclick="openTab(event, 'DataLampiranSertifikatPinjam')">Data Lampiran</button>
-              <button type="button" class="tablinks" onclick="openTab(event, 'SIDSertifikatPinjam')">SID</button>
+              <button type="button" class="tablinks" onclick="openTab(event, 'DataSertifikatPenyerahan')">Data Sertifikat</button>
+              <button type="button" class="tablinks" onclick="openTab(event, 'DataLampiranSertifikatPenyerahan')">Data Lampiran</button>
+              <button type="button" class="tablinks" onclick="openTab(event, 'SIDSertifikatPenyerahan')">SID</button>
             </div>
 
              <!-- Start Data Sertifikat -->
-             <div id="DataSertifikatPinjam" class="tabcontent">
+             <div id="DataSertifikatPenyerahan" class="tabcontent">
                 <div class="row">
                       <div class="col-md-10 mx-auto">
                       <br><br>
                          
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;"  for="sertAgunanIDPinjam">Agunan ID</label>
+                                      <label class="control-label" style="padding-top: 5px;"  for="sertAgunanIDPenyerahan">Agunan ID</label>
                                   </div>
                                   <div class="col-sm-3">
-                                  <input type="text" class="form-control" id="sertAgunanIDPinjam" name="sertAgunanIDPinjam" placeholder='NEW' readonly>
+                                  <input type="text" class="form-control" id="sertAgunanIDPenyerahan" name="sertAgunanIDPenyerahan" placeholder='NEW' readonly>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="sertIDPinjam" name="sertIDPinjam" readonly value="">
+                                      <input type="number" class="form-control" id="sertIDPenyerahan" name="sertIDPenyerahan" readonly value="">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertNoSertPinjam">No. Sertifikat</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertNoSertPenyerahan">No. Sertifikat</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertNoSertPinjam" name="sertNoSertPinjam">
+                                      <input type="text" class="form-control" id="sertNoSertPenyerahan" name="sertNoSertPenyerahan">
                                   </div>
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertKOHIRPinjam">No. KOHIR</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertKOHIRPenyerahan">No. KOHIR</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertKOHIRPinjam" name="sertKOHIRPinjam">
+                                      <input type="text" class="form-control" id="sertKOHIRPenyerahan" name="sertKOHIRPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertJenisSertifikatPinjam">Jenis Sertifkat</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertJenisSertifikatPenyerahan">Jenis Sertifkat</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="sertJenisSertifikatPinjam" name="sertJenisSertifikatPinjam">
+                                        <select class="form-control select2" id="sertJenisSertifikatPenyerahan" name="sertJenisSertifikatPenyerahan">
                                         </select>
                                   </div>
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertNoPERSILPinjam">No. PERSIL</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertNoPERSILPenyerahan">No. PERSIL</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertNoPERSILPinjam" name="sertNoPERSILPinjam">
+                                      <input type="text" class="form-control" id="sertNoPERSILPenyerahan" name="sertNoPERSILPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;"  for="sertTanggalSertifikatPinjam">Tanggal Sertifikat</label>
+                                      <label class="control-label" style="padding-top: 5px;"  for="sertTanggalSertifikatPenyerahan">Tanggal Sertifikat</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input type="date" class="form-control" id="sertTanggalSertifikatPinjam" name="sertTanggalSertifikatPinjam">
+                                    <input type="date" class="form-control" id="sertTanggalSertifikatPenyerahan" name="sertTanggalSertifikatPenyerahan">
                                   </div>
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" id="sertJTSHGBlblPinjam" for="sertJTSHGBPinjam">Tgl JT SHGB</label>
+                                      <label class="control-label" style="padding-top: 5px;" id="sertJTSHGBlblPenyerahan" for="sertJTSHGBPenyerahan">Tgl JT SHGB</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input type="date" class="form-control" id="sertJTSHGBPinjam" name="sertJTSHGBPinjam">
+                                    <input type="date" class="form-control" id="sertJTSHGBPenyerahan" name="sertJTSHGBPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertNoSuratUkurPinjam">No. Surat Ukur</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertNoSuratUkurPenyerahan">No. Surat Ukur</label>
                                   </div>
                                   <div class="col-sm-4">
-                                      <input type="text" class="form-control" id="sertNoSuratUkurPinjam" name="sertNoSuratUkurPinjam">
+                                      <input type="text" class="form-control" id="sertNoSuratUkurPenyerahan" name="sertNoSuratUkurPenyerahan">
                                   </div>
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertPLBangunanPinjam">P L Bangunan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertPLBangunanPenyerahan">P L Bangunan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertPLBangunanPinjam" name="sertPLBangunanPinjam">
+                                      <input type="text" class="form-control" id="sertPLBangunanPenyerahan" name="sertPLBangunanPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertLuasTanahPinjam">Luas Tanah</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertLuasTanahPenyerahan">Luas Tanah</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="number" class="form-control" id="sertLuasTanahPinjam" name="sertLuasTanahPinjam">
+                                      <input type="number" class="form-control" id="sertLuasTanahPenyerahan" name="sertLuasTanahPenyerahan">
                                   </div>
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertNamaPPATPinjam">Nama PPAT</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertNamaPPATPenyerahan">Nama PPAT</label>
                                   </div>
                                   <div class="col-sm-4">
-                                      <input type="text" class="form-control" id="sertNamaPPATPinjam" name="sertNamaPPATPinjam">
+                                      <input type="text" class="form-control" id="sertNamaPPATPenyerahan" name="sertNamaPPATPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertNamaPemilikPinjam">Nama Pemilik</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertNamaPemilikPenyerahan">Nama Pemilik</label>
                                   </div>
                                   <div class="col-sm-8">
-                                      <input type="text" class="form-control" id="sertNamaPemilikPinjam" name="sertNamaPemilikPinjam">
+                                      <input type="text" class="form-control" id="sertNamaPemilikPenyerahan" name="sertNamaPemilikPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertAlamatSertifikatPinjam">Alamat Sertifikat</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertAlamatSertifikatPenyerahan">Alamat Sertifikat</label>
                                   </div>
                                   <div class="col-sm-8">
-                                  <textarea style="height: 75px;" type="text" class="form-control" name="sertAlamatSertifikatPinjam" id="sertAlamatSertifikatPinjam" placeholder="Alamat..."></textarea>
+                                  <textarea style="height: 75px;" type="text" class="form-control" name="sertAlamatSertifikatPenyerahan" id="sertAlamatSertifikatPenyerahan" placeholder="Alamat..."></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertKelurahanPinjam">Keluarhan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertKelurahanPenyerahan">Keluarhan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="sertKelurahanPinjam" name="sertKelurahanPinjam" >
+                                      <input type="text" class="form-control" id="sertKelurahanPenyerahan" name="sertKelurahanPenyerahan" >
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertKecamatanPinjam">Kecamatan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertKecamatanPenyerahan">Kecamatan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="sertKecamatanPinjam" name="sertKecamatanPinjam">
+                                      <input type="text" class="form-control" id="sertKecamatanPenyerahan" name="sertKecamatanPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertKotaPinjam">Kota</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertKotaPenyerahan">Kota</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="sertKotaPinjam" name="sertKotaPinjam">
+                                      <input type="text" class="form-control" id="sertKotaPenyerahan" name="sertKotaPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertPorpinsiPinjam">Propinsi</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertPorpinsiPenyerahan">Propinsi</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="sertPorpinsiPinjam" name="sertPorpinsiPinjam">
+                                      <input type="text" class="form-control" id="sertPorpinsiPenyerahan" name="sertPorpinsiPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertBatasTanahPinjam">Batas Tanah</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertBatasTanahPenyerahan">Batas Tanah</label>
                                   </div>
                                   <div class="col-sm-8">
-                                      <input type="text" class="form-control" id="sertBatasTanahPinjam" name="sertBatasTanahPinjam">
+                                      <input type="text" class="form-control" id="sertBatasTanahPenyerahan" name="sertBatasTanahPenyerahan">
                                   </div>
                               </div>
                       </div>
@@ -267,119 +267,119 @@
             <!-- END Data Sertifikat -->
 
             <!-- Start Data Lampiran -->
-            <div id="DataLampiranSertifikatPinjam" class="tabcontent">
+            <div id="DataLampiranSertifikatPenyerahan" class="tabcontent">
                 <!-- ROW -->
                 <div class="row">
                       <div class="col-md-12 mx-auto">
                       <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokAJBPinjam" name="sertDokAJBPinjam">
+                                    <select class="form-control select2" id="sertDokAJBPenyerahan" name="sertDokAJBPenyerahan">
                                             
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" value="Y" id="check_ajbPinjam" name="check_ajbPinjam">&nbsp;AJB</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" value="Y" id="check_ajbPenyerahan" name="check_ajbPenyerahan">&nbsp;AJB</label>
                                 </div>
                                 <div class="col-sm-1">
                                     <label class="control-label" style="padding-top: 5px;" for="">Nomor</label>
                                 </div>
                                 <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertNomorAJBPinjam" name="sertNomorAJBPinjam" >
+                                      <input type="text" class="form-control" id="sertNomorAJBPenyerahan" name="sertNomorAJBPenyerahan" >
                                 </div>
                                 <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" >Tanggal AJB</label>
                                 </div>
                                 <div class="col-sm-3">
-                                  <input type="date" class="form-control" id="sertTanggalAJBPinjam" name="sertTanggalAJBPinjam" >
+                                  <input type="date" class="form-control" id="sertTanggalAJBPenyerahan" name="sertTanggalAJBPenyerahan" >
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokIMBPinjam" name="sertDokIMBPinjam">
+                                    <select class="form-control select2" id="sertDokIMBPenyerahan" name="sertDokIMBPenyerahan">
                                                 
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_imbPinjam" name='check_imbPinjam' value="Y">&nbsp;IMB</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_imbPenyerahan" name='check_imbPenyerahan' value="Y">&nbsp;IMB</label>
                                 </div>
                                 <div class="col-sm-1">
                                     <label class="control-label" style="padding-top: 5px;" for="">Nomor</label>
                                 </div>
                                 <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertNomorIMBPinjam" name="sertNomorIMBPinjam" >
+                                      <input type="text" class="form-control" id="sertNomorIMBPenyerahan" name="sertNomorIMBPenyerahan" >
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSPPTPinjam" name="sertDokSPPTPinjam">
+                                    <select class="form-control select2" id="sertDokSPPTPenyerahan" name="sertDokSPPTPenyerahan">
                                                 
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_spptPinjam" name='check_spptPinjam' value="Y">&nbsp;SPPT</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_spptPenyerahan" name='check_spptPenyerahan' value="Y">&nbsp;SPPT</label>
                                 </div>
                                 <div class="col-sm-1">
                                     <label class="control-label" style="padding-top: 5px;" for="">Nomor</label>
                                 </div>
                                 <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertNomorSPPTPinjam" name="sertNomorSPPTPinjam" >
+                                      <input type="text" class="form-control" id="sertNomorSPPTPenyerahan" name="sertNomorSPPTPenyerahan" >
                                 </div>
                                 <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="">Tahun</label>
                                 </div>
                                 <div class="col-sm-3">
-                                  <input type="number" class="form-control" id="sertTahunSPPTPinjam" name="sertTahunSPPTPinjam" min="1500" max="2999" >
+                                  <input type="number" class="form-control" id="sertTahunSPPTPenyerahan" name="sertTahunSPPTPenyerahan" min="1500" max="2999" >
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSKHMTPinjam" name="sertDokSKHMTPinjam">
+                                    <select class="form-control select2" id="sertDokSKHMTPenyerahan" name="sertDokSKHMTPenyerahan">
                                                
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_skmhtPinjam" name='check_skmhtPinjam' value="Y">&nbsp;SKMHT</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_skmhtPenyerahan" name='check_skmhtPenyerahan' value="Y">&nbsp;SKMHT</label>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokDenahPinjam" name="sertDokDenahPinjam">
+                                    <select class="form-control select2" id="sertDokDenahPenyerahan" name="sertDokDenahPenyerahan">
                                                 
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_denahPinjam" name='check_denahPinjam' value="Y">&nbsp;Denah</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_denahPenyerahan" name='check_denahPenyerahan' value="Y">&nbsp;Denah</label>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokRoyaPinjam" name="sertDokRoyaPinjam">
+                                    <select class="form-control select2" id="sertDokRoyaPenyerahan" name="sertDokRoyaPenyerahan">
                                                
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_royaPinjam" name='check_royaPinjam' value="Y">&nbsp;Roya</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_royaPenyerahan" name='check_royaPenyerahan' value="Y">&nbsp;Roya</label>
                                 </div>
                             </div>
                             <!--- SHT --->
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSHTPinjam" name="sertDokSHTPinjam">
+                                    <select class="form-control select2" id="sertDokSHTPenyerahan" name="sertDokSHTPenyerahan">
                                                
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_shtPinjam" name='check_shtPinjam' value="Y">&nbsp;SHT</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_shtPenyerahan" name='check_shtPenyerahan' value="Y">&nbsp;SHT</label>
                                 </div>
                                 <div class="col-sm-1">
                                     <label class="control-label" style="padding-top: 5px;" for="">Nomor</label>
                                 </div>
                                 <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertNoSHTPinjam" name="sertNoSHTPinjam" >
+                                      <input type="text" class="form-control" id="sertNoSHTPenyerahan" name="sertNoSHTPenyerahan" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -390,7 +390,7 @@
                                     <label class="control-label" style="padding-top: 5px;" for="">Propinsi</label>
                                 </div>
                                 <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertPropinsiSHTPinjam" name="sertPropinsiSHTPinjam" >
+                                      <input type="text" class="form-control" id="sertPropinsiSHTPenyerahan" name="sertPropinsiSHTPenyerahan" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -401,40 +401,40 @@
                                     <label class="control-label" style="padding-top: 5px;" for="">Kota</label>
                                 </div>
                                 <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="sertKotaSHTPinjam" name="sertKotaSHTPinjam" >
+                                      <input type="text" class="form-control" id="sertKotaSHTPenyerahan" name="sertKotaSHTPenyerahan" >
                                 </div>
                             </div>
                             <!--- SHT --->
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSTTSPinjam" name="sertDokSTTSPinjam">
+                                    <select class="form-control select2" id="sertDokSTTSPenyerahan" name="sertDokSTTSPenyerahan">
                                                 
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_sttsPinjam" name='check_sttsPinjam' value="Y">&nbsp;STTS</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_sttsPenyerahan" name='check_sttsPenyerahan' value="Y">&nbsp;STTS</label>
                                 </div>
                                 <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="inputFirstname">Tahun</label>
                                 </div>
                                 <div class="col-sm-3">
-                                  <input type="number" class="form-control" id="sertTahunSTTSPinjam" name="sertTahunSTTSPinjam" placeholder="Tahun" min="1500" max="2999">
+                                  <input type="number" class="form-control" id="sertTahunSTTSPenyerahan" name="sertTahunSTTSPenyerahan" placeholder="Tahun" min="1500" max="2999">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSSBPinjam" name="sertDokSSBPinjam">
+                                    <select class="form-control select2" id="sertDokSSBPenyerahan" name="sertDokSSBPenyerahan">
                                               
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_ssb_bphtPinjam" name='check_ssb_bphtPinjam' value="Y">&nbsp;SSB/BPHTB</label>
+                                    <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline"><input type="checkbox" id="check_ssb_bphtPenyerahan" name='check_ssb_bphtPenyerahan' value="Y">&nbsp;SSB/BPHTB</label>
                                 </div>
                                 <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="inputFirstname">Atas Nama</label>
                                 </div>
                                 <div class="col-sm-5">
-                                  <input type="text" class="form-control" id="sertAtasNamaSSBBPHTBPinjam" name="sertAtasNamaSSBBPHTBPinjam" placeholder="Atas Nama">
+                                  <input type="text" class="form-control" id="sertAtasNamaSSBBPHTBPenyerahan" name="sertAtasNamaSSBBPHTBPenyerahan" placeholder="Atas Nama">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -442,7 +442,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Lainnya</label>
                                   </div>
                                   <div class="col-sm-9">
-                                  <textarea style="height: 75px;" type="text" class="form-control" id="sertLainnyaPinjam" name="sertLainnyaPinjam"></textarea>
+                                  <textarea style="height: 75px;" type="text" class="form-control" id="sertLainnyaPenyerahan" name="sertLainnyaPenyerahan"></textarea>
                                   </div>
                             </div>
                       </div>
@@ -452,7 +452,7 @@
             <!-- End Data Lampiran -->
 
             <!-- Start SID -->
-            <div id="SIDSertifikatPinjam" class="tabcontent">
+            <div id="SIDSertifikatPenyerahan" class="tabcontent">
                 <div class="row">
                         <div class="col-md-10 mx-auto">
                         <br><br>
@@ -461,7 +461,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Jenis Agunan</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="sertSIDJenisAgunanPinjam" name="sertSIDJenisAgunanPinjam">
+                                            <select class="form-control select2" id="sertSIDJenisAgunanPenyerahan" name="sertSIDJenisAgunanPenyerahan">
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                    
                                             </select>
@@ -472,7 +472,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Peringkat Surat Berharga</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="sertSIDPeringkatSuratPinjam" name="sertSIDPeringkatSuratPinjam">
+                                            <select class="form-control select2" id="sertSIDPeringkatSuratPenyerahan" name="sertSIDPeringkatSuratPenyerahan">
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                 
                                             </select>
@@ -483,7 +483,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Jenis Pengikatan</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="sertJenisPengikatanPinjam" name="sertJenisPengikatanPinjam">
+                                            <select class="form-control select2" id="sertJenisPengikatanPenyerahan" name="sertJenisPengikatanPenyerahan">
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                     
                                             </select>
@@ -494,7 +494,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Nama Pemilik Agunan</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="sertSIDNamaPemilikAgunanPinjam" name="sertSIDNamaPemilikAgunanPinjam">
+                                        <input type="text" class="form-control" id="sertSIDNamaPemilikAgunanPenyerahan" name="sertSIDNamaPemilikAgunanPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -502,7 +502,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Status/Bukti Kepemilikan</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="sertSIDBuktiPemilikAgunanPinjam" name="sertSIDBuktiPemilikAgunanPinjam">
+                                        <input type="text" class="form-control" id="sertSIDBuktiPemilikAgunanPenyerahan" name="sertSIDBuktiPemilikAgunanPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -510,7 +510,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Alamat</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="sertSIDAlamatPinjam" name="sertSIDAlamatPinjam">
+                                        <input type="text" class="form-control" id="sertSIDAlamatPenyerahan" name="sertSIDAlamatPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -518,7 +518,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Lokasi</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="sertSIDLokasiPinjam" name="sertSIDLokasiPinjam">
+                                            <select class="form-control select2" id="sertSIDLokasiPenyerahan" name="sertSIDLokasiPenyerahan">
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                  
                                             </select>
@@ -529,7 +529,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (NJOP)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="sertNilaiNJOPPinjam" name="sertNilaiNJOPPinjam">
+                                        <input type="number" class="form-control" id="sertNilaiNJOPPenyerahan" name="sertNilaiNJOPPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -537,7 +537,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (Bank)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="sertNilaiBankPinjam" name="sertNilaiBankPinjam">
+                                        <input type="number" class="form-control" id="sertNilaiBankPenyerahan" name="sertNilaiBankPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -545,7 +545,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan Independen</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="sertNilaiIndependenPinjam" name="sertNilaiIndependenPinjam">
+                                        <input type="number" class="form-control" id="sertNilaiIndependenPenyerahan" name="sertNilaiIndependenPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -553,7 +553,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Nama Penilai Independen</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="sertNamaIndependenPinjam" name="sertNamaIndependenPinjam">
+                                        <input type="text" class="form-control" id="sertNamaIndependenPenyerahan" name="sertNamaIndependenPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -561,7 +561,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Paripasu (%)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="sertParipasuPinjam" name="sertParipasuPinjam">
+                                        <input type="number" class="form-control" id="sertParipasuPenyerahan" name="sertParipasuPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -569,7 +569,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Asuransi</label>
                                     </div>
                                     <div class="col-sm-3">
-                                            <select class="form-control select2" id="sertAsuransiPinjam" name="sertAsuransiPinjam">
+                                            <select class="form-control select2" id="sertAsuransiPenyerahan" name="sertAsuransiPenyerahan">
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                     <option value="Y">YA</option>
                                                     <option value="T">TIDAK</option>
@@ -588,7 +588,7 @@
 
 
       <div class="modal-footer">
-        <button type="button" id="sert_button_kembali_pinjam" class="btn btn-danger">Kembali</button>
+        <button type="button" id="sert_button_kembali_penyerahan" class="btn btn-danger">Kembali</button>
       </div>
     </div>
   </div>

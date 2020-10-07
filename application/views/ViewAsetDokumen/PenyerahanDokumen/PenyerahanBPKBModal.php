@@ -1,11 +1,11 @@
 <!-- Modal -->
-<div class="modal fade" id="peminjamanBPKBModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="penyerahanBPKBModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl"
        style="margin-bottom:50px; width:1300px; overflow-y:auto;" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Peminjaman Data Aset Dokumen BPKB</h3>
-        <button type="button" class="close" id="bpkb_button_kembali_pinjam2" aria-label="Close">
+        <h3 class="modal-title" id="exampleModalLabel">Penyerahan Data Aset Dokumen BPKB</h3>
+        <button type="button" class="close" id="bpkb_button_kembali_penyerahan2" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -19,90 +19,90 @@
                                         <div class="col-sm-7">
                                         </div>
                                         <div class="col-sm-1">
-                                            <label class="control-label" style="padding-top: 5px;" for="bpkbVerifikasiPinjam">Verifikasi</label>
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbVerifikasiPenyerahan">Verifikasi</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <input class="form-control select2" id="bpkbVerifikasiPinjam" name="bpkbVerifikasiPinjam" disabled>
+                                            <input class="form-control select2" id="bpkbVerifikasiPenyerahan" name="bpkbVerifikasiPenyerahan" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-2">
-                                            <label class="control-label" style="padding-top: 5px;"  for="bpkbTglRegisterPinjam">Tanggal Register</label>
+                                            <label class="control-label" style="padding-top: 5px;"  for="bpkbTglRegisterPenyerahan">Tanggal Register</label>
                                         </div>
                                         <div class="col-sm-3">
-                                                <input type="date" class="form-control" id="bpkbTglRegisterPinjam" name="bpkbTglRegisterPinjam" readonly>
+                                                <input type="date" class="form-control" id="bpkbTglRegisterPenyerahan" name="bpkbTglRegisterPenyerahan" readonly>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label style="padding-top: 5px;" class="control-label" for="bpkbTglPenilaianPinjam">Tanggal Penilaian</label>
+                                            <label style="padding-top: 5px;" class="control-label" for="bpkbTglPenilaianPenyerahan">Tanggal Penilaian</label>
                                         </div>
                                         <div class="col-sm-3">
-                                                <input type="date" class="form-control" id="bpkbTglPenilaianPinjam" name="bpkbTglPenilaianPinjam" value="" >
+                                                <input type="date" class="form-control" id="bpkbTglPenilaianPenyerahan" name="bpkbTglPenilaianPenyerahan" value="" >
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <label class="control-label" style="padding-top: 5px;" for="bpkbKantorLokasiPinjam">Kantor Lokasi Jaminan</label>
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbKantorLokasiPenyerahan">Kantor Lokasi Jaminan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKantorLokasiPinjam" name="bpkbKantorLokasiPinjam">
+                                            <select class="form-control select2" id="bpkbKantorLokasiPenyerahan" name="bpkbKantorLokasiPenyerahan">
                                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <label class="control-label" style="padding-top: 5px;" for="bpkbKodeJenisAgunanPinjam">Jenis Agunan</label>
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbKodeJenisAgunanPenyerahan">Jenis Agunan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKodeJenisAgunanPinjam" name="bpkbKodeJenisAgunanPinjam">
+                                            <select class="form-control select2" id="bpkbKodeJenisAgunanPenyerahan" name="bpkbKodeJenisAgunanPenyerahan">
                                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <label class="control-label" style="padding-top: 5px;" for="bpkbKodeIkatanAgunanPinjam">Ikatan Agunan</label>
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbKodeIkatanAgunanPenyerahan">Ikatan Agunan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKodeIkatanAgunanPinjam" name="bpkbKodeIkatanAgunanPinjam">
+                                            <select class="form-control select2" id="bpkbKodeIkatanAgunanPenyerahan" name="bpkbKodeIkatanAgunanPenyerahan">
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <label class="control-label" style="padding-top: 5px;" for="bpkbNilaiTaksasiAgunanPinjam">Nilai Taksasi Agunan</label>
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbNilaiTaksasiAgunanPenyerahan">Nilai Taksasi Agunan</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="number" class="form-control" id="bpkbNilaiTaksasiAgunanPinjam" name="bpkbNilaiTaksasiAgunanPinjam">
+                                            <input type="number" class="form-control" id="bpkbNilaiTaksasiAgunanPenyerahan" name="bpkbNilaiTaksasiAgunanPenyerahan">
                                         </div>
                                         <div class="col-sm-1">
                                             <label type="number" class="control-label" style="padding-top: 5px;">NJOP</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="number" class="form-control" id="bpkbNJOPPinjam" name="bpkbNJOPPinjam">
+                                            <input type="number" class="form-control" id="bpkbNJOPPenyerahan" name="bpkbNJOPPenyerahan">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <label class="control-label" style="padding-top: 5px;" for="bpkbHargaPasarPinjam">Harga Pasar</label>
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbHargaPasarPenyerahan">Harga Pasar</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="number" class="form-control" id="bpkbHargaPasarPinjam" name="bpkbHargaPasarPinjam">
+                                            <input type="number" class="form-control" id="bpkbHargaPasarPenyerahan" name="bpkbHargaPasarPenyerahan">
                                         </div>
                                         <div class="col-sm-1">
-                                            <label class="control-label" style="padding-top: 5px;" for="bpkbAPHTPinjam">APHT</label>
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbAPHTPenyerahan">APHT</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="number" class="form-control" id="bpkbAPHTPinjam" name="bpkbAPHTPinjam">
+                                            <input type="number" class="form-control" id="bpkbAPHTPenyerahan" name="bpkbAPHTPenyerahan">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <label class="control-label" style="padding-top: 5px;" for="bpkbPersenDijaminPinjam">Persen Dijamin</label>
+                                            <label class="control-label" style="padding-top: 5px;" for="bpkbPersenDijaminPenyerahan">Persen Dijamin</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="number" class="form-control" id="bpkbPersenDijaminPinjam" name="bpkbPersenDijaminPinjam" readonly>
+                                            <input type="number" class="form-control" id="bpkbPersenDijaminPenyerahan" name="bpkbPersenDijaminPenyerahan" readonly>
                                         </div>
                                     </div>
                                     
@@ -112,13 +112,13 @@
                     </div>
 
             <div class="tab">
-              <button type="button" class="tablinks" onclick="openTab(event, 'DataBPKBPinjam')">Data BPKB</button>
-              <button type="button" class="tablinks" onclick="openTab(event, 'DataLampiranBPKBPinjam')">Data Lampiran</button>
-              <button type="button" class="tablinks" onclick="openTab(event, 'SIDBpkbPinjam')">SID</button>
+              <button type="button" class="tablinks" onclick="openTab(event, 'DataBPKBPenyerahan')">Data BPKB</button>
+              <button type="button" class="tablinks" onclick="openTab(event, 'DataLampiranBPKBPenyerahan')">Data Lampiran</button>
+              <button type="button" class="tablinks" onclick="openTab(event, 'SIDBpkbPenyerahan')">SID</button>
             </div>
             
                <!-- Start Data BPKB -->
-            <div id="DataBPKBPinjam" class="tabcontent">
+            <div id="DataBPKBPenyerahan" class="tabcontent">
                 <div class="row">
                       <div class="col-md-12 mx-auto">
                       <br><br>
@@ -127,39 +127,39 @@
                                       <label class="control-label" style="padding-top: 5px;"  for="inputFirstname">Agunan ID</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="bpkbAgunanIDPinjam" name="bpkbAgunanIDPinjam" readonly>
+                                      <input type="text" class="form-control" id="bpkbAgunanIDPenyerahan" name="bpkbAgunanIDPenyerahan" readonly>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoBPKBPinjam">No. BPKB</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoBPKBPenyerahan">No. BPKB</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="text" class="form-control" id="bpkbNoBPKBPinjam" name="bpkbNoBPKBPinjam" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbNoBPKBPenyerahan" name="bpkbNoBPKBPenyerahan" placeholder="">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNamaPemilikPinjam">Nama Pemilik</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNamaPemilikPenyerahan">Nama Pemilik</label>
                                   </div>
                                   <div class="col-sm-7">
-                                      <input type="text" class="form-control" id="bpkbNamaPemilikPinjam" name="bpkbNamaPemilikPinjam" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbNamaPemilikPenyerahan" name="bpkbNamaPemilikPenyerahan" placeholder="">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbAlamatPemlikPinjam">Alamat Pemilik</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbAlamatPemlikPenyerahan">Alamat Pemilik</label>
                                   </div>
                                   <div class="col-sm-7">
-                                    <textarea style="height: 75px;" type="text" class="form-control" id="bpkbAlamatPemlikPinjam" name="bpkbAlamatPemlikPinjam"></textarea>
+                                    <textarea style="height: 75px;" type="text" class="form-control" id="bpkbAlamatPemlikPenyerahan" name="bpkbAlamatPemlikPenyerahan"></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbKotaPemilikPinjam">Kota Pemilik</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbKotaPemilikPenyerahan">Kota Pemilik</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbKotaPemilikPinjam" name="bpkbKotaPemilikPinjam" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbKotaPemilikPenyerahan" name="bpkbKotaPemilikPenyerahan" placeholder="">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -167,12 +167,12 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Merk/Type</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbMerkPinjam" name="bpkbMerkPinjam">
+                                    <select class="form-control select2" id="bpkbMerkPenyerahan" name="bpkbMerkPenyerahan">
                                               
                                     </select>
                                   </div>
                                   <div class="col-sm-4">
-                                        <select class="form-control select2" id="bpkbTypePinjam" name="bpkbTypePinjam">
+                                        <select class="form-control select2" id="bpkbTypePenyerahan" name="bpkbTypePenyerahan">
                                                
                                         </select>
                                   </div>
@@ -182,12 +182,12 @@
                                       <label class="control-label" style="padding-top: 6px;" for="">Jenis / Silinder</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbJenisPinjam" name="bpkbJenisPinjam">
+                                    <select class="form-control select2" id="bpkbJenisPenyerahan" name="bpkbJenisPenyerahan">
                                                
                                     </select>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="number" class="form-control" id="bpkbSilinderPinjam" name="bpkbSilinderPinjam" placeholder="Silinder"> 
+                                    <input type="number" class="form-control" id="bpkbSilinderPenyerahan" name="bpkbSilinderPenyerahan" placeholder="Silinder"> 
                                   </div>
                                   <div class="col-sm-1">
                                     <label class="control-label" style="padding-top: 6px;" for="">CC</label>
@@ -195,54 +195,54 @@
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoRangkaPinjam">No. Rangka</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoRangkaPenyerahan">No. Rangka</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbNoRangkaPinjam" name="bpkbNoRangkaPinjam" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbNoRangkaPenyerahan" name="bpkbNoRangkaPenyerahan" placeholder="">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoMesinPinjam">No. Mesin</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoMesinPenyerahan">No. Mesin</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbNoMesinPinjam" name="bpkbNoMesinPinjam" placeholder="">
+                                      <input type="text" class="form-control" id="bpkbNoMesinPenyerahan" name="bpkbNoMesinPenyerahan" placeholder="">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbTahunPinjam">Tahun</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbTahunPenyerahan">Tahun</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="number" class="form-control" id="bpkbTahunPinjam" name="bpkbTahunPinjam" placeholder="Tahun" min="1500" max="2999">
+                                    <input type="number" class="form-control" id="bpkbTahunPenyerahan" name="bpkbTahunPenyerahan" placeholder="Tahun" min="1500" max="2999">
                                   </div>
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbTglExpPajakPinjam">Tgl. Exp Pajak</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbTglExpPajakPenyerahan">Tgl. Exp Pajak</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="date" class="form-control" id="bpkbTglExpPajakPinjam" name="bpkbTglExpPajakPinjam">
+                                      <input type="date" class="form-control" id="bpkbTglExpPajakPenyerahan" name="bpkbTglExpPajakPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbTahunPinjam">Warna</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbTahunPenyerahan">Warna</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="bpkbWarnaPinjam" name="bpkbWarnaPinjam">
+                                    <input type="text" class="form-control" id="bpkbWarnaPenyerahan" name="bpkbWarnaPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoPolisiPinjam">No. Polisi</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoPolisiPenyerahan">No. Polisi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="bpkbNoPolisiPinjam" name="bpkbNoPolisiPinjam" placeholder="">
+                                    <input type="text" class="form-control" id="bpkbNoPolisiPenyerahan" name="bpkbNoPolisiPenyerahan" placeholder="">
                                   </div>
                                   <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Tgl. Exp STNK</label>
                                   </div>
                                   <div class="col-sm-3">
-                                      <input type="date" class="form-control" id="bpkbTglExpSTNKPinjam" name="bpkbTglExpSTNKPinjam">
+                                      <input type="date" class="form-control" id="bpkbTglExpSTNKPenyerahan" name="bpkbTglExpSTNKPenyerahan">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -250,7 +250,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">No. STNK</label>
                                   </div>
                                   <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbNoSTNKPinjam" name="bpkbNoSTNKPinjam">
+                                      <input type="text" class="form-control" id="bpkbNoSTNKPenyerahan" name="bpkbNoSTNKPenyerahan">
                                   </div>
                               </div>
                           <!-- Form ATAS -->
@@ -261,67 +261,67 @@
 
             
             <!-- Start Data Lampiran -->
-            <div id="DataLampiranBPKBPinjam" class="tabcontent">
+            <div id="DataLampiranBPKBPenyerahan" class="tabcontent">
                 <!-- ROW -->
                 <div class="row">
                       <div class="col-md-12 mx-auto">
                       <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokKwitansiBlankoPinjam" name="bpkbDokKwitansiBlankoPinjam">
+                                    <select class="form-control select2" id="bpkbDokKwitansiBlankoPenyerahan" name="bpkbDokKwitansiBlankoPenyerahan">
                                           
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
-                                    <input type="checkbox"  value="Y" id="check_kw_blankoPinjam" name="check_kw_blankoPinjam">&nbsp;Kwitansi Blanko</label>
+                                    <input type="checkbox"  value="Y" id="check_kw_blankoPenyerahan" name="check_kw_blankoPenyerahan">&nbsp;Kwitansi Blanko</label>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                             <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokFakturPemilikPinjam" name="bpkbDokFakturPemilikPinjam">
+                                    <select class="form-control select2" id="bpkbDokFakturPemilikPenyerahan" name="bpkbDokFakturPemilikPenyerahan">
                                            
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
-                                    <input type="checkbox"  value="Y" id="check_faktur_pemilikPinjam" name="check_faktur_pemilikPinjam">&nbsp;Faktur Pemilik</label>
+                                    <input type="checkbox"  value="Y" id="check_faktur_pemilikPenyerahan" name="check_faktur_pemilikPenyerahan">&nbsp;Faktur Pemilik</label>
                                 </div>
                                 <div class="col-sm-2">
-                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoFakturPemilikPinjam">No. Faktur Pemilik</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="bpkbNoFakturPemilikPenyerahan">No. Faktur Pemilik</label>
                                 </div>
                                 <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="bpkbNoFakturPemilikPinjam" name="bpkbNoFakturPemilikPinjam">
+                                      <input type="text" class="form-control" id="bpkbNoFakturPemilikPenyerahan" name="bpkbNoFakturPemilikPenyerahan">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokKwJualBeliPinjam" name="bpkbDokKwJualBeliPinjam">
+                                    <select class="form-control select2" id="bpkbDokKwJualBeliPenyerahan" name="bpkbDokKwJualBeliPenyerahan">
                                            
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
-                                    <input type="checkbox" value="Y" id="check_kw_jual_beliPinjam" name="check_kw_jual_beliPinjam">&nbsp;Kwitansi Jual Beli</label>
+                                    <input type="checkbox" value="Y" id="check_kw_jual_beliPenyerahan" name="check_kw_jual_beliPenyerahan">&nbsp;Kwitansi Jual Beli</label>
                                 </div>
                             </div>
                             <!-- SK TRAYEK -->
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokSKTrayekPinjam" name="bpkbDokSKTrayekPinjam">
+                                    <select class="form-control select2" id="bpkbDokSKTrayekPenyerahan" name="bpkbDokSKTrayekPenyerahan">
                                            
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label style="padding-left: 5px; padding-top: 5px;" class="checkbox-inline">
-                                    <input type="checkbox" value="Y" id="check_sk_trayekPinjam" name="check_sk_trayekPinjam">&nbsp;SK Trayek</label>
+                                    <input type="checkbox" value="Y" id="check_sk_trayekPenyerahan" name="check_sk_trayekPenyerahan">&nbsp;SK Trayek</label>
                                 </div>
                                 <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">No. SK Trayek</label>
                                 </div>
                                 <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="noSKTrayekPinjam" name="noSKTrayekPinjam">
+                                      <input type="text" class="form-control" id="noSKTrayekPenyerahan" name="noSKTrayekPenyerahan">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -335,7 +335,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Berlaku s/d</label>
                                 </div>
                                 <div class="col-sm-3">
-                                      <input type="date" class="form-control" id="bpkbBerlakuSDPinjam" name="bpkbBerlakuSDPinjam">
+                                      <input type="date" class="form-control" id="bpkbBerlakuSDPenyerahan" name="bpkbBerlakuSDPenyerahan">
                                 </div>
                             </div>
                             <!-- SK TRAYEK -->
@@ -344,7 +344,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Lainnya</label>
                                   </div>
                                   <div class="col-sm-9">
-                                  <textarea style="height: 100px;" type="text" class="form-control" id="bpkbLainnyaPinjam" name="bpkbLainnyaPinjam"></textarea>
+                                  <textarea style="height: 100px;" type="text" class="form-control" id="bpkbLainnyaPenyerahan" name="bpkbLainnyaPenyerahan"></textarea>
                                   </div>
                             </div>
                       </div>
@@ -355,7 +355,7 @@
             
             
             <!-- Start SID -->
-            <div id="SIDBpkbPinjam" class="tabcontent">
+            <div id="SIDBpkbPenyerahan" class="tabcontent">
                 <div class="row">
                         <div class="col-md-10 mx-auto">
                         <br><br>
@@ -364,7 +364,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="bpkbSIDJenisAgunan">Jenis Agunan</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="bpkbSIDJenisAgunanPinjam" name="bpkbSIDJenisAgunanPinjam" disabled>
+                                            <select class="form-control select2" id="bpkbSIDJenisAgunanPenyerahan" name="bpkbSIDJenisAgunanPenyerahan" disabled>
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                     
                                             </select>
@@ -372,10 +372,10 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDPengikatSuratPinjam">Pengikat Surat Berharga</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDPengikatSuratPenyerahan">Pengikat Surat Berharga</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="bpkbSIDPengikatSuratPinjam" name="bpkbSIDPengikatSuratPinjam" disabled>
+                                            <select class="form-control select2" id="bpkbSIDPengikatSuratPenyerahan" name="bpkbSIDPengikatSuratPenyerahan" disabled>
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                     
                                             </select>
@@ -383,10 +383,10 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDJenisPengikatanPinjam">Jenis Pengikatan</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDJenisPengikatanPenyerahan">Jenis Pengikatan</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="bpkbSIDJenisPengikatanPinjam" name="bpkbSIDJenisPengikatanPinjam" disabled>
+                                            <select class="form-control select2" id="bpkbSIDJenisPengikatanPenyerahan" name="bpkbSIDJenisPengikatanPenyerahan" disabled>
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                 
                                             </select>
@@ -394,68 +394,68 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDNamaPemilikAgunanPinjam">Nama Pemilik Agunan</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDNamaPemilikAgunanPenyerahan">Nama Pemilik Agunan</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="bpkbSIDNamaPemilikAgunanPinjam" name="bpkbSIDNamaPemilikAgunanPinjam">
+                                        <input type="text" class="form-control" id="bpkbSIDNamaPemilikAgunanPenyerahan" name="bpkbSIDNamaPemilikAgunanPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDStatusBuktiKepemilikanPinjam">Status/Bukti Kepemilikan</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDStatusBuktiKepemilikanPenyerahan">Status/Bukti Kepemilikan</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="bpkbSIDStatusBuktiKepemilikanPinjam" name="bpkbSIDStatusBuktiKepemilikanPinjam">
+                                        <input type="text" class="form-control" id="bpkbSIDStatusBuktiKepemilikanPenyerahan" name="bpkbSIDStatusBuktiKepemilikanPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDAlamatPinjam">Alamat</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDAlamatPenyerahan">Alamat</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="bpkbSIDAlamatPinjam" name="bpkbSIDAlamatPinjam">
+                                        <input type="text" class="form-control" id="bpkbSIDAlamatPenyerahan" name="bpkbSIDAlamatPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDLokasiPinjam">Lokasi</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDLokasiPenyerahan">Lokasi</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="bpkbSIDLokasiPinjam" name="bpkbSIDLokasiPinjam" disabled>
+                                            <select class="form-control select2" id="bpkbSIDLokasiPenyerahan" name="bpkbSIDLokasiPenyerahan" disabled>
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDNJOPPinjam">Nilai Agunan (NJOP)</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDNJOPPenyerahan">Nilai Agunan (NJOP)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="bpkbSIDNJOPPinjam" name='bpkbSIDNJOPPinjam' placeholder="">
+                                        <input type="number" class="form-control" id="bpkbSIDNJOPPenyerahan" name='bpkbSIDNJOPPenyerahan' placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="nilaiSIDAgunanBankPinjam">Nilai Agunan (Bank)</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="nilaiSIDAgunanBankPenyerahan">Nilai Agunan (Bank)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="nilaiSIDAgunanBankPinjam" name="nilaiSIDAgunanBankPinjam" placeholder="">
+                                        <input type="number" class="form-control" id="nilaiSIDAgunanBankPenyerahan" name="nilaiSIDAgunanBankPenyerahan" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDNilaiIndependenPinjam">Nilai Agunan Independen</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDNilaiIndependenPenyerahan">Nilai Agunan Independen</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="bpkbSIDNilaiIndependenPinjam" name="bpkbSIDNilaiIndependenPinjam" >
+                                        <input type="number" class="form-control" id="bpkbSIDNilaiIndependenPenyerahan" name="bpkbSIDNilaiIndependenPenyerahan" >
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDNamaIndependenPinjam">Nama Penilai Independen</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="bpkbSIDNamaIndependenPenyerahan">Nama Penilai Independen</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="bpkbSIDNamaIndependenPinjam" name="bpkbSIDNamaIndependenPinjam">
+                                        <input type="text" class="form-control" id="bpkbSIDNamaIndependenPenyerahan" name="bpkbSIDNamaIndependenPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -463,7 +463,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Paripasu (%)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="bpkbSIDParipasuPinjam" name="bpkbSIDParipasuPinjam">
+                                        <input type="number" class="form-control" id="bpkbSIDParipasuPenyerahan" name="bpkbSIDParipasuPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -471,7 +471,7 @@
                                         <label class="control-label" style="padding-top: 5px;" for="">Asuransi</label>
                                     </div>
                                     <div class="col-sm-3">
-                                            <select class="form-control select2" id="bpkbSIDAsuransiPinjam" name="bpkbSIDAsuransiPinjam">
+                                            <select class="form-control select2" id="bpkbSIDAsuransiPenyerahan" name="bpkbSIDAsuransiPenyerahan">
                                             <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                     <option value="Y">YA</option>
                                                     <option value="T">TIDAK</option>
@@ -484,13 +484,13 @@
             </div>
             <!-- END SID -->
 
-            <input type="hidden" class="form-control" id="bpkbIDPinjam" name="bpkbIDPinjam">
-            <input type="hidden" class="form-control" id="bpkbNoReffPinjam" name="bpkbNoReffPinjam">
+            <input type="hidden" class="form-control" id="bpkbIDPenyerahan" name="bpkbIDPenyerahan">
+            <input type="hidden" class="form-control" id="bpkbNoReffPenyerahan" name="bpkbNoReffPenyerahan">
 
       </div>
       <!--END Modal Body-->
       <div class="modal-footer text-center" style="margin: 0 auto;">
-        <button type="button" id="bpkb_button_kembali_pinjam" class="btn btn-danger">Kembali</button>
+        <button type="button" id="bpkb_button_kembali_penyerahan" class="btn btn-danger">Kembali</button>
       </div>
     </div>
   </div>

@@ -14,6 +14,7 @@ var bpkbKantorLokasi = '';
 var JenisKend = '';
 var MerkKend = '';
 var TypeKend = '';
+var no_rekening = '';
 // check bpkb
 var bpkb_blanko_check = '';
 var bpkb_faktur_pemilik = '';
@@ -481,15 +482,99 @@ $('#bodyJenisPengurusan').on('click','.btnPiliJenis', function () {
     var namaJenisPengurusan         = $(this).data("nama");
     var keteranganJenisPengurusan   = $(this).data("keterangan");
     var sysdate                     = $(this).data("sysdate");
-    var test = new Date(sysdate);
+    var newDate = new Date(sysdate);
     var kembali = '';
 
-    test.setDate(test.getDate() + keteranganJenisPengurusan);
-    kembali = test.getFullYear() + "-" + ("0" + (test.getMonth() + 1)).slice(-2) + "-" + test.getDate();
+    newDate.setDate(newDate.getDate() + keteranganJenisPengurusan + 11);
+    kembali = newDate.getFullYear() + "-" + ("0" + (newDate.getMonth() + 1)).slice(-2) + "-" + ("0" + (newDate.getDate() + 1)).slice(-2);
 
     $('#mainJenisPengurusanPinjam').val(namaJenisPengurusan);
     $('#mainTanggalRencanaKembaliPinjam').val(kembali);
     $('#ListJaminanPengurusanModal').modal('hide');
+});
+
+
+
+// modal penyerahan 
+$('#btn_simpan_modal_penyerahan').click(function () {
+    $('#loading').show();
+    $('#loadingPenyerahan').show();
+    $.ajax({
+        url : base_url + "index.php/AsetDokumenPenyerahanController/penyerahanData",
+        type : "POST",
+        dataType : "json",
+        data : {"mainIdPenyerahan"                : $('#mainIdPenyerahan').val(),
+                "mainNomorPenyerahan"             : $('#mainNomorPenyerahan').val(),
+                "mainNoReffPenyerahan"            : $('#mainNoReffPenyerahan').val(),
+                "mainAreaKerjaPenyerahan"         : $('#mainAreaKerjaPenyerahan').val(),
+                "mainTanggalPenyerahan"           : $('#mainTanggalPenyerahan').val(),
+                "mainTransaksiPenyerahan"         : $('#mainTransaksiPenyerahan').val(),
+                "mainNamaPenyerahan"              : $('#mainNamaPenyerahan').val(),
+                "mainKeteranganPenyerahan"        : $('#mainKeteranganPenyerahan').val(),
+                "mainAlamatPenyerahan"            : $('#mainAlamatPenyerahan').val(),
+                "mainKotaPenyerahan"              : $('#mainKotaPenyerahan').val(),
+                "mainJenisPengurusanPenyerahan"   : $('#mainJenisPengurusanPenyerahan').val(),
+                "mainNomorRekeningPenyerahan"     : $('#mainNomorRekeningPenyerahan').val(),
+                "mainTanggalRealisasiPenyerahan"  : $('#mainTanggalRealisasiPenyerahan').val(),
+                "jenisJaminanPenyerahan"          : JaminanHeader.jenis_jaminan,
+                "verifikasi"                  : JaminanHeader.verifikasi,
+                "rodaKendaraanPenyerahan"         : JaminanHeader.roda_kendaraan,
+                "mainTanggalRencanaKembaliPenyerahan" : $('#mainTanggalRencanaKembaliPenyerahan').val(),
+                "jaminanDokumentID"           : JaminanDokument.id
+            },
+
+        success : function(response) {
+            console.log('success');
+            console.log(response);
+            alert('Penyerahan Data Sukses');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
+        },
+        error : function(response) {
+            console.log('failed');
+            alert('Gagal Melakukan Peminjaman Data');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+        }
+    });  
+});
+$('#btn_kembali_penyerahan_modal').click(function () { 
+    $('#PenyerahanMainModal').modal('hide');
+    $('#loading').show();
+    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+});
+$('#btn_kembali_penyerahan_modal2').click(function () {
+    $('#PenyerahanMainModal').modal('hide');
+    $('#loading').show();
+    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+});
+// modal sertifikat
+$('#sert_button_kembali_penyerahan').click(function () {
+    console.log("kembali di klik");
+    $('#penyerahanSertifikatModal').modal('hide');
+});
+$('#sert_button_kembali_penyerahan2').click(function () {
+    console.log("kembali di klik");
+    $('#penyerahanSertifikatModal').modal('hide');
+});
+//modal bpkb
+$('#bpkb_button_kembali_penyerahan').click(function () {
+    console.log("kembali di klik");
+    $('#penyerahanBPKBModal').modal('hide');
+});
+$('#bpkb_button_kembali_penyerahan2').click(function () {
+    console.log("kembali di klik");
+    //mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
+    $('#penyerahanBPKBModal').modal('hide');
+});
+//modal emas
+$('#emas_button_kembali_penyerahan').click(function () {
+    console.log("kembali di klik");
+    $('#penyerahanEmasModal').modal('hide');
+});
+$('#emas_button_kembali_penyerahan2').click(function () {
+    console.log("kembali di klik");
+    $('#penyerahanEmasModal').modal('hide');
 });
 
 
@@ -563,6 +648,30 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
             else if(JaminanHeader.jenis_jaminan == 'EMAS'){
                 mappingFieldEmas(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
             }
+            
+            /// validasi nomor rekening sudah cair atau belum
+            if(JaminanHeader.no_rekening != ''){
+                alert('Maaf, Data sudah masuk BO Kredit( ' + JaminanHeader.no_rekening + ' ) dan sudah Go-Live, Data tidak dapat dirubah!');
+                
+                $("#btn_simpan_update_modal").prop("disabled", true);
+                $("#sert_button_simpan").prop("disabled", true);
+                $("#bpkb_button_simpan").prop("disabled", true);
+                $("#emas_button_simpan").prop("disabled", true);
+            }
+            /// validasi verifikasi dokumen apakah sudah di verifikasi atau belum
+            if(JaminanHeader.verifikasi == '1'){
+                alert('Maaf, Data sudah diverifikasi, tidak dapat dikoreksi!');
+                $("#btn_simpan_update_modal").prop("disabled", true);
+                $("#sert_button_simpan").prop("disabled", true);
+                $("#bpkb_button_simpan").prop("disabled", true);
+                $("#emas_button_simpan").prop("disabled", true);
+            } else if(JaminanDokument.verifikasi == '1'){
+                alert('Maaf, Data sudah diverifikasi, tidak dapat dikoreksi!');
+                $("#btn_simpan_update_modal").prop("disabled", true);
+                $("#sert_button_simpan").prop("disabled", true);
+                $("#bpkb_button_simpan").prop("disabled", true);
+                $("#emas_button_simpan").prop("disabled", true);
+            }
         
             $('#loading').hide();
             $('#loading1').hide();
@@ -582,13 +691,24 @@ $('#bodyTableAsetDokumen').on('click','.btnDelete', function () {
     noref = $(this).data("noref");
     status = $(this).data("status");
     idAgunan = $(this).data("agunan");
-        
-        if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan No. Ref " + nomor)) {
-           deleteFunction();
-           
-        } else {
-            alert('Data Batal Di Delete');
-        }
+    $no_rekening = $(this).data("norekening");
+    $verifikasi = $(this).data("verifikasi");
+    console.log( $no_rekening + ' ' + $verifikasi);   
+    
+    // validasi nomor rekening sudah cair atau blm
+    if($no_rekening != ''){
+        alert('Maaf, Data sudah masuk BO Kredit( ' + $no_rekening + ' ) dan sudah Go-Live, Data tidak dapat dihapus!');
+        return;
+    }else if($verifikasi != ''){
+        alert('Maaf, Data sudah diverifikasi, tidak dapat dihapus!');
+        return;
+    }
+    
+    if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan No. Ref " + nomor)) {
+        deleteFunction();  
+    } else {
+        alert('Data Batal Di Delete');
+    }
 });
 
 $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
@@ -626,6 +746,7 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
             $('#mainIdPinjam').val(JaminanHeader.id);
             $('#mainNomorPinjam').val(JaminanHeader.nomor);
             $('#mainNoReffPinjam').val(JaminanHeader.no_reff);
+            $('#mainVerifikasiPinjam').val(JaminanHeader.verifikasi);
 
             if(JaminanHeader.jenis_jaminan == 'SERTIFIKAT'){
                 mappingFieldSertifikatPinjam(JaminanHeader, JaminanDokument);
@@ -688,6 +809,7 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
             $('#mainIdKembali').val(JaminanHeader.id);
             $('#mainNomorKembali').val(JaminanHeader.nomor);
             $('#mainNoReffKembali').val(JaminanHeader.no_reff);
+            $('#mainVerifikasiKembali').val(JaminanHeader.verifikasi);
 
             if(JaminanHeader.jenis_jaminan == 'SERTIFIKAT'){
                 mappingFieldSertifikatKembali(JaminanHeader, JaminanDokument);
@@ -752,6 +874,72 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
         }
     }); 
 });
+
+$('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
+    nomor = $(this).data("nomor");
+    noref = $(this).data("noref");
+    status = $(this).data("status");
+    idAgunan = $(this).data("agunan");
+   // var keterangan = "Pelunasan";
+ 
+    console.log(nomor,noref,status,idAgunan,'ASI');
+
+    // $('#loading').show();
+
+    $('#PenyerahanMainModal').modal('show');
+
+    $.ajax({
+        url : base_url + "index.php/AsetDokumenPenyerahanController/displayDetails",
+        type : "POST",
+        dataType : "json",
+        data : {"nomorAgunan"    : nomor, 
+                "nomorRefAgunan" : noref,
+                "dataStatus"     : status,
+                "agunanID"       : idAgunan},
+
+        success : function(response) {
+            JaminanHeader = response.getJaminanHeader[0];
+            JaminanDokument = response.getJaminanDokument[0];
+            
+            console.log(JaminanHeader, JaminanDokument);
+ 
+            //  Penyerahan   
+            $('#mainAreaKerjaPenyerahan').append('<option value="' + JaminanHeader.kode_kantor + '" selected>'+ JaminanHeader.kode_kantor + ' - ' + JaminanHeader.nama_kantor +'</option>');
+            $('#mainTanggalPenyerahan').val(JaminanHeader.tgl); 
+            $('#mainNomorRekeningPenyerahan').val(JaminanHeader.no_rekening);
+            $('#mainTanggalRealisasiPenyerahan').val(JaminanHeader.tgl_realisasi);
+            $('#mainIdPenyerahan').val(JaminanHeader.id);
+            $('#mainNomorPenyerahan').val(JaminanHeader.nomor);
+            $('#mainNoReffPenyerahan').val(JaminanHeader.no_reff);
+            $('#mainNamaPenyerahan').val(JaminanHeader.nama);
+            $('#mainAlamatPenyerahan').val(JaminanHeader.alamat);  
+            $('#mainKotaPenyerahan').val(JaminanHeader.kota);  
+            $('#mainNomorRekeningPenyerahan').val(JaminanHeader.no_rekening);
+            $('#mainVerifikasiPenyerahan').val(JaminanHeader.verifikasi);
+            $('#mainKeteranganPenyerahan').val("Pelunasan");  
+            
+            if(JaminanHeader.jenis_jaminan == 'SERTIFIKAT'){
+                mappingFieldSertifikatPenyerahan(JaminanHeader, JaminanDokument);
+            } 
+            else if(JaminanHeader.jenis_jaminan == 'BPKB'){
+                mappingFieldBPKBPenyerahan(JaminanHeader, JaminanDokument);
+            }
+            else if(JaminanHeader.jenis_jaminan == 'EMAS'){
+                mappingFieldEmasPenyerahan(JaminanHeader, JaminanDokument);
+            }
+            $('#loadingPenyerahan').hide();
+            $('#loading').hide();
+            console.log("FINISH");
+        },
+        error : function(response) {
+            console.log('failed');
+            alert("Gagal Get Detail");
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+        }
+    });   
+});
+
 
 $('#mainBtnSearchRekening').click(function () {
     $('#modalNomorRekening').modal('show');
@@ -1064,7 +1252,7 @@ function mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
 
 
     ///untuk bpkb
-    $('#bpkbVerifikasi').val(JaminanDokument.verifikasi)
+    $('#bpkbVerifikasi').val(JaminanDokument.verifikasi);
     $('#bpkbTglRegister').val(JaminanDokument.tgl_register);
     //bpkbTglPenilaian tgl penilaian dari SID belum di develop
     $('#bpkbKantorLokasi').append('<option value="' + JaminanDokument.kode_kantor_lokasi_jaminan + '" selected>'+ JaminanDokument.app_kode_kantor + ' - ' + JaminanDokument.app_nama_kantor +'</option>'); 
@@ -1193,7 +1381,7 @@ function mappingFieldEmas(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
     $('#emasHargaTaksasi').val(JaminanDokument.harga_taksasi); 
     $('#emasID').val(JaminanDokument.id); 
     $('#emasNoReff').val(JaminanDokument.no_reff); 
-    $('#emasVerifikasi').val(JaminanDokument.verifikasi)
+    $('#emasVerifikasi').val(JaminanDokument.verifikasi);
 
     $('#rowEmasAgunanID').html(JaminanDokument.agunan_id);
     $('#rowEmasNoSeri').html(JaminanDokument.no_seri); 
@@ -1274,6 +1462,7 @@ function mappingFieldSertifikatPinjam(JaminanHeader, JaminanDokument){
     $('#sertKotaPinjam').val(JaminanDokument.kota_sertifikat);
     $('#sertPorpinsiPinjam').val(JaminanDokument.propinsi_sertifikat);
     $('#sertBatasTanahPinjam').val(JaminanDokument.batas_tanah);
+    $('#sertVerifikasiPinjam').val(JaminanDokument.verifikasi);
 
     $('#rowSertAgunanIDPinjam').html(JaminanDokument.agunan_id);
     $('#rowSertTanggalPinjam').html(JaminanDokument.tgl_sertifikat);
@@ -1416,6 +1605,7 @@ function mappingFieldBPKBPinjam(JaminanHeader, JaminanDokument){
       $('#bpkbDokSKTrayekPinjam').find('option').remove().end();
  
      ///untuk bpkb
+     $('#bpkbVerifikasiPinjam').val(JaminanDokument.verifikasi);
      $('#bpkbTglRegisterPinjam').val(JaminanDokument.tgl_register);
      //bpkbTglPenilaian tgl penilaian dari SID belum di develop
      $('#bpkbKantorLokasiPinjam').append('<option value="' + JaminanDokument.kode_kantor_lokasi_jaminan + '" selected>'+ JaminanDokument.app_kode_kantor + ' - ' + JaminanDokument.app_nama_kantor +'</option>'); 
@@ -1527,6 +1717,7 @@ function mappingFieldEmasPinjam(JaminanHeader, JaminanDokument){
      $('#emasHargaTaksasiPinjam').val(JaminanDokument.harga_taksasi); 
      $('#emasIDPinjam').val(JaminanDokument.id); 
      $('#emasNoReffPinjam').val(JaminanDokument.no_reff); 
+     $('#emasVerifikasiPinjam').val(JaminanDokument.verifikasi);
 
     $('#rowEmasAgunanIDPinjam').html(JaminanDokument.agunan_id);
     $('#rowEmasNoSeriPinjam').html(JaminanDokument.no_seri); 
@@ -1607,6 +1798,7 @@ function mappingFieldSertifikatKembali(JaminanHeader, JaminanDokument){
      $('#sertKotaKembali').val(JaminanDokument.kota_sertifikat);
      $('#sertPorpinsiKembali').val(JaminanDokument.propinsi_sertifikat);
      $('#sertBatasTanahKembali').val(JaminanDokument.batas_tanah);
+     $('#sertVerifikasiKembali').val(JaminanDokument.verifikasi);
     
     $('#rowSertAgunanIDKembali').html(JaminanDokument.agunan_id);
     $('#rowSertTanggalKembali').html(JaminanDokument.tgl_sertifikat);
@@ -1749,6 +1941,7 @@ function mappingFieldBPKBKembali(JaminanHeader, JaminanDokument){
        $('#bpkbDokSKTrayekKembali').find('option').remove().end();
   
       ///untuk bpkb
+      $('#bpkbVerifikasiKembali').val(JaminanDokument.verifikasi);
       $('#bpkbTglRegisterKembali').val(JaminanDokument.tgl_register);
       //bpkbTglPenilaian tgl penilaian dari SID belum di develop
       $('#bpkbKantorLokasiKembali').append('<option value="' + JaminanDokument.kode_kantor_lokasi_jaminan + '" selected>'+ JaminanDokument.app_kode_kantor + ' - ' + JaminanDokument.app_nama_kantor +'</option>'); 
@@ -1861,6 +2054,7 @@ function mappingFieldEmasKembali(JaminanHeader, JaminanDokument){
      $('#emasHargaTaksasiKembali').val(JaminanDokument.harga_taksasi); 
      $('#emasIDKembali').val(JaminanDokument.id); 
      $('#emasNoReffKembali').val(JaminanDokument.no_reff); 
+     $('#emasVerifikasiKembali').val(JaminanDokument.verifikasi);
 
      $('#rowEmasAgunanIDKembali').html(JaminanDokument.agunan_id);
     $('#rowEmasNoSeriKembali').html(JaminanDokument.no_seri); 
@@ -1871,6 +2065,341 @@ function mappingFieldEmasKembali(JaminanHeader, JaminanDokument){
     $('#rowEmasVerifKembali').html(JaminanDokument.verifikasi);
 }
 
+function mappingFieldSertifikatPenyerahan(JaminanHeader, JaminanDokument){
+   
+    $('#main_tab_bpkbPenyerahan').hide(); 
+    $('#main_tab_emasPenyerahan').hide(); 
+    $('#main_tab_sertPenyerahan').show();
+
+    //sert
+    $('#sertKantorLokasiPenyerahan').find('option').remove().end();
+    $('#sertKodeJenisAgunanPenyerahan').find('option').remove().end();
+    $('#sertJenisSertifikatPenyerahan').find('option').remove().end();
+   // $('#sertVerifikasi').find('option').remove().end();
+    // remove asli dok sert
+    $('#sertDokAJBPenyerahan').find('option').remove().end();
+    $('#sertDokIMBPenyerahan').find('option').remove().end();
+    $('#sertDokSPPTPenyerahan').find('option').remove().end();
+    $('#sertDokSKHMTPenyerahan').find('option').remove().end();
+    $('#sertDokDenahPenyerahan').find('option').remove().end();
+    $('#sertDokRoyaPenyerahan').find('option').remove().end();
+    $('#sertDokSHTPenyerahan').find('option').remove().end();
+    $('#sertDokSTTSPenyerahan').find('option').remove().end();
+    $('#sertDokSSBPenyerahan').find('option').remove().end();
+    //$('#sertVerifikasiPenyerahan').append(jenis_verifikasi_list);
+
+
+
+    // sertifikat 
+    $('#sertTglRegisterPenyerahan').val(JaminanDokument.tgl_register);
+    // sertTglPenilaian ini di SID belum di bikin
+    $('#sertKantorLokasiPenyerahan').append('<option value="' + JaminanDokument.kode_kantor_lokasi_jaminan + '" selected>'+ JaminanDokument.app_kode_kantor + ' - ' + JaminanDokument.app_nama_kantor +'</option>'); 
+    $('#sertKodeJenisAgunanPenyerahan').append('<option value="' + JaminanDokument.jenis_agunan_detail + '" selected>' + JaminanDokument.KKJA_jenis_agunan +'</option>'); 
+    $('#sertKodeIkatanAgunanPenyerahan').append('<option value="' + JaminanDokument.ikatan_agunan_detail + '" data-persen="'+ JaminanDokument.ikatan_persen_default +'" selected>' + JaminanDokument.ikatan_agunan +'</option>');
+    $('#sertVerifikasiPenyerahan').append('<option value="' + JaminanDokument.verifikasi + '" selected>' + JaminanDokument.verifikasi +'</option>'); 
+    $('#sertNilaiTaksasiAgunanPenyerahan').val(JaminanDokument.nilai_taksasi_detail); 
+    $('#sertNJOPPenyerahan').val(JaminanDokument.nilai_njop_detail); 
+    $('#sertHargaPasarPenyerahan').val(JaminanDokument.nilai_pasar_detail); 
+    $('#sertAPHTPenyerahan').val(JaminanDokument.nilai_apht_detail); 
+    $('#sertPersenDijaminPenyerahan').val(JaminanDokument.ikatan_persen_default);
+    $('#sertAgunanIDPenyerahan').val(JaminanDokument.agunan_id); 
+    $('#sertIDPenyerahan').val(JaminanDokument.id);
+    if(JaminanDokument.no_shm != ''){
+        $('#sertNoSertPenyerahan').val(JaminanDokument.no_shm); 
+        $('#sertJenisSertifikatPenyerahan').append('<option value="SHM" selected>SHM</option>');
+        $('#rowSertNoSertifPenyerahan').html(JaminanDokument.no_shm);
+        $('#rowSertJenisPenyerahan').html('SHM');
+    } else if(JaminanDokument.no_shgb != ''){
+        $('#sertNoSertPenyerahan').val(JaminanDokument.no_shgb); 
+        $('#sertJenisSertifikatPenyerahan').append('<option value="SHGB" selected>SHGB</option>');
+        $('#rowSertNoSertifPenyerahan').html(JaminanDokument.no_shgb);
+        $('#rowSertJenisPenyerahan').html('SHGB');
+    } else if(JaminanDokument.no_ajb != ''){
+        $('#sertNoSertPenyerahan').val(JaminanDokument.no_ajb); 
+        $('#sertJenisSertifikatPenyerahan').append('<option value="AJB" selected>AJB</option>');
+        $('#rowSertNoSertifPenyerahan').html(JaminanDokument.no_ajb);
+        $('#rowSertJenisPenyerahan').html('AJB');
+    }
+    $('#sertKOHIRPenyerahan').val(JaminanDokument.no_kohir); 
+    $('#sertNoPERSILPenyerahan').val(JaminanDokument.no_persil);  
+    $('#sertTanggalSertifikatPenyerahan').val(JaminanDokument.tgl_sertifikat); 
+    $('#sertJTSHGBPenyerahan').val(JaminanDokument.tgl_jt_shgb); 
+    $('#sertNoSuratUkurPenyerahan').val(JaminanDokument.no_surat_ukur); 
+    $('#sertPLBangunanPenyerahan').val(JaminanDokument.pl_bangunan); 
+    $('#sertLuasTanahPenyerahan').val(JaminanDokument.luas_tanah); 
+    $('#sertNamaPPATPenyerahan').val(JaminanDokument.nama_ppat);  
+    $('#sertNamaPemilikPenyerahan').val(JaminanDokument.nama_pemilik_sertifikat); 
+    $('#sertAlamatSertifikatPenyerahan').val(JaminanDokument.alamat_sertifikat);
+    $('#sertKelurahanPenyerahan').val(JaminanDokument.kelurahan_sertifikat);
+    $('#sertKecamatanPenyerahan').val(JaminanDokument.kecamatan_sertifikat);
+    $('#sertKotaPenyerahan').val(JaminanDokument.kota_sertifikat);
+    $('#sertPorpinsiPenyerahan').val(JaminanDokument.propinsi_sertifikat);
+    $('#sertBatasTanahPenyerahan').val(JaminanDokument.batas_tanah);
+
+    $('#rowSertAgunanIDPenyerahan').html(JaminanDokument.agunan_id);
+    $('#rowSertTanggalPenyerahan').html(JaminanDokument.tgl_sertifikat);
+    $('#rowSertLuasTanahPenyerahan').html(JaminanDokument.luas_tanah);
+    $('#rowSertPemilikPenyerahan').html(JaminanDokument.nama_pemilik_sertifikat);
+    $('#rowSertVerifPenyerahan').html(JaminanDokument.verifikasi);   
+    $('#sertVerifikasiPenyerahan').val(JaminanDokument.verifikasi); 
+
+    // DATA LAMPIRAN  
+    if(JaminanDokument.asli_ajb == 1){
+        $('#sertDokAJBPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokAJBPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    if(JaminanDokument.asli_imb == 1){
+        $('#sertDokIMBPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokIMBPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    if(JaminanDokument.asli_sppt == 1){
+        $('#sertDokSPPTPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokSPPTPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    if(JaminanDokument.asli_skmht == 1){
+        $('#sertDokSKHMTPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokSKHMTPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    if(JaminanDokument.asli_gambar_denah == 1){
+        $('#sertDokDenahPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokDenahPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    if(JaminanDokument.asli_surat_roya == 1){
+        $('#sertDokRoyaPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokRoyaPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    if(JaminanDokument.asli_sht == 1){
+        $('#sertDokSHTPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokSHTPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    if(JaminanDokument.asli_stts == 1){
+        $('#sertDokSTTSPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokSTTSPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    if(JaminanDokument.asli_ssb == 1){
+        $('#sertDokSSBPenyerahan').append('<option value="1" selected>ASLI</option>');
+    }else{
+        $('#sertDokSSBPenyerahan').append('<option value="2" selected>COPY</option>');
+    }
+    $('#sertNomorAJBPenyerahan').val(JaminanDokument.no_ajb);  
+    $('#sertTanggalAJBPenyerahan').val(JaminanDokument.tgl_ajb);  
+    $('#sertNomorIMBPenyerahan').val(JaminanDokument.no_imb); 
+    $('#sertNomorSPPTPenyerahan').val(JaminanDokument.no_sppt);
+    $('#sertTahunSPPTPenyerahan').val(JaminanDokument.sppt_tahun);
+    $('#sertNoSHTPenyerahan').val(JaminanDokument.no_sht);
+    $('#sertPropinsiSHTPenyerahan').val(JaminanDokument.sht_propinsi);
+    $('#sertKotaSHTPenyerahan').val(JaminanDokument.sht_kota);
+    $('#sertTahunSTTSPenyerahan').val(JaminanDokument.stts_tahun);
+    $('#sertAtasNamaSSBBPHTBPenyerahan').val(JaminanDokument.ssb_atas_nama);
+    $('#sertLainnyaPenyerahan').val(JaminanDokument.lain_lain);
+
+    /// check box sertifikat
+    if(JaminanDokument.ajb == 'Y'){
+        $("#check_ajbPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_ajbPenyerahan").prop("checked", false);
+    }
+    if(JaminanDokument.imb == 'Y'){
+        $("#check_imbPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_imbPenyerahan").prop("checked", false);
+    }
+    if(JaminanDokument.sppt == 'Y'){
+        $("#check_spptPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_spptPenyerahan").prop("checked", false);
+    }
+    if(JaminanDokument.skmht == 'Y'){
+        $("#check_skmhtPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_skmhtPenyerahan").prop("checked", false);
+    }
+    if(JaminanDokument.gambar_denah == 'Y'){
+        $("#check_denahPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_denahPenyerahan").prop("checked", false);
+    }
+    if(JaminanDokument.surat_roya == 'Y'){
+        $("#check_royaPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_royaPenyerahan").prop("checked", false);
+    }
+    if(JaminanDokument.sht == 'Y'){
+        $("#check_shtPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_shtPenyerahan").prop("checked", false);
+    }
+    if(JaminanDokument.stts == 'Y'){
+        $("#check_sttsPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_sttsPenyerahan").prop("checked", false);
+    }
+    if(JaminanDokument.ssb == 'Y'){
+        $("#check_ssb_bphtPenyerahan").prop("checked", true);
+    }
+    else{
+        $("#check_ssb_bphtPenyerahan").prop("checked", false);
+    }
+}
+function mappingFieldBPKBPenyerahan(JaminanHeader, JaminanDokument){
+    $('#main_tab_sertPenyerahan').hide(); 
+    $('#main_tab_emasPenyerahan').hide();
+    $('#main_tab_bpkbPenyerahan').show();
+
+      //bpkb
+      $('#bpkbKodeJenisAgunanPenyerahan').find('option').remove().end();
+      $('#bpkbKodeIkatanAgunanPenyerahan').find('option').remove().end();
+      $('#bpkbKantorLokasiPenyerahan').find('option').remove().end();
+      $('#bpkbMerkPenyerahan').find('option').remove().end();
+      $('#bpkbTypePenyerahan').find('option').remove().end();
+      $('#bpkbJenisPenyerahan').find('option').remove().end();
+ 
+      
+      // remove asli dok bpkb
+      $('#bpkbDokKwitansiBlankoPenyerahan').find('option').remove().end();
+      $('#bpkbDokFakturPemilikPenyerahan').find('option').remove().end();
+      $('#bpkbDokKwJualBeliPenyerahan').find('option').remove().end();
+      $('#bpkbDokSKTrayekPenyerahan').find('option').remove().end();
+ 
+     ///untuk bpkb
+     $('#bpkbVerifikasiPenyerahan').val(JaminanDokument.verifikasi);
+     $('#bpkbTglRegisterPenyerahan').val(JaminanDokument.tgl_register);
+     //bpkbTglPenilaian tgl penilaian dari SID belum di develop
+     $('#bpkbKantorLokasiPenyerahan').append('<option value="' + JaminanDokument.kode_kantor_lokasi_jaminan + '" selected>'+ JaminanDokument.app_kode_kantor + ' - ' + JaminanDokument.app_nama_kantor +'</option>'); 
+     $('#bpkbKodeJenisAgunanPenyerahan').append('<option value="' + JaminanDokument.jenis_agunan_detail + '" selected>' + JaminanDokument.KKJA_jenis_agunan +'</option>'); 
+     $('#bpkbKodeIkatanAgunanPenyerahan').append('<option value="' + JaminanDokument.ikatan_agunan_detail + '" data-persen="'+ JaminanDokument.ikatan_persen_default +'" selected>' + JaminanDokument.ikatan_agunan +'</option>')
+     $('#bpkbVerifikasiPenyerahan').append('<option value="' + JaminanDokument.verifikasi + '" selected>' + JaminanDokument.verifikasi +'</option>'); 
+     $('#bpkbNilaiTaksasiAgunanPenyerahan').val(JaminanDokument.nilai_taksasi_detail);
+     $('#bpkbNJOPPenyerahan').val(JaminanDokument.nilai_njop_detail);
+     $('#bpkbHargaPasarPenyerahan').val(JaminanDokument.nilai_pasar_detail);
+     $('#bpkbAPHTPenyerahan').val(JaminanDokument.nilai_apht_detail);
+     $('#bpkbPersenDijaminPenyerahan').val(JaminanDokument.persen_dijaminkan_detail);
+     //Data BPKB
+     $('#bpkbAgunanIDPenyerahan').val(JaminanDokument.agunan_id);  
+     $('#bpkbNoBPKBPenyerahan').val(JaminanDokument.nomor_bpkb);    
+     $('#bpkbNamaPemilikPenyerahan').val(JaminanDokument.nama_bpkb);   
+     $('#bpkbAlamatPemlikPenyerahan').val(JaminanDokument.alamat_bpkb);    
+     $('#bpkbKotaPemilikPenyerahan').val(JaminanDokument.kota_bpkb);  
+     $('#bpkbSilinderPenyerahan').val(JaminanDokument.silinder); 
+     $('#bpkbNoRangkaPenyerahan').val(JaminanDokument.no_rangka);  
+     $('#bpkbNoMesinPenyerahan').val(JaminanDokument.no_mesin);
+     $('#bpkbTahunPenyerahan').val(JaminanDokument.tahun);
+     $('#bpkbTglExpPajakPenyerahan').val(JaminanDokument.tgl_expired_pajak); 
+     $('#bpkbWarnaPenyerahan').val(JaminanDokument.warna);     
+     $('#bpkbNoPolisiPenyerahan').val(JaminanDokument.no_polisi);  
+     $('#bpkbTglExpSTNKPenyerahan').val(JaminanDokument.tgl_expired_stnk); 
+     $('#bpkbNoSTNKPenyerahan').val(JaminanDokument.no_stnk); 
+     $('#bpkbIDPenyerahan').val(JaminanDokument.id); 
+     $('#bpkbNoReffPenyerahan').val(JaminanDokument.no_reff); 
+     
+     
+     $('#bpkbMerkPenyerahan').append('<option value="'+JaminanDokument.kd_merk+'" selected>'+ JaminanDokument.nama_merk+'</option>');
+     $('#bpkbTypePenyerahan').append('<option value="'+JaminanDokument.kd_type+'" selected>'+ JaminanDokument.nama_type+'</option>');
+     $('#bpkbJenisPenyerahan').append('<option value="'+JaminanDokument.kd_jenis+'"selected>'+ JaminanDokument.nama_jenis+'</option>');
+     
+     // Data Lampiran
+     $('#bpkbNoFakturPemilikPenyerahan').val(JaminanDokument.no_faktur);  
+     $('#noSKTrayekPenyerahan').val(JaminanDokument.no_sk_trayek);  
+     $('#bpkbBerlakuSDPenyerahan').val(JaminanDokument.tgl_expired_sk_trayek);     
+     $('#bpkbLainnyaPenyerahan').val(JaminanDokument.lain_lain);
+
+    $('#rowBPKBAgunanIDPenyerahan').html(JaminanDokument.agunan_id);
+    $('#rowBPKBNoBpkbPenyerahan').html(JaminanDokument.nomor_bpkb);
+    $('#rowBPKBNamaPemilikPenyerahan').html(JaminanDokument.nama_bpkb);
+    $('#rowBPKBAlamatPenyerahan').html(JaminanDokument.alamat_bpkb);
+    $('#rowBPKBNoPolisiPenyerahan').html(JaminanDokument.no_polisi);
+    $('#rowBPKBVerifPenyerahan').html(JaminanDokument.verifikasi);
+     
+     if(JaminanDokument.asli_blanko == 1){
+         $('#bpkbDokKwitansiBlankoPenyerahan').append('<option value="1" selected>ASLI</option>');
+     }else{
+         $('#bpkbDokKwitansiBlankoPenyerahan').append('<option value="2" selected>COPY</option>');
+     }
+     if(JaminanDokument.asli_faktur_pemilik == 1){
+         $('#bpkbDokFakturPemilikPenyerahan').append('<option value="1" selected>ASLI</option>');
+     }else{
+         $('#bpkbDokFakturPemilikPenyerahan').append('<option value="2" selected>COPY</option>');
+     }
+     if(JaminanDokument.asli_kwitansi_jb == 1){
+         $('#bpkbDokKwJualBeliPenyerahan').append('<option value="1" selected>ASLI</option>');
+     }else{
+         $('#bpkbDokKwJualBeliPenyerahan').append('<option value="2" selected>COPY</option>');
+     }
+     if(JaminanDokument.asli_sk_trayek == 1){
+         $('#bpkbDokSKTrayekPenyerahan').append('<option value="1" selected>ASLI</option>');
+     }else{
+         $('#bpkbDokSKTrayekPenyerahan').append('<option value="2" selected>COPY</option>');
+     }
+     /// check box bpkb
+     if(JaminanDokument.blanko == 'Y'){
+         $("#check_kw_blankoPenyerahan").prop("checked", true);
+     }
+     else{
+         $("#check_kw_blankoPenyerahan").prop("checked", false);
+     }
+     if(JaminanDokument.faktur_pemilik == 'Y'){
+         $("#check_faktur_pemilikPenyerahan").prop("checked", true);
+     }
+     else{
+         $("#check_faktur_pemilikPenyerahan").prop("checked", false);
+     }
+     if(JaminanDokument.kwitansi_jb == 'Y'){
+         $("#check_kw_jual_beliPenyerahan").prop("checked", true);
+     }
+     else{
+         $("#check_kw_jual_beliPenyerahan").prop("checked", false);
+     }
+     if(JaminanDokument.sk_trayek == 'Y'){
+         $("#check_sk_trayekPenyerahan").prop("checked", true);
+     }
+     else{
+         $("#check_sk_trayekPenyerahan").prop("checked", false);
+     }
+}
+function mappingFieldEmasPenyerahan(JaminanHeader, JaminanDokument){
+    $('#main_tab_sertPenyerahan').hide(); 
+    $('#main_tab_bpkbPenyerahan').hide();
+    $('#main_tab_emasPenyerahan').show();
+
+     //remove jenis emas
+     $('#emasJenisEmasPenyerahan').find('option').remove().end();
+    
+     $('#emasVerifikasiPenyerahan').append('<option value="' + JaminanDokument.verifikasi + '" selected>' + JaminanDokument.verifikasi +'</option>'); 
+     $('#emasAgunanIDPenyerahan').val(JaminanDokument.agunan_id); 
+     $('#emasNoSeriPenyerahan').val(JaminanDokument.no_seri); 
+     $('#emasJenisEmasPenyerahan').append('<option value="' + JaminanDokument.jenis_emas + '" selected>'+ JaminanDokument.jenis_emas + '</option>');
+     $('#emasKaratPenyerahan').val(JaminanDokument.karat); 
+     $('#emasBeratPenyerahan').val(JaminanDokument.berat); 
+     $('#emasHargaPasarPenyerahan').val(JaminanDokument.harga_pasar); 
+     $('#emasHargaTaksasiPenyerahan').val(JaminanDokument.harga_taksasi); 
+     $('#emasIDPenyerahan').val(JaminanDokument.id); 
+     $('#emasNoReffPenyerahan').val(JaminanDokument.no_reff); 
+     $('#emasVerifikasiPenyerahan').val(JaminanDokument.verifikasi);
+
+    $('#rowEmasAgunanIDPenyerahan').html(JaminanDokument.agunan_id);
+    $('#rowEmasNoSeriPenyerahan').html(JaminanDokument.no_seri); 
+    $('#rowEmasJenisPenyerahan').html(JaminanDokument.jenis_emas); 
+    $('#rowEmasKaratPenyerahan').html(JaminanDokument.karat); 
+    $('#rowEmasGramPenyerahan').html(JaminanDokument.berat); 
+    $('#rowEmasHargaPasarPenyerahan').html(JaminanDokument.harga_pasar);
+    $('#rowEmasVerifPenyerahan').html(JaminanDokument.verifikasi);
+}
 
 function updateSertifikat(){
 

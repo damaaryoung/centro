@@ -162,46 +162,8 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 		$query = $this->db2->query($str);
 		return $query->result_array();
     }
-    public function listDokumenVerifikasi(){
+    public function listDokumenVerifikasi($kode_kantor){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		// $str = "SELECT 
-        //             id,
-        //             LEFT(nomor, 10) AS nomor,
-        //             LEFT(no_reff, 10) AS no_reff,
-        //             tgl,
-        //             nama,
-        //             LEFT(alamat, 200) AS alamat,
-        //             kelurahan,
-        //             kecamatan,
-        //             kota,
-        //             propinsi,
-        //             kode_pos,
-        //             jenis_jaminan,
-        //             roda_kendaraan,
-        //             status,
-        //             kontrak_status,
-        //             ket,
-        //             no_rekening,
-        //             tgl_realisasi,
-        //             kode_kantor,
-        //             verifikasi,
-        //             jd.agunan_id
-        //         FROM
-        //             jaminan_header 
-        //             LEFT JOIN 
-        //             (SELECT 
-        //                 LEFT(no_reff, 10) AS no_reff2,
-        //                 agunan_id
-        //             FROM
-        //                 jaminan_dokument 
-        //             WHERE verifikasi = 0 
-        //                 AND agunan_id <> '') jd 
-        //             ON jd.no_reff2 = jaminan_header.no_reff 
-        //         WHERE STATUS = 'MASUK' 
-        //             AND jaminan_header.kode_kantor = '00' 
-        //         ORDER BY jaminan_header.nomor DESC 
-        //         LIMIT 0, 25      
-        // 	";
         $str = "SELECT 
                     id,
                     LEFT(nomor, 10) AS nomor,
@@ -236,9 +198,9 @@ class AsetDokumenVerifikasiModel extends CI_Model{
                          ) jd 
                     ON jd.no_reff2 = jaminan_header.no_reff 
                 WHERE STATUS = 'MASUK' 
-                    #and jaminan_header.kode_kantor = '00' 
-                #ORDER BY jaminan_header.nomor DESC 
-                ORDER BY jaminan_header.id DESC 
+                    and jaminan_header.kode_kantor = '$kode_kantor' 
+                ORDER BY jaminan_header.nomor DESC 
+                #ORDER BY jaminan_header.id DESC 
                 LIMIT 0, 25;";
 		$query = $this->db2->query($str);
 		return $query->result_array();

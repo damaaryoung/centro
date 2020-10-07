@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CENTRO | BPR Kredit Mandriri</title>
-  <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.jpg" />
+  <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
 
@@ -114,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th>Status</th>
                       <th style="width:150px;">Deskripsi</th>
                       <th>Lokasi</th>
-                      <th style="width:230px;">Action</th>
+                      <th style="width:250px;">Action</th>
                   </tr>
               </thead>
               <tbody id="bodyTableAsetDokumen">
@@ -154,6 +154,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             data-noref="<?= $row['no_reff'] ?>" 
                                             data-status="<?= $row['status'] ?>"
                                             data-agunan="<?= $row['agunan_id'] ?>"
+                                            data-norekening="<?= $row['no_rekening'] ?>"
+                                            data-verifikasi="<?= $row['verifikasi'] ?>"
                                             data-toggle="tooltip" 
                                             data-placement="bottom" 
                                             title="Delete"
@@ -195,6 +197,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             title="Due Date"
                                             name="btnKembali"> 
                                             <i style ='padding-left: 5px;' class="fas fa-stopwatch"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-success btn-sm btnPenyerahan" style ='padding-left: 5px;'
+                                            data-nomor="<?= $row['nomor'] ?>"
+                                            data-noref="<?= $row['no_reff'] ?>" 
+                                            data-status="<?= $row['status'] ?>"
+                                            data-agunan="<?= $row['agunan_id'] ?>"
+                                            data-toggle="tooltip" 
+                                            data-placement="bottom" 
+                                            title="Penyerahan"
+                                            name="btnKembali"> 
+                                            <i style ='padding-left: 5px;'  class="fas fa-file-import"></i>
                                     </button>
                                     
                                     <form method="post" target="_blank" style ='display:inline;' action="<?php echo base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen")?>"> 
@@ -248,6 +262,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $KembaliBPKBModal;
         echo $KembaliEmasModal;
         echo $DueDateMainModal;
+        echo $PenyerahanMainModal;
+        echo $PenyerahanSertifikatModal;
+        echo $PenyerahanBPKBModal;
+        echo $PenyerahanEmasModal;
         echo $ctrlbar;
         echo $js;
         echo $footer;

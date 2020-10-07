@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/design/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/design/css/styles.css">
         <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/design/css/styles_ide.css"> -->
-        <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.jpg" />
+        <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
 
     <style>
         @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
@@ -33,7 +33,7 @@
               <div class="panel-body">
                 <div class="top-right col-sm-12 col-xs-12 text-center ">
                     <a class="logo " href="">
-                      <img style="width:130px;height:130px;" src="<?php echo base_url() ?>assets/design/images/kmi_logo.jpg" alt="KMI Logo">
+                      <img style="width:130px;height:130px;" src="<?php echo base_url() ?>assets/design/images/kmi_logo.png" alt="KMI Logo">
                     </a>
                     <br>
                 </div>

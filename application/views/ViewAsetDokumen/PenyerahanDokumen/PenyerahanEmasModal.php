@@ -1,11 +1,11 @@
 <!-- Modal -->
-<div class="modal fade" id="peminjamanEmasModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="penyerahanEmasModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl"
        style="margin-bottom:50px; width:1300px; overflow-y:auto;" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Peminjaman Data Aset Dokumen Emas</h3>
-        <button type="button" class="close"  id="emas_button_kembali_pinjam2" aria-label="Close">
+        <h3 class="modal-title" id="exampleModalLabel">Penyerahan Data Aset Dokumen Emas</h3>
+        <button type="button" class="close"  id="emas_button_kembali_penyerahan2" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -13,55 +13,55 @@
       <div class="modal-body">  
           
             <div class="tab">
-              <button type='button' class="tablinks" onclick="openTab(event, 'DataEmasPinjam')">Data Emas</button>
-              <button type='button' class="tablinks" onclick="openTab(event, 'SIDEmasPinjam')">SID</button>
+              <button type='button' class="tablinks" onclick="openTab(event, 'DataEmasPenyerahan')">Data Emas</button>
+              <button type='button' class="tablinks" onclick="openTab(event, 'SIDEmasPenyerahan')">SID</button>
             </div>
 
             <!-- Start Data Emas -->
-            <div id="DataEmasPinjam" class="tabcontent">
+            <div id="DataEmasPenyerahan" class="tabcontent">
                 <div class="row">
                       <div class="col-md-10 mx-auto">
                           <form method="post" action="<?php echo base_url("index.php/AsetDokumenEntryController/handleUserInputEmas")?>">
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;"  for="emasAgunanIDPinjam">Agunan ID</label>
+                                      <label class="control-label" style="padding-top: 5px;"  for="emasAgunanIDPenyerahan">Agunan ID</label>
                                   </div>
                                   <div class="col-sm-5">
-                                  <input type="text" class="form-control" id="emasAgunanIDPinjam" name='emasAgunanIDPinjam' readonly>
+                                  <input type="text" class="form-control" id="emasAgunanIDPenyerahan" name='emasAgunanIDPenyerahan' readonly>
                                   </div>
                                   <div class="col-sm-1">
-                                      <label class="control-label" style="padding-top: 5px;" for="emasVerifikasiPinjam">Verifikasi</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="emasVerifikasi">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-2">
-                                      <input class="form-control select2" id="emasVerifikasiPinjam" name="emasVerifikasiPinjam" disabled>
+                                      <input class="form-control select2" id="emasVerifikasiPenyerahan" name="emasVerifikasiPenyerahan" disabled>
                                   </div>
                               </div>
 
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;"  for="emasNoSeriPinjam">No Seri</label>
+                                      <label class="control-label" style="padding-top: 5px;"  for="emasNoSeriPenyerahan">No Seri</label>
                                   </div>
                                   <div class="col-sm-5">
-                                  <input type="text" class="form-control" id="emasNoSeriPinjam" name="emasNoSeriPinjam" placeholder="" required>
+                                  <input type="text" class="form-control" id="emasNoSeriPenyerahan" name="emasNoSeriPenyerahan" placeholder="" required>
                                   </div>
                               </div>
 
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;"  for="emasJenisEmasPinjam">Jenis Emas</label>
+                                      <label class="control-label" style="padding-top: 5px;"  for="emasJenisEmasPenyerahan">Jenis Emas</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="emasJenisEmasPinjam" name="emasJenisEmasPinjam">
+                                        <select class="form-control select2" id="emasJenisEmasPenyerahan" name="emasJenisEmasPenyerahan">
                                         </select>
                                   </div>
                               </div>
 
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;"  for="emasKaratPinjam">Karat</label>
+                                      <label class="control-label" style="padding-top: 5px;"  for="emasKaratPenyerahan">Karat</label>
                                   </div>
                                   <div class="col-sm-2">
-                                  <input type="number" class="form-control" id="emasKaratPinjam" name='emasKaratPinjam' placeholder="">
+                                  <input type="number" class="form-control" id="emasKaratPenyerahan" name='emasKaratPenyerahan' placeholder="">
                                   </div>
                               </div>
 
@@ -70,7 +70,7 @@
                                       <label class="control-label" style="padding-top: 5px;"  for="">Berat (Gram)</label>
                                   </div>
                                   <div class="col-sm-2">
-                                  <input type="number" class="form-control" id="emasBeratPinjam" name="emasBeratPinjam" placeholder="">
+                                  <input type="number" class="form-control" id="emasBeratPenyerahan" name="emasBeratPenyerahan" placeholder="">
                                   </div>
                               </div>
 
@@ -79,7 +79,7 @@
                                       <label class="control-label" style="padding-top: 5px;"  for="">Harga Pasar</label>
                                   </div>
                                   <div class="col-sm-5">
-                                  <input type="number" class="form-control" id="emasHargaPasarPinjam" name='emasHargaPasarPinjam' placeholder="">
+                                  <input type="number" class="form-control" id="emasHargaPasarPenyerahan" name='emasHargaPasarPenyerahan' placeholder="">
                                   </div>
                               </div>
 
@@ -88,7 +88,7 @@
                                       <label class="control-label" style="padding-top: 5px;"  for="">Harga Taksasi</label>
                                   </div>
                                   <div class="col-sm-5">
-                                  <input type="number" class="form-control" id="emasHargaTaksasiPinjam" name='emasHargaTaksasiPinjam' placeholder="">
+                                  <input type="number" class="form-control" id="emasHargaTaksasiPenyerahan" name='emasHargaTaksasiPenyerahan' placeholder="">
                                   </div>
                               </div>
                           <!-- Form ATAS -->
@@ -98,128 +98,128 @@
             <!-- END Data Emas -->
 
              <!-- Start SID -->
-            <div id="SIDEmasPinjam" class="tabcontent">
+            <div id="SIDEmasPenyerahan" class="tabcontent">
                 <div class="row">
                         <div class="col-md-10 mx-auto">
                         <br><br>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDJenisAgunanPinjam">Jenis Agunan</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDJenisAgunanPenyerahan">Jenis Agunan</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="emasSIDJenisAgunanPinjam" name="emasSIDJenisAgunanPinjam" disabled>
+                                            <select class="form-control select2" id="emasSIDJenisAgunanPenyerahan" name="emasSIDJenisAgunanPenyerahan" disabled>
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDPeringkatSuratPinjam">Pengikat Surat Berharga</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDPeringkatSuratPenyerahan">Pengikat Surat Berharga</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="emasSIDPeringkatSuratPinjam" name="emasSIDPeringkatSuratPinjam" disabled>
+                                            <select class="form-control select2" id="emasSIDPeringkatSuratPenyerahan" name="emasSIDPeringkatSuratPenyerahan" disabled>
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>   
                                             </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDJenisPengikatanPinjam">Jenis Pengikatan</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDJenisPengikatanPenyerahan">Jenis Pengikatan</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="emasSIDJenisPengikatanPinjam" name="emasSIDJenisPengikatanPinjam" disabled>
+                                            <select class="form-control select2" id="emasSIDJenisPengikatanPenyerahan" name="emasSIDJenisPengikatanPenyerahan" disabled>
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>   
                                             </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDNamaPemilikAgunanPinjam">Nama Pemilik Agunan</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDNamaPemilikAgunanPenyerahan">Nama Pemilik Agunan</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="emasSIDNamaPemilikAgunanPinjam" name='emasSIDNamaPemilikAgunanPinjam'>
+                                        <input type="text" class="form-control" id="emasSIDNamaPemilikAgunanPenyerahan" name='emasSIDNamaPemilikAgunanPenyerahan'>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDStatusPinjam">Status/Bukti Kepemilikan</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDStatusPenyerahan">Status/Bukti Kepemilikan</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="emasSIDStatusPinjam" name='emasSIDStatusPinjam' value='SERTIFIKAT'>
+                                        <input type="text" class="form-control" id="emasSIDStatusPenyerahan" name='emasSIDStatusPenyerahan' value='SERTIFIKAT'>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDAlamatPinjam">Alamat</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDAlamatPenyerahan">Alamat</label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="emasSIDAlamatPinjam" name='emasSIDAlamatPinjam'>
+                                        <input type="text" class="form-control" id="emasSIDAlamatPenyerahan" name='emasSIDAlamatPenyerahan'>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDLokasiPinjam">Lokasi</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDLokasiPenyerahan">Lokasi</label>
                                     </div>
                                     <div class="col-sm-5">
-                                            <select class="form-control select2" id="emasSIDLokasiPinjam" name="emasSIDLokasiPinjam" disabled>
+                                            <select class="form-control select2" id="emasSIDLokasiPenyerahan" name="emasSIDLokasiPenyerahan" disabled>
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDNJOPPinjam">Nilai Agunan (NJOP)</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDNJOPPenyerahan">Nilai Agunan (NJOP)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="emasSIDNJOPPinjam" name="emasSIDNJOPPinjam">
+                                        <input type="number" class="form-control" id="emasSIDNJOPPenyerahan" name="emasSIDNJOPPenyerahan">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDBankPinjam">Nilai Agunan (Bank)</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDBankPenyerahan">Nilai Agunan (Bank)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="emasSIDBankPinjam" name='emasSIDBankPinjam'>
+                                        <input type="number" class="form-control" id="emasSIDBankPenyerahan" name='emasSIDBankPenyerahan'>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDNilaiIndependenPinjam">Nilai Agunan Independen</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDNilaiIndependenPenyerahan">Nilai Agunan Independen</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="emasSIDNilaiIndependenPinjam" name='emasSIDNilaiIndependenPinjam'>
+                                        <input type="number" class="form-control" id="emasSIDNilaiIndependenPenyerahan" name='emasSIDNilaiIndependenPenyerahan'>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDNamaIndependenPinjam">Nama Penilai Independen</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDNamaIndependenPenyerahan">Nama Penilai Independen</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="emasSIDNamaIndependenPinjam" name='emasSIDNamaIndependenPinjam'>
+                                        <input type="text" class="form-control" id="emasSIDNamaIndependenPenyerahan" name='emasSIDNamaIndependenPenyerahan'>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDTglPenilaianPinjam">Tanggal Penilaian</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDTglPenilaianPenyerahan">Tanggal Penilaian</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="date" class="form-control" id="emasSIDTglPenilaianPinjam" name='emasSIDTglPenilaianPinjam'>
+                                        <input type="date" class="form-control" id="emasSIDTglPenilaianPenyerahan" name='emasSIDTglPenilaianPenyerahan'>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDParipasuPinjam">Paripasu (%)</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDParipasuPenyerahan">Paripasu (%)</label>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="emasSIDParipasuPinjam" name='emasSIDParipasuPinjam'>
+                                        <input type="number" class="form-control" id="emasSIDParipasuPenyerahan" name='emasSIDParipasuPenyerahan'>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDAsuransiPinjam">Asuransi</label>
+                                        <label class="control-label" style="padding-top: 5px;" for="emasSIDAsuransiPenyerahan">Asuransi</label>
                                     </div>
                                     <div class="col-sm-3">
-                                            <select class="form-control select2" id="emasSIDAsuransiPinjam" name="emasSIDAsuransiPinjam">
+                                            <select class="form-control select2" id="emasSIDAsuransiPenyerahan" name="emasSIDAsuransiPenyerahan">
                                                     <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                     <option value="Y">YA</option>
                                                     <option value="T">TIDAK</option>
@@ -232,14 +232,14 @@
             </div>
             <!-- END SID -->
 
-            <input type="hidden" class="form-control" id="emasIDPinjam" name="emasIDPinjam">
-            <input type="hidden" class="form-control" id="emasNoReffPinjam" name="emasNoReffPinjam">
+            <input type="hidden" class="form-control" id="emasIDPenyerahan" name="emasIDPenyerahan">
+            <input type="hidden" class="form-control" id="emasNoReffPenyerahan" name="emasNoReffPenyerahan">
 
            
       </div>
       <!--END Modal Body-->
       <div class="modal-footer text-center" style="margin: 0 auto;">
-        <button type="button" id="emas_button_kembali_pinjam" class="btn btn-danger">Kembali</button>
+        <button type="button" id="emas_button_kembali_penyerahan" class="btn btn-danger">Kembali</button>
       </div>
     </div>
   </div>

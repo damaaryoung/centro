@@ -35,7 +35,11 @@ class AsetDokumenEntryController extends CI_Controller {
 		$data['KembaliEmasModal'] = $this->load->view('ViewAsetDokumen/PengembalianDokumen/KembaliEmasModal.php', NULL, TRUE);
 		// modal due date
 		$data['DueDateMainModal'] = $this->load->view('ViewAsetDokumen/DueDate/DueDateMainModal.php', NULL, TRUE);
-
+		// modal penyerahan
+		$data['PenyerahanMainModal'] = $this->load->view('ViewAsetDokumen/PenyerahanDokumen/PenyerahanMainModal.php', NULL, TRUE);
+		$data['PenyerahanSertifikatModal'] = $this->load->view('ViewAsetDokumen/PenyerahanDokumen/PenyerahanSertifikatModal.php', NULL, TRUE);
+		$data['PenyerahanBPKBModal'] = $this->load->view('ViewAsetDokumen/PenyerahanDokumen/PenyerahanBPKBModal.php', NULL, TRUE);
+		$data['PenyerahanEmasModal'] = $this->load->view('ViewAsetDokumen/PenyerahanDokumen/PenyerahanEmasModal.php', NULL, TRUE);
 		if($session != ''){
 			$data['ListAsset'] = $this->AsetDokumenEntryModel->listAsetDokumen($kode_kantor);
 			$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
@@ -1390,7 +1394,7 @@ class AsetDokumenEntryController extends CI_Controller {
 										. $row['jenis_jaminan']. '</td> <td>'
 										. $row['status'].'</td> <td>'
 										. $row['deskripsi_ringkas_jaminan'].'</td> <td>'
-										. $row['lokasi_penyimpanan'].'</td> <td style="width:230px;">'
+										. $row['lokasi_penyimpanan'].'</td> <td style="width:250px;">'
 										. ' <button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
 													data-nomor="'. $row['nomor'] .'"
 													data-noref="'. $row['no_reff'] .'" 
@@ -1407,6 +1411,8 @@ class AsetDokumenEntryController extends CI_Controller {
 													data-noref="'. $row['no_reff'] .'" 
 													data-status="'. $row['status'] .'"
 													data-agunan="'. $row['agunan_id'] .'"
+													data-norekening="'. $row['no_rekening'] .'"
+                                            		data-verifikasi="'. $row['verifikasi'] .'"
 													data-toggle="tooltip" 
 													data-placement="bottom" 
 													title="Delete"
@@ -1446,6 +1452,18 @@ class AsetDokumenEntryController extends CI_Controller {
 													name="btnKembali"> 
 													<i style ="padding-left: 5px;" class="fas fa-stopwatch"></i>
 											</button>
+
+											<button type="button" class="btn btn-success btn-sm btnPenyerahan" style ="padding-left: 5px;"
+												data-nomor="'. $row['nomor'] .'"
+												data-noref="'. $row['no_reff'] .'" 
+												data-status="'. $row['status'] .'"
+												data-agunan="'. $row['agunan_id'] .'"
+												data-toggle="tooltip" 
+												data-placement="bottom" 
+												title="Penyerahan"
+												name="btnKembali"> 
+												<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
+                                    		</button>
 
 											<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
 											<button type="submit" class="btn btn-info btn-sm btnCetaks" 
@@ -1489,7 +1507,7 @@ class AsetDokumenEntryController extends CI_Controller {
 										. $row['jenis_jaminan']. '</td> <td>'
 										. $row['status'].'</td> <td>'
 										. $row['deskripsi_ringkas_jaminan'].'</td> <td>'
-										. $row['lokasi_penyimpanan'].'</td> <td style="width:230px;">'
+										. $row['lokasi_penyimpanan'].'</td> <td style="width:250px;">'
 										. ' <button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
 													data-nomor="'. $row['nomor'] .'"
 													data-noref="'. $row['no_reff'] .'" 
@@ -1506,6 +1524,8 @@ class AsetDokumenEntryController extends CI_Controller {
 													data-noref="'. $row['no_reff'] .'" 
 													data-status="'. $row['status'] .'"
 													data-agunan="'. $row['agunan_id'] .'"
+													data-norekening="'. $row['no_rekening'] .'"
+                                            		data-verifikasi="'. $row['verifikasi'] .'"
 													data-toggle="tooltip" 
 													data-placement="bottom" 
 													title="Delete"
@@ -1545,6 +1565,18 @@ class AsetDokumenEntryController extends CI_Controller {
 													name="btnKembali"> 
 													<i style ="padding-left: 5px;" class="fas fa-stopwatch"></i>
 											</button>
+
+											<button type="button" class="btn btn-success btn-sm btnPenyerahan" style ="padding-left: 5px;"
+												data-nomor="'. $row['nomor'] .'"
+												data-noref="'. $row['no_reff'] .'" 
+												data-status="'. $row['status'] .'"
+												data-agunan="'. $row['agunan_id'] .'"
+												data-toggle="tooltip" 
+												data-placement="bottom" 
+												title="Penyerahan"
+												name="btnKembali"> 
+												<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
+                                    		</button>
 
 											<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
 											<button type="submit" class="btn btn-info btn-sm btnCetaks" 
@@ -1607,11 +1639,8 @@ class AsetDokumenEntryController extends CI_Controller {
 	}
 
 	public function buttonBack(){
-
 		redirect('AsetDokumenEntryController/index'); 
 	}
-
-
 
 	public function deleteTempEmas(){
 			//UNSET EMAS
@@ -1636,7 +1665,6 @@ class AsetDokumenEntryController extends CI_Controller {
 			$data1['sukses'] = 'sukses';
 			echo json_encode($data1);
 	}
-
 	public function deleteTempSert(){
 		//// UNSET SESSION /////
 		$this->session->unset_tempdata('sertAgunanID');

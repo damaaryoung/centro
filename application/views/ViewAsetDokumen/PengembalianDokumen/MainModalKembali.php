@@ -17,7 +17,16 @@
            <!--- FORM ATAS ------>
            <div class="row">
                   <div class="col-md-12 mx-auto">
-                          
+                             <div class="form-group row">
+                                  <div class="col-sm-7">
+                                  </div>
+                                  <div class="col-sm-1">
+                                    <label style="padding-top: 6px;" class="control-label" for="mainVerifikasiKembali">Verifikasi</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <input class="form-control select2" id="mainVerifikasiKembali" name="mainVerifikasiKembali" disabled>
+                                  </div>
+                              </div>     
                               <div class="form-group row">
                                   <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerjaKembali">Area Kerja</label>
