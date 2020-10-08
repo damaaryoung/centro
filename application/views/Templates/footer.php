@@ -5,7 +5,7 @@
       Versi 0.0.1-C
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2020 <a href="https://adminlte.io">BPR Kredit Mandiri Indonesia. </a></strong> All rights reserved.
+    <strong>Copyright &copy; 2020 <a href="#">BPR Kredit Mandiri Indonesia. </a></strong> All rights reserved.
   </footer>
 </div>
 

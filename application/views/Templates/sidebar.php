@@ -52,15 +52,15 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php//index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>View Aset Dokumen</p>
+                    <p>Verifikasi Aset Dokumen</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>index.php/PemindahanJaminanMainController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Verifikasi</p>
+                    <p>Pemindahan Lokasi</p>
                   </a>
                 </li>
               </ul>

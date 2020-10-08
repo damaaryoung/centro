@@ -21,7 +21,7 @@ class DashboardController extends CI_Controller {
 
 		if($session != ''){
 			$data['tests'] = $this->DashboardModel->testfunct();
-			$this->load->view('ViewDashboard/ViewDashboard2.php', $data);
+			$this->load->view('ViewDashboard/ViewDashboard.php', $data);
 		}
 		else{
 			redirect('LoginController/index'); 

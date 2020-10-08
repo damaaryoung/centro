@@ -1,0 +1,123 @@
+<?php
+if (! defined('BASEPATH')) exit('No direct script access allowed');
+class PemindahanInsertModel extends CI_Model{
+	
+	public function __construct() {
+		parent:: __construct();
+		$this->load->database();
+	}
+
+    public function selectKodeKantor(){
+            $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+            $str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
+                    FROM dpm_online.`app_kode_kantor` AKK;
+                ";
+            $query = $this->db2->query($str);
+            
+            return $query->result_array();
+    }
+    public function listJaminan($kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT 
+                    `id`,
+                    `nomor`,
+                    `tgl`,
+                    `kode_kantor_asal`,
+                    kk1.nama_kantor AS nama_kantor_asal,
+                    `kode_kantor_tujuan`,
+                    kk2.nama_kantor AS nama_kantor_tujuan,
+                    `ket`,
+                    `user_id`,
+                    `lokasi_penyimpanan` AS kode_lokasi_penyimpanan,
+                    kkc.nama_centro AS nama_lokasi_penyimpanan,
+                    `verifikasi` 
+                FROM
+                    `jaminan_pemindahan` jp 
+                    LEFT JOIN app_kode_kantor kk1 
+                    ON kk1.kode_kantor = jp.kode_kantor_asal 
+                    LEFT JOIN app_kode_kantor kk2 
+                    ON kk2.kode_kantor = jp.kode_kantor_tujuan 
+                    LEFT JOIN kre_kode_centro kkc 
+                    ON kkc.kode_centro = jp.lokasi_penyimpanan 
+                WHERE jp.kode_kantor_asal = '$kode_kantor' 
+                ORDER BY jp.nomor DESC 
+                LIMIT 0, 25;
+            ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }
+    public function getJaminanDokumen($kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT `jaminan_dokument`.`no_reff`, `agunan_id`, `jaminan_dokument`.`kode_kantor`, `kode_kantor_lokasi_jaminan`, 
+                    jh.`status`, 
+                    IF(`jenis`='SERTIFIKAT',
+                            CONCAT(IF(IFNULL(`no_shm`,'')<>'','SHM',
+                                            IF(IFNULL(`no_shgb`,'')<>'','SHGB','AJB')),' NO. ', 
+                                        IF(IFNULL(`no_shm`,'')<>'', IFNULL(`no_shm`,''),
+                                            IF(IFNULL(`no_shgb`,'')<>'', IFNULL(`no_shgb`,''), IFNULL(`no_ajb`,''))),
+                                        ' A/N : ', IFNULL(`nama_pemilik_sertifikat`,''), 
+                                        ' ALAMAT : ', IFNULL(`alamat_sertifikat`,'')),
+                            CONCAT('BPKB NO. ',IFNULL(`nomor_bpkb`,''),' A/N : ', IFNULL(`nama_bpkb`,''),
+                                        ' ALAMAT : ', IFNULL(`alamat_bpkb`,''),
+                                        ' NO RANGKA : ', IFNULL(`no_rangka`,''),
+                                        ' NO MESIN : ', IFNULL(`no_mesin`,''),
+                                        ' TAHUN ', IFNULL(`tahun`,''),' NO. POL : ', IFNULL(`no_polisi`,''))
+                            ) AS deskripsi_ringkas,
+                        `no_rekening_agunan`, `verifikasi`
+                FROM `jaminan_dokument`
+                LEFT JOIN (
+                    SELECT no_reff, `status` FROM `jaminan_header`) jh ON jh.`no_reff`=`jaminan_dokument`.`no_reff`
+                WHERE verifikasi=1 AND kode_kantor_lokasi_jaminan='$kode_kantor'  AND `status`='MASUK' 
+                ORDER BY no_reff
+                LIMIT 0, 25
+            ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }
+    public function getSearchJaminanDokumen($kode_kantor,$search){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT `jaminan_dokument`.`no_reff`, `agunan_id`, `jaminan_dokument`.`kode_kantor`, `kode_kantor_lokasi_jaminan`, 
+                    jh.`status`, 
+                    IF(`jenis`='SERTIFIKAT',
+                        CONCAT(IF(IFNULL(`no_shm`,'')<>'','SHM',
+                                        IF(IFNULL(`no_shgb`,'')<>'','SHGB','AJB')),' NO. ', 
+                                    IF(IFNULL(`no_shm`,'')<>'', IFNULL(`no_shm`,''),
+                                        IF(IFNULL(`no_shgb`,'')<>'', IFNULL(`no_shgb`,''), IFNULL(`no_ajb`,''))),
+                                    ' A/N : ', IFNULL(`nama_pemilik_sertifikat`,''), 
+                                    ' ALAMAT : ', IFNULL(`alamat_sertifikat`,'')),
+                        CONCAT('BPKB NO. ',IFNULL(`nomor_bpkb`,''),' A/N : ', IFNULL(`nama_bpkb`,''),
+                                    ' ALAMAT : ', IFNULL(`alamat_bpkb`,''),
+                                    ' NO RANGKA : ', IFNULL(`no_rangka`,''),
+                                    ' NO MESIN : ', IFNULL(`no_mesin`,''),
+                                    ' TAHUN ', IFNULL(`tahun`,''),' NO. POL : ', IFNULL(`no_polisi`,''))
+                        ) AS deskripsi_ringkas,
+                    `no_rekening_agunan`, `verifikasi`
+                FROM `jaminan_dokument`
+                    LEFT JOIN (
+                    SELECT no_reff, `status` FROM `jaminan_header`) jh ON jh.`no_reff`=`jaminan_dokument`.`no_reff`
+                WHERE verifikasi=1 
+                AND (`jaminan_dokument`.`no_reff` LIKE '%$search%' 
+                OR agunan_id LIKE '%$search%' 
+                OR no_shm LIKE '%$search%' 
+                OR no_shgb LIKE '%$search%' 
+                OR no_ajb LIKE '%$search%' 
+                OR nama_pemilik_sertifikat LIKE '%$search%' 
+                OR nomor_bpkb LIKE '%$search%' OR nama_bpkb LIKE '%$search%' 
+                OR no_mesin LIKE '%$search%' 
+                OR no_polisi LIKE '%$search%') 
+                AND kode_kantor_lokasi_jaminan='$kode_kantor'  
+                AND `status`= 'MASUK' 
+                ORDER BY no_reff
+                LIMIT 0, 25
+            ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }
+
+    
+}   
+
+
