@@ -119,7 +119,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 ?>  
                                 <td>
                                         <div>
-                                                <button type="button" class="btn btn-primary btn-sm btnUpdate" style ='padding-left: 5px;'
+                                          <form method="post" action="<?php echo base_url(); ?>index.php/PemindahanUpdateController/index"> 
+                                                <button type="submit" class="btn btn-primary btn-sm btnUpdate" style ='padding-left: 5px;'
                                                         data-id="<?= $row['id'] ?>"
                                                         data-nomor="<?= $row['nomor'] ?>" 
                                                         data-toggle="tooltip" 
@@ -127,7 +128,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         title="Edit"
                                                         name="btnUpdate"> 
                                                         <i style="padding-left: 5px;" class="fas fa-edit"></i>
+                                                        <input type="hidden" class="form-control" name="tblID" value = "<?= $row['id'] ?>">
+                                                        <input type="hidden" class="form-control" name="tblNomor" value = "<?= $row['nomor'] ?>">
                                                 </button>
+                                          </form>
                                         </div>
                                 </td>
                                 </tr>

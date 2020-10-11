@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Entry Pemindahan Lokasi Jaminan</h1>
+            <h1 class="m-0 text-dark">Koreksi Pemindahan Lokasi Jaminan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -88,24 +88,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </div>
                           <!-- Form ATAS -->
 
-                          <div id="" class="tabcontent">
-                            <table id="tablePemindahanInsertMain" class="table table-striped table-bordered display" style="width:100%">
+                          <div id="BPKB" class="tabcontent">
+                            <table id="" class="table table-striped table-bordered display" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>No.&nbsp;Reff</th>
                                             <th>Agunan&nbsp;ID</th>
                                             <th>Jenis</th>
-                                            <th style="width: 500px;">Deskripsi&nbsp;Jaminan</th>
+                                            <th>Deskripsi&nbsp;Jaminan</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="bodytablePemindahanInsertMain">
+                                    <tbody>
                                         <tr>
-                                            <td></td> 
-                                            <td></td> 
-                                            <td></td> 
-                                            <td></td> 
-                                            <td></td> 
+                                            <?php
+                                                    foreach ($getPemindahanJaminanDetail as $row) :
+                                                        // $idData = $row['id_data'];
+                                                        $idx= 0;
+                                                        echo "<tr>";
+                                                        echo "<td>".$row['no_reff']."</td>";
+                                                        echo "<td>".$row['agunan_id']."</td>";
+                                                        echo "<td>".$row['jenis']."</td>";     
+                                                        echo "<td>".$row['deskripsi_ringkas']."</td>";                                                    
+                                            ?>  
+                                            <td>
+                                                    <div>
+                                                    <form method="post" action="<?php echo base_url(); ?>index.php/PemindahanUpdateController/index"> 
+                                                            <button type="submit" class="btn btn-primary btn-sm btnUpdate" style ='padding-left: 5px;'
+                                                                    data-id="<?= $row['id'] ?>"
+                                                                    data-nomor="<?= $row['nomor'] ?>" 
+                                                                    data-toggle="tooltip" 
+                                                                    data-placement="bottom" 
+                                                                    title="Edit"
+                                                                    name="btnUpdate"> 
+                                                                    <i style="padding-left: 5px;" class="fas fa-edit"></i>
+                                                                    <input type="hidden" class="form-control" name="tblID" value = "<?= $row['id'] ?>">
+                                                                    <input type="hidden" class="form-control" name="tblNomor" value = "<?= $row['no_reff'] ?>">
+                                                                    <input type="hidden" class="form-control" name="tblRekening" value = "<?= $row['no_rekening_agunan'] ?>">
+                                                            </button>
+                                                    </form>
+                                                    </div>
+                                            </td>
+                                            </tr>
+                                            <?php
+                                                    endforeach;
+                                            ?>
                                             
                                         </tr>
                                     </tbody>
@@ -122,9 +149,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-3">
                                   <select class="form-control form-control-sm select2" id="mainLokasiJaminan" name="mainLokasiJaminan">
-                                          <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                        <?php foreach ($getCentro as $row) : ?>
-                                          <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - ' .$row['nama'];?></option>
+                                        <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
+                                        <?php foreach ($selectKodeKantor as $row) : ?>
+                                        <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
                                         <?php endforeach;?>
                                   </select>
                                   </div>
@@ -132,9 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="mainKeterangan">Keterangan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                     <textarea style="height: 75px;" type="text" 
-                                            class="form-control" name="mainKeterangan" 
-                                            id="mainKeterangan" placeholder=""><?php echo $this->session->tempdata('sertAlamatSertifikat'); ?></textarea>
+                                    <input type="text" class="form-control form-control-sm" id="mainKeterangan" name="mainKeterangan">
                                   </div>
                      </div>
                       </div>

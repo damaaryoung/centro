@@ -47,11 +47,14 @@ class PemindahanJaminanMainController extends CI_Controller {
 										. $row['nama_kantor_tujuan'].'</td> <td>'										
 										. $row['nama_lokasi_penyimpanan'].'</td> <td>'
 										. $row['verifikasi'].'</td> <td>'
-										. '<button type="button" class="btn btn-success btn-sm btnVerifikasi" style ="padding-left: 5px;"
+										. '<button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
 													data-nomor="'.$row['nomor'].'"
-													data-agunanid="'.$row['tgl'].'"
-													name="btnVerifikasi"> 
-													<i style="padding-left: 5px;" class="fa fa-check"></i>
+													data-id="'.$row['id'].'"
+													data-toggle="tooltip" 
+                                                    data-placement="bottom" 
+                                                    title="Edit"
+                                                    name="btnUpdate"> 
+													<i style="padding-left: 5px;" class="fas fa-edit"></i>
 											</button>  </td> </tr>'];
 											
 									
@@ -63,4 +66,3 @@ class PemindahanJaminanMainController extends CI_Controller {
 
 
 }
-

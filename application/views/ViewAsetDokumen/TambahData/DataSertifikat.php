@@ -297,7 +297,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="">Keluarhan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="">Kelurahan</label>
                                   </div>
                                   <div class="col-sm-5">
                                       <input type="text" class="form-control" id="sertKelurahan" name="sertKelurahan" value="<?php echo $this->session->tempdata('sertKelurahan'); ?>">

@@ -1,6 +1,6 @@
 <?php
 if (! defined('BASEPATH')) exit('No direct script access allowed');
-class PemindahanInsertModel extends CI_Model{
+class PemindahanUpdateModel extends CI_Model{
 	
 	public function __construct() {
 		parent:: __construct();
@@ -19,7 +19,7 @@ class PemindahanInsertModel extends CI_Model{
     public function getJaminanDokumen($kode_kantor){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT `jaminan_dokument`.`no_reff`, `agunan_id`, `jaminan_dokument`.`kode_kantor`, `kode_kantor_lokasi_jaminan`, 
-                    jh.`status`, `jenis`,
+                    jh.`status`, 
                     IF(`jenis`='SERTIFIKAT',
                             CONCAT(IF(IFNULL(`no_shm`,'')<>'','SHM',
                                             IF(IFNULL(`no_shgb`,'')<>'','SHGB','AJB')),' NO. ', 
@@ -45,10 +45,35 @@ class PemindahanInsertModel extends CI_Model{
         
         return $query->result_array();
     }
+    public function getPemindahanJaminanDetail($tblNomor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT jpd.`id`, jpd.`nomor`, jpd.`no_reff`, jd.`agunan_id`, jd.`jenis`, 
+                    LEFT( IF(jd.`jenis`='SERTIFIKAT',
+                        CONCAT(IF(IFNULL(`no_shm`,'')<>'','SHM',
+                                        IF(IFNULL(`no_shgb`,'')<>'','SHGB','AJB')),' NO. ', 
+                                    IF(IFNULL(`no_shm`,'')<>'', IFNULL(`no_shm`,''),
+                                        IF(IFNULL(`no_shgb`,'')<>'', IFNULL(`no_shgb`,''), IFNULL(`no_ajb`,''))),
+                                    ' A/N : ', IFNULL(`nama_pemilik_sertifikat`,''), 
+                                    ' ALAMAT : ', IFNULL(`alamat_sertifikat`,'')),
+                        CONCAT('BPKB NO. ',IFNULL(`nomor_bpkb`,''),' A/N : ', IFNULL(`nama_bpkb`,''),
+                                    ' ALAMAT : ', IFNULL(`alamat_bpkb`,''),
+                                    ' NO RANGKA : ', IFNULL(`no_rangka`,''),
+                                    ' NO MESIN : ', IFNULL(`no_mesin`,''),
+                                    ' TAHUN ', IFNULL(`tahun`,''),' NO. POL : ', IFNULL(`no_polisi`,''))
+                        ), 450) AS deskripsi_ringkas,
+                    `no_rekening_agunan`
+                FROM dpm_online.jaminan_pemindahan_detail jpd
+                    LEFT JOIN `jaminan_dokument` jd ON jd.`no_reff`=jpd.`no_reff`
+                WHERE  jpd.`nomor`='$tblNomor' ORDER BY id LIMIT 0, 25
+            ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }
     public function getSearchJaminanDokumen($kode_kantor,$search){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT `jaminan_dokument`.`no_reff`, `agunan_id`, `jaminan_dokument`.`kode_kantor`, `kode_kantor_lokasi_jaminan`, 
-                    jh.`status`, `jenis`,
+                    jh.`status`, 
                     IF(`jenis`='SERTIFIKAT',
                         CONCAT(IF(IFNULL(`no_shm`,'')<>'','SHM',
                                         IF(IFNULL(`no_shgb`,'')<>'','SHGB','AJB')),' NO. ', 
@@ -85,18 +110,8 @@ class PemindahanInsertModel extends CI_Model{
         
         return $query->result_array();
     }
-    public function getCentro(){
-        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-        $str = "SELECT kode_centro AS `kode`, nama_centro AS `nama`, flg_aktif AS `flg_aktif`
-                FROM dpm_online.kre_kode_centro
-                WHERE 0=0 
-                
-                ORDER BY kode;";
-        $query = $this->db2->query($str);
-        
-        return $query->result_array();
-    }
 
     
 }   
+
 

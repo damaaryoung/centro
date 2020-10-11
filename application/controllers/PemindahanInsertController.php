@@ -5,7 +5,7 @@ class PemindahanInsertController extends CI_Controller {
 	public function __construct() {
         parent:: __construct();
         $this->load->model('PemindahanLokasiJaminanModel/PemindahanInsertModel');
-       // $this->load->database('DB_NEWWEBTOOL', TRUE);
+	   // $this->load->database('DB_NEWWEBTOOL', TRUE);
        
 	}
 
@@ -21,8 +21,8 @@ class PemindahanInsertController extends CI_Controller {
 		$data['ModalJaminanDokumen'] = $this->load->view('ViewPemindahanLokasiJaminan/Insert/ModalJaminanDokumen.php', NULL, TRUE);
 
 		if($session != ''){
-            // $data['listJaminan'] = $this->PemindahanJaminanMainModel->listJaminan($kode_kantor);
-            $data['selectKodeKantor'] = $this->PemindahanInsertModel->selectKodeKantor();
+			$data['selectKodeKantor'] = $this->PemindahanInsertModel->selectKodeKantor();
+			$data['getCentro'] = $this->PemindahanInsertModel->getCentro();
 			$this->load->view('ViewPemindahanLokasiJaminan/Insert/PemindahanLokasiInsert.php', $data);
 		}
 		else{
@@ -44,17 +44,19 @@ class PemindahanInsertController extends CI_Controller {
 			// $result_kode_kantor_lokasi  = $row['kode_kantor_lokasi_jaminan']
 			
 			
-			$data[]    = 	['<tr> <td>'. $row['no_reff'] . '</td> <td>'
-										. $row['agunan_id']. '</td> <td>'
-										. $row['deskripsi_ringkas'].'</td> <td>'
-										. $row['no_rekening_agunan'].'</td> <td>'										
-										. $row['verifikasi'].'</td> <td>'
-										. '<button type="button" class="btn btn-success btn-sm btnVerifikasi" style ="padding-left: 5px;"
-													data-nomor="'.$row['no_reff'].'"
-													data-agunanid="'.$row['agunan_id'].'"
-													name="btnVerifikasi"> 
-													<i style="padding-left: 5px;" class="fa fa-check"></i>
-											</button>  </td> </tr>'];
+			$data[]    = ['<tr> <td>'. $row['no_reff'] . '</td> <td>'
+						. $row['agunan_id']. '</td> <td>'
+						. $row['deskripsi_ringkas'].'</td> <td>'
+						. $row['no_rekening_agunan'].'</td> <td>'										
+						. $row['verifikasi'].'</td> <td>'
+						. '<button type="button" class="btn btn-success btn-sm btnPilihJaminan" style ="padding-left: 5px;"
+									data-nomor="'.$row['no_reff'].'"
+									data-agunanid="'.$row['agunan_id'].'"
+									data-jenis="'.$row['jenis'].'"
+									data-deskripsi="'.$row['deskripsi_ringkas'].'"
+									name="btnPilihJaminan"> 
+									<i style="padding-left: 5px;" class="fa fa-check"></i>
+							</button>  </td> </tr>'];
 											
 									
 		endforeach;	
@@ -79,16 +81,16 @@ class PemindahanInsertController extends CI_Controller {
 			
 			
 			$data[]    = 	['<tr> <td>'. $row['no_reff'] . '</td> <td>'
-										. $row['agunan_id']. '</td> <td>'
-										. $row['deskripsi_ringkas'].'</td> <td>'
-										. $row['no_rekening_agunan'].'</td> <td>'										
-										. $row['verifikasi'].'</td> <td>'
-										. '<button type="button" class="btn btn-success btn-sm btnVerifikasi" style ="padding-left: 5px;"
-													data-nomor="'.$row['no_reff'].'"
-													data-agunanid="'.$row['agunan_id'].'"
-													name="btnVerifikasi"> 
-													<i style="padding-left: 5px;" class="fa fa-check"></i>
-											</button>  </td> </tr>'];
+							. $row['agunan_id']. '</td> <td>'
+							. $row['deskripsi_ringkas'].'</td> <td>'
+							. $row['no_rekening_agunan'].'</td> <td>'										
+							. $row['verifikasi'].'</td> <td>'
+							. '<button type="button" class="btn btn-success btn-sm btnPilihJaminan" style ="padding-left: 5px;"
+										data-nomor="'.$row['no_reff'].'"
+										data-agunanid="'.$row['agunan_id'].'"
+										name="btnPilihJaminan"> 
+										<i style="padding-left: 5px;" class="fa fa-check"></i>
+								</button>  </td> </tr>'];
 											
 									
 		endforeach;	

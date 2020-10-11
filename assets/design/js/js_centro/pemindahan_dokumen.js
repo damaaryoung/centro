@@ -1,4 +1,6 @@
 var dataTableeee = [];
+var nomor = '';
+var id = '';
 var base_url = $('#base_url').val();
 
 function serchDataJaminan(){
@@ -28,7 +30,7 @@ function serchDataJaminan(){
                 $('#tableLokasiJaminan').DataTable( {
                     "destroy": true,
                     "scrollX": true,
-                    "autoWidth" : false,
+                    "autoWidth" : true,
                     "searching": false,
                     "aaSorting" : []
                 } );
