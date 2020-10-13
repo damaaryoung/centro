@@ -96,6 +96,68 @@ class PemindahanInsertModel extends CI_Model{
         
         return $query->result_array();
     }
+    public function sysdate(){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
+        $query = $this->db->query($str);
+        
+        return $query->result_array();
+    }
+    public function generateNomor($kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT CONCAT('$kode_kantor','.',LPAD(SUBSTR(nomor, 4, 6) + 1, 6, '0')) AS hasil 
+                FROM dpm_online.jaminan_pemindahan 
+                WHERE nomor LIKE CONCAT('$kode_kantor', '.%') 
+                    ORDER BY hasil DESC 
+                    LIMIT 1";
+		$query = $this->db2->query($str);
+		
+		return $query->result_array();
+    }
+    public function insertDataPemindahan($mainTanggal,
+                                            $nomor,
+                                            $kode_kantor,
+                                            $kode_kantor_tujuan,
+                                            $mainKeterangan,
+                                            $userIdLogin,
+                                            $kode_lokasi_penyimpanan,
+                                            $verifikasi
+                                        ){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+		$this->db2->query("INSERT INTO dpm_online.jaminan_pemindahan (
+                                `nomor`,
+                                `tgl`,
+                                `kode_kantor_asal`,
+                                `kode_kantor_tujuan`,
+                                `ket`,
+                                `user_id`,
+                                `lokasi_penyimpanan`,
+                                `verifikasi`
+                            ) 
+                            VALUES('$nomor',
+                                    '$mainTanggal',
+                                    '$kode_kantor',
+                                    '$kode_kantor_tujuan',
+                                    '$mainKeterangan',
+                                    '$userIdLogin',
+                                    '$kode_lokasi_penyimpanan',
+                                    '$verifikasi'
+                                    );");
+    }
+    public function insertDataPemindahanDetail($nomor,$nomorReffDeatail,$agunanIdDetail){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+		$this->db2->query("INSERT INTO dpm_online.jaminan_pemindahan_detail (
+                                    `nomor`, 
+                                    `no_reff`, 
+                                    `agunan_id`)
+                            VALUES('$nomor',
+                                   '$nomorReffDeatail',
+                                   '$agunanIdDetail');");
+    }
+    
+
 
     
 }   

@@ -66,19 +66,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomor">Nomor</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="text" class="form-control form-control-sm" id="mainNomor" name="mainNomor" readonly value="NEW">
+                                    <input type="text" class="form-control form-control-sm" id="mainNomor" name="mainNomor" readonly value="<?php echo $nomor?>">
                                   </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Tanggal</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="date" class="form-control form-control-sm" id="mainTanggal" name="mainTanggal">
+                                    <input type="date" class="form-control form-control-sm" id="mainTanggal" name="mainTanggal" value="<?php echo $tgl?>">
                                   </div>
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Kode Kantor Tujuan</label>
-                                  </div>
-                                  <div class="col-sm-3">
+                                  </div>   
+                                  <div class="col-sm-3">   
                                   <select class="form-control form-control-sm select2" id="kode_kantor" name="kode_kantor">
+                                        <option value="<?php echo $kode_kantor_tujuan?>" selected ><?php echo $kode_kantor_tujuan?></option>
                                         <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
                                         <?php foreach ($selectKodeKantor as $row) : ?>
                                         <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
@@ -89,52 +90,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <!-- Form ATAS -->
 
                           <div id="BPKB" class="tabcontent">
-                            <table id="" class="table table-striped table-bordered display" style="width:100%">
+                            <table id="tablePemindahanUpdateMain" class="table table-striped table-bordered display" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>No.&nbsp;Reff</th>
                                             <th>Agunan&nbsp;ID</th>
                                             <th>Jenis</th>
-                                            <th>Deskripsi&nbsp;Jaminan</th>
+                                            <th style="width: 500px;">Deskripsi&nbsp;Jaminan</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <?php
-                                                    foreach ($getPemindahanJaminanDetail as $row) :
-                                                        // $idData = $row['id_data'];
-                                                        $idx= 0;
-                                                        echo "<tr>";
-                                                        echo "<td>".$row['no_reff']."</td>";
-                                                        echo "<td>".$row['agunan_id']."</td>";
-                                                        echo "<td>".$row['jenis']."</td>";     
-                                                        echo "<td>".$row['deskripsi_ringkas']."</td>";                                                    
-                                            ?>  
-                                            <td>
-                                                    <div>
-                                                    <form method="post" action="<?php echo base_url(); ?>index.php/PemindahanUpdateController/index"> 
-                                                            <button type="submit" class="btn btn-primary btn-sm btnUpdate" style ='padding-left: 5px;'
-                                                                    data-id="<?= $row['id'] ?>"
-                                                                    data-nomor="<?= $row['nomor'] ?>" 
-                                                                    data-toggle="tooltip" 
-                                                                    data-placement="bottom" 
-                                                                    title="Edit"
-                                                                    name="btnUpdate"> 
-                                                                    <i style="padding-left: 5px;" class="fas fa-edit"></i>
-                                                                    <input type="hidden" class="form-control" name="tblID" value = "<?= $row['id'] ?>">
-                                                                    <input type="hidden" class="form-control" name="tblNomor" value = "<?= $row['no_reff'] ?>">
-                                                                    <input type="hidden" class="form-control" name="tblRekening" value = "<?= $row['no_rekening_agunan'] ?>">
-                                                            </button>
-                                                    </form>
-                                                    </div>
-                                            </td>
-                                            </tr>
-                                            <?php
-                                                    endforeach;
-                                            ?>
-                                            
-                                        </tr>
+                                    <tbody  id="bodytablePemindahanUpdateMain">
+                                            <td></td> 
+                                            <td></td> 
+                                            <td></td> 
+                                            <td></td> 
+                                            <td></td> 
                                     </tbody>
                             </table>
                       </div>
@@ -147,34 +118,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="mainLokasiJaminan">Kode Lokasi Penyimpanan</label>
                                   </div>
-                                  <div class="col-sm-3">
-                                  <select class="form-control form-control-sm select2" id="mainLokasiJaminan" name="mainLokasiJaminan">
-                                        <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
-                                        <?php foreach ($selectKodeKantor as $row) : ?>
-                                        <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
-                                        <?php endforeach;?>
+                                  <div class="col-sm-3">  
+                                  <select class="form-control form-control-sm select2" id="kode_lokasi_penyimpanan" name="kode_lokasi_penyimpanan">
+                                          <option value="<?php echo $lokasi_penyimpanan?>" selected ><?php echo $lokasi_penyimpanan?></option>
+                                          <?php foreach ($getCentro as $row) : ?>
+                                            <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - ' .$row['nama'];?></option>
+                                          <?php endforeach;?>
                                   </select>
                                   </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="mainKeterangan">Keterangan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input type="text" class="form-control form-control-sm" id="mainKeterangan" name="mainKeterangan">
+                                    <textarea style="height: 75px;" type="text" 
+                                            class="form-control" name="mainKeterangan" 
+                                            id="mainKeterangan"><?php echo $ket;?></textarea>
                                   </div>
                      </div>
                       </div>
                   </div>
               </div>
               <div class="card-footer text-center">
-                    <button type="button" class="btn btn-danger"  id="btn_kembali_update_modal">Kembali</button>
-                    <button type="button" class="btn btn-primary" id="btn_simpan_update_modal" >Simpan</button>
+                    <button type="button" class="btn btn-danger"  id="btn_kembali_update_pemindahan_lokasi">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="btn_simpan_update_pemindahan_lokasi" >Simpan</button>
              </div>
 
        </div>
 
        <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">                                  
-
-
+       <input type="hidden" class="form-control" id="getNomor" name="getNomor" value = "<?php echo $getNomor; ?>"> 
       </div>
       <!-- /.container-fluid -->
     </div>
@@ -188,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $js;
   
   ?>
-  <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/pemindahan_dokumen_insert.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/pemindahan_dokumen_update.js"></script>
 
 <!-- ./wrapper -->
 

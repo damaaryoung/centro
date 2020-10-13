@@ -15,7 +15,40 @@ var parsedDataDetailArr = [];
 var base_url = $('#base_url').val();
 
 
+$(document).ready(function () {     
+    
+    var dataNomor = $('#getNomor').val();
+    console.log(dataNomor);
+    $('#loading').show(); 
 
+    $.ajax({
+        url : base_url + "index.php/PemindahanUpdateController/getDataDetail",
+        type : "POST",
+        dataType : "json",
+        data : {"dataNomor" : dataNomor},
+
+        success : function(response) {
+            console.log(response); 
+            //console.log(response[1][2]);
+
+            for(i = 0; i < response.length; i++ ){
+                mainTable.push(response[i][0]);
+                arrNomorReff.push(response[i][1]);
+                arrAgunanID.push(response[i][2]);
+            }
+            // console.log(arrAgunanID);
+            $('#tablePemindahanUpdateMain > tbody:first').html(mainTable);
+
+            $('#loading').hide(); 
+        },
+        error : function(response) {
+            console.log(response);
+            alert('Gagal Get Data, Mohon Coba Lagi');
+            //window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+        }
+    });
+    
+});
 $('#btn_tambah_jaminan_main').click(function () {
     dataTableeee = [];
     $('#modalJaminanDokumen').modal('show');
@@ -49,10 +82,11 @@ $('#btn_tambah_jaminan_main').click(function () {
     });    
     
 });
-$('#btn_kembali_insert_pemindahan').click(function () {
+$('#btn_kembali_update_pemindahan_lokasi').click(function () {
     $('#loading').show();
     window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
 });
+
 $('#bodyTableModalJaminan').on('click','.btnPilihJaminan', function () {
     nomorreff = $(this).data("nomorreff");
     agunan_id = $(this).data("agunanid");
@@ -79,11 +113,11 @@ $('#bodyTableModalJaminan').on('click','.btnPilihJaminan', function () {
         arrNomorReff.push(nomorreff);
         arrAgunanID.push(agunan_id);
     }
-    $('#tablePemindahanInsertMain > tbody:first').html(mainTable);
+    $('#tablePemindahanUpdateMain > tbody:first').html(mainTable);
     closeModalJaminanDokumen();
 
 });
-$('#bodytablePemindahanInsertMain').on('click','.btnDeleteJaminanData', function () {
+$('#bodytablePemindahanUpdateMain').on('click','.btnDeleteJaminanData', function () {
     nomorreff = $(this).data("nomorreff");
     agunan_id = $(this).data("agunanid");
     jenis = $(this).data("jenis");
@@ -100,7 +134,7 @@ $('#bodytablePemindahanInsertMain').on('click','.btnDeleteJaminanData', function
                     +           'data-deskripsi="'+deskripsi+'"'
                     +           'name="btnDeleteJaminanData">' 
                     +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>']; 
-    $('#loading').show();  
+    // $('#loading').show();  
     if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan No. Reff " + nomorreff)) {
         for(i = 0; i < mainTable.length; i++ ){
             var detaDelete = mainTable[i].toString();
@@ -110,60 +144,16 @@ $('#bodytablePemindahanInsertMain').on('click','.btnDeleteJaminanData', function
                 arrAgunanID.splice (i, 1);
             }
         }
-        $('#tablePemindahanInsertMain > tbody:first').html(mainTable);
+        $('#tablePemindahanUpdateMain > tbody:first').html(mainTable);
         alert('Data Dihapus');
         $('#loading').hide();  
     } else {
         alert('Data Batal Di Hapus');
         $('#loading').hide();  
     }
-    console.log(mainTable,arrNomorReff,arrAgunanID);
+    console.log(selectedData);
 
 });
-
-
-
-$('#btn_simpan_insert_pemindahan').click(function () {
-    mainTanggal = $('#mainTanggal').val();
-    kode_kantor_tujuan =  $('#kode_kantor_tujuan').val();  
-    kode_lokasi_penyimpanan = $('#kode_lokasi_penyimpanan').val();  
-    mainKeterangan = $('#mainKeterangan').val();  
-
-    for(i = 0; i < mainTable.length; i++ ){
-        var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
-        parsedDataDetailArr.push(data);
-    }
-    lengthParsed = parsedDataDetailArr.length;
-    $('#loading').show(); 
-    $.ajax({
-        url : base_url + "index.php/PemindahanInsertController/insertDataPemindahan",
-        type : "POST",
-        dataType : "json",
-        data : {"mainTanggal"             : mainTanggal,
-                "kode_kantor_tujuan"      : kode_kantor_tujuan,
-                "kode_lokasi_penyimpanan" : kode_lokasi_penyimpanan,
-                "mainKeterangan"          : mainKeterangan,
-                "parsedDataDetailArr"     : parsedDataDetailArr,
-                "lengthParsed"            : lengthParsed},
-
-        success : function(response) {
-            console.log(response); 
-            alert('Sukses');   
-            window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
-
-        },
-        error : function(response) {
-            console.log(response);
-            alert('Gagal Insert Data Pemindagan Jaminan, Mohon Coba Lagi');
-            window.location = base_url + 'index.php/PemindahanInsertController/index';
-        }
-    });
-    
-}); 
-
-
-
-
 
 function closeModalJaminanDokumen(){
     $('#modalJaminanDokumen').modal('hide');

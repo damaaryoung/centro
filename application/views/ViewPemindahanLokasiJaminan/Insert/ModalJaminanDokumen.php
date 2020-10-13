@@ -27,7 +27,7 @@
             <table id="TableModalJaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
               <thead>
                   <tr>
-                      <th style="width:50px;">Nomor&nbsp;Reffs</th>
+                      <th style="width:50px;">Nomor&nbsp;Reff</th>
                       <th style="width:50px;">Agunan&nbsp;ID</th>
                       <th style="width:50px;">Deskripsi&nbsp;Ringkas</th>
                       <th style="width:50px;">Nomor&nbsp;Rekening</th>

@@ -72,13 +72,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Tanggal</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="date" class="form-control form-control-sm" id="mainTanggal" name="mainTanggal">
+                                    <input type="date" class="form-control form-control-sm" id="mainTanggal" name="mainTanggal" value="<?php echo $sysdate;?>" readonly>
                                   </div>
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Kode Kantor Tujuan</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="kode_kantor_tujuan">Kode Kantor Tujuan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                  <select class="form-control form-control-sm select2" id="kode_kantor" name="kode_kantor">
+                                  <select class="form-control form-control-sm select2" id="kode_kantor_tujuan" name="kode_kantor_tujuan">
                                         <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
                                         <?php foreach ($selectKodeKantor as $row) : ?>
                                         <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
@@ -118,10 +118,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <button type="button" class="btn btn-success"  id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
                                   </div>
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="mainLokasiJaminan">Kode Lokasi Penyimpanan</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="kode_lokasi_penyimpanan">Kode Lokasi Penyimpanan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                  <select class="form-control form-control-sm select2" id="mainLokasiJaminan" name="mainLokasiJaminan">
+                                  <select class="form-control form-control-sm select2" id="kode_lokasi_penyimpanan" name="kode_lokasi_penyimpanan">
                                           <option value="" selected disabled hidden>Silahkan Pilih</option>
                                         <?php foreach ($getCentro as $row) : ?>
                                           <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - ' .$row['nama'];?></option>
@@ -134,15 +134,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="col-sm-3">
                                      <textarea style="height: 75px;" type="text" 
                                             class="form-control" name="mainKeterangan" 
-                                            id="mainKeterangan" placeholder=""><?php echo $this->session->tempdata('sertAlamatSertifikat'); ?></textarea>
+                                            id="mainKeterangan" placeholder=""></textarea>
                                   </div>
                      </div>
-                      </div>
+                     </div>
                   </div>
               </div>
               <div class="card-footer text-center">
-                    <button type="button" class="btn btn-danger"  id="btn_kembali_update_modal">Kembali</button>
-                    <button type="button" class="btn btn-primary" id="btn_simpan_update_modal" >Simpan</button>
+                    <button type="button" class="btn btn-danger"  id="btn_kembali_insert_pemindahan">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="btn_simpan_insert_pemindahan">Simpan</button>
              </div>
 
        </div>

@@ -129,10 +129,12 @@
                                      text-align: center;" cellspacing="-1">
                 <tr>
                     <td width="" >Diterima Oleh,</td>
+                    <td width="" >Diserahkan Oleh,</td>
                     <td width="" >Diperiksa Oleh,</td>
                 </tr>
                 <br><br><br><br><br><br><br>
                 <tr>
+                    <td width="" >(...........................................)</td>
                     <td width="" >(...........................................)</td>
                     <td width="" >(...........................................)</td>
                 </tr>

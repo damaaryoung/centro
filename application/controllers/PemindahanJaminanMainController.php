@@ -35,19 +35,14 @@ class PemindahanJaminanMainController extends CI_Controller {
 		
 		$listJaminanSearch = $this->PemindahanJaminanMainModel->listJaminanSearch($search,$kode_kantor);
 		foreach ($listJaminanSearch as $row) :
-			// $jenis_jaminan     		   = $row['jenis_jaminan'];
-			// $status                     = $row['status'];
-			// $result_kode_kantor         = $row['kode_kantor'];  
-			// $result_kode_kantor_lokasi  = $row['kode_kantor_lokasi_jaminan']
-			
-			
 			$data[]    = 	['<tr> <td>'. $row['nomor']. '</td> <td>'
 										. $row['tgl']. '</td> <td>'
 										. $row['nama_kantor_asal'].'</td> <td>'
 										. $row['nama_kantor_tujuan'].'</td> <td>'										
 										. $row['nama_lokasi_penyimpanan'].'</td> <td>'
 										. $row['verifikasi'].'</td> <td>'
-										. '<button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
+										. '<form method="post" action="'. base_url().'index.php/PemindahanUpdateController/index">'
+										. '<button type="submit" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
 													data-nomor="'.$row['nomor'].'"
 													data-id="'.$row['id'].'"
 													data-toggle="tooltip" 
@@ -55,6 +50,8 @@ class PemindahanJaminanMainController extends CI_Controller {
                                                     title="Edit"
                                                     name="btnUpdate"> 
 													<i style="padding-left: 5px;" class="fas fa-edit"></i>
+													<input type="hidden" class="form-control" name="tblID" value = "'.$row['id'].'">
+                                                    <input type="hidden" class="form-control" name="tblNomor" value = "'. $row['tgl']. '">
 											</button>  </td> </tr>'];
 											
 									

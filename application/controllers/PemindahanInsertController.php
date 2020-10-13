@@ -23,6 +23,10 @@ class PemindahanInsertController extends CI_Controller {
 		if($session != ''){
 			$data['selectKodeKantor'] = $this->PemindahanInsertModel->selectKodeKantor();
 			$data['getCentro'] = $this->PemindahanInsertModel->getCentro();
+			$sysdate = $this->PemindahanInsertModel->sysdate();
+			foreach ($sysdate as $row) :
+				$data['sysdate'] = $row['sysdate'];		
+			endforeach;	
 			$this->load->view('ViewPemindahanLokasiJaminan/Insert/PemindahanLokasiInsert.php', $data);
 		}
 		else{
@@ -50,7 +54,7 @@ class PemindahanInsertController extends CI_Controller {
 						. $row['no_rekening_agunan'].'</td> <td>'										
 						. $row['verifikasi'].'</td> <td>'
 						. '<button type="button" class="btn btn-success btn-sm btnPilihJaminan" style ="padding-left: 5px;"
-									data-nomor="'.$row['no_reff'].'"
+									data-nomorreff="'.$row['no_reff'].'"
 									data-agunanid="'.$row['agunan_id'].'"
 									data-jenis="'.$row['jenis'].'"
 									data-deskripsi="'.$row['deskripsi_ringkas'].'"
@@ -86,7 +90,7 @@ class PemindahanInsertController extends CI_Controller {
 							. $row['no_rekening_agunan'].'</td> <td>'										
 							. $row['verifikasi'].'</td> <td>'
 							. '<button type="button" class="btn btn-success btn-sm btnPilihJaminan" style ="padding-left: 5px;"
-										data-nomor="'.$row['no_reff'].'"
+										data-nomorreff="'.$row['no_reff'].'"
 										data-agunanid="'.$row['agunan_id'].'"
 										name="btnPilihJaminan"> 
 										<i style="padding-left: 5px;" class="fa fa-check"></i>
@@ -95,11 +99,61 @@ class PemindahanInsertController extends CI_Controller {
 									
 		endforeach;	
 
-		echo json_encode($data);
+		echo json_encode($data);		
+	}
+
+	public function insertDataPemindahan(){
+		$kode_kantor = $this->session->userdata('kd_cabang');
+		$userIdLogin = $this->session->userdata('userIdLogin');
+		$hasilNomor = '';
 		
+		$mainTanggal             = $this->input->post('mainTanggal');
+		$kode_kantor_tujuan      = $this->input->post('kode_kantor_tujuan');
+		$kode_lokasi_penyimpanan = $this->input->post('kode_lokasi_penyimpanan');
+		$mainKeterangan          = $this->input->post('mainKeterangan');
+		$parsedDataDetailArr     = $this->input->post('parsedDataDetailArr');
+		$lengthParsed            = $this->input->post('lengthParsed');
+		$verifikasi				 = '0';
+		
+		$data['kode_kantor']             = $this->session->userdata('kd_cabang');
+		$data['mainTanggal']             = $this->input->post('mainTanggal');;
+		$data['kode_kantor_tujuan']      = $this->input->post('kode_kantor_tujuan');
+		$data['kode_lokasi_penyimpanan'] = $this->input->post('kode_lokasi_penyimpanan');
+		$data['mainKeterangan']          = $this->input->post('mainKeterangan');
+		$data['parsedDataDetailArr']     = $this->input->post('parsedDataDetailArr');
+		$data['lengthParsed']            = $this->input->post('lengthParsed');
+
+		$generateNomor = $this->PemindahanInsertModel->generateNomor($kode_kantor);
+		foreach ($generateNomor as $row) :
+			$hasilNomor = $row['hasil'];		
+		endforeach;	
+		if($hasilNomor != null){
+			$nomor = $hasilNomor;
+		}else{
+			$nomor = $kode_kantor . '.000001';
+		}
+
+		$this->PemindahanInsertModel->insertDataPemindahan($mainTanggal,
+															$nomor,
+															$kode_kantor,
+															$kode_kantor_tujuan,
+															$mainKeterangan,
+															$userIdLogin,
+															$kode_lokasi_penyimpanan,
+															$verifikasi
+														  );
+
+		for($i = 0; $i < $lengthParsed; $i++){
+			$nomorReffDeatail = $parsedDataDetailArr[$i][0];
+			$agunanIdDetail   = $parsedDataDetailArr[$i][1];
+			
+			$this->PemindahanInsertModel->insertDataPemindahanDetail($nomor,$nomorReffDeatail,$agunanIdDetail);
+			
+		}
+	
+		echo json_encode($data);
 	}
 
 
 
 }
-
