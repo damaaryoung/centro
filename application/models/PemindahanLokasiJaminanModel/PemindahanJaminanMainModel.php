@@ -68,4 +68,23 @@ class PemindahanJaminanMainModel extends CI_Model{
         
         return $query->result_array();
     }
+     public function deleteDataPemindahan($nomor,$version,$usename,$kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+        $this->db2->trans_start();
+        $this->db2->query("INSERT INTO dpm_online.user_log (USER, kd_menu, waktu, ket, AppVer, ip) 
+                            VALUES
+                            (
+                                '$usename',
+                                'fr_TransaksiPemindahanLokasiJaminan',
+                                NOW(),
+                                'Hapus Pemindahan Lokasi Jaminan nomor=$nomor nama kantor asal=$kode_kantor',
+                                '$version',
+                                (SELECT SUBSTRING(HOST, 1, 20) FROM information_schema.processlist WHERE ID=CONNECTION_ID())
+                            );");
+        $this->db2->query("DELETE FROM dpm_online.jaminan_pemindahan WHERE nomor='$nomor';");
+        $this->db2->query("DELETE FROM dpm_online.jaminan_pemindahan_detail WHERE nomor='$nomor';");
+		$this->db2->trans_complete();
+    }
+
 }

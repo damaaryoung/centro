@@ -72,15 +72,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Tanggal</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="date" class="form-control form-control-sm" id="mainTanggal" name="mainTanggal" value="<?php echo $tgl?>">
+                                    <input type="date" class="form-control form-control-sm" id="mainTanggal" name="mainTanggal" value="<?php echo $tgl?>" readonly>
                                   </div>
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Kode Kantor Tujuan</label>
                                   </div>   
                                   <div class="col-sm-3">   
-                                  <select class="form-control form-control-sm select2" id="kode_kantor" name="kode_kantor">
+                                  <select class="form-control form-control-sm select2" id="kode_kantor_tujuan" name="kode_kantor_tujuan">
                                         <option value="<?php echo $kode_kantor_tujuan?>" selected ><?php echo $kode_kantor_tujuan?></option>
-                                        <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
                                         <?php foreach ($selectKodeKantor as $row) : ?>
                                         <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
                                         <?php endforeach;?>

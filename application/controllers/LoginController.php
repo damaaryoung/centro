@@ -66,7 +66,7 @@ class LoginController extends CI_Controller {
                 $data1['customer']    = $row['access_id'];
 			endforeach;	
 
-			
+			$data1['version']    = 'CentroSystem Web Versi Dev';
 			$this->session->set_userdata($data1);
 			
 			echo json_encode($data);

@@ -67,6 +67,47 @@ class PemindahanUpdateController extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function updatePemindahanLokasiJaminan(){
+		$kode_kantor = $this->session->userdata('kd_cabang');
+		$userIdLogin = $this->session->userdata('userIdLogin');
+
+		$mainTanggal             = $this->input->post('mainTanggal');
+		$kode_kantor_tujuan      = $this->input->post('kode_kantor_tujuan');
+		$kode_lokasi_penyimpanan = $this->input->post('kode_lokasi_penyimpanan');
+		$mainKeterangan          = $this->input->post('mainKeterangan');
+		$parsedDataDetailArr     = $this->input->post('parsedDataDetailArr');
+		$lengthParsed            = $this->input->post('lengthParsed');
+		$mainNomor               = $this->input->post('mainNomor');
+		$verifikasi				 = '0';
 		
+		$data['kode_kantor']             = $this->session->userdata('kd_cabang');
+		$data['mainTanggal']             = $this->input->post('mainTanggal');;
+		$data['kode_kantor_tujuan']      = $this->input->post('kode_kantor_tujuan');
+		$data['kode_lokasi_penyimpanan'] = $this->input->post('kode_lokasi_penyimpanan');
+		$data['mainKeterangan']          = $this->input->post('mainKeterangan');
+		$data['parsedDataDetailArr']     = $this->input->post('parsedDataDetailArr');
+		$data['lengthParsed']            = $this->input->post('lengthParsed');
+		$data['mainNomor']               = $this->input->post('mainNomor');
+	
+
+		$this->PemindahanUpdateModel->updateDataPemindahan($mainTanggal,
+															$mainNomor,
+															$kode_kantor,
+															$kode_kantor_tujuan,
+															$mainKeterangan,
+															$userIdLogin,
+															$kode_lokasi_penyimpanan,
+															$verifikasi
+														  );
+
+		for($i = 0; $i < $lengthParsed; $i++){
+			$nomorReffDeatail = $parsedDataDetailArr[$i][0];
+			$agunanIdDetail   = $parsedDataDetailArr[$i][1];
+			
+			$this->PemindahanUpdateModel->updateDataPemindahanDetail($mainNomor,$nomorReffDeatail,$agunanIdDetail);
+			
+		}
+	
+		echo json_encode($data);
 	}
+
 }

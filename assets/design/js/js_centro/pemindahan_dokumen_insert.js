@@ -154,7 +154,7 @@ $('#btn_simpan_insert_pemindahan').click(function () {
         },
         error : function(response) {
             console.log(response);
-            alert('Gagal Insert Data Pemindagan Jaminan, Mohon Coba Lagi');
+            alert('Gagal Insert Data Pemindahan Jaminan, Mohon Coba Lagi');
             window.location = base_url + 'index.php/PemindahanInsertController/index';
         }
     });

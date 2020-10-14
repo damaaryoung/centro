@@ -41,24 +41,52 @@ class PemindahanJaminanMainController extends CI_Controller {
 										. $row['nama_kantor_tujuan'].'</td> <td>'										
 										. $row['nama_lokasi_penyimpanan'].'</td> <td>'
 										. $row['verifikasi'].'</td> <td>'
-										. '<form method="post" action="'. base_url().'index.php/PemindahanUpdateController/index">'
-										. '<button type="submit" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
-													data-nomor="'.$row['nomor'].'"
-													data-id="'.$row['id'].'"
-													data-toggle="tooltip" 
-                                                    data-placement="bottom" 
-                                                    title="Edit"
-                                                    name="btnUpdate"> 
-													<i style="padding-left: 5px;" class="fas fa-edit"></i>
-													<input type="hidden" class="form-control" name="tblID" value = "'.$row['id'].'">
-                                                    <input type="hidden" class="form-control" name="tblNomor" value = "'. $row['tgl']. '">
-											</button>  </td> </tr>'];
+										. '<div class="form-inline">'
+											. '<form method="post" action="'. base_url().'index.php/PemindahanUpdateController/index">'
+											. '<button type="submit" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
+														data-id="'.$row['id'].'"
+														data-nomor="'.$row['nomor'].'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Edit"
+														name="btnUpdate"> 
+														<i style="padding-left: 5px;" class="fas fa-edit"></i>
+														<input type="hidden" class="form-control" name="tblID" value = "'.$row['id'].'">
+														<input type="hidden" class="form-control" name="tblNomor" value = "'. $row['nomor']. '">
+												</button>
+												</form>
+												<div style ="padding-left: 5px;">
+													<button type="button" class="btn btn-danger btn-sm btnDeleteLokasiJaminan" style ="padding-left: 5px;"
+																data-id="'.$row['id'].'"
+																data-nomor="'.$row['nomor'].'" 
+														name="btnDeleteLokasiJaminan"> 
+														<i style="padding-left: 5px;" class="fa fa-trash"></i> 
+													</button>  
+												</div>
+												</div>'
+											
+										.'</td> </tr>'];
 											
 									
 		endforeach;	
 
 		echo json_encode($data);
 		
+	}
+	public function deleteDataPemindahanLokasi(){
+        $version      = $this->session->userdata('version');
+		$nomor        = $this->input->post('nomor');
+		$usename      = $this->session->userdata('usename');
+		$kode_kantor  = $this->session->userdata('kd_cabang');
+		
+		$data['nomor']   = $this->input->post('nomor');
+		$data['version'] = $this->session->userdata('version');
+		$data['usename'] = $this->session->userdata('usename');
+		
+		$this->PemindahanJaminanMainModel->deleteDataPemindahan($nomor,$version,$usename,$kode_kantor);
+		
+
+		echo json_encode($data);
 	}
 
 

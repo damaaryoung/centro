@@ -5,6 +5,7 @@ var arrAgunanID = [];
 var selectedData = '';
 var nomorreff = '';
 var agunan_id = '';
+var mainNomor = '';
 
 var mainTanggal = '';
 var kode_kantor_tujuan = '';
@@ -18,7 +19,6 @@ var base_url = $('#base_url').val();
 $(document).ready(function () {     
     
     var dataNomor = $('#getNomor').val();
-    console.log(dataNomor);
     $('#loading').show(); 
 
     $.ajax({
@@ -28,15 +28,12 @@ $(document).ready(function () {
         data : {"dataNomor" : dataNomor},
 
         success : function(response) {
-            console.log(response); 
-            //console.log(response[1][2]);
 
             for(i = 0; i < response.length; i++ ){
                 mainTable.push(response[i][0]);
                 arrNomorReff.push(response[i][1]);
                 arrAgunanID.push(response[i][2]);
             }
-            // console.log(arrAgunanID);
             $('#tablePemindahanUpdateMain > tbody:first').html(mainTable);
 
             $('#loading').hide(); 
@@ -44,7 +41,7 @@ $(document).ready(function () {
         error : function(response) {
             console.log(response);
             alert('Gagal Get Data, Mohon Coba Lagi');
-            //window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+            window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
         }
     });
     
@@ -154,6 +151,48 @@ $('#bodytablePemindahanUpdateMain').on('click','.btnDeleteJaminanData', function
     console.log(selectedData);
 
 });
+
+$('#btn_simpan_update_pemindahan_lokasi').click(function () {
+    mainTanggal             = $('#mainTanggal').val();
+    kode_kantor_tujuan      = $('#kode_kantor_tujuan').val();  
+    kode_lokasi_penyimpanan = $('#kode_lokasi_penyimpanan').val();  
+    mainKeterangan          = $('#mainKeterangan').val(); 
+    mainNomor               = $('#mainNomor').val();
+
+    for(i = 0; i < mainTable.length; i++ ){
+        var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
+        parsedDataDetailArr.push(data);
+    }
+    lengthParsed = parsedDataDetailArr.length;
+
+    // console.log(mainTanggal, kode_kantor_tujuan, kode_lokasi_penyimpanan, mainKeterangan, mainNomor, parsedDataDetailArr, lengthParsed);
+    $('#loading').show(); 
+    $.ajax({
+        url : base_url + "index.php/PemindahanUpdateController/updatePemindahanLokasiJaminan",
+        type : "POST",
+        dataType : "json",
+        data : {"mainTanggal"             : mainTanggal,
+                "kode_kantor_tujuan"      : kode_kantor_tujuan,
+                "kode_lokasi_penyimpanan" : kode_lokasi_penyimpanan,
+                "mainKeterangan"          : mainKeterangan,
+                "parsedDataDetailArr"     : parsedDataDetailArr,
+                "lengthParsed"            : lengthParsed,
+                "mainNomor"               : mainNomor},
+
+        success : function(response) {
+            console.log(response); 
+            alert('Sukses Update Data');   
+            window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+
+        },
+        error : function(response) {
+            console.log(response);
+            alert('Gagal Update Data Pemindahan Jaminan, Mohon Coba Lagi');
+            window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+        }
+    });
+    
+});     
 
 function closeModalJaminanDokumen(){
     $('#modalJaminanDokumen').modal('hide');

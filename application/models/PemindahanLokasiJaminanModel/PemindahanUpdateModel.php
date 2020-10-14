@@ -101,6 +101,42 @@ class PemindahanUpdateModel extends CI_Model{
         
         return $query->result_array();
     }
+    public function updateDataPemindahan($mainTanggal,
+                                            $mainNomor,
+                                            $kode_kantor,
+                                            $kode_kantor_tujuan,
+                                            $mainKeterangan,
+                                            $userIdLogin,
+                                            $kode_lokasi_penyimpanan,
+                                            $verifikasi
+                                        ){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+        $this->db2->trans_start();
+        $this->db2->query("UPDATE dpm_online.jaminan_pemindahan 
+                            SET
+                                `kode_kantor_tujuan` = '$kode_kantor_tujuan',
+                                `lokasi_penyimpanan` = '$kode_lokasi_penyimpanan',
+                                `ket`                = '$mainKeterangan',
+                                `user_id`            = '$userIdLogin'
+                            WHERE `nomor` = '$mainNomor';");
+        $this->db2->query("DELETE FROM dpm_online.`jaminan_pemindahan_detail`
+                           WHERE `nomor` = '$mainNomor';");
+		$this->db2->trans_complete();
+    }
+    public function updateDataPemindahanDetail($mainNomor,$nomorReffDeatail,$agunanIdDetail){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+		$this->db2->query("INSERT INTO dpm_online.jaminan_pemindahan_detail (
+                                    `nomor`, 
+                                    `no_reff`, 
+                                    `agunan_id`)
+                            VALUES('$mainNomor',
+                                   '$nomorReffDeatail',
+                                   '$agunanIdDetail');");
+    }
+   
+
 
     
 }   

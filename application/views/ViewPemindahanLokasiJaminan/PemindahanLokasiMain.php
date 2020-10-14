@@ -118,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         
                                 ?>  
                                 <td>
-                                        <div>
+                                        <div class="form-inline">
                                           <form method="post" action="<?php echo base_url(); ?>index.php/PemindahanUpdateController/index"> 
                                                 <button type="submit" class="btn btn-primary btn-sm btnUpdate" style ='padding-left: 5px;'
                                                         data-id="<?= $row['id'] ?>"
@@ -132,6 +132,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <input type="hidden" class="form-control" name="tblNomor" value = "<?= $row['nomor'] ?>">
                                                 </button>
                                           </form>
+                                          <div style ="padding-left: 5px;">
+                                            <button type="button" class="btn btn-danger btn-sm btnDeleteLokasiJaminan" style ="padding-left: 5px;"
+                                                        data-id="<?= $row['id'] ?>"
+                                                        data-nomor="<?= $row['nomor'] ?>" 
+                                                  name="btnDeleteLokasiJaminan"> 
+                                                  <i style="padding-left: 5px;" class="fa fa-trash"></i> 
+                                            </button>  
+                                          </div>
                                         </div>
                                 </td>
                                 </tr>
