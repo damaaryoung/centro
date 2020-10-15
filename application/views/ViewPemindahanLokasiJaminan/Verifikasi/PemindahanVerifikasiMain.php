@@ -10,8 +10,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>CENTRO | BPR Kredit Mandriri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-  <title>AdminLTE 3 | Starter</title>
   <?php echo $css;?>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -31,12 +29,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Pemindahan Lokasi Jaminan</h1>
+            <h1 class="m-0 text-dark">Verifikasi Pemindahan Lokasi Jaminan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Pemindahan Lokasi Jaminan</li>
+              <li class="breadcrumb-item active">Verifikasi Pemindahan Lokasi Jaminan</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -68,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                      &nbsp;&nbsp;
                     </div>
                     <div class="form-group">
-                      <label for="pwd">Kode Kantor</label> &nbsp;&nbsp;
+                      <label for="pwd">Kode Kantor Tujuan</label> &nbsp;&nbsp;
                       <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 400px;" onchange="serchDataJaminan()">
                             <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
                             <?php foreach ($selectKodeKantor as $row) : ?>
@@ -119,28 +117,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 ?>  
                                 <td>
                                         <div class="form-inline">
-                                          <form method="post" action="<?php echo base_url(); ?>index.php/PemindahanUpdateController/index"> 
-                                                <button type="submit" class="btn btn-primary btn-sm btnUpdate" style ='padding-left: 5px;'
+                                          <form method="post" action="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/verifikasiMenu"> 
+                                                <button type="submit" class="btn btn-success btn-sm btnVerifikasi" style ='padding-left: 5px;'
                                                         data-id="<?= $row['id'] ?>"
                                                         data-nomor="<?= $row['nomor'] ?>" 
                                                         data-toggle="tooltip" 
                                                         data-placement="bottom" 
-                                                        title="Edit"
-                                                        name="btnUpdate"> 
-                                                        <i style="padding-left: 5px;" class="fas fa-edit"></i>
+                                                        title="Verifikasi"
+                                                        name="btnVerifikasi"> 
+                                                        <i style="padding-left: 5px;" class="fas fa-check"></i>
                                                         <input type="hidden" class="form-control" name="tblID" value = "<?= $row['id'] ?>">
                                                         <input type="hidden" class="form-control" name="tblNomor" value = "<?= $row['nomor'] ?>">
                                                 </button>
                                           </form>
-                                          <div style ="padding-left: 5px;">
-                                            <button type="button" class="btn btn-danger btn-sm btnDeleteLokasiJaminan" style ="padding-left: 5px;"
-                                                        data-id="<?= $row['id'] ?>"
-                                                        data-nomor="<?= $row['nomor'] ?>" 
-                                                        data-verifikasi="<?= $row['verifikasi'] ?>" 
-                                                        name="btnDeleteLokasiJaminan"> 
-                                                  <i style="padding-left: 5px;" class="fa fa-trash"></i> 
-                                            </button>  
-                                          </div>
                                         </div>
                                 </td>
                                 </tr>
@@ -166,7 +155,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $js;
   
   ?>
-  <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/pemindahan_dokumen.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/pemindahan_dokumen_verifikasi.js"></script>
 
 
 <!-- ./wrapper -->

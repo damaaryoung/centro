@@ -59,6 +59,7 @@ class PemindahanJaminanMainController extends CI_Controller {
 													<button type="button" class="btn btn-danger btn-sm btnDeleteLokasiJaminan" style ="padding-left: 5px;"
 																data-id="'.$row['id'].'"
 																data-nomor="'.$row['nomor'].'" 
+																data-verifikasi="'.$row['verifikasi'].'" 
 														name="btnDeleteLokasiJaminan"> 
 														<i style="padding-left: 5px;" class="fa fa-trash"></i> 
 													</button>  

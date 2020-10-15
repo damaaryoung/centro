@@ -6,7 +6,7 @@ var selectedData = '';
 var nomorreff = '';
 var agunan_id = '';
 var mainNomor = '';
-
+var mainVerifikasi = '';
 var mainTanggal = '';
 var kode_kantor_tujuan = '';
 var kode_lokasi_penyimpanan = '';
@@ -19,6 +19,7 @@ var base_url = $('#base_url').val();
 $(document).ready(function () {     
     
     var dataNomor = $('#getNomor').val();
+    var mainVerifikasi = $('#mainVerifikasi').val();
     $('#loading').show(); 
 
     $.ajax({
@@ -28,7 +29,6 @@ $(document).ready(function () {
         data : {"dataNomor" : dataNomor},
 
         success : function(response) {
-
             for(i = 0; i < response.length; i++ ){
                 mainTable.push(response[i][0]);
                 arrNomorReff.push(response[i][1]);
@@ -37,6 +37,18 @@ $(document).ready(function () {
             $('#tablePemindahanUpdateMain > tbody:first').html(mainTable);
 
             $('#loading').hide(); 
+            if(mainVerifikasi == '1'){
+                alert('Data sudah di verifikasi, tidak dapat dikoreksi');
+                $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", true);
+                $("#btn_tambah_jaminan_main").prop("disabled", true);
+                $(".btnDeleteJaminanData").prop("disabled", true);
+                
+                
+            }else if(mainVerifikasi == '0'){
+                $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", false);
+            }
+
+            console.log(mainTable,arrNomorReff,arrAgunanID);
         },
         error : function(response) {
             console.log(response);
@@ -102,7 +114,7 @@ $('#bodyTableModalJaminan').on('click','.btnPilihJaminan', function () {
                     +           'name="btnDeleteJaminanData">' 
                     +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>'];   
    
-    if(arrNomorReff.includes(nomorreff) == true && arrAgunanID.includes(agunan_id)){
+    if(arrNomorReff.includes(nomorreff) == true && arrAgunanID.includes(agunan_id) == true){
         alert('Data Dengan Nomor Ref ' + nomorreff + ' dan Agunan ID ' +agunan_id+' Sudah Ada Dalam List');
         return
     }else{

@@ -1,11 +1,13 @@
 <?php
 if (! defined('BASEPATH')) exit('No direct script access allowed');
-class PemindahanUpdateModel extends CI_Model{
+class PemindahanVerifikasiModel extends CI_Model{
 	
 	public function __construct() {
 		parent:: __construct();
 		$this->load->database();
 	}
+
+
 
     public function selectKodeKantor(){
             $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
@@ -15,6 +17,57 @@ class PemindahanUpdateModel extends CI_Model{
             $query = $this->db2->query($str);
             
             return $query->result_array();
+    }
+    public function listJaminan($kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT 
+                    `id`,
+                    `nomor`,
+                    `tgl`,
+                    `kode_kantor_asal`,
+                    kk1.nama_kantor AS nama_kantor_asal,
+                    `kode_kantor_tujuan`,
+                    kk2.nama_kantor AS nama_kantor_tujuan,
+                    `ket`,
+                    `user_id`,
+                    `lokasi_penyimpanan` AS kode_lokasi_penyimpanan,
+                    kkc.nama_centro AS nama_lokasi_penyimpanan,
+                    `verifikasi` 
+                FROM
+                    `jaminan_pemindahan` jp 
+                    LEFT JOIN app_kode_kantor kk1 
+                    ON kk1.kode_kantor = jp.kode_kantor_asal 
+                    LEFT JOIN app_kode_kantor kk2 
+                    ON kk2.kode_kantor = jp.kode_kantor_tujuan 
+                    LEFT JOIN kre_kode_centro kkc 
+                    ON kkc.kode_centro = jp.lokasi_penyimpanan 
+                WHERE jp.kode_kantor_tujuan = '$kode_kantor' 
+                HAVING verifikasi = 0 
+                ORDER BY jp.nomor DESC 
+                LIMIT 0, 25;
+            ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }
+    public function listJaminanSearch($search,$kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT `id`, `nomor`, `tgl`, `kode_kantor_asal`, kk1.nama_kantor AS nama_kantor_asal,
+                    `kode_kantor_tujuan`, kk2.nama_kantor AS nama_kantor_tujuan, `ket`, `user_id`,`lokasi_penyimpanan` AS kode_lokasi_penyimpanan, 
+                    kkc.nama_centro AS nama_lokasi_penyimpanan , `verifikasi`
+                FROM `jaminan_pemindahan` jp
+                LEFT JOIN app_kode_kantor kk1 ON kk1.kode_kantor=jp.kode_kantor_asal
+                LEFT JOIN app_kode_kantor kk2 ON kk2.kode_kantor=jp.kode_kantor_tujuan
+                LEFT JOIN kre_kode_centro kkc ON kkc.kode_centro=jp.lokasi_penyimpanan
+                WHERE jp.kode_kantor_tujuan  = '$kode_kantor' 
+                AND (jp.nomor LIKE '%$search%' 
+                    OR kk1.nama_kantor LIKE '%$search%' 
+                    OR kk2.nama_kantor LIKE '%$search%') 
+                    HAVING verifikasi = 0 
+                ORDER BY jp.nomor DESC LIMIT 0, 25";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
     }
     public function getCentro(){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
@@ -101,43 +154,19 @@ class PemindahanUpdateModel extends CI_Model{
         
         return $query->result_array();
     }
-    public function updateDataPemindahan($mainTanggal,
-                                            $mainNomor,
-                                            $kode_kantor,
-                                            $kode_kantor_tujuan,
-                                            $mainKeterangan,
-                                            $userIdLogin,
-                                            $kode_lokasi_penyimpanan
-                                        ){
+    public function verifikasieDataPemindahan($mainNomor,$mainVerifikasi){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
         $this->db2->trans_start();
         $this->db2->query("UPDATE dpm_online.jaminan_pemindahan 
-                            SET
-                                `kode_kantor_tujuan` = '$kode_kantor_tujuan',
-                                `lokasi_penyimpanan` = '$kode_lokasi_penyimpanan',
-                                `ket`                = '$mainKeterangan',
-                                `user_id`            = '$userIdLogin'
+                            SET `verifikasi` = '$mainVerifikasi'
                             WHERE `nomor` = '$mainNomor';");
-        $this->db2->query("DELETE FROM dpm_online.`jaminan_pemindahan_detail`
-                           WHERE `nomor` = '$mainNomor';");
+        $this->db2->query("UPDATE dpm_online.jaminan_pemindahan_detail
+                            SET `last_update` = NOW()
+                            WHERE `nomor` = '$mainNomor';");                    
 		$this->db2->trans_complete();
     }
-    public function updateDataPemindahanDetail($mainNomor,$nomorReffDeatail,$agunanIdDetail){
-        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		
-		$this->db2->query("INSERT INTO dpm_online.jaminan_pemindahan_detail (
-                                    `nomor`, 
-                                    `no_reff`, 
-                                    `agunan_id`)
-                            VALUES('$mainNomor',
-                                   '$nomorReffDeatail',
-                                   '$agunanIdDetail');");
-    }
-   
 
-
-    
-}   
-
+     
+}
 

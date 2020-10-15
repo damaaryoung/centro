@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Koreksi Pemindahan Lokasi Jaminan</h1>
+            <h1 class="m-0 text-dark">Verifikasi Pemindahan Lokasi Jaminan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Form ATAS -->
       <div class="card card-info">
             <div class="card-header with-border">
-              <h3 class="card-title">Tambah Data Aset Dokumen</h3>
+              <h3 class="card-title">Verifikasi Data Aset Dokumen</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -66,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomor">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <select class="form-control form-control-sm select2" id="mainVerifikasi" name="mainVerifikasi" disabled>
+                                    <select class="form-control form-control-sm select2" id="mainVerifikasi" name="mainVerifikasi">
                                         <option value="<?php echo $verifikasi?>" selected ><?php echo $verifikasi?></option>
                                         <?php 
                                           if($verifikasi == '0'){
@@ -96,7 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Kode Kantor Tujuan</label>
                                   </div>   
                                   <div class="col-sm-3">   
-                                  <select class="form-control form-control-sm select2" id="kode_kantor_tujuan" name="kode_kantor_tujuan">
+                                  <select class="form-control form-control-sm select2" id="kode_kantor_tujuan" name="kode_kantor_tujuan" readonly>
                                         <option value="<?php echo $kode_kantor_tujuan?>" selected ><?php echo $kode_kantor_tujuan?></option>
                                         <?php foreach ($selectKodeKantor as $row) : ?>
                                         <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
@@ -107,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <!-- Form ATAS -->
 
                           <div id="BPKB" class="tabcontent">
-                            <table id="tablePemindahanUpdateMain" class="table table-striped table-bordered display" style="width:100%">
+                            <table id="tablePemindahanVerifikasiMain" class="table table-striped table-bordered display" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>No.&nbsp;Reff</th>
@@ -117,7 +117,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody  id="bodytablePemindahanUpdateMain">
+                                    <tbody  id="bodytablePemindahanVerifikasiMain">
                                             <td></td> 
                                             <td></td> 
                                             <td></td> 
@@ -136,7 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="mainLokasiJaminan">Kode Lokasi Penyimpanan</label>
                                   </div>
                                   <div class="col-sm-3">  
-                                  <select class="form-control form-control-sm select2" id="kode_lokasi_penyimpanan" name="kode_lokasi_penyimpanan">
+                                  <select class="form-control form-control-sm select2" id="kode_lokasi_penyimpanan" name="kode_lokasi_penyimpanan" readonly>
                                           <option value="<?php echo $lokasi_penyimpanan?>" selected ><?php echo $lokasi_penyimpanan?></option>
                                           <?php foreach ($getCentro as $row) : ?>
                                             <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - ' .$row['nama'];?></option>
@@ -149,15 +149,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="col-sm-3">
                                     <textarea style="height: 75px;" type="text" 
                                             class="form-control" name="mainKeterangan" 
-                                            id="mainKeterangan"><?php echo $ket;?></textarea>
+                                            id="mainKeterangan" readonly><?php echo $ket;?></textarea>
                                   </div>
                      </div>
                       </div>
                   </div>
               </div>
               <div class="card-footer text-center">
-                    <button type="button" class="btn btn-danger"  id="btn_kembali_update_pemindahan_lokasi">Kembali</button>
-                    <button type="button" class="btn btn-primary" id="btn_simpan_update_pemindahan_lokasi" >Simpan</button>
+                    <button type="button" class="btn btn-danger"  id="btn_kembali_verifikasi_pemindahan_lokasi">Kembali</button>
+                    <button type="button" class="btn btn-primary" id="btn_simpan_verifikasi_pemindahan_lokasi" >Simpan</button>
              </div>
 
        </div>
@@ -177,7 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $js;
   
   ?>
-  <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/pemindahan_dokumen_update.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/pemindahan_dokumen_verifikasi_proses.js"></script>
 
 <!-- ./wrapper -->
 

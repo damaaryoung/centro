@@ -3,6 +3,8 @@ var nomor = '';
 var id = '';
 var base_url = $('#base_url').val();
 
+
+
 function serchDataJaminan(){
     var search = $('#search').val(); 
     var kode_kantor = $('#kode_kantor').val(); 
@@ -12,7 +14,7 @@ function serchDataJaminan(){
     $('#tableLokasiJaminan').DataTable().clear();
     $('#tableLokasiJaminan').DataTable().destroy();
     $.ajax({
-        url : base_url + "index.php/PemindahanJaminanMainController/getListJaminanSearch",
+        url : base_url + "index.php/PemindahanVerifikasiController/getListJaminanSearch",
         type : "POST",
         dataType : "json",
         data : {"search"    : search,
@@ -46,40 +48,3 @@ function serchDataJaminan(){
         }
     });   
 }
-$('#bodyTableLokasiJaminan').on('click','.btnDeleteLokasiJaminan', function () {
-    nomor = $(this).data("nomor");
-    id = $(this).data("id"); 
-    verifikasi = $(this).data("verifikasi"); 
-    //console.log(nomor,id, verifikasi);
-
-    if(verifikasi == '1'){
-        alert('Data Sudah Di Verifikasi, Data Tidak Dapat Dihapus');
-        return;
-    }
-    $('#loading').show();
-    if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan Nomor " + nomor)) {
-        $.ajax({
-            url : base_url + "index.php/PemindahanJaminanMainController/deleteDataPemindahanLokasi",
-            type : "POST",
-            dataType : "json",
-            data : {"nomor"    : nomor,
-                    "id"       : id},
-    
-            success : function(response) {
-                console.log(response)
-                alert('Data Berhasil Dihapus');
-                window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
-            },
-            error : function(response) {
-                console.log('failed :' + response);
-                alert('Gagal Hapus Data Lokasi Pemindahan Lokasi Jaminan, Mohon Coba Lagi');
-                window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
-            }
-        }); 
-    } else {
-        alert('Data Batal Di Hapus');
-        $('#loading').hide();  
-    }
-
-});
-

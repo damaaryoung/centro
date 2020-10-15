@@ -63,6 +63,12 @@
                     <p>Pemindahan Lokasi</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p style="font-size: 14px;">Verifikasi Pemindahan Lokasi</p>
+                  </a>
+                </li>
               </ul>
             </li>
           <?php } else{} ?>

@@ -71,7 +71,7 @@ $('#bodyTableModalJaminan').on('click','.btnPilihJaminan', function () {
                     +           'name="btnDeleteJaminanData">' 
                     +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>'];   
    
-    if(arrNomorReff.includes(nomorreff) == true && arrAgunanID.includes(agunan_id)){
+    if(arrNomorReff.includes(nomorreff) == true && arrAgunanID.includes(agunan_id) == true){
         alert('Data Dengan Nomor Ref ' + nomorreff + ' dan Agunan ID ' +agunan_id+' Sudah Ada Dalam List');
         return
     }else{
