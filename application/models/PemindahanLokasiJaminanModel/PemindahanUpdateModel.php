@@ -134,8 +134,60 @@ class PemindahanUpdateModel extends CI_Model{
                                    '$nomorReffDeatail',
                                    '$agunanIdDetail');");
     }
-   
 
+    public function getJaminanPemindahanHeaderCetak($tblNomor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT id,
+                    nomor,
+                    tgl,
+                    `kode_kantor_asal`, 
+                    IF(`kode_kantor_asal`='00','Kantor Cabang Bekasi Utara',kk1.nama_kantor) AS nama_kantor_asal,
+                    `kode_kantor_tujuan`, 
+                    IF(`kode_kantor_tujuan`='00','Kantor Cabang Bekasi Utara',kk2.nama_kantor) AS nama_kantor_tujuan,
+                    ket,
+                    lokasi_penyimpanan
+                    
+                FROM dpm_online.jaminan_pemindahan JP 
+                LEFT JOIN dpm_online.`app_kode_kantor` kk1
+                    ON kk1.`kode_kantor` = jp.`kode_kantor_asal`
+                LEFT JOIN dpm_online.`app_kode_kantor` kk2
+                    ON kk2.`kode_kantor` = jp.`kode_kantor_tujuan`
+                WHERE JP.`nomor` = '$tblNomor';";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }   
+    public function getPemindahanJaminanCetak($dataNomor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT jp.`nomor`, `tgl`, `kode_kantor_asal`, IF(`kode_kantor_asal`='00','Kantor Cabang Bekasi Utara',kk1.nama_kantor) AS nama_kantor_asal,
+                    `kode_kantor_tujuan`, IF(`kode_kantor_tujuan`='00','Kantor Cabang Bekasi Utara',kk2.nama_kantor) AS nama_kantor_tujuan, `ket`,  
+                    jpd.`no_reff`, jd.agunan_id,
+                    IF(`jenis`='SERTIFIKAT',
+                        CONCAT(IF(IFNULL(`no_shm`,'')<>'','SHM',
+                                        IF(IFNULL(`no_shgb`,'')<>'','SHGB','AJB')),' NO. ', 
+                                    IF(IFNULL(`no_shm`,'')<>'', IFNULL(`no_shm`,''),
+                                        IF(IFNULL(`no_shgb`,'')<>'', IFNULL(`no_shgb`,''), IFNULL(`no_ajb`,''))),
+                                    ' A/N : ', IFNULL(`nama_pemilik_sertifikat`,''), 
+                                    ' ALAMAT : ', IFNULL(`alamat_sertifikat`,'')),
+                        CONCAT('BPKB NO. ',IFNULL(`nomor_bpkb`,''),' A/N : ', IFNULL(`nama_bpkb`,''),
+                                    ' ALAMAT : ', IFNULL(`alamat_bpkb`,''),
+                                    ' NO RANGKA : ', IFNULL(`no_rangka`,''),
+                                    ' NO MESIN : ', IFNULL(`no_mesin`,''),
+                                    ' TAHUN ', IFNULL(`tahun`,''),' NO. POL : ', IFNULL(`no_polisi`,''))
+                        ) AS deskripsi_ringkas, jd.no_rekening_agunan, 
+                        get_nama_nasabah('KRE', jd.no_rekening_agunan) AS nama_nasabah, jp.lokasi_penyimpanan
+                FROM `jaminan_pemindahan` jp
+                LEFT JOIN `jaminan_pemindahan_detail` jpd ON jpd.`nomor`=jp.`nomor`
+                LEFT JOIN `jaminan_dokument` jd ON jd.`no_reff`=jpd.`no_reff`
+                LEFT JOIN app_kode_kantor kk1 ON kk1.kode_kantor=jp.kode_kantor_asal
+                LEFT JOIN app_kode_kantor kk2 ON kk2.kode_kantor=jp.kode_kantor_tujuan
+                WHERE jp.`nomor`='$dataNomor'
+    
+            ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }
 
     
 }   

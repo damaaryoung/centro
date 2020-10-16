@@ -154,8 +154,13 @@ class PemindahanVerifikasiModel extends CI_Model{
         
         return $query->result_array();
     }
-    public function verifikasieDataPemindahan($mainNomor,$mainVerifikasi){
-        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+    public function verifikasieDataPemindahan($mainNomor,
+                                                $mainVerifikasi,
+                                                $kode_kantor_tujuan,
+                                                $kode_lokasi_penyimpanan,
+                                                $parsedDataDetailArr,
+                                                $lengthParsed){
+       $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
         $this->db2->trans_start();
         $this->db2->query("UPDATE dpm_online.jaminan_pemindahan 
@@ -163,10 +168,20 @@ class PemindahanVerifikasiModel extends CI_Model{
                             WHERE `nomor` = '$mainNomor';");
         $this->db2->query("UPDATE dpm_online.jaminan_pemindahan_detail
                             SET `last_update` = NOW()
-                            WHERE `nomor` = '$mainNomor';");                    
-		$this->db2->trans_complete();
+                            WHERE `nomor` = '$mainNomor';"); 
+        //looping update di jaminan dokument
+        for($i = 0; $i < $lengthParsed; $i++){
+			$nomorReffDetail = $parsedDataDetailArr[$i][0];
+            $agunanIdDetail   = $parsedDataDetailArr[$i][1];
+            $this->db2->query("UPDATE dpm_online.jaminan_dokument 
+                                SET `kode_kantor_lokasi_jaminan`='$kode_kantor_tujuan', 
+                                     lokasi_penyimpanan = '$kode_lokasi_penyimpanan' 
+                                WHERE no_reff = '$nomorReffDetail'
+                                and agunan_id = '$agunanIdDetail';"); 
+			
+		}                   
+        $this->db2->trans_complete();
     }
 
      
 }
-

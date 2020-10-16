@@ -142,9 +142,16 @@ class PemindahanVerifikasiController extends CI_Controller {
 		$data['mainNomor']               = $this->input->post('mainNomor');
 		$data['mainVerifikasi']          = $this->input->post('mainVerifikasi');
 	
+		$data['parsedDataDetailArr']     = $this->input->post('parsedDataDetailArr');
+		$data['lengthParsed']            = $this->input->post('lengthParsed');
+		$data['mainVerifikasi']          = $this->input->post('mainVerifikasi');
 
-		$this->PemindahanVerifikasiModel->verifikasieDataPemindahan($mainNomor,$mainVerifikasi);
-		
+		$this->PemindahanVerifikasiModel->verifikasieDataPemindahan($mainNomor,
+																	$mainVerifikasi,
+																	$kode_kantor_tujuan,
+																	$kode_lokasi_penyimpanan,
+																	$parsedDataDetailArr,
+																	$lengthParsed);
 		echo json_encode($data);
 	}
 }

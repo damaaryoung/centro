@@ -141,6 +141,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                   <i style="padding-left: 5px;" class="fa fa-trash"></i> 
                                             </button>  
                                           </div>
+                                          <div style ="padding-left: 5px;">
+                                           <form method="post" target="_blank" style ='display:inline;' action="<?php echo base_url("index.php/PemindahanCetakController/cetakProses")?>"> 
+                                              <button type="submit" class="btn btn-success btn-sm btnCetakLokasiJaminan" style ="padding-left: 5px;"
+                                                          data-id="<?= $row['id'] ?>"
+                                                          data-nomor="<?= $row['nomor'] ?>" 
+                                                          data-verifikasi="<?= $row['verifikasi'] ?>" 
+                                                          name="btnCetakLokasiJaminan"> 
+                                                    <i style="padding-left: 5px;" class="fa fa-print"></i> 
+                                                    <input type="hidden" name="nomorCetak" value="<?php echo $row['nomor'];?>">
+                                                    <input type="hidden" name="idCetak" value="<?php echo $row['id'];?>">
+                                              </button> 
+                                            </form>
+                                          </div>
                                         </div>
                                 </td>
                                 </tr>

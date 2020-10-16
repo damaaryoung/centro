@@ -17,9 +17,9 @@
                 </tr>
             </table>
 
-            <p style="font-size: 12px;">Telah Dipinjamkan oleh BPR Kredit Mandiri Indonesia<?php echo $nama_kantor;?> , kepada :</p>
+            <p style="font-size: 10px;">Telah Dipinjamkan oleh BPR Kredit Mandiri Indonesia<?php echo $nama_kantor;?> , kepada :</p>
             <table border="0" style="width: 100%;
-                                     font-size: 12px; 
+                                     font-size: 10px; 
                                      vertical-align:top; 
                                      table-layout:fixed; 
                                      word-break:break-all;
@@ -36,9 +36,9 @@
                 </tr>
             </table>
 
-            <p style="font-size: 12px;">Berupa 1 Buah <?php echo $jenis_jaminan?> asli dengan rincian sebagai berikut :</p>
+            <p style="font-size: 10px;">Berupa 1 Buah <?php echo $jenis_jaminan?> asli dengan rincian sebagai berikut :</p>
             <table border="0" style="width: 100%;
-                                     font-size: 12px; 
+                                     font-size: 10px; 
                                      vertical-align:top; 
                                      table-layout:fixed; 
                                      word-break:break-all;
@@ -75,9 +75,9 @@
                 </tr>
             </table>
 
-            <p style="font-size: 12px;">Dengan Kelengkapan :</p>
+            <p style="font-size: 10px;">Dengan Kelengkapan :</p>
             <table border="0" style="width: 100%;
-                                     font-size: 12px; 
+                                     font-size: 10px; 
                                      vertical-align:top; 
                                      table-layout:fixed; 
                                      word-break:break-all;
@@ -123,12 +123,12 @@
                 </tr>
             </table>
 
-            <p style="font-size: 12px;">Jenis Pengurusan : <?php echo $jenis_pengurusan;?> dan akan dikembalikan pada tanggal <?php echo $tgl_rencana_kembali;?></p>
-            <p style="font-size: 12px;"><?php $ket;?></p>
+            <p style="font-size: 10px;">Jenis Pengurusan : <?php echo $jenis_pengurusan;?> dan akan dikembalikan pada tanggal <?php echo $tgl_rencana_kembali;?></p>
+            <p style="font-size: 10px;"><?php $ket;?></p>
             
-            <p style="text-align: right; font-size: 11px; "><?php echo $kota.', ' . $sysdate;?></p>
+            <p style="text-align: right; font-size: 10px; "><?php echo $kota.', ' . $sysdate;?></p>
             <table style="width: 100%;
-                                     font-size: 11px; 
+                                     font-size: 10px; 
                                      vertical-align:top; 
                                      table-layout:fixed; 
                                      word-break:break-all;
@@ -153,7 +153,7 @@
             <br>
             <div style="border: 1px solid black; border-collapse: collapse;">
                 <table style="width: 80%;
-                                        font-size: 12px; 
+                                        font-size: 10px; 
                                         vertical-align:top; 
                                         table-layout:fixed; 
                                         word-break:break-all;
@@ -165,7 +165,7 @@
                 </table>
 
                 <table style="width: 100%;
-                                     font-size: 16px; 
+                                     font-size: 14px; 
                                      vertical-align:top; 
                                      table-layout:fixed; 
                                      word-break:break-all;
@@ -175,15 +175,15 @@
                     </tr>
                 </table>
                 <div style="padding-left: 30px;">
-                    <p style="font-size: 12px; padding-left: 20px;">Alasan :</p>
+                    <p style="font-size: 10px; padding-left: 20px;">Alasan :</p>
                     <textarea name="w3review" rows="4" cols="50">
                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </textarea>
 
-                    <p style="font-size: 12px; padding-left: 20px;">Persyaratan :</p>
+                    <p style="font-size: 10px; padding-left: 20px;">Persyaratan :</p>
 
                     <table style="width: 100%;
-                                     font-size: 12px; 
+                                     font-size: 10px; 
                                      vertical-align:top; 
                                      table-layout:fixed; 
                                      word-break:break-all;
@@ -203,7 +203,7 @@
                     </table>
                     <br><br>
                     <table style="width: 100%;
-                                     font-size: 11px; 
+                                     font-size: 10px; 
                                      vertical-align:top; 
                                      table-layout:fixed; 
                                      word-break:break-all;

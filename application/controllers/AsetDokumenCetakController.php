@@ -102,7 +102,7 @@ class AsetDokumenCetakController extends CI_Controller {
             }else if($data["status"] == 'WAITING'){
                 $cetak = $this->load->view('ViewAsetDokumen/Cetak/BPKB/CetakanTransaksiPinjamAsetDokumen.php', $data, TRUE);
             }
-        }if($data["jenis_jaminan"] == 'EMAS'){
+        }else if($data["jenis_jaminan"] == 'EMAS'){
             if($data["status"] == 'MASUK'){
                 $cetak = $this->load->view('ViewAsetDokumen/Cetak/Emas/CetakanTransaksiPenerimaanAsetDokumen.php', $data, TRUE);
             }else if($data["status"] == 'PINJAM'){

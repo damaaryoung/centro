@@ -61,7 +61,13 @@ $('#btn_simpan_verifikasi_pemindahan_lokasi').click(function () {
     mainNomor               = $('#mainNomor').val();
     mainVerifikasi          = $('#mainVerifikasi').val();
 
-    console.log(mainTanggal, kode_kantor_tujuan, kode_lokasi_penyimpanan, mainKeterangan, mainNomor);
+    for(i = 0; i < mainTable.length; i++ ){
+        var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
+        parsedDataDetailArr.push(data);
+    }
+    lengthParsed = parsedDataDetailArr.length;
+
+    console.log(mainTanggal, kode_kantor_tujuan, kode_lokasi_penyimpanan, mainKeterangan, mainNomor, parsedDataDetailArr,lengthParsed );
     $('#loading').show(); 
     $.ajax({
         url : base_url + "index.php/PemindahanVerifikasiController/prosesVerifikasi",
@@ -72,6 +78,8 @@ $('#btn_simpan_verifikasi_pemindahan_lokasi').click(function () {
                 "kode_lokasi_penyimpanan" : kode_lokasi_penyimpanan,
                 "mainKeterangan"          : mainKeterangan,
                 "mainNomor"               : mainNomor,
+                "parsedDataDetailArr"     : parsedDataDetailArr,
+                "lengthParsed"            : lengthParsed,
                 "mainVerifikasi"          : mainVerifikasi
             },
 
@@ -83,8 +91,8 @@ $('#btn_simpan_verifikasi_pemindahan_lokasi').click(function () {
         },
         error : function(response) {
             console.log(response);
-            alert('Gagal Verifikasi Data Pemindahan Jaminan, Mohon Coba Lagi');
-           // window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
+            alert('Gagal Verifikasi Data Pemindahan Jaminan, Mohon Coba Lagi atau Hubungi Team IT');
+            window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
         }
     });
     
