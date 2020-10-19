@@ -78,7 +78,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <option value="PINJAM">PINJAM</option>
                               <option value="WAITING">WAITING</option>
                               <option value="IN TRANSIT">IN TRANSIT</option>
-                              <option value="KEMBALI">KEMBALI</option>
                       </select> &nbsp;&nbsp;
                     </div>               
                 </div>

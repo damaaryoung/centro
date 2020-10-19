@@ -84,7 +84,7 @@
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 6px;" class="control-label" for="mainKotaPinjam">Kota</label>
+                                      <label style="padding-top: 6px;" class="control-label" for="mainKotaPinjam">Kota/Kabupaten</label>
                                   </div>
                                   <div class="col-sm-5">
                                     <input type="text" class="form-control" id="mainKotaPinjam" name="mainKotaPinjam" readonly>
@@ -131,7 +131,7 @@
                   <div class="tab">
                     <button type='button' class="tablinks" id='main_tab_bpkbPinjam' onclick="openTab(event, 'pinjamBPKB')">BPKB</button>
                     <button type='button' class="tablinks" id='main_tab_sertPinjam' onclick="openTab(event, 'pinjamSertifikat')">Sertifikat</button>
-                    <button type='button' class="tablinks" id='main_tab_emasPinjam' onclick="openTab(event, 'pinjamEmas')">Emas</button>
+                    <!-- <button type='button' class="tablinks" id='main_tab_emasPinjam' onclick="openTab(event, 'pinjamEmas')">Emas</button> -->
                   </div>
 
                   <!-- Start BPKB -->

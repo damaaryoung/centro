@@ -12,6 +12,9 @@ class AsetDokumenEntryController extends CI_Controller {
 	public function index(){
 		$session = $this->session->userdata('nama');
 		$kode_kantor = $this->session->userdata('kd_cabang');
+		$divisi_id   = $this->session->userdata('divisi_id');
+		$data['kode_kantor'] = $this->session->userdata('kd_cabang');
+		$data['divisi_id']  = $this->session->userdata('divisi_id');
 		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
 		$data['navbar'] = $this->load->view('templates/navbar.php', NULL, TRUE);
@@ -53,6 +56,8 @@ class AsetDokumenEntryController extends CI_Controller {
 	}
 	public function displayTambahAsetDokumen(){
 		$session = $this->session->userdata('nama');
+		$data['kode_kantor'] = $this->session->userdata('kd_cabang');
+		$data['divisi_id']  = $this->session->userdata('divisi_id');
 		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
 		$data['navbar'] = $this->load->view('templates/navbar.php', NULL, TRUE);
@@ -240,6 +245,10 @@ class AsetDokumenEntryController extends CI_Controller {
 		$data['sidebar'] = $this->load->view('templates/sidebar.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('templates/footer.php', NULL, TRUE);
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE); 
+		$data['kode_kantor'] = $this->session->userdata('kd_cabang');
+		$data['divisi_id']  = $this->session->userdata('divisi_id');
+
+		
 
 		if($session != ''){
 			$data['sysdate'] = $this->AsetDokumenEntryModel->sysdate();
@@ -272,6 +281,8 @@ class AsetDokumenEntryController extends CI_Controller {
 		$data['sidebar'] = $this->load->view('templates/sidebar.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('templates/footer.php', NULL, TRUE);
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
+		$data['kode_kantor'] = $this->session->userdata('kd_cabang');
+		$data['divisi_id']  = $this->session->userdata('divisi_id');
 
 		if($session != ''){
 			$data['sysdate'] = $this->AsetDokumenEntryModel->sysdate();

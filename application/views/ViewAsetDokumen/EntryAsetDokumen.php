@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
 <div class="wrapper">
 
   	<?php 
@@ -60,12 +60,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="form-group">
                       <label for="pwd">Kode Kantor</label> &nbsp;&nbsp;
+                      <?php
+                        if($kode_kantor == '00' || $divisi_id == 'IT'){
+                      ?>
                       <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 200px;">
                             <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
                             <?php foreach ($selectKodeKantor as $row) : ?>
                               <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
                             <?php endforeach;?>
-                      </select>&nbsp;&nbsp;
+                      </select>
+                      <?php }else if($kode_kantor != '00' || $divisi_id != 'IT'){
+                          echo '<input class="form-control" id="kode_kantor" name="kode_kantor" style="width: 200px;" value="'.$kode_kantor.'" readonly>'; 
+                        } ?> 
+                      &nbsp;&nbsp;
                     </div>   
                     <div class="form-group">
                       <label for="pwd">Status</label> &nbsp;&nbsp;
@@ -75,7 +82,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <option value="PINJAM">PINJAM</option>
                               <option value="WAITING">WAITING</option>
                               <option value="IN TRANSIT">IN TRANSIT</option>
-                              <option value="KEMBALI">KEMBALI</option>
                       </select> &nbsp;&nbsp;
                     </div>   
                     <div class="form-group">
@@ -83,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <select class="form-control select2" id="jenis" name="jenis" style="width: 200px;"  onchange="serchAsetDokumenB()">
                               <option value="SERTIFIKAT">SERTIFIKAT</option>
                               <option value="BPKB">BPKB</option>
-                              <option value="EMAS">EMAS</option>
+                              <!-- <option value="EMAS">EMAS</option> -->
                       </select> &nbsp;&nbsp;
                     </div>                 
                 </div>
@@ -245,7 +251,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.card-body -->
           </div>  
-          </div> <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+          </div> 
+          <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
     </section>
 
 	<?php

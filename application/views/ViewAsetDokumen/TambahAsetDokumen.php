@@ -71,8 +71,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerja">Area Kerja</label>
                                   </div>
                                   <div class="col-sm-5">
+                                  <!-- <?php
+                                    //if($kode_kantor == '00' || $divisi_id == 'IT'){
+                                  ?>
                                     <select class="form-control select2" id="mainAreaKerja" name="mainAreaKerja" required>
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php //foreach ($ListKodeKantor as $row) : ?>
+                                                <option value="<?php //echo $row['kode_kantor'];?>"><?php //echo $row['kode_kantor'];?> - <?php //echo $row['nama_kantor'];?> </option>
+                                                <?php //endforeach;?>
+                                    </select>
+                                    <?php //}else if($kode_kantor != '00' || $divisi_id != 'IT'){
+                                      //echo ' <input class="form-control" id="mainAreaKerja" name="mainAreaKerja" value="'.$kode_kantor.'" readonly>';
+                                    //} ?>  -->
+                                    <select class="form-control select2" id="mainAreaKerja" name="mainAreaKerja" required>
+                                                <option value="<?php echo $this->session->userdata('kd_cabang'); ?>" selected><?php echo $this->session->userdata('kd_cabang'); ?></option>
                                                 <?php foreach ($ListKodeKantor as $row) : ?>
                                                 <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
                                                 <?php endforeach;?>
@@ -94,10 +105,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainTransaksi">Transaksi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="mainTransaksi" name="mainTransaksi">
-                                            <?php //foreach ($MenuData as $row) : ?>
-                                            <option selected value="<?php echo 'MASUK';?>"><?php echo 'MASUK';?></option>
-                                            <?php //endforeach;?>
+                                        <select class="form-control select2" id="mainTransaksi" name="mainTransaksi" readonly>
+                                            <option  value="MASUK"><?php echo 'MASUK';?></option>
+                                            <option  value="WAITING"><?php echo 'WAITING';?></option>
                                         </select>
                                   </div>
                                   <div class="col-sm-3">
@@ -128,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 6px;" class="control-label" for="mainKota">Kota</label>
+                                      <label style="padding-top: 6px;" class="control-label" for="mainKota">Kota/Kabupaten</label>
                                   </div>
                                   <div class="col-sm-5">
                                     <input type="text" class="form-control" id="mainKota" name="mainKota">
@@ -182,7 +192,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="tab">
               <button type='button' class="tablinks" id='main_tab_bpkb' onclick="openTab(event, 'BPKB')">BPKB</button>
               <button type='button' class="tablinks" id='main_tab_sert' onclick="openTab(event, 'Sertifikat')">Sertifikat</button>
-              <button type='button' class="tablinks" id='main_tab_emas' onclick="openTab(event, 'Emas')">Emas</button>
+              <!-- <button type='button' class="tablinks" id='main_tab_emas' onclick="openTab(event, 'Emas')">Emas</button> -->
             </div>
 
             <!-- Start BPKB -->
@@ -195,7 +205,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <th>Nama Pemilik</th>
                               <th>Alamat&nbsp;Pemilik</th>
                               <th>No.&nbsp;Polisi</th>
-                              <th>Verifikasi</th>
+                              <!-- <th>Verifikasi</th> -->
                               <th>Action</th>
                           </tr>
                       </thead>
@@ -206,7 +216,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <td><p id='rowBPKBNamaPemilik'><?php echo $bpkbNamaPemilik; ?></p></td> 
                               <td><p id='rowBPKBAlamat'><?php echo $bpkbAlamatPemlik; ?></p></td>
                               <td><p id='rowBPKBNoPolisi'><?php echo $bpkbNoPolisi; ?></p></td> 
-                              <td><p id='rowBPKBVerif'><?php echo 'Verifikasi'; ?></p></td>   
+                              <!-- <td><p id='rowBPKBVerif'><?php //echo 'Verifikasi'; ?></p></td>    -->
                               <td> 
                                 <button type="button" class="btn btn-danger btn-sm" 
                                         id="deleteTempBPKB"
@@ -236,7 +246,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <th>Tanggal&nbsp;Surat</th>
                             <th>Luas Tanah</th>
                             <th>Nama&nbsp;Pemilik</th>
-                            <th>Verifikasi</th>
+                            <!-- <th>Verifikasi</th> -->
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -248,7 +258,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td><p id='rowSertTanggal'><?php echo $sertTanggalSertifikat; ?></p></td>
                             <td><p id='rowSertLuasTanah'><?php echo $sertLuasTanah; ?></p></td>
                             <td><p id='rowSertPemilik'><?php echo $sertNamaPemilik; ?></p></td>
-                            <td><p id='rowSertVerif'><?php echo 'Verifikasi'; ?></p></td>
+                            <!-- <td><p id='rowSertVerif'><?php // echo 'Verifikasi'; ?></p></td> -->
                             <td><button type="button" class="btn btn-danger btn-sm" 
                                       id="delTempSert"
                                       data-toggle="tooltip" 
@@ -306,7 +316,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </tr>
                     </tbody>
                 </table>
-                    <a type="button" class="btn btn-primary btn-sm" id="btnTambahBPKB" href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahDataEmas"> <i class="fa fa-pencil-square-o"></i> Tambah</a>  
+                    <a type="button" class="btn btn-primary btn-sm" id="btnTambahBPKB"> <i class="fa fa-pencil-square-o"></i> Tambah</a>  
                     
             </div>
             <!-- END Emas -->

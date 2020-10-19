@@ -84,17 +84,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="sertKantorLokasi">Kantor Lokasi Jaminan</label>
                                   </div>
                                   <div class="col-sm-7">
-                                      <select class="form-control select2" id="sertKantorLokasi" name="sertKantorLokasi">
-                                                <?php if($this->session->tempdata('sertKantorLokasi') != NULL ) {
-                                                            echo '<option selected value="'. $this->session->tempdata('sertKantorLokasi') .'">'. $this->session->tempdata('sertKantorLokasi')  .'</option>';
-                                                      } else{
-                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
-                                                      }
-                                                ?>
-                                                <?php foreach ($ListKodeKantor as $row) : ?>
-                                                 <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
-                                                <?php endforeach;?>
-                                      </select>
+                                        <?php if($kode_kantor == '00' || $divisi_id == 'IT'){ ?>
+                                            <select class="form-control select2" id="sertKantorLokasi" name="sertKantorLokasi">
+                                                        <?php if($this->session->tempdata('sertKantorLokasi') != NULL ) {
+                                                                    echo '<option selected value="'. $this->session->tempdata('sertKantorLokasi') .'">'. $this->session->tempdata('sertKantorLokasi')  .'</option>';
+                                                            } else{
+                                                                    echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                            }
+                                                        ?>
+                                                        <?php foreach ($ListKodeKantor as $row) : ?>
+                                                        <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
+                                                        <?php endforeach;?>
+                                            </select>
+                                        <?php }else if($kode_kantor != '00' || $divisi_id != 'IT'){
+                                            echo '<input class="form-control" id="sertKantorLokasi" name="sertKantorLokasi" value="'.$kode_kantor.'" readonly>';
+                                        } ?>
                                   </div>
                               </div>
                               <div class="form-group row">

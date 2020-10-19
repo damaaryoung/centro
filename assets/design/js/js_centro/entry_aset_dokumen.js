@@ -41,14 +41,12 @@ var asli_option = '<option value="1">ASLI</option> <option value="2">COPY</optio
 var jenis_sert_otion = '<option value="SHM">SHM</option> <option value="SHGB">SHGB</option> <option value="AJB">AJB</option>';
 var main_transaksi ='<option value="IN TRANSIT">IN TRANSIT</option>' +
                     '<option value="KELUAR">KELUAR</option>' +
-                    '<option value="KEMBALI">KEMBALI</option>'+
                     '<option value="MASUK">MASUK</option>'+
                     '<option value="PINJAM">PINJAM</option>'+
                     '<option value="WAITING">WAITING</option>';
 var jenis_emas_list ='<option value="BATANGAN">BATANGAN</option>' +
                      '<option value="COIN">COIN</option>'+
                      '<option value="LAIN">LAIN</option>';
-
 $('#sertKodeIkatanAgunan').change(function(){
     persenDefault = $(this).find('option:selected').attr('data-persen');
    $('#sertPersenDijamin').val(persenDefault);
@@ -86,7 +84,6 @@ $(function(){
         $("#bpkbBerlakuSD").prop("disabled", !this.checked); 
     });
 });
-
 
 
 // modal uodate

@@ -84,7 +84,7 @@
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 6px;" class="control-label" for="mainKotaPenyerahan">Kota</label>
+                                      <label style="padding-top: 6px;" class="control-label" for="mainKotaPenyerahan">Kota/Kabupaten</label>
                                   </div>
                                   <div class="col-sm-5">
                                     <input type="text" class="form-control" id="mainKotaPenyerahan" name="mainKotaPenyerahan" readonly>
@@ -131,7 +131,7 @@
                   <div class="tab">
                     <button type='button' class="tablinks" id='main_tab_bpkbPenyerahan' onclick="openTab(event, 'penyerahanBPKB')">BPKB</button>
                     <button type='button' class="tablinks" id='main_tab_sertPenyerahan' onclick="openTab(event, 'penyerahanSertifikat')">Sertifikat</button>
-                    <button type='button' class="tablinks" id='main_tab_emasPenyerahan' onclick="openTab(event, 'penyerahanEmas')">Emas</button>
+                    <!-- <button type='button' class="tablinks" id='main_tab_emasPenyerahan' onclick="openTab(event, 'penyerahanEmas')">Emas</button> -->
                   </div>
 
                   <!-- Start BPKB -->

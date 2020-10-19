@@ -115,6 +115,17 @@ $(document).ready(function () {
         $('#main_tab_emas').show(); 
         $('#main_tab_sert').hide();
     }
+    $('#mainTakeover').on('click', function(){             
+
+        if(document.getElementById("mainTakeover").checked == true){
+            console.log('di check');
+            $('#mainTransaksi option:contains(WAITING)').prop({selected: true});
+        }
+        if(document.getElementById("mainTakeover").checked == false){
+            console.log('tidak');
+            $('#mainTransaksi option:contains(MASUK)').prop({selected: true});
+        }
+    })
 
 
 });

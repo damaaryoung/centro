@@ -88,17 +88,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="bpkbKantorLokasi">Kantor Lokasi Jaminan</label>
                                   </div>
                                   <div class="col-sm-7">
-                                      <select class="form-control select2" id="bpkbKantorLokasi" name="bpkbKantorLokasi">
-                                                <?php if($this->session->tempdata('bpkbKantorLokasi') != NULL ) {
-                                                            echo '<option selected value="'. $this->session->tempdata('bpkbKantorLokasi') .'">'. $this->session->tempdata('bpkbKantorLokasi') .'</option>';
-                                                      } else{
-                                                            echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
-                                                      }
-                                                ?>
-                                                <?php foreach ($ListKodeKantor as $row) : ?>
-                                                <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
-                                                <?php endforeach;?>
-                                      </select>
+                                        <?php if($kode_kantor == '00' || $divisi_id == 'IT'){ ?>
+                                            <select class="form-control select2" id="bpkbKantorLokasi" name="bpkbKantorLokasi">
+                                                        <?php if($this->session->tempdata('bpkbKantorLokasi') != NULL ) {
+                                                                    echo '<option selected value="'. $this->session->tempdata('bpkbKantorLokasi') .'">'. $this->session->tempdata('bpkbKantorLokasi') .'</option>';
+                                                            } else{
+                                                                    echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                            }
+                                                        ?>
+                                                        <?php foreach ($ListKodeKantor as $row) : ?>
+                                                        <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
+                                                        <?php endforeach;?>
+                                            </select>
+                                        <?php }else if($kode_kantor != '00' || $divisi_id != 'IT'){
+                                            echo '<input class="form-control" id="bpkbKantorLokasi" name="bpkbKantorLokasi" value="'.$kode_kantor.'" readonly>';
+                                        } ?> 
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -534,7 +538,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="">Lainnya</label>
                                   </div>
                                   <div class="col-sm-9">
-                                  <textarea style="height: 100px;" type="text" class="form-control" id="bpkbLainnya" name="bpkbLainnya"></textarea>
+                                  <textarea style="height: 100px;" type="text" class="form-control" id="bpkbLainnya" name="bpkbLainnya"><?php echo $this->session->tempdata('bpkbLainnya') ?></textarea>
                                   </div>
                             </div>
                       </div>
