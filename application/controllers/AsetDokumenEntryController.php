@@ -317,6 +317,37 @@ class AsetDokumenEntryController extends CI_Controller {
 	/// END DISPLAY CONTROL///
 
 	/// START HANDLE USER INPUT FORM CONTROL///
+
+	//handle input header
+	public function handleInputHeader(){
+
+		$mainAreaKerja = $this->input->post('mainAreaKerja'); 
+		$mainTanggal = $this->input->post('mainTanggal'); 
+		$mainTransaksi = $this->input->post('mainTransaksi'); 
+		$mainNama = $this->input->post('mainNama');
+		$mainKeterangan = $this->input->post('mainKeterangan');
+		$mainAlamat = $this->input->post('mainAlamat');		
+		$mainKota = $this->input->post('mainKota');  
+		$mainJenisPengurusan = $this->input->post('mainJenisPengurusan');    
+		$mainNomorRekening = $this->input->post('mainNomorRekening'); 
+		$mainNamaNasabah = $this->input->post('mainNamaNasabah'); 
+		$mainTanggalRealisasi = $this->input->post('mainTanggalRealisasi');
+
+		$this->session->set_tempdata('mainAreaKerja', $mainAreaKerja, 900);
+		$this->session->set_tempdata('mainTanggal', $mainTanggal, 900);
+		$this->session->set_tempdata('mainTransaksi', $mainTransaksi, 900);
+		$this->session->set_tempdata('mainNama', $mainNama, 900);
+		$this->session->set_tempdata('mainKeterangan', $mainKeterangan, 900);
+		$this->session->set_tempdata('mainAlamat', $mainAlamat, 900);
+		$this->session->set_tempdata('mainKota', $mainKota, 900);
+		$this->session->set_tempdata('mainJenisPengurusan', $mainJenisPengurusan, 900);
+		$this->session->set_tempdata('mainNomorRekening', $mainNomorRekening, 900);
+		$this->session->set_tempdata('mainNamaNasabah', $mainNamaNasabah, 900);
+		$this->session->set_tempdata('mainTanggalRealisasi', $mainTanggalRealisasi, 900);
+		$data1['sukses'] = 'sukses';
+		echo json_encode($data1);
+
+	}
 	
 	// HANDLE SERTIFIKAT //
 	public function handleUserInputSertifikat(){
@@ -1477,7 +1508,7 @@ class AsetDokumenEntryController extends CI_Controller {
                                     		</button>
 
 											<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
-											<button type="submit" class="btn btn-info btn-sm btnCetaks" 
+												<button type="submit" class="btn btn-info btn-sm btnCetaks" 
 														data-nomor="'. $row['nomor'] .'"
 														data-noref="'. $row['no_reff'] .'" 
 														data-status="'. $row['status'] .'"
@@ -1650,6 +1681,17 @@ class AsetDokumenEntryController extends CI_Controller {
 	}
 
 	public function buttonBack(){
+		$this->session->unset_tempdata('mainAreaKerja');
+		$this->session->unset_tempdata('mainTanggal');
+		$this->session->unset_tempdata('mainTransaksi');
+		$this->session->unset_tempdata('mainNama');
+		$this->session->unset_tempdata('mainKeterangan');
+		$this->session->unset_tempdata('mainAlamat');
+		$this->session->unset_tempdata('mainKota');
+		$this->session->unset_tempdata('mainJenisPengurusan');
+		$this->session->unset_tempdata('mainNomorRekening');
+		$this->session->unset_tempdata('mainNamaNasabah');
+		$this->session->unset_tempdata('mainTanggalRealisasi');
 		redirect('AsetDokumenEntryController/index'); 
 	}
 
@@ -1826,7 +1868,6 @@ class AsetDokumenEntryController extends CI_Controller {
 		echo json_encode($data1); 
 	}
 
-	
 
 	
 }

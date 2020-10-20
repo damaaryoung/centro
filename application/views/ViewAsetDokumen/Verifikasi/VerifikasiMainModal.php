@@ -10,10 +10,9 @@
         </button>
       </div>
       <div class="modal-body">
-      
-      <div id="loading1">
+           <div id="loading1">
               <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
-      </div>
+           </div>
            <!--- FORM ATAS ------>
            <div class="row">
                   <div class="col-md-11 mx-auto">

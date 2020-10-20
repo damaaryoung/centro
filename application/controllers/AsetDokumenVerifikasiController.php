@@ -94,6 +94,7 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 										. $row['jenis_jaminan']. '</td> <td>'
 										. $row['status'].'</td> <td>'
 										. $row['kontrak_status'].'</td> <td>'
+										. $row['verifikasi'].'</td> <td>'
 										. '<button type="button" class="btn btn-success btn-sm btnVerifikasi" style ="padding-left: 5px;"
 													data-nomor="'.$row['nomor'].'"
 													data-noref="'.$row['no_reff'].'" 

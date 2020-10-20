@@ -1,4 +1,15 @@
 var dataTableeee = [];
+var mainAreaKerja = '';
+var mainTanggal   = '';
+var mainTransaksi = '';
+var mainNama      = '';
+var mainKeterangan = '';
+var mainKeterangan = '';
+var mainKota       = '';
+var mainJenisPengurusan = '';
+var mainNomorRekening = '';
+var mainNamaNasabah = '';
+var mainTanggalRealisasi = '';
 var base_url = $('#base_url').val();
 
 $('#mainBtnSearchRekening').click(function () {
@@ -195,3 +206,90 @@ $('#delTempEmas').click(function () {
         }
     }); 
 });
+
+$('#btnTambahBPKB').click(function () {
+    
+    mainAreaKerja =  $('#mainAreaKerja').val();
+    mainTanggal   =  $('#mainTanggal').val();
+    mainTransaksi =  $('#mainTransaksi').val();
+    mainNama      =  $('#mainNama').val();
+    mainKeterangan =  $('#mainKeterangan').val(); 
+    mainAlamat =  $('#mainAlamat').val(); 
+    mainKota       =  $('#mainKota').val();
+    mainJenisPengurusan =  $('#mainJenisPengurusan').val();
+    mainNomorRekening =  $('#mainNomorRekening').val();
+    mainNamaNasabah =  $('#mainNamaNasabah').val();
+    mainTanggalRealisasi =  $('#mainTanggalRealisasi').val();
+    
+    $('#loading').show();
+    $.ajax({
+        url : base_url + "index.php/AsetDokumenEntryController/handleInputHeader",
+        type : "POST",
+        dataType : "json",
+        data : {'mainAreaKerja'        :  mainAreaKerja,
+                'mainTanggal'          :  mainTanggal,
+                'mainTransaksi'        :  mainTransaksi,
+                'mainNama'             :  mainNama,
+                'mainKeterangan'       :  mainKeterangan,
+                'mainAlamat'           :  mainAlamat,
+                'mainKota'             :  mainKota,
+                'mainJenisPengurusan'  :  mainJenisPengurusan,
+                'mainNomorRekening'    :  mainNomorRekening,
+                'mainNamaNasabah'      :  mainNamaNasabah,
+                'mainTanggalRealisasi' :  mainTanggalRealisasi},
+
+        success : function(response) {
+            console.log(response);
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahDataBPKB';  
+        },
+        error : function(response) {
+            alert('Proses Gagal, Mohon Coba Lagi');
+            console.log(response);
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+        }
+    }); 
+    console.log(mainAreaKerja,mainTanggal,mainTransaksi, mainNama, mainKeterangan ,mainKota, mainJenisPengurusan, mainNomorRekening, mainNamaNasabah,mainTanggalRealisasi);
+});
+
+$('#btnTambahSertif').click(function () {
+    mainAreaKerja =  $('#mainAreaKerja').val();
+    mainTanggal   =  $('#mainTanggal').val();
+    mainTransaksi =  $('#mainTransaksi').val();
+    mainNama      =  $('#mainNama').val();
+    mainKeterangan =  $('#mainKeterangan').val(); 
+    mainAlamat =  $('#mainAlamat').val(); 
+    mainKota       =  $('#mainKota').val();
+    mainJenisPengurusan =  $('#mainJenisPengurusan').val();
+    mainNomorRekening =  $('#mainNomorRekening').val();
+    mainNamaNasabah =  $('#mainNamaNasabah').val();
+    mainTanggalRealisasi =  $('#mainTanggalRealisasi').val();
+    $('#loading').show();
+    $.ajax({
+        url : base_url + "index.php/AsetDokumenEntryController/handleInputHeader",
+        type : "POST",
+        dataType : "json",
+        data : {'mainAreaKerja'        :  mainAreaKerja,
+                'mainTanggal'          :  mainTanggal,
+                'mainTransaksi'        :  mainTransaksi,
+                'mainNama'             :  mainNama,
+                'mainKeterangan'       :  mainKeterangan,
+                'mainAlamat'           :  mainAlamat,
+                'mainKota'             :  mainKota,
+                'mainJenisPengurusan'  :  mainJenisPengurusan,
+                'mainNomorRekening'    :  mainNomorRekening,
+                'mainNamaNasabah'      :  mainNamaNasabah,
+                'mainTanggalRealisasi' :  mainTanggalRealisasi},
+
+        success : function(response) {
+            console.log(response);
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahDataSertifikat';  
+        },
+        error : function(response) {
+            alert('Proses Gagal, Mohon Coba Lagi');
+            $('#loading').hide();
+            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+        }
+    }); 
+    console.log("Tambah Sertifikat");
+});
+

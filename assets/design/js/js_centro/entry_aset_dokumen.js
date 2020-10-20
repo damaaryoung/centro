@@ -85,6 +85,12 @@ $(function(){
     });
 });
 
+$('#search').keypress(function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+        serchAsetDokumen();
+    }
+  }); 
 
 // modal uodate
 $('#btn_simpan_update_modal').click(function () {
@@ -688,15 +694,15 @@ $('#bodyTableAsetDokumen').on('click','.btnDelete', function () {
     noref = $(this).data("noref");
     status = $(this).data("status");
     idAgunan = $(this).data("agunan");
-    $no_rekening = $(this).data("norekening");
-    $verifikasi = $(this).data("verifikasi");
-    console.log( $no_rekening + ' ' + $verifikasi);   
+    no_rekening = $(this).data("norekening");
+    verifikasi = $(this).data("verifikasi");
+    console.log( no_rekening + ' ' + verifikasi);   
     
     // validasi nomor rekening sudah cair atau blm
-    if($no_rekening != ''){
-        alert('Maaf, Data sudah masuk BO Kredit( ' + $no_rekening + ' ) dan sudah Go-Live, Data tidak dapat dihapus!');
+    if(no_rekening != ''){
+        alert('Maaf, Data sudah masuk BO Kredit( ' + no_rekening + ' ) dan sudah Go-Live, Data tidak dapat dihapus!');
         return;
-    }else if($verifikasi != ''){
+    }else if(verifikasi != ''){
         alert('Maaf, Data sudah diverifikasi, tidak dapat dihapus!');
         return;
     }
@@ -713,11 +719,19 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
     noref = $(this).data("noref");
     status = $(this).data("status");
     idAgunan = $(this).data("agunan");
- 
     console.log(nomor,noref,status,idAgunan);
+    if(status == 'PINJAM'){
+        alert('Maaf, data tidak dapat dipinjamkan');
+        return;
+    }else if(status == 'KELUAR'){
+        alert('Maaf, data tidak dapat dipinjamkan');
+        return;
+    }else if(status == 'IN TRANSIT'){
+        alert('Maaf, data tidak dapat dipinjamkan');
+        return;
+    }
 
     $('#loading').show();
-
     $('#PeminjamanMainModal').modal('show');
 
     $.ajax({
@@ -754,6 +768,15 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
             else if(JaminanHeader.jenis_jaminan == 'EMAS'){
                 mappingFieldEmasPinjam(JaminanHeader, JaminanDokument);
             }
+            /// validasi verifikasi dokumen apakah sudah di verifikasi atau belum
+            if(JaminanHeader.verifikasi == '0'){
+                alert('Maaf, Data belum di verifikasi, Tidak Dapat Di Pinjamkan');
+                $("#btn_simpan_modal_pinjam").prop("disabled", true);
+            } else if(JaminanDokument.verifikasi == '0'){
+                alert('Maaf, Data belum di verifikasi, Tidak Dapat Di Pinjamkan');
+                $("#btn_simpan_modal_pinjam").prop("disabled", true);
+            }
+
             $('#loading2').hide();
             $('#loading').hide();
             console.log("FINISH");
@@ -792,6 +815,13 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
             JaminanDokument = response.getJaminanDokument[0];
             JaminanHistory = response.getJaminanHistory[0];
             console.log(JaminanHeader, JaminanDokument,JaminanHistory);
+            if(JaminanHeader.status != 'PINJAM'){
+                alert('Maaf, Data yang dipilih belum di Pinjamkan');
+                $('#KembaliMainModal').modal('hide');
+                $('#loading5').hide();
+                return;
+            }
+            
             //  Kembali   
             $('#mainAreaKerjaKembali').append('<option value="' + JaminanHeader.kode_kantor + '" selected>'+ JaminanHeader.kode_kantor + ' - ' + JaminanHeader.nama_kantor +'</option>');
             $('#mainTanggalKembali').val(JaminanHeader.tgl); 
@@ -817,6 +847,15 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
             else if(JaminanHeader.jenis_jaminan == 'EMAS'){
                 mappingFieldEmasKembali(JaminanHeader, JaminanDokument);
             }
+
+            if(JaminanHeader.verifikasi == '0'){
+                alert('Maaf, Data belum di verifikasi');
+                $("#btn_simpan_modal_kembali").prop("disabled", true);
+            }else if(JaminanDokument.verifikasi == '0'){
+                alert('Maaf, Data belum di verifikasi');
+                $("#btn_simpan_modal_kembali").prop("disabled", true);
+            }
+            
 
 
             $('#loading5').hide();
@@ -2720,8 +2759,6 @@ function checkBPKB(){
 }
 
 function serchAsetDokumen(){
-    $('#employeeTable').DataTable().clear();
-    $('#employeeTable').DataTable().destroy();
     var search = $('#search').val(); 
     var status = $('#status').val();  
     var kode_kantor = $('#kode_kantor').val();
@@ -2741,10 +2778,10 @@ function serchAsetDokumen(){
                     },
 
             success : function(response) {
+                $('#employeeTable').DataTable().clear();
+                $('#employeeTable').DataTable().destroy();
                 console.log(response);  
-                        
                 dataTableeee.push(response); 
-
                 console.log(dataTableeee);
                 $('#employeeTable > tbody:first').html(dataTableeee);
                 $(document).ready(function() {
@@ -2762,14 +2799,12 @@ function serchAsetDokumen(){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                alert('Data Tidak Ditemukan');
+                alert('Data Tidak Ditemukan, Mohon Periksa Kembali');
                 $('#loading').hide();
             }
     });    
 }
-function serchAsetDokumenB(){
-    $('#employeeTable').DataTable().clear();
-    $('#employeeTable').DataTable().destroy();
+function serchAsetDokumenB(){  
     var search = $('#search').val(); 
     var status = $('#status').val();  
     var kode_kantor = $('#kode_kantor').val();
@@ -2789,8 +2824,9 @@ function serchAsetDokumenB(){
                     },
 
             success : function(response) {
+                $('#employeeTable').DataTable().clear();
+                $('#employeeTable').DataTable().destroy();
                 console.log(response);  
-                        
                 dataTableeee.push(response); 
 
                 console.log(dataTableeee);
@@ -2810,7 +2846,7 @@ function serchAsetDokumenB(){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                alert('Data Tidak Ditemukan');
+                alert('Data Tidak Ditemukan, Mohon Periksa Kembali');
                 $('#loading').hide();
             }
     });    
@@ -2831,10 +2867,7 @@ function serchDataRekening(){
             data : {"search"    : search},
 
             success : function(response) {
-                //console.log(response);  
-                        
                 dataTableeee.push(response); 
-
                 console.log(dataTableeee);
                 $('#TableNoRek > tbody:first').html(dataTableeee);
                 $(document).ready(function() {

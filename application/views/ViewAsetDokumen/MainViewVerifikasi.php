@@ -110,6 +110,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>Jaminan</th>
                         <th>Status</th>
                         <th>Status&nbsp;Kontrak</th>
+                        <th>Verifikasi</th>
                         <th style="width:100px;">Action</th>
                     </tr>
                 </thead>
@@ -127,6 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     echo "<td>".$row['jenis_jaminan']."</td>";
                                     echo "<td>".$row['status']."</td>";
                                     echo "<td>".$row['kontrak_status']."</td>";
+                                    echo "<td>".$row['verifikasi']."</td>";
                                 
                         ?>
                         <td>

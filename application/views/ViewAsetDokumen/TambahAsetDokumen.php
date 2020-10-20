@@ -70,23 +70,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerja">Area Kerja</label>
                                   </div>
-                                  <div class="col-sm-5">
-                                  <!-- <?php
-                                    //if($kode_kantor == '00' || $divisi_id == 'IT'){
-                                  ?>
+                                  <div class="col-sm-5"> 
+                                  
                                     <select class="form-control select2" id="mainAreaKerja" name="mainAreaKerja" required>
-                                                <?php //foreach ($ListKodeKantor as $row) : ?>
-                                                <option value="<?php //echo $row['kode_kantor'];?>"><?php //echo $row['kode_kantor'];?> - <?php //echo $row['nama_kantor'];?> </option>
-                                                <?php //endforeach;?>
-                                    </select>
-                                    <?php //}else if($kode_kantor != '00' || $divisi_id != 'IT'){
-                                      //echo ' <input class="form-control" id="mainAreaKerja" name="mainAreaKerja" value="'.$kode_kantor.'" readonly>';
-                                    //} ?>  -->
-                                    <select class="form-control select2" id="mainAreaKerja" name="mainAreaKerja" required>
-                                                <option value="<?php echo $this->session->userdata('kd_cabang'); ?>" selected><?php echo $this->session->userdata('kd_cabang'); ?></option>
-                                                <?php foreach ($ListKodeKantor as $row) : ?>
-                                                <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
-                                                <?php endforeach;?>
+                                                <?php if($this->session->tempdata('mainAreaKerja') != null){
+                                                  echo '<option value="'.$this->session->tempdata('sertKantorLokasi').'" selected>'.$this->session->tempdata('mainAreaKerja').'</option>';
+                                                } else {?> 
+                                                    <option value="<?php echo $this->session->userdata('kd_cabang'); ?>" selected><?php echo $this->session->userdata('kd_cabang'); ?></option>
+                                                <?php }?>                                                
+                                                    <?php foreach ($ListKodeKantor as $row) : ?>
+                                                    <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
+                                                    <?php endforeach;?>
                                     </select>
                                   </div>
                                   <div class="col-sm-1">
@@ -95,9 +89,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggal">Tanggal</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <?php foreach ($sysdate as $row) : ?>
+                                  <?php if($this->session->tempdata('mainTanggal') != null){ 
+                                      echo '<input readonly type="date" class="form-control" id="mainTanggal" name="mainTanggal" value="'.$this->session->tempdata('mainTanggal').'" placeholder="">';
+                                  } else {?>
+                                  <?php foreach ($sysdate as $row) : ?>
                                       <input readonly type="date" class="form-control" id="mainTanggal" name='mainTanggal' value="<?php echo $row['sysdate'];?>" placeholder="">
-                                    <?php endforeach;?>
+                                    <?php endforeach;
+                                  }?>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -106,6 +104,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-3">
                                         <select class="form-control select2" id="mainTransaksi" name="mainTransaksi" readonly>
+                                            <?php if($this->session->tempdata('mainTransaksi') != null){ 
+                                              echo '<option  value="'.$this->session->tempdata('mainTransaksi').'" selected>'.$this->session->tempdata('mainTransaksi').'</option>';
+                                            }?>
                                             <option  value="MASUK"><?php echo 'MASUK';?></option>
                                             <option  value="WAITING"><?php echo 'WAITING';?></option>
                                         </select>
@@ -119,13 +120,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainNama">Nama</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainNama" name='mainNama'>
+                                    <input type="text" class="form-control" id="mainNama" name='mainNama' value="<?php echo $this->session->tempdata('mainNama'); ?>">
                                   </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="mainKeterangan">Keterangan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <textarea style="height: 100px;" type="text" class="form-control" id="mainKeterangan" name='mainKeterangan'></textarea>
+                                    <textarea style="height: 100px;" type="text" class="form-control" id="mainKeterangan" name='mainKeterangan'><?php echo $this->session->tempdata('mainKeterangan'); ?></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -133,7 +134,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainAlamat">Alamat</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <textarea style="height: 100px;" type="text" class="form-control" id="mainAlamat" name="mainAlamat"></textarea>
+                                    <textarea style="height: 100px;" type="text" class="form-control" id="mainAlamat" name="mainAlamat"><?php echo $this->session->tempdata('mainAlamat'); ?></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -141,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainKota">Kota/Kabupaten</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="mainKota" name="mainKota">
+                                    <input type="text" class="form-control" id="mainKota" name="mainKota" value="<?php echo $this->session->tempdata('mainKota'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -149,7 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainJenisPengurusan">Jenis Pengurusan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="mainJenisPengurusan" name="mainJenisPengurusan">
+                                    <input type="text" class="form-control" id="mainJenisPengurusan" name="mainJenisPengurusan" value="<?php echo $this->session->tempdata('mainJenisPengurusan'); ?>">
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -157,7 +158,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomorRekening">Nomor Rekening</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainNomorRekening" name="mainNomorRekening">
+                                    <input type="text" class="form-control" id="mainNomorRekening" name="mainNomorRekening" value="<?php echo $this->session->tempdata('mainNomorRekening'); ?>">
                                   </div>
                                   <div class="col-sm-1">
                                       <button type="button" class="btn btn-success btn-sm" 
@@ -180,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomorRekening">Nama Nasabah</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainNamaNasabah" name="mainNamaNasabah" readonly>
+                                    <input type="text" class="form-control" id="mainNamaNasabah" name="mainNamaNasabah" readonly value="<?php echo $this->session->tempdata('mainNamaNasabah'); ?>">
                                   </div>
                               </div>
 
@@ -217,21 +218,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <td><p id='rowBPKBAlamat'><?php echo $bpkbAlamatPemlik; ?></p></td>
                               <td><p id='rowBPKBNoPolisi'><?php echo $bpkbNoPolisi; ?></p></td> 
                               <!-- <td><p id='rowBPKBVerif'><?php //echo 'Verifikasi'; ?></p></td>    -->
-                              <td> 
-                                <button type="button" class="btn btn-danger btn-sm" 
-                                        id="deleteTempBPKB"
-                                        data-toggle="tooltip" 
-                                        data-placement="bottom" 
-                                        title="Hapus"
-                                        name="deleteTempBPKB"> 
-                                        <i class="fa fa-trash"></i>
-                                </button>
+                              <td>                                                           
+                                <?php if($bpkbAgunanID != null){
+                                ?>
+                                  <button type="button" class="btn btn-danger btn-sm" 
+                                          id="deleteTempBPKB"
+                                          data-toggle="tooltip" 
+                                          data-placement="bottom" 
+                                          title="Hapus"
+                                          name="deleteTempBPKB"> 
+                                          <i class="fa fa-trash"></i>
+                                  </button>
+                                <?php
+                                } ?>
                               </td> 
                              
                           </tr>
                       </tbody>
               </table>
-              <a type="button" class="btn btn-primary btn-sm" id="btnTambahBPKB" href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahDataBPKB"> <i class="fa fa-pencil-square-o"></i> Tambah</a>   
+              <button type="button" class="btn btn-primary btn-sm" id="btnTambahBPKB"> <i class="far fa-edit"></i> 
+                <?php if($bpkbAgunanID != null){
+                  echo "Edit";
+                }else { echo "Tambah";}
+                ?>
+              </button>   
             </div>
             <!-- END BPKB -->
 
@@ -259,19 +269,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td><p id='rowSertLuasTanah'><?php echo $sertLuasTanah; ?></p></td>
                             <td><p id='rowSertPemilik'><?php echo $sertNamaPemilik; ?></p></td>
                             <!-- <td><p id='rowSertVerif'><?php // echo 'Verifikasi'; ?></p></td> -->
-                            <td><button type="button" class="btn btn-danger btn-sm" 
-                                      id="delTempSert"
-                                      data-toggle="tooltip" 
-                                      data-placement="bottom" 
-                                      title="Hapus"
-                                      name="delTempSert"> 
-                                      <i class="fa fa-trash"></i>
-                              </button>
+                            <td>                            
+                              <?php if($sertAgunanID != null){
+                              ?>
+                                <button type="button" class="btn btn-danger btn-sm" 
+                                        id="delTempSert"
+                                        data-toggle="tooltip" 
+                                        data-placement="bottom" 
+                                        title="Hapus"
+                                        name="delTempSert"> 
+                                        <i class="fa fa-trash"></i>
+                                </button>
+                              <?php
+                              } ?>
+                                
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <a type="button" class="btn btn-primary btn-sm" id="btnTambahSertif" href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahDataSertifikat"> <i class="fa fa-pencil-square-o"></i> Tambah</a>  
+                <button type="button" class="btn btn-primary btn-sm" id="btnTambahSertif"> 
+                    <i class="far fa-edit"></i>
+                    <?php if($sertAgunanID != null){
+                      echo "Edit";
+                    }else { echo "Tambah";}
+                    ?>
+                </button>  
                   
        
        

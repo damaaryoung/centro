@@ -16,8 +16,8 @@ var nomorDokument = '';
 var verifDokument = '';
 var dataTableeee = [];
 
-var jenis_verifikasi_list = '<option value="0">0</option>' +
-                            '<option value="1">1</option>';
+var jenis_verifikasi0 = '<option value="0">0</option>'; 
+var jenis_verifikasi1 = '<option value="1">1</option>';
 var base_url = $('#base_url').val();
 
 
@@ -32,11 +32,9 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
     
     console.log(nomor,noref,status,id,agunanID);
     $('#mainVerifikasiModal').modal('show');
-    $('#loading1').show();
 
     $('#mainVerifikasi').find('option').remove().end();
 
-    $('#mainVerifikasi').append(jenis_verifikasi_list);
 
     $.ajax({
         url : base_url + "index.php/AsetDokumenVerifikasiController/displayDetails",
@@ -68,6 +66,11 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
             $('#mainNomor').val(JaminanHeader.nomor);
             $('#mainNoReff').val(JaminanHeader.no_reff);
             $('#mainVerifikasi').append('<option value="' + JaminanHeader.verifikasi + '" selected>' + JaminanHeader.verifikasi  + '</option>');
+            if(JaminanHeader.verifikasi == '0'){
+                $('#mainVerifikasi').append(jenis_verifikasi1);
+            }else if(JaminanHeader.verifikasi == '1'){
+                $('#mainVerifikasi').append(jenis_verifikasi0);
+            }
            
             if(JaminanHeader.jenis_jaminan == 'SERTIFIKAT'){
                mappingFieldSertifikat(JaminanHeader,JaminanDokument);               
@@ -182,7 +185,12 @@ function mappingFieldSertifikat(JaminanHeader,JaminanDokument){
     $('#sertDokSHT').find('option').remove().end();
     $('#sertDokSTTS').find('option').remove().end();
     $('#sertDokSSB').find('option').remove().end();
-    $('#sertVerifikasi').append(jenis_verifikasi_list);
+    
+    if(JaminanDokument.verifikasi == '0'){
+        $('#sertVerifikasi').append(jenis_verifikasi1);
+    }else if(JaminanDokument.verifikasi == '1'){
+        $('#sertVerifikasi').append(jenis_verifikasi0);
+    }
 
 
 
@@ -383,7 +391,11 @@ function mappingFieldBPKB(JaminanHeader,JaminanDokument){
      $('#bpkbDokSKTrayek').find('option').remove().end();
      
 
-    $('#bpkbVerifikasi').append(jenis_verifikasi_list);
+    if(JaminanDokument.verifikasi == '0'){
+        $('#bpkbVerifikasi').append(jenis_verifikasi1);
+    }else if(JaminanDokument.verifikasi == '1'){
+        $('#bpkbVerifikasi').append(jenis_verifikasi0);
+    }
 
     ///untuk bpkb
     $('#bpkbTglRegister').val(JaminanDokument.tgl_register);
@@ -488,7 +500,11 @@ function mappingFieldEmas(JaminanHeader,JaminanDokument){
     $('#emasJenisEmas').find('option').remove().end();
     $('#emasVerifikasi').find('option').remove().end();
 
-    $('#emasVerifikasi').append(jenis_verifikasi_list);
+    if(JaminanDokument.verifikasi == '0'){
+        $('#emasVerifikasi').append(jenis_verifikasi1);
+    }else if(JaminanDokument.verifikasi == '1'){
+        $('#emasVerifikasi').append(jenis_verifikasi0);
+    }
 
 
     $('#emasVerifikasi').append('<option value="' + JaminanDokument.verifikasi + '" selected>' + JaminanDokument.verifikasi +'</option>'); 
@@ -511,8 +527,7 @@ function mappingFieldEmas(JaminanHeader,JaminanDokument){
     $('#rowEmasVerif').html(JaminanDokument.verifikasi);
 }
 
-function verifikasiHeader(){           
-
+function verifikasiHeader(){    
     idHeader            = $('#mainId').val();
     nomorHeader         =  $('#mainNomor').val();
     noRefHeader         =  $('#mainNoReff').val();
@@ -533,8 +548,20 @@ function verifikasiHeader(){
         verifDokument       = $('#emasVerifikasi').val(); 
      }
 
-    console.log(idHeader,nomorHeader,noRefHeader,verifHeader);
-    $('#loading1').show();
+    console.log(idHeader,nomorHeader,noRefHeader,verifHeader, verifDokument);
+    if(verifHeader == '0'){
+        alert('Status Verifikasi Jaminan Header masih 0');
+        return;
+    }else if(verifDokument == '0'){
+        alert('Status Verifikasi Jaminan Dokument Detail masih 0');
+        return;
+    }
+
+    $('#mainVerifikasiModal').scrollTop(0); 
+    $('#loading1').show();   
+    $('#loading').show();   
+    $("#btn_kembali_verifikasi_modal").prop("disabled", true);
+    $("#btn_simpan_verifikasi_modal").prop("disabled", true);
 
     $.ajax({
         url : base_url + "index.php/AsetDokumenVerifikasiController/verifikasi",
@@ -553,13 +580,11 @@ function verifikasiHeader(){
             console.log('harusnya bisa');
             console.log(response);
             alert('Data Verifikasi Sukses');
-            $('#loading1').hide();
             window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';  
         },
         error : function(response) {
             console.log('failed');
             alert('Data Gagal Di Verifikasi');
-            $('#loading1').hide();
             window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';
         }
     });    

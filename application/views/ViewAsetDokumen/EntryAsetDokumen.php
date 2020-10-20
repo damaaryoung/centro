@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   	<?php 
@@ -55,7 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                <div class="form-inline">
                     <div class="form-group">
                       <label for="email">Search</label> &nbsp; &nbsp;
-                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchAsetDokumen()"> 
+                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" > 
                      &nbsp;&nbsp;
                     </div>
                     <div class="form-group">
@@ -103,7 +103,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="card-header">
               <form method="get" action="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen"> 
                   <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"> Tambah </i></button> 
-                  <!--<input type="hidden" name="idData" value="<?php //echo $idData; ?>">    -->        
                </form>
             </div>
             <!-- /.card-header -->
@@ -142,7 +141,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             
                     ?>
                       <td>
-                            <div>
                                     <button type="button" class="btn btn-primary btn-sm btnUpdate" style ='padding-left: 5px;'
                                             data-nomor="<?= $row['nomor'] ?>"
                                             data-noref="<?= $row['no_reff'] ?>" 
@@ -235,11 +233,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <input type="hidden" name="status" value="<?php echo  $row['status'];?>">
                                     <input type="hidden" name="agunan_id" value="<?php echo $row['agunan_id'];?>">
                                    </form>
-
-
-
-              
-                            </div>
                       </td>
                       </tr>
                     <?php
