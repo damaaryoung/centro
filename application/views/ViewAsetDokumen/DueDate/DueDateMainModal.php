@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="mainDueDateModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog"
+  <div class="modal-dialog modal-xl"
        style="overflow-y:auto;" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -26,16 +26,21 @@
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-4">
+                                  <div class="col-sm-3">
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerja">Tanggal Rencana Kembali</label>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <input type="date" class="form-control" id="tanggalRencanaKembaliDueDate" name="tanggalRencanaKembaliDueDate">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                    
+                                      <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerja">Upload Cover Notes</label>
                                   </div>
                                   <div class="col-sm-6">
-                                    <input type="date" class="form-control" id="tanggalRencanaKembaliDueDate" name="tanggalRencanaKembaliDueDate">
+                                        <div class="custom-file">
+                                          <input type="file" id="customFile" accept=".img,.jpg,.jpeg,.png">
+                                        </div>
                                   </div>
                               </div>
                               

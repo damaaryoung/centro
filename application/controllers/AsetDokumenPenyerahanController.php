@@ -13,11 +13,12 @@ class AsetDokumenPenyerahanController extends CI_Controller {
 		$nomorAgunan 	= $this->input->post('nomorAgunan');
 		$nomorRefAgunan = $this->input->post('nomorRefAgunan');
 		$agunanID		= $this->input->post('agunanID');
+		$data_rekening  = $this->input->post('data_rekening');
 
 		$data['getJaminanHeader']			= $this->AsetDokumenPenyerahanModel->getJaminanHeader($nomorAgunan , $nomorRefAgunan);
 		$data['getJaminanDokument']			= $this->AsetDokumenPenyerahanModel->getJaminanDokument($agunanID, $nomorRefAgunan);
-
-		
+		$data['validasiLokasiJaminan']		= $this->AsetDokumenPenyerahanModel->validasiLokasiJaminan($agunanID, $nomorRefAgunan);
+		$data['validasSaldoRekening']		= $this->AsetDokumenPenyerahanModel->validasSaldoRekening($data_rekening);
 		echo json_encode($data);
 		
 	}

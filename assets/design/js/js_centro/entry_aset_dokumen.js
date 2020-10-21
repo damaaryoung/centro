@@ -1,12 +1,15 @@
 var nomor = '';
 var no_ref = '';
 var idAgunan = '';
+var data_rekening = '';
 var status = '';
 var datas = '';
 var ListKodeKantor = '';
 var sistemData = '';
 var JaminanHeader = '';
 var JaminanDokument = '';
+var validasSaldoRekening = '';
+var validasiLokasiJaminan = '';
 var KreKodeJenisAgunan = '';
 var KreKodeIkatanHukumAgunan = '';
 var persenDefault = '';
@@ -488,9 +491,9 @@ $('#bodyJenisPengurusan').on('click','.btnPiliJenis', function () {
     var newDate = new Date(sysdate);
     var kembali = '';
 
-    newDate.setDate(newDate.getDate() + keteranganJenisPengurusan + 11);
-    kembali = newDate.getFullYear() + "-" + ("0" + (newDate.getMonth() + 1)).slice(-2) + "-" + ("0" + (newDate.getDate() + 1)).slice(-2);
-
+    newDate.setDate(newDate.getDate() + keteranganJenisPengurusan);
+    kembali = newDate.getFullYear() + "-" + ("0" + (newDate.getMonth() + 1)).slice(-2) + "-" + ("0" + (newDate.getDate())).slice(-2);
+    console.log(newDate);
     $('#mainJenisPengurusanPinjam').val(namaJenisPengurusan);
     $('#mainTanggalRencanaKembaliPinjam').val(kembali);
     $('#ListJaminanPengurusanModal').modal('hide');
@@ -874,8 +877,11 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
     status = $(this).data("status");
     idAgunan = $(this).data("agunan");
     console.log(nomor,noref,status,idAgunan);
+    if(status != 'PINJAM'){
+        alert('Maaf, data tersebut bukan Peminjaman!');
+        return;
+    }
 
-    console.log(nomor + ' ' + noref + ' ' + status + ' ' + base_url + ' ' + idAgunan );
     $('#loading').show();
     $('#mainDueDateModal').modal('show');
     $.ajax({
@@ -916,12 +922,7 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
     noref = $(this).data("noref");
     status = $(this).data("status");
     idAgunan = $(this).data("agunan");
-   // var keterangan = "Pelunasan";
- 
-    console.log(nomor,noref,status,idAgunan,'ASI');
-
-    // $('#loading').show();
-
+    data_rekening = $(this).data("rekening");
     $('#PenyerahanMainModal').modal('show');
 
     $.ajax({
@@ -931,13 +932,29 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
-                "agunanID"       : idAgunan},
+                "agunanID"       : idAgunan,
+                "data_rekening"  : data_rekening
+            },
 
         success : function(response) {
-            JaminanHeader = response.getJaminanHeader[0];
-            JaminanDokument = response.getJaminanDokument[0];
+            JaminanHeader         = response.getJaminanHeader[0];
+            JaminanDokument       = response.getJaminanDokument[0];
+            validasSaldoRekening  = response.validasSaldoRekening[0];
+            validasiLokasiJaminan = response.validasiLokasiJaminan[0];
             
-            console.log(JaminanHeader, JaminanDokument);
+            console.log(validasSaldoRekening,validasiLokasiJaminan);
+            if(validasSaldoRekening > 0){
+                alert('Maaf, Data Masih Go Live, Tidak dapat dikeluarkan');
+                $('#PenyerahanMainModal').modal('hide');
+                $('#loading5').hide();
+                return;
+            }
+            if(validasiLokasiJaminan > 0){
+                alert('Beberapa jaminan masih berada di lokasi lain, Data tidak dapat dikeluarkan');
+                $('#PenyerahanMainModal').modal('hide');
+                $('#loading5').hide();
+                return;
+            }
  
             //  Penyerahan   
             $('#mainAreaKerjaPenyerahan').append('<option value="' + JaminanHeader.kode_kantor + '" selected>'+ JaminanHeader.kode_kantor + ' - ' + JaminanHeader.nama_kantor +'</option>');
@@ -965,7 +982,6 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
             }
             $('#loadingPenyerahan').hide();
             $('#loading').hide();
-            console.log("FINISH");
         },
         error : function(response) {
             console.log('failed');

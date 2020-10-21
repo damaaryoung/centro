@@ -208,6 +208,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             data-noref="<?= $row['no_reff'] ?>" 
                                             data-status="<?= $row['status'] ?>"
                                             data-agunan="<?= $row['agunan_id'] ?>"
+                                            data-rekening="<?= $row['no_rekening'] ?>"
                                             data-toggle="tooltip" 
                                             data-placement="bottom" 
                                             title="Penyerahan"

@@ -248,7 +248,7 @@ class AsetDokumenEntryModel extends CI_Model{
 					AND jaminan_header.status = 'MASUK' 
 					AND jaminan_header.jenis_jaminan = 'SERTIFIKAT' 
 				ORDER BY jaminan_header.nomor DESC 
-				LIMIT 0, 25  ";
+				LIMIT 0, 25;  ";
 		$query = $this->db2->query($str);
 		return $query->result_array();
 	}

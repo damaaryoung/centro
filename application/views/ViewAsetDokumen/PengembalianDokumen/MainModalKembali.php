@@ -48,7 +48,7 @@
                                   </div>
                                   <div class="col-sm-3">
                                         <select class="form-control select2" id="mainTransaksiKembali" name="mainTransaksiKembali" readonly>
-                                          <option value="KEMBALI">KEMBALI</option> 
+                                          <option value="MASUK">MASUK</option> 
                                         </select>
                                   </div>
                                   <div class="col-sm-3">

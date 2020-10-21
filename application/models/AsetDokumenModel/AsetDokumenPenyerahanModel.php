@@ -76,6 +76,24 @@ class AsetDokumenPenyerahanModel extends CI_Model{
 		
 		return $query->result_array();
 	}
+	public function validasiLokasiJaminan($agunanID, $nomorRefAgunan){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT COUNT(*) AS jml 
+				FROM
+					dpm_online.jaminan_dokument 
+				WHERE no_reff = '$nomorRefAgunan' 
+					AND kode_kantor_lokasi_jaminan <> kode_kantor;";
+		$query = $this->db2->query($str);
+		
+		return $query->result_array();
+	}
+	public function validasSaldoRekening($data_rekening){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT KreGetSaldoAkhir('$data_rekening',CURDATE());";
+		$query = $this->db2->query($str);
+		return $query->result_array();
+	}
+
 	public function sysdate(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
