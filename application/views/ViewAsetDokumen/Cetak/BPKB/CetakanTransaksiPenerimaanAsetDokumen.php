@@ -5,6 +5,10 @@
                                                                               margin-left:-4em;
                                                                               margin-top:-3.5em;
                                                                             ">
+            <p style="text-align: center; 
+                        font-size: 11px; 
+                        padding-top: -25px; 
+                        padding-left: -31px;"> <?php echo $alamatHeader ?></p>
             <h2 style="text-align: center;"><span style="text-decoration: underline;"><strong>BUKTI PENERIMAAN BPKB</strong></span></h2>
             <table border="0" style="width: 100%;
                                      font-size: 14px; 

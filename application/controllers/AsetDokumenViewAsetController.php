@@ -49,7 +49,7 @@ class AsetDokumenViewAsetController extends CI_Controller {
 		$this->session->set_userdata($data1);
 
 		if($session != ''){
-			$data['ListAsset'] = $this->AsetDokumenEntryModel->listAsetDokumen($kode_kantor);
+			
 			$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			
 			$this->load->view('ViewAsetDokumen/EntryAsetDokumen.php', $data);

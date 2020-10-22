@@ -84,4 +84,13 @@ class AsetDokumenCetakModel extends CI_Model{
         
         return $query->result_array();
 	}
+
+	public function getAlamatHeader(){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT CONCAT(alamat, ' ', kota, ' Telp.', telp, ' Fax.',fax) AS hasil FROM dpm_online.setup LIMIT 1;";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+	}
 }
+

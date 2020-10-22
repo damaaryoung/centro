@@ -57,6 +57,44 @@ $('#sertKodeIkatanAgunan').change(function(){
    $('#sertPersenDijamin').val(persenDefault);
 });
 
+$(document).ready(function () {     
+   
+    dataTableeee = [];
+    $('#loading').show(); 
+
+    $.ajax({
+            url : base_url + "index.php/AsetDokumenEntryController/getListAsetDokumen",
+            type : "POST",
+            dataType : "json",
+            data : {"test" : "test"},
+
+            success : function(response) {
+                $('#employeeTable').DataTable().clear();
+                $('#employeeTable').DataTable().destroy();
+                dataTableeee.push(response); 
+                $('#employeeTable > tbody:first').html(dataTableeee);
+                $(document).ready(function() {
+                    $('#employeeTable').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "aaSorting" : []
+                    } );
+                } );
+                $('#loading').hide();  
+                
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Gagal Get Data, Mohon Coba Kembali Beberapa Saat Lagi');
+                window.location = base_url + 'index.php/DashboardController/index';
+                $('#loading').hide();
+            }
+    });    
+    
+});
+
 $(function(){
     $('#check_ajb').on('click', function(){                  
        $("#sertNomorAJB").prop("disabled", !this.checked); 
@@ -2903,7 +2941,16 @@ function serchAsetDokumenB(){
                         "aaSorting" : []
                     } );
                 } );
-                $('#loading').hide();  
+                $('#loading').hide(); 
+                if(status == 'IN TRANSIT'){
+                    $(".btnCetaks").hide(); 
+                    $(".btnDelete").hide(); 
+                    $(".btnKembaliDokumen").hide(); 
+                    $(".btnDueDate").hide(); 
+                    $(".btnPenyerahan").hide(); 
+                    $(".btnPinjam").hide(); 
+                    
+                }
                 console.log("FINISH");
                 
             },

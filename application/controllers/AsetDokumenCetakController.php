@@ -81,7 +81,11 @@ class AsetDokumenCetakController extends CI_Controller {
             $data["usernameEmas"]          = $this->session->userdata('nama');
        
         endforeach;	
-      
+        $getAlamatHeader = $this->AsetDokumenCetakModel->getAlamatHeader($nomor, $no_reff);
+		foreach ($getAlamatHeader as $row) :
+            $data['alamatHeader']         = $row["hasil"];
+        endforeach;	
+
         if($data["jenis_jaminan"] == 'SERTIFIKAT'){
             if($data["status"] == 'MASUK'){
                 $cetak = $this->load->view('ViewAsetDokumen/Cetak/Sertifikat/CetakanTransaksiPenerimaanAsetDokumen.php', $data, TRUE);

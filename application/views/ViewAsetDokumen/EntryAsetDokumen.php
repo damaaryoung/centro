@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
 <div class="wrapper">
 
   	<?php 
@@ -110,11 +110,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <div class="card">
             <div class="card-header">
-            <?php  if( $this->session->userdata('menuAset') == '1'){ ?>
-              <form method="get" action="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen"> 
-                  <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"> Tambah </i></button> 
-               </form>
-            <?php }?>
+                <?php  if( $this->session->userdata('menuAset') == '1'){ ?>
+                  <form method="get" action="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen"> 
+                      <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"> Tambah </i></button> 
+                  </form>
+                <?php }?>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -134,128 +134,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </tr>
               </thead>
               <tbody id="bodyTableAsetDokumen">
-              <?php
-                         $idx = 1;
-                            foreach ($ListAsset as $row) :
-                                // $idData = $row['id_data'];
-                                $idx= 0;
-                                echo "<tr>";
-                                echo "<td>".$row['nomor']."</td>";
-                                echo "<td>".$row['agunan_id']."</td>";
-                                echo "<td>".$row['tgl']."</td>";
-                                echo "<td>".$row['nama']."</td>";     
-                                echo "<td>".$row['alamat']."</td>";
-                                echo "<td>".$row['jenis_jaminan']."</td>";
-                                echo "<td>".$row['status']."</td>";
-                                echo "<td>".$row['deskripsi_ringkas_jaminan']."</td>";
-                                echo "<td>".$row['lokasi_penyimpanan']."</td>";
-                            
-                    ?>
-                      <td>
-                                    <button type="button" class="btn btn-primary btn-sm btnUpdate" style ='padding-left: 5px;'
-                                            data-nomor="<?= $row['nomor'] ?>"
-                                            data-noref="<?= $row['no_reff'] ?>" 
-                                            data-status="<?= $row['status'] ?>"
-                                            data-agunan="<?= $row['agunan_id'] ?>"
-                                            data-toggle="tooltip" 
-                                            data-placement="bottom" 
-                                            title="Edit"
-                                            name="btnUpdate"> 
-                                            <i style="padding-left: 5px;" class="fas fa-edit"></i>
-                                    </button>
-                                <?php 
-                                    if( $this->session->userdata('menuAset') == '1' ){
-
-                                ?>
-                                    <button type="button" class="btn btn-danger btn-sm btnDelete" style ='padding-left: 5px;'
-                                            data-nomor="<?= $row['nomor'] ?>"
-                                            data-noref="<?= $row['no_reff'] ?>" 
-                                            data-status="<?= $row['status'] ?>"
-                                            data-agunan="<?= $row['agunan_id'] ?>"
-                                            data-norekening="<?= $row['no_rekening'] ?>"
-                                            data-verifikasi="<?= $row['verifikasi'] ?>"
-                                            data-toggle="tooltip" 
-                                            data-placement="bottom" 
-                                            title="Delete"
-                                            name="btnDelete"> 
-                                            <i style ='padding-left: 5px;' class="fa fa-trash"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-warning btn-sm btnPinjam" style ='padding-left: 5px;'
-                                            data-nomor="<?= $row['nomor'] ?>"
-                                            data-noref="<?= $row['no_reff'] ?>" 
-                                            data-status="<?= $row['status'] ?>"
-                                            data-agunan="<?= $row['agunan_id'] ?>"
-                                            data-toggle="tooltip" 
-                                            data-placement="bottom" 
-                                            title="Peminjaman"
-                                            name="btnPinjam"> 
-                                            <i style ='padding-left: 5px;' class="far fa-hand-point-up"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-success btn-sm btnKembaliDokumen" style ='padding-left: 5px;'
-                                            data-nomor="<?= $row['nomor'] ?>"
-                                            data-noref="<?= $row['no_reff'] ?>" 
-                                            data-status="<?= $row['status'] ?>"
-                                            data-agunan="<?= $row['agunan_id'] ?>"
-                                            data-toggle="tooltip" 
-                                            data-placement="bottom" 
-                                            title="Pengembalian"
-                                            name="btnKembali"> 
-                                            <i style ='padding-left: 5px;' class="far fa-hand-point-down"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-primary btn-sm btnDueDate" style ='padding-left: 5px;'
-                                            data-nomor="<?= $row['nomor'] ?>"
-                                            data-noref="<?= $row['no_reff'] ?>" 
-                                            data-status="<?= $row['status'] ?>"
-                                            data-agunan="<?= $row['agunan_id'] ?>"
-                                            data-toggle="tooltip" 
-                                            data-placement="bottom" 
-                                            title="Due Date"
-                                            name="btnKembali"> 
-                                            <i style ='padding-left: 5px;' class="fas fa-stopwatch"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-success btn-sm btnPenyerahan" style ='padding-left: 5px;'
-                                            data-nomor="<?= $row['nomor'] ?>"
-                                            data-noref="<?= $row['no_reff'] ?>" 
-                                            data-status="<?= $row['status'] ?>"
-                                            data-agunan="<?= $row['agunan_id'] ?>"
-                                            data-rekening="<?= $row['no_rekening'] ?>"
-                                            data-toggle="tooltip" 
-                                            data-placement="bottom" 
-                                            title="Penyerahan"
-                                            name="btnKembali"> 
-                                            <i style ='padding-left: 5px;'  class="fas fa-file-import"></i>
-                                    </button>
-                                    
-                                    <form method="post" target="_blank" style ='display:inline;' action="<?php echo base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen")?>"> 
-                                      <button type="submit" class="btn btn-info btn-sm btnCetaks" 
-                                              data-nomor="<?= $row['nomor'] ?>"
-                                              data-noref="<?= $row['no_reff'] ?>" 
-                                              data-status="<?= $row['status'] ?>"
-                                              data-agunan="<?= $row['agunan_id'] ?>"
-                                              data-toggle="tooltip" 
-                                              data-placement="bottom" 
-                                              title="Cetak"
-                                              name="btnKembali"> 
-                                              <i class="fa fa-print"></i>
-                                      </button>
-
-                                      <input type="hidden" name="nomor" value="<?php echo  $row['nomor'];  ?>">
-                                      <input type="hidden" name="no_reff" value="<?php echo $row['no_reff'];?>">
-                                      <input type="hidden" name="status" value="<?php echo  $row['status'];?>">
-                                      <input type="hidden" name="agunan_id" value="<?php echo $row['agunan_id'];?>">
-                                    </form>
-                                  <?php  } 
-                                ?>
-                      </td>
-                      </tr>
-                    <?php
-                      $idx++;
-                      endforeach;
-                    ?>
+                <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                </tr>
               </tbody>
           </table>
             </div>
@@ -335,6 +225,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               .modal-body{
                   height: 500px;
                   overflow-y: auto;
+              }
+              .modal-backdrop {
+                width: 100% !important;
+                height: 100% !important;
               }
   </style>
 
