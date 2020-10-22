@@ -30,10 +30,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-      Entry Aset Dokumen
-        <small>Transaksi Aset Dokumen</small>
-      </h1>
+        
+        <?php  if( $this->session->userdata('menuAset') == '1'){ 
+            echo  '<h1>
+                    Entry Aset Dokumen
+                    <small>Transaksi Aset Dokumen</small>
+                  </h1>';
+         } else{
+            echo  '<h1>
+                    View Asset Dokumen
+                    <small>Transaksi Aset Dokumen</small>
+                  </h1>';
+         }?>
+
       <ol class="breadcrumb">
       
       </ol>
@@ -101,9 +110,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <div class="card">
             <div class="card-header">
+            <?php  if( $this->session->userdata('menuAset') == '1'){ ?>
               <form method="get" action="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen"> 
                   <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"> Tambah </i></button> 
                </form>
+            <?php }?>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -152,7 +163,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             name="btnUpdate"> 
                                             <i style="padding-left: 5px;" class="fas fa-edit"></i>
                                     </button>
+                                <?php 
+                                    if( $this->session->userdata('menuAset') == '1' ){
 
+                                ?>
                                     <button type="button" class="btn btn-danger btn-sm btnDelete" style ='padding-left: 5px;'
                                             data-nomor="<?= $row['nomor'] ?>"
                                             data-noref="<?= $row['no_reff'] ?>" 
@@ -217,23 +231,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </button>
                                     
                                     <form method="post" target="_blank" style ='display:inline;' action="<?php echo base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen")?>"> 
-                                    <button type="submit" class="btn btn-info btn-sm btnCetaks" 
-                                            data-nomor="<?= $row['nomor'] ?>"
-                                            data-noref="<?= $row['no_reff'] ?>" 
-                                            data-status="<?= $row['status'] ?>"
-                                            data-agunan="<?= $row['agunan_id'] ?>"
-                                            data-toggle="tooltip" 
-                                            data-placement="bottom" 
-                                            title="Cetak"
-                                            name="btnKembali"> 
-                                            <i class="fa fa-print"></i>
-                                    </button>
+                                      <button type="submit" class="btn btn-info btn-sm btnCetaks" 
+                                              data-nomor="<?= $row['nomor'] ?>"
+                                              data-noref="<?= $row['no_reff'] ?>" 
+                                              data-status="<?= $row['status'] ?>"
+                                              data-agunan="<?= $row['agunan_id'] ?>"
+                                              data-toggle="tooltip" 
+                                              data-placement="bottom" 
+                                              title="Cetak"
+                                              name="btnKembali"> 
+                                              <i class="fa fa-print"></i>
+                                      </button>
 
-                                    <input type="hidden" name="nomor" value="<?php echo  $row['nomor'];  ?>">
-                                    <input type="hidden" name="no_reff" value="<?php echo $row['no_reff'];?>">
-                                    <input type="hidden" name="status" value="<?php echo  $row['status'];?>">
-                                    <input type="hidden" name="agunan_id" value="<?php echo $row['agunan_id'];?>">
-                                   </form>
+                                      <input type="hidden" name="nomor" value="<?php echo  $row['nomor'];  ?>">
+                                      <input type="hidden" name="no_reff" value="<?php echo $row['no_reff'];?>">
+                                      <input type="hidden" name="status" value="<?php echo  $row['status'];?>">
+                                      <input type="hidden" name="agunan_id" value="<?php echo $row['agunan_id'];?>">
+                                    </form>
+                                  <?php  } 
+                                ?>
                       </td>
                       </tr>
                     <?php
@@ -247,6 +263,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>  
           </div> 
           <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+          <input type="hidden" class="form-control" id="menuAsset" name="menuAsset" value = "<?php echo $this->session->userdata('menuAset'); ?>">
     </section>
 
 	<?php
@@ -262,11 +279,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $KembaliSertifikatModal;
         echo $KembaliBPKBModal;
         echo $KembaliEmasModal;
-        echo $DueDateMainModal;
         echo $PenyerahanMainModal;
         echo $PenyerahanSertifikatModal;
         echo $PenyerahanBPKBModal;
         echo $PenyerahanEmasModal;
+        echo $DueDateMainModal;
         echo $ctrlbar;
         echo $js;
         echo $footer;

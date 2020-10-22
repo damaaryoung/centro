@@ -123,6 +123,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 						JH.tgl_rencana_kembali,
 						JH.jenis_pengurusan,
 						JH.verifikasi,
+						JH.upload_cover_notes,
 						kk.`kode_cabang`,
 						kk.`nama_kantor`
 					FROM dpm_online.jaminan_header JH,
@@ -579,6 +580,16 @@ class AsetDokumenUpdateModel extends CI_Model{
 		$this->db2->query(" UPDATE dpm_online.jaminan_header 
 						    SET tgl_rencana_kembali = '$tanggalRencanaKembaliDueDate' 
 							WHERE id= '$mainIdDueDate';
+						");
+	}
+
+	public function updateCoverNotes($CoverNotesID,$namafileUpload){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+												
+		$this->db2->query(" UPDATE dpm_online.jaminan_header 
+						    SET upload_cover_notes = '$namafileUpload' 
+							WHERE id= '$CoverNotesID';
 						");
 	}
 

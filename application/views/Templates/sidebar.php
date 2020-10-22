@@ -52,6 +52,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenViewAsetController/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View Aset Dokumen</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Verifikasi Aset Dokumen</p>

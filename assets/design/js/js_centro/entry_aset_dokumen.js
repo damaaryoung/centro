@@ -39,7 +39,9 @@ var namaNotaris = '';
 var alamatNotaris = '';
 var kotaNotaris = '';
 var dataTableeee = [];
+var coverNotes = '';
 var base_url = $('#base_url').val();
+var menuAsset = $('#menuAsset').val();
 var asli_option = '<option value="1">ASLI</option> <option value="2">COPY</option>';
 var jenis_sert_otion = '<option value="SHM">SHM</option> <option value="SHGB">SHGB</option> <option value="AJB">AJB</option>';
 var main_transaksi ='<option value="IN TRANSIT">IN TRANSIT</option>' +
@@ -117,12 +119,20 @@ $('#btn_simpan_update_modal').click(function () {
 $('#btn_kembali_update_modal').click(function () { 
     $('#mainUpdateModal').modal('hide');
     $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+    if( menuAsset == '1'){
+        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+    }else if( menuAsset == '2'){
+        window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+    }
 });
 $('#btn_kembali_update_modal2').click(function () {
     $('#mainUpdateModal').modal('hide');
     $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+    if( menuAsset == '1'){
+        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+    }else if( menuAsset == '2'){
+        window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+    }
 });
 // modal sertifikat
 $('#sert_button_simpan').click(function () {
@@ -903,8 +913,21 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
             $('#mainNomorDueDate').val(JaminanHeader.nomor);
             $('#mainNoReffDueDate').val(JaminanHeader.no_reff);
             $('#namaNotarisDueDate').val(JaminanHeader.nama);
-            
+            $('#CoverNotesID').val(JaminanHeader.id);
 
+            if(JaminanHeader.upload_cover_notes == '' || JaminanHeader.upload_cover_notes == null){
+                alert('Mohon lakukan upload Cover Notes baru, untuk mengubah tanggal Due Date!');
+                $("#imgCoverNotes").attr('src', base_url + 'PUBLIC/CoverNotes/default.jpeg');
+                $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/default.jpeg');
+                
+                $('#btn_simpan_dueDate_modal').prop("disabled", true);
+            }else{
+                $("#imgCoverNotes").attr('src',  base_url + 'PUBLIC/CoverNotes/' + JaminanHeader.upload_cover_notes);
+                $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/' + JaminanHeader.upload_cover_notes);
+                $('#btn_simpan_dueDate_modal').prop("disabled", false);
+            }
+            
+            
             $('#loading').hide();
             $('#loading6').hide();
         },
@@ -2539,13 +2562,21 @@ function updateSertifikat(){
             console.log('harusnya bisa');
             console.log(response);
             alert('Data Sukses Di Update');
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
+            if( menuAsset == '1'){
+                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            }else if( menuAsset == '2'){
+                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+            }
         },
         error : function(response) {
             console.log('failed');
             alert('Data Gagal Update Data');
             $('#loading1').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            if( menuAsset == '1'){
+                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            }else if( menuAsset == '2'){
+                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+            }
         }
     });    
 }
@@ -2618,13 +2649,21 @@ function updateBPKB(){
             console.log(response);
             alert('Data Sukses Di Update');
             $('#loading1').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
+            if( menuAsset == '1'){
+                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            }else if( menuAsset == '2'){
+                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+            }
         },
         error : function(response) {
             console.log('failed');
             alert('Data Gagal Di Update');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            if( menuAsset == '1'){
+                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            }else if( menuAsset == '2'){
+                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+            }
         }
     });    
 
@@ -2665,13 +2704,21 @@ function updateEmas(){
             console.log(response);
             alert('Data Sukses Di Update');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
+            if( menuAsset == '1'){
+                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            }else if( menuAsset == '2'){
+                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+            } 
         },
         error : function(response) {
             console.log('failed');
             alert('Data Gagal Di Update');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            if( menuAsset == '1'){
+                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            }else if( menuAsset == '2'){
+                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+            }
         }
     });    
 }
@@ -2905,3 +2952,33 @@ function serchDataRekening(){
             }
     });    
 }
+
+$('#uploadForm').on('submit', function (e) {
+    e.preventDefault();
+    if( $("#coverNotes").val() == '' ){
+        alert("Mohon Pilih Cover Notes untuk di upload!");
+    }
+    else{
+        $("#loading6").show();
+        $.ajax({
+            url : base_url + "index.php/AsetDokumenUpdateController/uploadCoverNotes",
+            type : "POST",
+            data : new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,     
+            success : function(data) {
+               $("#loading6").hide();
+               $("#imgCoverNotes").attr('src',data);
+               $("#imgCoverNotes2").attr("href", data);
+               $('#btn_simpan_dueDate_modal').prop("disabled", false);
+               alert("Upload cover notes sukses, anda bisa mengubah due date");
+               
+            },
+            error : function(response) {
+                console.log(response);
+                alert(response);
+            }
+        }); 
+    }
+});

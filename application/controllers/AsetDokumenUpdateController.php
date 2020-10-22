@@ -681,7 +681,29 @@ class AsetDokumenUpdateController extends CI_Controller {
 	}
 
 	
+	public function uploadCoverNotes(){
+		$CoverNotesID = $this->input->post('CoverNotesID');
+		$namaFile = "CoverNotes_".$CoverNotesID;
+		if(isset($_FILES["coverNotes"]["name"])){
 
+
+			$config['upload_path']   = './PUBLIC/CoverNotes/';
+			$config['allowed_types'] = "*";
+			$config['overwrite']	 = true;
+			$config['file_name']     = $namaFile;
+			$this->load->library("upload", $config);
+
+			if(!$this->upload->do_upload('coverNotes') ){
+				echo $this->upload->display_errors();
+			} else{
+				
+				$data = $this->upload->data();
+				$namafileUpload = $data["file_name"];
+				$this->AsetDokumenUpdateModel->updateCoverNotes($CoverNotesID,$namafileUpload);
+				echo base_url().'PUBLIC/CoverNotes/'.$data["file_name"];		
+			}
+		}
+	}
 
 	
 }

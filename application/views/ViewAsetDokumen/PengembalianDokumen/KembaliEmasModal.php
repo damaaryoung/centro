@@ -21,7 +21,6 @@
             <div id="DataEmasKembali" class="tabcontent">
                 <div class="row">
                       <div class="col-md-10 mx-auto">
-                          <form method="post" action="<?php echo base_url("index.php/AsetDokumenEntryController/handleUserInputEmas")?>">
                               <div class="form-group row">
                                   <div class="col-sm-3">
                                       <label class="control-label" style="padding-top: 5px;"  for="emasAgunanIDKembali">Agunan ID</label>

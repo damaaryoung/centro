@@ -10,6 +10,7 @@ class AsetDokumenEntryController extends CI_Controller {
 
 	/// START DISPLAY CONTROL///
 	public function index(){
+		$this->session->unset_userdata('menuAset');
 		$session = $this->session->userdata('nama');
 		$kode_kantor = $this->session->userdata('kd_cabang');
 		$divisi_id   = $this->session->userdata('divisi_id');
@@ -43,6 +44,10 @@ class AsetDokumenEntryController extends CI_Controller {
 		$data['PenyerahanSertifikatModal'] = $this->load->view('ViewAsetDokumen/PenyerahanDokumen/PenyerahanSertifikatModal.php', NULL, TRUE);
 		$data['PenyerahanBPKBModal'] = $this->load->view('ViewAsetDokumen/PenyerahanDokumen/PenyerahanBPKBModal.php', NULL, TRUE);
 		$data['PenyerahanEmasModal'] = $this->load->view('ViewAsetDokumen/PenyerahanDokumen/PenyerahanEmasModal.php', NULL, TRUE);
+
+		$data1['menuAset']    = '1';
+		$this->session->set_userdata($data1);
+
 		if($session != ''){
 			$data['ListAsset'] = $this->AsetDokumenEntryModel->listAsetDokumen($kode_kantor);
 			$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
@@ -1427,110 +1432,139 @@ class AsetDokumenEntryController extends CI_Controller {
 		$jenis = $this->input->post('jenis');
 
 		$searchlist = $this->AsetDokumenEntryModel->querySearchA($search,$kode_kantor);
-		foreach ($searchlist as $row) :
-			$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
-										. $row['agunan_id']. '</td> <td>'
-										. $row['tgl']. '</td> <td>'
-										. $row['nama'].'</td> <td>'
-										. $row['alamat'] . '</td> <td>'
-										. $row['jenis_jaminan']. '</td> <td>'
-										. $row['status'].'</td> <td>'
-										. $row['deskripsi_ringkas_jaminan'].'</td> <td>'
-										. $row['lokasi_penyimpanan'].'</td> <td style="width:250px;">'
-										. ' <button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Edit"
-													name="btnUpdate"> 
-													<i style="padding-left: 5px;" class="fas fa-edit"></i>
-											</button>  
-											<button type="button" class="btn btn-danger btn-sm btnDelete" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-norekening="'. $row['no_rekening'] .'"
-                                            		data-verifikasi="'. $row['verifikasi'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Delete"
-													name="btnDelete"> 
-													<i style ="padding-left: 5px;" class="fa fa-trash"></i>
-											</button>
-											<button type="button" class="btn btn-warning btn-sm btnPinjam" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Peminjaman"
-													name="btnPinjam"> 
-													<i style ="padding-left: 5px;" class="far fa-hand-point-up"></i>
-											</button>
-											<button type="button" class="btn btn-success btn-sm btnKembaliDokumen" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Pengembalian"
-													name="btnKembali"> 
-													<i style ="padding-left: 5px;" class="far fa-hand-point-down"></i>
-											</button>
-											<button type="button" class="btn btn-primary btn-sm btnDueDate" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Due Date"
-													name="btnKembali"> 
-													<i style ="padding-left: 5px;" class="fas fa-stopwatch"></i>
-											</button>
-
-											<button type="button" class="btn btn-success btn-sm btnPenyerahan" style ="padding-left: 5px;"
-												data-nomor="'. $row['nomor'] .'"
-												data-noref="'. $row['no_reff'] .'" 
-												data-status="'. $row['status'] .'"
-												data-agunan="'. $row['agunan_id'] .'"
-												data-rekening="'. $row['no_rekening'] .'"
-												data-toggle="tooltip" 
-												data-placement="bottom" 
-												title="Penyerahan"
-												name="btnKembali"> 
-												<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
-                                    		</button>
-
-											<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
-												<button type="submit" class="btn btn-info btn-sm btnCetaks" 
+		if( $this->session->userdata('menuAset') == '1'){
+			foreach ($searchlist as $row) :
+				$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
+											. $row['agunan_id']. '</td> <td>'
+											. $row['tgl']. '</td> <td>'
+											. $row['nama'].'</td> <td>'
+											. $row['alamat'] . '</td> <td>'
+											. $row['jenis_jaminan']. '</td> <td>'
+											. $row['status'].'</td> <td>'
+											. $row['deskripsi_ringkas_jaminan'].'</td> <td>'
+											. $row['lokasi_penyimpanan'].'</td> <td style="width:250px;">'
+											. ' <button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
 														data-nomor="'. $row['nomor'] .'"
 														data-noref="'. $row['no_reff'] .'" 
 														data-status="'. $row['status'] .'"
 														data-agunan="'. $row['agunan_id'] .'"
 														data-toggle="tooltip" 
 														data-placement="bottom" 
-														title="Cetak"
+														title="Edit"
+														name="btnUpdate"> 
+														<i style="padding-left: 5px;" class="fas fa-edit"></i>
+												</button>
+												<button type="button" class="btn btn-danger btn-sm btnDelete" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-norekening="'. $row['no_rekening'] .'"
+														data-verifikasi="'. $row['verifikasi'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Delete"
+														name="btnDelete"> 
+														<i style ="padding-left: 5px;" class="fa fa-trash"></i>
+												</button>
+												<button type="button" class="btn btn-warning btn-sm btnPinjam" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Peminjaman"
+														name="btnPinjam"> 
+														<i style ="padding-left: 5px;" class="far fa-hand-point-up"></i>
+												</button>
+												<button type="button" class="btn btn-success btn-sm btnKembaliDokumen" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Pengembalian"
 														name="btnKembali"> 
-														<i class="fa fa-print"></i>
+														<i style ="padding-left: 5px;" class="far fa-hand-point-down"></i>
+												</button>
+												<button type="button" class="btn btn-primary btn-sm btnDueDate" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Due Date"
+														name="btnKembali"> 
+														<i style ="padding-left: 5px;" class="fas fa-stopwatch"></i>
 												</button>
 
-												<input type="hidden" name="nomor" value="'. $row['nomor'] .'">
-												<input type="hidden" name="no_reff" value="'. $row['no_reff'] .'">
-												<input type="hidden" name="status" value="'.  $row['status'] .'">
-												<input type="hidden" name="agunan_id" value="'. $row['agunan_id'] .'">
-											</form>
-																					
-											</td> </tr>'];
-											
-									
-		endforeach;	
+												<button type="button" class="btn btn-success btn-sm btnPenyerahan" style ="padding-left: 5px;"
+													data-nomor="'. $row['nomor'] .'"
+													data-noref="'. $row['no_reff'] .'" 
+													data-status="'. $row['status'] .'"
+													data-agunan="'. $row['agunan_id'] .'"
+													data-rekening="'. $row['no_rekening'] .'"
+													data-toggle="tooltip" 
+													data-placement="bottom" 
+													title="Penyerahan"
+													name="btnKembali"> 
+													<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
+												</button>
+
+												<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
+													<button type="submit" class="btn btn-info btn-sm btnCetaks" 
+															data-nomor="'. $row['nomor'] .'"
+															data-noref="'. $row['no_reff'] .'" 
+															data-status="'. $row['status'] .'"
+															data-agunan="'. $row['agunan_id'] .'"
+															data-toggle="tooltip" 
+															data-placement="bottom" 
+															title="Cetak"
+															name="btnKembali"> 
+															<i class="fa fa-print"></i>
+													</button>
+
+													<input type="hidden" name="nomor" value="'. $row['nomor'] .'">
+													<input type="hidden" name="no_reff" value="'. $row['no_reff'] .'">
+													<input type="hidden" name="status" value="'.  $row['status'] .'">
+													<input type="hidden" name="agunan_id" value="'. $row['agunan_id'] .'">
+												</form>
+																						
+												</td> </tr>'];
+												
+										
+			endforeach;	
+		}else{
+			foreach ($searchlist as $row) :
+				$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
+											. $row['agunan_id']. '</td> <td>'
+											. $row['tgl']. '</td> <td>'
+											. $row['nama'].'</td> <td>'
+											. $row['alamat'] . '</td> <td>'
+											. $row['jenis_jaminan']. '</td> <td>'
+											. $row['status'].'</td> <td>'
+											. $row['deskripsi_ringkas_jaminan'].'</td> <td>'
+											. $row['lokasi_penyimpanan'].'</td> <td style="width:250px;">'
+											. ' <button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Edit"
+														name="btnUpdate"> 
+														<i style="padding-left: 5px;" class="fas fa-edit"></i>
+												</button>																						
+												</td> </tr>'];
+												
+										
+			endforeach;
+		}
+			
 		//$data['mantap'] = 'mantap';
 		echo json_encode($data);
 	}
@@ -1541,111 +1575,138 @@ class AsetDokumenEntryController extends CI_Controller {
 		$jenis = $this->input->post('jenis');
 
 		$searchlist = $this->AsetDokumenEntryModel->querySearchB($status,$kode_kantor,$jenis);
-		foreach ($searchlist as $row) :
-			$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
-										. $row['agunan_id']. '</td> <td>'
-										. $row['tgl']. '</td> <td>'
-										. $row['nama'].'</td> <td>'
-										. $row['alamat'] . '</td> <td>'
-										. $row['jenis_jaminan']. '</td> <td>'
-										. $row['status'].'</td> <td>'
-										. $row['deskripsi_ringkas_jaminan'].'</td> <td>'
-										. $row['lokasi_penyimpanan'].'</td> <td style="width:250px;">'
-										. ' <button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Edit"
-													name="btnUpdate"> 
-													<i style="padding-left: 5px;" class="fas fa-edit"></i>
-											</button>  
-											<button type="button" class="btn btn-danger btn-sm btnDelete" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-norekening="'. $row['no_rekening'] .'"
-                                            		data-verifikasi="'. $row['verifikasi'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Delete"
-													name="btnDelete"> 
-													<i style ="padding-left: 5px;" class="fa fa-trash"></i>
-											</button>
-											<button type="button" class="btn btn-warning btn-sm btnPinjam" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Peminjaman"
-													name="btnPinjam"> 
-													<i style ="padding-left: 5px;" class="far fa-hand-point-up"></i>
-											</button>
-											<button type="button" class="btn btn-success btn-sm btnKembaliDokumen" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Pengembalian"
-													name="btnKembali"> 
-													<i style ="padding-left: 5px;" class="far fa-hand-point-down"></i>
-											</button>
-											<button type="button" class="btn btn-primary btn-sm btnDueDate" style ="padding-left: 5px;"
-													data-nomor="'. $row['nomor'] .'"
-													data-noref="'. $row['no_reff'] .'" 
-													data-status="'. $row['status'] .'"
-													data-agunan="'. $row['agunan_id'] .'"
-													data-toggle="tooltip" 
-													data-placement="bottom" 
-													title="Due Date"
-													name="btnKembali"> 
-													<i style ="padding-left: 5px;" class="fas fa-stopwatch"></i>
-											</button>
-
-											<button type="button" class="btn btn-success btn-sm btnPenyerahan" style ="padding-left: 5px;"
-												data-nomor="'. $row['nomor'] .'"
-												data-noref="'. $row['no_reff'] .'" 
-												data-status="'. $row['status'] .'"
-												data-agunan="'. $row['agunan_id'] .'"
-												data-rekening="'. $row['no_rekening'] .'"
-												data-toggle="tooltip" 
-												data-placement="bottom" 
-												title="Penyerahan"
-												name="btnKembali"> 
-												<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
-                                    		</button>
-
-											<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
-											<button type="submit" class="btn btn-info btn-sm btnCetaks" 
+		if( $this->session->userdata('menuAset') == '1'){
+			foreach ($searchlist as $row) :
+				$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
+											. $row['agunan_id']. '</td> <td>'
+											. $row['tgl']. '</td> <td>'
+											. $row['nama'].'</td> <td>'
+											. $row['alamat'] . '</td> <td>'
+											. $row['jenis_jaminan']. '</td> <td>'
+											. $row['status'].'</td> <td>'
+											. $row['deskripsi_ringkas_jaminan'].'</td> <td>'
+											. $row['lokasi_penyimpanan'].'</td> <td style="width:250px;">'
+											. ' <button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
 														data-nomor="'. $row['nomor'] .'"
 														data-noref="'. $row['no_reff'] .'" 
 														data-status="'. $row['status'] .'"
 														data-agunan="'. $row['agunan_id'] .'"
 														data-toggle="tooltip" 
 														data-placement="bottom" 
-														title="Cetak"
+														title="Edit"
+														name="btnUpdate"> 
+														<i style="padding-left: 5px;" class="fas fa-edit"></i>
+												</button>
+												<button type="button" class="btn btn-danger btn-sm btnDelete" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-norekening="'. $row['no_rekening'] .'"
+														data-verifikasi="'. $row['verifikasi'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Delete"
+														name="btnDelete"> 
+														<i style ="padding-left: 5px;" class="fa fa-trash"></i>
+												</button>
+												<button type="button" class="btn btn-warning btn-sm btnPinjam" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Peminjaman"
+														name="btnPinjam"> 
+														<i style ="padding-left: 5px;" class="far fa-hand-point-up"></i>
+												</button>
+												<button type="button" class="btn btn-success btn-sm btnKembaliDokumen" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Pengembalian"
 														name="btnKembali"> 
-														<i class="fa fa-print"></i>
+														<i style ="padding-left: 5px;" class="far fa-hand-point-down"></i>
+												</button>
+												<button type="button" class="btn btn-primary btn-sm btnDueDate" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Due Date"
+														name="btnKembali"> 
+														<i style ="padding-left: 5px;" class="fas fa-stopwatch"></i>
 												</button>
 
-												<input type="hidden" name="nomor" value="'. $row['nomor'] .'">
-												<input type="hidden" name="no_reff" value="'. $row['no_reff'] .'">
-												<input type="hidden" name="status" value="'.  $row['status'] .'">
-												<input type="hidden" name="agunan_id" value="'. $row['agunan_id'] .'">
-											</form>
-																					
-											</td> </tr>'];
-											
-									
-		endforeach;	
-		//$data['mantap'] = 'mantap';
+												<button type="button" class="btn btn-success btn-sm btnPenyerahan" style ="padding-left: 5px;"
+													data-nomor="'. $row['nomor'] .'"
+													data-noref="'. $row['no_reff'] .'" 
+													data-status="'. $row['status'] .'"
+													data-agunan="'. $row['agunan_id'] .'"
+													data-rekening="'. $row['no_rekening'] .'"
+													data-toggle="tooltip" 
+													data-placement="bottom" 
+													title="Penyerahan"
+													name="btnKembali"> 
+													<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
+												</button>
+
+												<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
+													<button type="submit" class="btn btn-info btn-sm btnCetaks" 
+															data-nomor="'. $row['nomor'] .'"
+															data-noref="'. $row['no_reff'] .'" 
+															data-status="'. $row['status'] .'"
+															data-agunan="'. $row['agunan_id'] .'"
+															data-toggle="tooltip" 
+															data-placement="bottom" 
+															title="Cetak"
+															name="btnKembali"> 
+															<i class="fa fa-print"></i>
+													</button>
+
+													<input type="hidden" name="nomor" value="'. $row['nomor'] .'">
+													<input type="hidden" name="no_reff" value="'. $row['no_reff'] .'">
+													<input type="hidden" name="status" value="'.  $row['status'] .'">
+													<input type="hidden" name="agunan_id" value="'. $row['agunan_id'] .'">
+												</form>
+																						
+												</td> </tr>'];
+												
+										
+			endforeach;	
+		}else{
+			foreach ($searchlist as $row) :
+				$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
+											. $row['agunan_id']. '</td> <td>'
+											. $row['tgl']. '</td> <td>'
+											. $row['nama'].'</td> <td>'
+											. $row['alamat'] . '</td> <td>'
+											. $row['jenis_jaminan']. '</td> <td>'
+											. $row['status'].'</td> <td>'
+											. $row['deskripsi_ringkas_jaminan'].'</td> <td>'
+											. $row['lokasi_penyimpanan'].'</td> <td style="width:250px;">'
+											. ' <button type="button" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
+														data-nomor="'. $row['nomor'] .'"
+														data-noref="'. $row['no_reff'] .'" 
+														data-status="'. $row['status'] .'"
+														data-agunan="'. $row['agunan_id'] .'"
+														data-toggle="tooltip" 
+														data-placement="bottom" 
+														title="Edit"
+														name="btnUpdate"> 
+														<i style="padding-left: 5px;" class="fas fa-edit"></i>
+												</button>																						
+												</td> </tr>'];
+												
+										
+			endforeach;
+		}
 		echo json_encode($data);
 	}
 	public function getDataSearchRekening(){
@@ -1870,7 +1931,9 @@ class AsetDokumenEntryController extends CI_Controller {
 		echo json_encode($data1); 
 	}
 
-
+	public function uploadCoverNotes(){
+		
+	}
 	
 }
 	
