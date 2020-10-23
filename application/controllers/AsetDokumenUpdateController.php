@@ -626,6 +626,8 @@ class AsetDokumenUpdateController extends CI_Controller {
 		$agunanID		= $this->input->post('agunanID');
 
 		$data['getJaminanHeader']			= $this->AsetDokumenUpdateModel->getJaminanHeader($nomorAgunan , $nomorRefAgunan);
+		$data['getJaminanDokument']			= $this->AsetDokumenUpdateModel->getJaminanDokument($agunanID, $nomorRefAgunan);
+		$data['getCoverNotes']			    = $this->AsetDokumenUpdateModel->getCoverNotes($agunanID, $nomorRefAgunan);
 		echo json_encode($data);
 
 	}
@@ -682,14 +684,23 @@ class AsetDokumenUpdateController extends CI_Controller {
 
 	
 	public function uploadCoverNotes(){
-		$CoverNotesID = $this->input->post('CoverNotesID');
-		$namaFile = "CoverNotes_".$CoverNotesID;
+		$CoverNotesID		 = $this->input->post('CoverNotesID');
+		$CoverNotesAgunanID  = $this->input->post('CoverNotesAgunanID');
+		$CoverNotesNoReff    = $this->input->post('CoverNotesNoReff');
+
+
+		$sysdate      = $this->AsetDokumenUpdateModel->sysdate1();
+		foreach ($sysdate as $row) :
+			$tanggal    = $row['sysdate'];
+		endforeach;
+		$namaFile     = "CoverNotes_".$CoverNotesID."_".$tanggal;
+			
 		if(isset($_FILES["coverNotes"]["name"])){
 
 
 			$config['upload_path']   = './PUBLIC/CoverNotes/';
 			$config['allowed_types'] = "*";
-			$config['overwrite']	 = true;
+			$config['overwrite']	 = false;
 			$config['file_name']     = $namaFile;
 			$this->load->library("upload", $config);
 
@@ -699,7 +710,8 @@ class AsetDokumenUpdateController extends CI_Controller {
 				
 				$data = $this->upload->data();
 				$namafileUpload = $data["file_name"];
-				$this->AsetDokumenUpdateModel->updateCoverNotes($CoverNotesID,$namafileUpload);
+			//	$this->AsetDokumenUpdateModel->updateCoverNotes($CoverNotesID,$namafileUpload);
+				$this->AsetDokumenUpdateModel->insertCoverNotes($CoverNotesNoReff,$CoverNotesAgunanID,$namafileUpload);
 				echo base_url().'PUBLIC/CoverNotes/'.$data["file_name"];		
 			}
 		}
@@ -707,3 +719,4 @@ class AsetDokumenUpdateController extends CI_Controller {
 
 	
 }
+

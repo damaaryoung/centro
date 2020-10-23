@@ -8,6 +8,7 @@ var ListKodeKantor = '';
 var sistemData = '';
 var JaminanHeader = '';
 var JaminanDokument = '';
+var JaminanCoverNotes = '';
 var validasSaldoRekening = '';
 var validasiLokasiJaminan = '';
 var KreKodeJenisAgunan = '';
@@ -944,7 +945,15 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
         success : function(response) {
             console.log('harusnya bisa');
             JaminanHeader = response.getJaminanHeader[0];
-            console.log(JaminanHeader);
+            JaminanDokument = response.getJaminanDokument[0];
+            if(response.getCoverNotes[0] == null){
+                JaminanCoverNotes = null;
+            }else{
+                JaminanCoverNotes = response.getCoverNotes[0];
+            }
+            
+            console.log(response);
+            console.log(JaminanHeader, JaminanDokument,JaminanCoverNotes);
 
             $('#tanggalRencanaKembaliDueDate').val(JaminanHeader.tgl_rencana_kembali);
             $('#mainIdDueDate').val(JaminanHeader.id);
@@ -952,17 +961,33 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
             $('#mainNoReffDueDate').val(JaminanHeader.no_reff);
             $('#namaNotarisDueDate').val(JaminanHeader.nama);
             $('#CoverNotesID').val(JaminanHeader.id);
+            $('#CoverNotesAgunanID').val(JaminanDokument.agunan_id);
+            $('#CoverNotesNoReff').val(JaminanHeader.no_reff);
 
-            if(JaminanHeader.upload_cover_notes == '' || JaminanHeader.upload_cover_notes == null){
+            var tempSysdate = new Date(JaminanHeader.sysdate);
+            var tempKembali = new Date(JaminanHeader.tgl_rencana_kembali);             
+            
+            if( tempKembali > tempSysdate){
+                alert('Tanggal Rencana Kembali Belum Expired, Tidak Dapat Update Due Date!');
+                $("#imgCoverNotes").attr('src', base_url + 'PUBLIC/CoverNotes/default.jpeg');
+                $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/default.jpeg');
+                
+                $('#btn_simpan_dueDate_modal').prop("disabled", true);
+                $('#btnUploadCoverNotes').prop("disabled", true);
+                
+            }
+            else if(JaminanCoverNotes == '' || JaminanCoverNotes == null){
                 alert('Mohon lakukan upload Cover Notes baru, untuk mengubah tanggal Due Date!');
                 $("#imgCoverNotes").attr('src', base_url + 'PUBLIC/CoverNotes/default.jpeg');
                 $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/default.jpeg');
                 
                 $('#btn_simpan_dueDate_modal').prop("disabled", true);
+                $('#btnUploadCoverNotes').prop("disabled", false);
             }else{
-                $("#imgCoverNotes").attr('src',  base_url + 'PUBLIC/CoverNotes/' + JaminanHeader.upload_cover_notes);
-                $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/' + JaminanHeader.upload_cover_notes);
+                $("#imgCoverNotes").attr('src',  base_url + 'PUBLIC/CoverNotes/' + JaminanCoverNotes.upload_cover_notes);
+                $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/' + JaminanCoverNotes.upload_cover_notes);
                 $('#btn_simpan_dueDate_modal').prop("disabled", false);
+                $('#btnUploadCoverNotes').prop("disabled", false);
             }
             
             
@@ -3015,11 +3040,15 @@ $('#uploadForm').on('submit', function (e) {
             cache: false,
             processData: false,     
             success : function(data) {
+               $("#imgCoverNotes").attr('src',"asd");
+               $("#imgCoverNotes2").attr("href", "ads");
+                console.log(data);
                $("#loading6").hide();
+               
+               alert("Upload cover notes sukses, anda bisa mengubah due date");
                $("#imgCoverNotes").attr('src',data);
                $("#imgCoverNotes2").attr("href", data);
                $('#btn_simpan_dueDate_modal').prop("disabled", false);
-               alert("Upload cover notes sukses, anda bisa mengubah due date");
                
             },
             error : function(response) {

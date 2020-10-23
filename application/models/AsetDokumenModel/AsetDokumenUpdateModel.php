@@ -123,9 +123,9 @@ class AsetDokumenUpdateModel extends CI_Model{
 						JH.tgl_rencana_kembali,
 						JH.jenis_pengurusan,
 						JH.verifikasi,
-						JH.upload_cover_notes,
 						kk.`kode_cabang`,
-						kk.`nama_kantor`
+						kk.`nama_kantor`,
+						DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate'
 					FROM dpm_online.jaminan_header JH,
 						dpm_online.`app_kode_kantor` KK
 					WHERE nomor = '$nomorAgunan'
@@ -170,7 +170,17 @@ class AsetDokumenUpdateModel extends CI_Model{
 		
 		return $query->result_array();
 	}
-
+	public function getCoverNotes($agunanID, $nomorRefAgunan){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT * FROM dpm_online.`jaminan_cover_notes`
+				WHERE agunan_id = '$agunanID'
+				AND no_reff = '$nomorRefAgunan'
+				ORDER BY id DESC;";
+		$query = $this->db2->query($str);
+		
+		return $query->result_array();
+	}
+	
 	public function getJenisKend(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT kd_jenis, nm_jenis, flg_aktif
@@ -591,6 +601,27 @@ class AsetDokumenUpdateModel extends CI_Model{
 						    SET upload_cover_notes = '$namafileUpload' 
 							WHERE id= '$CoverNotesID';
 						");
+	}
+	public function sysdate1(){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT DATE_FORMAT(SYSDATE(), '%Y_%m_%d') AS 'sysdate';";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+	}
+
+	public function insertCoverNotes($CoverNotesNoReff,$CoverNotesAgunanID,$namafileUpload){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+												
+		$this->db2->query("INSERT INTO jaminan_cover_notes
+							(no_reff, agunan_id, tanggal_upload, upload_cover_notes)
+							VALUES(
+								'$CoverNotesNoReff',
+								'$CoverNotesAgunanID',
+								NOW(),
+								'$namafileUpload');
+						 ");
 	}
 
 

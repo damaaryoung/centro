@@ -49,7 +49,8 @@
                                             </button>
                                         </div>
                                         <input type="hidden" name="CoverNotesID" id="CoverNotesID" >
-                                  
+                                        <input type="hidden" name="CoverNotesAgunanID" id="CoverNotesAgunanID" >
+                                        <input type="hidden" name="CoverNotesNoReff" id="CoverNotesNoReff" >
                               </div>
                               </form>
                               <div class="form-group row">
