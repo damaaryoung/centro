@@ -14,7 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>AdminLTE 3 | Starter</title>
   <?php echo $css;?>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onload="zoom()">
 <div class="wrapper">
 
   <?php
@@ -228,6 +228,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               .modal-body{
                   height: 500px;
                   overflow-y: auto;
+              }
+              .modal-backdrop {
+                width: 100% !important;
+                height: 100% !important;
               }
   </style>
 

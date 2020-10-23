@@ -17,7 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini" onload="zoom()">
 <div class="wrapper">
 
   <?php 
@@ -578,6 +578,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 padding: 6px 12px;
                 border: 1px solid #ccc;
                 border-top: none;
+              }
+              
+              .modal-backdrop {
+                width: 100% !important;
+                height: 100% !important;
               }
         </style>
 

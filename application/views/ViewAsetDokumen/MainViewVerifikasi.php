@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
 <div class="wrapper">
 
   	<?php 
@@ -39,7 +39,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </section>
 
     <!-- Main content -->
-    <section class="content container-fluid">
+    <section class="content container-fluid" style="min-height: 700px;">
 
     <div id="loading">
       <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
@@ -225,6 +225,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
               .modal-body{
                   height: 500px;
                   overflow-y: auto;
+              }
+              
+              .modal-backdrop {
+                width: 100% !important;
+                height: 100% !important;
               }
 </style>
 <script>

@@ -52,12 +52,6 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenViewAsetController/index" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>View Aset Dokumen</p>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Verifikasi Aset Dokumen</p>
@@ -79,6 +73,30 @@
             </li>
           <?php } else{} ?>
           <!-- END MENU ASET DOKUMEN -->
+
+          <!-- START MENU ASURANSI -->
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <p>
+                  Asuransi (Coming Soon)
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/UserAccessController/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p></p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+          <!-- END MENU ASURANSI -->
+
+
           <!-- START MENU USER ACCESS -->
           <?php  if($this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item has-treeview">

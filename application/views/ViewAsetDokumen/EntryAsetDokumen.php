@@ -47,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
       </ol>
     </section>
-    <section class="content container-fluid">
+    <section class="content container-fluid" style="min-height: 700px;">
       <div id="loading">
                 <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
       </div>

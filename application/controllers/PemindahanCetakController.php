@@ -29,6 +29,11 @@ class PemindahanCetakController extends CI_Controller {
 			$data['verifikasi'] =  $row['verifikasi'];
 			$data['lokasi_penyimpanan'] =  $row['lokasi_penyimpanan'];
         endforeach;	
+        $getAlamatHeader = $this->PemindahanUpdateModel->getAlamatHeader();
+		foreach ($getAlamatHeader as $row) :
+            $data['alamatHeader']         = $row["hasil"];
+        endforeach;	
+
         
         $data['getPemindahanJaminanCetak']   = $this->PemindahanUpdateModel->getPemindahanJaminanCetak($nomorCetak);
 			

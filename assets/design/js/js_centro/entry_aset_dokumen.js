@@ -969,9 +969,13 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
             
             if( tempKembali > tempSysdate){
                 alert('Tanggal Rencana Kembali Belum Expired, Tidak Dapat Update Due Date!');
-                $("#imgCoverNotes").attr('src', base_url + 'PUBLIC/CoverNotes/default.jpeg');
-                $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/default.jpeg');
-                
+                if(JaminanCoverNotes == '' || JaminanCoverNotes == null){
+                    $("#imgCoverNotes").attr('src', base_url + 'PUBLIC/CoverNotes/default.jpeg');
+                    $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/default.jpeg');
+                }else{
+                    $("#imgCoverNotes").attr('src',  base_url + 'PUBLIC/CoverNotes/' + JaminanCoverNotes.upload_cover_notes);
+                    $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/' + JaminanCoverNotes.upload_cover_notes);
+                }
                 $('#btn_simpan_dueDate_modal').prop("disabled", true);
                 $('#btnUploadCoverNotes').prop("disabled", true);
                 

@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css;?>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onload="zoom();">
 <div class="wrapper">
 
   <?php
@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
+    <div class="content"  style="min-height: 700px;">
       <div class="container-fluid">
       <div id="loading">
                 <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
@@ -204,6 +204,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
               .modal-body{
                   height: 500px;
                   overflow-y: auto;
+              }
+              .modal-backdrop {
+                width: 100% !important;
+                height: 100% !important;
               }
   </style>
 
