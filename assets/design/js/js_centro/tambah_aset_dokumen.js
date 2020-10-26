@@ -15,7 +15,6 @@ var base_url = $('#base_url').val();
 $('#mainBtnSearchRekening').click(function () {
     $('#modalNomorRekening').modal('show');
     dataTableeee = [];
-    console.log('button di click');
     $.ajax({
             url : base_url + "index.php/AsetDokumenEntryController/getNomorRekening",
             type : "POST",
@@ -23,11 +22,8 @@ $('#mainBtnSearchRekening').click(function () {
             data : {"test"    : "test"},
 
             success : function(response) {
-                //console.log(response);  
                         
                 dataTableeee.push(response); 
-
-                console.log(dataTableeee);
                 $('#TableNoRek > tbody:first').html(dataTableeee);
                 $(document).ready(function() {
                     $('#TableNoRek').DataTable( {
@@ -39,7 +35,6 @@ $('#mainBtnSearchRekening').click(function () {
                     } );
                 } );
                 $('#loading2').hide();  
-                console.log("FINISH");
                 
             },
             error : function(response) {
@@ -72,7 +67,6 @@ function serchDataRekening(){
     $('#TableNoRek').DataTable().destroy();
     var search = $('#search').val(); 
     dataTableeee = [];
-    console.log('berubah :  ' + search + ' ');
     $('#loading2').show(); 
 
     $.ajax({
@@ -82,11 +76,8 @@ function serchDataRekening(){
             data : {"search"    : search},
 
             success : function(response) {
-                //console.log(response);  
                         
                 dataTableeee.push(response); 
-
-                console.log(dataTableeee);
                 $('#TableNoRek > tbody:first').html(dataTableeee);
                 $(document).ready(function() {
                     $('#TableNoRek').DataTable( {
@@ -98,7 +89,6 @@ function serchDataRekening(){
                     } );
                 } );
                 $('#loading2').hide();  
-                console.log("FINISH");
                 
             },
             error : function(response) {
@@ -150,13 +140,13 @@ $('#delTempSert').click(function () {
         data : {"data"    : "data"},
 
         success : function(response) {
-            console.log(response);
             alert('Data Sukses Di Hapus');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
         },
         error : function(response) {
             alert('Data Gagal Di Hapus');
+            console.log('failed :' + response);
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
         }
@@ -172,13 +162,13 @@ $('#deleteTempBPKB').click(function () {
         data : {"data"    : "data"},
 
         success : function(response) {
-            console.log(response);
             alert('Data Sukses Di Hapus');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
         },
         error : function(response) {
             alert('Data Gagal Di Hapus');
+            console.log('failed :' + response);
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
         }
@@ -194,13 +184,13 @@ $('#delTempEmas').click(function () {
         data : {"data"    : "data"},
 
         success : function(response) {
-            console.log(response);
             alert('Data Sukses Di Hapus');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
         },
         error : function(response) {
             alert('Data Gagal Di Hapus');
+            console.log('failed :' + response);
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
         }
@@ -239,16 +229,14 @@ $('#btnTambahBPKB').click(function () {
                 'mainTanggalRealisasi' :  mainTanggalRealisasi},
 
         success : function(response) {
-            console.log(response);
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahDataBPKB';  
         },
         error : function(response) {
             alert('Proses Gagal, Mohon Coba Lagi');
-            console.log(response);
+            console.log('failed :' + response);
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
         }
     }); 
-    console.log(mainAreaKerja,mainTanggal,mainTransaksi, mainNama, mainKeterangan ,mainKota, mainJenisPengurusan, mainNomorRekening, mainNamaNasabah,mainTanggalRealisasi);
 });
 
 $('#btnTambahSertif').click(function () {
@@ -281,15 +269,14 @@ $('#btnTambahSertif').click(function () {
                 'mainTanggalRealisasi' :  mainTanggalRealisasi},
 
         success : function(response) {
-            console.log(response);
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahDataSertifikat';  
         },
         error : function(response) {
+            console.log('failed :' + response);
             alert('Proses Gagal, Mohon Coba Lagi');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
         }
     }); 
-    console.log("Tambah Sertifikat");
 });
 

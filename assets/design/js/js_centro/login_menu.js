@@ -19,7 +19,6 @@ var base_url = $('#base_url').val();
   }); 
 
   $('#btn-log-in').click(function(){   
-      console.log('button di click');
       loginfunction();
   });
 
@@ -43,7 +42,6 @@ var base_url = $('#base_url').val();
       dataType: 'json',
       success : function(response){
         console.log(response);
-        debugger;
         status      = response['status'];
         nama        = response['payload']['nama'];
         nik         = response['payload']['nik'];

@@ -9,10 +9,7 @@ function serchDataJaminan(){
     var search = $('#search').val(); 
     var kode_kantor = $('#kode_kantor').val(); 
     dataTableeee = [];
-    console.log('berubah :  ' + search + ' ' + kode_kantor);
     $('#loading').show(); 
-    $('#tableLokasiJaminan').DataTable().clear();
-    $('#tableLokasiJaminan').DataTable().destroy();
     $.ajax({
         url : base_url + "index.php/PemindahanVerifikasiController/getListJaminanSearch",
         type : "POST",
@@ -22,11 +19,11 @@ function serchDataJaminan(){
                },
 
         success : function(response) {
-            //console.log(response);  
+            $('#tableLokasiJaminan').DataTable().clear();
+            $('#tableLokasiJaminan').DataTable().destroy();
                     
             dataTableeee.push(response); 
 
-            console.log(dataTableeee);
             $('#tableLokasiJaminan > tbody:first').html(dataTableeee);
             $(document).ready(function() {
                 $('#tableLokasiJaminan').DataTable( {
@@ -38,7 +35,6 @@ function serchDataJaminan(){
                 } );
             } );
             $('#loading').hide();  
-            console.log("FINISH");
             
         },
         error : function(response) {

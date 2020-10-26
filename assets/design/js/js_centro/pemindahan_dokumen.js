@@ -7,10 +7,8 @@ function serchDataJaminan(){
     var search = $('#search').val(); 
     var kode_kantor = $('#kode_kantor').val(); 
     dataTableeee = [];
-    console.log('berubah :  ' + search + ' ' + kode_kantor);
     $('#loading').show(); 
-    $('#tableLokasiJaminan').DataTable().clear();
-    $('#tableLokasiJaminan').DataTable().destroy();
+   
     $.ajax({
         url : base_url + "index.php/PemindahanJaminanMainController/getListJaminanSearch",
         type : "POST",
@@ -20,11 +18,11 @@ function serchDataJaminan(){
                },
 
         success : function(response) {
-            //console.log(response);  
+            $('#tableLokasiJaminan').DataTable().clear();
+            $('#tableLokasiJaminan').DataTable().destroy();
                     
             dataTableeee.push(response); 
 
-            console.log(dataTableeee);
             $('#tableLokasiJaminan > tbody:first').html(dataTableeee);
             $(document).ready(function() {
                 $('#tableLokasiJaminan').DataTable( {
@@ -50,7 +48,6 @@ $('#bodyTableLokasiJaminan').on('click','.btnDeleteLokasiJaminan', function () {
     nomor = $(this).data("nomor");
     id = $(this).data("id"); 
     verifikasi = $(this).data("verifikasi"); 
-    //console.log(nomor,id, verifikasi);
 
     if(verifikasi == '1'){
         alert('Data Sudah Di Verifikasi, Data Tidak Dapat Dihapus');

@@ -117,7 +117,6 @@ $('#bodytablePemindahanInsertMain').on('click','.btnDeleteJaminanData', function
         alert('Data Batal Di Hapus');
         $('#loading').hide();  
     }
-    console.log(mainTable,arrNomorReff,arrAgunanID);
 
 });
 
@@ -147,13 +146,12 @@ $('#btn_simpan_insert_pemindahan').click(function () {
                 "lengthParsed"            : lengthParsed},
 
         success : function(response) {
-            console.log(response); 
             alert('Sukses');   
             window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
 
         },
         error : function(response) {
-            console.log(response);
+            console.log('failed :' + response);
             alert('Gagal Insert Data Pemindahan Jaminan, Mohon Coba Lagi');
             window.location = base_url + 'index.php/PemindahanInsertController/index';
         }
@@ -181,11 +179,9 @@ function serchDataJaminan(){
         data : {"search"    : search},
 
         success : function(response) {
-            //console.log(response);  
                     
             dataTableeee.push(response); 
 
-            console.log(dataTableeee);
             $('#TableModalJaminan > tbody:first').html(dataTableeee);
             $(document).ready(function() {
                 $('#TableModalJaminan').DataTable( {

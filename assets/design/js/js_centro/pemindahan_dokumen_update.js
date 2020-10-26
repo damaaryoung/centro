@@ -47,11 +47,9 @@ $(document).ready(function () {
             }else if(mainVerifikasi == '0'){
                 $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", false);
             }
-
-            console.log(mainTable,arrNomorReff,arrAgunanID);
         },
         error : function(response) {
-            console.log(response);
+            console.log('failed :' + response);
             alert('Gagal Get Data, Mohon Coba Lagi');
             window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
         }
@@ -160,7 +158,6 @@ $('#bodytablePemindahanUpdateMain').on('click','.btnDeleteJaminanData', function
         alert('Data Batal Di Hapus');
         $('#loading').hide();  
     }
-    console.log(selectedData);
 
 });
 
@@ -177,7 +174,6 @@ $('#btn_simpan_update_pemindahan_lokasi').click(function () {
     }
     lengthParsed = parsedDataDetailArr.length;
 
-    // console.log(mainTanggal, kode_kantor_tujuan, kode_lokasi_penyimpanan, mainKeterangan, mainNomor, parsedDataDetailArr, lengthParsed);
     $('#loading').show(); 
     $.ajax({
         url : base_url + "index.php/PemindahanUpdateController/updatePemindahanLokasiJaminan",
@@ -192,13 +188,12 @@ $('#btn_simpan_update_pemindahan_lokasi').click(function () {
                 "mainNomor"               : mainNomor},
 
         success : function(response) {
-            console.log(response); 
             alert('Sukses Update Data');   
             window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
 
         },
         error : function(response) {
-            console.log(response);
+            console.log('failed :' + response);
             alert('Gagal Update Data Pemindahan Jaminan, Mohon Coba Lagi');
             window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
         }
@@ -222,11 +217,9 @@ function serchDataJaminan(){
         data : {"search"    : search},
 
         success : function(response) {
-            //console.log(response);  
                     
             dataTableeee.push(response); 
 
-            console.log(dataTableeee);
             $('#TableModalJaminan > tbody:first').html(dataTableeee);
             $(document).ready(function() {
                 $('#TableModalJaminan').DataTable( {

@@ -138,18 +138,14 @@ $('#search').keypress(function(event) {
 
 // modal uodate
 $('#btn_simpan_update_modal').click(function () {
-   
-    console.log("update simpan di klik");
     //$('#updateSertifikat').modal('hide');
     if(JaminanHeader.jenis_jaminan == 'SERTIFIKAT'){
        updateSertifikat();
     } 
     else if(JaminanHeader.jenis_jaminan == 'BPKB'){
-        console.log("jaminan bpkb");
         updateBPKB();
     }
     else if(JaminanHeader.jenis_jaminan == 'EMAS'){
-        console.log("jaminan emas");
         updateEmas();
     }
 
@@ -175,46 +171,37 @@ $('#btn_kembali_update_modal2').click(function () {
 });
 // modal sertifikat
 $('#sert_button_simpan').click(function () {
-    console.log("simpan di klik");
     $('#updateSertifikat').modal('hide');
 });
 $('#sert_button_kembali').click(function () {
-    console.log("kembali di klik");
     mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#updateSertifikat').modal('hide');
 });
 $('#sert_button_kembali2').click(function () {
-    console.log("kembali di klik");
     mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#updateSertifikat').modal('hide');
 });
 //modal bpkb
 $('#bpkb_button_simpan').click(function () {
-    console.log("simpan di klik");
     $('#updateBPKB').modal('hide');
 });
 $('#bpkb_button_kembali').click(function () {
-    console.log("kembali di klik");
     mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#updateBPKB').modal('hide');
 });
 $('#bpkb_button_kembali2').click(function () {
-    console.log("kembali di klik");
     mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#updateBPKB').modal('hide');
 });
 //modal emas
 $('#emas_button_simpan').click(function () {
-    console.log("simpan di klik");
     $('#updateEmas').modal('hide');
 });
 $('#emas_button_kembali').click(function () {
-    console.log("kembali di klik");
     mappingFieldEmas(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#updateEmas').modal('hide');
 });
 $('#emas_button_kembali2').click(function () {
-    console.log("kembali di klik");
     mappingFieldEmas(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#updateEmas').modal('hide');
 });
@@ -249,14 +236,12 @@ $('#btn_simpan_modal_pinjam').click(function () {
             },
 
         success : function(response) {
-            console.log('success');
-            console.log(response);
             alert('Peminjaman Data Sukses');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Gagal Melakukan Peminjaman Data');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -275,32 +260,26 @@ $('#btn_kembali_pinjam_modal2').click(function () {
 });
 // modal sertifikat
 $('#sert_button_kembali_pinjam').click(function () {
-    console.log("kembali di klik");
     $('#pinjamSertifikatModal').modal('hide');
 });
 $('#sert_button_kembali_pinjam2').click(function () {
-    console.log("kembali di klik");
     $('#pinjamSertifikatModal').modal('hide');
 });
 //modal bpkb
 $('#bpkb_button_kembali_pinjam').click(function () {
-    console.log("kembali di klik");
     //mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#peminjamanBPKBModal').modal('hide');
 });
 $('#bpkb_button_kembali_pinjam2').click(function () {
-    console.log("kembali di klik");
     //mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#peminjamanBPKBModal').modal('hide');
 });
 //modal emas
 $('#emas_button_kembali_pinjam').click(function () {
-    console.log("kembali di klik");
    // mappingFieldEmas(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#peminjamanEmasModal').modal('hide');
 });
 $('#emas_button_kembali_pinjam2').click(function () {
-    console.log("kembali di klik");
    // mappingFieldEmas(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#peminjamanEmasModal').modal('hide');
 });
@@ -317,7 +296,6 @@ $('#btn_kembali_kembali_modal2').click(function () {
     window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_simpan_modal_kembali').click(function () {
-   console.log('button di click');
    $('#loading5').show();
 
    $.ajax({
@@ -365,13 +343,12 @@ $('#btn_simpan_modal_kembali').click(function () {
         },
 
     success : function(response) {
-        console.log(response);
         alert('Data Sukses Di Kembalikan');
         $('#loading5').hide();
         window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
     },
     error : function(response) {
-        console.log('failed');
+        console.log('failed :' + response);
         alert('Gagal Kembalikan Data');
         $('#loading').hide();
         window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -380,11 +357,9 @@ $('#btn_simpan_modal_kembali').click(function () {
 });
 //kembali sertifikat
 $('#sert_button_kembali_kembali').click(function () {
-    console.log("kembali di klik");
     $('#kembaliSertifikatModal').modal('hide');
 });
 $('#sert_button_kembali_kembali2').click(function () {
-    console.log("kembali di klik");
     $('#kembaliSertifikatModal').modal('hide');
 });
 //kembali bpkb
@@ -409,7 +384,6 @@ $('#btn_simpan_dueDate_modal').click(function () {
    var mainNomorDueDate =  $('#mainNomorDueDate').val();
    var mainNoReffDueDate =  $('#mainNoReffDueDate').val();
 
-   console.log(tanggalRencanaKembaliDueDate,mainIdDueDate,mainNomorDueDate,mainNoReffDueDate);
    $('#loading6').show();
    $.ajax({
     url : base_url + "index.php/AsetDokumenUpdateController/updateDueDate",
@@ -421,13 +395,12 @@ $('#btn_simpan_dueDate_modal').click(function () {
             "mainNoReffDueDate"            : mainNoReffDueDate},
 
     success : function(response) {
-        console.log(response);
         alert('Sukses Update Due Date');
 
         window.location = base_url + 'index.php/AsetDokumenEntryController/index';
     },
     error : function(response) {
-        console.log('failed');
+        console.log('failed :' + response);
         alert('Gagal Get Due Date');
         $('#loading').hide();
         window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -457,8 +430,7 @@ $('#btn_cari_notaris').click(function () {
         dataType : "json",
         data : {"test"    : "test"},
 
-        success : function(response) {
-            console.log(response);            
+        success : function(response) {  
             dataTableeee.push(response);           
             $('#notarisTable > tbody:first').html(dataTableeee);
             $(document).ready(function() {
@@ -474,7 +446,7 @@ $('#btn_cari_notaris').click(function () {
             
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Gagal Get Detail Notaris');
             $('#loading3').hide();
             $('#ListNotarisModal').modal('hide');
@@ -509,7 +481,6 @@ $('#btn_cari_jenis_pengurusan').click(function () {
     data : {"test"    : "test"},
 
     success : function(response) {
-        console.log('harusnya bisa');
         dataTableeee.push(response); 
 
         $('#JenisPengurusanTable > tbody:first').html(dataTableeee); 
@@ -526,7 +497,7 @@ $('#btn_cari_jenis_pengurusan').click(function () {
          
     },
     error : function(response) {
-        console.log('failed');
+        console.log('failed :' + response);
         alert('Gagal Get Detail Jenis Pengurusan');
         $('#loading3').hide();
         $('#ListNotarisModal').modal('hide');
@@ -542,7 +513,6 @@ $('#bodyJenisPengurusan').on('click','.btnPiliJenis', function () {
 
     newDate.setDate(newDate.getDate() + keteranganJenisPengurusan);
     kembali = newDate.getFullYear() + "-" + ("0" + (newDate.getMonth() + 1)).slice(-2) + "-" + ("0" + (newDate.getDate())).slice(-2);
-    console.log(newDate);
     $('#mainJenisPengurusanPinjam').val(namaJenisPengurusan);
     $('#mainTanggalRencanaKembaliPinjam').val(kembali);
     $('#ListJaminanPengurusanModal').modal('hide');
@@ -579,14 +549,12 @@ $('#btn_simpan_modal_penyerahan').click(function () {
             },
 
         success : function(response) {
-            console.log('success');
-            console.log(response);
             alert('Penyerahan Data Sukses');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Gagal Melakukan Peminjaman Data');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -605,30 +573,24 @@ $('#btn_kembali_penyerahan_modal2').click(function () {
 });
 // modal sertifikat
 $('#sert_button_kembali_penyerahan').click(function () {
-    console.log("kembali di klik");
     $('#penyerahanSertifikatModal').modal('hide');
 });
 $('#sert_button_kembali_penyerahan2').click(function () {
-    console.log("kembali di klik");
     $('#penyerahanSertifikatModal').modal('hide');
 });
 //modal bpkb
 $('#bpkb_button_kembali_penyerahan').click(function () {
-    console.log("kembali di klik");
     $('#penyerahanBPKBModal').modal('hide');
 });
 $('#bpkb_button_kembali_penyerahan2').click(function () {
-    console.log("kembali di klik");
     //mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument);
     $('#penyerahanBPKBModal').modal('hide');
 });
 //modal emas
 $('#emas_button_kembali_penyerahan').click(function () {
-    console.log("kembali di klik");
     $('#penyerahanEmasModal').modal('hide');
 });
 $('#emas_button_kembali_penyerahan2').click(function () {
-    console.log("kembali di klik");
     $('#penyerahanEmasModal').modal('hide');
 });
 
@@ -660,7 +622,6 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
                 "agunanID"       : idAgunan},
 
         success : function(response) {
-            console.log(response);
 
             //hasil data query object
             ListKodeKantor = response.ListKodeKantor;
@@ -732,9 +693,8 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
             $('#loading1').hide();
         },
         error : function(response) {
-            
             alert('Gagal Get Detail');
-            console.log('failed');
+            console.log('failed :' + response);
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';
         }
@@ -748,7 +708,6 @@ $('#bodyTableAsetDokumen').on('click','.btnDelete', function () {
     idAgunan = $(this).data("agunan");
     no_rekening = $(this).data("norekening");
     verifikasi = $(this).data("verifikasi");
-    console.log( no_rekening + ' ' + verifikasi);   
     
     // validasi nomor rekening sudah cair atau blm
     if(no_rekening != ''){
@@ -771,7 +730,6 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
     noref = $(this).data("noref");
     status = $(this).data("status");
     idAgunan = $(this).data("agunan");
-    console.log(nomor,noref,status,idAgunan);
     if(status == 'PINJAM'){
         alert('Maaf, data tidak dapat dipinjamkan');
         return;
@@ -799,7 +757,6 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
             JaminanHeader = response.getJaminanHeader[0];
             JaminanDokument = response.getJaminanDokument[0];
             
-            console.log(JaminanHeader, JaminanDokument);
  
             //  Pinjam   
             $('#mainAreaKerjaPinjam').append('<option value="' + JaminanHeader.kode_kantor + '" selected>'+ JaminanHeader.kode_kantor + ' - ' + JaminanHeader.nama_kantor +'</option>');
@@ -831,10 +788,9 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
 
             $('#loading2').hide();
             $('#loading').hide();
-            console.log("FINISH");
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert("Gagal Get Detail");
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -866,7 +822,6 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
             JaminanHeader = response.getJaminanHeader[0];
             JaminanDokument = response.getJaminanDokument[0];
             JaminanHistory = response.getJaminanHistory[0];
-            console.log(JaminanHeader, JaminanDokument,JaminanHistory);
             if(JaminanHeader.status != 'PINJAM'){
                 alert('Maaf, Data yang dipilih belum di Pinjamkan');
                 $('#KembaliMainModal').modal('hide');
@@ -925,7 +880,6 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
     noref = $(this).data("noref");
     status = $(this).data("status");
     idAgunan = $(this).data("agunan");
-    console.log(nomor,noref,status,idAgunan);
     if(status != 'PINJAM'){
         alert('Maaf, data tersebut bukan Peminjaman!');
         return;
@@ -943,7 +897,6 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
                 "agunanID"       : idAgunan},
 
         success : function(response) {
-            console.log('harusnya bisa');
             JaminanHeader = response.getJaminanHeader[0];
             JaminanDokument = response.getJaminanDokument[0];
             if(response.getCoverNotes[0] == null){
@@ -952,8 +905,6 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
                 JaminanCoverNotes = response.getCoverNotes[0];
             }
             
-            console.log(response);
-            console.log(JaminanHeader, JaminanDokument,JaminanCoverNotes);
 
             $('#tanggalRencanaKembaliDueDate').val(JaminanHeader.tgl_rencana_kembali);
             $('#mainIdDueDate').val(JaminanHeader.id);
@@ -999,7 +950,7 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
             $('#loading6').hide();
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Gagal Get Due Date');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -1032,7 +983,6 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
             validasSaldoRekening  = response.validasSaldoRekening[0];
             validasiLokasiJaminan = response.validasiLokasiJaminan[0];
             
-            console.log(validasSaldoRekening,validasiLokasiJaminan);
             if(validasSaldoRekening > 0){
                 alert('Maaf, Data Masih Go Live, Tidak dapat dikeluarkan');
                 $('#PenyerahanMainModal').modal('hide');
@@ -1074,7 +1024,7 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
             $('#loading').hide();
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert("Gagal Get Detail");
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -1086,7 +1036,6 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
 $('#mainBtnSearchRekening').click(function () {
     $('#modalNomorRekening').modal('show');
     dataTableeee = [];
-    console.log('button di click');
     $.ajax({
             url : base_url + "index.php/AsetDokumenUpdateController/getNomorRekening",
             type : "POST",
@@ -1094,11 +1043,8 @@ $('#mainBtnSearchRekening').click(function () {
             data : {"test"    : "test"},
 
             success : function(response) {
-                //console.log(response);  
                         
                 dataTableeee.push(response); 
-
-                console.log(dataTableeee);
                 $('#TableNoRek > tbody:first').html(dataTableeee);
                 $(document).ready(function() {
                     $('#TableNoRek').DataTable( {
@@ -1110,7 +1056,6 @@ $('#mainBtnSearchRekening').click(function () {
                     } );
                 } );
                 $('#loading7').hide();  
-                console.log("FINISH");
                 
             },
             error : function(response) {
@@ -2626,8 +2571,6 @@ function updateSertifikat(){
             },
 
         success : function(response) {
-            console.log('harusnya bisa');
-            console.log(response);
             alert('Data Sukses Di Update');
             if( menuAsset == '1'){
                 window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -2636,7 +2579,7 @@ function updateSertifikat(){
             }
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Data Gagal Update Data');
             $('#loading1').hide();
             if( menuAsset == '1'){
@@ -2712,8 +2655,6 @@ function updateBPKB(){
                 "check_sk_trayek"             : bpkb_check_skt
                },
         success : function(response) {
-            console.log('harusnya bisa');
-            console.log(response);
             alert('Data Sukses Di Update');
             $('#loading1').hide();
             if( menuAsset == '1'){
@@ -2723,7 +2664,7 @@ function updateBPKB(){
             }
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Data Gagal Di Update');
             $('#loading').hide();
             if( menuAsset == '1'){
@@ -2767,8 +2708,6 @@ function updateEmas(){
             },
 
         success : function(response) {
-            console.log('success');
-            console.log(response);
             alert('Data Sukses Di Update');
             $('#loading').hide();
             if( menuAsset == '1'){
@@ -2778,7 +2717,7 @@ function updateEmas(){
             } 
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Data Gagal Di Update');
             $('#loading').hide();
             if( menuAsset == '1'){
@@ -2790,8 +2729,6 @@ function updateEmas(){
     });    
 }
 function deleteFunction() {
-    
-    console.log(nomor + ' ' + noref + ' ' + status + ' ' + base_url + ' ' + idAgunan );
     $('#loading').show();
     $.ajax({
         url : base_url + "index.php/AsetDokumenEntryController/deleteDataDokumen",
@@ -2803,14 +2740,12 @@ function deleteFunction() {
                 "agunanID"       : idAgunan},
 
         success : function(response) {
-            console.log('harusnya bisa');
-            console.log(response);
             alert('Data Sukses Di Delete');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Data Gagal Di Delete');
             $('#loading').hide();
             window.location = base_url + 'index.php/AsetDokumenEntryController/index';
@@ -2894,7 +2829,6 @@ function serchAsetDokumen(){
     var kode_kantor = $('#kode_kantor').val();
     var jenis       = $('#jenis').val();
     dataTableeee = [];
-    console.log(jenis + ' ' + search + ' ' + status + ' ' + kode_kantor);
     $('#loading').show(); 
 
     $.ajax({
@@ -2910,9 +2844,7 @@ function serchAsetDokumen(){
             success : function(response) {
                 $('#employeeTable').DataTable().clear();
                 $('#employeeTable').DataTable().destroy();
-                console.log(response);  
                 dataTableeee.push(response); 
-                console.log(dataTableeee);
                 $('#employeeTable > tbody:first').html(dataTableeee);
                 $(document).ready(function() {
                     $('#employeeTable').DataTable( {
@@ -2923,9 +2855,7 @@ function serchAsetDokumen(){
                         "aaSorting" : []
                     } );
                 } );
-                $('#loading').hide();  
-                console.log("FINISH");
-                
+                $('#loading').hide();                  
             },
             error : function(response) {
                 console.log('failed :' + response);
@@ -2940,7 +2870,6 @@ function serchAsetDokumenB(){
     var kode_kantor = $('#kode_kantor').val();
     var jenis       = $('#jenis').val();
     dataTableeee = [];
-    console.log(jenis + ' ' + search + ' ' + status + ' ' + kode_kantor);
     $('#loading').show(); 
 
     $.ajax({
@@ -2956,10 +2885,8 @@ function serchAsetDokumenB(){
             success : function(response) {
                 $('#employeeTable').DataTable().clear();
                 $('#employeeTable').DataTable().destroy();
-                console.log(response);  
                 dataTableeee.push(response); 
 
-                console.log(dataTableeee);
                 $('#employeeTable > tbody:first').html(dataTableeee);
                 $(document).ready(function() {
                     $('#employeeTable').DataTable( {
@@ -2980,7 +2907,6 @@ function serchAsetDokumenB(){
                     $(".btnPinjam").hide(); 
                     
                 }
-                console.log("FINISH");
                 
             },
             error : function(response) {
@@ -2995,7 +2921,6 @@ function serchDataRekening(){
     $('#TableNoRek').DataTable().destroy();
     var search = $('#searchRekeningUpdate').val(); 
     dataTableeee = [];
-    console.log('berubah :  ' + search + ' ');
     $('#loading7').show(); 
 
     //// bareng pakai function search nya di controller Aset Dokumen Entry
@@ -3007,7 +2932,6 @@ function serchDataRekening(){
 
             success : function(response) {
                 dataTableeee.push(response); 
-                console.log(dataTableeee);
                 $('#TableNoRek > tbody:first').html(dataTableeee);
                 $(document).ready(function() {
                     $('#TableNoRek').DataTable( {
@@ -3018,8 +2942,7 @@ function serchDataRekening(){
                         "aaSorting" : []
                     } );
                 } );
-                $('#loading7').hide();  
-                console.log("FINISH");
+                $('#loading7').hide(); 
                 
             },
             error : function(response) {
@@ -3043,15 +2966,14 @@ $('#uploadForm').on('submit', function (e) {
             contentType: false,
             cache: false,
             processData: false,     
-            success : function(data) {
+            success : function(response) {
                $("#imgCoverNotes").attr('src',"asd");
                $("#imgCoverNotes2").attr("href", "ads");
-                console.log(data);
                $("#loading6").hide();
                
                alert("Upload cover notes sukses, anda bisa mengubah due date");
-               $("#imgCoverNotes").attr('src',data);
-               $("#imgCoverNotes2").attr("href", data);
+               $("#imgCoverNotes").attr('src',response);
+               $("#imgCoverNotes2").attr("href", response);
                $('#btn_simpan_dueDate_modal').prop("disabled", false);
                
             },

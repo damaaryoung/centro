@@ -29,8 +29,6 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
     id =  $(this).data("id"); //id header
     agunanID = $(this).data("agunanid");
 
-    
-    console.log(nomor,noref,status,id,agunanID);
     $('#mainVerifikasiModal').modal('show');
 
     $('#mainVerifikasi').find('option').remove().end();
@@ -46,11 +44,9 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
                 "agunanID"       : agunanID},
 
         success : function(response) {
-            console.log('Berhasil Get Details');
 
             JaminanHeader   = response.getJaminanHeader[0];
             JaminanDokument = response.getJaminanDokument[0];
-            console.log(response);
 
             //MAIN FORM
             $('#mainAreaKerja').append('<option value="' + JaminanHeader.kode_kantor + '" selected>'+ JaminanHeader.kode_kantor + ' - ' + JaminanHeader.nama_kantor +'</option>');
@@ -85,7 +81,7 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
             $('#loading1').hide(); 
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Gagal get Details');
             $('#loading1').hide();
             window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';
@@ -106,46 +102,37 @@ $('#btn_kembali_verifikasi_modal2').click(function () {
 });
 //sertifikat
 $('#sert_button_kembali').click(function () {
-    console.log("kembali di klik");
     mappingFieldSertifikat(JaminanHeader,JaminanDokument);
     $('#verifikasiSertifikat').modal('hide');
 });
 $('#sert_button_kembali2').click(function () {
-    console.log("kembali di klik");
     mappingFieldSertifikat(JaminanHeader,JaminanDokument);
     $('#verifikasiSertifikat').modal('hide');
 });
 $('#sert_button_simpan').click(function () {
-    console.log("simpan di klik");
     $('#verifikasiSertifikat').modal('hide');
 });
 //bpkb
 $('#bpkb_button_simpan').click(function () {
-    console.log("simpan di klik");
     $('#verifikasiBPKB').modal('hide');
 });
 $('#bpkb_button_kembali').click(function () {
-    console.log("kembali di klik");
     mappingFieldBPKB(JaminanHeader,JaminanDokument);
     $('#verifikasiBPKB').modal('hide');
 });
 $('#bpkb_button_kembali2').click(function () {
-    console.log("kembali di klik");
     mappingFieldBPKB(JaminanHeader,JaminanDokument);
     $('#verifikasiBPKB').modal('hide');
 });
 //emas
 $('#emas_button_simpan').click(function () {
-    console.log("simpan di klik");
     $('#verifikasiEmas').modal('hide');
 });
 $('#emas_button_kembali').click(function () {
-    console.log("kembali di klik");
     mappingFieldEmas(JaminanHeader,JaminanDokument);
     $('#verifikasiEmas').modal('hide');
 });
 $('#emas_button_kembali2').click(function () {
-    console.log("kembali di klik");
     mappingFieldEmas(JaminanHeader,JaminanDokument);
     $('#verifikasiEmas').modal('hide');
 });
@@ -153,15 +140,12 @@ $('#emas_button_kembali2').click(function () {
 $('#btn_simpan_verifikasi_modal').click(function () {
    
     if(JaminanHeader.jenis_jaminan == 'SERTIFIKAT'){
-        console.log("btn simpan di click");
         verifikasiHeader();
     } 
     else if(JaminanHeader.jenis_jaminan == 'BPKB'){
-        console.log("jaminan bpkb");
         verifikasiHeader();
     }
     else if(JaminanHeader.jenis_jaminan == 'EMAS'){
-        console.log("jaminan emas");
         verifikasiHeader();
     }
 
@@ -548,7 +532,6 @@ function verifikasiHeader(){
         verifDokument       = $('#emasVerifikasi').val(); 
      }
 
-    console.log(idHeader,nomorHeader,noRefHeader,verifHeader, verifDokument);
     if(verifHeader == '0'){
         alert('Status Verifikasi Jaminan Header masih 0');
         return;
@@ -577,13 +560,11 @@ function verifikasiHeader(){
             },
 
         success : function(response) {
-            console.log('harusnya bisa');
-            console.log(response);
             alert('Data Verifikasi Sukses');
             window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';  
         },
         error : function(response) {
-            console.log('failed');
+            console.log('failed :' + response);
             alert('Data Gagal Di Verifikasi');
             window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';
         }
@@ -597,7 +578,6 @@ function serchDataVerif(){
     var status = $('#status').val();  
     var kode_kantor = $('#kode_kantor').val();
     dataTableeee = [];
-    console.log('berubah :  ' + search + ' ' + status + ' ' + kode_kantor);
     $('#loading').show(); 
 
     $.ajax({
@@ -609,12 +589,8 @@ function serchDataVerif(){
                     "kode_kantor" : kode_kantor
                     },
 
-            success : function(response) {
-                //console.log(response);  
-                        
+            success : function(response) {                        
                 dataTableeee.push(response); 
-
-                console.log(dataTableeee);
                 $('#employeeTable > tbody:first').html(dataTableeee);
                 $(document).ready(function() {
                     $('#employeeTable').DataTable( {
@@ -625,9 +601,7 @@ function serchDataVerif(){
                         "aaSorting" : []
                     } );
                 } );
-                $('#loading').hide();  
-                console.log("FINISH");
-                
+                $('#loading').hide();                 
             },
             error : function(response) {
                 console.log('failed :' + response);

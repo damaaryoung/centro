@@ -28,7 +28,6 @@ $(document).ready(function () {
         data : {"dataNomor" : dataNomor},
 
         success : function(response) {
-            //console.log(response);
             for(i = 0; i < response.length; i++ ){
                 mainTable.push(response[i][0]);
                 arrNomorReff.push(response[i][1]);
@@ -40,7 +39,7 @@ $(document).ready(function () {
             $('#loading').hide(); 
         },
         error : function(response) {
-            console.log(response);
+            console.log('failed :' + response);
             alert('Gagal Get Data, Mohon Coba Lagi');
             window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
         }
@@ -67,7 +66,6 @@ $('#btn_simpan_verifikasi_pemindahan_lokasi').click(function () {
     }
     lengthParsed = parsedDataDetailArr.length;
 
-    console.log(mainTanggal, kode_kantor_tujuan, kode_lokasi_penyimpanan, mainKeterangan, mainNomor, parsedDataDetailArr,lengthParsed );
     $('#loading').show(); 
     $.ajax({
         url : base_url + "index.php/PemindahanVerifikasiController/prosesVerifikasi",
@@ -84,13 +82,12 @@ $('#btn_simpan_verifikasi_pemindahan_lokasi').click(function () {
             },
 
         success : function(response) {
-            console.log(response); 
             alert('Data Sukses di Verifikasi');   
             window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
 
         },
         error : function(response) {
-            console.log(response);
+            console.log('failed :' + response);
             alert('Gagal Verifikasi Data Pemindahan Jaminan, Mohon Coba Lagi atau Hubungi Team IT');
             window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
         }
