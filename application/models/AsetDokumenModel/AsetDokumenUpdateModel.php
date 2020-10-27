@@ -58,41 +58,45 @@ class AsetDokumenUpdateModel extends CI_Model{
         
         return $query->result_array();
 	}
-	public function getNmJenisAgunan(){
+	public function getSlikKodeJenisAgunan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT Desc1, CONCAT(Desc1,' - ',Desc2) AS nm_jenis_agunan
-				FROM sid_ref_jenis_agunan
-				ORDER BY Desc1;
+		$str = "SELECT `nomor`, `kode`, `nama`
+				FROM dpm_online.slik_ref_jenis_agunan
+				WHERE flg_aktif='1'
+				ORDER BY `nomor`;
 				";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
 	}	
-	public function getRefJenisPengikatan(){
+	public function getSlikLembagaPemeringkat(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT Desc1, CONCAT(Desc1,' - ',Desc2) AS nm_pengikatan
-				FROM sid_ref_jenis_pengikatan
-				ORDER BY Desc1;
+		$str = "SELECT `nomor`, `kode`, `nama`
+				FROM slik_ref_lembaga_pemeringkat
+				WHERE flg_aktif='1'
+				ORDER BY `nomor`;
 				";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
 	}
-	public function getRefJenisPeringkat(){
+	public function getSlikJenisPengikatan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT Desc1, CONCAT(Desc1,'- ',Desc2) AS nm_peringkat
-				FROM sid_ref_peringkat_sb
-				ORDER BY Desc1;
+		$str = "SELECT `nomor`, `kode`, `nama`
+				FROM dpm_online.slik_ref_jenis_pengikatan
+				WHERE flg_aktif='1'
+				ORDER BY `nomor`;
 				";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
 	}
-	public function getRefDati2(){
+	public function getSlikDati2(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT Desc1, CONCAT(Desc1,' - ',Desc2) AS nm_dati2
-				FROM sid_ref_dati2
-				ORDER BY Desc1;
+		$str = "SELECT `nomor`, `kode`, `nama`
+				FROM dpm_online.slik_ref_dati
+				WHERE flg_aktif='1'
+				ORDER BY `nomor`;
 				";
 		$query = $this->db2->query($str);
 		
@@ -101,37 +105,41 @@ class AsetDokumenUpdateModel extends CI_Model{
 
 	public function getJaminanHeader($nomorAgunan , $nomorRefAgunan){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT  JH.id,
-						JH.nomor,
-						JH.no_reff,
-						JH.tgl, 
-						JH.nama, 
-						JH.alamat, 
-						JH.kelurahan, 
-						JH.kecamatan, 
-						JH.kota,  
-						JH.propinsi,
-						JH.kode_pos,
-						JH.jenis_jaminan,
-						JH.roda_kendaraan,
-						JH.status,
-						JH.kontrak_status,
-						JH.ket,
-						JH.no_rekening,
-						JH.tgl_realisasi,
-						JH.kode_kantor,
-						JH.tgl_rencana_kembali,
-						JH.jenis_pengurusan,
-						JH.verifikasi,
-						kk.`kode_cabang`,
-						kk.`nama_kantor`,
-						DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate'
-					FROM dpm_online.jaminan_header JH,
-						dpm_online.`app_kode_kantor` KK
+		$str = "SELECT 
+					JH.id,
+					JH.nomor,
+					JH.no_reff,
+					JH.tgl,
+					JH.nama,
+					JH.alamat,
+					JH.kelurahan,
+					JH.kecamatan,
+					JH.kota,
+					JH.propinsi,
+					JH.kode_pos,
+					JH.jenis_jaminan,
+					JH.roda_kendaraan,
+					JH.status,
+					JH.kontrak_status,
+					JH.ket,
+					JH.no_rekening,
+					JH.tgl_realisasi,
+					JH.kode_kantor,
+					JH.tgl_rencana_kembali,
+					JH.jenis_pengurusan,
+					JH.verifikasi,
+					kk.`kode_cabang`,
+					kk.`nama_kantor`,
+					DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate',
+					VBK.`nama_nasabah`
+				FROM
+					dpm_online.jaminan_header JH
+				LEFT JOIN dpm_online.`app_kode_kantor` KK
+					ON jh.`kode_kantor` = kk.`kode_kantor`
+				LEFT JOIN dpm_online.`vmicro_browse_kredit` VBK
+					ON JH.`no_rekening` = VBK.`no_rekening`
 					WHERE nomor = '$nomorAgunan'
-					AND no_reff = '$nomorRefAgunan'
-					AND jh.`kode_kantor` = kk.`kode_kantor`;
-				";
+					AND no_reff = '$nomorRefAgunan'";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
@@ -170,6 +178,58 @@ class AsetDokumenUpdateModel extends CI_Model{
 		
 		return $query->result_array();
 	}
+
+	public function getJaminanSLIK($agunanID){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT 
+					SA.`flag_detail`,
+					SA.`kode_register_agunan`,
+					SA.`no_rekening`,
+					SA.`cif`,
+					SA.`kode_jenis_segment_fasilitas`,
+					SA.`kode_status_agunan`,
+					SA.`kode_jenis_agunan`,
+					SA.`peringkat_agunan`,
+					SA.`kode_lembaga_pemeringkat`,
+					SA.`kode_jenis_pengikatan`,
+					SA.`tanggal_pengikatan`,
+					SA.`nama_pemilik_agunan`,
+					SA.`bukti_kepemilikan`,
+					SA.`alamat_agunan`,
+					SA.`kode_kab_kota`,
+					SA.`nilai_agunan`,
+					SA.`nilai_agunan_menurut_ljk`,
+					SA.`tanggal_penilaian_ljk`,
+					SA.`nilai_agunan_penilai_independen`,
+					SA.`nama_penilai_independen`,
+					SA.`tanggal_penilaian_independen`,
+					SA.`status_paripasu`,
+					SA.`prosentase_paripasu`,
+					SA.`status_kredit_join`,
+					SA.`diasuransikan`,
+					SA.`keterangan`,
+					SA.`kode_kantor_cabang`,
+					SA.`operasi_data`,
+					CONCAT(SRJ.`kode`,' - ',SRJ.`nama`) AS sertSlikJenisAgunan,
+					CONCAT(RLP.`kode`,' - ',RLP.`nama`) AS sertSlikLembagaPemeringkat,
+					CONCAT(SRJP.`kode`,' - ',SRJP.`nama`) AS sertSlikJenisPengikatan,
+					CONCAT(SRD.`kode`,' - ',SRD.`nama`) AS sertSlikKodeDati2
+				FROM
+					dpm_online.slik_agunan SA
+				LEFT JOIN dpm_online.slik_ref_jenis_agunan SRJ
+					ON SRJ.KODE = SA.kode_jenis_agunan
+				LEFT JOIN slik_ref_lembaga_pemeringkat RLP
+					ON RLP.`kode` = SA.`kode_lembaga_pemeringkat`
+				LEFT JOIN slik_ref_jenis_pengikatan SRJP
+					ON SRJP.`kode` = SA.`kode_jenis_pengikatan`
+				LEFT JOIN slik_ref_dati SRD
+					ON SRD.`kode` = SA.`kode_kab_kota`
+				WHERE kode_register_agunan = '$agunanID';";
+		$query = $this->db2->query($str);
+		
+		return $query->result_array();
+	}
+
 	public function getCoverNotes($agunanID, $nomorRefAgunan){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT * FROM dpm_online.`jaminan_cover_notes`
@@ -376,6 +436,65 @@ class AsetDokumenUpdateModel extends CI_Model{
 								AND agunan_id = '$sertAgunanID';");
 
 	}
+
+	public function updateJaminanSlik($sertAgunanID, 
+										$mainNomorRekening,
+										$sertKantorLokasi,
+										$sertSlikStatusAgunan,
+										$sertSlikJenisAgunan,
+										$sertSlikPeringkatAgunan,
+										$sertSlikLembagaPemeringkat,
+										$sertSlikJenisPengikatan,
+										$sertSlikTanggalPengikatan,
+										$sertSlikNamaPemilikAgunan,
+										$sertSlikBuktiKepemilikanAgunan,
+										$sertSlikAlamat,
+										$sertSlikKodeDati2,
+										$sertSlikNilaiNJOP,
+										$sertSlikNilaiLJK,
+										$sertSlikTanggalLJK,
+										$sertSlikNilaiIndependen,
+										$sertSlikNamaIndependen,
+										$sertSlikTglIndependen,
+										$sertSlikParipasu,
+										$sertSlikParipasuPersen,
+										$sertSLikStatusJoinAccount,
+										$sertSlikAsuransi,
+										$sertSlikKeterangan	
+										){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+		$this->db2->query("UPDATE  dpm_online.`slik_agunan` 
+								SET	`flag_detail`				      = 'D',
+									`kode_jenis_segment_fasilitas` 	  = 'F01',
+									`kode_status_agunan`   			  = '$sertSlikStatusAgunan',
+									`kode_jenis_agunan` 			  = '$sertSlikJenisAgunan',
+									`peringkat_agunan` 				  = '$sertSlikPeringkatAgunan',
+									`kode_lembaga_pemeringkat` 		  = '$sertSlikLembagaPemeringkat',
+									`kode_jenis_pengikatan` 		  = '$sertSlikJenisPengikatan',
+									`tanggal_pengikatan` 			  = '$sertSlikTanggalPengikatan',
+									`nama_pemilik_agunan` 			  = '$sertSlikNamaPemilikAgunan',
+									`bukti_kepemilikan` 			  = '$sertSlikBuktiKepemilikanAgunan',
+									`alamat_agunan` 			      = '$sertSlikAlamat',
+									`kode_kab_kota` 			      = '$sertSlikKodeDati2',
+									`nilai_agunan` 					  = $sertSlikNilaiNJOP,
+									`nilai_agunan_menurut_ljk` 		  = $sertSlikNilaiLJK,
+									`tanggal_penilaian_ljk` 		  = '$sertSlikTanggalLJK',
+									`nilai_agunan_penilai_independen` = $sertSlikNilaiIndependen,
+									`nama_penilai_independen`         = '$sertSlikNamaIndependen',
+									`tanggal_penilaian_independen`    = '$sertSlikTglIndependen',
+									`status_paripasu` 				  = '$sertSlikParipasu',
+									`prosentase_paripasu` 			  = $sertSlikParipasuPersen,
+									`status_kredit_join` 			  = '$sertSLikStatusJoinAccount',
+									`diasuransikan` 				  = '$sertSlikAsuransi',
+									`keterangan` 					  = '$sertSlikKeterangan',
+									`kode_kantor_cabang` 			  = (SELECT sandi_cabang AS kode
+																			FROM app_kode_kantor akk
+																			WHERE akk.`kode_kantor` = '$sertKantorLokasi'
+																			LIMIT 1)
+							WHERE kode_register_agunan = '$sertAgunanID' ;");
+	}
+
 
 	//update bpkb
 	public function updateJaminanHeaderBPKB($mainId,
@@ -626,3 +745,5 @@ class AsetDokumenUpdateModel extends CI_Model{
 
 
 }
+
+

@@ -400,10 +400,10 @@ class AsetDokumenEntryController extends CI_Controller {
 			$data['ListKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			$data['KreKodeJenisAgunan'] = $this->AsetDokumenEntryModel->KreKodeJenisAgunan();
 			$data['KreKodeIkatanHukumAgunan'] = $this->AsetDokumenEntryModel->KreKodeIkatanHukumAgunan();
-			$data['NamaJenisAgunan'] = $this->AsetDokumenEntryModel->getNmJenisAgunan();
-			$data['RefJenisPengikatan'] = $this->AsetDokumenEntryModel->getRefJenisPengikatan();
-			$data['RefJenisPeringkat'] = $this->AsetDokumenEntryModel->getRefJenisPeringkat();
-			$data['RefDati2'] = $this->AsetDokumenEntryModel->getRefDati2();
+			$data['SlikKodeJenisAgunan'] = $this->AsetDokumenEntryModel->getSlikKodeJenisAgunan();
+			$data['SlikLembagaPemeringkat'] = $this->AsetDokumenEntryModel->getSlikLembagaPemeringkat();
+			$data['SlikJenisPengikatan'] = $this->AsetDokumenEntryModel->getSlikJenisPengikatan();
+			$data['SlikDati2'] = $this->AsetDokumenEntryModel->getSlikDati2();
 			//next id
 			//akses menu
 			$nextID = $this->AsetDokumenEntryModel->nextID();
@@ -679,33 +679,50 @@ class AsetDokumenEntryController extends CI_Controller {
 
 
 			// form data SID //
-			$sertSIDJenisAgunan = $this->input->post('sertSIDJenisAgunan');
-			$sertSIDPeringkatSurat = $this->input->post('sertSIDPeringkatSurat');
-			$sertJenisPengikatan = $this->input->post('sertJenisPengikatan');
-			$sertSIDNamaPemilikAgunan = $this->input->post('sertSIDNamaPemilikAgunan');
-			$sertSIDBuktiPemilikAgunan = $this->input->post('sertSIDBuktiPemilikAgunan');
-			$sertSIDAlamat = $this->input->post('sertSIDAlamat');
-			$sertSIDLokasi = $this->input->post('sertSIDLokasi');
-			$sertNilaiNJOP = $this->input->post('sertNilaiNJOP');
-			$sertNilaiBank = $this->input->post('sertNilaiBank');
-			$sertNilaiIndependen = $this->input->post('sertNilaiIndependen');
-			$sertNamaIndependen = $this->input->post('sertNamaIndependen');
-			$sertParipasu = $this->input->post('sertParipasu');
-			$sertAsuransi = $this->input->post('sertAsuransi');
+			$sertSlikStatusAgunan      		= $this->input->post('sertSlikStatusAgunan');
+			$sertSlikJenisAgunan        	= $this->input->post('sertSlikJenisAgunan');
+			$sertSlikPeringkatAgunan    	= $this->input->post('sertSlikPeringkatAgunan');
+			$sertSlikLembagaPemeringkat 	= $this->input->post('sertSlikLembagaPemeringkat');
+			$sertSlikJenisPengikatan    	= $this->input->post('sertSlikJenisPengikatan');
+			$sertSlikTanggalPengikatan  	= $this->input->post('sertSlikTanggalPengikatan');
+			$sertSlikNamaPemilikAgunan  	= $this->input->post('sertSlikNamaPemilikAgunan');
+			$sertSlikBuktiKepemilikanAgunan = $this->input->post('sertSlikBuktiKepemilikanAgunan');
+			$sertSlikAlamat 				= $this->input->post('sertSlikAlamat');
+			$sertSlikKodeDati2 				= $this->input->post('sertSlikKodeDati2');
+			$sertSlikNilaiNJOP 				= $this->input->post('sertSlikNilaiNJOP');
+			$sertSlikNilaiLJK 				= $this->input->post('sertSlikNilaiLJK');
+			$sertSlikTanggalLJK 			= $this->input->post('sertSlikTanggalLJK');
+			$sertSlikNilaiIndependen 		= $this->input->post('sertSlikNilaiIndependen');
+			$sertSlikTglIndependen 			= $this->input->post('sertSlikTglIndependen');
+			$sertSlikNamaIndependen 		= $this->input->post('sertSlikNamaIndependen');
+			$sertSlikKeterangan 			= $this->input->post('sertSlikKeterangan');
+			$sertSlikParipasu 				= $this->input->post('sertSlikParipasu');
+			$sertSlikParipasuPersen 		= $this->input->post('sertSlikParipasuPersen');
+			$sertSLikStatusJoinAccount 		= $this->input->post('sertSLikStatusJoinAccount');
+			$sertSlikAsuransi 				= $this->input->post('sertSlikAsuransi');
 
-			$this->session->set_tempdata('sertSIDJenisAgunan', $sertSIDJenisAgunan, 900);
-			$this->session->set_tempdata('sertSIDPeringkatSurat', $sertSIDPeringkatSurat, 900);
-			$this->session->set_tempdata('sertJenisPengikatan', $sertJenisPengikatan, 900);
-			$this->session->set_tempdata('sertSIDNamaPemilikAgunan', $sertSIDNamaPemilikAgunan, 900);
-			$this->session->set_tempdata('sertSIDBuktiPemilikAgunan', $sertSIDBuktiPemilikAgunan, 900);
-			$this->session->set_tempdata('sertSIDAlamat', $sertSIDAlamat, 900);
-			$this->session->set_tempdata('sertSIDLokasi', $sertSIDLokasi, 900);
-			$this->session->set_tempdata('sertNilaiNJOP', $sertNilaiNJOP, 900);
-			$this->session->set_tempdata('sertNilaiBank', $sertNilaiBank, 900);
-			$this->session->set_tempdata('sertNilaiIndependen', $sertNilaiIndependen, 900);
-			$this->session->set_tempdata('sertNamaIndependen', $sertNamaIndependen, 900);
-			$this->session->set_tempdata('sertParipasu', $sertParipasu, 900);
-			$this->session->set_tempdata('sertAsuransi', $sertAsuransi, 900);
+		
+			$this->session->set_tempdata('sertSlikStatusAgunan', $sertSlikStatusAgunan, 900);
+			$this->session->set_tempdata('sertSlikJenisAgunan', $sertSlikJenisAgunan, 900);
+			$this->session->set_tempdata('sertSlikPeringkatAgunan', $sertSlikPeringkatAgunan, 900);
+			$this->session->set_tempdata('sertSlikLembagaPemeringkat', $sertSlikLembagaPemeringkat, 900);
+			$this->session->set_tempdata('sertSlikJenisPengikatan', $sertSlikJenisPengikatan, 900);
+			$this->session->set_tempdata('sertSlikTanggalPengikatan', $sertSlikTanggalPengikatan, 900);
+			$this->session->set_tempdata('sertSlikNamaPemilikAgunan', $sertSlikNamaPemilikAgunan, 900);
+			$this->session->set_tempdata('sertSlikBuktiKepemilikanAgunan', $sertSlikBuktiKepemilikanAgunan, 900);
+			$this->session->set_tempdata('sertSlikAlamat', $sertSlikAlamat, 900);
+			$this->session->set_tempdata('sertSlikKodeDati2', $sertSlikKodeDati2, 900);
+			$this->session->set_tempdata('sertSlikNilaiNJOP', $sertSlikNilaiNJOP, 900);
+			$this->session->set_tempdata('sertSlikNilaiLJK', $sertSlikNilaiLJK, 900);
+			$this->session->set_tempdata('sertSlikTanggalLJK', $sertSlikTanggalLJK, 900);
+			$this->session->set_tempdata('sertSlikNilaiIndependen', $sertSlikNilaiIndependen, 900);
+			$this->session->set_tempdata('sertSlikTglIndependen', $sertSlikTglIndependen, 900);
+			$this->session->set_tempdata('sertSlikNamaIndependen', $sertSlikNamaIndependen, 900);
+			$this->session->set_tempdata('sertSlikKeterangan', $sertSlikKeterangan, 900);
+			$this->session->set_tempdata('sertSlikParipasu', $sertSlikParipasu, 900);
+			$this->session->set_tempdata('sertSlikParipasuPersen', $sertSlikParipasuPersen, 900);
+			$this->session->set_tempdata('sertSLikStatusJoinAccount', $sertSLikStatusJoinAccount, 900);
+			$this->session->set_tempdata('sertSlikAsuransi', $sertSlikAsuransi, 900);
 
 			redirect('AsetDokumenEntryController/displayTambahAsetDokumen'); 
 		}
@@ -976,7 +993,7 @@ class AsetDokumenEntryController extends CI_Controller {
 					$sertNJOP 			        = $this->session->tempdata('sertNJOP');    
 					$sertHargaPasar 			= $this->session->tempdata('sertHargaPasar');
 					$sertAPHT 			        = $this->session->tempdata('sertAPHT'); 
-					$sertPersenDijamin 			=$this->session->tempdata('sertPersenDijamin');
+					$sertPersenDijamin 			= $this->session->tempdata('sertPersenDijamin');
 					// DATA SERTIFIKAT
 					$sertAgunanID 			= $this->session->tempdata('sertAgunanID');
 					$sertID 			    = $this->session->tempdata('sertID');
@@ -1030,19 +1047,28 @@ class AsetDokumenEntryController extends CI_Controller {
 					$ssb_bpht		=	$this->session->tempdata('ssb_bpht');
 					///end check box///
 					// DATA SID
-					$sertSIDJenisAgunan 			= $this->session->tempdata('sertSIDJenisAgunan');
-					$sertSIDPeringkatSurat 			= $this->session->tempdata('sertSIDPeringkatSurat');
-					$sertJenisPengikatan 			= $this->session->tempdata('sertJenisPengikatan');
-					$sertSIDNamaPemilikAgunan 		= $this->session->tempdata('sertSIDNamaPemilikAgunan');
-					$sertSIDBuktiPemilikAgunan 		= $this->session->tempdata('sertSIDBuktiPemilikAgunan');
-					$sertSIDAlamat 					= $this->session->tempdata('sertSIDAlamat');
-					$sertSIDLokasi 					= $this->session->tempdata('sertSIDLokasi');
-					$sertNilaiNJOP 					= $this->session->tempdata('sertNilaiNJOP');
-					$sertNilaiBank 					= $this->session->tempdata('sertNilaiBank');
-					$sertNilaiIndependen 			= $this->session->tempdata('sertNilaiIndependen');
-					$sertNamaIndependen 			= $this->session->tempdata('sertNamaIndependen');
-					$sertParipasu 					= $this->session->tempdata('sertParipasu');
-					$sertAsuransi 					= $this->session->tempdata('sertAsuransi');
+					
+					$sertSlikStatusAgunan      		= $this->session->tempdata('sertSlikStatusAgunan');
+					$sertSlikJenisAgunan        	= $this->session->tempdata('sertSlikJenisAgunan');
+					$sertSlikPeringkatAgunan    	= $this->session->tempdata('sertSlikPeringkatAgunan');
+					$sertSlikLembagaPemeringkat 	= $this->session->tempdata('sertSlikLembagaPemeringkat');
+					$sertSlikJenisPengikatan    	= $this->session->tempdata('sertSlikJenisPengikatan');
+					$sertSlikTanggalPengikatan  	= $this->session->tempdata('sertSlikTanggalPengikatan');
+					$sertSlikNamaPemilikAgunan  	= $this->session->tempdata('sertSlikNamaPemilikAgunan');
+					$sertSlikBuktiKepemilikanAgunan = $this->session->tempdata('sertSlikBuktiKepemilikanAgunan');
+					$sertSlikAlamat 				= $this->session->tempdata('sertSlikAlamat');
+					$sertSlikKodeDati2 				= $this->session->tempdata('sertSlikKodeDati2');
+					$sertSlikNilaiNJOP 				= $this->session->tempdata('sertSlikNilaiNJOP');
+					$sertSlikNilaiLJK 				= $this->session->tempdata('sertSlikNilaiLJK');
+					$sertSlikTanggalLJK 			= $this->session->tempdata('sertSlikTanggalLJK');
+					$sertSlikNilaiIndependen 		= $this->session->tempdata('sertSlikNilaiIndependen');
+					$sertSlikTglIndependen 			= $this->session->tempdata('sertSlikTglIndependen');
+					$sertSlikNamaIndependen 		= $this->session->tempdata('sertSlikNamaIndependen');
+					$sertSlikKeterangan 			= $this->session->tempdata('sertSlikKeterangan');
+					$sertSlikParipasu 				= $this->session->tempdata('sertSlikParipasu');
+					$sertSlikParipasuPersen 		= $this->session->tempdata('sertSlikParipasuPersen');
+					$sertSLikStatusJoinAccount 		= $this->session->tempdata('sertSLikStatusJoinAccount');
+					$sertSlikAsuransi 				= $this->session->tempdata('sertSlikAsuransi');
 					/// END FORM TAMBAH SERTIFIKAT ///
 
 					/// penentuan nomor setifikat berdasarkan jenis sertifikat
@@ -1147,8 +1173,33 @@ class AsetDokumenEntryController extends CI_Controller {
 																		$mainNomorRekening,//no_rekening_agunan,
 																		$sertLainnya,
 																		$verifikasi);//lain_lain);
-
-				    //// UNSET SESSION /////
+					
+					$this->AsetDokumenEntryModel->insertJaminanSlikSert($agunan_id,
+																		$sertKantorLokasi,
+																		$mainNomorRekening,
+																		$sertSlikStatusAgunan,
+																		$sertSlikJenisAgunan,
+																		$sertSlikPeringkatAgunan,
+																		$sertSlikLembagaPemeringkat,
+																		$sertSlikJenisPengikatan,
+																		$sertSlikTanggalPengikatan,
+																		$sertSlikNamaPemilikAgunan,
+																		$sertSlikBuktiKepemilikanAgunan,
+																		$sertSlikAlamat,
+																		$sertSlikKodeDati2,
+																		$sertSlikNilaiNJOP,
+																		$sertSlikNilaiLJK,
+																		$sertSlikTanggalLJK,
+																		$sertSlikNilaiIndependen,
+																		$sertSlikNamaIndependen,
+																		$sertSlikTglIndependen,
+																		$sertSlikParipasu,
+																		$sertSlikParipasuPersen,
+																		$sertSLikStatusJoinAccount,
+																		$sertSlikAsuransi,
+																		$sertSlikKeterangan);
+					
+					//// UNSET SESSION /////
 					$this->session->unset_tempdata('sertAgunanID');
 					$this->session->unset_tempdata('sertTglRegister'); 
 					$this->session->unset_tempdata('sertTglPenilaian'); 
@@ -1213,19 +1264,27 @@ class AsetDokumenEntryController extends CI_Controller {
 					$this->session->unset_tempdata('ssb_bpht');
 					///end check box///
 					// DATA SID
-					$this->session->unset_tempdata('sertSIDJenisAgunan');
-					$this->session->unset_tempdata('sertSIDPeringkatSurat');
-					$this->session->unset_tempdata('sertJenisPengikatan');
-					$this->session->unset_tempdata('sertSIDNamaPemilikAgunan');
-					$this->session->unset_tempdata('sertSIDBuktiPemilikAgunan');
-					$this->session->unset_tempdata('sertSIDAlamat');
-					$this->session->unset_tempdata('sertSIDLokasi');
-					$this->session->unset_tempdata('sertNilaiNJOP');
-					$this->session->unset_tempdata('sertNilaiBank');
-					$this->session->unset_tempdata('sertNilaiIndependen');
-					$this->session->unset_tempdata('sertNamaIndependen');
-					$this->session->unset_tempdata('sertParipasu');
-					$this->session->unset_tempdata('sertAsuransi');
+					$this->session->unset_tempdata('sertSlikStatusAgunan');
+					$this->session->unset_tempdata('sertSlikJenisAgunan');
+					$this->session->unset_tempdata('sertSlikPeringkatAgunan');
+					$this->session->unset_tempdata('sertSlikLembagaPemeringkat');
+					$this->session->unset_tempdata('sertSlikJenisPengikatan');
+					$this->session->unset_tempdata('sertSlikTanggalPengikatan');
+					$this->session->unset_tempdata('sertSlikNamaPemilikAgunan');
+					$this->session->unset_tempdata('sertSlikBuktiKepemilikanAgunan');
+					$this->session->unset_tempdata('sertSlikAlamat');
+					$this->session->unset_tempdata('sertSlikKodeDati2');
+					$this->session->unset_tempdata('sertSlikNilaiNJOP');
+					$this->session->unset_tempdata('sertSlikNilaiLJK');
+					$this->session->unset_tempdata('sertSlikTanggalLJK');
+					$this->session->unset_tempdata('sertSlikNilaiIndependen');
+					$this->session->unset_tempdata('sertSlikTglIndependen');
+					$this->session->unset_tempdata('sertSlikNamaIndependen');
+					$this->session->unset_tempdata('sertSlikKeterangan');
+					$this->session->unset_tempdata('sertSlikParipasu');
+					$this->session->unset_tempdata('sertSlikParipasuPersen');
+					$this->session->unset_tempdata('sertSLikStatusJoinAccount');
+					$this->session->unset_tempdata('sertSlikAsuransi');
 					/// END FORM TAMBAH SERTIFIKAT ///
 			}
 			else if($this->session->tempdata('bpkbTglRegister') != ''){
@@ -1986,20 +2045,28 @@ class AsetDokumenEntryController extends CI_Controller {
 		$this->session->unset_tempdata('stts');
 		$this->session->unset_tempdata('ssb_bpht');
 		///end check box///
-		// DATA SID
-		$this->session->unset_tempdata('sertSIDJenisAgunan');
-		$this->session->unset_tempdata('sertSIDPeringkatSurat');
-		$this->session->unset_tempdata('sertJenisPengikatan');
-		$this->session->unset_tempdata('sertSIDNamaPemilikAgunan');
-		$this->session->unset_tempdata('sertSIDBuktiPemilikAgunan');
-		$this->session->unset_tempdata('sertSIDAlamat');
-		$this->session->unset_tempdata('sertSIDLokasi');
-		$this->session->unset_tempdata('sertNilaiNJOP');
-		$this->session->unset_tempdata('sertNilaiBank');
-		$this->session->unset_tempdata('sertNilaiIndependen');
-		$this->session->unset_tempdata('sertNamaIndependen');
-		$this->session->unset_tempdata('sertParipasu');
-		$this->session->unset_tempdata('sertAsuransi');
+		// DATA SLIK
+		$this->session->unset_tempdata('sertSlikStatusAgunan');
+		$this->session->unset_tempdata('sertSlikJenisAgunan');
+		$this->session->unset_tempdata('sertSlikPeringkatAgunan');
+		$this->session->unset_tempdata('sertSlikLembagaPemeringkat');
+		$this->session->unset_tempdata('sertSlikJenisPengikatan');
+		$this->session->unset_tempdata('sertSlikTanggalPengikatan');
+		$this->session->unset_tempdata('sertSlikNamaPemilikAgunan');
+		$this->session->unset_tempdata('sertSlikBuktiKepemilikanAgunan');
+		$this->session->unset_tempdata('sertSlikAlamat');
+		$this->session->unset_tempdata('sertSlikKodeDati2');
+		$this->session->unset_tempdata('sertSlikNilaiNJOP');
+		$this->session->unset_tempdata('sertSlikNilaiLJK');
+		$this->session->unset_tempdata('sertSlikTanggalLJK');
+		$this->session->unset_tempdata('sertSlikNilaiIndependen');
+		$this->session->unset_tempdata('sertSlikTglIndependen');
+		$this->session->unset_tempdata('sertSlikNamaIndependen');
+		$this->session->unset_tempdata('sertSlikKeterangan');
+		$this->session->unset_tempdata('sertSlikParipasu');
+		$this->session->unset_tempdata('sertSlikParipasuPersen');
+		$this->session->unset_tempdata('sertSLikStatusJoinAccount');
+		$this->session->unset_tempdata('sertSlikAsuransi');
 		/// END FORM TAMBAH SERTIFIKAT ///
 		$data1['sukses'] = 'sukses';
 		echo json_encode($data1);

@@ -116,7 +116,7 @@
             <div class="tab">
               <button type="button" class="tablinks" onclick="openTab(event, 'DataSertifikat')">Data Sertifikat</button>
               <button type="button" class="tablinks" onclick="openTab(event, 'DataLampiranSertifikat')">Data Lampiran</button>
-              <button type="button" class="tablinks" onclick="openTab(event, 'SIDSertifikat')">SID</button>
+              <button type="button" class="tablinks" onclick="openTab(event, 'SLIKSertifikat')">SLIK</button>
             </div>
 
              <!-- Start Data Sertifikat -->
@@ -454,144 +454,188 @@
             <!-- End Data Lampiran -->
 
             <!-- Start SID -->
-            <div id="SIDSertifikat" class="tabcontent">
+            <div id="SLIKSertifikat" class="tabcontent">
                 <div class="row">
-                        <div class="col-md-10 mx-auto">
-                        <br><br>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Jenis Agunan</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                            <select class="form-control select2" id="sertSIDJenisAgunan" name="sertSIDJenisAgunan">
-                                                    <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                    <?php //foreach ($NamaJenisAgunan as $row) : ?>
-                                                    <option value="<?php// echo $row['Desc1'];?>"><?php// echo  $row['nm_jenis_agunan'];?></option>
-                                                    <?php// endforeach;?>
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Peringkat Surat Berharga</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                            <select class="form-control select2" id="sertSIDPeringkatSurat" name="sertSIDPeringkatSurat">
-                                                    <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                    <?php foreach ($RefJenisPeringkat as $row) : ?>
-                                                    <option value="<?php echo $row['Desc1'];?>"><?php echo  $row['nm_peringkat'];?></option>
-                                                    <?php endforeach;?>
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Jenis Pengikatan</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                            <select class="form-control select2" id="sertJenisPengikatan" name="sertJenisPengikatan">
-                                                    <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                    <?php foreach ($RefJenisPengikatan as $row) : ?>
-                                                    <option value="<?php echo $row['Desc1'];?>"><?php echo  $row['nm_pengikatan'];?></option>
-                                                    <?php endforeach;?>
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Nama Pemilik Agunan</label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="sertSIDNamaPemilikAgunan" name="sertSIDNamaPemilikAgunan">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Status/Bukti Kepemilikan</label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="sertSIDBuktiPemilikAgunan" name="sertSIDBuktiPemilikAgunan">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Alamat</label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="sertSIDAlamat" name="sertSIDAlamat">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Lokasi</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                            <select class="form-control select2" id="sertSIDLokasi" name="sertSIDLokasi">
-                                                    <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                    <?php foreach ($RefDati2 as $row) : ?>
-                                                    <option value="<?php echo $row['Desc1'];?>"><?php echo  $row['nm_dati2'];?></option>
-                                                    <?php endforeach;?>
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (NJOP)</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="sertNilaiNJOP" name="sertNilaiNJOP">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (Bank)</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="sertNilaiBank" name="sertNilaiBank">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan Independen</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="sertNilaiIndependen" name="sertNilaiIndependen">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Nama Penilai Independen</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="sertNamaIndependen" name="sertNamaIndependen">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Paripasu (%)</label>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <input type="number" class="form-control" id="sertParipasu" name="sertParipasu">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">
-                                        <label class="control-label" style="padding-top: 5px;" for="">Asuransi</label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                            <select class="form-control select2" id="sertAsuransi" name="sertAsuransi">
-                                                    <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                    <option value="Y">YA</option>
-                                                    <option value="T">TIDAK</option>
-                                            </select>
-                                    </div>
-                                </div>
-                            <!-- Form ATAS -->
-                        </div>
-                    </div>
-                </div>
-                <!-- END SID -->                   
-
+                        <div class="col-md-12 mx-auto">
+                      <br><br>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Status Agunan</label>
+                                  </div>
+                                  <div class="col-sm-5">
+                                        <select class="form-control select2" id="sertSlikStatusAgunan" name="sertSlikStatusAgunan">
+                                                
+                                        </select>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Paripasu</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <select class="form-control select2" id="sertSlikParipasu" name="sertSlikParipasu">
+                                        </select>
+                                  </div>
+                              </div>                
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Jenis Agunan</label>
+                                  </div>
+                                  <div class="col-sm-5">
+                                        <select class="form-control select2" id="sertSlikJenisAgunan" name="sertSlikJenisAgunan">
+                                        
+                                        </select>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Paripasu (%)</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="sertSlikParipasuPersen" name="sertSlikParipasuPersen">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Peringkat Agunan</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <input type="text" class="form-control" id="sertSlikPeringkatAgunan" name="sertSlikPeringkatAgunan"  maxlength="6" >
+                                  </div>
+                                  <div class="col-sm-2">
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Status Join Account</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <select class="form-control select2" id="sertSLikStatusJoinAccount" name="sertSLikStatusJoinAccount">
+                                        </select>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Lembaga Pemeringkat</label>
+                                  </div>
+                                  <div class="col-sm-5">
+                                        <select class="form-control select2" id="sertSlikLembagaPemeringkat" name="sertSlikLembagaPemeringkat">
+                                               
+                                        </select>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Diasuransikan</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <select class="form-control select2" id="sertSlikAsuransi" name="sertSlikAsuransi">
+                                       
+                                        </select>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Jenis Pengikatan</label>
+                                  </div>
+                                  <div class="col-sm-5">
+                                        <select class="form-control select2" id="sertSlikJenisPengikatan" name="sertSlikJenisPengikatan">
+                                               
+                                        </select>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Tanggal Pengikatan</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <input type="date" class="form-control" id="sertSlikTanggalPengikatan" name="sertSlikTanggalPengikatan">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Nama Pemilik Agunan</label>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <input type="text" class="form-control" id="sertSlikNamaPemilikAgunan" name="sertSlikNamaPemilikAgunan">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Bukti Kepemilikan</label>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <input type="text" class="form-control" id="sertSlikBuktiKepemilikanAgunan" name="sertSlikBuktiKepemilikanAgunan">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Alamat</label>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <textarea style="height: 115px;" type="text" class="form-control" id="sertSlikAlamat" name="sertSlikAlamat"></textarea>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Kode Dati 2 Agunan</label>
+                                  </div>
+                                  <div class="col-sm-5">
+                                        <select class="form-control select2" id="sertSlikKodeDati2" name="sertSlikKodeDati2">
+                                                
+                                        </select>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (NJOP)</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="sertSlikNilaiNJOP" name="sertSlikNilaiNJOP">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (LJK)</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="sertSlikNilaiLJK" name="sertSlikNilaiLJK">
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Tanggal Penilaian (LJK)</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="date" class="form-control" id="sertSlikTanggalLJK" name="sertSlikTanggalLJK">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan Independen</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="sertSlikNilaiIndependen" name="sertSlikNilaiIndependen">
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Tgl Penilaian Independen</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="date" class="form-control" id="sertSlikTglIndependen" name="sertSlikTglIndependen">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Nama Penilai Independen</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="text" class="form-control" id="sertSlikNamaIndependen" name="sertSlikNamaIndependen">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Keterangan</label>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <textarea style="height: 115px;" type="text" class="form-control" id="sertSlikKeterangan" name="sertSlikKeterangan"></textarea>
+                                  </div>
+                              </div>
+                          <!-- Form ATAS -->
+                      </div>
+                      </div>
+                      </div>
+                  
+            <!-- END SLIK -->                
                                 
             </div>      
       <!-- ini modal body -->

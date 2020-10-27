@@ -19,13 +19,15 @@ class AsetDokumenUpdateController extends CI_Controller {
 
 		$data['KreKodeJenisAgunan'] 		= $this->AsetDokumenUpdateModel->KreKodeJenisAgunan();
 		$data['KreKodeIkatanHukumAgunan'] 	= $this->AsetDokumenUpdateModel->KreKodeIkatanHukumAgunan();
-		$data['getNmJenisAgunan'] 			= $this->AsetDokumenUpdateModel->getNmJenisAgunan();
-		$data['getRefJenisPengikatan'] 		= $this->AsetDokumenUpdateModel->getRefJenisPengikatan();
-		$data['getRefJenisPeringkat'] 		= $this->AsetDokumenUpdateModel->getRefJenisPeringkat();
-		$data['getRefDati2'] 				= $this->AsetDokumenUpdateModel->getRefDati2();
+		//slik
+		$data['getSlikKodeJenisAgunan'] 	= $this->AsetDokumenUpdateModel->getSlikKodeJenisAgunan();		
+		$data['getSlikLembagaPemeringkat'] 	= $this->AsetDokumenUpdateModel->getSlikLembagaPemeringkat();
+		$data['getSlikJenisPengikatan'] 	= $this->AsetDokumenUpdateModel->getSlikJenisPengikatan();
+		$data['getSlikDati2'] 				= $this->AsetDokumenUpdateModel->getSlikDati2();
 
 		$data['getJaminanHeader']			= $this->AsetDokumenUpdateModel->getJaminanHeader($nomorAgunan , $nomorRefAgunan);
 		$data['getJaminanDokument']			= $this->AsetDokumenUpdateModel->getJaminanDokument($agunanID, $nomorRefAgunan);
+		$data['getJaminanSLIK']			= $this->AsetDokumenUpdateModel->getJaminanSLIK($agunanID);
 
 		$data['MerkKend'] = $this->AsetDokumenUpdateModel->getMerkKend();
 		$data['JenisKend'] = $this->AsetDokumenUpdateModel->getJenisKend();
@@ -185,6 +187,28 @@ class AsetDokumenUpdateController extends CI_Controller {
 			$no_ajb = '';
 		}	
 
+		$sertSlikPeringkatAgunan        = $this->input->post('sertSlikPeringkatAgunan');
+		$sertSlikParipasuPersen         = $this->input->post('sertSlikParipasuPersen');
+		$sertSlikTanggalPengikatan      = $this->input->post('sertSlikTanggalPengikatan');
+		$sertSlikNamaPemilikAgunan      = $this->input->post('sertSlikNamaPemilikAgunan');
+		$sertSlikBuktiKepemilikanAgunan = $this->input->post('sertSlikBuktiKepemilikanAgunan');
+		$sertSlikAlamat                 = $this->input->post('sertSlikAlamat');
+		$sertSlikNilaiNJOP              = $this->input->post('sertSlikNilaiNJOP');
+		$sertSlikNilaiLJK               = $this->input->post('sertSlikNilaiLJK'); 
+		$sertSlikTanggalLJK             = $this->input->post('sertSlikTanggalLJK'); 
+		$sertSlikNilaiIndependen        = $this->input->post('sertSlikNilaiIndependen');
+		$sertSlikNamaIndependen         = $this->input->post('sertSlikNamaIndependen'); 
+		$sertSlikTglIndependen          = $this->input->post('sertSlikTglIndependen'); 
+		$sertSlikKeterangan             = $this->input->post('sertSlikKeterangan'); 
+		$sertSlikJenisAgunan            = $this->input->post('sertSlikJenisAgunan'); 
+		$sertSlikLembagaPemeringkat     = $this->input->post('sertSlikLembagaPemeringkat'); 
+		$sertSlikJenisPengikatan        = $this->input->post('sertSlikJenisPengikatan'); 
+		$sertSlikKodeDati2              = $this->input->post('sertSlikKodeDati2'); 
+		$sertSlikStatusAgunan           = $this->input->post('sertSlikStatusAgunan'); 
+		$sertSlikParipasu               = $this->input->post('sertSlikParipasu'); 
+		$sertSLikStatusJoinAccount      = $this->input->post('sertSLikStatusJoinAccount'); 
+		$sertSlikAsuransi               = $this->input->post('sertSlikAsuransi'); 
+
 		$this->AsetDokumenUpdateModel->updateJaminanHeaderSert($mainId,
 																$mainTanggal,
 																$mainNama,
@@ -262,7 +286,31 @@ class AsetDokumenUpdateController extends CI_Controller {
 																	$sertLainnya,
 																	$verifikasi);							
 
-		
+		$this->AsetDokumenUpdateModel->updateJaminanSlik($sertAgunanID, 
+															$mainNomorRekening,
+															$sertKantorLokasi,
+															$sertSlikStatusAgunan,
+															$sertSlikJenisAgunan,
+															$sertSlikPeringkatAgunan,
+															$sertSlikLembagaPemeringkat,
+															$sertSlikJenisPengikatan,
+															$sertSlikTanggalPengikatan,
+															$sertSlikNamaPemilikAgunan,
+															$sertSlikBuktiKepemilikanAgunan,
+															$sertSlikAlamat,
+															$sertSlikKodeDati2,
+															$sertSlikNilaiNJOP,
+															$sertSlikNilaiLJK,
+															$sertSlikTanggalLJK,
+															$sertSlikNilaiIndependen,
+															$sertSlikNamaIndependen,
+															$sertSlikTglIndependen,
+															$sertSlikParipasu,
+															$sertSlikParipasuPersen,
+															$sertSLikStatusJoinAccount,
+															$sertSlikAsuransi,
+															$sertSlikKeterangan);
+
 		$data['jenisJaminan']  = $jenisJaminan;
 		$data['no_shm']  = $no_shm;
 		$data['no_shgb']  = $no_shgb;
@@ -323,8 +371,32 @@ class AsetDokumenUpdateController extends CI_Controller {
 		$data['sertAgunanID']  = $sertAgunanID;
 		$data['sertID']  = $sertID;
 		$data['verifikasi']  = $verifikasi;
+
+		$data['sertSlikPeringkatAgunan'] = $sertSlikPeringkatAgunan   ;
+		$data['sertSlikParipasuPersen'] = $sertSlikParipasuPersen      ;
+		$data['sertSlikTanggalPengikatan'] = $sertSlikTanggalPengikatan  ;
+		$data['sertSlikNamaPemilikAgunan'] = $sertSlikNamaPemilikAgunan   ;
+		$data['sertSlikBuktiKepemilikanAgunan'] = $sertSlikBuktiKepemilikanAgunan ;
+		$data['sertSlikAlamat'] = $sertSlikAlamat             ;
+		$data['sertSlikNilaiNJOP'] = $sertSlikNilaiNJOP           ;
+		$data['sertSlikNilaiLJK'] = $sertSlikNilaiLJK        ; 
+		$data['sertSlikTanggalLJK'] = $sertSlikTanggalLJK            ; 
+		$data['sertSlikNilaiIndependen'] = $sertSlikNilaiIndependen  ;
+		$data['sertSlikNamaIndependen'] = $sertSlikNamaIndependen   ; 
+		$data['sertSlikTglIndependen'] = $sertSlikTglIndependen;           
+		$data['sertSlikKeterangan'] = $sertSlikKeterangan         ; 
+		$data['sertSlikJenisAgunan'] =  $sertSlikJenisAgunan   ;
+		$data['sertSlikLembagaPemeringkat'] =  $sertSlikLembagaPemeringkat  ;   
+		$data['sertSlikJenisPengikatan'] =  $sertSlikJenisPengikatan ;      
+		$data['sertSlikKodeDati2'] = $sertSlikKodeDati2 ;             
+		$data['sertSlikStatusAgunan'] = $sertSlikStatusAgunan;            
+		$data['sertSlikParipasu'] = $sertSlikParipasu ;             
+		$data['sertSLikStatusJoinAccount'] =  $sertSLikStatusJoinAccount;    
+		$data['sertSlikAsuransi'] = $sertSlikAsuransi;                
+
 		echo json_encode($data);
 	}
+
 	public function updateBPKB(){
 		$jenisJaminan = 'BPKB';
 		$rodaKendaraan = '4';

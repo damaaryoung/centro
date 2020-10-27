@@ -181,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="tab">
               <button type="button" class="tablinks" onclick="openTab(event, 'DataSertifikat')">Data Sertifikat</button>
               <button type="button" class="tablinks" onclick="openTab(event, 'DataLampiran')">Data Lampiran</button>
-              <button type="button" class="tablinks" onclick="openTab(event, 'SID')">SID</button>
+              <button type="button" class="tablinks" onclick="openTab(event, 'SLIK')">SLIK</button>
             </div>
 
             <!-- Start Data Sertifikat -->
@@ -745,144 +745,268 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-            <!-- Start SID -->
-            <div id="SID" class="tabcontent" style="font-size: 13px;">
+            <!-- Start SLIK -->
+            <div id="SLIK" class="tabcontent" style="font-size: 13px;">
             <div class="row">
-                      <div class="col-md-10 mx-auto">
+                      <div class="col-md-12 mx-auto">
                       <br><br>
                               <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Status Agunan</label>
+                                  </div>
+                                  <div class="col-sm-5">
+                                        <select class="form-control select2" id="sertSlikStatusAgunan" name="sertSlikStatusAgunan">
+                                                
+                                                <?php if($this->session->tempdata('sertSlikStatusAgunan') == '1') {
+                                                        echo '<option value="1" selected>1 - Tersedia</option>
+                                                              <option value="2" >2 - Indent</option>';
+                                                      } else if($this->session->tempdata('sertSlikStatusAgunan') == '2'){
+                                                        echo '<option value="1" >1 - Tersedia</option>
+                                                              <option value="2" selected>2 - Indent</option>';
+                                                      }else{
+                                                        echo '<option value="1">1 - Tersedia</option>
+                                                              <option value="2" selected>2 - Indent</option>';
+                                                      }
+                                                ?>
+                                        </select>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Paripasu</label>
+                                  </div>
                                   <div class="col-sm-3">
+                                        <select class="form-control select2" id="sertSlikParipasu" name="sertSlikParipasu">
+                                                
+                                                <?php if($this->session->tempdata('sertSlikParipasu') == 'T') {
+                                                        echo '<option value="T" selected>T</option>
+                                                              <option value="Y">Y</option>';
+                                                      } else if($this->session->tempdata('sertSlikParipasu') == 'Y'){
+                                                        echo '<option value="T" >T</option>
+                                                              <option value="Y" selected>Y</option>';
+                                                      }else{
+                                                        echo '<option value="T"selected>T</option>
+                                                              <option value="Y">Y</option>';
+                                                      }
+                                                ?>
+                                        </select>
+                                  </div>
+                              </div>                
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertSIDJenisAgunan" name="sertSIDJenisAgunan">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                <?php foreach ($NamaJenisAgunan as $row) : ?>
-                                                <option value="<?php echo $row['Desc1'];?>"><?php echo  $row['nm_jenis_agunan'];?></option>
+                                        <select class="form-control select2" id="sertSlikJenisAgunan" name="sertSlikJenisAgunan">
+                                        <?php if($this->session->tempdata('sertSlikJenisAgunan') != '') {
+                                                        echo '<option value="'.$this->session->tempdata('sertSlikJenisAgunan').'" selected>'.$this->session->tempdata('sertSlikJenisAgunan').'</option>';
+                                              } else{
+                                                  echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                              }
+                                        ?>
+                                                <?php foreach ($SlikKodeJenisAgunan as $row) : ?>
+                                                <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - '. $row['nama'];?></option>
                                                 <?php endforeach;?>
+                                        </select>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Paripasu (%)</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="sertSlikParipasuPersen" name="sertSlikParipasuPersen" value="<?php echo $this->session->tempdata('sertSlikParipasuPersen');?>">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Peringkat Agunan</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <input type="text" class="form-control" id="sertSlikPeringkatAgunan" name="sertSlikPeringkatAgunan"  maxlength="6"  value="<?php echo $this->session->tempdata('sertSlikPeringkatAgunan');?>">
+                                  </div>
+                                  <div class="col-sm-2">
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Status Join Account</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <select class="form-control select2" id="sertSLikStatusJoinAccount" name="sertSLikStatusJoinAccount">
+                                              
+                                                <?php if($this->session->tempdata('sertSLikStatusJoinAccount') == 'T') {
+                                                        echo '<option value="T" selected>T</option>
+                                                              <option value="Y">Y</option>';
+                                                      } else if($this->session->tempdata('sertSLikStatusJoinAccount') == 'Y'){
+                                                        echo '<option value="T" >T</option>
+                                                              <option value="Y" selected>Y</option>';
+                                                      }else{
+                                                        echo '<option value="T">T</option>
+                                                              <option value="Y" selected>Y</option>';
+                                                      }
+                                                ?>
                                         </select>
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="">Peringkat Surat Berharga</label>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Lembaga Pemeringkat</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertSIDPeringkatSurat" name="sertSIDPeringkatSurat">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                <?php foreach ($RefJenisPeringkat as $row) : ?>
-                                                <option value="<?php echo $row['Desc1'];?>"><?php echo  $row['nm_peringkat'];?></option>
+                                        <select class="form-control select2" id="sertSlikLembagaPemeringkat" name="sertSlikLembagaPemeringkat">
+                                                <?php if($this->session->tempdata('sertSlikJenisAgunan') != '') {
+                                                        echo '<option value="'.$this->session->tempdata('sertSlikJenisAgunan').'" selected>'.$this->session->tempdata('sertSlikJenisAgunan').'</option>';
+                                                    } else{
+                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                    }
+                                                ?>
+                                                    <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                                <?php foreach ($SlikLembagaPemeringkat as $row) : ?>
+                                                    <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - '. $row['nama'];?></option>
                                                 <?php endforeach;?>
+                                        </select>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Diasuransikan</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                        <select class="form-control select2" id="sertSlikAsuransi" name="sertSlikAsuransi">
+                                        <?php if($this->session->tempdata('sertSlikAsuransi') == 'T') {
+                                                        echo '<option value="T" selected>T</option>
+                                                              <option value="Y">Y</option>';
+                                                      } else if($this->session->tempdata('sertSlikAsuransi') == 'Y'){
+                                                        echo '<option value="T" >T</option>
+                                                              <option value="Y" selected>Y</option>';
+                                                      }else{
+                                                        echo '<option value="T">T</option>
+                                                              <option value="Y" selected>Y</option>';
+                                                      }
+                                                ?>
                                         </select>
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Pengikatan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertJenisPengikatan" name="sertJenisPengikatan">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                <?php foreach ($RefJenisPengikatan as $row) : ?>
-                                                <option value="<?php echo $row['Desc1'];?>"><?php echo  $row['nm_pengikatan'];?></option>
+                                        <select class="form-control select2" id="sertSlikJenisPengikatan" name="sertSlikJenisPengikatan">
+                                                <?php if($this->session->tempdata('sertSlikJenisPengikatan') != '') {
+                                                        echo '<option value="'.$this->session->tempdata('sertSlikJenisPengikatan').'" selected>'.$this->session->tempdata('sertSlikJenisPengikatan').'</option>';
+                                                    } else{
+                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                    }
+                                                ?>
+                                                <?php foreach ($SlikJenisPengikatan as $row) : ?>
+                                                <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - '. $row['nama'];?></option>
                                                 <?php endforeach;?>
                                         </select>
                                   </div>
                               </div>
                               <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Tanggal Pengikatan</label>
+                                  </div>
                                   <div class="col-sm-3">
+                                        <input type="date" class="form-control" id="sertSlikTanggalPengikatan" name="sertSlikTanggalPengikatan" value="<?php echo $this->session->tempdata('sertSlikTanggalPengikatan');?>">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Nama Pemilik Agunan</label>
                                   </div>
-                                  <div class="col-sm-8">
-                                      <input type="text" class="form-control" id="sertSIDNamaPemilikAgunan" name="sertSIDNamaPemilikAgunan">
+                                  <div class="col-sm-6">
+                                      <input type="text" class="form-control" id="sertSlikNamaPemilikAgunan" name="sertSlikNamaPemilikAgunan" value="<?php echo $this->session->tempdata('sertSlikNamaPemilikAgunan');?>">
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="">Status/Bukti Kepemilikan</label>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Bukti Kepemilikan</label>
                                   </div>
-                                  <div class="col-sm-8">
-                                      <input type="text" class="form-control" id="sertSIDBuktiPemilikAgunan" name="sertSIDBuktiPemilikAgunan">
+                                  <div class="col-sm-6">
+                                      <input type="text" class="form-control" id="sertSlikBuktiKepemilikanAgunan" name="sertSlikBuktiKepemilikanAgunan" value="<?php echo $this->session->tempdata('sertSlikBuktiKepemilikanAgunan');?>">
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Alamat</label>
                                   </div>
-                                  <div class="col-sm-8">
-                                      <input type="text" class="form-control" id="sertSIDAlamat" name="sertSIDAlamat">
+                                  <div class="col-sm-6">
+                                      <textarea style="height: 115px;" type="text" class="form-control" id="sertSlikAlamat" name="sertSlikAlamat"><?php echo $this->session->tempdata('sertSlikAlamat');?></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="">Lokasi</label>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Kode Dati 2 Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertSIDLokasi" name="sertSIDLokasi">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                <?php foreach ($RefDati2 as $row) : ?>
-                                                <option value="<?php echo $row['Desc1'];?>"><?php echo  $row['nm_dati2'];?></option>
+                                        <select class="form-control select2" id="sertSlikKodeDati2" name="sertSlikKodeDati2">
+                                                <?php if($this->session->tempdata('sertSlikKodeDati2') != '') {
+                                                        echo '<option value="'.$this->session->tempdata('sertSlikKodeDati2').'" selected>'.$this->session->tempdata('sertSlikKodeDati2').'</option>';
+                                                    } else{
+                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
+                                                    }
+                                                ?>
+                                                <?php foreach ($SlikDati2 as $row) : ?>
+                                                <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - '. $row['nama'];?></option>
                                                 <?php endforeach;?>
                                         </select>
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (NJOP)</label>
                                   </div>
-                                  <div class="col-sm-5">
-                                      <input type="number" class="form-control" id="sertNilaiNJOP" name="sertNilaiNJOP">
+                                  <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="sertSlikNilaiNJOP" name="sertSlikNilaiNJOP" value="<?php echo $this->session->tempdata('sertSlikNilaiNJOP');?>">
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (Bank)</label>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan (LJK)</label>
                                   </div>
-                                  <div class="col-sm-5">
-                                      <input type="number" class="form-control" id="sertNilaiBank" name="sertNilaiBank">
+                                  <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="sertSlikNilaiLJK" name="sertSlikNilaiLJK" value="<?php echo $this->session->tempdata('sertSlikNilaiLJK');?>">
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Tanggal Penilaian (LJK)</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="date" class="form-control" id="sertSlikTanggalLJK" name="sertSlikTanggalLJK" value="<?php echo $this->session->tempdata('sertSlikTanggalLJK');?>">
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Nilai Agunan Independen</label>
                                   </div>
-                                  <div class="col-sm-5">
-                                      <input type="number" class="form-control" id="sertNilaiIndependen" name="sertNilaiIndependen">
+                                  <div class="col-sm-3">
+                                      <input type="number" class="form-control" id="sertSlikNilaiIndependen" name="sertSlikNilaiIndependen" value="<?php echo $this->session->tempdata('sertSlikNilaiIndependen');?>">
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Tgl Penilaian Independen</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <input type="date" class="form-control" id="sertSlikTglIndependen" name="sertSlikTglIndependen" value="<?php echo $this->session->tempdata('sertSlikTglIndependen');?>">
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;" for="">Nama Penilai Independen</label>
                                   </div>
-                                  <div class="col-sm-5">
-                                      <input type="text" class="form-control" id="sertNamaIndependen" name="sertNamaIndependen">
+                                  <div class="col-sm-3">
+                                      <input type="text" class="form-control" id="sertSlikNamaIndependen" name="sertSlikNamaIndependen" value="<?php echo $this->session->tempdata('sertSlikNamaIndependen');?>">
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="">Paripasu (%)</label>
+                                  <div class="col-sm-2">
+                                      <label class="control-label" style="padding-top: 5px;" for="">Keterangan</label>
                                   </div>
-                                  <div class="col-sm-5">
-                                      <input type="number" class="form-control" id="sertParipasu" name="sertParipasu">
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="">Asuransi</label>
-                                  </div>
-                                  <div class="col-sm-3">
-                                        <select class="form-control select2" id="sertAsuransi" name="sertAsuransi">
-                                                <option value="" selected disabled hidden>Silahkan Pilih</option>
-                                                <option value="Y">YA</option>
-                                                <option value="T">TIDAK</option>
-                                        </select>
+                                  <div class="col-sm-6">
+                                      <textarea style="height: 115px;" type="text" class="form-control" id="sertSlikKeterangan" name="sertSlikKeterangan"><?php echo $this->session->tempdata('sertSlikKeterangan');?></textarea>
                                   </div>
                               </div>
                           <!-- Form ATAS -->
                       </div>
                   </div>
             </div>
-            <!-- END SID -->
+            <!-- END SLIK -->
+
+
             <div class="card-footer text-center">
                 <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
                 <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
