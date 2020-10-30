@@ -3,6 +3,49 @@ var nomor = '';
 var id = '';
 var base_url = $('#base_url').val();
 
+$(document).ready(function () {     
+   
+    dataTableeee = [];
+    $('#loading').show(); 
+
+       
+    $.ajax({
+        url : base_url + "index.php/PemindahanJaminanMainController/getListJaminan",
+        type : "POST",
+        dataType : "json",
+        data : {"search"    : 'search'
+               },
+
+        success : function(response) {
+            $('#tableLokasiJaminan').DataTable().clear();
+            $('#tableLokasiJaminan').DataTable().destroy();
+                    
+            dataTableeee.push(response); 
+
+            $('#tableLokasiJaminan > tbody:first').html(dataTableeee);
+            $(document).ready(function() {
+                $('#tableLokasiJaminan').DataTable( {
+                    "destroy": true,
+                    "scrollX": true,
+                    "autoWidth" : true,
+                    "searching": false,
+                    "aaSorting" : []
+                } );
+            } );
+            $('#loading').hide();  
+            console.log("FINISH");
+            
+        },
+        error : function(response) {
+            console.log('failed :' + response);
+            alert('Gagal Get Data, Mohon Coba Beberapa Saat Lagi');
+            window.location = base_url + 'index.php/DashboardController/index'
+            $('#loading').hide(); 
+        }
+    });       
+    
+});
+
 function serchDataJaminan(){
     var search = $('#search').val(); 
     var kode_kantor = $('#kode_kantor').val(); 
