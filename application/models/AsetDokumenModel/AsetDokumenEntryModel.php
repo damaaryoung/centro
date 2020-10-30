@@ -1155,6 +1155,9 @@ class AsetDokumenEntryModel extends CI_Model{
 										$agunanID){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$this->db2->trans_start();
+		$this->db2->query("UPDATE  dpm_online.`slik_agunan` 
+							SET	`operasi_data`= 'D'
+							WHERE kode_register_agunan = '$agunanID' ;");
 		$this->db2->query("DELETE 
 							FROM dpm_online.jaminan_header 
 							WHERE no_reff = '$nomorRefAgunan' 
