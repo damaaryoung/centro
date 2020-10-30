@@ -525,7 +525,18 @@ class AsetDokumenEntryModel extends CI_Model{
 							'$sertLainnya',
 							'$verifikasi');");
 	}
+	public function getCIF($mainNomorRekening){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+			$str = " SELECT nasabah_id 
+						FROM `vmicro_browse_kredit` WHERE no_rekening = '$mainNomorRekening'
+						ORDER BY tgl_realisasi DESC 
+						LIMIT 1";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+	}
 	public function insertJaminanSlikSert($agunan_id,
+											$cif,
 											$sertKantorLokasi,
 											$mainNomorRekening,
 											$sertSlikStatusAgunan,
@@ -586,12 +597,7 @@ class AsetDokumenEntryModel extends CI_Model{
 						VALUES( 'D',
 								'$agunan_id',
 								'$mainNomorRekening',
-								( SELECT 
-									nasabah_id 
-									FROM
-									`vmicro_browse_kredit` WHERE no_rekening = '$mainNomorRekening'
-								  ORDER BY tgl_realisasi DESC 
-								  LIMIT 1),
+								'$cif',
 								'F01',
 								'$sertSlikStatusAgunan',
 								'$sertSlikJenisAgunan',
@@ -618,8 +624,7 @@ class AsetDokumenEntryModel extends CI_Model{
 									FROM app_kode_kantor akk
 									WHERE akk.`kode_kantor` = '$sertKantorLokasi'
 									LIMIT 1),
-								'C'
-								) 
+								'C') 
 								ON DUPLICATE KEY 
 								UPDATE 
 								`flag_detail`				      = 'D',
@@ -649,7 +654,7 @@ class AsetDokumenEntryModel extends CI_Model{
 																		FROM app_kode_kantor akk
 																		WHERE akk.`kode_kantor` = '$sertKantorLokasi'
 																		LIMIT 1);");
-					}
+	}
 	//// bpkb ////
 	public function getJenisKend(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);

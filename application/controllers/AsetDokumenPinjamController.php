@@ -5,6 +5,7 @@ class AsetDokumenPinjamController extends CI_Controller {
 	public function __construct() {
         parent:: __construct();
 		$this->load->model('AsetDokumenModel/AsetDokumenPinjamModel');
+		$this->load->model('AsetDokumenModel/AsetDokumenUpdateModel');
        
 	}
 
@@ -16,7 +17,7 @@ class AsetDokumenPinjamController extends CI_Controller {
 
 		$data['getJaminanHeader']			= $this->AsetDokumenPinjamModel->getJaminanHeader($nomorAgunan , $nomorRefAgunan);
 		$data['getJaminanDokument']			= $this->AsetDokumenPinjamModel->getJaminanDokument($agunanID, $nomorRefAgunan);
-
+		$data['getJaminanSLIK']			    = $this->AsetDokumenUpdateModel->getJaminanSLIK($agunanID);
 		
 		echo json_encode($data);
 		

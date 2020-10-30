@@ -13,6 +13,25 @@ var mainTanggalRealisasi = '';
 var base_url = $('#base_url').val();
 
 $('#mainBtnSearchRekening').click(function () {
+    dataRekening()
+    
+});
+$('#bodyNomorRekening').on('click','.btnPilihRekening', function () {
+    var namaNasabah   = $(this).data("nama");
+    var noRekening   = $(this).data("norek");
+
+    $('#mainNomorRekening').val(noRekening);
+    $('#mainNamaNasabah').val(namaNasabah);
+    $('#modalNomorRekening').modal('hide');
+});
+$('#btn_kembali_norek_modal').click(function ()  {
+    $('#modalNomorRekening').modal('hide');
+});
+$('#btn_kembali_norek_modal2').click(function () {
+    $('#modalNomorRekening').modal('hide');
+});
+
+function dataRekening(){
     $('#modalNomorRekening').modal('show');
     dataTableeee = [];
     $.ajax({
@@ -42,25 +61,8 @@ $('#mainBtnSearchRekening').click(function () {
                 alert('Gagal Get Detail Nomor Rekening, Silahkan Coba Lagi');
                 $('#modalNomorRekening').modal('hide');
             }
-    });    
-    
-});
-$('#bodyNomorRekening').on('click','.btnPilihRekening', function () {
-    var namaNasabah   = $(this).data("nama");
-    var noRekening   = $(this).data("norek");
-
-    $('#mainNomorRekening').val(noRekening);
-    $('#mainNamaNasabah').val(namaNasabah);
-    $('#modalNomorRekening').modal('hide');
-});
-$('#btn_kembali_norek_modal').click(function ()  {
-    $('#modalNomorRekening').modal('hide');
-});
-$('#btn_kembali_norek_modal2').click(function () {
-    $('#modalNomorRekening').modal('hide');
-});
-
-
+    });  
+}
 
 function serchDataRekening(){
     $('#TableNoRek').DataTable().clear();

@@ -210,10 +210,10 @@ class AsetDokumenUpdateModel extends CI_Model{
 					SA.`keterangan`,
 					SA.`kode_kantor_cabang`,
 					SA.`operasi_data`,
-					CONCAT(SRJ.`kode`,' - ',SRJ.`nama`) AS sertSlikJenisAgunan,
-					CONCAT(RLP.`kode`,' - ',RLP.`nama`) AS sertSlikLembagaPemeringkat,
-					CONCAT(SRJP.`kode`,' - ',SRJP.`nama`) AS sertSlikJenisPengikatan,
-					CONCAT(SRD.`kode`,' - ',SRD.`nama`) AS sertSlikKodeDati2
+					CONCAT(SRJ.`kode`,' - ',SRJ.`nama`) AS SlikJenisAgunan,
+					CONCAT(RLP.`kode`,' - ',RLP.`nama`) AS SlikLembagaPemeringkat,
+					CONCAT(SRJP.`kode`,' - ',SRJP.`nama`) AS SlikJenisPengikatan,
+					CONCAT(SRD.`kode`,' - ',SRD.`nama`) AS SlikKodeDati2
 				FROM
 					dpm_online.slik_agunan SA
 				LEFT JOIN dpm_online.slik_ref_jenis_agunan SRJ
@@ -274,6 +274,16 @@ class AsetDokumenUpdateModel extends CI_Model{
 	}
 
 	//update sertifikat
+	public function getCIF($mainNomorRekening){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+			$str = " SELECT nasabah_id 
+						FROM `vmicro_browse_kredit` WHERE no_rekening = '$mainNomorRekening'
+						ORDER BY tgl_realisasi DESC 
+						LIMIT 1";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+	}
 	public function updateJaminanHeaderSert($mainId,
 											$mainTanggal,
 											$mainNama,
@@ -439,6 +449,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 
 	public function updateJaminanSlik($sertAgunanID, 
 										$mainNomorRekening,
+										$cif,
 										$sertKantorLokasi,
 										$sertSlikStatusAgunan,
 										$sertSlikJenisAgunan,
@@ -466,6 +477,8 @@ class AsetDokumenUpdateModel extends CI_Model{
 		
 		$this->db2->query("UPDATE  dpm_online.`slik_agunan` 
 								SET	`flag_detail`				      = 'D',
+									`no_rekening`      				  = '$mainNomorRekening',
+									`cif`			   				  = '$cif',
 									`kode_jenis_segment_fasilitas` 	  = 'F01',
 									`kode_status_agunan`   			  = '$sertSlikStatusAgunan',
 									`kode_jenis_agunan` 			  = '$sertSlikJenisAgunan',
@@ -491,7 +504,8 @@ class AsetDokumenUpdateModel extends CI_Model{
 									`kode_kantor_cabang` 			  = (SELECT sandi_cabang AS kode
 																			FROM app_kode_kantor akk
 																			WHERE akk.`kode_kantor` = '$sertKantorLokasi'
-																			LIMIT 1)
+																			LIMIT 1),
+									`operasi_data`					  = 'U'
 							WHERE kode_register_agunan = '$sertAgunanID' ;");
 	}
 

@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class AsetDokumenVerifikasiController extends CI_Controller {
 	public function __construct() {
         parent:: __construct();
-        $this->load->model('AsetDokumenModel/AsetDokumenVerifikasiModel');
+		$this->load->model('AsetDokumenModel/AsetDokumenVerifikasiModel');
+		$this->load->model('AsetDokumenModel/AsetDokumenUpdateModel');
        
 	}
 
@@ -44,6 +45,7 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 
 		$data['getJaminanHeader']	 		= $this->AsetDokumenVerifikasiModel->getJaminanHeader($nomorAgunan , $nomorRefAgunan);
 		$data['getJaminanDokument']			= $this->AsetDokumenVerifikasiModel->getJaminanDokument($agunanID, $nomorRefAgunan);
+		$data['getJaminanSLIK']			= $this->AsetDokumenUpdateModel->getJaminanSLIK($agunanID);
 
 		$data['nomorRefAgunan'] = $nomorRefAgunan;
 		$data['agunanID'] = $agunanID;

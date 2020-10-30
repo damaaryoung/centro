@@ -5,6 +5,7 @@ class AsetDokumenKembaliController extends CI_Controller {
 	public function __construct() {
         parent:: __construct();
 		$this->load->model('AsetDokumenModel/AsetDokumenKembaliModel');
+		$this->load->model('AsetDokumenModel/AsetDokumenUpdateModel');
        
 	}
 
@@ -17,6 +18,7 @@ class AsetDokumenKembaliController extends CI_Controller {
 		$data['getJaminanHeader']			= $this->AsetDokumenKembaliModel->getJaminanHeader($nomorAgunan , $nomorRefAgunan);
 		$data['getJaminanDokument']			= $this->AsetDokumenKembaliModel->getJaminanDokument($agunanID, $nomorRefAgunan);
 		$data['getJaminanHistory']	    	= $this->AsetDokumenKembaliModel->getJaminanHistory($nomorRefAgunan);
+		$data['getJaminanSLIK']			    = $this->AsetDokumenUpdateModel->getJaminanSLIK($agunanID);
 
 		
 		echo json_encode($data);

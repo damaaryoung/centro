@@ -836,8 +836,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         echo '<option value="T" >T</option>
                                                               <option value="Y" selected>Y</option>';
                                                       }else{
-                                                        echo '<option value="T">T</option>
-                                                              <option value="Y" selected>Y</option>';
+                                                        echo '<option value="T" selected>T</option>
+                                                              <option value="Y">Y</option>';
                                                       }
                                                 ?>
                                         </select>
@@ -849,13 +849,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-5">
                                         <select class="form-control select2" id="sertSlikLembagaPemeringkat" name="sertSlikLembagaPemeringkat">
-                                                <?php if($this->session->tempdata('sertSlikJenisAgunan') != '') {
-                                                        echo '<option value="'.$this->session->tempdata('sertSlikJenisAgunan').'" selected>'.$this->session->tempdata('sertSlikJenisAgunan').'</option>';
+                                                <?php if($this->session->tempdata('sertSlikLembagaPemeringkat') != '') {
+                                                        echo '<option value="'.$this->session->tempdata('sertSlikLembagaPemeringkat').'" selected>'.$this->session->tempdata('sertSlikLembagaPemeringkat').'</option>';
                                                     } else{
                                                         echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
                                                     }
                                                 ?>
-                                                    <option value="" selected disabled hidden>Silahkan Pilih</option>
                                                 <?php foreach ($SlikLembagaPemeringkat as $row) : ?>
                                                     <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - '. $row['nama'];?></option>
                                                 <?php endforeach;?>
@@ -873,8 +872,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         echo '<option value="T" >T</option>
                                                               <option value="Y" selected>Y</option>';
                                                       }else{
-                                                        echo '<option value="T">T</option>
-                                                              <option value="Y" selected>Y</option>';
+                                                        echo '<option value="T" selected>T</option>
+                                                              <option value="Y">Y</option>';
                                                       }
                                                 ?>
                                         </select>

@@ -55,6 +55,15 @@ class AsetDokumenUpdateController extends CI_Controller {
 		$mainTanggalRealisasi = $this->input->post('mainTanggalRealisasi');
 		$mainId				  = $this->input->post('mainId');
 
+		$cif = $this->AsetDokumenUpdateModel->getCIF($mainNomorRekening);
+		foreach ($cif as $row) :
+			$cif    = $row['nasabah_id'];
+		endforeach;
+
+		if($cif == null){
+			$cif = ' ';
+		}
+
 		// form atas sertifikat	
 		$sertTglRegister = $this->input->post('sertTglRegister'); 
 		$sertTglPenilaian = $this->input->post('sertTglPenilaian'); 
@@ -288,6 +297,7 @@ class AsetDokumenUpdateController extends CI_Controller {
 
 		$this->AsetDokumenUpdateModel->updateJaminanSlik($sertAgunanID, 
 															$mainNomorRekening,
+															$cif,
 															$sertKantorLokasi,
 															$sertSlikStatusAgunan,
 															$sertSlikJenisAgunan,
@@ -413,6 +423,15 @@ class AsetDokumenUpdateController extends CI_Controller {
 		$mainNomorRekening 	  = $this->input->post('mainNomorRekening');
 		$mainTanggalRealisasi = $this->input->post('mainTanggalRealisasi');
 		$mainId				  = $this->input->post('mainId');
+		
+		$cif = $this->AsetDokumenUpdateModel->getCIF($mainNomorRekening);
+		foreach ($cif as $row) :
+			$cif    = $row['nasabah_id'];
+		endforeach;
+
+		if($cif == null){
+			$cif = ' ';
+		}
 
 		$bpkbTglRegister 			= $this->input->post('bpkbTglRegister'); 
 		$bpkbTglPenilaian 			= $this->input->post('bpkbTglPenilaian');
@@ -483,6 +502,29 @@ class AsetDokumenUpdateController extends CI_Controller {
 			$bpkbBerlakuSD				= $this->input->post('bpkbBerlakuSD');
 			$bpkbLainnya				= $this->input->post('bpkbLainnya');
 
+			//bpkb slik
+			$bpkbSlikPeringkatAgunan        = $this->input->post('bpkbSlikPeringkatAgunan');
+			$bpkbSlikParipasuPersen         = $this->input->post('bpkbSlikParipasuPersen');
+			$bpkbSlikTanggalPengikatan      = $this->input->post('bpkbSlikTanggalPengikatan');
+			$bpkbSlikNamaPemilikAgunan      = $this->input->post('bpkbSlikNamaPemilikAgunan');
+			$bpkbSlikBuktiKepemilikanAgunan = $this->input->post('bpkbSlikBuktiKepemilikanAgunan');
+			$bpkbSlikAlamat                 = $this->input->post('bpkbSlikAlamat');
+			$bpkbSlikNilaiNJOP              = $this->input->post('bpkbSlikNilaiNJOP');
+			$bpkbSlikNilaiLJK               = $this->input->post('bpkbSlikNilaiLJK'); 
+			$bpkbSlikTanggalLJK             = $this->input->post('bpkbSlikTanggalLJK'); 
+			$bpkbSlikNilaiIndependen        = $this->input->post('bpkbSlikNilaiIndependen');
+			$bpkbSlikNamaIndependen         = $this->input->post('bpkbSlikNamaIndependen'); 
+			$bpkbSlikTglIndependen          = $this->input->post('bpkbSlikTglIndependen'); 
+			$bpkbSlikKeterangan             = $this->input->post('bpkbSlikKeterangan'); 
+			$bpkbSlikJenisAgunan            = $this->input->post('bpkbSlikJenisAgunan'); 
+			$bpkbSlikLembagaPemeringkat     = $this->input->post('bpkbSlikLembagaPemeringkat'); 
+			$bpkbSlikJenisPengikatan        = $this->input->post('bpkbSlikJenisPengikatan'); 
+			$bpkbSlikKodeDati2              = $this->input->post('bpkbSlikKodeDati2'); 
+			$bpkbSlikStatusAgunan           = $this->input->post('bpkbSlikStatusAgunan'); 
+			$bpkbSlikParipasu               = $this->input->post('bpkbSlikParipasu'); 
+			$bpkbSLikStatusJoinAccount      = $this->input->post('bpkbSLikStatusJoinAccount'); 
+			$bpkbSlikAsuransi               = $this->input->post('bpkbSlikAsuransi'); 
+
 
 			$this->AsetDokumenUpdateModel->updateJaminanHeaderBPKB($mainId,
 																	$mainTanggal,
@@ -542,6 +584,32 @@ class AsetDokumenUpdateController extends CI_Controller {
 																	$mainNomorRekening,
 																	$bpkbID,
 																	$bpkbNoReff);
+
+			$this->AsetDokumenUpdateModel->updateJaminanSlik($bpkbAgunanID, 
+															$mainNomorRekening,
+															$cif,
+															$bpkbKantorLokasi,
+															$bpkbSlikStatusAgunan,
+															$bpkbSlikJenisAgunan,
+															$bpkbSlikPeringkatAgunan,
+															$bpkbSlikLembagaPemeringkat,
+															$bpkbSlikJenisPengikatan,
+															$bpkbSlikTanggalPengikatan,
+															$bpkbSlikNamaPemilikAgunan,
+															$bpkbSlikBuktiKepemilikanAgunan,
+															$bpkbSlikAlamat,
+															$bpkbSlikKodeDati2,
+															$bpkbSlikNilaiNJOP,
+															$bpkbSlikNilaiLJK,
+															$bpkbSlikTanggalLJK,
+															$bpkbSlikNilaiIndependen,
+															$bpkbSlikNamaIndependen,
+															$bpkbSlikTglIndependen,
+															$bpkbSlikParipasu,
+															$bpkbSlikParipasuPersen,
+															$bpkbSLikStatusJoinAccount,
+															$bpkbSlikAsuransi,
+															$bpkbSlikKeterangan);
 
 			$data['mainAreaKerja'] =	$mainAreaKerja;
 			$data['mainTanggal'] =	$mainTanggal;
@@ -603,6 +671,28 @@ class AsetDokumenUpdateController extends CI_Controller {
 			$data['faktur_pemilik'] = $faktur_pemilik;
 			$data['kwitansi_jb'] = $kwitansi_jb;
 			$data['sk_trayek'] = $sk_trayek;
+
+			$data['bpkbSlikPeringkatAgunan'] = $bpkbSlikPeringkatAgunan   ;
+			$data['bpkbSlikParipasuPersen'] = $bpkbSlikParipasuPersen      ;
+			$data['bpkbSlikTanggalPengikatan'] = $bpkbSlikTanggalPengikatan  ;
+			$data['bpkbSlikNamaPemilikAgunan'] = $bpkbSlikNamaPemilikAgunan   ;
+			$data['bpkbSlikBuktiKepemilikanAgunan'] = $bpkbSlikBuktiKepemilikanAgunan ;
+			$data['bpkbSlikAlamat'] = $bpkbSlikAlamat             ;
+			$data['bpkbSlikNilaiNJOP'] = $bpkbSlikNilaiNJOP           ;
+			$data['bpkbSlikNilaiLJK'] = $bpkbSlikNilaiLJK        ; 
+			$data['bpkbSlikTanggalLJK'] = $bpkbSlikTanggalLJK            ; 
+			$data['bpkbSlikNilaiIndependen'] = $bpkbSlikNilaiIndependen  ;
+			$data['bpkbSlikNamaIndependen'] = $bpkbSlikNamaIndependen   ; 
+			$data['bpkbSlikTglIndependen'] = $bpkbSlikTglIndependen;           
+			$data['bpkbSlikKeterangan'] = $bpkbSlikKeterangan         ; 
+			$data['bpkbSlikJenisAgunan'] =  $bpkbSlikJenisAgunan   ;
+			$data['bpkbSlikLembagaPemeringkat'] =  $bpkbSlikLembagaPemeringkat  ;   
+			$data['bpkbSlikJenisPengikatan'] =  $bpkbSlikJenisPengikatan ;      
+			$data['bpkbSlikKodeDati2'] = $bpkbSlikKodeDati2 ;             
+			$data['bpkbSlikStatusAgunan'] = $bpkbSlikStatusAgunan;            
+			$data['bpkbSlikParipasu'] = $bpkbSlikParipasu ;             
+			$data['bpkbSLikStatusJoinAccount'] =  $bpkbSLikStatusJoinAccount;    
+			$data['bpkbSlikAsuransi'] = $bpkbSlikAsuransi;  
 
 			echo json_encode($data);
 

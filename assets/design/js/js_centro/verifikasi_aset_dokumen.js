@@ -5,7 +5,7 @@ var id = '';
 var agunanID = '';
 var JaminanHeader = '';
 var JaminanDokument = '';
-
+var JaminanSlik = '';
 var idHeader = '';
 var nomorHeader = '';
 var noRefHeader = '';
@@ -47,6 +47,7 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
 
             JaminanHeader   = response.getJaminanHeader[0];
             JaminanDokument = response.getJaminanDokument[0];
+            JaminanSlik     = response.getJaminanSLIK[0];
 
             //MAIN FORM
             $('#mainAreaKerja').append('<option value="' + JaminanHeader.kode_kantor + '" selected>'+ JaminanHeader.kode_kantor + ' - ' + JaminanHeader.nama_kantor +'</option>');
@@ -69,10 +70,10 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
             }
            
             if(JaminanHeader.jenis_jaminan == 'SERTIFIKAT'){
-               mappingFieldSertifikat(JaminanHeader,JaminanDokument);               
+               mappingFieldSertifikat(JaminanHeader,JaminanDokument, JaminanSlik);               
             } 
             else if(JaminanHeader.jenis_jaminan == 'BPKB'){
-                mappingFieldBPKB(JaminanHeader,JaminanDokument);
+                mappingFieldBPKB(JaminanHeader,JaminanDokument, JaminanSlik);
             }
             else if(JaminanHeader.jenis_jaminan == 'EMAS'){
                 mappingFieldEmas(JaminanHeader,JaminanDokument);
@@ -102,11 +103,11 @@ $('#btn_kembali_verifikasi_modal2').click(function () {
 });
 //sertifikat
 $('#sert_button_kembali').click(function () {
-    mappingFieldSertifikat(JaminanHeader,JaminanDokument);
+    mappingFieldSertifikat(JaminanHeader,JaminanDokument, JaminanSlik);
     $('#verifikasiSertifikat').modal('hide');
 });
 $('#sert_button_kembali2').click(function () {
-    mappingFieldSertifikat(JaminanHeader,JaminanDokument);
+    mappingFieldSertifikat(JaminanHeader,JaminanDokument, JaminanSlik);
     $('#verifikasiSertifikat').modal('hide');
 });
 $('#sert_button_simpan').click(function () {
@@ -153,7 +154,7 @@ $('#btn_simpan_verifikasi_modal').click(function () {
 });
 
 
-function mappingFieldSertifikat(JaminanHeader,JaminanDokument){
+function mappingFieldSertifikat(JaminanHeader,JaminanDokument, JaminanSlik){
     //sert
     $('#sertKantorLokasi').find('option').remove().end();
     $('#sertKodeJenisAgunan').find('option').remove().end();
@@ -351,6 +352,78 @@ function mappingFieldSertifikat(JaminanHeader,JaminanDokument){
     else{
         $("#check_ssb_bpht").prop("checked", false);
     }
+
+    /// SLIK ///
+    if(JaminanSlik != null){    
+        $('#sertSlikPeringkatAgunan').val(JaminanSlik.peringkat_agunan);  
+        $('#sertSlikParipasuPersen').val(JaminanSlik.prosentase_paripasu); 
+        $('#sertSlikTanggalPengikatan').val(JaminanSlik.tanggal_pengikatan); 
+        $('#sertSlikNamaPemilikAgunan').val(JaminanSlik.nama_pemilik_agunan);
+        $('#sertSlikBuktiKepemilikanAgunan').val(JaminanSlik.bukti_kepemilikan);
+        $('#sertSlikAlamat').val(JaminanSlik.alamat_agunan);
+        $('#sertSlikNilaiNJOP').val(JaminanSlik.nilai_agunan);
+        $('#sertSlikNilaiLJK').val(JaminanSlik.nilai_agunan_menurut_ljk);
+        $('#sertSlikTanggalLJK').val(JaminanSlik.tanggal_penilaian_ljk);
+        $('#sertSlikNilaiIndependen').val(JaminanSlik.nilai_agunan_penilai_independen);
+        $('#sertSlikNamaIndependen').val(JaminanSlik.nama_penilai_independen);
+        $('#sertSlikTglIndependen').val(JaminanSlik.tanggal_penilaian_independen);
+        $('#sertSlikKeterangan').val(JaminanSlik.keterangan);
+        if(JaminanSlik.kode_jenis_agunan != ''){
+            $('#sertSlikJenisAgunan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
+        }else { $('#sertSlikJenisAgunan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+        
+        if(JaminanSlik.kode_lembaga_pemeringkat != ''){
+            $('#sertSlikLembagaPemeringkat').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
+        }else { $('#sertSlikLembagaPemeringkat').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+
+        if(JaminanSlik.kode_jenis_pengikatan != ''){
+            $('#sertSlikJenisPengikatan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
+        }else { $('#sertSlikJenisPengikatan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+
+        if(JaminanSlik.kode_kab_kota != ''){
+            $('#sertSlikKodeDati2').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
+        }else { $('#sertSlikKodeDati2').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+        
+    
+        
+
+        if( JaminanSlik.kode_status_agunan == '1') {
+            $('#sertSlikStatusAgunan').append('<option value="1" selected>1 - Tersedia</option> <option value="2" >2 - Indent</option>');
+        } else if(JaminanSlik.kode_status_agunan == '2'){
+            $('#sertSlikStatusAgunan').append('<option value="1" >1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
+        }else{
+            $('#sertSlikStatusAgunan').append('<option value="1">1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
+        }
+        if( JaminanSlik.status_paripasu == 'Y') {
+            $('#sertSlikParipasu').append('<option value="T" >T</option> <option value="Y" selected>Y</option>');
+        } else if(JaminanSlik.status_paripasu == 'T'){
+            $('#sertSlikParipasu').append('<option value="T" selected>T</option> <option value="Y">Y</option>');
+        }else{
+            $('#sertSlikParipasu').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        }
+
+        if( JaminanSlik.status_kredit_join == 'Y') {
+            $('#sertSLikStatusJoinAccount').append('<option value="T" >T</option> <option value="Y" selected>Y</option>');
+        } else if(JaminanSlik.status_kredit_join == 'T'){
+            $('#sertSLikStatusJoinAccount').append('<option value="T" selected>T</option> <option value="Y">Y</option>');
+        }else{
+            $('#sertSLikStatusJoinAccount').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        }
+
+        if( JaminanSlik.diasuransikan == 'Y') {
+            $('#sertSlikAsuransi').append('<option value="T" >T</option> <option value="Y" selected>Y</option>');
+        } else if(JaminanSlik.diasuransikan == 'T'){
+            $('#sertSlikAsuransi').append('<option value="T" selected>T</option> <option value="Y">Y</option>');
+        }else{
+            $('#sertSlikAsuransi').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        }
+
+     
+    }
+    $('#sertSLikStatusJoinAccount').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+    $('#sertSlikAsuransi').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+    $('#sertSlikParipasu').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+    $('#sertSlikStatusAgunan').append('<option value="1">1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
     
 }
 function mappingFieldBPKB(JaminanHeader,JaminanDokument){
@@ -474,6 +547,66 @@ function mappingFieldBPKB(JaminanHeader,JaminanDokument){
     else{
         $("#check_sk_trayek").prop("checked", false);
     }
+
+    /// SLIK ///
+    if(JaminanSlik != null){                 
+        $('#bpkbSlikPeringkatAgunan').val(JaminanSlik.peringkat_agunan);  
+        $('#bpkbSlikParipasuPersen').val(JaminanSlik.prosentase_paripasu); 
+        $('#bpkbSlikTanggalPengikatan').val(JaminanSlik.tanggal_pengikatan); 
+        $('#bpkbSlikNamaPemilikAgunan').val(JaminanSlik.nama_pemilik_agunan);
+        $('#bpkbSlikBuktiKepemilikanAgunan').val(JaminanSlik.bukti_kepemilikan);
+        $('#bpkbSlikAlamat').val(JaminanSlik.alamat_agunan);
+        $('#bpkbSlikNilaiNJOP').val(JaminanSlik.nilai_agunan);
+        $('#bpkbSlikNilaiLJK').val(JaminanSlik.nilai_agunan_menurut_ljk);
+        $('#bpkbSlikTanggalLJK').val(JaminanSlik.tanggal_penilaian_ljk);
+        $('#bpkbSlikNilaiIndependen').val(JaminanSlik.nilai_agunan_penilai_independen);
+        $('#bpkbSlikNamaIndependen').val(JaminanSlik.nama_penilai_independen);
+        $('#bpkbSlikTglIndependen').val(JaminanSlik.tanggal_penilaian_independen);
+        $('#bpkbSlikKeterangan').val(JaminanSlik.keterangan);
+        if(JaminanSlik.kode_jenis_agunan != ''){
+            $('#bpkbSlikJenisAgunan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
+        }else { $('#sertSlikJenisAgunan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+        
+        if(JaminanSlik.kode_lembaga_pemeringkat != ''){
+            $('#bpkbSlikLembagaPemeringkat').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
+        }else { $('#bpkbSlikLembagaPemeringkat').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+
+        if(JaminanSlik.kode_jenis_pengikatan != ''){
+            $('#bpkbSlikJenisPengikatan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
+        }else { $('#bpkbSlikJenisPengikatan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+
+        if(JaminanSlik.kode_kab_kota != ''){
+            $('#bpkbSlikKodeDati2').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
+        }else { $('#bpkbSlikKodeDati2').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+        
+        if( JaminanSlik.kode_status_agunan == '1') {
+            $('#bpkbSlikStatusAgunan').append('<option value="1" selected>1 - Tersedia</option> <option value="2" >2 - Indent</option>');
+        } else if(JaminanSlik.kode_status_agunan == '2'){
+            $('#bpkbSlikStatusAgunan').append('<option value="1" >1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
+        }
+        if( JaminanSlik.status_paripasu == 'Y') {
+            $('#bpkbSlikParipasu').append('<option value="T" >T</option> <option value="Y" selected>Y</option>');
+        } else if(JaminanSlik.status_paripasu == 'T'){
+            $('#bpkbSlikParipasu').append('<option value="T" selected>T</option> <option value="Y">Y</option>');
+        }
+        if( JaminanSlik.status_kredit_join == 'Y') {
+            $('#bpkbSLikStatusJoinAccount').append('<option value="T" >T</option> <option value="Y" selected>Y</option>');
+        } else if(JaminanSlik.status_kredit_join == 'T'){
+            $('#bpkbSLikStatusJoinAccount').append('<option value="T" selected>T</option> <option value="Y">Y</option>');
+        }
+        if( JaminanSlik.diasuransikan == 'Y') {
+            $('#bpkbSlikAsuransi').append('<option value="T" >T</option> <option value="Y" selected>Y</option>');
+        } else if(JaminanSlik.diasuransikan == 'T'){
+            $('#bpkbSlikAsuransi').append('<option value="T" selected>T</option> <option value="Y">Y</option>');
+        }
+        
+    }    
+
+        $('#bpkbSlikStatusAgunan').append('<option value="1">1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
+        $('#bpkbSlikParipasu').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        $('#bpkbSLikStatusJoinAccount').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        $('#bpkbSlikAsuransi').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        
     
 }
 function mappingFieldEmas(JaminanHeader,JaminanDokument){

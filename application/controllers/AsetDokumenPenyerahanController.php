@@ -5,6 +5,7 @@ class AsetDokumenPenyerahanController extends CI_Controller {
 	public function __construct() {
         parent:: __construct();
 		$this->load->model('AsetDokumenModel/AsetDokumenPenyerahanModel');
+		$this->load->model('AsetDokumenModel/AsetDokumenUpdateModel');
        
 	}
 
@@ -17,6 +18,7 @@ class AsetDokumenPenyerahanController extends CI_Controller {
 
 		$data['getJaminanHeader']			= $this->AsetDokumenPenyerahanModel->getJaminanHeader($nomorAgunan , $nomorRefAgunan);
 		$data['getJaminanDokument']			= $this->AsetDokumenPenyerahanModel->getJaminanDokument($agunanID, $nomorRefAgunan);
+		$data['getJaminanSLIK']			= $this->AsetDokumenUpdateModel->getJaminanSLIK($agunanID);
 		$data['validasiLokasiJaminan']		= $this->AsetDokumenPenyerahanModel->validasiLokasiJaminan($agunanID, $nomorRefAgunan);
 		$data['validasSaldoRekening']		= $this->AsetDokumenPenyerahanModel->validasSaldoRekening($data_rekening);
 		echo json_encode($data);

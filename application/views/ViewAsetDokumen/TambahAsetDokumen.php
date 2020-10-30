@@ -158,7 +158,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomorRekening">Nomor Rekening</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainNomorRekening" name="mainNomorRekening" value="<?php echo $this->session->tempdata('mainNomorRekening'); ?>">
+                                    <input type="text" class="form-control" id="mainNomorRekening" name="mainNomorRekening" 
+                                            value="<?php echo $this->session->tempdata('mainNomorRekening'); ?>" 
+                                            onclick="dataRekening()"
+                                            required>
                                   </div>
                                   <div class="col-sm-1">
                                       <button type="button" class="btn btn-success btn-sm" 
