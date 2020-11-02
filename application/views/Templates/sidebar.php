@@ -75,7 +75,7 @@
           <!-- END MENU ASET DOKUMEN -->
 
           <!-- START MENU ASURANSI -->
-            <li class="nav-item has-treeview">
+            <!-- <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
                 <p>
@@ -91,7 +91,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
 
 
           <!-- END MENU ASURANSI -->

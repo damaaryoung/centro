@@ -14,7 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>AdminLTE 3 | Starter</title>
   <?php echo $css;?>
 </head>
-<body class="hold-transition sidebar-mini" onload="zoom()">
+<body class="hold-transition sidebar-mini" style="min-height: 700px;" onload="zoom()">
 <div class="wrapper">
 
   <?php
