@@ -30,6 +30,12 @@ $config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
 $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 $config['url_api_login'] = "http://103.31.232.146/API_ABSENSI/";
 
+$config['api_url'] = 'http://103.31.232.146/API_WEBTOOL3/';
+$config['img_url'] = 'http://103.31.232.146/API_WEBTOOL3/';
+
+// $config['api_url'] = 'http://103.31.232.146/API_WEBTOOL3_2/';
+// $config['img_url'] = 'http://103.31.232.146/API_WEBTOOL3_2/';
+
 /*
 |--------------------------------------------------------------------------
 | Index File

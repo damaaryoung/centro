@@ -75,7 +75,7 @@
           <!-- END MENU ASET DOKUMEN -->
 
           <!-- START MENU ASURANSI -->
-            <!-- <li class="nav-item has-treeview">
+             <!-- <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
                 <p>
@@ -91,11 +91,56 @@
                   </a>
                 </li>
               </ul>
-            </li> -->
+            </li>  -->
 
 
           <!-- END MENU ASURANSI -->
 
+          <!-- MENU CREDIT CHECKING -->
+          <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <p>
+                  Credit Checking
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/DataCreditCheckingController/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Proses</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/DataCreditCheckingController/ds_spv" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Hasil</p>
+                  </a>
+                </li>
+              </ul>
+          </li> 
+          <!-- End MENU CREDIT CHECKING -->
+
+          <!-- MENU OPERASIONAL -->
+          <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <p>
+                  Operasional
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="<?php echo base_url(); ?>index.php/DataCreditCheckingController/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Cek Sertifikat</p>
+                  </a>
+                </li>
+              </ul>
+          </li> 
+          <!-- END MENU OPERASIONAL -->
 
           <!-- START MENU USER ACCESS -->
           <?php  if($this->session->userdata('divisi_id') == 'IT'){ ?>
