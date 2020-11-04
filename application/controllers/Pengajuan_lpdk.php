@@ -71,7 +71,7 @@ class Pengajuan_lpdk extends CI_Controller
 
         $footerHTML = '
     <hr><small>Form Pengajuan LPDK</small>';
-
+        
         require_once("vendor/autoload.php");    
         $mpdf = new \Mpdf\Mpdf();
         $html = $this->load->view('report/pengajuan_lpdk', $data, true);

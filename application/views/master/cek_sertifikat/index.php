@@ -52,15 +52,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         width: 40px;
         cursor: pointer;
     }
+    .modal-backdrop {
+                width: 100% !important;
+                height: 100% !important;
+              }
 </style>
-<link href="<?php echo base_url('index.php/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>" rel="stylesheet" type="text/css">
-<script src="<?php echo base_url('index.php/assets/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
+<link href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>" rel="stylesheet" type="text/css">
+<script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
 <div id="lihat_data_credit" class="content-wrapper" style="padding-left: 15px; padding-right: 15px;">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><img src="<?= base_url(); ?>index.php/assets/dist/img/monitor.svg" width="10%"> Data Credit Checking</h1>
+                    <h1><img src="<?= base_url(); ?>assets/dist/img/monitor.svg" width="10%"> Data Credit Checking</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -71,7 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
         </div>
     </section>
-    <section>
+    <section  style="min-height: 700px;">
         <div class="row">
             <div class="col-12">
                 <div class="callout callout-success">
@@ -119,8 +123,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
 	?>
 
-<script src="<?= base_url() ?>index.php/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="<?= base_url() ?>index.php/assets/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 <?php $this->view('master/cek_sertifikat/index_js.php'); ?>
 
 

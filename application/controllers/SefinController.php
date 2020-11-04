@@ -67,6 +67,25 @@ class SefinController extends CI_Controller {
 			redirect('LoginController/index'); 
 		}
         
+	}
+	
+	public function pengajuan_lpdk()
+    {
+		$session = $this->session->userdata('nama');
+		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
+		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
+		$data['navbar'] = $this->load->view('templates/navbar.php', NULL, TRUE);
+		$data['sidebar'] = $this->load->view('templates/sidebar.php', NULL, TRUE);
+		$data['footer'] = $this->load->view('templates/footer.php', NULL, TRUE);
+		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
+	
+
+		if($session != ''){
+			$this->load->view('master/lpdk/data_pengajuan_lpdk', $data);
+		}
+		else{
+			redirect('LoginController/index'); 
+		}
     }
 
 }

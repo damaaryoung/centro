@@ -24,6 +24,7 @@ class Cek_sertifikat_report extends CI_Controller
       $data=json_decode($output, true);
       // var_dump($data);
       $result['detail']=$data['data'];
+      require_once("vendor/autoload.php");
       $mpdf = new \Mpdf\Mpdf();
       $html = $this->load->view('master/cek_sertifikat/print', $result, true);
       $mpdf->WriteHTML($html);
