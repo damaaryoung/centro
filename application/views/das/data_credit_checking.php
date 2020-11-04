@@ -27,624 +27,636 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-    <link href="<?php echo base_url('assets/dist/css/datepicker.min.css') ?>" rel="stylesheet" type="text/css">
-    <script src="<?php echo base_url('assets/dist/js/datepicker.js') ?>"></script>
-    <div id="lihat_data_credit" class="content-wrapper" style="padding-left: 15px; padding-right: 15px;">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Data Credit Checking</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Data Credit Checking</li>
-                        </ol>
-                    </div>
+<link href="<?php echo base_url('assets/dist/css/datepicker.min.css') ?>" rel="stylesheet" type="text/css">
+<script src="<?php echo base_url('assets/dist/js/datepicker.js') ?>"></script>
+<div id="lihat_data_credit" class="content-wrapper" style="padding-left: 15px; padding-right: 15px;">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Data Credit Checking</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Data Credit Checking</li>
+                    </ol>
                 </div>
             </div>
-        </section>
-        <section style="min-height: 700px;">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="box-body table-responsive no-padding">
-                                <table id="example2" class="table table-bordered table-hover table-sm">
-                                    <thead style="font-size: 12px" class="bg-danger">
-                                        <tr>
-                                            <th>
-                                                No
-                                            </th>
-                                            <th>
-                                                Tanggal Transaksi
-                                            </th>
-                                            <th>
-                                                No SO
-                                            </th>
-                                            <th>
-                                                Nama SO
-                                            </th>
-                                            <th>
-                                                Asal Data
-                                            </th>
-                                            <th>
-                                                Nama Marketing
-                                            </th>
-                                            <th>
-                                                Nama Debitur
-                                            </th>
-                                            <th>
-                                                Status HM
-                                            </th>
-                                            <th>
-                                                Aksi
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="data_credit_checking" style="font-size: 12px">
-                                    </tbody>
-                                </table>
-                            </div>
+        </div>
+    </section>
+    <section  style="min-height: 700px;">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="box-body table-responsive no-padding">
+                            <table id="table_proses" class="table table-bordered table-hover table-sm" style="font-size: 12px">
+                                <thead style="font-size: 12px" class="bg-danger">
+                                    <tr>
+                                        <th>
+                                            No
+                                        </th>
+                                        <th>
+                                            Tanggal Transaksi
+                                        </th>
+                                        <th>
+                                            No SO
+                                        </th>
+                                        <th>
+                                            Nama SO
+                                        </th>
+                                        <th>
+                                            Asal Data
+                                        </th>
+                                        <th>
+                                            Nama Marketing
+                                        </th>
+                                        <th>
+                                            Nama Debitur
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Aksi
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data_credit_checking" style="font-size: 12px">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
-    <div id="lihat_detail" class="content-wrapper" style="padding-left: 15px; padding-right: 15px;">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Data Credit Checking</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Data Credit Checking</li>
-                        </ol>
-                    </div>
+        </div>
+    </section>
+</div>
+<div id="lihat_detail" class="content-wrapper" style="padding-left: 15px; padding-right: 15px;">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Data Credit Checking</h1>
                 </div>
-            </div><!-- /.container-fluid -->
-        </section>
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12" style="margin-bottom: 16px;">
-                        <form id="form_detail_credit">
-                            <input type="hidden" name="id" value="">
-                            <div class="card mb-3" id="table">
-                                <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_1" role="button" aria-expanded="false" aria-controls="collapse_1">
-                                    <a class="text-light">
-                                        <b>CREDIT CHECKING</b>
-                                    </a>
-                                </div>
-                                <div class="card-body collapse" id="collapse_1">
-                                    <div class="row" id="data_user">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>No SO</label>
-                                                <input type="text" class="form-control" name="nomor_so" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Nama SO</label>
-                                                <input type="text" class="form-control" name="nama_so" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Asal Data</label>
-                                                <input type="text" class="form-control" name="asal_data" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Nama Marketing 1/CGC/EGC/Tele Sales</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="nama_marketing" class="form-control" disabled>
-                                                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Data Credit Checking</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" style="margin-bottom: 16px;">
+                    <form id="form_detail_credit">
+                        <input type="hidden" name="id" value="">
+                        <div class="card mb-3" id="table">
+                            <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_1" role="button" aria-expanded="false" aria-controls="collapse_1">
+                                <a class="text-light">
+                                    <b>CREDIT CHECKING</b>
+                                </a>
+                            </div>
+                            <div class="card-body collapse" id="collapse_1">
+                                <div class="row" id="data_user">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>No SO</label>
+                                            <input type="text" class="form-control" name="nomor_so" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nama SO</label>
+                                            <input type="text" class="form-control" name="nama_so" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Asal Data</label>
+                                            <input type="text" class="form-control" name="asal_data" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nama Marketing 1/CGC/EGC/Tele Sales</label>
+                                            <div class="input-group">
+                                                <input type="text" name="nama_marketing" class="form-control" disabled>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Plafon</label>
-                                                <input type="text" name="plafon" class="form-control" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Tenor</label>
-                                                <input type="text" name="tenor" class="form-control" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Jenis Pinjaman</label>
-                                                <input type="text" class="form-control" name="jenis_pinjaman" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Tujuan Pinjaman</label>
-                                                <textarea name="tujuan_pinjaman" class="form-control " rows="5" cols="40" disabled></textarea>
-                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Plafon</label>
+                                            <input type="text" name="plafon" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tenor</label>
+                                            <input type="text" name="tenor" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Jenis Pinjaman</label>
+                                            <input type="text" class="form-control" name="jenis_pinjaman" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tujuan Pinjaman</label>
+                                            <textarea name="tujuan_pinjaman" class="form-control " rows="5" cols="40" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-3" id="table">
-                                <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_2" role="button" aria-expanded="false" aria-controls="collapse_2">
-                                    <a class="text-light">
-                                        <b>DATA CALON DEBITUR</b>
-                                    </a>
-                                </div>
-                                <div class="card-body collapse" id="collapse_2">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nama Lengkap <small><i>(Sesuai KTP)</i></small></label>
-                                                <input type="text" name="nama_lengkap" class="form-control" disabled>
+                        </div>
+                        <div class="card mb-3" id="table">
+                            <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_2" role="button" aria-expanded="false" aria-controls="collapse_2">
+                                <a class="text-light">
+                                    <b>DATA CALON DEBITUR</b>
+                                </a>
+                            </div>
+                            <div class="card-body collapse" id="collapse_2">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nama Lengkap <small><i>(Sesuai KTP)</i></small></label>
+                                            <input type="text" name="nama_lengkap" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Gelar Keagamaan</label>
+                                                <input type="text" name="gelar_keagamaan" class="form-control" disabled>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>Gelar Keagamaan</label>
-                                                    <input type="text" name="gelar_keagamaan" class="form-control" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Gelar Pendidikan</label>
-                                                    <input type="text" name="gelar_pendidikan" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>Jenis Kelamin</label>
-                                                    <input type="text" id="jenis_kelamin" name="jenis_kelamin" class="form-control" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Status Pernikahan</label>
-                                                    <input type="text" name="status_nikah" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Nama Ibu Kandung</label>
-                                                <input type="text" name="ibu_kandung" class="form-control" disabled>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>No KTP</label>
-                                                    <input type="text" name="no_ktp" class="form-control" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>NIK KTP di KK</label>
-                                                    <input type="text" name="no_ktp_kk" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>No Kartu Keluarga</label>
-                                                    <input type="text" name="no_kk" class="form-control" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>No NPWP</label>
-                                                    <input type="text" name="no_npwp" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>Tempat Lahir</label>
-                                                    <input type="text" name="tempat_lahir" class="form-control" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="exampleInputEmail1">Tanggal Lahir</label>
-                                                    <input type="text" name="tgl_lahir_deb" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Agama</label>
-                                                <input type="text" class="form-control" id="agama" name="agama" disabled>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-8">
-                                                    <label>Alamat <small><i>(Sesuai KTP)</i></small></label>
-                                                    <input type="text" class="form-control" name="alamat_ktp" disabled>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label>RT</label>
-                                                    <input type="text" class="form-control" name="rt_ktp" disabled>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label>RW</label>
-                                                    <input type="text" class="form-control" name="rw_ktp" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Provinsi</label>
-                                                <input type="text" class="form-control" name="provinsi_ktp" disabled>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>Kabupaten/Kota</label>
-                                                    <input type="text" class="form-control" name="kabupaten_ktp" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Kecamatan</label>
-                                                    <input type="text" class="form-control" name="kecamatan_ktp" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>Kelurahan</label>
-                                                    <input type="text" class="form-control" name="kelurahan_ktp" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Kode POS</label>
-                                                    <input type="text" name="kode_pos_ktp" class="form-control" disabled>
-                                                </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Gelar Pendidikan</label>
+                                                <input type="text" name="gelar_pendidikan" class="form-control" disabled>
                                             </div>
                                         </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-8">
-                                                    <label>Alamat <small><i>(Domisili)</i></small></label>
-                                                    <input type="text" class="form-control" name="alamat_domisili" disabled>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label>RT</label>
-                                                    <input type="text" class="form-control" name="rt_domisili" disabled>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label>RW</label>
-                                                    <input type="text" class="form-control" name="rw_domisili" disabled>
-                                                </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Jenis Kelamin</label>
+                                                <input type="text" id="jenis_kelamin" name="jenis_kelamin" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Provinsi</label>
-                                                <input type="text" class="form-control" name="provinsi_domisili" disabled>
+                                            <div class="form-group col-md-6">
+                                                <label>Status Pernikahan</label>
+                                                <input type="text" name="status_nikah" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Kabupaten</label>
-                                                <input type="text" class="form-control" name="kabupaten_domisili" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nama Ibu Kandung</label>
+                                            <input type="text" name="ibu_kandung" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>No KTP</label>
+                                                <input type="text" name="no_ktp" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group col-md-6">
+                                                <label>NIK KTP di KK</label>
+                                                <input type="text" name="no_ktp_kk" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>No Kartu Keluarga</label>
+                                                <input type="text" name="no_kk" class="form-control" disabled>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>No NPWP</label>
+                                                <input type="text" name="no_npwp" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-5">
+                                                <label>Tempat Lahir</label>
+                                                <input type="text" name="tempat_lahir" class="form-control" disabled>
+                                            </div>
+                                            <div class="form-group col-md-5">
+                                                <label for="exampleInputEmail1">Tanggal Lahir</label>
+                                                <input type="text" name="tgl_lahir_deb" class="form-control" disabled>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label>Umur</label>
+                                                <input type="text" id="umur" name="umur" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Agama</label>
+                                            <input type="text" class="form-control" id="agama" name="agama" disabled>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-8">
+                                                <label>Alamat <small><i>(Sesuai KTP)</i></small></label>
+                                                <input type="text" class="form-control" name="alamat_ktp" disabled>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label>RT</label>
+                                                <input type="text" class="form-control" name="rt_ktp" disabled>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label>RW</label>
+                                                <input type="text" class="form-control" name="rw_ktp" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Provinsi</label>
+                                            <input type="text" class="form-control" name="provinsi_ktp" disabled>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Kabupaten/Kota</label>
+                                                <input type="text" class="form-control" name="kabupaten_ktp" disabled>
+                                            </div>
+                                            <div class="form-group col-md-6">
                                                 <label>Kecamatan</label>
-                                                <input type="text" class="form-control" name="kecamatan_domisili" disabled>
+                                                <input type="text" class="form-control" name="kecamatan_ktp" disabled>
                                             </div>
-                                            <div class="form-group">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
                                                 <label>Kelurahan</label>
-                                                <input type="text" class="form-control" name="kelurahan_domisili" disabled>
+                                                <input type="text" class="form-control" name="kelurahan_ktp" disabled>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group col-md-6">
                                                 <label>Kode POS</label>
-                                                <input type="text" name="kode_pos_domisili" class="form-control" disabled>
+                                                <input type="text" name="kode_pos_ktp" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Pendidikan Terakhir</label>
-                                                <input type="text" name="pendidikan_terakhir" class="form-control" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-8">
+                                                <label>Alamat <small><i>(Domisili)</i></small></label>
+                                                <input type="text" class="form-control" name="alamat_domisili" disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Jumlah Tanggungan</label>
-                                                <input type="text" name="jumlah_tanggungan" class="form-control" disabled>
+                                            <div class="form-group col-md-2">
+                                                <label>RT</label>
+                                                <input type="text" class="form-control" name="rt_domisili" disabled>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group col-md-2">
+                                                <label>RW</label>
+                                                <input type="text" class="form-control" name="rw_domisili" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Provinsi</label>
+                                            <input type="text" class="form-control" name="provinsi_domisili" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Kabupaten</label>
+                                            <input type="text" class="form-control" name="kabupaten_domisili" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Kecamatan</label>
+                                            <input type="text" class="form-control" name="kecamatan_domisili" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Kelurahan</label>
+                                            <input type="text" class="form-control" name="kelurahan_domisili" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Kode POS</label>
+                                            <input type="text" name="kode_pos_domisili" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Pendidikan Terakhir</label>
+                                            <input type="text" name="pendidikan_terakhir" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Jumlah Tanggungan</label>
+                                            <input type="text" name="jumlah_tanggungan" class="form-control" disabled>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
                                                 <label>No Telpon</label>
                                                 <input type="text" name="no_telp" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group col-md-6">
                                                 <label>No HP</label>
                                                 <input type="text" name="no_hp" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Alamat Korespondensi</label>
-                                                <input type="text" class="form-control" name="alamat_surat" disabled>
-                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" name="email" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Alamat Korespondensi</label>
+                                            <input type="text" class="form-control" name="alamat_surat" disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="card mb-3" id="table">
-                                <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_3" role="button" aria-expanded="false" aria-controls="collapse_3">
-                                    <a class="text-light">
-                                        <b>DATA PASANGAN</b>
-                                    </a>
-                                </div>
-                                <div class="card-body collapse" id="collapse_3">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nama Lengkap <small><i>(Sesuai KTP)</i></small></label>
-                                                <input type="text" name="nama_lengkap_pas" class="form-control" disabled>
+                        <div class="card mb-3" id="table">
+                            <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_3" role="button" aria-expanded="false" aria-controls="collapse_3">
+                                <a class="text-light">
+                                    <b>DATA PASANGAN</b>
+                                </a>
+                            </div>
+                            <div class="card-body collapse" id="collapse_3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nama Lengkap <small><i>(Sesuai KTP)</i></small></label>
+                                            <input type="text" name="nama_lengkap_pas" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nama Ibu Kandung</label>
+                                            <input type="text" name="nama_ibu_kandung_pas" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Jenis Kelamin</label>
+                                            <input type="text" id="jenis_kelamin_pas" name="jenis_kelamin_pas" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Alamat<small><i>(Sesuai KTP)</i></small></label>
+                                            <textarea name="alamat_ktp_pas" class="form-control " rows="5" cols="40" disabled></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>No KTP</label>
+                                                <input type="text" name="no_ktp_pas" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Nama Ibu Kandung</label>
-                                                <input type="text" name="nama_ibu_kandung_pas" class="form-control" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Jenis Kelamin</label>
-                                                <input type="text" id="jenis_kelamin_pas" name="jenis_kelamin_pas" class="form-control" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Alamat<small><i>(Sesuai KTP)</i></small></label>
-                                                <textarea name="alamat_ktp_pas" class="form-control " rows="5" cols="40" disabled></textarea>
+                                            <div class="form-group col-md-6">
+                                                <label>NIK KTP di KK</label>
+                                                <input type="text" name="no_ktp_kk_pas" class="form-control" disabled>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>No KTP</label>
-                                                    <input type="text" name="no_ktp_pas" class="form-control" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>NIK KTP di KK</label>
-                                                    <input type="text" name="no_ktp_kk_pas" class="form-control" disabled>
-                                                </div>
+                                        <div class="form-group">
+                                            <label>NO NPWP</label>
+                                            <input type="text" name="no_npwp_pas" class="form-control" disabled>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Tempat Lahir</label>
+                                                <input type="text" name="tempat_lahir_pas" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <label>NO NPWP</label>
-                                                <input type="text" name="no_npwp_pas" class="form-control" disabled>
+                                            <div class="form-group col-md-6">
+                                                <label>Tanggal Lahir</label>
+                                                <input name="tgl_lahir_pas" type="text" class="form-control" disabled>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label>Tempat Lahir</label>
-                                                    <input type="text" name="tempat_lahir_pas" class="form-control" disabled>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Tanggal Lahir</label>
-                                                    <input name="tgl_lahir_pas" type="text" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>No Telpon</label>
-                                                <input type="text" name="no_telp_pas" class="form-control" disabled>
-                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>No Telpon</label>
+                                            <input type="text" name="no_telp_pas" class="form-control" disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-3" id="formku">
-                                <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_4" role="button" aria-expanded="false" aria-controls="collapse_4">
-                                    <a class="text-light">
-                                        <b>DATA PENJAMIN</b>
-                                    </a>
-                                </div>
-                                <div class="card-body collapse" id="collapse_4">
-                                    <div class="box-body table-responsive no-padding">
-                                        <table id="example2" class="table table-bordered table-hover" style="min-width: 2300px">
-                                            <thead style="font-size: 12px">
-                                                <tr>
-                                                    <th>
-                                                        Nama KTP
-                                                    </th>
-                                                    <th>
-                                                        Nama Ibu Kandung
-                                                    </th>
-                                                    <th>
-                                                        No KTP
-                                                    </th>
-                                                    <th>
-                                                        No NPWP
-                                                    </th>
-                                                    <th>
-                                                        Tempat Lahir
-                                                    </th>
-                                                    <th>
-                                                        Tanggal Lahir
-                                                    </th>
-                                                    <th>
-                                                        Jenis Kelamin
-                                                    </th>
-                                                    <th>
-                                                        Alamat KTP
-                                                    </th>
-                                                    <th>
-                                                        No Telpon
-                                                    </th>
-                                                    <th>
-                                                        Hubungan Debitur
-                                                    </th>
-                                                    <th>
-                                                        Lampiran KTP
-                                                    </th>
-                                                    <th>
-                                                        Lampiran KTP Pasangan
-                                                    </th>
-                                                    <th>
-                                                        Lampiran KK
-                                                    </th>
-                                                    <th>
-                                                        Lampiran Buku Nikah
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="data_penjamin" style="font-size: 12px">
-                                            </tbody>
-                                        </table>
-                                    </div>
+                        </div>
+                        <div class="card mb-3" id="formku">
+                            <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_4" role="button" aria-expanded="false" aria-controls="collapse_4">
+                                <a class="text-light">
+                                    <b>DATA PENJAMIN</b>
+                                </a>
+                            </div>
+                            <div class="card-body collapse" id="collapse_4">
+                                <div class="box-body table-responsive no-padding">
+                                    <table id="example2" class="table table-bordered table-hover" style="min-width: 2300px">
+                                        <thead style="font-size: 12px">
+                                            <tr>
+                                                <th>
+                                                    Nama KTP
+                                                </th>
+                                                <th>
+                                                    Nama Ibu Kandung
+                                                </th>
+                                                <th>
+                                                    No KTP
+                                                </th>
+                                                <th>
+                                                    No NPWP
+                                                </th>
+                                                <th>
+                                                    Tempat Lahir
+                                                </th>
+                                                <th>
+                                                    Tanggal Lahir
+                                                </th>
+                                                <th>
+                                                    Jenis Kelamin
+                                                </th>
+                                                <th>
+                                                    Alamat KTP
+                                                </th>
+                                                <th>
+                                                    No Telpon
+                                                </th>
+                                                <th>
+                                                    Hubungan Debitur
+                                                </th>
+                                                <th>
+                                                    Lampiran KTP
+                                                </th>
+                                                <th>
+                                                    Lampiran KTP Pasangan
+                                                </th>
+                                                <th>
+                                                    Lampiran KK
+                                                </th>
+                                                <th>
+                                                    Lampiran Buku Nikah
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data_penjamin" style="font-size: 12px">
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="card mb-3" id="table">
-                                <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_5" role="button" aria-expanded="false" aria-controls="collapse_5">
-                                    <a class="text-light">
-                                        <b>LAMPIRAN</b>
-                                    </a>
-                                </div>
-                                <div class="card-body collapse" id="collapse_5">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">KTP Debitur</label>
-                                                <div class="form-group form-file-upload form-file-multiple">
-                                                    <div class="col-md-6">
-                                                        <div class="well" id="gambar_ktp">
-                                                        </div>
+                        <div class="card mb-3" id="table">
+                            <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_5" role="button" aria-expanded="false" aria-controls="collapse_5">
+                                <a class="text-light">
+                                    <b>LAMPIRAN</b>
+                                </a>
+                            </div>
+                            <div class="card-body collapse" id="collapse_5">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">KTP Debitur</label>
+                                            <div class="form-group form-file-upload form-file-multiple">
+                                                <div class="col-md-6">
+                                                    <div class="well" id="gambar_ktp">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="kk">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">Kartu Keluarga Debitur</label>
-                                                <div class="form-group form-file-upload form-file-multiple">
-                                                    <div class="col-md-6">
-                                                        <div class="well" id="gambar_kk">
-                                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="kk">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Kartu Keluarga Debitur</label>
+                                            <div class="form-group form-file-upload form-file-multiple">
+                                                <div class="col-md-6">
+                                                    <div class="well" id="gambar_kk">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="sertifikat">
-                                            <div class="form-group">
-                                                <label>Sertifikat</label>
-                                                <div class="form-group form-file-upload form-file-multiple">
-                                                    <div class="col-md-6">
-                                                        <div class="well" id="gambar_sertifikat">
-                                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="sertifikat">
+                                        <div class="form-group">
+                                            <label>Sertifikat</label>
+                                            <div class="form-group form-file-upload form-file-multiple">
+                                                <div class="col-md-6">
+                                                    <div class="well" id="gambar_sertifikat">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="pbb">
-                                            <div class="form-group">
-                                                <label for="exampleInput1" class="bmd-label-floating">Lampiran PBB</label>
-                                                <div class="form-group form-file-upload form-file-multiple">
-                                                    <div class="col-md-6">
-                                                        <div class="well" id="gambar_pbb">
-                                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="pbb">
+                                        <div class="form-group">
+                                            <label for="exampleInput1" class="bmd-label-floating">Lampiran PBB</label>
+                                            <div class="form-group form-file-upload form-file-multiple">
+                                                <div class="col-md-6">
+                                                    <div class="well" id="gambar_pbb">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="imb">
-                                            <div class="form-group">
-                                                <label for="exampleInput1" class="bmd-label-floating">IMB</label>
-                                                <div class="form-group form-file-upload form-file-multiple">
-                                                    <div class="col-md-6">
-                                                        <div class="well" id="gambar_imb">
-                                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="imb">
+                                        <div class="form-group">
+                                            <label for="exampleInput1" class="bmd-label-floating">IMB</label>
+                                            <div class="form-group form-file-upload form-file-multiple">
+                                                <div class="col-md-6">
+                                                    <div class="well" id="gambar_imb">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="ktp_pasangan">
-                                            <div class="form-group">
-                                                <label for="exampleInput1" class="bmd-label-floating">KTP Pasangan</label>
-                                                <div class="form-group form-file-upload form-file-multiple">
-                                                    <div class="col-md-6">
-                                                        <div class="well" id="gambar_ktp_pasangan">
-                                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="ktp_pasangan">
+                                        <div class="form-group">
+                                            <label for="exampleInput1" class="bmd-label-floating">KTP Pasangan</label>
+                                            <div class="form-group form-file-upload form-file-multiple">
+                                                <div class="col-md-6">
+                                                    <div class="well" id="gambar_ktp_pasangan">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="buku_nikah">
-                                            <div class="form-group">
-                                                <label for="exampleInput1" class="bmd-label-floating">Buku Nikah</label>
-                                                <div class="form-group form-file-upload form-file-multiple">
-                                                    <div class="col-md-6">
-                                                        <div class="well" id="gambar_buku_nikah">
-                                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="buku_nikah">
+                                        <div class="form-group">
+                                            <label for="exampleInput1" class="bmd-label-floating">Buku Nikah</label>
+                                            <div class="form-group form-file-upload form-file-multiple">
+                                                <div class="col-md-6">
+                                                    <div class="well" id="gambar_buku_nikah">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="lampiran_ideb">
-                                            <div class="form-group">
-                                                <label>Lampiran IDEB</label>
-                                                <div id="dataideb">
-                                                </div>
+                                    </div>
+                                    <div class="col-md-4" id="lampiran_ideb">
+                                        <div class="form-group">
+                                            <label>Lampiran IDEB</label>
+                                            <div id="dataideb">
                                             </div>
                                         </div>
-                                        <div class="col-md-4" id="lampiran_pefindo">
-                                            <div class="form-group">
-                                                <label>Lampiran PEFINDO</label>
-                                                <div id="datapefindo">
-                                                </div>
+                                    </div>
+                                    <div class="col-md-4" id="lampiran_pefindo">
+                                        <div class="form-group">
+                                            <label>Lampiran PEFINDO</label>
+                                            <div id="datapefindo">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-3" id="table">
-                                <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_6" role="button" aria-expanded="false" aria-controls="collapse_6">
-                                    <a class="text-light">
-                                        <b>UPLOAD FILE IDEB & PEFINDO</b>
-                                    </a>
-                                </div>
-                                <div class="card-body collapse" id="collapse_6">
-                                    <div class="form-row">
-                                        <div class="col-md-6" id="">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <label for="exampleInput1" class="bmd-label-floating">Upload Ideb</label>
-                                                    <div class="form-group form-file-upload form-file-multiple">
-                                                        <button type="button" class="btn btn-success add-row"><i class="fa fa-plus"></i>&nbsp; Tambah </button>&nbsp;
-                                                        <button type="button" class="btn btn-danger delete-row"><i class="fa fa-trash"></i>&nbsp; Delete </button>
-                                                    </div>
+                        </div>
+                        <div class="card mb-3" id="table">
+                            <div class="card-header bg-gradient-danger" data-toggle="collapse" href="#collapse_6" role="button" aria-expanded="false" aria-controls="collapse_6">
+                                <a class="text-light">
+                                    <b>UPLOAD FILE IDEB & PEFINDO</b>
+                                </a>
+                            </div>
+                            <div class="card-body collapse" id="collapse_6">
+                                <div class="form-row">
+                                    <div class="col-md-6" id="">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="exampleInput1" class="bmd-label-floating">Upload Ideb</label>
+                                                <div class="form-group form-file-upload form-file-multiple">
+                                                    <button type="button" class="btn btn-success add-row"><i class="fa fa-plus"></i>&nbsp; Tambah </button>&nbsp;
+                                                    <button type="button" class="btn btn-danger delete-row"><i class="fa fa-trash"></i>&nbsp; Delete </button>
                                                 </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table id="table1" class="table table-hover table-striped table-bordered nowrap">
-                                                    <thead>
-                                                        <tr>
-                                                            <th width="5">Pilih</th>
-                                                            <th>Ideb</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><input type="checkbox" name="record_ideb" width="5" onkeyup="javascript:this.value=this.value.toUpperCase()"></td>
-                                                            <td><input type="file" class="form-control" name="ideb[]" multiple id="ideb" onkeyup="javascript:this.value=this.value.toUpperCase()"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
                                             </div>
                                         </div>
-                                        <div class="col-md-6" id="">
-                                            <div class="row">
-                                                <div class="form-group">
-                                                    <label for="exampleInput1" class="bmd-label-floating">Upload Pefindo</label>
-                                                    <div class="form-group form-file-upload form-file-multiple">
-                                                        <button type="button" class="btn btn-success add-row-pefindo"><i class="fa fa-plus"></i>&nbsp; Tambah </button>&nbsp;
-                                                        <button type="button" class="btn btn-danger delete-row-pefindo"><i class="fa fa-trash"></i>&nbsp; Delete </button>
-                                                    </div>
+                                        <div class="table-responsive">
+                                            <table id="table1" class="table table-hover table-striped table-bordered nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="5">Pilih</th>
+                                                        <th>Ideb</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input type="checkbox" name="record_ideb" width="5" onkeyup="javascript:this.value=this.value.toUpperCase()"></td>
+                                                        <td><input type="file" class="form-control" name="ideb[]" multiple id="ideb" onkeyup="javascript:this.value=this.value.toUpperCase()"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label for="exampleInput1" class="bmd-label-floating">Upload Pefindo</label>
+                                                <div class="form-group form-file-upload form-file-multiple">
+                                                    <button type="button" class="btn btn-success add-row-pefindo"><i class="fa fa-plus"></i>&nbsp; Tambah </button>&nbsp;
+                                                    <button type="button" class="btn btn-danger delete-row-pefindo"><i class="fa fa-trash"></i>&nbsp; Delete </button>
                                                 </div>
                                             </div>
-                                            <div class="table-responsive">
-                                                <table id="table2" class="table table-hover table-striped table-bordered nowrap">
-                                                    <thead>
-                                                        <tr>
-                                                            <th width="5">Pilih</th>
-                                                            <th>Pefindo</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><input type="checkbox" name="record_pefindo" width="5" onkeyup="javascript:this.value=this.value.toUpperCase()"></td>
-                                                            <td><input type="file" class="form-control" name="pefindo[]" id="pefindo" onkeyup="javascript:this.value=this.value.toUpperCase()"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table id="table2" class="table table-hover table-striped table-bordered nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="5">Pilih</th>
+                                                        <th>Pefindo</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input type="checkbox" name="record_pefindo" width="5" onkeyup="javascript:this.value=this.value.toUpperCase()"></td>
+                                                        <td><input type="file" class="form-control" name="pefindo[]" id="pefindo" onkeyup="javascript:this.value=this.value.toUpperCase()"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" style="margin-top: 20px;">
-                                <label style="font-style: italic; color: #383a3a;">Catatan</label>
-                                <textarea name="catatan_das" style="width: 100%" rows="5" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea>
-
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-primary" name="lanjut_ds_spv" value="1" style="float: right;">Lanjut DS SPV</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label style="font-style: italic; color: #383a3a;">Catatan SO</label>
+                            <textarea name="notes_so" style="width: 100%" rows="5" readonly></textarea>
+                        </div>
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label style="font-style: italic; color: #383a3a;">Catatan</label>
+                            <textarea name="catatan_das" style="width: 100%" rows="5" onkeyup="javascript:this.value=this.value.toUpperCase()"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary" name="lanjut_ds_spv" value="1" style="float: right;">Lanjut DS SPV</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
-    </div>
-
-
-    <div class="modal fade in" id="modal_load_data" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" id="load_data"></div>
         </div>
+    </section>
+</div>
+
+
+<div class="modal fade in" id="modal_load_data" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="load_data"></div>
     </div>
-        
+</div>
 
 
 
@@ -786,14 +798,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </style>
 
   <script>
-        $(document).ready(function() {
-            $('#employeeTable').DataTable( {
-                "scrollX": true,
-                "autoWidth" : true,
-                "searching": false,
-                "aaSorting" : []
-            } );
-        } );
+        // $(document).ready(function() {
+        //     $('#employeeTable').DataTable( {
+        //         "scrollX": true,
+        //         "autoWidth" : true,
+        //         "searching": false,
+        //         "aaSorting" : []
+        //     } );
+        // } );
 
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
@@ -816,7 +828,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
   </script>
 
-  
 <script type="text/javascript">
     function rubah(angka) {
         var reverse = angka.toString().split('').reverse().join(''),
@@ -930,6 +941,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
         })
     }
 
+    tampil_data_so();
+
+    function tampil_data_so() {
+        $('#table_proses').DataTable({
+
+            "processing": true,
+            "serverSide": true,
+            'destroy': true,
+            "order": [],
+
+            "ajax": {
+                "url": "<?php echo site_url('Proses_controller/get_data_proses') ?>",
+                "type": "POST"
+            },
+
+            "columnDefs": [{
+                "targets": [0],
+                "orderable": false,
+            }, ],
+
+        })
+    };
+
+
     load_data = function() {
         get_credit_checking()
             .done(function(response) {
@@ -983,7 +1018,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $('#data_credit_checking').html('<tr><td colspan="4">Tidak ada data</td></tr>');
             });
     }
-    load_data();
+    // load_data();
     $('#data_credit_checking').show();
 
     // Click ubah
@@ -1041,6 +1076,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $('#form_detail_credit input[name=no_npwp]').val(data.data_debitur.no_npwp);
                 $('#form_detail_credit input[name=tempat_lahir]').val(data.data_debitur.tempat_lahir);
                 $('#form_detail_credit input[name=tgl_lahir_deb]').val(data.data_debitur.tgl_lahir);
+                $('#form_detail_credit input[name=umur]').val(data.data_debitur.umur);
                 $('#form_detail_credit input[name=agama]').val(data.data_debitur.agama);
 
                 $('#form_detail_credit input[name=alamat_ktp]').val(data.data_debitur.alamat_ktp.alamat_singkat);
@@ -1063,7 +1099,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $('#form_detail_credit input[name=jumlah_tanggungan]').val(data.data_debitur.jumlah_tanggungan);
                 $('#form_detail_credit input[name=no_telp]').val(data.data_debitur.no_telp);
                 $('#form_detail_credit input[name=no_hp]').val(data.data_debitur.no_hp);
+                $('#form_detail_credit input[name=email]').val(data.data_debitur.email);
                 $('#form_detail_credit input[name=alamat_surat]').val(data.data_debitur.alamat_surat);
+                $('#form_detail_credit textarea[name=notes_so]').val(data.notes_so);
 
                 //data pasangan
 
@@ -1246,7 +1284,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 var data = res.data;
                 bootbox.alert('Data berhasil di simpan', function() {
                     $("#batal").click();
-                    load_data();
+                    tampil_data_so();
                     hide_all();
                     $('#lihat_data_credit').show();
                     $('#form_detail_credit')[0].reset();

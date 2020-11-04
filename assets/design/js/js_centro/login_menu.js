@@ -9,6 +9,7 @@ var usename = '';
 var userIdLogin = '';
 var kd_cabang = '';
 var divisi_id = '';
+var token = '';
 var base_url = $('#base_url').val();
 
   $('input').keypress(function(event) {
@@ -43,6 +44,7 @@ var base_url = $('#base_url').val();
       success : function(response){
         console.log(response);
         status      = response['status'];
+        token       = response['token'];
         nama        = response['payload']['nama'];
         nik         = response['payload']['nik'];
         jabatan     = response['payload']['jabatan'];
@@ -53,6 +55,8 @@ var base_url = $('#base_url').val();
         userIdLogin = response['payload']['id'];
         divisi_id   = response['payload']['divisi_id'];
         kd_cabang   = response['user']['kd_cabang'];
+        localStorage.setItem('token', token);
+        console.log(token);
         loginfunction2(nama,
                        nik,
                        jabatan,
@@ -62,9 +66,11 @@ var base_url = $('#base_url').val();
                        usename,
                        userIdLogin,
                        divisi_id,
-                       kd_cabang);
+                       kd_cabang,
+                       token);
       },
       error: function (response) {
+        
         console.log(response);
         status = response['status'];
         loginfunction2(nama,
@@ -76,7 +82,8 @@ var base_url = $('#base_url').val();
                        usename,
                        userIdLogin,
                        divisi_id,
-                       kd_cabang);       
+                       kd_cabang,
+                       token);       
       }
     });
 
@@ -91,7 +98,8 @@ function loginfunction2(nama,
                        usename,
                        userIdLogin,
                        divisi_id,
-                       kd_cabang){
+                       kd_cabang,
+                       token){
       console.log(nama);
          $.ajax({
               url : base_url +"index.php/LoginController/login_process",
@@ -106,12 +114,13 @@ function loginfunction2(nama,
                       "usename" : usename,
                       "userIdLogin" : userIdLogin,
                       "divisi_id"  : divisi_id,
-                      "kd_cabang"   : kd_cabang
+                      "kd_cabang"   : kd_cabang,
+                      "token"   : token
                     },
 
               success : function(response) {
                  console.log('harusnya bisa');
-                  window.location = base_url + 'index.php/DashboardController/index';  
+                 window.location = base_url + 'index.php/DashboardController/index';  
               },
               error : function(response) {
                   console.log('failed');

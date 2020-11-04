@@ -71,6 +71,42 @@
                 </li>
               </ul>
             </li>
+          <?php } else if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                    <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                    <p>
+                      Asset Dokumen
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Entry Aset Dokumen</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Verifikasi Aset Dokumen</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>index.php/PemindahanJaminanMainController/index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pemindahan Lokasi</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p style="font-size: 14px;">Verifikasi Pemindahan Lokasi</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
           <?php } else{} ?>
           <!-- END MENU ASET DOKUMEN -->
 
@@ -101,21 +137,27 @@
               <a href="#" class="nav-link">
                 <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
                 <p>
-                  Credit Checking
+                  SEFIN
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/DataCreditCheckingController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>index.php/SefinController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Proses</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/DataCreditCheckingController/ds_spv" class="nav-link">
+                  <a href="<?php echo base_url(); ?>index.php/SefinController/ds_spv" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Hasil</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/SefinController/cek_sertifikat" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> Cek Sertifikat</p>
                   </a>
                 </li>
               </ul>

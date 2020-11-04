@@ -30,7 +30,8 @@ class LoginController extends CI_Controller {
 			'exp' => $this->input->post('exp'),
 			'divisi_id' => $this->input->post('divisi_id'),
 			'usename' => $this->input->post('usename'),
-			'kd_cabang' => $this->input->post('kd_cabang')
+			'kd_cabang' => $this->input->post('kd_cabang'),
+			'SESSION_TOKEN' => $this->input->post('token')
 		);
 
 		$data1 = array(
@@ -43,9 +44,10 @@ class LoginController extends CI_Controller {
 			'usename' => $this->input->post('usename'),
 			'userIdLogin' => $this->input->post('userIdLogin'),
 			'divisi_id' => $this->input->post('divisi_id'),
-			'kd_cabang' => $this->input->post('kd_cabang')
+			'kd_cabang' => $this->input->post('kd_cabang'),
+			'SESSION_TOKEN' => $this->input->post('token')
 		);
-
+	
 		
 
 		if($this->input->post('nama') != ''){ //ada data di parsing -> set session login
