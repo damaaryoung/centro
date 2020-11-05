@@ -64,7 +64,7 @@
             <!-- info row -->
             <div class="row invoice-info d-flex flex-nowrap p-5">
               <div class="col-md invoice-col">
-                <h6>Telah Dipinjamkan oleh BPR Kredit Mandiri Indonesia <?php echo $key['nama_kantor'];?> ,Berupa 1 Buah <?php echo $key['jenis_jaminan'];?> asli dengan rincian beserta data kelengkapan sebagai berikut :</h6>
+                <h6>Telah Dipinjamkan oleh BPR Kredit Mandiri Indonesia <?php echo $key['nama_kota'];?> ,Berupa 1 Buah <?php echo $key['jenis_jaminan'];?> asli dengan rincian beserta data kelengkapan sebagai berikut :</h6>
               </div>
             </div>
             <div class="row invoice-info">
@@ -113,21 +113,84 @@
                 <table>
                   <tr>
                     <th>AJB</th>
-                    <td>: <?= ($key['asli_ajb']=='1') ? "ASLI" :($key['asli_ajb']=='2') ? "COPY" : '-' ; ?></td>
+                    <td>: 
+                      <?php 
+                      if ($key['asli_ajb']=='1') {
+                        echo "ASLI";
+                      } elseif ($key['asli_ajb']=='2') {
+                        echo "COPY";
+                      }else{
+                        echo "-";
+                      }
+                       ?>  
+                    </td>
                     <th class="d-flex flex-nowrap ml-5">IMB</th>
-                    <td><?= ($key['asli_imb']=='1') ? "ASLI" :($key['asli_imb']=='2') ? "COPY" : '-' ; ?> m<sup>2</sup></td>
+                    <td>
+                      <?php 
+                      if ($key['asli_imb']=='1') {
+                        echo "ASLI";
+                      } elseif ($key['asli_imb']=='2') {
+                        echo "COPY";
+                      }else{
+                        echo "-";
+                      }
+                       ?> 
+                      m<sup>2</sup>
+                    </td>
                   </tr>
                   <tr>
                     <th>SPPT</th>
-                    <td>: <?= ($key['asli_sppt']=='1') ? "ASLI" :($key['asli_sppt']=='2') ? "COPY" : '-' ; ?></td>
+                    <td>: 
+                      <?php 
+                      if ($key['asli_sppt']=='1') {
+                        echo "ASLI";
+                      } elseif ($key['asli_sppt']=='2') {
+                        echo "COPY";
+                      }else{
+                        echo "-";
+                      }
+                       ?>     
+                    </td>
                     <th class="d-flex flex-nowrap ml-5">SHT</th>
-                    <td><?= ($key['asli_sht']=='1') ? "ASLI" :($key['asli_sht']=='2') ? "COPY" : '-' ; ?> m<sup>2</sup></td>
+                    <td>
+                      <?php 
+                      if ($key['asli_sht']=='1') {
+                        echo "ASLI";
+                      } elseif ($key['asli_sht']=='2') {
+                        echo "COPY";
+                      }else{
+                        echo "-";
+                      }
+                       ?> 
+                      m<sup>2</sup>
+                    </td>
                   </tr>
                   <tr>
                     <th>STTS</th>
-                    <td>: <?= ($key['asli_stts']=='1') ? "ASLI" :($key['asli_stts']=='2') ? "COPY" : '-' ; ?></td>
+                    <td>: 
+                      <?php 
+                      if ($key['asli_stts']=='1') {
+                        echo "ASLI";
+                      } elseif ($key['asli_stts']=='2') {
+                        echo "COPY";
+                      }else{
+                        echo "-";
+                      }
+                     ?> 
+                    </td>
                     <th class="d-flex flex-nowrap ml-5">SSB</th>
-                    <td><?= ($key['asli_ssb']=='1') ? "ASLI" :($key['asli_ssb']=='2') ? "COPY" : '-' ; ?> m<sup>2</sup></td>
+                    <td> 
+                      <?php 
+                      if ($key['asli_ssb']=='1') {
+                        echo "ASLI";
+                      } elseif ($key['asli_ssb']=='2') {
+                        echo "COPY";
+                      }else{
+                        echo "-";
+                      }
+                     ?>
+                      m<sup>2</sup>
+                    </td>
                   </tr>
                 </table>
               </div>

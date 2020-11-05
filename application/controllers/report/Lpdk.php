@@ -118,7 +118,7 @@ class Lpdk extends CI_Controller
 
 
         $footerHTML = '<hr><small>Lembar Persetujuan Dokumen Kredit</small>';
-
+        require_once("vendor/autoload.php"); 
         $mpdf = new \Mpdf\Mpdf();
         $html = $this->load->view('report/lpdk', $data, true);
         $mpdf->WriteHTML($html);

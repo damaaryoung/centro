@@ -27,7 +27,7 @@
 
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>index.php/DashboardController/index" class="nav-link">
-             <i style="color : #FFD700" class="nav-icon fas fa-tachometer-alt"></i>
+             <i style="color : #FFDE00" class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
                 <span class="right badge badge-danger">Dashboard</span>
@@ -38,7 +38,7 @@
           <?php  if($this->session->userdata('dokumen') == '2'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
                 <p>
                   Asset Dokumen
                   <i class="fas fa-angle-left right"></i>
@@ -74,7 +74,7 @@
           <?php } else if($this->session->userdata('divisi_id') == 'IT'){ ?>
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
-                    <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                    <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
                     <p>
                       Asset Dokumen
                       <i class="fas fa-angle-left right"></i>
@@ -113,7 +113,7 @@
           <!-- START MENU ASURANSI -->
              <!-- <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
                 <p>
                   Asuransi (Coming Soon)
                   <i class="fas fa-angle-left right"></i>
@@ -135,7 +135,7 @@
           <!-- MENU CREDIT CHECKING -->
           <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
                 <p>
                   SEFIN
                   <i class="fas fa-angle-left right"></i>
@@ -145,19 +145,25 @@
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/SefinController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p> Proses</p>
+                    <p> Proses Credit Checking</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/SefinController/ds_spv" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p> Hasil</p>
+                    <p> Hasil Credit Checking</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/SefinController/pengajuan_lpdk" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Pengajuan LPDK</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/SefinController/lpdk" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p> LPDK</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -174,7 +180,7 @@
           <?php  if($this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
                 <p>
                   User Access
                   <i class="fas fa-angle-left right"></i>
@@ -192,7 +198,7 @@
           <?php } else if($this->session->userdata('admin') == '1'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i style="color : #FFD700" class="nav-icon fas fa-th"></i>
+                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
                 <p>
                   User Access
                   <i class="fas fa-angle-left right"></i>

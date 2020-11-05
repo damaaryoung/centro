@@ -30,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Verifikasi Aset Dokumen
+      <h1><img src="<?= base_url(); ?>assets/dist/img/clipboard.svg" width="5%">Verifikasi Aset Dokumen
         <small>Transaksi Aset Dokumen</small>
       </h1>
       <ol class="breadcrumb">

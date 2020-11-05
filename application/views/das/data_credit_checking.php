@@ -50,6 +50,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                    <div class="px-2 bg-light">
+                                <marquee class="py-3" direction="left" onmouseover="this.stop()" onmouseout="this.start()" style=" color:#ff0018">
+                                *Pengajuan Bi Checking dengan Debitur yang sama minimal memiliki tenggang waktu 60 hari dari pengajuan sebelumnya*
+                                </marquee>
+                            </div>
                         <div class="box-body table-responsive no-padding">
                             <table id="table_proses" class="table table-bordered table-hover table-sm" style="font-size: 12px">
                                 <thead style="font-size: 12px" class="bg-danger">

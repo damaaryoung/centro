@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Pemindahan Lokasi Jaminan</h1>
+            <h1 class="m-0 text-dark"><img src="<?= base_url(); ?>assets/dist/img/file.svg" width="10%"> Pemindahan Lokasi Jaminan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -59,7 +59,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             
             <!-- MENU FILTER -->
             <!-- /.card-header -->
-            <div class="card-body text-center">  
+            <div class="card-body text-center">   
 
                <div class="form-inline">
                     <div class="form-group">
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- /.card -->
           <!-- END MENU FILTER -->
 
-          <div class="card">
+          <div class="card" style="min-height: 700px;">
             <div class="card-header">
               <form method="get" action="<?php echo base_url(); ?>index.php/PemindahanInsertController/index"> 
                   <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"> Tambah </i></button> 

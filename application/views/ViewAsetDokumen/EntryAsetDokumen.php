@@ -32,12 +32,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <section class="content-header">
         
         <?php  if( $this->session->userdata('menuAset') == '1'){ 
-            echo  '<h1>
+            echo  '<h1> <img src="'. base_url() .'assets/dist/img/monitor.svg" width="5%">
                     Entry Aset Dokumen
                     <small>Transaksi Aset Dokumen</small>
                   </h1>';
          } else{
-            echo  '<h1>
+            echo  '<h1> <img src="'. base_url() .'assets/dist/img/monitor.svg" width="5%">
                     View Asset Dokumen
                     <small>Transaksi Aset Dokumen</small>
                   </h1>';
