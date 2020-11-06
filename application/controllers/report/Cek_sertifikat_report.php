@@ -8,6 +8,7 @@ class Cek_sertifikat_report extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('AsetDokumenModel/AsetDokumenCetakModel');
     }
 
     public function index($id)
@@ -24,10 +25,27 @@ class Cek_sertifikat_report extends CI_Controller
       $data=json_decode($output, true);
       // var_dump($data);
       $result['detail']=$data['data'];
+      
       require_once("vendor/autoload.php");
-      $mpdf = new \Mpdf\Mpdf();
-      $html = $this->load->view('master/cek_sertifikat/print', $result, true);
+    
+
+      $status =  $data['data'][0]['status'];
+      if($status == 'WAITING' || $status == 'MASUK'){
+        $mpdf = new \Mpdf\Mpdf();
+        $html = $this->load->view('master/cek_sertifikat/print', $result, true);
+      
+      } else if($status == 'PINJAM'){
+        $getAlamatHeader = $this->AsetDokumenCetakModel->getAlamatHeader();
+        foreach ($getAlamatHeader as $row) :
+            $result['alamatHeader']         = $row["hasil"];
+        endforeach;	 
+        $mpdf = new \Mpdf\Mpdf();
+        $html = $this->load->view('master/cek_sertifikat/print_pinjam', $result, true);
+      }
       $mpdf->WriteHTML($html);
       $mpdf->Output();
+
+      
+ 
     }
 }

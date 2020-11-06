@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+php_value upload_max_filesize 10M
+
+<IfModule mod_php5.c>
+    php_value disable_functions "all of them without curl_exec"
+</IfModule>

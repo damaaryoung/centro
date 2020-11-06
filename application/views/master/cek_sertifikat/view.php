@@ -56,6 +56,12 @@
                         <?= ($key['tgl_sertifikat']==''||$key['tgl_sertifikat']==NULL||$key['tgl_sertifikat']=='0000-00-00') ? 'undefined data' : '<button type="button" class="btn btn-block btn-outline-primary btn-flat btn-xs">'.date('d F Y', strtotime($key["tgl_sertifikat"])).'</button>' ; ?>
                       </td>
                     </tr>
+                    <tr>
+                      <th><i class="fas fa-calendar"></i> Status :</th>
+                      <td>
+                        <?= ($key['status']==''||$key['status']==NULL) ? 'undefined data' : '<button type="button" class="btn btn-block btn-outline-primary btn-flat btn-xs">'.$key["status"].'</button>' ; ?>
+                      </td>
+                    </tr>
                   </table>
                 </h4>
               </div>
@@ -211,7 +217,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Alamat</label>
-                        <textarea name="alamat" class="form-control" id="alamat"><?=$key['nama_lengkap'];?></textarea>
+                        <textarea name="alamat" class="form-control" id="alamat"><?=$key['alamat'];?></textarea>
                       </div>
                     </fieldset>
                     <fieldset class="scheduler-border">
@@ -226,7 +232,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Tgl. Sertifikat</label>
-                        <input type="text" name="tgl_sertifikat" class="form-control" id="tgl-sertifikat" value="<?=$key['tgl_sertifikat'];?>">
+                        <input type="date" name="tgl_sertifikat" class="form-control" id="tgl-sertifikat" value="<?=$key['tgl_sertifikat'];?>">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Luas Tanah</label>
@@ -376,6 +382,18 @@
                               </div>
                             </div>
                           </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Status</label>
+                                <select class="custom-select" name="status"  id="status">
+                                  <?php if($key['status'] ==  'WAITING'){
+                                    echo '<option value="WAITING" selected >WAITING</option>';
+                                    echo '<option value="MASUK" >MASUK</option>';
+                                  } else if($key['status'] ==  'MASUK'){
+                                    echo '<option value="MASUK" selected >MASUK</option>';
+                                    echo '<option value="PINJAM" >PINJAM</option>';
+                                  }?>
+                                </select>
                         </div>
                     </fieldset>
                   </div>

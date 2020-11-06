@@ -1,3 +1,25 @@
+<?php foreach ($detail as $key): ?>
+<?php
+$no_rekening=$key['nomor_so'];
+$nama=$key['nama_lengkap'];
+$alamat=$key['alamat'];
+$no_shm=$key['no_shm'];
+$no_surat_ukur=$key['nomor_surat_ukur'];
+$tgl_sertifikat=$key['tgl_sertifikat'];
+$alamat_sertifikat=$key['alamat'];
+($key['asli_ajb']==1) ? $ajb="Asli" :($key['asli_ajb']==2) ? $ajb="Copy" : $ajb="-" ;
+($key['asli_imb']==1) ? $imb="Asli" :($key['asli_imb']==2) ? $imb="Copy" : $imb="-" ;
+($key['asli_skmht']==1) ? $skmht="Asli" :($key['asli_skmht']==2) ? $skmht="Copy" : $skmht="-" ;
+($key['asli_sppt']==1) ? $sppt="Asli" :($key['asli_sppt']==2) ? $sppt="Copy" : $sppt="-" ;
+($key['asli_sht']==1) ? $sht="Asli" :($key['asli_sht']==2) ? $sht="Copy" : $sht="-" ;
+($key['asli_stts']==1) ? $stts="Asli" :($key['asli_stts']==2) ? $stts="Copy" : $stts="-" ;
+($key['asli_ssb']==1) ? $ssb="Asli" :($key['asli_ssb']==2) ? $ssb="Copy" : $ssb="-" ;
+($key['gambar_denah']=='Y') ? $gambar_denah="Ya" :($key['gambar_denah']=='N') ? $gambar_denah="Tidak" : $gambar_denah="-" ;
+($key['surat_roya']=='Y') ? $surat_roya="Ya" :($key['surat_roya']=='N') ? $surat_roya="Tidak" : $surat_roya="-" ;
+$kota=$key['nama_kota'];
+$tgl=$key['tgl'];
+$nomor=$key['nomor_so'];
+?>
 <!DOCTYPE html>
 <html>
     <body>
@@ -16,12 +38,11 @@
                                      table-layout:fixed; 
                                      word-break:break-all;" cellspacing="-1">
                 <tr>
-                    <td style="text-align: left;"><span style="text-decoration: underline;"><strong>NO. REK : <?php echo $no_rekening;?></strong></span></td>
                     <td style="text-align: right;"> <span style="text-decoration: underline;"><strong>NO : <?php echo $nomor;?> </strong></span></td>
                 </tr>
             </table>
 
-            <p style="font-size: 12px;">Telah Dipinjamkan oleh BPR Kredit Mandiri Indonesia <?php echo $nama_kantor;?> , kepada :</p>
+            <p style="font-size: 12px;">Telah Dipinjamkan oleh BPR Kredit Mandiri Indonesia<?php //echo $nama_kantor;?> , sertifikat :</p>
             <table border="0" style="width: 100%;
                                      font-size: 12px; 
                                      vertical-align:top; 
@@ -39,18 +60,18 @@
                     <td width><?php echo $alamat;?></td>
                 </tr>
             </table>
-            <p style="font-size: 12px;">Berupa 1 Buah <?php echo $jenis_jaminan?> asli dengan rincian sebagai berikut :</p>
+            <p style="font-size: 12px;">Berupa 1 Buah SERTIFIKAT asli dengan rincian sebagai berikut :</p>
             <table border="0" style="width: 100%;
                                      font-size: 12px; 
                                      vertical-align:top; 
                                      table-layout:fixed; 
                                      word-break:break-all;
                                      padding-left: 20px;" cellspacing="-1">
-                <tr>
+                <!-- <tr>
                     <td width="115px">Agunan ID</td>
                     <td width="10px">:</td>
-                    <td><?php echo  $agunan_id; ?></td>
-                </tr>
+                    <td><?php// echo  $agunan_id; ?></td>
+                </tr> -->
                 <tr>
                     <td width="115px">No SHM</td>
                     <td width="10px">:</td>
@@ -66,11 +87,11 @@
                     <td width="10px">:</td>
                     <td><?php echo $tgl_sertifikat; ?></td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td width="115px">Luas Tanah (m2)</td>
                     <td width="10px">:</td>
-                    <td><?php echo $luas_tanah; ?></td>
-                </tr>
+                    <td><?php// echo $luas_tanah; ?></td>
+                </tr> -->
                 <tr>
                     <td width="115px">Alamat</td>
                     <td width="10px">:</td>
@@ -126,8 +147,8 @@
                 </tr>
             </table>
 
-            <p style="font-size: 12px;">Jenis Pengurusan : <?php echo $jenis_pengurusan;?> dan akan dikembalikan pada tanggal <?php echo $tgl_rencana_kembali;?></p>
-            <p style="font-size: 12px;"><?php echo $ket;?></p>
+            <p style="font-size: 12px;">Pengambilan Sertifikat tidak Saya kuasakan kepada pihak lain dan atau Siapapun.</p>
+            <!-- <p style="font-size: 12px;"> <?php// echo $ket;?> </p> -->
             <br><br><br><br>
             <p style="text-align: right; font-size: 11px; "><?php echo $kota.', ' . $tgl;?></p>
             <table border="0" style="width: 100%;
@@ -145,12 +166,12 @@
                 <tr>
                     <td width="" >(...........................................)</td>
                     <td width="" >(...........................................)</td>
-                    <td width="" >( <?php echo $nama; ?> )</td>
+                    <td width="" >(...........................................)</td>
                 </tr>
             </table>
     </body>
 </html>
-
+<?php endforeach; ?>
 
 
 

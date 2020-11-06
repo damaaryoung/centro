@@ -46,7 +46,7 @@ $config['img_url'] = 'http://103.31.232.146/API_WEBTOOL3/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
