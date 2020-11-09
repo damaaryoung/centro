@@ -392,6 +392,9 @@
                                   } else if($key['status'] ==  'MASUK'){
                                     echo '<option value="MASUK" selected >MASUK</option>';
                                     echo '<option value="PINJAM" >PINJAM</option>';
+                                  } else if($key['status'] ==  'PINJAM'){
+                                    echo '<option value="MASUK">MASUK</option>';
+                                    echo '<option value="PINJAM" selected>PINJAM</option>';
                                   }?>
                                 </select>
                         </div>
@@ -416,7 +419,7 @@
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   Loading...
                 </button>
-                <a href="<?= base_url(); ?>report/Cek_sertifikat_report/index/<?= $id; ?>" class="btn btn-primary float-right" style="margin-right: 5px;" data-toggle="tooltip" data-placement="top" title="Generate PDF">
+                <a href="<?= base_url(); ?>report/Cek_sertifikat_report/index/<?= $id; ?>" target="_blank" class="btn btn-primary float-right" style="margin-right: 5px;" data-toggle="tooltip" data-placement="top" title="Generate PDF">
                   <i class="fas fa-download"></i> PDF
                 </a>
               </div>

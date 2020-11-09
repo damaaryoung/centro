@@ -28,14 +28,14 @@
         <td><?= $key['nama_lengkap']; ?></td>
         <td>Rp. <?= number_format($key['plafon']); ?></td>
         <td>
-          <button type="button" class="btn btn-block btn-outline-<?= ($key['status_sertifikat']=='IN') ? 'success' : 'danger' ; ?> btn-xs">
-            <?= ($key['status_sertifikat']=='IN') ? 'Masuk' : 'Waiting' ; ?>
+          <button type="button" class="btn btn-block btn-outline-<?php if($key['status_sertifikat'] == 'MASUK'){echo 'success';}else if($key['status_sertifikat'] == 'PINJAM'){echo 'warning';} else{echo 'danger';}?> btn-xs">
+            <?= $key['status_sertifikat'] ?>
           </button>
         </td>
         <td>
           <div class="btn-group">
               <button type="button" class="btn btn-primary btn-sm" onclick="view('<?= $key['id']; ?>');" data-toggle="tooltip" data-placement="left" title="Check Data"><i class="fas fa-search"></i></button>
-              <a href="<?= base_url().'index.php/report/Cek_sertifikat_report/index/'.$key["id"]; ?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="right" title="Generate PDF"><i class="fas fa-download"></i></a>
+              <a href="<?= base_url().'index.php/report/Cek_sertifikat_report/index/'.$key["id"]; ?>" target="_blank" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="right" title="Generate PDF"><i class="fas fa-download"></i></a>
             </div>
         </td>
       </tr>

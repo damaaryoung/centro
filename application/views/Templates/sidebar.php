@@ -135,7 +135,7 @@
           <!-- MENU CREDIT CHECKING -->
           <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
+                <i ><img src="../../assets/dist/img/akun.png" alt="sefin logo" style=" width: 15% ; height: 15%;"></i>
                 <p>
                   SEFIN
                   <i class="fas fa-angle-left right"></i>
