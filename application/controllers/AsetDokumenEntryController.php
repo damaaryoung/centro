@@ -2296,10 +2296,6 @@ class AsetDokumenEntryController extends CI_Controller {
 		$data1['sukses'] = 'sukses';
 		echo json_encode($data1); 
 	}
-
-	public function uploadCoverNotes(){
-		
-	}
 	
 }
 	

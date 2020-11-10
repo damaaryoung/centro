@@ -86,6 +86,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="input-group-append">
                           <span class="input-group-text"><i class="fas fa-search"></i></span>
                         </div>
+                        <div class="input-group-append">
+                          <a type="button" onclick="view_modal_excell()" class="input-group-text btn-sm btn-success" target="_blank"> <i class="fas fa-file-export"></i> Export Excel  </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -111,6 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
 </div>
 <!-- modal ended -->
+
 
 
 

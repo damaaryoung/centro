@@ -36,4 +36,34 @@ class CekSertifikat_controller extends CI_Controller
     function updated(){
       echo $this->Model_cek_sertifikat->updated();
     }
+
+    public function exportExcelModal(){
+      $this->load->view('master/cek_sertifikat/view_export_excel');
+    }
+    public function exportExcel(){
+      $date1 = $this->input->post('dari_tgl');
+      $date2 = $this->input->post('sampai_tgl');
+      
+      
+      $dateTimestamp1 = strtotime($date1); 
+      $dateTimestamp2 = strtotime($date2); 
+
+      if ($dateTimestamp1 > $dateTimestamp2) {
+        $dari_tgl   = $date1;
+        $sampai_tgl = $date2;
+
+      }else{
+        $dari_tgl   = $date2;
+        $sampai_tgl = $date1;
+      }
+
+      $data['report'] = $this->Model_cek_sertifikat->getReportSertifikat($dari_tgl,$sampai_tgl);
+      $sysdate = $this->Model_cek_sertifikat->sysdate();
+      foreach ($sysdate as $row) :
+        $data['sysdate']    = $row['sysdate']; 
+      endforeach;	
+
+
+      $this->load->view('master/cek_sertifikat/print_excel', $data);
+    }
 }

@@ -166,4 +166,30 @@
       });
     });
   }
+
+  //function untuk esport excel
+  function view_modal_excell(){
+    $('.bd-example-modal-lg').modal('show')
+    $.ajax({
+      url: "<?= base_url(); ?>index.php/CekSertifikat_controller/exportExcelModal",
+      data:{'id':''},
+      type: "POST",
+      success: function(response) {
+        document.getElementById("view-data").innerHTML = response;
+      }
+    });
+  }
+  
+  function dateValidation(){
+    var dari_tgl = $("#dari_tgl").val();
+    var sampai_tgl = '';
+    console.log(dari_tgl);
+
+    $('#sampai_tgl').prop("disabled", false);
+    $('#sampai_tgl').prop("min", dari_tgl);
+
+    sampai_tgl = $("#sampai_tgl").val();
+  }
+
+  
 </script>

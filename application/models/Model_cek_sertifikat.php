@@ -85,4 +85,40 @@ class Model_cek_sertifikat extends CI_Model{
     return json_encode($output, true);
   }
 
+  public function getReportSertifikat($dari_tgl,$sampai_tgl){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT 
+              a.tgl_sertifikat,
+              a.`tgl_ukur_sertifikat`,
+              b.nomor_so,
+              c.nama AS nama_cabang,
+              d.nama_lengkap AS nama_lengkap,
+              e.`plafon`,
+              a.status,
+              F.`status_caa`
+            FROM
+              agunan_tanah AS a 
+              LEFT JOIN trans_so AS b 
+                ON (a.id_trans_so = b.id) 
+              LEFT JOIN mk_cabang AS c 
+                ON (b.id_cabang = c.id) 
+              LEFT JOIN calon_debitur AS d 
+                ON (b.id_calon_debitur = d.id)
+              LEFT JOIN tb_approval AS e
+                ON B.`id` = e.`id_trans_so`
+              LEFT JOIN trans_caa AS F
+                ON F.`id_trans_so` = B.`id`
+              WHERE A.CREATED_AT BETWEEN '$dari_tgl' AND '$sampai_tgl';";
+		$query = $this->db->query($str);
+		
+		return $query->result_array();
+  }
+  public function sysdate(){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
+        $query = $this->db->query($str);
+        
+        return $query->result_array();
+	}
+
 }
