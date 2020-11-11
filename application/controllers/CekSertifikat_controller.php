@@ -48,7 +48,7 @@ class CekSertifikat_controller extends CI_Controller
       $dateTimestamp1 = strtotime($date1); 
       $dateTimestamp2 = strtotime($date2); 
 
-      if ($dateTimestamp1 > $dateTimestamp2) {
+      if ($dateTimestamp1 <= $dateTimestamp2) {
         $dari_tgl   = $date1;
         $sampai_tgl = $date2;
 

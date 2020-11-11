@@ -86,7 +86,6 @@ class Model_cek_sertifikat extends CI_Model{
   }
 
   public function getReportSertifikat($dari_tgl,$sampai_tgl){
-		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT 
               a.tgl_sertifikat,
               a.`tgl_ukur_sertifikat`,
@@ -114,11 +113,10 @@ class Model_cek_sertifikat extends CI_Model{
 		return $query->result_array();
   }
   public function sysdate(){
-		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
-        $query = $this->db->query($str);
+    $query = $this->db->query($str);
         
-        return $query->result_array();
+    return $query->result_array();
 	}
 
 }
