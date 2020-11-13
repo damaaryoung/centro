@@ -8,8 +8,7 @@ class UserAccessController extends CI_Controller {
        
 	}
 
-	public function index()
-	{
+	public function index(){
 		$session = $this->session->userdata('nama');
 		$data['active'] = 'dokumen';
 		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
@@ -20,7 +19,7 @@ class UserAccessController extends CI_Controller {
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
 
 		if($session != ''){
-			$data['UserData'] = $this->UserAccessModel->ListData();
+		//	$data['UserData'] = $this->UserAccessModel->ListData();
 			
 			$this->load->view('ViewUserAccess/ViewListUserAccess.php', $data);
 		}
@@ -109,6 +108,98 @@ class UserAccessController extends CI_Controller {
 		else{
 			redirect('LoginController/index'); 
 		}
+	}
+
+	public function getListUser(){
+		$UserData = $this->UserAccessModel->ListData();
+	
+			foreach ($UserData as $row) :
+				$data[]    = 	['<tr style="cursor:pointer" onclick="getDetail('.$row['user_id'].')"> <td>'
+											. $row['user_id'] . '</td> <td>'
+											. $row['nama']. '</td> <td>'
+											. $row['nik']. '</td> <td>'
+											. $row['jabatan'].'</td> <td>'
+											. $row['email'] . '</td>'
+											. 
+											// '<td>
+											// 	<div>
+											// 			<form method="post" action="'. base_url("index.php/UserAccessController/infoUserAccess").'">
+											// 				<button type="submit" class="btn btn-primary btn-sm"> <i class="fas fa-pen"></i></button>       
+											// 				<input type="hidden" name="userId" value="'.$row['user_id'].'">            
+											// 			</form>
+											// 	</div></td>
+																						
+												' </tr>'];
+												
+										
+			endforeach;	
+		
+		echo json_encode($data);
+	}
+
+	public function getSearch(){
+		$search = $this->input->post('search');
+		$UserData = $this->UserAccessModel->ListDataSearch($search);
+	
+			foreach ($UserData as $row) :
+				$data[]    = 	['<tr style="cursor:pointer" onclick="getDetail('.$row['user_id'].')"> <td>'
+											. $row['user_id'] . '</td> <td>'
+											. $row['nama']. '</td> <td>'
+											. $row['nik']. '</td> <td>'
+											. $row['jabatan'].'</td> <td>'
+											. $row['email'] . '</td>'
+											. 
+											// '<td>
+											// 	<div>
+											// 			<form method="post" action="'. base_url("index.php/UserAccessController/infoUserAccess").'">
+											// 				<button type="submit" class="btn btn-primary btn-sm"> <i class="fas fa-pen"></i></button>       
+											// 				<input type="hidden" name="userId" value="'.$row['user_id'].'">            
+											// 			</form>
+											// 	</div></td>
+																						
+												' </tr>'];
+												
+										
+			endforeach;	
+		
+		echo json_encode($data);
+	}
+	// info user index
+	public function getDetail(){
+	
+			$userId = $this->input->post('user_id');
+			//DATA AKSES USER
+			$data['MenuData'] = $this->UserAccessModel->userAccessList();
+			//DATA MENU
+			$data['AksesData'] = $this->UserAccessModel->accessExisting($userId);
+			
+
+			echo json_encode($data);
+		
+	}
+
+	public function userAccessProcess(){
+		$userId       = $this->input->post('id_user_get');
+		$arrSaveUserAccess = $this->input->post('arrSaveUserAccess');
+		$lengthParsed      = $this->input->post('lengthParsed');
+		$addBy             = $this->session->userdata('usename'); 
+
+		$data['arrSaveUserAccess']     = $this->input->post('arrSaveUserAccess');
+		$data['lengthParsed']     = $this->input->post('lengthParsed');
+
+		for($i = 0; $i < $lengthParsed; $i++){
+			$access_id =  $arrSaveUserAccess[$i][0];
+
+			if($arrSaveUserAccess[$i][1] == 'Y'){
+				$this->UserAccessModel->addUserAccessNew($userId,$access_id,$addBy);
+			}
+			else if($arrSaveUserAccess[$i][1] == 'N'){
+				$this->UserAccessModel->revokeAksesNew($userId,$access_id);
+			}
+			
+		}
+		
+		echo json_encode($data);
 	}
 
 }

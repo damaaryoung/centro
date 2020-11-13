@@ -63,9 +63,14 @@ class LoginController extends CI_Controller {
                 $data1['dokumen']    = $row['access_id'];
 			endforeach;	
 
-			$AksesCustomer = $this->LoginModel->aksesCustomer($userId);
+			$AksesCustomer = $this->LoginModel->aksesSefin($userId);
 			foreach ($AksesCustomer as $row) :
-                $data1['customer']    = $row['access_id'];
+                $data1['sefin']    = $row['access_id'];
+			endforeach;	
+
+			$AksesBSS = $this->LoginModel->aksesBSS($userId);
+			foreach ($AksesCustomer as $row) :
+                $data1['bss']    = $row['access_id'];
 			endforeach;	
 
 			$data1['version']    = 'CentroSystem Web Versi Dev';

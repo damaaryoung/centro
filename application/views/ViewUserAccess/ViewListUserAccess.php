@@ -56,49 +56,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"></h3>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control cari-berdasarkan" id='search' placeholder="Cari user....">
+                  <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  </div>
+                </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
               
-                <table id="employeeTable1" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                <table id="employeeTable" class="table table-striped table-bordered" style="width:100% text-align:center" >
                     <thead>
-                        <tr>
                             <th>User ID</th>
                             <th>Nama</th>
                             <th>NIK</th>
                             <th>Jabatan</th>
                             <th>Email</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-                               $idx = 1;
-                                  foreach ($UserData as $row) {
-                                       $userId = $row['user_id'];
-                                      // $namaDepan = $row['nama_depan'];
-                                      // $namaBelakang = $row['nama_belakang'];
-
-                                      echo "<tr>";
-                                      echo "<td>".$row['user_id']."</td>";
-                                      echo "<td>".$row['nama']."</td>";
-                                      echo "<td>".$row['nik']."</td>";
-                                      echo "<td>".$row['jabatan']."</td>";
-                                      echo "<td>".$row['email']."</td>";        
-                          ?>
-                            <td>
-                                  <div>
-                                        <form method="post" action="<?php echo base_url("index.php/UserAccessController/infoUserAccess")?>">
-                                            <button type="submit" class="btn btn-primary btn-sm"> <i class="fas fa-pen"></i></button>       
-                                            <input type="hidden" name="userId" value="<?php echo $userId;?>">            
-                                        </form>
-                                  </div>
-                            </td>
-                            </tr>
-                          <?php
-                            }
-                          ?>
+                    <tbody id="tbUserAccess">
+                      
                     </tbody>
                 </table>
 
@@ -116,26 +94,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
 
- 
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              <div id="loading1">
+                <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+              </div>
+
+              <div  id="formUserAccess">
+                <table id="tableAkses" class="table table-striped" style="width:100% text-align:center" >
+                    <thead>
+                            <th>Menu</th>
+                            <th>Akses</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body_tbl_access">
+                  
+                    </tbody>
+                </table>
+              </div>
+              <input type="hidden" class="form-control" id="id_user_get" name="id_user_get">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveUserAccess()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- REQUIRED JS SCRIPTS -->
 
 	<?php
         echo $footer;
         echo $ctrlbar;
-		echo $js;
+		    echo $js;
 	?>
+  
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/user_access.js"></script>
  
 </body>
 </html>
-
-<script>
-        $(document).ready(function() {
-            $('#employeeTable1').DataTable( {
-                "scrollX": true,
-                "autoWidth" : false,
-                "aaSorting" : []
-            } );
-        } );
- </script>

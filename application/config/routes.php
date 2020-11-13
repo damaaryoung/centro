@@ -52,4 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'LoginController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['dashboard'] = 'DasboardController';
+$route['dashboard'] = 'DashboardController/index';
+$route['bss'] = 'BSSController/index';
+$route['entry_asset_document'] = 'AsetDokumenEntryController/index';
+$route['user_access']= 'UserAccessController/index';

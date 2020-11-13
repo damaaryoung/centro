@@ -1,3 +1,11 @@
+  <!-- CSS COLOR ICON SIDEBAR -->
+  <style>
+  .icon_color_sidebar {
+    color : #FFDE00;
+  }
+  </style>
+  <!-- END CSS COLOR ICON SIDEBAR -->
+ 
  <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #9A0303;" >
     <!-- Brand Logo -->
@@ -26,8 +34,8 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>index.php/DashboardController/index" class="nav-link">
-             <i style="color : #FFDE00" class="nav-icon fas fa-tachometer-alt"></i>
+            <a href="<?php echo base_url(); ?>dashboard" class="nav-link">
+             <i class="nav-icon fas fa-tachometer-alt icon_color_sidebar"></i>
               <p>
                 Dashboard
                 <span class="right badge badge-danger">Dashboard</span>
@@ -35,10 +43,10 @@
             </a>
           </li>     
           <!-- START MENU ASET DOKUMEN -->
-          <?php  if($this->session->userdata('dokumen') == '2'){ ?>
+          <?php  if($this->session->userdata('dokumen') == '2' || $this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-th icon_color_sidebar"></i>
                 <p>
                   Asset Dokumen
                   <i class="fas fa-angle-left right"></i>
@@ -46,7 +54,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>entry_asset_document" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Entry Aset Dokumen</p>
                   </a>
@@ -71,116 +79,73 @@
                 </li>
               </ul>
             </li>
-          <?php } else if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
-                    <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
-                    <p>
-                      Asset Dokumen
-                      <i class="fas fa-angle-left right"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/index" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Entry Aset Dokumen</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Verifikasi Aset Dokumen</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?php echo base_url(); ?>index.php/PemindahanJaminanMainController/index" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Pemindahan Lokasi</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/index" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p style="font-size: 14px;">Verifikasi Pemindahan Lokasi</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
           <?php } else{} ?>
           <!-- END MENU ASET DOKUMEN -->
 
-          <!-- START MENU ASURANSI -->
-             <!-- <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
-                <p>
-                  Asuransi (Coming Soon)
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Asuransi (Coming Soon)</p>
-                  </a>
-                </li>
-              </ul>
-            </li>  -->
-
-
-          <!-- END MENU ASURANSI -->
-
           <!-- MENU CREDIT CHECKING -->
-          <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i ><img src="../../assets/dist/img/akun.png" alt="sefin logo" style=" width: 15% ; height: 15%;"></i>
-                <p>
-                  SEFIN
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/SefinController/index" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Proses Credit Checking</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/SefinController/ds_spv" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Hasil Credit Checking</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/SefinController/pengajuan_lpdk" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Pengajuan LPDK</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/SefinController/lpdk" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> LPDK</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/SefinController/cek_sertifikat" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Cek Sertifikat</p>
-                  </a>
-                </li>
-              </ul>
-          </li> 
+          <?php  if($this->session->userdata('sefin') == '3' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-file-invoice icon_color_sidebar"></i>
+                  <p>
+                    SEFIN
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>index.php/SefinController/index" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p> Proses Credit Checking</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>index.php/SefinController/ds_spv" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p> Hasil Credit Checking</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>index.php/SefinController/pengajuan_lpdk" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p> Pengajuan LPDK</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>index.php/SefinController/lpdk" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p> LPDK</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>index.php/SefinController/cek_sertifikat" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p> Cek Sertifikat</p>
+                    </a>
+                  </li>
+                </ul>
+            </li> 
+          <?php } else{} ?>
           <!-- End MENU CREDIT CHECKING -->
 
+          <!-- MENU BSS -->
+          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('bss') == '4'){ ?>
+            <li class="nav-item">
+              <a href="<?php echo base_url(); ?>bss" class="nav-link">
+              <i class="nav-icon fas fa-paste icon_color_sidebar"></i>
+                <p>
+                  BSS
+                </p>
+              </a>
+            </li>   
+          <?php } else{} ?>
+          <!--- END MENU BSS -->
+
           <!-- START MENU USER ACCESS -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT'){ ?>
+          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('admin') == '1'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-users-cog icon_color_sidebar"></i>
                 <p>
                   User Access
                   <i class="fas fa-angle-left right"></i>
@@ -188,25 +153,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/UserAccessController/index" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>List User Access</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          <?php } else if($this->session->userdata('admin') == '1'){ ?>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i style="color : #FFDE00" class="nav-icon fas fa-th"></i>
-                <p>
-                  User Access
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/UserAccessController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>user_access" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>List User Access</p>
                   </a>
