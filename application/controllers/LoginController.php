@@ -52,25 +52,43 @@ class LoginController extends CI_Controller {
 
 		if($this->input->post('nama') != ''){ //ada data di parsing -> set session login
 			//akses menu admin
-			$AksesCustomer = $this->LoginModel->aksesAdmin($userId);
-			foreach ($AksesCustomer as $row) :
-                $data1['admin']    = $row['access_id'];
-			endforeach;	
+			$userAccess = $this->LoginModel->userAccess($userId);
+			foreach ($userAccess as $row) :
+				if( $row['access_id'] == '1'){
+					$data1['user_access'] = 'ok';
+				}
+				else if( $row['access_id'] == '2'){
+					$data1['entry_aset_dokumen'] = 'ok';
+				}
+				else if( $row['access_id'] == '3'){
+					$data1['verifikasi_aset_dokumen'] = 'ok';
+				}
+				else if( $row['access_id'] == '4'){
+					$data1['pemindahan_lokasi'] = 'ok';
+				}
+				else if( $row['access_id'] == '5'){
+					$data1['verifikasi_pemindahan_lokasi'] = 'ok';
+				}
+				else if( $row['access_id'] == '6'){
+					$data1['proses_credit_checking'] = 'ok';
+				}
+				else if( $row['access_id'] == '7'){
+					$data1['hasil_credit_checking'] = 'ok';
+				}
+				else if( $row['access_id'] == '8'){
+					$data1['pengajuan_LPDK'] = 'ok';
+				}
+				else if( $row['access_id'] == '9'){
+					$data1['LPDK'] = 'ok';
+				}
+				else if( $row['access_id'] == '10'){
+					$data1['cek_sertifikat'] = 'ok';
+				}
+				else if( $row['access_id'] == '11'){
+					$data1['BSS'] = 'ok';
+				}
 
-			//akses menu aset dokumen
-			$AksesDokumen = $this->LoginModel->aksesDokumen($userId);
-			foreach ($AksesDokumen as $row) :
-                $data1['dokumen']    = $row['access_id'];
-			endforeach;	
-
-			$AksesCustomer = $this->LoginModel->aksesSefin($userId);
-			foreach ($AksesCustomer as $row) :
-                $data1['sefin']    = $row['access_id'];
-			endforeach;	
-
-			$AksesBSS = $this->LoginModel->aksesBSS($userId);
-			foreach ($AksesCustomer as $row) :
-                $data1['bss']    = $row['access_id'];
+                
 			endforeach;	
 
 			$data1['version']    = 'CentroSystem Web Versi Dev';

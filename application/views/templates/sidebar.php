@@ -43,7 +43,6 @@
             </a>
           </li>     
           <!-- START MENU ASET DOKUMEN -->
-          <?php  if($this->session->userdata('dokumen') == '2' || $this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-th icon_color_sidebar"></i>
@@ -53,37 +52,40 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+              <?php  if($this->session->userdata('entry_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>entry_asset_document" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Entry Aset Dokumen</p>
                   </a>
                 </li>
+             <?php } if($this->session->userdata('verifikasi_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Verifikasi Aset Dokumen</p>
                   </a>
                 </li>
+              <?php } if($this->session->userdata('pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/PemindahanJaminanMainController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Pemindahan Lokasi</p>
                   </a>
                 </li>
+              <?php } if($this->session->userdata('verifikasi_pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p style="font-size: 14px;">Verifikasi Pemindahan Lokasi</p>
                   </a>
                 </li>
+              <?php } ?>
               </ul>
             </li>
-          <?php } else{} ?>
           <!-- END MENU ASET DOKUMEN -->
 
           <!-- MENU CREDIT CHECKING -->
-          <?php  if($this->session->userdata('sefin') == '3' || $this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-file-invoice icon_color_sidebar"></i>
@@ -93,43 +95,49 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
+                <?php  if($this->session->userdata('proses_credit_checking') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>index.php/SefinController/index" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Proses Credit Checking</p>
                     </a>
                   </li>
+                <?php  } if($this->session->userdata('hasil_credit_checking') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>index.php/SefinController/ds_spv" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Hasil Credit Checking</p>
                     </a>
                   </li>
+                <?php } if($this->session->userdata('pengajuan_LPDK') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>index.php/SefinController/pengajuan_lpdk" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Pengajuan LPDK</p>
                     </a>
                   </li>
+                <?php } if($this->session->userdata('LPDK') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>index.php/SefinController/lpdk" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> LPDK</p>
                     </a>
                   </li>
+                <?php } if($this->session->userdata('cek_sertifikat') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>index.php/SefinController/cek_sertifikat" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Cek Sertifikat</p>
                     </a>
                   </li>
+                <?php }?>
                 </ul>
             </li> 
-          <?php } else{} ?>
+         
           <!-- End MENU CREDIT CHECKING -->
 
           <!-- MENU BSS -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('bss') == '4'){ ?>
+          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('BSS') == 'ok'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>bss" class="nav-link">
               <i class="nav-icon fas fa-paste icon_color_sidebar"></i>
@@ -142,7 +150,7 @@
           <!--- END MENU BSS -->
 
           <!-- START MENU USER ACCESS -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('admin') == '1'){ ?>
+          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('user_access') == 'ok'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users-cog icon_color_sidebar"></i>

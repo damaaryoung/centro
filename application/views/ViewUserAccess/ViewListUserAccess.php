@@ -59,7 +59,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="input-group mb-3">
                   <input type="text" class="form-control cari-berdasarkan" id='search' placeholder="Cari user....">
                   <div class="input-group-append">
-                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <span class="input-group-text"><i class="fas fa-search" onclick="searchData()"></i></span>
                   </div>
                 </div>
               </div>
@@ -73,6 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <th>NIK</th>
                             <th>Jabatan</th>
                             <th>Email</th>
+                            <th>Username</th>
                         </tr>
                     </thead>
                     <tbody id="tbUserAccess">

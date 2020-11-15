@@ -123,7 +123,7 @@ function loginfunction2(nama,
                  window.location = base_url + 'index.php/DashboardController/index';  
               },
               error : function(response) {
-                  console.log('failed');
+                  console.log('failed ' + response);
                  
                   window.location = base_url + 'index.php/LoginController/index'; 
               }

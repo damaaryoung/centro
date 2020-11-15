@@ -119,8 +119,8 @@ class UserAccessController extends CI_Controller {
 											. $row['nama']. '</td> <td>'
 											. $row['nik']. '</td> <td>'
 											. $row['jabatan'].'</td> <td>'
-											. $row['email'] . '</td>'
-											. 
+											. $row['email'] . '</td>  <td>'
+											. $row['user'] . '</td>'.
 											// '<td>
 											// 	<div>
 											// 			<form method="post" action="'. base_url("index.php/UserAccessController/infoUserAccess").'">
@@ -147,8 +147,8 @@ class UserAccessController extends CI_Controller {
 											. $row['nama']. '</td> <td>'
 											. $row['nik']. '</td> <td>'
 											. $row['jabatan'].'</td> <td>'
-											. $row['email'] . '</td>'
-											. 
+											. $row['email'] . '</td> <td>'
+											. $row['user'] . '</td>'.
 											// '<td>
 											// 	<div>
 											// 			<form method="post" action="'. base_url("index.php/UserAccessController/infoUserAccess").'">

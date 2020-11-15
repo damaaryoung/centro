@@ -101,7 +101,7 @@ class UserAccessModel extends CI_Model{
 	//NEW USER ACCESS
 	public function ListData(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT user_id, nama, nik, jabatan, email
+		$str = "SELECT user_id, nama, nik, jabatan, email, user
 				FROM user
 				limit 25;
                ";
@@ -111,7 +111,7 @@ class UserAccessModel extends CI_Model{
 	}
 	public function ListDataSearch($search){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT user_id, nama, nik, jabatan, email
+		$str = "SELECT user_id, nama, nik, jabatan, email, user
 				FROM user
 				WHERE user_id LIKE '%$search%'
 				OR    nama    LIKE '%$search%'
