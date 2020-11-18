@@ -97,35 +97,35 @@
                 <ul class="nav nav-treeview">
                 <?php  if($this->session->userdata('proses_credit_checking') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>index.php/SefinController/index" class="nav-link">
+                    <a href="<?php echo base_url(); ?>SefinController/index" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Proses Credit Checking</p>
                     </a>
                   </li>
                 <?php  } if($this->session->userdata('hasil_credit_checking') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>index.php/SefinController/ds_spv" class="nav-link">
+                    <a href="<?php echo base_url(); ?>SefinController/ds_spv" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Hasil Credit Checking</p>
                     </a>
                   </li>
                 <?php } if($this->session->userdata('pengajuan_LPDK') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>index.php/SefinController/pengajuan_lpdk" class="nav-link">
+                    <a href="<?php echo base_url(); ?>SefinController/pengajuan_lpdk" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Pengajuan LPDK</p>
                     </a>
                   </li>
                 <?php } if($this->session->userdata('LPDK') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>index.php/SefinController/lpdk" class="nav-link">
+                    <a href="<?php echo base_url(); ?>SefinController/lpdk" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> LPDK</p>
                     </a>
                   </li>
                 <?php } if($this->session->userdata('cek_sertifikat') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>index.php/SefinController/cek_sertifikat" class="nav-link">
+                    <a href="<?php echo base_url(); ?>SefinController/cek_sertifikat" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Cek Sertifikat</p>
                     </a>
@@ -134,7 +134,38 @@
                 </ul>
             </li> 
          
-          <!-- End MENU CREDIT CHECKING -->
+          <!-- END MENU CREDIT CHECKING -->
+
+          <!-- MENU CUSTODIAN -->
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-file-contract icon_color_sidebar"></i>
+                  <p>
+                    CUSTODIAN
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                <?php if($this->session->userdata('cek_sertifikat') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>request_jaminan_centro" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p style="font-size: 14px;"> Request Jaminan Ke Centro</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('cek_sertifikat') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>request_jaminan_verifikasi" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p style="font-size: 14px;"> Verifikasi Request Jaminan</p>
+                    </a>
+                  </li>
+                <?php }?>
+                </ul>
+            </li> 
+         
+          <!-- END MENU CUSTODIAN -->
 
           <!-- MENU BSS -->
           <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('BSS') == 'ok'){ ?>
