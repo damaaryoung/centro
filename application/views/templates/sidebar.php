@@ -146,7 +146,7 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <?php if($this->session->userdata('cek_sertifikat') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                <?php if($this->session->userdata('request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>request_jaminan_centro" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -154,7 +154,7 @@
                     </a>
                   </li>
                 <?php }?>
-                <?php if($this->session->userdata('cek_sertifikat') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                <?php if($this->session->userdata('verifikasi_request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>request_jaminan_verifikasi" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>

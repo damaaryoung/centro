@@ -87,7 +87,12 @@ class LoginController extends CI_Controller {
 				else if( $row['access_id'] == '11'){
 					$data1['BSS'] = 'ok';
 				}
-
+				else if( $row['access_id'] == '12'){
+					$data1['request_jaminan_ke_centro'] = 'ok';
+				}
+				else if( $row['access_id'] == '13'){
+					$data1['verifikasi_request_jaminan_ke_centro'] = 'ok';
+				}
                 
 			endforeach;	
 

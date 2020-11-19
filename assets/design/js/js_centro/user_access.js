@@ -103,7 +103,7 @@ function saveUserAccess(){
     arrSaveUserAccess = [];
     var checked = '';
     id_user_get = $('#id_user_get').val();
-    
+    $('#loading1').show();
 
     for(i = 0; i < MenuData.length; i++ ){
         if ($("#akses"+MenuData[i]['access_id']).is(":checked")){
