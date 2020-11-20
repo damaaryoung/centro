@@ -162,6 +162,22 @@
                     </a>
                   </li>
                 <?php }?>
+                <?php if($this->session->userdata('update_kirim_jaminan_controller') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>update_kirim_jaminan" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p style="font-size: 14px;"> Update Kirim Jaminan ke Centro</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('update_kirim_jaminan_verifikasi_controller') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>update_kirim_jaminan_verifikasi" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p style="font-size: 14px;"> Verifikasi Update Kirim Jaminan ke Centro</p>
+                    </a>
+                  </li>
+                <?php }?>
                 </ul>
             </li> 
          

@@ -42,7 +42,7 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 											. $row['nama_kantor_tujuan'].'</td> <td>'
 											. $row['verifikasi'].'</td> <td>'
 											. '<div>
-														<form method="post" action="'. base_url("index.php//").'">
+														<form method="post" action="'. base_url("Request_Jaminan_Verifikasi_Controller/prosesVerifikasiMain").'">
 															<button type="submit" class="btn btn-success btn-sm"> <i class="fas fa-check"></i></button>       
 															<input type="hidden" name="userId" value="'.$row['user_id'].'">            
 														</form>
@@ -65,7 +65,7 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 											. $row['nama_kantor_tujuan'].'</td> <td>'
 											. $row['verifikasi'].'</td> <td>'
 											. '<div>
-														<form method="post" action="'. base_url("index.php//").'">
+														<form method="post" action="'. base_url("Request_Jaminan_Verifikasi_Controller/prosesVerifikasiMain").'">
 															<button type="submit" class="btn btn-success btn-sm"> <i class="fas fa-check"></i></button>       
 															<input type="hidden" name="userId" value="'.$row['user_id'].'">            
 														</form>
@@ -77,6 +77,26 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		
 		
 		echo json_encode($data);
+	}
+
+	public function prosesVerifikasiMain()
+	{
+		$session = $this->session->userdata('nama');
+		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
+		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
+		$data['navbar'] = $this->load->view('templates/navbar.php', NULL, TRUE);
+		$data['sidebar'] = $this->load->view('templates/sidebar.php', NULL, TRUE);
+		$data['footer'] = $this->load->view('templates/footer.php', NULL, TRUE);
+		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
+
+		if($session != ''){ 
+			$data['selectKodeKantor'] = $this->Request_Jaminan_Verifikasi_Model->selectKodeKantor();
+			$this->load->view('ViewCustodian/request_jaminan_verifikasi_proses.php', $data);
+		}
+		else{
+			redirect('LoginController/index'); 
+		}
+		
 	}
 
 }
