@@ -5,7 +5,8 @@ class Request_Jaminan_Centro_Model extends CI_Model{
 	public function __construct() {
 		parent:: __construct();
 		$this->load->database();
-	}
+    }
+    
 
     public function selectKodeKantor(){
             $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
@@ -16,6 +17,66 @@ class Request_Jaminan_Centro_Model extends CI_Model{
             
             return $query->result_array();
     }
+    public function list_request_jaminan($kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT 
+                    `id`,
+                    `nomor`,
+                    `tgl`,
+                    `kode_kantor_lokasi_jaminan`,
+                    kk1.nama_kantor AS nama_kantor_asal,
+                    `kode_kantor_tujuan`,
+                    kk2.nama_kantor AS nama_kantor_tujuan,
+                    `ket`,
+                    `user_id`,
+                    `verifikasi` 
+                FROM
+                    `jaminan_request_pemindahan` jp 
+                    LEFT JOIN app_kode_kantor kk1 
+                    ON kk1.kode_kantor = jp.kode_kantor_lokasi_jaminan 
+                    LEFT JOIN app_kode_kantor kk2 
+                    ON kk2.kode_kantor = jp.kode_kantor_tujuan 
+                WHERE jp.kode_kantor_tujuan = '$kode_kantor' 
+                #HAVING verifikasi = 0 
+                ORDER BY jp.nomor DESC 
+                LIMIT 0, 25;
+            ";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }
+    public function listJaminanSearch($search,$kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT 
+                    `id`,
+                    `nomor`,
+                    `tgl`,
+                    `kode_kantor_lokasi_jaminan`,
+                    kk1.nama_kantor AS nama_kantor_asal,
+                    `kode_kantor_tujuan`,
+                    kk2.nama_kantor AS nama_kantor_tujuan,
+                    `ket`,
+                    `user_id`,
+                    `verifikasi` 
+                FROM
+                    `jaminan_request_pemindahan` jp 
+                    LEFT JOIN app_kode_kantor kk1 
+                    ON kk1.kode_kantor = jp.kode_kantor_lokasi_jaminan 
+                    LEFT JOIN app_kode_kantor kk2 
+                    ON kk2.kode_kantor = jp.kode_kantor_tujuan 
+                WHERE jp.kode_kantor_tujuan = '$kode_kantor' 
+                    OR (jp.nomor LIKE '$search' 
+                        OR kk1.nama_kantor LIKE '$search' 
+                        OR kk2.nama_kantor LIKE '$search'
+                    ) #HAVING verifikasi = 0 
+                ORDER BY jp.nomor DESC 
+                LIMIT 0, 25 ;";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+    }
+
+    /// insert page
     public function getJaminanDokumen($kode_kantor){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT `jaminan_dokument`.`no_reff`, `agunan_id`, `jaminan_dokument`.`kode_kantor`, `kode_kantor_lokasi_jaminan`, 
@@ -33,13 +94,13 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                                         ' NO MESIN : ', IFNULL(`no_mesin`,''),
                                         ' TAHUN ', IFNULL(`tahun`,''),' NO. POL : ', IFNULL(`no_polisi`,''))
                             ) AS deskripsi_ringkas,
-                        `no_rekening_agunan`, `verifikasi`
+                        `no_rekening_agunan`, `verifikasi`, `kode_kantor`, `kode_kantor_lokasi_jaminan`, `lokasi_penyimpanan`
                 FROM `jaminan_dokument`
                 LEFT JOIN (
                     SELECT no_reff, `status` FROM `jaminan_header`) jh ON jh.`no_reff`=`jaminan_dokument`.`no_reff`
-                WHERE verifikasi=1 AND kode_kantor_lokasi_jaminan='$kode_kantor'  AND `status`='MASUK' 
+                WHERE verifikasi=1 AND kode_kantor='$kode_kantor'  AND `status`='MASUK' AND `lokasi_penyimpanan` IS NOT NULL
                 ORDER BY no_reff
-                LIMIT 0, 25
+                LIMIT 0, 25;
             ";
         $query = $this->db2->query($str);
         
@@ -62,7 +123,7 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                                     ' NO MESIN : ', IFNULL(`no_mesin`,''),
                                     ' TAHUN ', IFNULL(`tahun`,''),' NO. POL : ', IFNULL(`no_polisi`,''))
                         ) AS deskripsi_ringkas,
-                    `no_rekening_agunan`, `verifikasi`
+                    `no_rekening_agunan`, `verifikasi`, `kode_kantor`, `kode_kantor_lokasi_jaminan`, `lokasi_penyimpanan`
                 FROM `jaminan_dokument`
                     LEFT JOIN (
                     SELECT no_reff, `status` FROM `jaminan_header`) jh ON jh.`no_reff`=`jaminan_dokument`.`no_reff`
@@ -76,8 +137,9 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                 OR nomor_bpkb LIKE '%$search%' OR nama_bpkb LIKE '%$search%' 
                 OR no_mesin LIKE '%$search%' 
                 OR no_polisi LIKE '%$search%') 
-                AND kode_kantor_lokasi_jaminan='$kode_kantor'  
+                AND kode_kantor='$kode_kantor'  
                 AND `status`= 'MASUK' 
+                AND `lokasi_penyimpanan` IS NOT NULL
                 ORDER BY no_reff
                 LIMIT 0, 25
             ";
@@ -102,6 +164,79 @@ class Request_Jaminan_Centro_Model extends CI_Model{
         
         return $query->result_array();
     }
+    public function generateNomor($kode_kantor_tujuan){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT CONCAT('$kode_kantor_tujuan','.',LPAD(SUBSTR(nomor, 4, 6) + 1, 6, '0')) AS hasil 
+                FROM dpm_online.jaminan_request_pemindahan 
+                WHERE nomor LIKE CONCAT('$kode_kantor_tujuan', '.%') 
+                    ORDER BY hasil DESC 
+                    LIMIT 1;";
+		$query = $this->db2->query($str);
+		
+		return $query->result_array();
+    }
+    public function insertDataPemindahan($main_tanggal,
+                                            $nomor,
+                                            $kode_kantor_lokasi_jaminan,
+                                            $kode_kantor_tujuan,
+                                            $main_keterangan,
+                                            $main_keperluan,
+                                            $userIdLogin,
+                                            $verifikasi,
+                                            $kode_custodian){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+		$this->db2->query("INSERT INTO dpm_online.`jaminan_request_pemindahan` (
+                                `nomor`,
+                                `tgl`,
+                                `kode_kantor_lokasi_jaminan`,
+                                `kode_kantor_tujuan`,
+                                `ket`,
+                                `keperluan`,
+                                `user_id`,
+                                `verifikasi`,
+                                `kode_custodian`) 
+                            VALUES (
+                                '$nomor',
+                                '$main_tanggal',
+                                '$kode_kantor_lokasi_jaminan',
+                                '$kode_kantor_tujuan',
+                                '$main_keterangan',
+                                '$main_keperluan',
+                                '$userIdLogin',
+                                '$verifikasi',
+                                '$kode_custodian');");
+    }
+    public function insertDataPemindahanDetail($nomor,$nomorReffDeatail,$agunanIdDetail){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+		$this->db2->query("INSERT INTO dpm_online.jaminan_request_pemindahan_detail (
+                                    `nomor`, 
+                                    `no_reff`, 
+                                    `agunan_id`)
+                            VALUES('$nomor',
+                                   '$nomorReffDeatail',
+                                   '$agunanIdDetail');");
+    }
+    public function deleteDataPemindahan($nomor,$version,$usename,$kode_kantor){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		
+        $this->db2->trans_start();
+        $this->db2->query("INSERT INTO dpm_online.user_log (USER, kd_menu, waktu, ket, AppVer, ip) 
+                            VALUES('$usename',
+                                'Request Jaminan Ke Centro',
+                                NOW(),
+                                'Hapus Pemindahan Request Jaminan nomor=$nomor nama kantor tujuan=$kode_kantor',
+                                '$version',
+                                (SELECT SUBSTRING(HOST, 1, 20) FROM information_schema.processlist WHERE ID=CONNECTION_ID())
+                            );");
+        $this->db2->query("DELETE FROM dpm_online.jaminan_request_pemindahan WHERE nomor='$nomor';");
+        $this->db2->query("DELETE FROM dpm_online.jaminan_request_pemindahan_detail WHERE nomor='$nomor';");
+		$this->db2->trans_complete();
+    }
+
+
+
     
 }   
 

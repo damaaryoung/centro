@@ -23,7 +23,7 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                     `id`,
                     `nomor`,
                     `tgl`,
-                    `kode_kantor_asal`,
+                    `kode_kantor_lokasi_jaminan`,
                     kk1.nama_kantor AS nama_kantor_asal,
                     `kode_kantor_tujuan`,
                     kk2.nama_kantor AS nama_kantor_tujuan,
@@ -33,10 +33,10 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                 FROM
                     `jaminan_request_pemindahan` jp 
                     LEFT JOIN app_kode_kantor kk1 
-                    ON kk1.kode_kantor = jp.kode_kantor_asal 
+                    ON kk1.kode_kantor = jp.kode_kantor_lokasi_jaminan 
                     LEFT JOIN app_kode_kantor kk2 
                     ON kk2.kode_kantor = jp.kode_kantor_tujuan 
-                WHERE jp.kode_kantor_tujuan = '$kode_kantor' 
+                WHERE jp.kode_kantor_lokasi_jaminan = '$kode_kantor' 
                 #HAVING verifikasi = 0 
                 ORDER BY jp.nomor DESC 
                 LIMIT 0, 25;
@@ -52,7 +52,7 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                     `id`,
                     `nomor`,
                     `tgl`,
-                    `kode_kantor_asal`,
+                    `kode_kantor_lokasi_jaminan`,
                     kk1.nama_kantor AS nama_kantor_asal,
                     `kode_kantor_tujuan`,
                     kk2.nama_kantor AS nama_kantor_tujuan,
@@ -62,10 +62,10 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                 FROM
                     `jaminan_request_pemindahan` jp 
                     LEFT JOIN app_kode_kantor kk1 
-                    ON kk1.kode_kantor = jp.kode_kantor_asal 
+                    ON kk1.kode_kantor = jp.kode_kantor_lokasi_jaminan 
                     LEFT JOIN app_kode_kantor kk2 
                     ON kk2.kode_kantor = jp.kode_kantor_tujuan 
-                WHERE jp.kode_kantor_tujuan = '$kode_kantor' 
+                WHERE jp.kode_kantor_lokasi_jaminan = '$kode_kantor' 
                     OR (jp.nomor LIKE '$search' 
                         OR kk1.nama_kantor LIKE '$search' 
                         OR kk2.nama_kantor LIKE '$search'

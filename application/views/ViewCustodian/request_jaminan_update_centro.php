@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1><img src="<?= base_url(); ?>assets/dist/img/request_pemindahan.svg" width="5%"> Request Jaminan Ke Centro
+      <h1><img src="<?= base_url(); ?>assets/dist/img/request_pemindahan.svg" width="5%"> Update Request Jaminan Ke Centro
         <small></small>
       </h1>
       <ol class="breadcrumb">
@@ -62,20 +62,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 6px;" class="control-label" for="main_nomor">Nomor</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="text" class="form-control form-control-sm" id="main_nomor" name="main_nomor" readonly value="NEW">
+                                    <input type="text" class="form-control form-control-sm" id="main_nomor" name="main_nomor" readonly value="<?php echo $nomor;?>">
                                   </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="main_tanggal">Tanggal</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="date" class="form-control form-control-sm" id="main_tanggal" name="main_tanggal" value="<?php echo $sysdate;?>" readonly>
+                                    <input type="date" class="form-control form-control-sm" id="main_tanggal" name="main_tanggal" value="<?php echo $tgl;?>" readonly>
+                                  </div>
+                                  <div class="col-sm-2" style="text-align: right;">
+                                      <label style="padding-top: 6px;" class="control-label" for="main_nomor">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-2">
+                                        <select class="form-control form-control-sm select2" id="mainVerifikasi" name="mainVerifikasi" disabled>
+                                              <option value="<?php echo $verifikasi?>" selected ><?php echo $verifikasi?></option>
+                                              <?php 
+                                                if($verifikasi == '0'){
+                                                  echo '<option value="1">1</option>';
+                                                }
+                                                else{
+                                                  echo '<option value="0">0</option>';
+                                                }
+                                              ?>
+                                        </select>
+                                  </div>
+                                 
+                              </div>
+                      </div>
+                      <div class="col-md-12 mx-auto">
+                              <div class="form-group row">
+                                  <div class="col-sm-3">
+                                      <label style="padding-top: 5px;" class="control-label" for="kode_kantor_lokasi_jaminan">Kode Kantor Lokasi Jaminan</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                  <select class="form-control form-control-sm select2" readonly disabled id="kode_kantor_lokasi_jaminan" name="kode_kantor_lokasi_jaminan">
+                                        <option value="<?php echo $kode_kantor_lokasi_jaminan;?>" selected ><?php echo $kode_kantor_lokasi_jaminan;?></option>
+                                        <?php foreach ($selectKodeKantor as $row) : ?>
+                                        <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
+                                        <?php endforeach;?>
+                                  </select>
+                                  </div>
+                                  <div class="col-sm-2" style="text-align: right;">
                                       <label style="padding-top: 5px;" class="control-label" for="kode_custodian">Kode Custodian</label>
                                   </div>
                                   <div class="col-sm-4">
                                     <select class="form-control form-control-sm select2" id="kode_custodian" name="kode_custodian">
-                                        <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                        <option value="<?php echo $kode_custodian;?>" selected ><?php echo $kode_custodian;?></option>
                                         <?php foreach ($getCentro as $row) : ?>
                                           <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - ' .$row['nama'];?></option>
                                         <?php endforeach;?>
@@ -86,24 +118,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </div>
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="kode_kantor_lokasi_jaminan">Kode Kantor Lokasi Jaminan</label>
-                                  </div>
-                                  <div class="col-sm-3">
-                                  <select class="form-control form-control-sm select2" id="kode_kantor_lokasi_jaminan" name="kode_kantor_lokasi_jaminan">
-                                        <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
-                                        <?php foreach ($selectKodeKantor as $row) : ?>
-                                        <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
-                                        <?php endforeach;?>
-                                  </select>
-                                  </div>
-                                  <div class="col-sm-1">
-                                  </div>
-                                  <div class="col-sm-2">
-                                      <label style="padding-top: 6px;" class="control-label" for="main_keperluan">Keperluan</label>
-                                  </div>
-                                  <div class="col-sm-4">
+                              <div class="col-sm-6">
+                              </div>
+                              <div class="col-sm-2" style="text-align: right;"  >
+                                    <label style="padding-top: 6px;" class="control-label" for="main_keperluan">Keperluan</label>
+                              </div>
+                              <div class="col-sm-4">
                                         <select class="form-control form-control-sm select2" id="main_keperluan" name="main_keperluan">
+                                            <option value="<?php echo $keperluan;?>" selected ><?php echo $keperluan;?></option>
                                             <option value="Pelunasan Kontrak">Pelunasan Kontrak</option>
                                             <option value="Proses Litigasi">Proses Litigasi</option>
                                             <option value="Pemeriksaan Audit">Pemeriksaan Audit</option>
@@ -163,7 +185,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="col-sm-3">
                                         <textarea style="height: 75px;" type="text" 
                                             class="form-control" name="main_keterangan" 
-                                            id="main_keterangan" placeholder="Keterangan...."></textarea>
+                                            id="main_keterangan" placeholder="Keterangan...."><?php echo $ket;?></textarea>
                                   </div>
                               </div>
                       </div>
@@ -177,7 +199,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
 
             <!-- End Data Tables-->
-            <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+            <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">                              
+            <input type="hidden" class="form-control" id="getNomor" name="getNomor" value = "<?php echo $getNomor; ?>"> 
 
     </section>
     <!-- /.content -->
@@ -241,7 +264,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-  <?php $this->view('ViewCustodian/js/request_jaminan_centro_js.php'); ?>
+  <?php $this->view('ViewCustodian/js/request_jaminan_update_js.php'); ?>
 
 	<?php
         echo $ctrlbar;
