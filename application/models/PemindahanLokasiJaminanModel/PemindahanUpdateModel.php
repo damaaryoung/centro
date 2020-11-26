@@ -129,10 +129,12 @@ class PemindahanUpdateModel extends CI_Model{
 		$this->db2->query("INSERT INTO dpm_online.jaminan_pemindahan_detail (
                                     `nomor`, 
                                     `no_reff`, 
-                                    `agunan_id`)
+                                    `agunan_id`,
+                                    `last_update`)
                             VALUES('$mainNomor',
                                    '$nomorReffDeatail',
-                                   '$agunanIdDetail');");
+                                   '$agunanIdDetail',
+                                    NOW());");
     }
 
     public function getJaminanPemindahanHeaderCetak($tblNomor){

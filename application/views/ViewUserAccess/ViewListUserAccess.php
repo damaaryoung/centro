@@ -59,7 +59,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="input-group mb-3">
                   <input type="text" class="form-control cari-berdasarkan" id='search' placeholder="Cari user....">
                   <div class="input-group-append">
-                    <span class="input-group-text"><i class="fas fa-search" onclick="searchData()"></i></span>
+                    <span class="input-group-text" style="cursor:pointer" onclick="searchData()"><i class="fas fa-search" ></i></span>
                   </div>
                 </div>
               </div>
