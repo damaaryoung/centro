@@ -44,7 +44,8 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 											. '<div>
 														<form method="post" action="'. base_url("Request_Jaminan_Verifikasi_Controller/prosesVerifikasiMain").'">
 															<button type="submit" class="btn btn-success btn-sm"> <i class="fas fa-check"></i></button>       
-															<input type="hidden" name="userId" value="'.$row['user_id'].'">            
+															<input type="hidden" name="userId" value="'.$row['user_id'].'">   
+															<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">               
 														</form>
 												</div> </td></tr>'];
 												
@@ -67,7 +68,8 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 											. '<div>
 														<form method="post" action="'. base_url("Request_Jaminan_Verifikasi_Controller/prosesVerifikasiMain").'">
 															<button type="submit" class="btn btn-success btn-sm"> <i class="fas fa-check"></i></button>       
-															<input type="hidden" name="userId" value="'.$row['user_id'].'">            
+															<input type="hidden" name="userId" value="'.$row['user_id'].'">   
+															<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">           
 														</form>
 												</div> </td></tr>'];
 												
@@ -79,8 +81,9 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function prosesVerifikasiMain()
-	{
+
+	/// begin page vefrifikasi
+	public function prosesVerifikasiMain(){
 		$session = $this->session->userdata('nama');
 		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
@@ -90,13 +93,40 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
 
 		if($session != ''){ 
+			$tblNomor          = $this->input->post('tblNomor');
+			$data['getNomor']  = $this->input->post('tblNomor');
 			$data['selectKodeKantor'] = $this->Request_Jaminan_Verifikasi_Model->selectKodeKantor();
+			$getJaminanPemindahanHeader = $this->Request_Jaminan_Verifikasi_Model->getJaminanPemindahanHeader($tblNomor);
+			foreach ($getJaminanPemindahanHeader as $row) :
+				$data['nomor'] =  $row['nomor'];
+				$data['tgl'] =  $row['tgl'];
+				$data['kode_kantor_lokasi_jaminan'] =  $row['kode_kantor_lokasi_jaminan'];
+				$data['kode_kantor_tujuan'] =  $row['kode_kantor_tujuan'];
+				$data['ket'] =  $row['ket'];
+				$data['keperluan'] =  $row['keperluan'];
+				$data['verifikasi'] =  $row['verifikasi'];
+				$data['kode_custodian'] =  $row['kode_custodian'];
+			endforeach;	
 			$this->load->view('ViewCustodian/request_jaminan_verifikasi_proses.php', $data);
 		}
 		else{
 			redirect('LoginController/index'); 
 		}
 		
+	}
+	public function getDataDetail(){
+        
+		$dataNomor                    = $this->input->post('dataNomor');
+		$getPemindahanJaminanDetail   = $this->Request_Jaminan_Verifikasi_Model->getPemindahanJaminanDetail($dataNomor);
+		
+		foreach ($getPemindahanJaminanDetail as $row) :
+			$data[]    = ['<tr> <td>'. $row['no_reff'] . '</td> <td>'
+										. $row['agunan_id'] . '</td> <td>'
+										. $row['jenis'] .'</td> <td>'
+										. $row['deskripsi_ringkas'] .'</td></tr>',$row['no_reff'], $row['agunan_id']];
+
+		endforeach;	
+		echo json_encode($data);
 	}
 
 }

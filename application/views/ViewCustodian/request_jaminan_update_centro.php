@@ -58,13 +58,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-1">
+                                  <div class="col-sm-1"  style="text-align: left;">
                                       <label style="padding-top: 6px;" class="control-label" for="main_nomor">Nomor</label>
                                   </div>
                                   <div class="col-sm-2">
                                     <input type="text" class="form-control form-control-sm" id="main_nomor" name="main_nomor" readonly value="<?php echo $nomor;?>">
                                   </div>
-                                  <div class="col-sm-1">
+                                  <div class="col-sm-1"  style="text-align: left;">
                                       <label style="padding-top: 5px;" class="control-label" for="main_tanggal">Tanggal</label>
                                   </div>
                                   <div class="col-sm-2">
@@ -86,12 +86,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                               ?>
                                         </select>
                                   </div>
-                                 
                               </div>
                       </div>
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-3" style="text-align: left;">
                                       <label style="padding-top: 5px;" class="control-label" for="kode_kantor_lokasi_jaminan">Kode Kantor Lokasi Jaminan</label>
                                   </div>
                                   <div class="col-sm-3">
@@ -117,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </div>
                       </div>
                       <div class="col-md-12 mx-auto">
-                              <div class="form-group row">
+                            <div class="form-group row">
                               <div class="col-sm-6">
                               </div>
                               <div class="col-sm-2" style="text-align: right;"  >
@@ -132,7 +131,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <option value="Repeat Order Naik HT">Repeat Order Naik HT</option>
                                         </select>
                                   </div>
-                              </div>
+                            </div>
                       </div>
                 </div>
                    
