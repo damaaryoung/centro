@@ -219,15 +219,15 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		$lengthParsed               = $this->input->post('lengthParsed');
 		$verifikasi				    = '0';
 		
-		$data['kode_kantor']             = $this->session->userdata('kd_cabang');
-		$data['main_tanggal']             = $main_tanggal;
-		$data['kode_custodian']      = $kode_custodian; 
+		$data['kode_kantor']                = $this->session->userdata('kd_cabang');
+		$data['main_tanggal']               = $main_tanggal;
+		$data['kode_custodian']             = $kode_custodian; 
 		$data['kode_kantor_lokasi_jaminan'] = $kode_kantor_lokasi_jaminan;
-		$data['main_keperluan']          = $main_keperluan;
-		$data['main_keterangan']     = $main_keterangan;
-		$data['parsedDataDetailArr']            = $parsedDataDetailArr;
-		$data['lengthParsed']            = $lengthParsed;
-		$data['verifikasi']            = $verifikasi;
+		$data['main_keperluan']             = $main_keperluan;
+		$data['main_keterangan']            = $main_keterangan;
+		$data['parsedDataDetailArr']        = $parsedDataDetailArr;
+		$data['lengthParsed']               = $lengthParsed;
+		$data['verifikasi']                 = $verifikasi;
 
 		$generateNomor = $this->Request_Jaminan_Centro_Model->generateNomor($kode_kantor_tujuan);
 		foreach ($generateNomor as $row) :
