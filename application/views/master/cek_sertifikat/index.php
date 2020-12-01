@@ -64,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><img src="<?= base_url(); ?>assets/dist/img/monitor.svg" width="10%"> Data Credit Checking</h1>
+                    <h1><img src="<?= base_url(); ?>assets/dist/img/monitor.svg" width="10%"> Cek Sertifikat</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">

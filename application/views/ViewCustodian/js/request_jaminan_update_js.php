@@ -42,12 +42,17 @@ $(document).ready(function () {
 
             $('#loading').hide(); 
             if(mainVerifikasi == '1'){
-                alert('Data sudah di verifikasi, tidak dapat dikoreksi');
-                $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", true);
-                $("#btn_tambah_jaminan_main").prop("disabled", true);
-                $(".btnDeleteJaminanData").prop("disabled", true);
-                
-                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Perhatian...',
+                    text: 'Data Sudah Di Verifikasi, Data Tidak Dapat Dikoreksi',
+                    allowOutsideClick: false,
+                    footer: '<a href></a>'
+                }).then(()=> {
+                   $("#btn_simpan").prop("disabled", true);
+                   $("#btn_tambah_jaminan_main").prop("disabled", true);
+                   $(".btnDeleteJaminanData").prop("disabled", true);
+                });
             }else if(mainVerifikasi == '0'){
                 $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", false);
             }
@@ -245,15 +250,31 @@ $('#btn_simpan').click(function () {
                 "lengthParsed"               : lengthParsed},
 
         success : function(response) {
-            alert('Sukses Edit Request Jaminan Ke Centro, Silahkan Tunggu Proses Verifikasi Dari Centro');   
-            console.log(response);
-            window.location = '<?= base_url(); ?>request_jaminan_centro';
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Sukses Edit Request Jaminan Ke Centro, Silahkan Tunggu Proses Verifikasi Dari Centro',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=> {
+                window.location = '<?= base_url(); ?>request_jaminan_centro';
+                $('#loading').hide(); 
+                console.log(response);
+            });  
 
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert('Gagal Request Jaminan Ke Centro, Silahkan Coba Beberapa Saat Lagi');
-            window.location = '<?= base_url(); ?>request_jaminan_centro';
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Perhatian...',
+                    text: 'Gagal Request Jaminan Ke Centro, Silahkan Coba Beberapa Saat Lagi',
+                    allowOutsideClick: false,
+                    footer: '<a href></a>'
+            }).then(()=> {
+                window.location = '<?= base_url(); ?>request_jaminan_centro';
+                $('#loading').hide(); 
+            });
         }
     });
     

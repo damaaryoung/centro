@@ -124,4 +124,24 @@ class Model_view_master extends ci_model
         $data=$this->db->query($query)->result();
         return $data;
     }
+    public function selectKodeKantor(){
+        $str = "SELECT id, nama FROM mk_cabang c;";
+        $query = $this->db->query($str);
+        
+        return $query->result_array();
+    }
+    public function select_pic_cabang(){
+        $outputs   = $this->model_menu->getUser();
+        $user_id   = $outputs['data']['user_id'];
+        $get_cabang = "SELECT p.`id_cabang` as id,
+                            mk.`nama` as nama
+                        FROM m_pic p,
+                            mk_cabang mk
+                        WHERE p.`id_cabang` = mk.`id`
+                        AND user_id='$user_id';";
+
+        $query = $this->db->query($get_cabang);
+        
+        return $query->result_array();
+    }
 }

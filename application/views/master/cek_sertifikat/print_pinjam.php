@@ -7,15 +7,17 @@ $no_shm=$key['no_shm'];
 $no_surat_ukur=$key['nomor_surat_ukur'];
 $tgl_sertifikat=$key['tgl_sertifikat'];
 $alamat_sertifikat=$key['alamat'];
-($key['asli_ajb']==1) ? $ajb="Asli" :($key['asli_ajb']==2) ? $ajb="Copy" : $ajb="-" ;
-($key['asli_imb']==1) ? $imb="Asli" :($key['asli_imb']==2) ? $imb="Copy" : $imb="-" ;
-($key['asli_skmht']==1) ? $skmht="Asli" :($key['asli_skmht']==2) ? $skmht="Copy" : $skmht="-" ;
-($key['asli_sppt']==1) ? $sppt="Asli" :($key['asli_sppt']==2) ? $sppt="Copy" : $sppt="-" ;
-($key['asli_sht']==1) ? $sht="Asli" :($key['asli_sht']==2) ? $sht="Copy" : $sht="-" ;
-($key['asli_stts']==1) ? $stts="Asli" :($key['asli_stts']==2) ? $stts="Copy" : $stts="-" ;
-($key['asli_ssb']==1) ? $ssb="Asli" :($key['asli_ssb']==2) ? $ssb="Copy" : $ssb="-" ;
-($key['gambar_denah']=='Y') ? $gambar_denah="Ya" :($key['gambar_denah']=='N') ? $gambar_denah="Tidak" : $gambar_denah="-" ;
-($key['surat_roya']=='Y') ? $surat_roya="Ya" :($key['surat_roya']=='N') ? $surat_roya="Tidak" : $surat_roya="-" ;
+/// pembetulan
+if($key['asli_ajb']==1){ $ajb="Asli"; } else if ($key['asli_ajb']==2) { $ajb="Copy"; } else{$ajb="-";}
+if($key['asli_imb']==1){ $imb="Asli"; } else if ($key['asli_imb']==2) { $imb="Copy"; } else{$imb="-";}
+if($key['asli_skmht']==1){ $skmht="Asli"; } else if ($key['asli_skmht']==2) { $skmht="Copy"; } else{$skmht="-";}
+if($key['asli_sppt']==1){ $sppt="Asli"; } else if ($key['asli_sppt']==2) { $sppt="Copy"; } else{$sppt="-";}
+if($key['asli_sht']==1){ $sht="Asli"; } else if ($key['asli_sht']==2) { $sht="Copy"; } else{$sht="-";}
+if($key['asli_stts']==1){ $stts="Asli"; } else if ($key['asli_stts']==2) { $stts="Copy"; } else{$stts="-";}
+if($key['asli_ssb']==1){ $ssb="Asli"; } else if ($key['asli_ssb']==2) { $ssb="Copy"; } else{$ssb="-";}
+if($key['asli_gambar_denah']==1){ $gambar_denah="Asli"; } else if ($key['asli_gambar_denah']==2) { $gambar_denah="Copy"; } else{$gambar_denah="-";}
+if($key['asli_surat_roya']==1){ $surat_roya="Asli"; } else if ($key['asli_surat_roya']==2) { $surat_roya="Copy"; } else{$surat_roya="-";}
+
 $kota=$key['nama_kota'];
 $tgl=$key['tgl'];
 $nomor=$key['nomor_so'];
