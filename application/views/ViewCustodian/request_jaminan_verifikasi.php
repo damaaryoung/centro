@@ -12,6 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
 
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -20,11 +21,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
   	<?php 
-	  echo $navbar;
+	    echo $navbar;
       echo $sidebar;
       echo $js;
 	?>
 
+<script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
     
 
   <!-- Content Wrapper. Contains page content -->

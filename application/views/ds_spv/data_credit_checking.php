@@ -44,6 +44,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                 </div>
             </section>
+            <!-- Horizontal Form -->
+            <div class="card card-info">
+                    <div class="card-header with-border">
+                    <h3 class="card-title">FILTER</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body text-center">  
+                        <div class="row">
+                            <div class="col-md-12 mx-auto">
+                                    <div class="form-group row">
+                                    
+                                        <div class="col-sm-2">
+                                            <label style="padding-top: 5px;" class="control-label" for="main_kode_kantor" style="text-align: left;">Kode Kantor</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select class="form-control form-control-sm select2" id="main_kode_kantor" name="main_kode_kantor" onchange='filter_data_so()'>
+                                            <?php foreach ($selectKodeKantor as $row) : ?>
+                                                <option value="<?php echo $row['id'];?>"><?php echo $row['id'];?> - <?php echo $row['nama'];?> </option>
+                                            <?php endforeach;?>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        
+                    </div>            
+                </div>
+          <!-- /.card -->
             <section  style="min-height: 700px;">
                 <div class="row">
                     <div class="col-12">
@@ -913,6 +942,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     "ajax": {
                         "url": "<?php echo site_url('Hasil_controller/get_data_so') ?>",
                         "type": "POST"
+                    },
+
+                    "columnDefs": [{
+                        "targets": [0],
+                        "orderable": false,
+                    }, ],
+
+                })
+            };
+
+            function filter_data_so() {
+                var kode_kantor = $('#main_kode_kantor').val();
+                console.log(kode_kantor);
+                $('#table_hasil').DataTable({
+
+                    "processing": true,
+                    "serverSide": true,
+                    'destroy': true,
+                    "order": [],
+
+                    "ajax": {
+                        "url": "<?php echo site_url('Hasil_controller/get_filter_data_so') ?>",
+                        "type": "POST",
+                        "data" : {"kode_kantor" : kode_kantor}
                     },
 
                     "columnDefs": [{

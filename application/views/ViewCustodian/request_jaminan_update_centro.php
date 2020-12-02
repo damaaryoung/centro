@@ -12,6 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
 
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -172,15 +173,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-2">
+                                  <div class="col-sm-1">
                                     <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
                                   </div>
-                                  <div class="col-sm-5">
-                                    
+                                  <div class="col-sm-2" style="text-align: right;">
+                                    <label style="padding-top: 5px;" class="control-label" for="main_keterangan">PIC Peminjam</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <input type="text" class="form-control form-control-sm" id="main_pic" name="main_pic" value="<?php echo $pic_request_pemindahan; ?>">
+                                  </div>
+                                  <div class="col-sm-1">
                                   </div>
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="main_keterangan">Keterangan</label>
-                                  </div>
+                                  </div>  
                                   <div class="col-sm-3">
                                         <textarea style="height: 75px;" type="text" 
                                             class="form-control" name="main_keterangan" 
@@ -270,7 +276,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $footer;
         
 	?>
-
+<script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
 <style>
               /* Important part */
               .modal-dialog{

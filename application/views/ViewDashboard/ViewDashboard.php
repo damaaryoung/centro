@@ -65,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         alt="Image Centro" 
                         style="width: 350px; height: 350px; text-align: center;">
                  
-                      
+                      <p><?php echo $this->session->userdata('SESSION_TOKEN')?></p>
                     </div>
                                      
                 </div> 

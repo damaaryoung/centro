@@ -11,6 +11,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -24,8 +26,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       echo $sidebar;
       echo $js;
 	?>
+<script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
+<script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
 
-    
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

@@ -109,7 +109,7 @@
                 $('.save').css("display", "none");
             },
             success: function(response) {
-              alert(response);
+              console.log(response);
               Swal.fire(
                 'Berhasil Tersimpan.',
                 'Perubahan Data Tersimpan.',

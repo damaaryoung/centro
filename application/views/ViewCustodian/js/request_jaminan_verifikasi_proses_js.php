@@ -17,13 +17,17 @@ var kode_kantor_lokasi_jaminan = '';
 var main_keperluan             = '';
 var main_keterangan            = '';
 var main_nomor                 = '';
+var mainVerifikasi   = '';
+var dataDefaultVerif = '';
+var main_pic         = '';
 
 
 $(document).ready(function () {     
     
     var dataNomor = $('#getNomor').val();
     console.log(dataNomor);
-    var mainVerifikasi = $('#mainVerifikasi').val();
+    mainVerifikasi = $('#mainVerifikasi').val();
+    dataDefaultVerif = $('#dataDefaultVerif').val();
     $('#loading').show(); 
 
     $.ajax({
@@ -42,15 +46,20 @@ $(document).ready(function () {
             $('#table_request_jaminan > tbody:first').html(mainTable);
 
             $('#loading').hide(); 
-            if(mainVerifikasi == '1'){
-                alert('Data sudah di verifikasi, tidak dapat dikoreksi');
-                $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", true);
-                $("#btn_tambah_jaminan_main").prop("disabled", true);
-                $(".btnDeleteJaminanData").prop("disabled", true);
-                
-                
-            }else if(mainVerifikasi == '0'){
-                $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", false);
+            if(dataDefaultVerif == '1'){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Perhatian...',
+                    text: 'Data Sudah Di Verifikasi, Data Tidak Dapat Dikoreksi',
+                    allowOutsideClick: false,
+                    footer: '<a href></a>'
+                }).then(()=> {
+                   $("#btn_simpan").prop("disabled", true);
+                   $("#btn_print").prop("disabled", false);
+                   $(".btnDeleteJaminanData").prop("disabled", true);
+                });
+            }else if(dataDefaultVerif == '0'){
+                $("#btn_simpan").prop("disabled", false);
             }
         },
         error : function(response) {
@@ -67,4 +76,89 @@ $('#btn_batal').click(function () {
     window.location = '<?= base_url(); ?>Request_Jaminan_Verifikasi_Controller/index';
     
 });
+
+$('#btn_simpan').click(function () {
+
+    main_tanggal               = $('#main_tanggal').val();
+    kode_custodian             = $('#kode_custodian').val();
+    kode_kantor_lokasi_jaminan = $('#kode_kantor_lokasi_jaminan').val();
+    main_keperluan             = $('#main_keperluan').val();
+    main_keterangan            = $('#main_keterangan').val();
+    main_nomor                 = $('#main_nomor').val();
+    mainVerifikasi             = $('#mainVerifikasi').val();
+    main_pic                   = $('#main_pic').val();
+    
+    dataDefaultVerif = $('#dataDefaultVerif').val();
+
+    for(i = 0; i < mainTable.length; i++ ){
+        var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
+        parsedDataDetailArr.push(data);
+    }
+    lengthParsed = parsedDataDetailArr.length;
+
+    console.log(main_nomor, main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan, mainVerifikasi, main_pic);
+    console.log(parsedDataDetailArr, lengthParsed);
+
+    if(dataDefaultVerif == '1'){
+        Swal.fire({
+                    icon: 'error',
+                    title: 'Perhatian...',
+                    text: 'Data Sudah Di Verifikasi, Data Tidak Dapat Dikoreksi',
+                    allowOutsideClick: false,
+                    footer: '<a href></a>'
+        });
+        return;
+    }
+
+
+    $('#loading').show(); 
+    $.ajax({
+        url : "<?= base_url(); ?>Request_Jaminan_Verifikasi_Controller/prosesVerifikasi",
+        type : "POST",
+        dataType : "json",
+        data : {"main_nomor"                 : main_nomor,
+                "main_tanggal"               : main_tanggal,
+                "kode_custodian"             : kode_custodian,
+                "kode_kantor_lokasi_jaminan" : kode_kantor_lokasi_jaminan,
+                "main_keperluan"             : main_keperluan,
+                "main_keterangan"            : main_keterangan,
+                "mainVerifikasi"             : mainVerifikasi,
+                "parsedDataDetailArr"        : parsedDataDetailArr,
+                "lengthParsed"               : lengthParsed,
+                "main_pic"                   : main_pic},
+
+        success : function(response) {
+            //alert('Sukses Verifikasi Request Pemindahan Dokumen'); 
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Sukses Verifikasi Request Pemindahan Dokumen',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=> {
+                window.location = '<?= base_url(); ?>request_jaminan_verifikasi';
+                $('#loading').hide(); 
+                console.log(response);
+            });  
+        },
+        error : function(response) {
+            console.log('failed :' + response);
+            //alert('Gagal Verifikasi Request Jaminan, Silahkan Coba Beberapa Saat Lagi Atau Hubungi Team IT');
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Perhatian...',
+                    text: 'Gagal Verifikasi Request Jaminan, Silahkan Coba Beberapa Saat Lagi Atau Hubungi Team IT',
+                    allowOutsideClick: false,
+                    footer: '<a href></a>'
+            }).then(()=> {
+                window.location = '<?= base_url(); ?>request_jaminan_verifikasi';
+                $('#loading').hide(); 
+            });
+            
+        }
+    });
+    
+}); 
+
+
 </script>

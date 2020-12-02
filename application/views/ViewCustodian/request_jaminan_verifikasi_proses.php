@@ -14,6 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">       
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
@@ -159,20 +160,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-4">
-                                    <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main" disabled>Tambah <i class="fas fa-plus-circle"></i></button>
-                                    <button type="button" class="btn btn-primary btn-sm"  id="btn_tambah_jaminan_main" disabled>Print &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-print"></i></button>
+                                  <div class="col-sm-2">
+                                    <div class="form-inline">
+                                      <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main" disabled>Tambah <i class="fas fa-plus-circle"></i></button>
+                                     
+                                      <div style ="padding-left: 5px;">
+                                        <form method="post" target="_blank" style ="display:inline;" action="<?php echo base_url();?>Request_Jaminan_Verifikasi_Controller/cetakProses"> 
+                                          <button type="submit" class="btn btn-primary btn-sm"  id="btn_print" disabled
+                                                  data-nomor="<?php echo $nomor?>" 
+                                                >Print &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-print"></i>
+                                          </button>
+                                          <input type="hidden" name="nomorCetak" value="<?php echo $nomor?>">
+                                        </form>
+													            </div>
+                                   
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-2" style="text-align: right;">
+                                    <label style="padding-top: 5px;" class="control-label" for="main_pic">PIC Peminjam</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    
+                                    <input type="text" class="form-control form-control-sm" id="main_pic" name="main_pic" disabled value="<?php echo $pic_request_pemindahan; ?>">
                                   </div>
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="pic_peminjaman">Keterangan</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="main_keterangan">Keterangan</label>
                                   </div>
                                   <div class="col-sm-3">
                                         <textarea style="height: 75px;" type="text" 
-                                            class="form-control" name="keterangan_main" 
-                                            id="keterangan_main" placeholder="Keterangan...." readonly><?php echo $ket;?></textarea>
+                                            class="form-control" name="main_keterangan" 
+                                            id="main_keterangan" placeholder="Keterangan...."><?php echo $ket;?></textarea>
                                   </div>
                               </div>
                       </div>
@@ -243,6 +259,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <button type="button" class="btn btn-danger" onclick="closeModalJaminanDokumen()">Kembali</button>
           </div>
           <input type="hidden" class="form-control" id="getNomor" name="getNomor" value = "<?php echo $getNomor; ?>"> 
+          <input type="hidden" class="form-control" id="dataDefaultVerif" name="dataDefaultVerif" value = "<?php echo $verifikasi; ?>"> 
         </div>
       </div>
     </div>
@@ -256,6 +273,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $footer;
         
 	?>
+  <script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
 
 <style>
               /* Important part */

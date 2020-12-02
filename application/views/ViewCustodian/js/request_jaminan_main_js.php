@@ -87,7 +87,26 @@ function searchData(){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                alert('Data Tidak Ditemukan');
+                //alert('Data Tidak Ditemukan');
+                toastr["warning"]("Data Tidak Ditemukan", "Perhatian!");
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                    }
                 $('#loading').hide();
             }
     });    
@@ -113,9 +132,18 @@ $('#table_body_request_jaminan').on('click','.btnDeleteRequestJaminan', function
                     "id"       : id},
     
             success : function(response) {
-                console.log(response)
-                alert('Data Berhasil Dihapus');
-                window.location = '<?= base_url(); ?>request_jaminan_centro';
+                console.log(response)                
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Data Berhasil Dihapus',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(()=> {
+                    window.location = '<?= base_url(); ?>request_jaminan_centro';
+                    $('#loading').hide(); 
+                    console.log(response);
+                });  
             },
             error : function(response) {
                 console.log('failed :' + response);

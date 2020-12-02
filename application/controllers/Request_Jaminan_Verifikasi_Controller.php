@@ -105,7 +105,8 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 				$data['ket'] =  $row['ket'];
 				$data['keperluan'] =  $row['keperluan'];
 				$data['verifikasi'] =  $row['verifikasi'];
-				$data['kode_custodian'] =  $row['kode_custodian'];
+				$data['kode_custodian'] =  $row['kode_custodian']; 
+				$data['pic_request_pemindahan'] =  $row['pic_request_pemindahan'];  
 			endforeach;	
 			$this->load->view('ViewCustodian/request_jaminan_verifikasi_proses.php', $data);
 		}
@@ -128,5 +129,94 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		endforeach;	
 		echo json_encode($data);
 	}
+	public function prosesVerifikasi(){
+		$kode_kantor = $this->session->userdata('kd_cabang');
+		$userIdLogin = $this->session->userdata('userIdLogin');
+
+		$main_nomor                 = $this->input->post('main_nomor');
+		$main_tanggal               = $this->input->post('main_tanggal');
+		$kode_custodian             = $this->input->post('kode_custodian');
+		$kode_kantor_tujuan         = $this->session->userdata('kd_cabang');
+		$kode_kantor_lokasi_jaminan = $this->input->post('kode_kantor_lokasi_jaminan');
+		$main_keperluan             = $this->input->post('main_keperluan');
+		$main_keterangan            = $this->input->post('main_keterangan');
+		$mainVerifikasi		        = $this->input->post('mainVerifikasi');
+		$parsedDataDetailArr        = $this->input->post('parsedDataDetailArr');
+		$lengthParsed               = $this->input->post('lengthParsed');
+		$main_pic                   = $this->input->post('main_pic');
+		
+		$data['kode_kantor']                = $this->session->userdata('kd_cabang');
+		$data['main_nomor']                 = $this->input->post('main_nomor');
+		$data['main_tanggal']               = $this->input->post('main_tanggal');
+		$data['kode_custodian']             = $this->input->post('kode_custodian');
+		$data['kode_kantor_tujuan']         = $this->session->userdata('kd_cabang');
+		$data['kode_kantor_lokasi_jaminan'] = $this->input->post('kode_kantor_lokasi_jaminan');
+		$data['main_keperluan']             = $this->input->post('main_keperluan');
+		$data['main_keterangan']            = $this->input->post('main_keterangan');
+		$data['mainVerifikasi']             = $this->input->post('mainVerifikasi');
+		$data['parsedDataDetailArr']        = $this->input->post('parsedDataDetailArr');
+		$data['lengthParsed']               = $this->input->post('lengthParsed');
+		$data['main_pic']                   = $this->input->post('main_pic');
+
+		
+
+		$this->Request_Jaminan_Verifikasi_Model->verifikasieDataPemindahan($main_nomor,                 
+																				$main_tanggal,               
+																				$kode_custodian,             
+																				$kode_kantor_tujuan,         
+																				$kode_kantor_lokasi_jaminan, 
+																				$main_keperluan,             
+																				$main_keterangan,            
+																				$mainVerifikasi,		        
+																				$parsedDataDetailArr,      
+																				$lengthParsed);           
+		echo json_encode($data);
+	}
+
+	//cetak verifikasi dokument
+
+	public function cetakProses(){
+        $session            = $this->session->userdata('nama');
+		$kode_kantor        = $this->session->userdata('kd_cabang');
+		$nomorCetak         = $this->input->post('nomorCetak');
+
+		$data['nomorCetak'] = $this->input->post('nomorCetak');
+		
+		$getJaminanPemindahanHeaderCetak = $this->Request_Jaminan_Verifikasi_Model->getJaminanPemindahanHeaderCetak($nomorCetak);
+		foreach ($getJaminanPemindahanHeaderCetak as $row) :
+			$data['nomor'] =  $row['nomor'];
+			$data['tgl'] =  $row['tgl'];
+            $data['kode_kantor_lokasi_jaminan'] =  $row['kode_kantor_lokasi_jaminan'];
+            $data['nama_kantor_lokasi_jaminan'] =  $row['nama_kantor_lokasi_jaminan'];
+            $data['kode_kantor_tujuan'] =  $row['kode_kantor_tujuan'];
+            $data['nama_kantor_tujuan'] =  $row['nama_kantor_tujuan'];
+			$data['ket'] =  $row['ket'];
+			$data['keperluan'] =  $row['keperluan'];
+			$data['kode_custodian'] =  $row['kode_custodian'];
+			$data['verifikasi'] =  $row['verifikasi'];
+			$data['lokasi_penyimpanan'] =  $row['lokasi_penyimpanan'];
+        endforeach;	
+        $getAlamatHeader = $this->Request_Jaminan_Verifikasi_Model->getAlamatHeader();
+		foreach ($getAlamatHeader as $row) :
+            $data['alamatHeader']         = $row["hasil"];
+        endforeach;	
+
+        
+        $data['getPemindahanJaminanCetak']   = $this->Request_Jaminan_Verifikasi_Model->getPemindahanJaminanCetak($nomorCetak);
+        $cetak = $this->load->view('ViewCustodian/Cetak/print_verifikasi.php', $data, TRUE);
+
+        		
+        // Require composer autoload
+        require_once("vendor/autoload.php");
+        // Create an instance of the class:
+        $mpdf = new \Mpdf\Mpdf();
+        // Write some HTML code:
+        $mpdf->WriteHTML($cetak);
+        // Output a PDF file directly to the browser
+        ob_clean();
+        $mpdf->Output();
+		
+	}
+
 
 }

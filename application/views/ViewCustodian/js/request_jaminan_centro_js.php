@@ -15,6 +15,7 @@ var kode_custodian = '';
 var kode_kantor_lokasi_jaminan = '';
 var main_keperluan = '';
 var main_keterangan = '';
+var main_pic = '';
 
 
 $('#btn_tambah_jaminan_main').click(function () {
@@ -162,11 +163,12 @@ $('#table_body_request_jaminan').on('click','.btnDeleteJaminanData', function ()
 
 $('#btn_simpan').click(function () {
 
-    main_tanggal  = $('#main_tanggal').val();;
-    kode_custodian = $('#kode_custodian').val();;
-    kode_kantor_lokasi_jaminan = $('#kode_kantor_lokasi_jaminan').val();;
-    main_keperluan = $('#main_keperluan').val();;
-    main_keterangan = $('#main_keterangan').val();;
+    main_tanggal    = $('#main_tanggal').val();
+    kode_custodian  = $('#kode_custodian').val();
+    kode_kantor_lokasi_jaminan = $('#kode_kantor_lokasi_jaminan').val();
+    main_keperluan  = $('#main_keperluan').val();
+    main_keterangan = $('#main_keterangan').val();
+    main_pic        = $('#main_pic').val();
 
     for(i = 0; i < mainTable.length; i++ ){
         var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
@@ -174,10 +176,13 @@ $('#btn_simpan').click(function () {
     }
     lengthParsed = parsedDataDetailArr.length;
 
-    //  console.log(main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan);
+    // console.log(main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan, main_pic);
     // console.log(parsedDataDetailArr, lengthParsed);
-
-
+   
+    if(lengthParsed == 0){
+        alert("Anda Belum Menambahkan Detail Data Pengajuan !");
+        return;
+    }
     $('#loading').show(); 
     $.ajax({
         url : "<?= base_url(); ?>Request_Jaminan_Centro_Controller/insertDataPemindahan",
@@ -189,12 +194,22 @@ $('#btn_simpan').click(function () {
                 "main_keperluan"             : main_keperluan,
                 "main_keterangan"            : main_keterangan,
                 "parsedDataDetailArr"        : parsedDataDetailArr,
-                "lengthParsed"               : lengthParsed},
+                "lengthParsed"               : lengthParsed,
+                "main_pic"                   : main_pic},
 
         success : function(response) {
-            alert('Sukses Request Jaminan Ke Centro, Silahkan Tunggu Proses Verifikasi Dari Centro');   
             console.log(response);
-            window.location = '<?= base_url(); ?>request_jaminan_centro';
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Sukses Request Jaminan Ke Centro, Silahkan Tunggu Proses Verifikasi Dari Centro',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=> {
+                window.location = '<?= base_url(); ?>request_jaminan_centro';
+                $('#loading').hide(); 
+                console.log(response);
+            });  
 
         },
         error : function(response) {

@@ -16,6 +16,7 @@ var kode_kantor_lokasi_jaminan = '';
 var main_keperluan             = '';
 var main_keterangan            = '';
 var main_nomor                 = '';
+var main_pic                   = '';
 
 
 $(document).ready(function () {     
@@ -42,12 +43,17 @@ $(document).ready(function () {
 
             $('#loading').hide(); 
             if(mainVerifikasi == '1'){
-                alert('Data sudah di verifikasi, tidak dapat dikoreksi');
-                $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", true);
-                $("#btn_tambah_jaminan_main").prop("disabled", true);
-                $(".btnDeleteJaminanData").prop("disabled", true);
-                
-                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Perhatian...',
+                    text: 'Data Sudah Di Verifikasi, Data Tidak Dapat Dikoreksi',
+                    allowOutsideClick: false,
+                    footer: '<a href></a>'
+                }).then(()=> {
+                   $("#btn_simpan").prop("disabled", true);
+                   $("#btn_tambah_jaminan_main").prop("disabled", true);
+                   $(".btnDeleteJaminanData").prop("disabled", true);
+                });
             }else if(mainVerifikasi == '0'){
                 $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", false);
             }
@@ -219,6 +225,7 @@ $('#btn_simpan').click(function () {
     main_keperluan             = $('#main_keperluan').val();
     main_keterangan            = $('#main_keterangan').val();
     main_nomor                 = $('#main_nomor').val();
+    main_pic                   = $('#main_pic').val();
 
     for(i = 0; i < mainTable.length; i++ ){
         var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
@@ -226,10 +233,12 @@ $('#btn_simpan').click(function () {
     }
     lengthParsed = parsedDataDetailArr.length;
 
-    console.log(main_nomor, main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan);
-    console.log(parsedDataDetailArr, lengthParsed);
-
-
+    // console.log(main_nomor, main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan, main_pic);
+    // console.log(parsedDataDetailArr, lengthParsed);
+    if(lengthParsed == 0){
+        alert("Anda Belum Menambahkan Detail Data Pengajuan !");
+        return;
+    }
     $('#loading').show(); 
     $.ajax({
         url : "<?= base_url(); ?>Request_Jaminan_Update_Controller/updatePemindahanLokasiJaminan",
@@ -242,18 +251,35 @@ $('#btn_simpan').click(function () {
                 "main_keperluan"             : main_keperluan,
                 "main_keterangan"            : main_keterangan,
                 "parsedDataDetailArr"        : parsedDataDetailArr,
-                "lengthParsed"               : lengthParsed},
+                "lengthParsed"               : lengthParsed,
+                "main_pic"                   : main_pic},
 
         success : function(response) {
-            alert('Sukses Edit Request Jaminan Ke Centro, Silahkan Tunggu Proses Verifikasi Dari Centro');   
-            console.log(response);
-            window.location = '<?= base_url(); ?>request_jaminan_centro';
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Sukses Edit Request Jaminan Ke Centro, Silahkan Tunggu Proses Verifikasi Dari Centro',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=> {
+                window.location = '<?= base_url(); ?>request_jaminan_centro';
+                $('#loading').hide(); 
+                console.log(response);
+            });  
 
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert('Gagal Request Jaminan Ke Centro, Silahkan Coba Beberapa Saat Lagi');
-            window.location = '<?= base_url(); ?>request_jaminan_centro';
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Perhatian...',
+                    text: 'Gagal Request Jaminan Ke Centro, Silahkan Coba Beberapa Saat Lagi',
+                    allowOutsideClick: false,
+                    footer: '<a href></a>'
+            }).then(()=> {
+                window.location = '<?= base_url(); ?>request_jaminan_centro';
+                $('#loading').hide(); 
+            });
         }
     });
     
