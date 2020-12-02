@@ -36,12 +36,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 height: 100% !important;
               }
             td.details-control {
-                background: url('../../assets/dist/img/details_open.png') no-repeat center center;
+                background: url('../assets/dist/img/details_open.png') no-repeat center center;
                 cursor: pointer;
             }
 
             tr.shown td.details-control {
-                background: url('../../assets/dist/img/details_close.png') no-repeat center center;
+                background: url('../assets/dist/img/details_close.png') no-repeat center center;
             }
 
             .card-primary.card-outline-tabs>.card-header a.active {
