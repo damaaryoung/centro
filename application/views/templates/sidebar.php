@@ -166,7 +166,7 @@
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>update_kirim_jaminan" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p style="font-size: 14px;"> Update Kirim Jaminan ke Centro</p>
+                      <p style="font-size: 14px;"> Update Kirim Jaminan</p>
                     </a>
                   </li>
                 <?php }?>
@@ -174,7 +174,7 @@
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>update_kirim_jaminan_verifikasi" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p style="font-size: 14px;"> Verifikasi Update Kirim Jaminan ke Centro</p>
+                      <p style="font-size: 13px;"> Verifikasi Update Kirim Jaminan</p>
                     </a>
                   </li>
                 <?php }?>

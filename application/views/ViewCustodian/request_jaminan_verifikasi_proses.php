@@ -160,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-4">
+                                  <div class="col-sm-2">
                                     <div class="form-inline">
                                       <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main" disabled>Tambah <i class="fas fa-plus-circle"></i></button>
                                      
@@ -176,11 +176,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                    
                                     </div>
                                   </div>
+                                  <div class="col-sm-2" style="text-align: right;">
+                                    <label style="padding-top: 5px;" class="control-label" for="main_pic">PIC Peminjam</label>
+                                  </div>
                                   <div class="col-sm-3">
-                                    
+                                    <input type="text" class="form-control form-control-sm" id="main_pic" name="main_pic" disabled value="<?php echo $pic_request_pemindahan; ?>">
                                   </div>
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="pic_peminjaman">Keterangan</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="main_keterangan">Keterangan</label>
                                   </div>
                                   <div class="col-sm-3">
                                         <textarea style="height: 75px;" type="text" 

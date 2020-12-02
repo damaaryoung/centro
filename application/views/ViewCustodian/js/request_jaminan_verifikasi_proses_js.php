@@ -17,8 +17,9 @@ var kode_kantor_lokasi_jaminan = '';
 var main_keperluan             = '';
 var main_keterangan            = '';
 var main_nomor                 = '';
-var mainVerifikasi = '';
+var mainVerifikasi   = '';
 var dataDefaultVerif = '';
+var main_pic         = '';
 
 
 $(document).ready(function () {     
@@ -85,6 +86,7 @@ $('#btn_simpan').click(function () {
     main_keterangan            = $('#main_keterangan').val();
     main_nomor                 = $('#main_nomor').val();
     mainVerifikasi             = $('#mainVerifikasi').val();
+    main_pic                   = $('#main_pic').val();
     
     dataDefaultVerif = $('#dataDefaultVerif').val();
 
@@ -94,7 +96,7 @@ $('#btn_simpan').click(function () {
     }
     lengthParsed = parsedDataDetailArr.length;
 
-    console.log(main_nomor, main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan, mainVerifikasi);
+    console.log(main_nomor, main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan, mainVerifikasi, main_pic);
     console.log(parsedDataDetailArr, lengthParsed);
 
     if(dataDefaultVerif == '1'){
@@ -122,7 +124,8 @@ $('#btn_simpan').click(function () {
                 "main_keterangan"            : main_keterangan,
                 "mainVerifikasi"             : mainVerifikasi,
                 "parsedDataDetailArr"        : parsedDataDetailArr,
-                "lengthParsed"               : lengthParsed},
+                "lengthParsed"               : lengthParsed,
+                "main_pic"                   : main_pic},
 
         success : function(response) {
             //alert('Sukses Verifikasi Request Pemindahan Dokumen'); 

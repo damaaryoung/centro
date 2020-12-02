@@ -105,7 +105,8 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 				$data['ket'] =  $row['ket'];
 				$data['keperluan'] =  $row['keperluan'];
 				$data['verifikasi'] =  $row['verifikasi'];
-				$data['kode_custodian'] =  $row['kode_custodian'];
+				$data['kode_custodian'] =  $row['kode_custodian']; 
+				$data['pic_request_pemindahan'] =  $row['pic_request_pemindahan'];  
 			endforeach;	
 			$this->load->view('ViewCustodian/request_jaminan_verifikasi_proses.php', $data);
 		}
@@ -142,6 +143,7 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		$mainVerifikasi		        = $this->input->post('mainVerifikasi');
 		$parsedDataDetailArr        = $this->input->post('parsedDataDetailArr');
 		$lengthParsed               = $this->input->post('lengthParsed');
+		$main_pic                   = $this->input->post('main_pic');
 		
 		$data['kode_kantor']                = $this->session->userdata('kd_cabang');
 		$data['main_nomor']                 = $this->input->post('main_nomor');
@@ -154,7 +156,7 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		$data['mainVerifikasi']             = $this->input->post('mainVerifikasi');
 		$data['parsedDataDetailArr']        = $this->input->post('parsedDataDetailArr');
 		$data['lengthParsed']               = $this->input->post('lengthParsed');
-		
+		$data['main_pic']                   = $this->input->post('main_pic');
 
 		
 

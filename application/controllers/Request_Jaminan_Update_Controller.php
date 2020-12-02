@@ -32,6 +32,7 @@ class Request_Jaminan_Update_Controller extends CI_Controller {
 				$data['keperluan'] =  $row['keperluan'];
 				$data['verifikasi'] =  $row['verifikasi'];
 				$data['kode_custodian'] =  $row['kode_custodian'];
+				$data['pic_request_pemindahan'] =  $row['pic_request_pemindahan'];
 			endforeach;	
 			$this->load->view('ViewCustodian/request_jaminan_update_centro.php', $data);
 		}
@@ -76,6 +77,7 @@ class Request_Jaminan_Update_Controller extends CI_Controller {
 		$main_keterangan            = $this->input->post('main_keterangan');
 		$parsedDataDetailArr        = $this->input->post('parsedDataDetailArr');
 		$lengthParsed               = $this->input->post('lengthParsed');
+		$main_pic                   = $this->input->post('main_pic');
 		
 		$data['main_nomor']                 = $this->input->post('main_nomor');
 		$data['kode_kantor']                = $this->session->userdata('kd_cabang');
@@ -87,6 +89,7 @@ class Request_Jaminan_Update_Controller extends CI_Controller {
 		$data['main_keterangan']            = $this->input->post('main_keterangan');
 		$data['parsedDataDetailArr']        = $this->input->post('parsedDataDetailArr');
 		$data['lengthParsed']               = $this->input->post('lengthParsed');
+		$data['main_pic']                   = $this->input->post('main_pic');
 		
 
 
@@ -97,7 +100,8 @@ class Request_Jaminan_Update_Controller extends CI_Controller {
 																		$main_keterangan,
 																		$main_keperluan,
 																		$userIdLogin,
-																		$kode_custodian);
+																		$kode_custodian,
+																		$main_pic);
 
 		for($i = 0; $i < $lengthParsed; $i++){
 			$nomorReffDeatail = $parsedDataDetailArr[$i][0];

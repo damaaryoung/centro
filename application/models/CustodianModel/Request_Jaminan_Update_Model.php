@@ -74,7 +74,8 @@ class Request_Jaminan_Update_Model extends CI_Model{
                                                                 $main_keterangan,
                                                                 $main_keperluan,
                                                                 $userIdLogin,
-                                                                $kode_custodian){
+                                                                $kode_custodian,
+                                                                $main_pic){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
         $this->db2->trans_start();
@@ -86,7 +87,8 @@ class Request_Jaminan_Update_Model extends CI_Model{
                                 `ket`                        = '$main_keterangan',
                                 `keperluan`                  = '$main_keperluan',
                                 `kode_custodian`             = '$kode_custodian',
-                                `user_id`                    = '$userIdLogin'
+                                `user_id`                    = '$userIdLogin',
+                                `pic_request_pemindahan`     = '$main_pic'
                             WHERE `nomor`                    = '$main_nomor';");
         $this->db2->query("DELETE 
                             FROM dpm_online.`jaminan_request_pemindahan_detail` 

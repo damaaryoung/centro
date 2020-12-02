@@ -183,7 +183,8 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                                             $main_keperluan,
                                             $userIdLogin,
                                             $verifikasi,
-                                            $kode_custodian){
+                                            $kode_custodian,
+                                            $main_pic){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
 		$this->db2->query("INSERT INTO dpm_online.`jaminan_request_pemindahan` (
@@ -195,7 +196,8 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                                 `keperluan`,
                                 `user_id`,
                                 `verifikasi`,
-                                `kode_custodian`) 
+                                `kode_custodian`,
+                                `pic_request_pemindahan`) 
                             VALUES (
                                 '$nomor',
                                 '$main_tanggal',
@@ -205,7 +207,8 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                                 '$main_keperluan',
                                 '$userIdLogin',
                                 '$verifikasi',
-                                '$kode_custodian');");
+                                '$kode_custodian',
+                                '$main_pic');");
     }
     public function insertDataPemindahanDetail($nomor,$nomorReffDeatail,$agunanIdDetail){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);

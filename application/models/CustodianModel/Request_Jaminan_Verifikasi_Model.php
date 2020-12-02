@@ -38,7 +38,7 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                     ON kk2.kode_kantor = jp.kode_kantor_tujuan 
                 WHERE jp.kode_kantor_lokasi_jaminan = '$kode_kantor' 
                 #HAVING verifikasi = 0 
-                ORDER BY jp.nomor DESC 
+                ORDER BY verifikasi ASC,  tgl DESC, jp.nomor DESC 
                 LIMIT 0, 25;
             ";
         $query = $this->db2->query($str);
@@ -70,7 +70,7 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                         OR kk1.nama_kantor LIKE '$search' 
                         OR kk2.nama_kantor LIKE '$search'
                     ) #HAVING verifikasi = 0 
-                ORDER BY jp.nomor DESC 
+                ORDER BY verifikasi ASC, tgl DESC,  jp.nomor DESC 
                 LIMIT 0, 25 ;";
         $query = $this->db2->query($str);
         

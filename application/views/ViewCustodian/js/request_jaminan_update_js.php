@@ -16,6 +16,7 @@ var kode_kantor_lokasi_jaminan = '';
 var main_keperluan             = '';
 var main_keterangan            = '';
 var main_nomor                 = '';
+var main_pic                   = '';
 
 
 $(document).ready(function () {     
@@ -224,6 +225,7 @@ $('#btn_simpan').click(function () {
     main_keperluan             = $('#main_keperluan').val();
     main_keterangan            = $('#main_keterangan').val();
     main_nomor                 = $('#main_nomor').val();
+    main_pic                   = $('#main_pic').val();
 
     for(i = 0; i < mainTable.length; i++ ){
         var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
@@ -231,10 +233,12 @@ $('#btn_simpan').click(function () {
     }
     lengthParsed = parsedDataDetailArr.length;
 
-    console.log(main_nomor, main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan);
-    console.log(parsedDataDetailArr, lengthParsed);
-
-
+    // console.log(main_nomor, main_tanggal, kode_custodian, kode_kantor_lokasi_jaminan, main_keperluan, main_keterangan, main_pic);
+    // console.log(parsedDataDetailArr, lengthParsed);
+    if(lengthParsed == 0){
+        alert("Anda Belum Menambahkan Detail Data Pengajuan !");
+        return;
+    }
     $('#loading').show(); 
     $.ajax({
         url : "<?= base_url(); ?>Request_Jaminan_Update_Controller/updatePemindahanLokasiJaminan",
@@ -247,7 +251,8 @@ $('#btn_simpan').click(function () {
                 "main_keperluan"             : main_keperluan,
                 "main_keterangan"            : main_keterangan,
                 "parsedDataDetailArr"        : parsedDataDetailArr,
-                "lengthParsed"               : lengthParsed},
+                "lengthParsed"               : lengthParsed,
+                "main_pic"                   : main_pic},
 
         success : function(response) {
             Swal.fire({

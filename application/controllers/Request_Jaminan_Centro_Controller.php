@@ -217,6 +217,7 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		$main_keterangan            = $this->input->post('main_keterangan');
 		$parsedDataDetailArr        = $this->input->post('parsedDataDetailArr');
 		$lengthParsed               = $this->input->post('lengthParsed');
+		$main_pic					= $this->input->post('main_pic');
 		$verifikasi				    = '0';
 		
 		$data['kode_kantor']                = $this->session->userdata('kd_cabang');
@@ -227,6 +228,7 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		$data['main_keterangan']            = $main_keterangan;
 		$data['parsedDataDetailArr']        = $parsedDataDetailArr;
 		$data['lengthParsed']               = $lengthParsed;
+		$data['main_pic']                   = $main_pic;
 		$data['verifikasi']                 = $verifikasi;
 
 		$generateNomor = $this->Request_Jaminan_Centro_Model->generateNomor($kode_kantor_tujuan);
@@ -247,7 +249,8 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 															$main_keperluan,
 															$userIdLogin,
 															$verifikasi,
-															$kode_custodian);
+															$kode_custodian,
+															$main_pic);
 
 		for($i = 0; $i < $lengthParsed; $i++){
 			$nomorReffDeatail = $parsedDataDetailArr[$i][0];

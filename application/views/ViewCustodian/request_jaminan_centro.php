@@ -14,6 +14,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
@@ -58,24 +60,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-1">
+                                  <div class="col-sm-1" style="text-align: left;">
                                       <label style="padding-top: 6px;" class="control-label" for="main_nomor">Nomor</label>
                                   </div>
                                   <div class="col-sm-2">
                                     <input type="text" class="form-control form-control-sm" id="main_nomor" name="main_nomor" readonly value="NEW">
                                   </div>
-                                  <div class="col-sm-1">
+                                  <div class="col-sm-1" style="text-align: left;">
                                       <label style="padding-top: 5px;" class="control-label" for="main_tanggal">Tanggal</label>
                                   </div>
                                   <div class="col-sm-2">
                                     <input type="date" class="form-control form-control-sm" id="main_tanggal" name="main_tanggal" value="<?php echo $sysdate;?>" readonly>
                                   </div>
-                                  <div class="col-sm-2">
+                                  <div class="col-sm-2" style="text-align: left;">
                                       <label style="padding-top: 5px;" class="control-label" for="kode_custodian">Kode Custodian</label>
                                   </div>
                                   <div class="col-sm-4">
                                     <select class="form-control form-control-sm select2" id="kode_custodian" name="kode_custodian">
-                                        <option value="" selected disabled hidden>Silahkan Pilih</option>
                                         <?php foreach ($getCentro as $row) : ?>
                                           <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - ' .$row['nama'];?></option>
                                         <?php endforeach;?>
@@ -86,7 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </div>
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-2">
+                                  <div class="col-sm-3" style="text-align: left;">
                                       <label style="padding-top: 5px;" class="control-label" for="kode_kantor_lokasi_jaminan">Kode Kantor Lokasi Jaminan</label>
                                   </div>
                                   <div class="col-sm-3">
@@ -97,9 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <?php endforeach;?>
                                   </select>
                                   </div>
-                                  <div class="col-sm-1">
-                                  </div>
-                                  <div class="col-sm-2">
+                                  <div class="col-sm-2" style="text-align: left;">
                                       <label style="padding-top: 6px;" class="control-label" for="main_keperluan">Keperluan</label>
                                   </div>
                                   <div class="col-sm-4">
@@ -151,11 +150,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-2">
+                                  <div class="col-sm-1">
                                     <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
                                   </div>
-                                  <div class="col-sm-5">
-                                    
+                                  <div class="col-sm-2" style="text-align: right;">
+                                    <label style="padding-top: 5px;" class="control-label" for="main_keterangan">PIC Peminjam</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <input type="text" class="form-control form-control-sm" id="main_pic" name="main_pic">
+                                  </div>
+                                  <div class="col-sm-1">
                                   </div>
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="main_keterangan">Keterangan</label>
@@ -242,6 +246,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
   <?php $this->view('ViewCustodian/js/request_jaminan_centro_js.php'); ?>
+  <script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
 
 	<?php
         echo $ctrlbar;
