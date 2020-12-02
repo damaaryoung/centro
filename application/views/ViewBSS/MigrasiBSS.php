@@ -33,7 +33,7 @@ ul:not(.browser-default) {
         <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-exchange-alt"></i> Pindah Ke Area Kerja </h5>
       </div>
       <div class="modal-body">
-      <form action="javascript:void(0)" onsubmit="migrasi_bss();" method="POST">
+      <form id="form-migrasi">
      
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Dari</label>
@@ -56,8 +56,8 @@ ul:not(.browser-default) {
       
       </div>
       <div class="modal-footer">
+        <button type="button" id="migrasi_bss" class="btn btn-primary">Send</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Send</button>
       </div>
       </form>
     </div>

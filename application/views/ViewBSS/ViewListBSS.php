@@ -11,11 +11,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
-
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  
 </head>
+<style>
+.kolektorClick:hover td{
+  background-color:#dee2e6;
+}
 
+.update_assignClick:hover td{
+  background-color:#dee2e6;
+}
+#loading-image{
+    z-index: 9999;
+}
+
+td.details-control {
+    background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+    cursor: alias;
+}
+tr.shown td.details-control {
+    background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+
+td.details-click {
+    background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+    cursor: alias;
+}
+tr.shown td.details-click {
+    background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+
+
+</style>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -47,11 +77,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <section class="content">
       <div class="container-fluid">
         <div class="row">
+        <div id="loading">
+                <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+              </div>
           <div class="col-12">
             <div class="card">
-              <div id="loading">
-                <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
-              </div>
+            
             <!-- Horizontal Form -->
           <div class="card card-info">
             <div class="card-header with-border">
@@ -114,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <div class="card">
             <div class="card-header">
-              <!-- <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#form_send_bss"><i class="fas fa-share-square"></i> Send BSS </i></button>  -->
+              <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#form_send_bss"><i class="fas fa-share-square"></i> Send BSS </i></button> 
               <button class="btn btn-success btn-sm" type="button" id="btn_send_pic"><i class="fas fa-share-square"></i> Send to PIC </i></button>   
               <button type="button" class="btn btn-info btn-sm"  id="btn_received_bss"><i class="fas fa-mail-bulk"></i> Received BSS </i><span class="badge badge-light" id="notify_received"><?php echo $notify[0]['total']; ?></span></button>
               <button class="btn btn-secondary btn-sm" type="button" id="btn_send_migrasi"><i class="fas fa-exchange-alt"></i> Migrasi </i></button>  
@@ -152,8 +183,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   $status = $row['status'];
                               }
                                 echo "<tr>";
-                                echo "<td>".$idx."</td>";
-                                echo "<td>".$row['kartu_number']."</td>";
+                                echo "<td  class='details-click'>".$idx."</td>";
+                                echo "<td class='kartu_number'>".$row['kartu_number']."</td>";
                                 echo "<td>".$status."</td>";
                                 echo "<td>".$row['nama_kantor']."</td>";
                                 echo "<td>".$row['nama_kolektor']."</td>";
@@ -194,7 +225,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-share-square"></i> Send BSS </h5>
       </div>
       <div class="modal-body">
-      <form action="javascript:void(0)" onsubmit="send_bss();" method="POST">
+      <form>
      
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Dari</label>
@@ -222,7 +253,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Send BSS</button>
+        <button type="button" id="send_bss_ga_to_area" class="btn btn-primary">Send BSS</button>
       </div>
       </form>
     </div>
@@ -243,9 +274,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </body>
 </html>
 
+<script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/list_bss.js"></script>
-<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/create_bss.js"></script> -->
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/received_bss.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/migrasi_bss.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/app_assets_js_autocomplete-custom.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/BsstoPic.js"></script>
+

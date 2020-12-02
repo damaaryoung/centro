@@ -8,6 +8,7 @@ function closeFormBSStoPic() {
   $('#form_send_BSStoPic').modal('hide');
 }
 
+// Get Received BSS
 function get_user_received_bss() {
   $.ajax({
     url: base_url + "BSSController/get_user_received_bss",
@@ -23,6 +24,7 @@ function get_user_received_bss() {
   })
 }
 
+// Send BSS to PIC
 $('#send_bss_to_pic').click(function () {
   let data = {
     kartu_number_awal: $("#no_kartu_awal").val(),
@@ -43,7 +45,7 @@ $('#send_bss_to_pic').click(function () {
       $('#loading').show();
     },
     success: function (respon) {
-      console.log(respon)
+      toastr["success"](respon.message)
       setTimeout(function () {
         $('#form_send_BSStoPic').modal('hide');
       }, 1000);
@@ -53,85 +55,86 @@ $('#send_bss_to_pic').click(function () {
   });
 })
 
+//form Kolektor ketika status kartu Open
+$('#employeeTable1').on('click','.kolektorClick', function () {
+  $('#form_assign_kolektor').modal('show');
+  $('#user_request').val(this.getAttribute('user_id_request'))
+  $('#kartu_nomer_bss').val($(this).find('td.kartu_number').text())
+  
+  getKolektor() 
+})
 
-function getKartuBSS() {
+function getKolektor() {
   $.ajax({
-    url: base_url + "BSSController/getKartuBSS",
+    url: base_url + "BSSController/getKolektor",
     type: "GET",
     dataType: "json",
-    success: function (x) {
-      console.log(x)
-      let dataAutoComplete = x.map(x => {
-        return {
-          id: x.kartu_number,
-          text: x.kartu_number
-        }
-      })
+    success: function (respon) {
+      let row = '';
+      for (let i = 0; i < respon.length; i++) {
+        row += `<option value="${respon[i]['kolektor_id']}">${respon[i]['nama']}</option>`
+      }
+      $('#kolektor_id').append(row);
+    }
+  });
+}
 
-      $("#noawal").on("keyup", function () {
-        if ($(this).val()) {
-          $('#noawal').autocompleteCustom({
-            data: dataAutoComplete, //theData is your JSON
-            limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
-            onAutocomplete: function (val) {
-              document.getElementById('noawal').setAttribute('data-id', val)
-            },
-            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-          });
-        }
-        if (!$(this).val()) {
-          $('#noawal').removeAttr('data-id');
-        }
-      })
+// ASSIGN form Kolektor 
+$('#assign_kolektor').click(function(){
+  let data = {
+    user_id_request : $("#user_request").val(),
+    kartu_number : $("#kartu_nomer_bss").val(),
+    kolektor_id : $('#kolektor_id').val()
+  }
+  if ( confirm("Konfirmasi. Yakin Anda ingin Update data ini ??") == true) {
+    $.ajax({
+      url: base_url + "BSSController/update_assign_kolektor",
+      type: "POST",
+      dataType: "json",
+      data: data,
+      beforeSend: function () {
+        $('#loading').show();
+      },
+      success: function (respon) {
+        toastr["success"](respon.message)
+        window.location = base_url + 'bss';
+        $('#loading').hide();
+      }
+    })
+  }else{
+    return false;
+  }
+})
 
-      $("#noakhir").on("keyup", function () {
-        if ($(this).val()) {
-          $('#noakhir').autocompleteCustom({
-            data: dataAutoComplete, //theData is your JSON
-            limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
-            onAutocomplete: function (val) {
-              document.getElementById('noakhir').setAttribute('data-id', val)
-            },
-            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-          });
-        }
-        if (!$(this).val()) {
-          $('#noakhir').removeAttr('data-id');
-        }
-      })
+$('#employeeTable1').on('click','.update_assignClick', function () {
+  $('#form_assign_update').modal('show');
+  $('#kartu_number').val($(this).find('td.kartu_number').text())
+})
 
-      $("#no_kartu_awal").on("keyup", function () {
-        if ($(this).val()) {
-          $('#no_kartu_awal').autocompleteCustom({
-            data: dataAutoComplete, //theData is your JSON
-            limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
-            onAutocomplete: function (val) {
-              document.getElementById('no_kartu_awal').setAttribute('data-id', val)
-            },
-            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-          });
-        }
-        if (!$(this).val()) {
-          $('#no_kartu_awal').removeAttr('data-id');
-        }
-      })
-
-      $("#no_kartu_akhir").on("keyup", function () {
-        if ($(this).val()) {
-          $('#no_kartu_akhir').autocompleteCustom({
-            data: dataAutoComplete, //theData is your JSON
-            limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
-            onAutocomplete: function (val) {
-              document.getElementById('no_kartu_akhir').setAttribute('data-id', val)
-            },
-            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-          });
-        }
-        if (!$(this).val()) {
-          $('#no_kartu_akhir').removeAttr('data-id');
-        }
-      })
-
+//Update form ASSIGN 
+$('#update_form_assign').click(function(){
+  let data ={
+    kartu_number: $("#kartu_number").val(),
+    status_assign : $("#status_assign").val(),
+    keterangan: $("#keterangan_update").val()
+  }
+  $.ajax({
+    url: base_url + "BSSController/update_from_assign",
+    type: "POST",
+    dataType: "json",
+    data: data,
+    beforeSend: function () {
+      $('#loading').show();
+    },
+    success: function (respon) {
+      if(respon.success == true){
+        toastr["success"](respon.message)
+        window.location = base_url + 'bss';
+        $('#loading').hide();
+      }else{
+          toastr["error"](respon.message)
+          $('#loading').hide();
+      }
     }
   })
-}
+})

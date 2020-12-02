@@ -6,35 +6,35 @@ function closeModal() {
 $('#btn_received_bss').click(function () {
   $('#modal_received_bss').modal('show');
   $.ajax({
-    url: base_url + "BSSController/get_received_bss",
-    type: "GET",
-    dataType: "json",
-    success: function (respon) {
+    url : base_url + "BSSController/get_received_bss",
+    type : "GET",
+    dataType : "json",
+    success : function(respon) {
       $('#TableReceived').DataTable().clear();
       $('#TableReceived').DataTable().destroy();
       let obj = respon.data;
       let row = "";
       for (let i = 0; i < respon.data.length; i++) {
         let ket = "";
-        if (obj[i]['keterangan'] == null) {
+        if(obj[i]['keterangan'] == null){
           ket = "";
-        } else {
+        }else{
           ket = obj[i]['keterangan']
         }
 
         let approve = "";
-        if (obj[i]['timeline_tgl_approved'] == null) {
+        if(obj[i]['timeline_tgl_approved'] == null){
           approve = "";
-        } else {
+        }else{
           approve = obj[i]['timeline_tgl_approved']
         }
 
         let status = "";
         if (obj[i]['status'] == '1') {
           status = `<span style="color:#00AE39">${obj[i]['status_app']}</span>`;
-        } else if (obj[i]['status'] == '0') {
+        }else if (obj[i]['status'] == '0'){
           status = `<span style="color:#6c757d">${obj[i]['status_app']}</span>`;
-        } else {
+        }else{
           status = `<span style="color:#D60404">${obj[i]['status_app']}</span>`;
         }
         row += ` <tr style="text-align:center">
@@ -72,7 +72,7 @@ $('#btn_received_bss').click(function () {
           "scrollX": true,
           "autoWidth": false,
           "aaSorting": [],
-          "searching": false,
+          "searching" : false,
           pageLength: 5,
           lengthMenu: [
             [5, 10, 20, -1],
@@ -80,13 +80,13 @@ $('#btn_received_bss').click(function () {
           ]
         });
       });
-      $('#loadingModal').hide();
-      if (respon.divisi_id != 'IT') {
-        $(".btn-reject").attr('disabled', 'disabled');
-        $(".btn-ok").attr('disabled', 'disabled');
-      }
-
-
+        $('#loadingModal').hide();  
+        if(respon.divisi_id != 'IT'){
+            $(".btn-reject").attr('disabled','disabled');
+            $(".btn-ok").attr('disabled','disabled');
+        }
+       
+        
     }
   });
 })
@@ -172,16 +172,16 @@ function serchReceived() {
         });
       });
       $('#loadingModal').hide();
-      if (respon.divisi_id != 'IT') {
-        $(".btn-reject").attr('disabled', 'disabled');
-        $(".btn-ok").attr('disabled', 'disabled');
+      if(respon.divisi_id != 'IT'){
+        $(".btn-reject").attr('disabled','disabled');
+        $(".btn-ok").attr('disabled','disabled');
       }
     }
   });
 }
 
-$('#TableReceived').on('click', '.btn-reject', function () {
-  if (confirm("Konfirmasi,Yakin Anda ingin reject BSS ini ??") == true) {
+$('#TableReceived').on('click','.btn-reject', function () {
+  if ( confirm("Konfirmasi,Yakin Anda ingin reject BSS ini ??") == true) {
     $('#formApproval').modal('show');
     $('#id').val(this.getAttribute('data-id'))
     $('#no_awal').val($(this).parents("tr").find('td.no_awal').text())
@@ -194,43 +194,57 @@ $('#TableReceived').on('click', '.btn-reject', function () {
   } else {
     return false;
   }
-
+ 
 });
 
 
 
-$('#send_approval_reject').click(function () {
-  let data = {
-    id: $("#id").val(),
-    no_awal: $("#no_awal").val(),
-    no_akhir: $("#no_awal").val(),
-    nama_user_send: $("#nama_user_send").val(),
-    is_migrasi: $("#is_migrasi").val(),
-    user_id_received: $('#user_id_received').val(),
-    kode_kantor_received: $('#kode_kantor_received').val(),
-    keterangan: $('#message-text').val(),
-    appoved: "Reject"
-  }
-  insertReceived(data)
+$('#send_approval_reject').click(function(){
+    let data = {
+      id : $("#id").val(),
+      no_awal :  $("#no_awal").val(),
+      no_akhir :  $("#no_akhir").val(),
+      nama_user_send :  $("#nama_user_send").val(),
+      is_migrasi :  $("#is_migrasi").val(),
+      user_id_received : $('#user_id_received').val(),
+      kode_kantor_received : $('#kode_kantor_received').val(),
+      keterangan : $('#message-text').val(),
+      appoved : "Reject"
+    }
+    $.ajax({
+      url: base_url + "BSSController/insertReceivedApproved",
+      type: "POST",
+      dataType: "json",
+      data: data,
+      beforeSend: function () {
+        $('#loading').show();
+      },
+      success: function (respon) {
+        toastr["success"](respon.message)
+        window.location = base_url + 'bss';
+        $('#loading').hide();
+      }
+    })
 })
 
 
-$('#TableReceived').on('click', '.btn-ok', function () {
+$('#TableReceived').on('click','.btn-ok', function () {
   let data = {
-    id: this.getAttribute('data-id'),
-    no_awal: $(this).parents("tr").find('td.no_awal').text(),
-    no_akhir: $(this).parents("tr").find('td.no_akhir').text(),
-    nama_user_send: $(this).parents("tr").find('td.nama_user_send').text(),
-    is_migrasi: this.getAttribute('migrasi'),
-    user_id_received: this.getAttribute('user_id_received'),
-    kode_kantor_received: this.getAttribute('kode_kantor_received'),
-    appoved: this.getAttribute('appoved')
+    id : this.getAttribute('data-id'),
+    no_awal :  $(this).parents("tr").find('td.no_awal').text(),
+    no_akhir :  $(this).parents("tr").find('td.no_akhir').text(),
+    nama_user_send : $(this).parents("tr").find('td.nama_user_send').text(),
+    is_migrasi :  this.getAttribute('migrasi'),
+    user_id_received :this.getAttribute('user_id_received'),
+    kode_kantor_received : this.getAttribute('kode_kantor_received'),
+    appoved : this.getAttribute('appoved')
   }
   insertReceived(data)
+  // console.log(data)
+
 });
 
-function insertReceived(data) {
-  console.log(data)
+function insertReceived(data){
   $.ajax({
     url: base_url + "BSSController/insertReceivedApproved",
     type: "POST",
@@ -240,6 +254,7 @@ function insertReceived(data) {
       $('#loading').show();
     },
     success: function (respon) {
+      toastr["success"](respon.message)
       window.location = base_url + 'bss';
       $('#loading').hide();
     }

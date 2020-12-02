@@ -9,13 +9,10 @@ class BSSModel extends CI_Model{
     }
 
 	public function getDataBSS(){
+		// $kode_cabang = $this->kode_cabang;
 		$this->db = $this->load->database('DB_DPM_ONLINE', true);
 		$str ="SELECT * FROM view_header_bss 
-				ORDER BY kode_kantor, kartu_number ASC LIMIT 20 OFFSET 0 ";
-
-		$str ="SELECT * FROM `view_header_bss` 
-		WHERE (kode_kantor='32' OR kode_kantor='00')
-		ORDER BY kode_kantor, kartu_number ASC LIMIT 20 OFFSET 0 ";
+				ORDER BY kode_kantor, kartu_number ASC LIMIT 10 OFFSET 0 ";
 
 		$query = $this->db->query($str);
 		return $query->result_array();
@@ -52,7 +49,7 @@ class BSSModel extends CI_Model{
 			  and
 			  IF('$search'<> '', (kartu_number LIKE '%$search%' OR nama_kolektor LIKE '%$search%'), 1)
 			
-			  ORDER BY kode_kantor, kartu_number DESC ";
+			  ORDER BY kode_kantor, kartu_number DESC LIMIT 20 OFFSET 0 ";
 			
 			$query = $this->db->query($str1);
 			return $query->result_array();
@@ -127,46 +124,106 @@ class BSSModel extends CI_Model{
 		return $query->result_array();
 	}
 
+	public function queryGetKolektor(){
+		$this->db = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT * FROM(
+			(SELECT NULL AS kolektor_id, 'KOSONGKAN KOLEKTOR' AS nama)
+			UNION ALL
+			(SELECT kode_group3 AS kolektor_id, deskripsi_group3 AS nama FROM kre_kode_group3
+			WHERE flg_aktif='1' AND kode_group3 NOT IN ('32','11')
+			ORDER BY deskripsi_group3)) xx";
+		$query = $this->db->query($str);
+		return $query->result_array();
+	}
+
 	public function queryInsertReceivedApprov(){
 		$id  		= $this->id;
 		$userId		= $this->userId;
 		$appoved	= $this->appoved;
-		$user_id_received  = isset( $this->user_id_received) ?  $this->user_id_received : '';
-		$kode_kantor_received = isset($this->kode_kantor_received) ? $this->kode_kantor_received : '';
-		$nama_user_send 	= isset($this->nama_user_send) ? $this->nama_user_send : '';
-		$keterangan = isset($this->keterangan) ? $this->keterangan : '';
-		$is_migrasi = isset($this->is_migrasi) ? $this->is_migrasi : '';
+		$user_id_received  = $this->user_id_received;
+		$kode_kantor_received = $this->kode_kantor_received;
+		$nama_user_send 	= $this->nama_user_send;
+		$keterangan = $this->keterangan;
+		$is_migrasi = $this->is_migrasi ;
 		$kode_cabang = $this->kode_cabang;
 		$divisi = $this->divisi_id;
 		$kartu_number_awal = $this->kartu_number_awal;
 		$kartu_number_akhir = $this->kartu_number_akhir;
+		$queryRangeKartu = "kartu_number BETWEEN $kartu_number_awal AND $kartu_number_akhir";
 		$this->db = $this->load->database('DB_DPM_ONLINE', true);
 
-	
-		if($appoved == 'Approved'){
-			$this->db->query("SELECT IFNULL(MAX(bundle_id),0) + 1 INTO @bundle_id FROM bss");
+		
+		if(($user_id_received) != 'null'){
+			if($appoved == 'Approved'){
 
-			for ($kartu_number_awal;$kartu_number_awal <= $kartu_number_akhir; $kartu_number_awal++){
-				$result = "INSERT INTO bss(kartu_number, bundle_id, user_id, kode_kantor, status_kartu)
-							 VALUES($kartu_number_awal, @bundle_id, $userId	, '$kode_kantor_received','0')";
-				$this->db->query($result);
-			 
+				$str ="UPDATE bss SET status_kartu='2', user_id=$user_id_received, last_update=NOW()
+									WHERE status_kartu='8'
+				   					AND (kartu_number BETWEEN $kartu_number_awal AND $kartu_number_akhir)
+									AND kode_kantor=(SELECT kd_cabang FROM user WHERE user_id=$userId)";
+				if ($this->db->query($str)){
+					// update 1 bundle jadi open
+					$this->db->query("SELECT IFNULL(@bundle_id,-1) into @bundle_id FROM bss WHERE kartu_number=$kartu_number_awal");
+					$this->db->query("UPDATE bss SET status_kartu='2', last_update=NOW()
+										WHERE (bundle_id IS NOT NULL)
+										AND bundle_id=@bundle_id
+										AND kode_kantor=(SELECT kd_cabang FROM user WHERE user_id=$user_id_received)");
+				}else{
+					$pesan = $this->db->error();
+				}
+			}
+			else{// Admin reject BSS dari K.ops
+				$str="UPDATE bss SET status_kartu='0', user_id=$user_id_received, last_update=NOW()
+									WHERE status_kartu='8'
+				   					AND (kartu_number BETWEEN $kartu_number_awal AND $kartu_number_akhir)
+									AND kode_kantor=(SELECT kd_cabang FROM user WHERE user_id=$userId)";
+				
+					// update 1 bundle jadi new
+				if ($this->db->query($str)){
+					$this->db->query("SELECT IFNULL(@bundle_id,-1) into @bundle_id FROM bss WHERE kartu_number=$kartu_number_awal");
+					$this->db->query("UPDATE bss SET status_kartu='0', last_update=NOW()
+										WHERE (bundle_id IS NOT NULL)
+										AND bundle_id=@bundle_id
+										AND kode_kantor=(SELECT kd_cabang FROM user WHERE user_id=$user_id_received)");
+				}else{
+					$pesan = $this->db->error();
+				}
+				
+			}
+		}else{
+		
+			if($appoved == 'Approved'){
+					if($is_migrasi == '1'){ // migrasi antar kantor
+						$this->db->query("UPDATE bss SET status_kartu='2', kode_kantor='$kode_kantor_received', user_id='$userId', 
+											last_update=NOW() WHERE ($queryRangeKartu) AND status_kartu='1'");
+					}else{
+					
+						$this->db->query("SELECT IFNULL(MAX(bundle_id),0) + 1 INTO @bundle_id FROM bss");
+						for ($kartu_number_awal;$kartu_number_awal <= $kartu_number_akhir; $kartu_number_awal++){
+							$result = "INSERT INTO bss(kartu_number, bundle_id, user_id, kode_kantor, status_kartu)
+										VALUES($kartu_number_awal, @bundle_id, $userId	, '$kode_kantor_received','0')";
+							$this->db->query($result);
+						}
+					}
+				
+			}else{ // reject
+				if($is_migrasi == '1'){ // jika rejek, maka balikin status kartu pusat in transit jadi NEW
+					
+					$this->db->query("SELECT nama FROM user WHERE user_id='$userId' INTO @nama_user_send");
+					$this->db->query("UPDATE bss SET status_kartu='0', last_update=NOW()
+										WHERE (kartu_number BETWEEN $kartu_number_awal AND $kartu_number_akhir) AND status_kartu='1'");
+				}
 			}
 			
-		}else{ // reject
-			if($is_migrasi == '1'){ // jika rejek, maka balikin status kartu pusat in transit jadi NEW
-				$this->db->query("SELECT nama FROM user WHERE user_id='$userId' INTO @nama_user_send");
-				$this->db->query("UPDATE bss SET status_kartu='0', last_update=NOW()
-									 WHERE (kartu_number BETWEEN $kartu_number_awal AND $kartu_number_akhir) AND status_kartu='1'");
-			}
 		}
+		
 
 		// update bss_notif
-		return $this->db->query("UPDATE bss_notif SET
+		$str_notif = "UPDATE bss_notif SET
 					tgl_approved=NOW(),
 					status='".($appoved == 'Approved' ? '1' :'2')."',
 					keterangan=".($appoved == 'Approved' ?  'NULL' : "'$keterangan'")."	
-					WHERE id=$id ");
+					WHERE id=$id ";
+		return $this->db->query($str_notif);
 			
 		return $message  = "Update status data success";	
 	}
@@ -256,5 +313,129 @@ class BSSModel extends CI_Model{
 		}
 
 		return $pesan;
+	}
+
+	public function queryAssigntoKolektor(){
+		$userId = $this->userId;
+		$kolektor_id = isset($this->kolektor_id) ? $this->kolektor_id : 'xx';
+		$user_id_request = $this->user_id_request;
+		$kartu_number = $this->kartu_number;
+
+		$this->db = $this->load->database('DB_DPM_ONLINE', true);
+		if(!is_numeric($kolektor_id)){
+			$pesan = "Maaf Nama Kolektor ' $kolektor_id ' Tidak Ada dalam System.";
+		}else{
+			$str   = "SELECT IF(kolektor_id='$kolektor_id','Y','N') AS is_ada
+						FROM bss_log
+						WHERE DATE(tgl_buat) = CURDATE() AND  kartu_number=SUBSTRING('$kartu_number',4) AND  status_kartu='4'";
+			$query = $this->db->query($str);
+			if($query->result_array() == NULL){
+				$str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
+								  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
+				$this->db->query($str2);
+				$pesan = "Send Nomor BSS TO Kolektor Success";
+			}else {
+				$pesan = "Maaf Anda Tidak diperkenankan menyerahkan kembali No. BSS yang sama di hari yang sama untuk satu kolektor yang sama. Silahkan ganti dengan NO. BSS yang berbeda.";
+			}
+
+			return $pesan;
+		}
+	}
+
+	public function queryUpdateAssign(){
+		$userId = $this->userId;
+		$kartu_number = $this->kartu_number;
+		$status_kartu = $this->status_assign;
+		$keterangan = trim( isset($this->keterangan) ? $this->keterangan : '' );
+
+		$this->db = $this->load->database('DB_DPM_ONLINE', true);
+		if( in_array($status_kartu, array('6','7')) && ( strlen($keterangan) < 10 || count(explode(' ',$keterangan)) < 1) ) {
+			$pesan  = array(
+				"msg"=> "Maaf Anda Harus Memasukkan Keterangan atau Alasannya jangan terlalu pendek",
+				"success" => false
+			);
+		}else{
+				if($status_kartu =='4') {// jika statusnya return, maka balikin ke open : update 2x buat log di trigger
+					$str = "UPDATE bss SET status_kartu=2, nominal=NULL, kolektor_id=NULL, last_update=NOW() 
+							WHERE kartu_number=SUBSTRING('$kartu_number',4)";
+				}else{
+					$str = "UPDATE bss SET status_kartu='$status_kartu', nominal=NULL, last_update=NOW()
+							WHERE kartu_number=SUBSTRING('$kartu_number',4)";
+				}
+				
+				$this->db->query($str);
+				$pesan  = array(
+					"msg"=> "Update Assign Success",
+					"success" => true
+				);
+		}
+	   return $pesan;
+	}
+
+	public function queryMigrasi(){
+		$userId 			= $this->userId;
+		$kode_kantor 		= $this->kode_kantor;
+		$kartu_number_awal 	= $this->kartu_number_awal;
+		$kartu_number_akhir = $this->kartu_number_akhir;
+		$kode_kantor_received	= $this->kode_kantor_received;
+		$validKartu			= "status_kartu in ('0','2') AND user_id=$userId";
+		$selisih = ($kartu_number_akhir - $kartu_number_awal)+1;
+		$queryRangeKartu = "kartu_number BETWEEN $kartu_number_awal AND $kartu_number_akhir";
+		
+		$this->db = $this->load->database('DB_DPM_ONLINE', true);
+		if( $selisih == 0 ) {
+			$pesan  = array(
+				"msg"=> "Maaf Migrasi $selisih BSS harus benar-benar masih utuh atau minimal 50 Lembar",
+				"success" => false
+			);
+		}else{
+			$str = "SELECT GROUP_CONCAT(pesan SEPARATOR '<br/>') AS pesannya FROM (
+						SELECT IF(COUNT(0)> 0,NULL,'Jumlah BSS harus berjumlah 50 lembar atau masih utuh<br>') AS pesan FROM bss
+							WHERE ( $queryRangeKartu ) AND $validKartu
+						UNION
+					SELECT IF(COUNT(0) > 0,NULL,'No.BSS Awal statusnya bukan NEW atau PICnya bukan Anda<br>') AS pesan FROM bss
+							WHERE kartu_number = $kartu_number_awal AND $validKartu
+						UNION
+					SELECT IF(COUNT(0) > 0,NULL,'No.BSS Akhir statusnya bukan NEW atau PICnya bukan Anda') AS pesan FROM bss
+							WHERE kartu_number = $kartu_number_akhir AND $validKartu
+					)xx";
+			$query = $this->db->query($str);
+			$row = $query->result_array();
+			if($row[0]['pesannya']  <> null){
+				$pesan  = array(
+					"msg"=> "Ada kesalahan No.BSS yang Anda masukkan".$row[0]['pesannya'],
+					"success" => false
+				);
+			}else{
+				$this->db->query("INSERT INTO bss_notif(kartu_number_awal, kartu_number_akhir, is_migrasi, kode_kantor_received,user_id, keterangan)
+						VALUES($kartu_number_awal,$kartu_number_akhir, '1','$kode_kantor_received', $userId, 'Migrasi BSS')");
+				$this->db->query("SELECT nama_area_kerja INTO @nama_area_kerja FROM view_spedo_combo_kantor 
+									WHERE kode_kantor=$kode_kantor_received");
+				$this->db->query("SET @user_id=$userId");
+				$this->db->query("UPDATE bss SET status_kartu='1', last_update=NOW() WHERE ($queryRangeKartu) AND $validKartu");
+
+				$pesan  = array(
+					"msg"=> "Migrasi success",
+					"success" => true
+				);
+			}
+
+			if($kode_kantor_received == $kode_kantor){
+				$pesan  = array(
+					"msg"=> "Maaf Migrasi hanya bisa dilakukan beda kantor",
+					"success" => false
+				);
+			}
+			
+		}
+		return $pesan;
+	}
+
+	public function queryLogBSS(){
+		$kartu_number = $this->kartu_number ;
+		$this->db = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT * FROM view_bss_log WHERE kartu_number=SUBSTRING('$kartu_number',4)LIMIT 5";
+		$query = $this->db->query($str);
+		return $query->result_array();
 	}
 }

@@ -78,6 +78,16 @@ class BSSController extends CI_Controller {
 		}
 	}
 
+	public function getKolektor(){
+		$session = $this->session->userdata('nama');
+		if($session != ''){
+			$kolektor = $this->BSSModel->queryGetKolektor();
+			echo json_encode($kolektor);
+		}else{
+			redirect('LoginController/index'); 
+		}
+	}
+
 	public function getSearch(){
 		$data = null;
 		$model = new BSSModel(); // nama class model
@@ -178,7 +188,6 @@ class BSSController extends CI_Controller {
 	}
 
 	public function send_bss_to_pic(){
-		$data = null;
 		$model = new BSSModel(); // nama class model
 		$model->kartu_number_awal	= $this->input->post('kartu_number_awal');
 		$model->kartu_number_akhir	= $this->input->post('kartu_number_akhir');
@@ -189,6 +198,71 @@ class BSSController extends CI_Controller {
 			"success" => true,
 			"message" => $insertdata,
 			"data" => null
+		]);
+	}
+
+	public function update_assign_kolektor(){
+		$model = new BSSModel(); // nama class model
+		$model->userId = $this->session->userdata('userIdLogin'); 
+		$model->user_id_request = $this->input->post('user_id_request');
+		$model->kartu_number =$this->input->post('kartu_number');
+		$model->kolektor_id = $this->input->post('kolektor_id');
+		$send_to_kolektor = $model->queryAssigntoKolektor();
+		echo json_encode([
+			"success" => true,
+			"message" => $send_to_kolektor,
+			"data" => null
+		]);
+	}
+
+	public function update_from_assign(){
+		$model = new BSSModel(); // nama class model
+		$model->userId = $this->session->userdata('userIdLogin'); 
+		$model->kartu_number =$this->input->post('kartu_number');
+		$model->status_assign = $this->input->post('status_assign');
+		$model->keterangan = $this->input->post('keterangan');
+		$send_to_assign = $model->queryUpdateAssign();
+		echo json_encode([
+			"success" => $send_to_assign['success'],
+			"message" => $send_to_assign['msg'],
+			"data" => null
+		]);
+	}
+
+	public function migrasi(){
+		$model = new BSSModel(); // nama class model
+		$model->userId = $this->session->userdata('userIdLogin'); 
+		$model->kode_kantor = $this->session->userdata('kd_cabang');
+		$model->kartu_number_awal = $this->input->post('kartu_number_awal'); 
+		$model->kartu_number_akhir = $this->input->post('kartu_number_akhir'); 
+		$model->kode_kantor_received = $this->input->post('kode_kantor_received'); 
+		$send_migrasi = $model->queryMigrasi();
+		echo json_encode([
+			"success" => $send_migrasi['success'],
+			"message" => $send_migrasi['msg'],
+			"data" => null
+		]);
+	}
+
+	public function getLogBSS(){
+		$data = null;
+		$model = new BSSModel(); // nama class model
+		$model->kartu_number	= $this->input->post('kartu_number');
+		$loglist = $model->queryLogBSS();
+		if( count($loglist) > 0){
+			$data = $loglist;
+			$success = true;
+			$message = '';
+		}else {
+			$data = null ;
+			$message = "Data is not found";
+			$success = false;
+		};
+
+		echo json_encode([
+			"success" => $success,
+			"message" => $message,
+			"data" => $data
 		]);
 	}
 

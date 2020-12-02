@@ -1,11 +1,45 @@
 let base_url = $('#base_url').val();
-$(document).ready(function () {
-  $('#employeeTable1').DataTable({
+ $(document).ready(function () {
+  var table = $('#employeeTable1').DataTable({
     "scrollX": true,
     "autoWidth": false,
     "aaSorting": [],
     "searching": false,
+    "searchable": false 
   });
+
+  $('#employeeTable1 tbody').on('click', 'td.details-click', function () {
+    var tr = $(this).closest("tr");
+    var row =   table.row( tr );
+    if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass( 'shown' );
+    }
+    else {
+        // Open this row
+        detail_log(row.child, $(this).parents("tr").find('td.kartu_number').text()) ;
+        tr.addClass( 'shown' );
+    }
+  });
+  
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
 });
 
 $('#status').change(function () {
@@ -57,16 +91,33 @@ function serchBSS(status, kode_area, searching) {
         let obj = respon.data;
         let row = "";
         for (let i = 0; i < respon.data.length; i++) {
-          // let status = '';
-          // if(obj[i]['status']='USED'){
-          //   status = `<span style="color:#00AE39;font-weight: bold;">${obj[i]['status']}</span>`;
-          // }else if(obj[i]['status']='USED'){
-          //   status = '<span style="color:#00AE39;font-weight: bold;">'.$row['status'].'</span>';
-          // }
-          row += ` <tr>
-                            <td>${i+1}</td>
-                            <td>${obj[i]['kartu_number']}</td>
-                            <td>${obj[i]['status']}</td>
+          let status_color  = '';
+          let form_update = '';
+          if(obj[i]['status']=='NEW'){
+            status_color = `color:#fde048`;
+          }else if(obj[i]['status']=='IN TRANSIT'){
+            status_color = `color:#63f908`;
+          }else if(obj[i]['status']=='OPEN'){
+            status_color = `color:#08bef7`;
+            form_update = `class="kolektorClick" style ="cursor:pointer;"`
+          }else if(obj[i]['status']=='ASSIGN'){
+            status_color = `color:#2bf963`;
+            form_update = `class="update_assignClick" style ="cursor:pointer;"`
+          }else if(obj[i]['status']=='RETURN'){
+            status_color = `color:#FF6412`;
+          }else if(obj[i]['status']=='USED'){
+            status_color = `color:#00AE39`;
+          }else if(obj[i]['status']=='LOST'){
+            status_color = `color:#fb7364`;
+          }else if(obj[i]['status']=='BROKEN'){
+            status_color = `color:#f91c03`;
+          }else if(obj[i]['status']=='EXCHANGE PIC'){
+            status_color = `color:#fab504`;
+          }
+          row += ` <tr  ${form_update} user_id_request = "${obj[i]['user_id']}">
+                            <td class='details-control'>${i+1}</td>
+                            <td class="kartu_number">${obj[i]['kartu_number']}</td>
+                            <td><span style="${status_color};font-weight: bold;">${obj[i]['status']}</span></td>
                             <td>${obj[i]['nama_kantor']}</td>
                             <td>${((obj[i]['nama_kolektor']== null)?'' :obj[i]['nama_kolektor'])}</td>
                             <td>${((obj[i]['no_rekening']== null)?'':obj[i]['no_rekening'])}</td>
@@ -79,23 +130,85 @@ function serchBSS(status, kode_area, searching) {
         }
         $('#employeeTable1 tbody').html(row);
         $('#loading').hide();
-        $(document).ready(function () {
-          $('#employeeTable1').DataTable({
-            "destroy": true,
-            "scrollX": true,
-            "autoWidth": false,
-            "aaSorting": []
-          });
+        var table =$('#employeeTable1').DataTable({
+          "destroy": true,
+          "scrollX": true,
+          "autoWidth": false,
+          "aaSorting": [],
+          "searching": false,
+          "searchable": false 
         });
+        $('#employeeTable1 tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest("tr");
+            var row =   table.row( tr );
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass( 'shown' );
+            }
+            else {
+                // Open this row
+                detail_log(row.child, $(this).parents("tr").find('td.kartu_number').text()) ;
+                tr.addClass( 'shown' );
+            }
+        } );
       } else {
-        alert(respon.message);
+        toastr["info"](respon.message)
         window.location = base_url + 'bss';
         $('#loading').hide();
       }
     }
   })
 }
-
+function detail_log( callback, d ) {
+          let data = {
+            kartu_number : d
+          }
+          $.ajax({
+            type: "POST",
+            url: base_url + "BSSController/getLogBSS",
+            dataType: "json",
+            data: data,
+            beforeSend: function () {
+              $('#loading').show();
+            },
+            success: function (respon) {
+              if(respon.success == true){
+                $('#loading').hide();
+                  let row = '';
+                  for(let i = 0; i < respon.data.length; i++){
+                    row += `<tr  class="table-light">
+                            <td>${respon.data[i]['inisial']+respon.data[i]['kartu_number']}</td>
+                            <td>${respon.data[i]['tgl_buat']}</td>
+                            <td>${respon.data[i]['status']}</td>
+                            <td>${((respon.data[i]['nama']== null)?'' :respon.data[i]['nama'])}</td>
+                            <td>${respon.data[i]['keterangan']}</td>
+                            </tr>
+                            `;
+                  }
+                  callback($(`
+                  <table class="table table-sm " style="width:80% text-align:center">
+                  <div style="color: darkblue; font-weight: 600;"><i class="fas fa-history"></i> Log BSS </div>
+                  <thead class="table table-striped table-bordered table-dark">
+                  <tr>
+                  <th>Nomer</th>
+                  <th>Tanggal</th>
+                  <th>Status</th>
+                  <th>User</th>
+                  <th>Keterangan</th>
+                  </tr>
+                  </thead>
+                  <tbody  class="tbody-light  table-hover  table-bordered">${row}<tbody>
+                </table>`)).show();
+              }else{
+                toastr["error"](respon.message)
+                $('#loading').hide();
+              }
+              
+            }
+          })
+        
+}
 
 
 $('#btn_send_migrasi').click(function () {
@@ -104,7 +217,7 @@ $('#btn_send_migrasi').click(function () {
 
 
 // Send BSS dari GA
-function send_bss() {
+$('#send_bss_ga_to_area').click(function(){
   let kartu_number_awal = $("#kartu_number_awal").val();
   let kartu_number_akhir = $("#kartu_number_akhir").val();
   let area_kerja = $("#area_kerja").val();
@@ -115,8 +228,9 @@ function send_bss() {
   } else {
     send_bss_db(kartu_number_awal, kartu_number_akhir, area_kerja)
   }
-}
+})
 
+// SEND BSS GA TO AREA QUERY
 function send_bss_db(kartu_number_awal, kartu_number_akhir, area_kerja) {
   let data = {
     kartu_number_awal: kartu_number_awal,
@@ -136,6 +250,7 @@ function send_bss_db(kartu_number_awal, kartu_number_akhir, area_kerja) {
       $('#loading').show();
     },
     success: function (respon) {
+      toastr["success"](respon.message)
       setTimeout(function () {
         $('#form_send_bss').modal('hide');
       }, 1000);
@@ -143,4 +258,88 @@ function send_bss_db(kartu_number_awal, kartu_number_akhir, area_kerja) {
       $('#loading').hide();
     }
   });
+}
+
+// get Kartu BSS  input text autocomplate 
+function getKartuBSS() {
+  $.ajax({
+    url: base_url + "BSSController/getKartuBSS",
+    type: "GET",
+    dataType: "json",
+    success: function (x) {
+      let dataAutoComplete = x.map(x => {
+        return {
+          id: x.kartu_number,
+          text: x.kartu_number
+        }
+      })
+
+      // Form Migrasi
+      $("#noawal").on("keyup", function () {
+        if ($(this).val()) {
+          $('#noawal').autocompleteCustom({
+            data: dataAutoComplete, //theData is your JSON
+            limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function (val) {
+              document.getElementById('noawal').setAttribute('data-id', val)
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+          });
+        }
+        if (!$(this).val()) {
+          $('#noawal').removeAttr('data-id');
+        }
+      })
+
+      $("#noakhir").on("keyup", function () {
+        if ($(this).val()) {
+          $('#noakhir').autocompleteCustom({
+            data: dataAutoComplete, //theData is your JSON
+            limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function (val) {
+              document.getElementById('noakhir').setAttribute('data-id', val)
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+          });
+        }
+        if (!$(this).val()) {
+          $('#noakhir').removeAttr('data-id');
+        }
+      })
+
+      // Form Send To PIC
+      $("#no_kartu_awal").on("keyup", function () {
+        if ($(this).val()) {
+          $('#no_kartu_awal').autocompleteCustom({
+            data: dataAutoComplete, //theData is your JSON
+            limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function (val) {
+              document.getElementById('no_kartu_awal').setAttribute('data-id', val)
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+          });
+        }
+        if (!$(this).val()) {
+          $('#no_kartu_awal').removeAttr('data-id');
+        }
+      })
+
+      $("#no_kartu_akhir").on("keyup", function () {
+        if ($(this).val()) {
+          $('#no_kartu_akhir').autocompleteCustom({
+            data: dataAutoComplete, //theData is your JSON
+            limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function (val) {
+              document.getElementById('no_kartu_akhir').setAttribute('data-id', val)
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+          });
+        }
+        if (!$(this).val()) {
+          $('#no_kartu_akhir').removeAttr('data-id');
+        }
+      })
+
+    }
+  })
 }

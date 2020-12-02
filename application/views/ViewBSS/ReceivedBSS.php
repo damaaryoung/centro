@@ -10,7 +10,6 @@
         </button>
       </div>
       <div class="modal-body">
-
     <!-- Data Tables -->
     <div class="card">
       <div class="form-inline" style="padding : 10px; float: right">
@@ -54,7 +53,6 @@
     </div>
   </div>
 </div>
-
 <div class="modal fade" id="formApproval" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -80,8 +78,8 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" id="send_approval_reject" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
       </form>
     </div>

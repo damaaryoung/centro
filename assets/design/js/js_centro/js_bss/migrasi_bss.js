@@ -6,6 +6,7 @@ $(document).ready(function () {
   //   "searching": false,
   // });
   getAreaKerja()
+  getKartuBSS()
 });
 
 function getAreaKerja() {
@@ -22,3 +23,32 @@ function getAreaKerja() {
     }
   })
 }
+
+$('#migrasi_bss').click(function () {
+  let data ={
+    kartu_number_awal : $('#noawal').val(),
+    kartu_number_akhir : $('#noakhir').val(),
+    kode_kantor_received : $('#AreaKantor').val()
+  }
+  $.ajax({
+    url: base_url + "BSSController/migrasi",
+    type: "POST",
+    dataType: "json",
+    data: data,
+    beforeSend: function () {
+      $('#loading').show();
+    },
+    success: function (respon) {
+      if(respon.success == true){
+        $('#form-migrasi')[0].reset()
+        toastr["success"](respon.message)
+        window.location = base_url + 'bss';
+        $('#loading').hide();
+     }else{
+        toastr["error"](respon.message)
+        $('#loading').hide();
+     }
+      
+    }
+  })
+})
