@@ -6,6 +6,19 @@ var base_url = $('#base_url').val();
 
 $(document).ready(function () {     
    
+   getData();
+
+    
+});
+
+$('#main_search').keypress(function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+        searchData();
+    }
+}); 
+
+function getData(){
     dataTableeee = [];
     $('#loading').show(); 
 
@@ -38,17 +51,7 @@ $(document).ready(function () {
                 $('#loading').hide();
             }
     });    
-
-    
-});
-
-$('#main_search').keypress(function(event) {
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if (keycode == '13') {
-        searchData();
-    }
-}); 
-
+}
 
 function searchData(){
     
@@ -106,4 +109,6 @@ function searchData(){
             }
     });    
 }
+
+
 </script>
