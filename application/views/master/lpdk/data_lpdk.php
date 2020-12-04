@@ -79,6 +79,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </section>
             <section style="min-height: 700px;">
+                <div class="card card-info">
+                    <div class="card-header with-border">
+                    <h3 class="card-title"></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body text-center">  
+                        <div class="row">
+                            <div class="col-md-12 mx-auto">
+                                    <div class="form-group row">
+                                    
+                                        <div class="col-sm-2">
+                                            <label style="padding-top: 5px;" class="control-label" for="main_kode_kantor" style="text-align: left;">Kode Kantor</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select class="form-control form-control-sm select2" id="main_kode_kantor" name="main_kode_kantor" onchange='load_filter_data_lpdk()'>
+                                            <?php foreach ($selectKodeKantor as $row) : ?>
+                                                <option value="<?php echo $row['id'];?>"><?php echo $row['id'];?> - <?php echo $row['nama'];?> </option>
+                                            <?php endforeach;?>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        
+                    </div>            
+            </div>
+            <!-- /.card -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -151,6 +179,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div class="card card-info">
+                                <div class="card-header with-border">
+                                <h3 class="card-title"></h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body text-center">  
+                                    <div class="row">
+                                        <div class="col-md-12 mx-auto">
+                                                <div class="form-group row">
+                                                
+                                                    <div class="col-sm-2">
+                                                        <label style="padding-top: 5px;" class="control-label" for="main_kode_kantor_tambah" style="text-align: left;">Kode Kantor</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control form-control-sm select2" id="main_kode_kantor_tambah" name="main_kode_kantor_tambah" onchange='load_pengajuan_filter_data_lpdk()'>
+                                                        <?php foreach ($selectKodeKantor as $row) : ?>
+                                                            <option value="<?php echo $row['id'];?>"><?php echo $row['id'];?> - <?php echo $row['nama'];?> </option>
+                                                        <?php endforeach;?>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>            
+                        </div>
+                        <!-- /.card -->                        
                         <div class="card">
                             <div class="card-body">
                                 <div class="box-body table-responsive no-padding">
@@ -1173,6 +1229,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 },
             });
         }
+        get_filter_pengajuan = function(opts, id) {
+            var main_kode_kantor_tambah = $('#main_kode_kantor_tambah').val();
+            var url = '<?php echo config_item('api_url') ?>api/master/lpdk/statusQueueReturn/centro?cabang=' + main_kode_kantor_tambah;
+            if (opts != undefined) {
+                var data = opts;
+            }
+
+            return $.ajax({
+                url: url,
+                data: data,
+                dataSrc: "",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                beforeSend: function() {
+                    // let html =
+                    //             "<div width='100%' class='text-center'>"+
+                    //                 "<i class='fa fa-spinner fa-spin fa-4x text-danger'></i><br><br>"+
+                    //                 "<a id='batal' href='javascript:void(0)' class='text-primary batal' data-dismiss='modal'>Batal</a>"+
+
+                    //             "</div>";
+                    // $('#data_pengajuan').html(html);
+                    // $('#modal_load_data').modal('show');
+                },
+            });
+        }
         get_detail_pengajuan = function(opts, id) {
             var url = '<?php echo config_item('api_url') ?>api/master/lpdk/' + id;
             var data = opts;
@@ -1191,6 +1273,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
         //GET DATA LPDK
         get_lpdk = function(opts, id) {
             var url = '<?php echo config_item('api_url') ?>api/master/lpdk/statuskre';
+            if (opts != undefined) {
+                var data = opts;
+            }
+
+            return $.ajax({
+                url: url,
+                data: data,
+                dataSrc: "",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            });
+        }
+        /// filter lpdk
+        get_filter_lpdk = function(opts, id) {
+            var main_kode_kantor = $('#main_kode_kantor').val();
+            var url = '<?php echo config_item('api_url') ?>api/master/lpdk/statuskre/centro?cabang=' + main_kode_kantor;
             if (opts != undefined) {
                 var data = opts;
             }
@@ -1751,6 +1850,412 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 });
         }
         load_data_lpdk();
+        load_filter_data_lpdk = function() {
+            $('#data_lpdk').html('');
+            $('#table_lpdk').DataTable().clear();
+            $('#table_lpdk').DataTable().destroy();
+            get_filter_lpdk()
+                .done(function(response) {
+                    var data = response.data;
+                    var data_detail = response;
+                    var html = [];
+                    var no = 0;
+                    if (data.length === 0) {
+                        var tr = [
+                            '<tr valign="midle">',
+                            '<td colspan="4">No Data</td>',
+                            '</tr>'
+                        ].join('\n');
+                        $('#data_lpdk').html(tr);
+                        return;
+                    }
+
+                    function format(data) {
+                        console.log(data)
+                        var lamp_jaminan = "";
+                        var x = "";
+                        var imb = "";
+                        var pbb = "";
+                        var ahli_waris = "";
+                        var ajb_ppjb = "";
+                        var akta_hibah = "";
+                        var b = "";
+                        $.each(data.sertifikat, function(index, item) {
+                            var lampiran_sertifikat1 = item.lampiran_sertifikat;
+                            if (lampiran_sertifikat1 == '') {
+                                // var lamp_sertifikat = "hidden";
+                                var lampiran_sertifikat = "";
+                            } else
+                            if (lampiran_sertifikat1 == null) {
+                                // var lamp_ktp_deb = "hidden";
+                                var lampiran_sertifikat = "";
+                            } else {
+                                // var lamp_ktp_deb = "";
+                                var lampiran_sertifikat = lampiran_sertifikat1.substr(57);
+                            }
+
+                            var imb_sertifikat = item.lampiran_imb;
+                            if (imb_sertifikat == '') {
+                                // var lamp_sertifikat = "hidden";
+                                var lampiran_imb_sertifikat = "";
+                            } else
+                            if (imb_sertifikat == null) {
+                                // var lamp_ktp_deb = "hidden";
+                                var lampiran_imb_sertifikat = "";
+                            } else {
+                                // var lamp_ktp_deb = "";
+                                var lampiran_imb_sertifikat = imb_sertifikat.substr(57);
+                            }
+
+                            var pbb_sertifikat = item.lampiran_pbb;
+                            if (pbb_sertifikat == '') {
+                                // var lamp_sertifikat = "hidden";
+                                var lampiran_pbb_sertifikat = "";
+                            } else
+                            if (pbb_sertifikat == null) {
+                                // var lamp_ktp_deb = "hidden";
+                                var lampiran_pbb_sertifikat = "";
+                            } else {
+                                // var lamp_ktp_deb = "";
+                                var lampiran_pbb_sertifikat = pbb_sertifikat.substr(57);
+                            }
+
+                            var ahli_waris_sertifikat = item.ahli_waris;
+                            if (ahli_waris_sertifikat == '') {
+                                // var lamp_sertifikat = "hidden";
+                                var lampiran_ahli_waris_sertifikat = "";
+                            } else
+                            if (ahli_waris_sertifikat == null) {
+                                // var lamp_ktp_deb = "hidden";
+                                var lampiran_ahli_waris_sertifikat = "";
+                            } else {
+                                // var lamp_ktp_deb = "";
+                                var lampiran_ahli_waris_sertifikat = ahli_waris_sertifikat.substr(57);
+                            }
+
+                            var ajb_sertifikat = item.ajb_ppjb;
+                            if (ajb_sertifikat == '') {
+                                // var lamp_sertifikat = "hidden";
+                                var lampiran_ajb_sertifikat = "";
+                            } else
+                            if (ajb_sertifikat == null) {
+                                // var lamp_ktp_deb = "hidden";
+                                var lampiran_ajb_sertifikat = "";
+                            } else {
+                                // var lamp_ktp_deb = "";
+                                var lampiran_ajb_sertifikat = ajb_sertifikat.substr(57);
+                            }
+
+                            var akta_hibah_sertifikat = item.akta_hibah;
+                            if (akta_hibah_sertifikat == '') {
+                                // var lamp_sertifikat = "hidden";
+                                var lampiran_akta_hibah_sertifikat = "";
+                            } else
+                            if (akta_hibah_sertifikat == null) {
+                                // var lamp_ktp_deb = "hidden";
+                                var lampiran_akta_hibah_sertifikat = "";
+                            } else {
+                                // var lamp_ktp_deb = "";
+                                var lampiran_akta_hibah_sertifikat = akta_hibah_sertifikat.substr(57);
+                            }
+                            b = '<a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.lampiran_sertifikat + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.lampiran_imb + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_imb_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.lampiran_pbb + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_pbb_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.ahli_waris + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_ahli_waris_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.ajb_ppjb + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_ajb_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.akta_hibah + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_akta_hibah_sertifikat + '</p></a>'
+                        })
+
+                        var lampiran_ktp_deb = data.lampiran_debitur.lampiran_ktp_deb;
+                        if (lampiran_ktp_deb == '') {
+                            var lamp_ktp_deb = "hidden";
+                            var lamp_ktp_debitur = "";
+                        } else
+                        if (lampiran_ktp_deb == null) {
+                            var lamp_ktp_deb = "hidden";
+                            var lamp_ktp_debitur = "";
+                        } else {
+                            var lamp_ktp_deb = "";
+                            var lamp_ktp_debitur = lampiran_ktp_deb.substr(32);
+                        }
+
+                        var lampiran_kk_deb = data.lampiran_debitur.lampiran_kk;
+                        if (lampiran_kk_deb == '') {
+                            var lamp_kk_deb = "hidden";
+                            var lamp_kk_debitur = "";
+                        } else
+                        if (lampiran_kk_deb == null) {
+                            var lamp_kk_deb = "hidden";
+                            var lamp_kk_debitur = "";
+                        } else {
+                            var lamp_kk_deb = "";
+                            var lamp_kk_debitur = lampiran_kk_deb.substr(32);
+                        }
+
+                        var lamp_ktp_pasangan1 = data.lampiran_pasangan.lampiran_ktp_pasangan;
+                        if (lamp_ktp_pasangan1 == '') {
+                            var lamp_ktp_pas = "hidden";
+                            var lampiran_ktp_pasangan = "";
+                        } else if (lamp_ktp_pasangan1 == null) {
+                            var lamp_buku_nikah_pas = "hidden";
+                            var lampiran_ktp_pasangan = "";
+                        } else {
+                            var lamp_ktp_pas = "";
+                            var lampiran_ktp_pasangan = lamp_ktp_pasangan1.substr(33);
+                        }
+                        var lamp_buku_nikah_pasangan = data.lampiran_pasangan.lampiran_surat_nikah;
+                        if (lamp_buku_nikah_pasangan == '') {
+                            var lamp_buku_nikah_pas = "hidden";
+                            var lamp_buku_nikah_pasangan = "";
+                        } else if (lamp_buku_nikah_pasangan == null) {
+                            var lamp_buku_nikah_pas = "hidden";
+                            var lamp_buku_nikah_pasangan = "";
+                        } else {
+                            var lamp_buku_nikah_pas = "";
+                            var lamp_buku_nikah_pasangan = lamp_buku_nikah_pasangan.substr(33);
+                        }
+
+                        var lampiran_surat_cerai = data.lampiran[0].lampiran_surat_cerai;
+                        if (lampiran_surat_cerai == '') {
+                            var lamp_surat_cerai = "hidden";
+                            var lampiran_surat_cerai = "";
+                        } else
+                        if (lampiran_surat_cerai == null) {
+                            var lamp_surat_cerai = "hidden";
+                            var lampiran_surat_cerai = "";
+                        } else {
+                            var lamp_surat_cerai = "";
+                            var lampiran_surat_cerai = lampiran_surat_cerai.substr(46);
+                        }
+
+                        var lampiran_npwp1 = data.lampiran[0].lampiran_npwp;
+                        if (lampiran_npwp1 == '') {
+                            var lamp_npwp = "hidden";
+                            var lampiran_npwp = "";
+                        } else
+                        if (lampiran_npwp1 == null) {
+                            var lamp_npwp = "hidden";
+                            var lampiran_npwp = "";
+                        } else {
+                            var lamp_npwp = "";
+                            var lampiran_npwp = lampiran_npwp1.substr(46);
+                        }
+
+                        var lampiran_surat_kematian1 = data.lampiran[0].lampiran_surat_kematian;
+                        if (lampiran_surat_kematian1 == '') {
+                            var lamp_surat_kematian = "hidden";
+                            var lampiran_surat_kematian = "";
+                        } else
+                        if (lampiran_surat_kematian1 == null) {
+                            var lamp_surat_kematian = "hidden";
+                            var lampiran_surat_kematian = "";
+                        } else {
+                            var lamp_surat_kematian = "";
+                            var lampiran_surat_kematian = lampiran_surat_kematian1.substr(46);
+                        }
+
+                        var lampiran_surat_lahir1 = data.lampiran[0].lampiran_surat_lahir;
+                        if (lampiran_surat_lahir1 == '') {
+                            var lamp_surat_lahir = "hidden";
+                            var lampiran_surat_lahir = "";
+                        } else
+                        if (lampiran_surat_lahir1 == null) {
+                            var lamp_surat_lahir = "hidden";
+                            var lampiran_surat_lahir = "";
+                        } else {
+                            var lamp_surat_lahir = "";
+                            var lampiran_surat_lahir = lampiran_surat_lahir1.substr(46);
+                        }
+
+                        var lampiran_surat_ket_desa1 = data.lampiran[0].lampiran_sk_desa;
+                        if (lampiran_surat_ket_desa1 == '') {
+                            var lamp_surat_ket_desa = "hidden";
+                            var lampiran_surat_ket_desa = "";
+                        } else
+                        if (lampiran_surat_ket_desa1 == null) {
+                            var lamp_surat_ket_desa = "hidden";
+                            var lampiran_surat_ket_desa = "";
+                        } else {
+                            var lamp_surat_ket_desa = "";
+                            var lampiran_surat_ket_desa = lampiran_surat_ket_desa1.substr(46);
+                        }
+
+                        var notes_counter0 = data.notes_counter[0];
+                        if (notes_counter0 == '') {
+                            var notes_counter_hide0 = "hidden";
+                        } else
+                        if (notes_counter0 == null) {
+                            var notes_counter_hide0 = "hidden";
+                        } else {
+                            var notes_counter_hide0 = "";
+                        }
+
+                        var notes_progress0 = data.notes_progress[0];
+                        if (notes_progress0 == '') {
+                            var notes_progress_hide0 = "hidden";
+                        } else
+                        if (notes_progress0 == null) {
+                            var notes_progress_hide0 = "hidden";
+                        } else {
+                            var notes_progress_hide0 = "";
+                        }
+
+                        var notes_counter1 = data.notes_counter[1];
+                        if (notes_counter1 == '') {
+                            var notes_counter_hide1 = "hidden";
+                        } else
+                        if (notes_counter1 == null) {
+                            var notes_counter_hide1 = "hidden";
+                        } else {
+                            var notes_counter_hide1 = "";
+                        }
+
+                        var notes_progress1 = data.notes_progress[1];
+                        if (notes_progress1 == '') {
+                            var notes_progress_hide1 = "hidden";
+                        } else
+                        if (notes_progress1 == null) {
+                            var notes_progress_hide1 = "hidden";
+                        } else {
+                            var notes_progress_hide1 = "";
+                        }
+
+                        var notes_counter2 = data.notes_counter[2];
+                        if (notes_counter2 == '') {
+                            var notes_counter_hide2 = "hidden";
+                        } else
+                        if (notes_counter2 == null) {
+                            var notes_counter_hide2 = "hidden";
+                        } else {
+                            var notes_counter_hide2 = "";
+                        }
+
+                        var notes_progress2 = data.notes_progress[2];
+                        if (notes_progress2 == '') {
+                            var notes_progress_hide2 = "hidden";
+                        } else
+                        if (notes_progress2 == null) {
+                            var notes_progress_hide2 = "hidden";
+                        } else {
+                            var notes_progress_hide2 = "";
+                        }
+
+                        var notes_cancel = data.notes_cancel;
+                        if (notes_cancel == '') {
+                            var notes_cancel_hide = "hidden";
+                        } else
+                        if (notes_cancel == null) {
+                            var notes_cancel_hide = "hidden";
+                        } else {
+                            var notes_cancel_hide = "";
+                        }
+
+                        return '<table cellpadding="5" class="table table-bordered table-hover table-sm" cellspacing="0" border="0" style="padding-left:50px;">' +
+                            '<tr class="table-sm" style="font-size:12px">' +
+                            '<th>Lampiran Data Nasabah</th>' +
+                            '<th>Lampiran Data Jaminan</th>' +
+                            '<th>Tanggal Revisi LPDK</th>' +
+                            '<th>LPDK Checking by</th>' +
+                            '<th>Notes/Keterangan SLA</th>' +
+                            '</tr>' +
+                            '<tr style="font-size:12px">' +
+                            '<td width="100px"><a id="lampiran_ktp_deb_detail" ' + lamp_ktp_deb + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_debitur.lampiran_ktp_deb + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lamp_ktp_debitur + '</p></a><a id="lampiran_kk_deb_detail" ' + lamp_kk_deb + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_debitur.lampiran_kk + '"><p style="font-size: 13px; font-weight: 400;">' + lamp_kk_debitur + '</p></a><a id="lampiran_ktp_pas_detail" ' + lamp_ktp_pas + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_pasangan.lampiran_ktp_pasangan + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_ktp_pasangan + '</p></a><a id="lampiran_npwp_deb_detail" ' + lamp_npwp + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_npwp + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_npwp + '</p></a><a id="lampiran_surat_nikah_deb_detail" ' + lamp_buku_nikah_pas + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_pasangan.lampiran_surat_nikah + '"><p style="font-size: 13px; font-weight: 400;">' + lamp_buku_nikah_pasangan + '</p></a><a id="lampiran_surat_cerai_deb_detail" ' + lamp_surat_cerai + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_surat_cerai + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_surat_cerai + '</p></a><a id="lampiran_surat_kematian_deb_detail" ' + lamp_surat_kematian + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_surat_kematian + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_surat_kematian + '</p></a><a id="lampiran_surat_lahir_deb_detail" ' + lamp_surat_lahir + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_surat_lahir + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_surat_lahir + '</p></a><a id="lampiran_surat_ket_desa_deb_detail" ' + lamp_surat_ket_desa + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_sk_desa + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_surat_ket_desa + '</p></a></td>' +
+                            '<td>' + b + '</td>' +
+                            '<td>' + data.updated_at + '</td>' +
+                            '<td>JULIAN FRANDES SAPUTRA</td>' +
+                            '<td> <p ' + notes_progress_hide0 + ' >' + data.notes_progress[0] + '</p> <br><p ' + notes_counter_hide0 + ' >' + data.notes_counter[0] + '</p><br> <p ' + notes_progress_hide1 + ' >' + data.notes_progress[1] + '</p> <br><p ' + notes_counter_hide1 + ' >' + data.notes_counter[1] + '</p><br> <p ' + notes_progress_hide2 + ' >' + data.notes_progress[2] + '</p> <br><p ' + notes_counter_hide2 + ' >' + data.notes_counter[2] + '</p><br><b ' + notes_cancel_hide + '> Note Cancel:</b><br><b ' + notes_cancel_hide + ' > ' + data.notes_cancel + ' </br></td > ' +
+                            '</tr>' +
+                            '</table>'
+
+
+                    }
+
+                    $.each(data, function(index, item) {
+                        var nama_user = '<?php echo $nama_user['data']['nama'] ?>';
+                        var group_menu = '<?php echo $nama_user['data']['group_menu'] ?>';
+                        console.log(group_menu);
+                        if (nama_user == 'JULIAN FRANDES SAPUTRA' || group_menu == 'IT' || group_menu == 'PUSAT') {
+                            var btndisable = "";
+                        } else {
+                            var btndisable = "disabled";
+                        }
+
+                        var status = item.status_kredit;
+                        if (status == 'CANCEL') {
+                            var disabled = "";
+                        } else {
+                            var disabled = "disabled";
+                        }
+
+                        if (status == 'ON-PROGRESS') {
+                            var disabled_real = "";
+                        } else {
+                            var disabled_real = "disabled";
+                        }
+
+                        if (status == 'REALISASI') {
+                            var disabled_edit = "disabled";
+                        } else {
+                            var disabled_edit = "";
+                        }
+                        var plafon = (rubah(item.plafon));
+                        var tr = [
+                            '<tr>',
+                            '<td title="Detail" class="details-control" data="' + item.trans_so + '"></td>',
+                            '<td>' + item.status_kredit + '</td>',
+                            '<td>' + item.created_at + '</td>',
+                            '<td>' + item.tanggal_selesai[0].created_at + '</td>',
+                            '<td>' + item.nomor_so + '</td>',
+                            '<td>' + item.nama_so + '</td>',
+                            '<td>' + item.request_by + '</td>',
+                            '<td>' + item.nama_cabang[0] + '</td>',
+                            '<td>' + item.nama_debitur + '</td>',
+                            '<td>' + plafon + '</td>',
+                            '<td>' + item.tenor + '</td>',
+                            '<td>' + item.sla + '</td>',
+                            '<td style="width: 120px;">',
+                            '<form method="post" target="_blank" action="<?php echo base_url() . 'index.php/report/Lpdk' ?>"> <button type="button" ' + btndisable + ' class="btn btn-info btn-sm edit" title="Ubah LPDK" ' + disabled_edit + '  data-target="#update" data="' + item.trans_so + '"><i class="fas fa-pencil-alt"></i></button>',
+                            '<button type="button" class="btn btn-warning btn-sm edit" title="Detail LPDK" onclick="click_detail()" ' + btndisable + ' data-target="#update" data="' + item.trans_so + '"><i style="color: #fff;" class="fas fa-eye"></i></button>',
+                            '<input type="hidden" name ="id" value="' + item.trans_so + '"><button type="submit" class="btn btn-success btn-sm" title="Cetak LPDK"><i class="far fa-file-pdf"></i></a></form>',
+                            '</td>',
+                            '</tr>'
+                        ].join('\n');
+                        html.push(tr);
+                    });
+                    $('#data_lpdk').html(html);
+
+                    var table = $('#table_lpdk').DataTable({
+                        "pageLength": 10,
+                        "order": [
+                            [0, "asc"]
+                        ],
+                        "paging": true,
+                        "retrieve": true,
+                        "lengthChange": true,
+                        "searching": true,
+                        "ordering": true,
+                        "info": true,
+                        "autoWidth": false,
+                    });
+
+                    $('#table_lpdk tbody').on('click', 'td.details-control', function() {
+                        var tr = $(this).closest('tr');
+                        var row = table.row(tr);
+                        var id = $(this).attr('data');
+                        get_detail_lampiran({}, id)
+                            .done(function(response) {
+                                var data = response.data[0];
+                                console.log(data);
+                                if (row.child.isShown()) {
+                                    row.child.hide();
+                                    tr.removeClass('shown');
+                                } else {
+                                    row.child(format(data)).show();
+                                    tr.addClass('shown');
+                                }
+                            })
+
+                    });
+                })
+                .fail(function(response) {
+                    $('#data_lpdk').html('<tr><td colspan="4">Tidak ada data</td></tr>');
+                });
+        }
 
         $("#modal_pengajuan").click(function() {
             $("#modal_data_pengajuan").modal('show');
@@ -2149,6 +2654,400 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
             load_pengajuan_data_lpdk();
         })
+        load_pengajuan_filter_data_lpdk = function() {
+                $('#data_pengajuan_lpdk').html('');
+                $('#table_pengajuan_lpdk').DataTable().clear();
+                $('#table_pengajuan_lpdk').DataTable().destroy();
+                get_filter_pengajuan()
+                    .done(function(response) {
+                        var data = response.data;
+                        var data_detail = response;
+                        var html = [];
+                        var no = 0;
+                        if (data.length === 0) {
+                            var tr = [
+                                '<tr valign="midle">',
+                                '<td colspan="4">No Data, Bitch!</td>',
+                                '</tr>'
+                            ].join('\n');
+                            $('#data_pengajuan_lpdk').html(tr);
+                            return;
+                        }
+
+                        function format(data) {
+                            console.log(data)
+                            var lamp_jaminan = "";
+                            var x = "";
+                            var imb = "";
+                            var pbb = "";
+                            var ahli_waris = "";
+                            var ajb_ppjb = "";
+                            var akta_hibah = "";
+                            var b = "";
+                            $.each(data.sertifikat, function(index, item) {
+                                var lampiran_sertifikat1 = item.lampiran_sertifikat;
+                                if (lampiran_sertifikat1 == '') {
+                                    // var lamp_sertifikat = "hidden";
+                                    var lampiran_sertifikat = "";
+                                } else
+                                if (lampiran_sertifikat1 == null) {
+                                    // var lamp_ktp_deb = "hidden";
+                                    var lampiran_sertifikat = "";
+                                } else {
+                                    // var lamp_ktp_deb = "";
+                                    var lampiran_sertifikat = lampiran_sertifikat1.substr(57);
+                                }
+
+                                var imb_sertifikat = item.lampiran_imb;
+                                if (imb_sertifikat == '') {
+                                    // var lamp_sertifikat = "hidden";
+                                    var lampiran_imb_sertifikat = "";
+                                } else
+                                if (imb_sertifikat == null) {
+                                    // var lamp_ktp_deb = "hidden";
+                                    var lampiran_imb_sertifikat = "";
+                                } else {
+                                    // var lamp_ktp_deb = "";
+                                    var lampiran_imb_sertifikat = imb_sertifikat.substr(57);
+                                }
+
+                                var pbb_sertifikat = item.lampiran_pbb;
+                                if (pbb_sertifikat == '') {
+                                    // var lamp_sertifikat = "hidden";
+                                    var lampiran_pbb_sertifikat = "";
+                                } else
+                                if (pbb_sertifikat == null) {
+                                    // var lamp_ktp_deb = "hidden";
+                                    var lampiran_pbb_sertifikat = "";
+                                } else {
+                                    // var lamp_ktp_deb = "";
+                                    var lampiran_pbb_sertifikat = pbb_sertifikat.substr(57);
+                                }
+
+                                var ahli_waris_sertifikat = item.ahli_waris;
+                                if (ahli_waris_sertifikat == '') {
+                                    // var lamp_sertifikat = "hidden";
+                                    var lampiran_ahli_waris_sertifikat = "";
+                                } else
+                                if (ahli_waris_sertifikat == null) {
+                                    // var lamp_ktp_deb = "hidden";
+                                    var lampiran_ahli_waris_sertifikat = "";
+                                } else {
+                                    // var lamp_ktp_deb = "";
+                                    var lampiran_ahli_waris_sertifikat = ahli_waris_sertifikat.substr(57);
+                                }
+
+                                var ajb_sertifikat = item.ajb_ppjb;
+                                if (ajb_sertifikat == '') {
+                                    // var lamp_sertifikat = "hidden";
+                                    var lampiran_ajb_sertifikat = "";
+                                } else
+                                if (ajb_sertifikat == null) {
+                                    // var lamp_ktp_deb = "hidden";
+                                    var lampiran_ajb_sertifikat = "";
+                                } else {
+                                    // var lamp_ktp_deb = "";
+                                    var lampiran_ajb_sertifikat = ajb_sertifikat.substr(57);
+                                }
+
+                                var akta_hibah_sertifikat = item.akta_hibah;
+                                if (akta_hibah_sertifikat == '') {
+                                    // var lamp_sertifikat = "hidden";
+                                    var lampiran_akta_hibah_sertifikat = "";
+                                } else
+                                if (akta_hibah_sertifikat == null) {
+                                    // var lamp_ktp_deb = "hidden";
+                                    var lampiran_akta_hibah_sertifikat = "";
+                                } else {
+                                    // var lamp_ktp_deb = "";
+                                    var lampiran_akta_hibah_sertifikat = akta_hibah_sertifikat.substr(57);
+                                }
+                                b = '<a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.lampiran_sertifikat + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.lampiran_imb + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_imb_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.lampiran_pbb + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_pbb_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.ahli_waris + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_ahli_waris_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.ajb_ppjb + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_ajb_sertifikat + '</p></a><a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + item.akta_hibah + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lampiran_akta_hibah_sertifikat + '</p></a>'
+                            })
+
+                            var lampiran_ktp_deb = data.lampiran_debitur.lampiran_ktp_deb;
+                            if (lampiran_ktp_deb == '') {
+                                var lamp_ktp_deb = "hidden";
+                                var lamp_ktp_debitur = "";
+                            } else
+                            if (lampiran_ktp_deb == null) {
+                                var lamp_ktp_deb = "hidden";
+                                var lamp_ktp_debitur = "";
+                            } else {
+                                var lamp_ktp_deb = "";
+                                var lamp_ktp_debitur = lampiran_ktp_deb.substr(32);
+                            }
+
+                            var lampiran_kk_deb = data.lampiran_debitur.lampiran_kk;
+                            if (lampiran_kk_deb == '') {
+                                var lamp_kk_deb = "hidden";
+                                var lamp_kk_debitur = "";
+                            } else
+                            if (lampiran_kk_deb == null) {
+                                var lamp_kk_deb = "hidden";
+                                var lamp_kk_debitur = "";
+                            } else {
+                                var lamp_kk_deb = "";
+                                var lamp_kk_debitur = lampiran_kk_deb.substr(32);
+                            }
+
+                            var lamp_ktp_pasangan1 = data.lampiran_pasangan.lampiran_ktp_pasangan;
+                            if (lamp_ktp_pasangan1 == '') {
+                                var lamp_ktp_pas = "hidden";
+                                var lampiran_ktp_pasangan = "";
+                            } else if (lamp_ktp_pasangan1 == null) {
+                                var lamp_buku_nikah_pas = "hidden";
+                                var lampiran_ktp_pasangan = "";
+                            } else {
+                                var lamp_ktp_pas = "";
+                                var lampiran_ktp_pasangan = lamp_ktp_pasangan1.substr(33);
+                            }
+                            var lamp_buku_nikah_pasangan = data.lampiran_pasangan.lampiran_surat_nikah;
+                            if (lamp_buku_nikah_pasangan == '') {
+                                var lamp_buku_nikah_pas = "hidden";
+                                var lamp_buku_nikah_pasangan = "";
+                            } else if (lamp_buku_nikah_pasangan == null) {
+                                var lamp_buku_nikah_pas = "hidden";
+                                var lamp_buku_nikah_pasangan = "";
+                            } else {
+                                var lamp_buku_nikah_pas = "";
+                                var lamp_buku_nikah_pasangan = lamp_buku_nikah_pasangan.substr(33);
+                            }
+
+                            var lampiran_surat_cerai = data.lampiran[0].lampiran_surat_cerai;
+                            if (lampiran_surat_cerai == '') {
+                                var lamp_surat_cerai = "hidden";
+                                var lampiran_surat_cerai = "";
+                            } else
+                            if (lampiran_surat_cerai == null) {
+                                var lamp_surat_cerai = "hidden";
+                                var lampiran_surat_cerai = "";
+                            } else {
+                                var lamp_surat_cerai = "";
+                                var lampiran_surat_cerai = lampiran_surat_cerai.substr(46);
+                            }
+
+                            var lampiran_npwp1 = data.lampiran[0].lampiran_npwp;
+                            if (lampiran_npwp1 == '') {
+                                var lamp_npwp = "hidden";
+                                var lampiran_npwp = "";
+                            } else
+                            if (lampiran_npwp1 == null) {
+                                var lamp_npwp = "hidden";
+                                var lampiran_npwp = "";
+                            } else {
+                                var lamp_npwp = "";
+                                var lampiran_npwp = lampiran_npwp1.substr(46);
+                            }
+
+                            var lampiran_surat_kematian1 = data.lampiran[0].lampiran_surat_kematian;
+                            if (lampiran_surat_kematian1 == '') {
+                                var lamp_surat_kematian = "hidden";
+                                var lampiran_surat_kematian = "";
+                            } else
+                            if (lampiran_surat_kematian1 == null) {
+                                var lamp_surat_kematian = "hidden";
+                                var lampiran_surat_kematian = "";
+                            } else {
+                                var lamp_surat_kematian = "";
+                                var lampiran_surat_kematian = lampiran_surat_kematian1.substr(46);
+                            }
+
+                            var lampiran_surat_lahir1 = data.lampiran[0].lampiran_surat_lahir;
+                            if (lampiran_surat_lahir1 == '') {
+                                var lamp_surat_lahir = "hidden";
+                                var lampiran_surat_lahir = "";
+                            } else
+                            if (lampiran_surat_lahir1 == null) {
+                                var lamp_surat_lahir = "hidden";
+                                var lampiran_surat_lahir = "";
+                            } else {
+                                var lamp_surat_lahir = "";
+                                var lampiran_surat_lahir = lampiran_surat_lahir1.substr(46);
+                            }
+
+                            var lampiran_surat_ket_desa1 = data.lampiran[0].lampiran_sk_desa;
+                            if (lampiran_surat_ket_desa1 == '') {
+                                var lamp_surat_ket_desa = "hidden";
+                                var lampiran_surat_ket_desa = "";
+                            } else
+                            if (lampiran_surat_ket_desa1 == null) {
+                                var lamp_surat_ket_desa = "hidden";
+                                var lampiran_surat_ket_desa = "";
+                            } else {
+                                var lamp_surat_ket_desa = "";
+                                var lampiran_surat_ket_desa = lampiran_surat_ket_desa1.substr(46);
+                            }
+
+                            var notes_counter0 = data.notes_counter[0];
+                            if (notes_counter0 == '') {
+                                var notes_counter_hide0 = "hidden";
+                            } else
+                            if (notes_counter0 == null) {
+                                var notes_counter_hide0 = "hidden";
+                            } else {
+                                var notes_counter_hide0 = "";
+                            }
+
+                            var notes_progress0 = data.notes_progress[0];
+                            if (notes_progress0 == '') {
+                                var notes_progress_hide0 = "hidden";
+                            } else
+                            if (notes_progress0 == null) {
+                                var notes_progress_hide0 = "hidden";
+                            } else {
+                                var notes_progress_hide0 = "";
+                            }
+
+                            var notes_counter1 = data.notes_counter[1];
+                            if (notes_counter1 == '') {
+                                var notes_counter_hide1 = "hidden";
+                            } else
+                            if (notes_counter1 == null) {
+                                var notes_counter_hide1 = "hidden";
+                            } else {
+                                var notes_counter_hide1 = "";
+                            }
+
+                            var notes_progress1 = data.notes_progress[1];
+                            if (notes_progress1 == '') {
+                                var notes_progress_hide1 = "hidden";
+                            } else
+                            if (notes_progress1 == null) {
+                                var notes_progress_hide1 = "hidden";
+                            } else {
+                                var notes_progress_hide1 = "";
+                            }
+
+                            var notes_counter2 = data.notes_counter[2];
+                            if (notes_counter2 == '') {
+                                var notes_counter_hide2 = "hidden";
+                            } else
+                            if (notes_counter2 == null) {
+                                var notes_counter_hide2 = "hidden";
+                            } else {
+                                var notes_counter_hide2 = "";
+                            }
+
+                            var notes_progress2 = data.notes_progress[2];
+                            if (notes_progress2 == '') {
+                                var notes_progress_hide2 = "hidden";
+                            } else
+                            if (notes_progress2 == null) {
+                                var notes_progress_hide2 = "hidden";
+                            } else {
+                                var notes_progress_hide2 = "";
+                            }
+
+                            // var notes_cancel = data.notes_cancel;
+                            // if (notes_cancel == '') {
+                            //     var notes_cancel_hide = "hidden";
+                            // } else
+                            // if (notes_cancel == null) {
+                            //     var notes_cancel_hide = "hidden";
+                            // } else {
+                            //     var notes_cancel_hide = "";
+                            // }
+                            return '<table cellpadding="5" class="table table-bordered table-hover table-sm" cellspacing="0" border="0" style="padding-left:50px;">' +
+                                '<tr class="table-sm" style="font-size:12px">' +
+                                '<th>Lampiran Data Nasabah</th>' +
+                                '<th>Lampiran Data Jaminan</th>' +
+                                '<th>Tanggal Revisi LPDK</th>' +
+                                '<th>LPDK Checking by</th>' +
+                                '<th>Notes/Keterangan SLA</th>' +
+                                '</tr>' +
+                                '<tr style="font-size:12px">' +
+                                '<td width="100px"><a id="lampiran_ktp_deb_detail" ' + lamp_ktp_deb + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_debitur.lampiran_ktp_deb + '"><p class="hide_ktp_deb" style="font-size: 13px; font-weight: 400;">' + lamp_ktp_debitur + '</p></a><a id="lampiran_kk_deb_detail" ' + lamp_kk_deb + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_debitur.lampiran_kk + '"><p style="font-size: 13px; font-weight: 400;">' + lamp_kk_debitur + '</p></a><a id="lampiran_ktp_pas_detail" ' + lamp_ktp_pas + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_pasangan.lampiran_ktp_pasangan + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_ktp_pasangan + '</p></a><a id="lampiran_npwp_deb_detail" ' + lamp_npwp + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_npwp + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_npwp + '</p></a><a id="lampiran_surat_nikah_deb_detail" ' + lamp_buku_nikah_pas + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_pasangan.lampiran_surat_nikah + '"><p style="font-size: 13px; font-weight: 400;">' + lamp_buku_nikah_pasangan + '</p></a><a id="lampiran_surat_cerai_deb_detail" ' + lamp_surat_cerai + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_surat_cerai + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_surat_cerai + '</p></a><a id="lampiran_surat_kematian_deb_detail" ' + lamp_surat_kematian + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_surat_kematian + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_surat_kematian + '</p></a><a id="lampiran_surat_lahir_deb_detail" ' + lamp_surat_lahir + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_surat_lahir + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_surat_lahir + '</p></a><a id="lampiran_surat_ket_desa_deb_detail" ' + lamp_surat_ket_desa + ' class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_sk_desa + '"><p style="font-size: 13px; font-weight: 400;">' + lampiran_surat_ket_desa + '</p></a></td>' +
+                                '<td>' + b + '</td>' +
+                                '<td>' + data.updated_at + '</td>' +
+                                '<td>' + data.request_by + '</td>' +
+                                '<td> <p ' + notes_progress_hide0 + ' >' + data.notes_progress[0] + '</p> <br><p ' + notes_counter_hide0 + ' >' + data.notes_counter[0] + '</p><br> <p ' + notes_progress_hide1 + ' >' + data.notes_progress[1] + '</p> <br><p ' + notes_counter_hide1 + ' >' + data.notes_counter[1] + '</p><br> <p ' + notes_progress_hide2 + ' >' + data.notes_progress[2] + '</p> <br><p ' + notes_counter_hide2 + ' >' + data.notes_counter[2] + '</p></td > ' +
+                                '</tr>' +
+                                '</table>'
+
+
+                        }
+
+                        $.each(data, function(index, item) {
+                            var status = item.status_kredit;
+                            if (status == 'CANCEL') {
+                                var disabled = "";
+                            } else {
+                                var disabled = "disabled";
+                            }
+
+                            if (status == 'ON-PROGRESS') {
+                                var disabled_real = "";
+                            } else {
+                                var disabled_real = "disabled";
+                            }
+
+                            if (status == 'REALISASI') {
+                                var disabled_edit = "disabled";
+                            } else {
+                                var disabled_edit = "";
+                            }
+                            var plafon = (rubah(item.plafon));
+                            var tr = [
+                                '<tr>',
+                                '<td title="Detail" class="details-control" data="' + item.trans_so + '"></td>',
+                                '<td>' + item.status_kredit + '</td>',
+                                '<td>' + item.created_at + '</td>',
+                                '<td>' + item.nomor_so + '</td>',
+                                '<td>' + item.nama_so + '</td>',
+                                '<td>' + item.request_by + '</td>',
+                                '<td>' + item.nama_cabang[0] + '</td>',
+                                '<td>' + item.nama_debitur + '</td>',
+                                '<td>' + plafon + '</td>',
+                                '<td>' + item.tenor + '</td>',
+                                '<td style="width: 50px;">',
+                                '<form method="post" target="_blank" action="<?php echo base_url() . 'index.php/report/Pengajuan_lpdk' ?>"><button type="button" class="btn btn-info btn-sm edit" title="Tambah LPDK" ' + disabled_edit + '  data-target="#update" data="' + item.trans_so + '"><i class="fas fa-plus-circle"></i></button>',
+                                '<button type="button"  class="btn btn-warning btn-sm note" title="Note Return" style="background-color: #6610f2; border-color: #6f42c1;" data="' + item.trans_so + '"><i style="color: #fff;" class="fas fa-sticky-note"></i></button>',
+                                '<input type="hidden" name ="id" value="' + item.trans_so + '"><button type="submit" class="btn btn-success btn-sm" title="Cetak Pengajuan"><i class="far fa-file-pdf"></i></a></form>',
+                                '</td>',
+                                '</tr>'
+                            ].join('\n');
+                            html.push(tr);
+                        });
+                        $('#data_pengajuan_lpdk').html(html);
+
+                        var table = $('#table_pengajuan_lpdk').DataTable({
+                            "pageLength": 10,
+                            "order": [
+                                [0, "asc"]
+                            ],
+                            "paging": true,
+                            "retrieve": true,
+                            "lengthChange": true,
+                            "searching": true,
+                            "ordering": true,
+                            "info": true,
+                            "autoWidth": false,
+                        });
+
+                        $('#table_pengajuan_lpdk tbody').on('click', 'td.details-control', function() {
+                            var tr = $(this).closest('tr');
+                            var row = table.row(tr);
+                            var id = $(this).attr('data');
+                            get_detail_lampiran({}, id)
+                                .done(function(response) {
+                                    var data = response.data[0];
+                                    console.log(data);
+                                    if (row.child.isShown()) {
+                                        row.child.hide();
+                                        tr.removeClass('shown');
+                                    } else {
+                                        row.child(format(data)).show();
+                                        tr.addClass('shown');
+                                    }
+                                })
+
+                        });
+                    })
+                    .fail(function(response) {
+                        $('#data_pengajuan_lpdk').html('<tr><td colspan="4">Tidak ada data</td></tr>');
+                    });
+        }
 
         $('#data_pengajuan_lpdk').on('click', '.note', function(e) {
             var id = $(this).attr('data');

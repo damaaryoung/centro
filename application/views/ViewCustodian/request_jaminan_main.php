@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
                                   <div class="col-sm-2">
-                                    <button type="button" class="btn btn-success btn-sm"  id="btn_refresh"><i class="fas fa-sync"></i> Refresh</button>
+                                    <button type="button" class="btn btn-success btn-sm"  id="btn_refresh" onclick="getData()"><i class="fas fa-sync"></i> Refresh</button>
                                   </div>
                               </div>
                       </div>

@@ -17,13 +17,13 @@ var main_keperluan             = '';
 var main_keterangan            = '';
 var main_nomor                 = '';
 var main_pic                   = '';
-
+var mainVerifikasi             = '';
 
 $(document).ready(function () {     
     
     var dataNomor = $('#getNomor').val();
     console.log(dataNomor);
-    var mainVerifikasi = $('#mainVerifikasi').val();
+    mainVerifikasi = $('#mainVerifikasi').val();
     $('#loading').show(); 
 
     $.ajax({
@@ -55,7 +55,7 @@ $(document).ready(function () {
                    $(".btnDeleteJaminanData").prop("disabled", true);
                 });
             }else if(mainVerifikasi == '0'){
-                $("#btn_simpan_update_pemindahan_lokasi").prop("disabled", false);
+                $("#btn_simpan").prop("disabled", false);
             }
         },
         error : function(response) {
@@ -226,6 +226,7 @@ $('#btn_simpan').click(function () {
     main_keterangan            = $('#main_keterangan').val();
     main_nomor                 = $('#main_nomor').val();
     main_pic                   = $('#main_pic').val();
+    mainVerifikasi             = $('#mainVerifikasi').val();
 
     for(i = 0; i < mainTable.length; i++ ){
         var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
@@ -237,6 +238,10 @@ $('#btn_simpan').click(function () {
     // console.log(parsedDataDetailArr, lengthParsed);
     if(lengthParsed == 0){
         alert("Anda Belum Menambahkan Detail Data Pengajuan !");
+        return;
+    }
+    if(mainVerifikasi == 1){
+        alert("Data Sudah Di Verifikasi, Tidak Dapat Di Update !");
         return;
     }
     $('#loading').show(); 
