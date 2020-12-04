@@ -3,6 +3,11 @@
   .icon_color_sidebar {
     color : #FFDE00;
   }
+
+  .nav-sidebar>.nav-item {
+    margin-bottom: 0;
+    font-size: 12px !important;
+  }
   </style>
   <!-- END CSS COLOR ICON SIDEBAR -->
  
@@ -77,10 +82,26 @@
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p style="font-size: 14px;">Verifikasi Pemindahan Lokasi</p>
+                    <p>Verifikasi Pemindahan Lokasi</p>
                   </a>
                 </li>
               <?php } ?>
+              <?php if($this->session->userdata('request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>request_jaminan_centro" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p> Request Jaminan Ke Centro</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('verifikasi_request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>request_jaminan_verifikasi" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p> Verifikasi Request Jaminan</p>
+                    </a>
+                  </li>
+                <?php }?>
               </ul>
             </li>
           <!-- END MENU ASET DOKUMEN -->
@@ -90,7 +111,7 @@
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-file-invoice icon_color_sidebar"></i>
                   <p>
-                    SEFIN
+                    Credit Checking & Operasional
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
@@ -146,27 +167,11 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <?php if($this->session->userdata('request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>request_jaminan_centro" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p style="font-size: 14px;"> Request Jaminan Ke Centro</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('verifikasi_request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>request_jaminan_verifikasi" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p style="font-size: 14px;"> Verifikasi Request Jaminan</p>
-                    </a>
-                  </li>
-                <?php }?>
                 <?php if($this->session->userdata('update_kirim_jaminan_controller') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>update_kirim_jaminan" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p style="font-size: 14px;"> Update Kirim Jaminan</p>
+                      <p > Update Kirim Jaminan</p>
                     </a>
                   </li>
                 <?php }?>
@@ -174,7 +179,7 @@
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>update_kirim_jaminan_verifikasi" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p style="font-size: 13px;"> Verifikasi Update Kirim Jaminan</p>
+                      <p > Verifikasi Update Kirim Jaminan</p>
                     </a>
                   </li>
                 <?php }?>
@@ -184,7 +189,7 @@
           <!-- END MENU CUSTODIAN -->
 
           <!-- MENU BSS -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('BSS') == 'ok'){ ?>
+          <?php  if($this->session->userdata('divisi_id') == 'IT' ||$this->session->userdata('divisi_id') == 'GA' ||$this->session->userdata('divisi_id') == 'OPERASIONAL' || $this->session->userdata('BSS') == 'ok'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>bss" class="nav-link">
               <i class="nav-icon fas fa-paste icon_color_sidebar"></i>

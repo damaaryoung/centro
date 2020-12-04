@@ -9,11 +9,11 @@ class BSSModel extends CI_Model{
     }
 
 	public function getDataBSS(){
-		// $kode_cabang = $this->kode_cabang;
+		$kode_cabang = $this->kode_cabang;
 		$this->db = $this->load->database('DB_DPM_ONLINE', true);
-		$str ="SELECT * FROM view_header_bss 
-				ORDER BY kode_kantor, kartu_number ASC LIMIT 10 OFFSET 0 ";
-
+		$str ="SELECT * FROM `view_header_bss` WHERE 
+				IF($kode_cabang IN ('32', '00'), 1, kode_kantor= $kode_cabang) 
+				ORDER BY kode_kantor, kartu_number DESC LIMIT 10 OFFSET 0 ";
 		$query = $this->db->query($str);
 		return $query->result_array();
 	}
@@ -37,19 +37,20 @@ class BSSModel extends CI_Model{
 	public function querySearch(){
 		$kd_cabang = $this->kd_cabang;
 		$status = $this->status;
-		$kode_kantor = $this->area;
+		$kode_area = $this->area;
 		$search = $this->search;
 		$this->db= $this->load->database('DB_DPM_ONLINE', true);
 
 			$str1 = "SELECT * FROM `view_header_bss`
 			WHERE
-			  IF('$kode_kantor' IN ('32', '00'), kode_kantor IN ('32', '00'), IF('$kode_kantor' = 'all', 1, kode_kantor='$kode_kantor'))
+			  IF('$kode_area'='all', 1, kode_kantor='$kode_area')
 			  and
 			  IF('$status' <>'all', status_kartu= '$status', 1)
 			  and
 			  IF('$search'<> '', (kartu_number LIKE '%$search%' OR nama_kolektor LIKE '%$search%'), 1)
 			
 			  ORDER BY kode_kantor, kartu_number DESC LIMIT 20 OFFSET 0 ";
+			//   var_dump($str1);die();
 			
 			$query = $this->db->query($str1);
 			return $query->result_array();
@@ -83,12 +84,14 @@ class BSSModel extends CI_Model{
 
 	public function get_received_bss(){
 		$divisi = $this->divisi;
-		$user = $this->user;
+		$userId = $this->user_id;
 		$kode_cabang = $this->kode_cabang;
 		$this->db = $this->load->database('DB_DPM_ONLINE', true);
+		$group_menu = $this->db->query("SELECT * FROM user WHERE user_id = $userId")->row()->group_menu;
 		$str ="SELECT * FROM view_bss_notif WHERE 
-				IF('$divisi' IN ('PUSAT','IT'),1,user_id_received = '$user' OR kode_kantor_received='$kode_cabang')   
-				ORDER BY id DESC LIMIT 10 OFFSET 0";
+				
+				IF('$group_menu' IN ('PUSAT','IT'),1,user_id_received = '$userId' OR kode_kantor_received='$kode_cabang')   
+				LIMIT 10 OFFSET 0";
 		
 		$query = $this->db->query($str);
 		return  $query->result_array();
@@ -154,7 +157,7 @@ class BSSModel extends CI_Model{
 
 		
 		if(($user_id_received) != 'null'){
-			if($appoved == 'Approved'){
+			if($appoved == 'Approved'){ // Admin
 
 				$str ="UPDATE bss SET status_kartu='2', user_id=$user_id_received, last_update=NOW()
 									WHERE status_kartu='8'
@@ -189,7 +192,7 @@ class BSSModel extends CI_Model{
 				}
 				
 			}
-		}else{
+		}else{// GENERATE BSS atau PEMERIMAAN BSS dari GA ATAU TRANSFER ANTAR KANTOR
 		
 			if($appoved == 'Approved'){
 					if($is_migrasi == '1'){ // migrasi antar kantor
@@ -263,7 +266,7 @@ class BSSModel extends CI_Model{
 						   WHERE jabatan IN ('ADMINISTRATION','TELLER','ADMIN MICRO','DISTRICT ADMIN SECURE FINANCING','ADMIN KREDIT SUPPORT','CREDIT ADMINISTRATION')
 								AND user_id NOT IN ('523','491','$userId')
 								AND flg_block='N' AND tgl_expired >= CURDATE()
-								AND kd_cabang='$kode_kantor'
+								AND kd_cabang='$kode_cabang'
 								AND nama NOT LIKE '%DEMO%'";
 			}else{
 				$str = "SELECT user_id AS user_id_received, nama

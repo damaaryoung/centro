@@ -22,6 +22,8 @@ let base_url = $('#base_url').val();
         tr.addClass( 'shown' );
     }
   });
+
+  $("#loading-1").hide();
   
   toastr.options = {
     "closeButton": false,
@@ -40,6 +42,7 @@ let base_url = $('#base_url').val();
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   }
+
 });
 
 $('#status').change(function () {
@@ -213,6 +216,7 @@ function detail_log( callback, d ) {
 
 $('#btn_send_migrasi').click(function () {
   $('#form_send_migrasi').modal('show');
+  $('#loading-6').hide();
 })
 
 
@@ -223,8 +227,8 @@ $('#send_bss_ga_to_area').click(function(){
   let area_kerja = $("#area_kerja").val();
   let selisih = (kartu_number_akhir - kartu_number_awal) + 1;
   if (selisih <= 0 || selisih > 50) {
-    alert("Maaf No Kartu BSS Akhir Harus lebih besar dari No Awal Atau Maximal 50 lembar");
-    window.location = base_url + 'bss';
+    let message = "Maaf No Kartu BSS Akhir Harus lebih besar dari No Awal Atau Maximal 50 lembar";
+    toastr["error"](message);
   } else {
     send_bss_db(kartu_number_awal, kartu_number_akhir, area_kerja)
   }
@@ -247,7 +251,7 @@ function send_bss_db(kartu_number_awal, kartu_number_akhir, area_kerja) {
     dataType: "json",
     data: data,
     beforeSend: function () {
-      $('#loading').show();
+      $('#loading-1').show();
     },
     success: function (respon) {
       toastr["success"](respon.message)
@@ -255,7 +259,7 @@ function send_bss_db(kartu_number_awal, kartu_number_akhir, area_kerja) {
         $('#form_send_bss').modal('hide');
       }, 1000);
       window.location = base_url + 'bss';
-      $('#loading').hide();
+      $('#loading-1').hide();
     }
   });
 }
@@ -274,7 +278,7 @@ function getKartuBSS() {
         }
       })
 
-      // Form Migrasi
+      // AutocompleteCuston input Form Migrasi
       $("#noawal").on("keyup", function () {
         if ($(this).val()) {
           $('#noawal').autocompleteCustom({
@@ -307,7 +311,7 @@ function getKartuBSS() {
         }
       })
 
-      // Form Send To PIC
+      // AutocompleteCuston input Form Send To PIC
       $("#no_kartu_awal").on("keyup", function () {
         if ($(this).val()) {
           $('#no_kartu_awal').autocompleteCustom({

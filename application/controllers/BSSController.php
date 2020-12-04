@@ -29,9 +29,11 @@ class BSSController extends CI_Controller {
 			$model = new BSSModel(); 
 
 			$model->user = $this->session->userdata('nama');
+			$model->divisi_id = $this->session->userdata('divisi_id'); 
 			$model->kode_cabang = $this->session->userdata('kd_cabang'); 
+			$model->userId = $this->session->userdata('userIdLogin'); 
 			$data['notify'] = $model->get_notify_received_bss();
-			
+			$data['divisi_id'] = $this->session->userdata('divisi_id'); 
 			$data['getAll'] = $model->getDataBSS();
 			$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			$this->load->view('ViewBSS/ViewListBSS.php', $data);
@@ -123,24 +125,26 @@ class BSSController extends CI_Controller {
 		$insertdata = $model->queryInsertBSS();
 		echo json_encode([
 			"success" => true,
-			"message" => "Send BSS From GA to Area Kerja Success ",
+			"message" => $insertdata,
 			"data" => null
 		]);
 	}
 
 	public function get_received_bss(){
 		$divisi_id = $this->session->userdata('divisi_id');
+		$jabatan = $this->session->userdata('jabatan');
 		$session = $this->session->userdata('nama');
 		if($session != ''){
 			$model = new BSSModel();
 			$model->divisi = $divisi_id; 
-			$model->user = $this->session->userdata('nama');
+			$model->user_id = $this->session->userdata('userIdLogin');
 			$model->kode_cabang = $this->session->userdata('kd_cabang'); 
 			$data =$model->get_received_bss();
 			echo json_encode([
 				"success" => true,
 				"message" => "",
 				"divisi_id" => $divisi_id,
+				"jabatan" => $jabatan,
 				"data" => $data
 			]);
 		}

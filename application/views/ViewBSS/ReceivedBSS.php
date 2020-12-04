@@ -10,6 +10,9 @@
         </button>
       </div>
       <div class="modal-body">
+      <div id="loading-7">
+        <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+      </div>
     <!-- Data Tables -->
     <div class="card">
       <div class="form-inline" style="padding : 10px; float: right">
@@ -63,6 +66,9 @@
         </button>
       </div>
       <div class="modal-body">
+      <div id="loading-5">
+        <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+      </div>
         <form>
         <input type="hidden" id ="id" >
         <input type="hidden" id ="nama_user_send">

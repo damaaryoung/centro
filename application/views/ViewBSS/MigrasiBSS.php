@@ -33,8 +33,10 @@ ul:not(.browser-default) {
         <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-exchange-alt"></i> Pindah Ke Area Kerja </h5>
       </div>
       <div class="modal-body">
+      <div id="loading-6">
+        <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+      </div>
       <form id="form-migrasi">
-     
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Dari</label>
           <div class="col-sm-8">

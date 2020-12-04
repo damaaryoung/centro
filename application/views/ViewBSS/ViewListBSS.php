@@ -25,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   background-color:#dee2e6;
 }
 #loading-image{
-    z-index: 9999;
+    z-index: 99999;
 }
 
 td.details-control {
@@ -96,7 +96,7 @@ tr.shown td.details-click {
                     <div class="form-group row">
                       <label class="col col-form-label">Status</label>
                       <div class="col">
-                          <select class="form-control browser-default" id="status"   style="width: 200px;">
+                          <select class="form-control browser-default custom-select" id="status"   style="width: 200px;">
                             <option value="all">ALL DATA</option>
                             <option value= "0">NEW</option>
                             <option value= "1">IN TRANSIT</option>
@@ -117,7 +117,7 @@ tr.shown td.details-click {
                       <?php
                         if($kode_kantor == '00' || $divisi_id == 'IT'){
                       ?>
-                      <select class="form-control select2" id="kode_kantor" style="width: 200px;">
+                      <select class="form-control select2 custom-select" id="kode_kantor" style="width: 200px;">
                             <option value="all">ALL AREA</option>
                             <?php foreach ($selectKodeKantor as $row) : ?>
                               <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
@@ -145,10 +145,16 @@ tr.shown td.details-click {
 
             <div class="card">
             <div class="card-header">
-              <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#form_send_bss"><i class="fas fa-share-square"></i> Send BSS </i></button> 
-              <button class="btn btn-success btn-sm" type="button" id="btn_send_pic"><i class="fas fa-share-square"></i> Send to PIC </i></button>   
+              <?php if($divisi_id == 'GA' || $divisi_id == 'IT'){
+                echo '<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#form_send_bss"><i class="fas fa-share-square"></i> Send BSS </i></button> ';
+              }?>
+              <?php if($divisi_id == 'OPERASIONAL' || $divisi_id == 'IT'){
+              echo '<button class="btn btn-success btn-sm" type="button" id="btn_send_pic"><i class="fas fa-share-square"></i> Send to PIC </i></button>';
+              }?>   
               <button type="button" class="btn btn-info btn-sm"  id="btn_received_bss"><i class="fas fa-mail-bulk"></i> Received BSS </i><span class="badge badge-light" id="notify_received"><?php echo $notify[0]['total']; ?></span></button>
-              <button class="btn btn-secondary btn-sm" type="button" id="btn_send_migrasi"><i class="fas fa-exchange-alt"></i> Migrasi </i></button>  
+              <?php if($divisi_id == 'OPERASIONAL' || $divisi_id == 'IT'){
+                echo '<button class="btn btn-secondary btn-sm" type="button" id="btn_send_migrasi"><i class="fas fa-exchange-alt"></i> Migrasi </i></button>';
+              }?>  
             </div>
             
             <!-- /.card-header -->
@@ -225,8 +231,10 @@ tr.shown td.details-click {
         <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-share-square"></i> Send BSS </h5>
       </div>
       <div class="modal-body">
+      <div id="loading-1">
+        <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+      </div>
       <form>
-     
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Dari</label>
           <div class="col-sm-8">
@@ -242,7 +250,7 @@ tr.shown td.details-click {
         <div class="form-group row">
           <label  class="col-sm-4 col-form-label">Ke Area Kerja</label>
           <div class="col-sm-8">
-          <select class="form-control" id="area_kerja">
+          <select class="form-control " id="area_kerja">
             <?php foreach ($selectKodeKantor as $row) : ?>
               <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
             <?php endforeach;?>

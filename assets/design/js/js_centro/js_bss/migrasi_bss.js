@@ -36,17 +36,17 @@ $('#migrasi_bss').click(function () {
     dataType: "json",
     data: data,
     beforeSend: function () {
-      $('#loading').show();
+      $('#loading-6').show();
     },
     success: function (respon) {
       if(respon.success == true){
         $('#form-migrasi')[0].reset()
         toastr["success"](respon.message)
         window.location = base_url + 'bss';
-        $('#loading').hide();
+        $('#loading-6').hide();
      }else{
         toastr["error"](respon.message)
-        $('#loading').hide();
+        $('#loading-6').hide();
      }
       
     }
