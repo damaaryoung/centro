@@ -77,7 +77,7 @@ class Request_Jaminan_Centro_Model extends CI_Model{
     }
 
     /// insert page
-    public function getJaminanDokumen($kode_kantor){
+    public function getJaminanDokumen($kode_kantor, $kode_kantor_lokasi_jaminan){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT `jaminan_dokument`.`no_reff`, `agunan_id`, `jaminan_dokument`.`kode_kantor`, `kode_kantor_lokasi_jaminan`, 
                     jh.`status`, `jenis`,
@@ -98,7 +98,8 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                 FROM `jaminan_dokument`
                 LEFT JOIN (
                     SELECT no_reff, `status` FROM `jaminan_header`) jh ON jh.`no_reff`=`jaminan_dokument`.`no_reff`
-                WHERE verifikasi=1 AND kode_kantor='$kode_kantor'  AND `status`='MASUK' AND `lokasi_penyimpanan` IS NOT NULL
+                WHERE verifikasi=1 AND kode_kantor='$kode_kantor' AND `kode_kantor_lokasi_jaminan` = '$kode_kantor_lokasi_jaminan'  
+                AND `status`='MASUK' 
                 ORDER BY no_reff
                 LIMIT 0, 25;
             ";
@@ -139,7 +140,6 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                 OR no_polisi LIKE '%$search%') 
                 AND kode_kantor='$kode_kantor'  
                 AND `status`= 'MASUK' 
-                AND `lokasi_penyimpanan` IS NOT NULL
                 ORDER BY no_reff
                 LIMIT 0, 25
             ";

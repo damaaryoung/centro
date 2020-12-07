@@ -19,6 +19,8 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
 
 		if($session != ''){ 
+			$data['kode_kantor'] = $this->session->userdata('kd_cabang');
+			$data['divisi_id']   = $this->session->userdata('divisi_id');
 			$data['selectKodeKantor'] = $this->Request_Jaminan_Verifikasi_Model->selectKodeKantor();
 			$this->load->view('ViewCustodian/request_jaminan_verifikasi.php', $data);
 		}

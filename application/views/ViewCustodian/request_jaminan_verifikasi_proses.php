@@ -111,7 +111,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </div>
                       <div class="col-md-12 mx-auto">
                             <div class="form-group row">
-                              <div class="col-sm-6">
+                              <div class="col-sm-3" style="text-align: left;">
+                                      <label style="padding-top: 5px;" class="control-label" for="kode_kantor_tujuan">Kode Kantor Tujuan</label>
+                                  </div>
+                              <div class="col-sm-3">
+                                  <select class="form-control form-control-sm select2" readonly disabled id="kode_kantor_tujuan" name="kode_kantor_tujuan">
+                                        <option value="<?php echo $kode_kantor_tujuan;?>" selected ><?php echo $kode_kantor_tujuan;?></option>
+                                  </select>
                               </div>
                               <div class="col-sm-2" style="text-align: right;"  >
                                     <label style="padding-top: 6px;" class="control-label" for="main_keperluan">Keperluan</label>
@@ -134,7 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Data Tables -->
         <div class="card card-danger">
                 <div class="card-header">
-                <h3 class="card-title"></h3>
+                <h3 class="card-title">DATA REQUEST JAMINAN</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">

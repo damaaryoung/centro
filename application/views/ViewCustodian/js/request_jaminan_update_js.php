@@ -71,11 +71,15 @@ $(document).ready(function () {
 $('#btn_tambah_jaminan_main').click(function () {
     dataTableeee = [];
     $('#modalJaminanDokumen').modal('show');
+    kode_kantor_lokasi_jaminan = $('#kode_kantor_lokasi_jaminan').val();
+    
+    $('#TableModalJaminan').DataTable().clear();
+    $('#TableModalJaminan').DataTable().destroy();
     $.ajax({
             url :  "<?= base_url(); ?>Request_Jaminan_Centro_Controller/getMasterJaminan",
             type : "POST",
             dataType : "json",
-            data : {"test"    : "test"},
+            data : {"kode_kantor_lokasi_jaminan"    : kode_kantor_lokasi_jaminan},
 
             success : function(response) {
                 dataTableeee.push(response); 
