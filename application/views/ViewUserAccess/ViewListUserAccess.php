@@ -98,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
 
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
 
               <div  id="formUserAccess">
-                <table id="tableAkses" class="table table-striped" style="width:100% text-align:center" >
+                <table id="tableAkses" class="table table-striped" style="width:100%; text-align:center; height: 500px;">
                     <thead>
                             <th>Menu</th>
                             <th>Akses</th>
