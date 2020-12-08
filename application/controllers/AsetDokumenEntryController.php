@@ -2283,6 +2283,12 @@ class AsetDokumenEntryController extends CI_Controller {
 		$data1['sukses'] = 'sukses';
 		echo json_encode($data1); 
 	}
+	public function getTypeKend(){
+		$merk = $this->input->post('merk'); 
+		$data['typeKend'] = $this->AsetDokumenEntryModel->getTypeKend2($merk);
+		$data['test'] = 'test';
+		echo json_encode($data);
+	}
 	
 }
 	

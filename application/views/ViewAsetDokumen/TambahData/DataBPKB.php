@@ -239,7 +239,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="">Merk/Type</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbMerk" name="bpkbMerk">
+                                    <select class="form-control select2" id="bpkbMerk" name="bpkbMerk" onchange="selectTypeKendaraan()">
                                                 <?php if($this->session->tempdata('bpkbMerk') != NULL ) {
                                                             echo '<option selected value="'. $this->session->tempdata('bpkbMerk') .'">'. $this->session->tempdata('bpkbMerk') .'</option>';
                                                       } else{
@@ -809,6 +809,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
             </div>
             <!-- END SLIK -->
+            <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
 
 
             <div class="card-footer text-center">
