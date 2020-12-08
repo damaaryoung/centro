@@ -981,25 +981,6 @@ class AsetDokumenEntryController extends CI_Controller {
 			$this->session->set_tempdata('emasSIDParipasu', $emasSIDParipasu, 900);
 			$this->session->set_tempdata('emasSIDAsuransi', $emasSIDAsuransi, 900);
 
-			// var_dump($this->session->tempdata('emasAgunanID'));
-			// var_dump($this->session->tempdata('emasNoSeri'));
-			// var_dump($this->session->tempdata('emasJenisEmas'));
-			// var_dump($this->session->tempdata('emasKarat'));
-			// var_dump($this->session->tempdata('emasBerat'));
-			// var_dump($this->session->tempdata('emasHargaPasar'));
-			// var_dump($this->session->tempdata('emasHargaTaksasi'));
-			
-			// var_dump($this->session->tempdata('emasSIDNamaPemilikAgunan'));
-			// var_dump($this->session->tempdata('emasSIDStatus'));
-			// var_dump($this->session->tempdata('emasSIDAlamat'));
-			// var_dump($this->session->tempdata('emasSIDNJOP'));
-			// var_dump($this->session->tempdata('emasSIDBank'));
-			// var_dump($this->session->tempdata('emasSIDNilaiIndependen'));
-			// var_dump($this->session->tempdata('emasSIDNamaIndependen'));
-			// var_dump($this->session->tempdata('emasSIDTglPenilaian'));
-			// var_dump($this->session->tempdata('emasSIDParipasu'));
-			// var_dump($this->session->tempdata('emasSIDAsuransi'));
-			
 			redirect('AsetDokumenEntryController/displayTambahAsetDokumen'); 
 
 		}
@@ -1506,7 +1487,7 @@ class AsetDokumenEntryController extends CI_Controller {
 																		$bpkbKantorLokasi,
 																		$mainNomorRekening);
 
-					$this->AsetDokumenEntryModel->insertJaminanSlikSert($agunan_id,
+				$this->AsetDokumenEntryModel->insertJaminanSlikSert($agunan_id,
 																		$cif,
 																		$bpkbKantorLokasi,
 																		$mainNomorRekening,
@@ -2090,6 +2071,12 @@ class AsetDokumenEntryController extends CI_Controller {
 		$this->session->unset_tempdata('mainNomorRekening');
 		$this->session->unset_tempdata('mainNamaNasabah');
 		$this->session->unset_tempdata('mainTanggalRealisasi');
+		if($this->session->tempdata('bpkbTglRegister') != ''){
+			$this->deleteTempBPKB();
+		}
+		else if($this->session->tempdata('sertTglRegister') != ''){
+			$this->deleteTempSert();
+		}
 		redirect('AsetDokumenEntryController/index'); 
 	}
 
