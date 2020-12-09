@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <th>Nomor</th>
                                 <th>Tanggal</th>
                                 <th>Nama Kantor Asal</th>
-                                <th>Nama Custodian</th>
+                                <th>Nama Kantor Tujuan</th>
                                 <th>Verifikasi</th>
                                 <th>Action</th>
                             </tr>

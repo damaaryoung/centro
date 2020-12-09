@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="col-sm-2">
                                     <input type="date" class="form-control form-control-sm" id="main_tanggal" name="main_tanggal" value="<?php echo $tgl;?>" readonly>
                                   </div>
-                                  <div class="col-sm-2" style="text-align: right;">
+                                  <div class="col-sm-2" style="text-align: left;">
                                       <label style="padding-top: 6px;" class="control-label" for="main_nomor">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-2">
@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <option value="<?php echo $kode_kantor_lokasi_jaminan;?>" selected ><?php echo $kode_kantor_lokasi_jaminan;?></option>
                                   </select>
                                   </div>
-                                  <div class="col-sm-2" style="text-align: right;">
+                                  <div class="col-sm-2" style="text-align: left;">
                                       <label style="padding-top: 5px;" class="control-label" for="kode_custodian">Kode Custodian</label>
                                   </div>
                                   <div class="col-sm-4">
@@ -119,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <option value="<?php echo $kode_kantor_tujuan;?>" selected ><?php echo $kode_kantor_tujuan;?></option>
                                   </select>
                               </div>
-                              <div class="col-sm-2" style="text-align: right;"  >
+                              <div class="col-sm-2" style="text-align: left;"  >
                                     <label style="padding-top: 6px;" class="control-label" for="main_keperluan">Keperluan</label>
                               </div>
                               <div class="col-sm-4">
@@ -129,7 +129,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                             </div>
                       </div>
+                      <div class="col-md-12 mx-auto">
+                              <div class="form-group row">
+                                  <div class="col-sm-3" style="text-align: left;">
+                                    <label style="padding-top: 5px;" class="control-label" for="main_pic">PIC Peminjam</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <input type="text" class="form-control form-control-sm" id="main_pic" name="main_pic" disabled value="<?php echo $pic_request_pemindahan; ?>">
+                                  </div>
+                                  <div class="col-sm-2" style="text-align: left;">
+                                      <label style="padding-top: 5px;" class="control-label" for="main_keterangan">Keterangan</label>
+                                  </div>
+                                  <div class="col-sm-4">
+                                        <textarea style="height: 75px;" type="text" 
+                                            class="form-control" name="main_keterangan" 
+                                            id="main_keterangan" placeholder="Keterangan...."><?php echo $ket;?></textarea>
+                                  </div>
+                              </div>
+                      </div>
                 </div>
+           
                    
             </div>            
           </div>
@@ -144,6 +163,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <div class="row">
+                          <div class="col-md-12 mx-auto">
+                                  <div class="form-group row">
+                                      <div class="col-sm-2">
+                                        <div class="form-inline">
+                                          <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main" disabled>Tambah <i class="fas fa-plus-circle"></i></button>
+                                        
+                                          <div style ="padding-left: 5px;">
+                                            <form method="post" target="_blank" style ="display:inline;" action="<?php echo base_url();?>Request_Jaminan_Verifikasi_Controller/cetakProses"> 
+                                              <button type="submit" class="btn btn-primary btn-sm"  id="btn_print" disabled
+                                                      data-nomor="<?php echo $nomor?>" 
+                                                    >Print &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-print"></i>
+                                              </button>
+                                              <input type="hidden" name="nomorCetak" value="<?php echo $nomor?>">
+                                            </form>
+                                          </div>
+                                      
+                                        </div>
+                                      </div>
+                          </div>
+                    </div>
                     <table id="table_request_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
                         <thead>
                             <tr>
@@ -163,42 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </tbody>
                     </table>
                     <br>    
-                    <div class="row">
-                      <div class="col-md-12 mx-auto">
-                              <div class="form-group row">
-                                  <div class="col-sm-2">
-                                    <div class="form-inline">
-                                      <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main" disabled>Tambah <i class="fas fa-plus-circle"></i></button>
-                                     
-                                      <div style ="padding-left: 5px;">
-                                        <form method="post" target="_blank" style ="display:inline;" action="<?php echo base_url();?>Request_Jaminan_Verifikasi_Controller/cetakProses"> 
-                                          <button type="submit" class="btn btn-primary btn-sm"  id="btn_print" disabled
-                                                  data-nomor="<?php echo $nomor?>" 
-                                                >Print &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-print"></i>
-                                          </button>
-                                          <input type="hidden" name="nomorCetak" value="<?php echo $nomor?>">
-                                        </form>
-													            </div>
-                                   
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-2" style="text-align: right;">
-                                    <label style="padding-top: 5px;" class="control-label" for="main_pic">PIC Peminjam</label>
-                                  </div>
-                                  <div class="col-sm-3">
-                                    <input type="text" class="form-control form-control-sm" id="main_pic" name="main_pic" disabled value="<?php echo $pic_request_pemindahan; ?>">
-                                  </div>
-                                  <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="main_keterangan">Keterangan</label>
-                                  </div>
-                                  <div class="col-sm-3">
-                                        <textarea style="height: 75px;" type="text" 
-                                            class="form-control" name="main_keterangan" 
-                                            id="main_keterangan" placeholder="Keterangan...."><?php echo $ket;?></textarea>
-                                  </div>
-                              </div>
-                      </div>
-                </div>
+                    
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer text-center">
