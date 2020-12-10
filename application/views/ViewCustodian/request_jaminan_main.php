@@ -82,9 +82,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         echo '<input class="form-control form-control-sm" id="main_kode_kantor" name="main_kode_kantor" value="'.$kode_kantor.'" readonly>'; 
                                       } ?> 
                                   </div>
-                                  <div class="col-sm-2">
-                                      <button type="button" class="btn btn-success btn-sm" style="width: 250px;"  id="btn_tambah"><i class="fas fa-plus-circle"></i> Tambah</button>
-                                  </div>
                               </div>
                       </div>
                 </div>
@@ -96,9 +93,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <!-- Data Tables -->
-        <div class="card card-danger">
+        <div class="card ">
                 <div class="card-header">
-                <h3 class="card-title"></h3>
+                  <h3 class="card-title"></h3>
+                  <div class="row">
+                      <div class="col-md-12 mx-auto">
+                                  <div class="col-sm-2">
+                                      <button type="button" class="btn btn-success btn-sm" style="width: 250px;"  id="btn_tambah"><i class="fas fa-plus-circle"></i> Tambah</button>
+                                  </div>
+                      </div>
+                  </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">

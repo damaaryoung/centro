@@ -201,6 +201,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Start BPKB -->
             <div id="BPKB" class="tabcontent">
+                <br>
+                <div class="row">
+                   <div class="col-md-12 mx-auto">
+                    <button type="button" class="btn btn-primary btn-sm" id="btnTambahBPKB" style="width:250px;"> 
+                      <i class="fas fa-plus-circle"></i> 
+                      <?php if($bpkbAgunanID != null){
+                        echo "Edit";
+                      }else { echo "Tambah";}
+                      ?>
+                    </button> 
+                   </div>
+                </div>
+                <br>
               <table id="" class="table table-striped table-bordered display" style="width:100%">
                       <thead>
                           <tr>
@@ -238,18 +251,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                              
                           </tr>
                       </tbody>
-              </table>
-              <button type="button" class="btn btn-primary btn-sm" id="btnTambahBPKB"> <i class="far fa-edit"></i> 
-                <?php if($bpkbAgunanID != null){
-                  echo "Edit";
-                }else { echo "Tambah";}
-                ?>
-              </button>   
+              </table>  
             </div>
             <!-- END BPKB -->
 
             <!-- Start Sertifikat -->
             <div id="Sertifikat" class="tabcontent">
+                <br>
+                <div class="row">
+                   <div class="col-md-12 mx-auto">
+                     <button type="button" class="btn btn-primary btn-sm" id="btnTambahSertif" style="width:250px;"> 
+                         <i class="fas fa-plus-circle"></i>
+                         <?php if($sertAgunanID != null){
+                           echo "Edit";
+                         }else { echo "Tambah";}
+                         ?>
+                     </button> 
+                   </div>
+                </div>
+                <br>
+                
                 <table id="" class="table table-striped table-bordered display" style="width:100%">
                     <thead>
                         <tr>
@@ -289,17 +310,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </td>
                         </tr>
                     </tbody>
-                </table>
-                <button type="button" class="btn btn-primary btn-sm" id="btnTambahSertif"> 
-                    <i class="far fa-edit"></i>
-                    <?php if($sertAgunanID != null){
-                      echo "Edit";
-                    }else { echo "Tambah";}
-                    ?>
-                </button>  
-                  
-       
-       
+                </table> 
             </div>
             <!-- End Sertifikat -->
 

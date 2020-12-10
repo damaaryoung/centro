@@ -158,10 +158,11 @@
                                 </tr>
                             </tbody>
                     </table>
+                      <div style="text-align: right">
                         <a type="button" data-toggle="modal" data-target="#peminjamanBPKBModal"
-                            class="btn btn-primary btn-sm" id="btnPinjamBPKB" >  
-                        <i class="fa fa-pencil-square-o"></i> Detail</a>  
-                                      
+                            class="btn btn-primary btn-sm" id="btnPinjamBPKB" style="width: 200px; color:white;">  
+                            <i class="fas fa-info-circle"></i> Detail</a>  
+                      </div>                
                   </div>
                   <!-- END BPKB -->
 
@@ -191,9 +192,11 @@
                               </tr>
                           </tbody>
                       </table>
-                        <a type="button" data-toggle="modal" data-target="#pinjamSertifikatModal"
-                            class="btn btn-primary btn-sm" id="btnPinjamSertif" >  
-                         <i class="fa fa-pencil-square-o"></i> Detail</a>  
+                          <div style="text-align: right">
+                            <a type="button" data-toggle="modal" data-target="#pinjamSertifikatModal"
+                                class="btn btn-primary btn-sm" id="btnPinjamSertif" style="width: 200px; color:white;">  
+                                <i class="fas fa-info-circle"></i> Detail</a>  
+                          </div>
                   </div>
                   <!-- End Sertifikat -->
 

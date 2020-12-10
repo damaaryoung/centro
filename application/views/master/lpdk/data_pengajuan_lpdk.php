@@ -61,6 +61,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 width: 40px;
                 cursor: pointer;
             }
+            #loadings {
+                width: 100%;
+                height: 100%;
+                top: 200;
+                left: 500;
+                position: fixed;
+                display: block;
+                z-index: 99;
+                text-align: center;
+            }
+            #loading-images {
+                position: absolute;
+                top: 35%;
+                left: 35%;
+                z-index: 100;
+            }
         </style>
         <link href="<?php echo base_url('assets/dist/css/datepicker.min.css') ?>" rel="stylesheet" type="text/css">
         <script src="<?php echo base_url('assets/dist/js/datepicker.js') ?>"></script>
@@ -84,14 +100,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <section style="min-height: 700px;">
             <div class="card card-info">
             <div class="card-header with-border">
-              <h3 class="card-title"></h3>
+              <h3 class="card-title">
+                <div id="loadings">
+                    <img id="loading-images" src="<?php echo base_url(); ?>assets/design/images/ajax-loader1.gif" alt="Loading..." />
+                </div>
+              </h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body text-center">  
                 <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                               
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="main_kode_kantor" style="text-align: left;">Kode Kantor</label>
                                   </div>
@@ -1873,6 +1892,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             load_data_pengajuan = function() {
                 get_pengajuan()
                     .done(function(response) {
+                        $('#loadings').hide();
                         var data = response.data;
                         var html = [];
                         var no = 0;
@@ -2064,6 +2084,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             load_data_lpdk = function() {
                 get_lpdk()
                     .done(function(response) {
+                        $('#loadings').hide();
                         var data = response.data;
                         var data_detail = response;
                         var html = [];
@@ -2461,8 +2482,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $('#data_pengajuan_lpdk').html('');
                 $('#table_pengajuan_lpdk').DataTable().clear();
                 $('#table_pengajuan_lpdk').DataTable().destroy();
+                $('#loadings').show();
                 get_filter_lpdk()
                     .done(function(response) {
+                        $('#loadings').hide();
                         var data = response.data;
                         var data_detail = response;
                         var html = [];
@@ -2850,8 +2873,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         });
                     })
                     .fail(function(response) {
+                        
                         $('#data_pengajuan_lpdk').html('<tr><td colspan="4">Tidak ada data</td></tr>');
                     });
+                    
             }
 
             //KLIK NOTE DATA PENGAJUAN LPDK
@@ -2931,6 +2956,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             //KLIK TAMBAH PENGAJUAN
             $("#modal_pengajuan").click(function() {
+                $('#loadings').show();
                 load_data_pengajuan();
             })
 

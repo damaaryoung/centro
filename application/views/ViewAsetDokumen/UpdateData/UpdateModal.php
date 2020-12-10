@@ -152,9 +152,11 @@
                                 </tr>
                             </tbody>
                     </table>
-                        <a type="button" data-toggle="modal" data-target="#updateBPKB"
-                            class="btn btn-primary btn-sm" id="btnUpdateBPKB" >  
-                        <i class="fa fa-pencil-square-o"></i> Detail</a>  
+                        <div style="text-align: right">
+                            <a type="button" data-toggle="modal" data-target="#updateBPKB"
+                                class="btn btn-primary btn-sm" id="btnUpdateBPKB" style="width: 200px; color:white;">  
+                                <i class="fas fa-info-circle"></i> Detail</a> 
+                        </div> 
                                       
                   </div>
                   <!-- END BPKB -->
@@ -185,9 +187,11 @@
                               </tr>
                           </tbody>
                       </table>
-                        <a type="button" data-toggle="modal" data-target="#updateSertifikat"
-                            class="btn btn-primary btn-sm" id="btnUpdateSertif" >  
-                         <i class="fa fa-pencil-square-o"></i> Detail</a>  
+                        <div style="text-align: right">
+                          <a type="button" data-toggle="modal" data-target="#updateSertifikat"
+                              class="btn btn-primary btn-sm" id="btnUpdateSertif" style="width: 200px; color:white;">  
+                              <i class="fas fa-info-circle"></i> Detail</a>  
+                        </div>
                   </div>
                   <!-- End Sertifikat -->
 

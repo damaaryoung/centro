@@ -56,6 +56,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
             .modal-backdrop {
                 width: 100% !important;
                 height: 100% !important;
+            } #loadings {
+                width: 100%;
+                height: 100%;
+                top: 200;
+                left: 500;
+                position: fixed;
+                display: block;
+                z-index: 99;
+                text-align: center;
+            }
+            #loading-images {
+                position: absolute;
+                top: 35%;
+                left: 35%;
+                z-index: 100;
             }
         </style>
         <link href="<?php echo base_url('assets/dist/css/datepicker.min.css') ?>" rel="stylesheet" type="text/css">
@@ -81,7 +96,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <section style="min-height: 700px;">
                 <div class="card card-info">
                     <div class="card-header with-border">
-                    <h3 class="card-title"></h3>
+                        <h3 class="card-title">
+                            <div id="loadings">
+                                <img id="loading-images" src="<?php echo base_url(); ?>assets/design/images/ajax-loader1.gif" alt="Loading..." />
+                            </div>
+                        </h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body text-center">  
@@ -1449,6 +1468,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         load_data_lpdk = function() {
             get_lpdk()
                 .done(function(response) {
+                    $('#loadings').hide();
                     var data = response.data;
                     var data_detail = response;
                     var html = [];
@@ -1851,11 +1871,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
         load_data_lpdk();
         load_filter_data_lpdk = function() {
+            $('#loadings').show();
             $('#data_lpdk').html('');
             $('#table_lpdk').DataTable().clear();
             $('#table_lpdk').DataTable().destroy();
             get_filter_lpdk()
                 .done(function(response) {
+                    $('#loadings').hide();
                     var data = response.data;
                     var data_detail = response;
                     var html = [];
@@ -2194,12 +2216,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             var disabled_edit = "";
                         }
                         var plafon = (rubah(item.plafon));
+                        if(item.tanggal_selesai[0] == null){
+                            var tanggal_selesai_created_at = '';
+                        }else{
+                            var tanggal_selesai_created_at = item.tanggal_selesai[0].created_at;
+                        }
                         var tr = [
                             '<tr>',
                             '<td title="Detail" class="details-control" data="' + item.trans_so + '"></td>',
                             '<td>' + item.status_kredit + '</td>',
                             '<td>' + item.created_at + '</td>',
-                            '<td>' + item.tanggal_selesai[0].created_at + '</td>',
+                            '<td>' + tanggal_selesai_created_at + '</td>',
                             '<td>' + item.nomor_so + '</td>',
                             '<td>' + item.nama_so + '</td>',
                             '<td>' + item.request_by + '</td>',

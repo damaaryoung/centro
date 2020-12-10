@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                <div class="form-inline">
                     <div class="form-group">
-                      <label for="email">Search</label> &nbsp; &nbsp;
+                      <label for="email"></label> &nbsp; &nbsp;
                       <input type="text" class="form-control" name="search" id="search" placeholder="Search" > 
                      &nbsp;&nbsp;
                     </div>
@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="card-header">
                 <?php  if( $this->session->userdata('menuAset') == '1'){ ?>
                   <form method="get" action="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen"> 
-                      <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-plus"> Tambah </i></button> 
+                      <button type="submit" class="btn btn-success btn-sm" style="width: 250px;"> <i class="fas fa-plus-circle"></i> Tambah </i></button> 
                   </form>
                 <?php }?>
             </div>
