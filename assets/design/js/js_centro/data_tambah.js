@@ -1,5 +1,6 @@
 var persenDefault = '';
 var jenisSertifikat = '';
+var base_url = $('#base_url').val();    
 
 
 
@@ -71,6 +72,27 @@ $(function(){
 });
 
 
+function selectTypeKendaraan(){
+    var merk = $('#bpkbMerk').val();
+    console.log(merk);
 
-
-
+    $.ajax({
+        url : base_url + "AsetDokumenEntryController/getTypeKend",
+        type : "POST",
+        dataType : "json",
+        data : {"merk"       : merk},
+        success : function(response) {
+           console.log(response.typeKend);
+           $('#bpkbType').find('option').remove().end();
+           $.each(response.typeKend,function(i,data){
+            $('#bpkbType').append('<option value="'+data.kd_type+'">' + data.nm_type + '</option>');
+           });
+       
+        },
+        error : function(response) {
+            console.log('failed :' + response);
+            alert('Gagal setting user acces, mohon coba beberapa saat lagi');
+          //  window.location = base_url + 'AsetDokumenEntryController/displayTambahDataBPKB';
+        }
+    });    
+}

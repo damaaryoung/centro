@@ -1125,6 +1125,12 @@ function  mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatan
                 $('#sertSlikJenisPengikatan').find('option').remove().end();
                 $('#sertSlikKodeDati2').find('option').remove().end();
 
+                
+                $('#sertSlikParipasu').find('option').remove().end();
+                $('#sertSLikStatusJoinAccount').find('option').remove().end();
+                $('#sertSlikAsuransi').find('option').remove().end();
+                $('#sertSlikStatusAgunan').find('option').remove().end();
+
                 // ISI
                 $('#sertJenisSertifikat').append(jenis_sert_otion);
                 $('#sertDokAJB').append(asli_option);
@@ -1383,11 +1389,15 @@ function  mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatan
             
                  
                 }
-                $('#sertSLikStatusJoinAccount').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
-                $('#sertSlikAsuransi').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
-                $('#sertSlikParipasu').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
-                $('#sertSlikStatusAgunan').append('<option value="1">1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
+                else if(JaminanSlik == null){
+                    $('#sertSLikStatusJoinAccount').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+                    $('#sertSlikAsuransi').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+                    $('#sertSlikParipasu').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+                    $('#sertSlikStatusAgunan').append('<option value="1">1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
 
+                }
+                
+                
                 $.each(SlikKodeJenisAgunan,function(i,data){
                     $('#sertSlikJenisAgunan').append('<option value="'+data.kode+'">' + data.kode + ' - ' + data.nama+'</option>');
                 });

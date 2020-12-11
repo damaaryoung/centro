@@ -18,6 +18,8 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
 
 		if($session != ''){ 
+			$data['kode_kantor'] = $this->session->userdata('kd_cabang');
+			$data['divisi_id']   = $this->session->userdata('divisi_id');
 			$data['selectKodeKantor'] = $this->Request_Jaminan_Centro_Model->selectKodeKantor();
 			$this->load->view('ViewCustodian/request_jaminan_main.php', $data);
 		}
@@ -144,9 +146,10 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 	public function getMasterJaminan(){
         $session = $this->session->userdata('nama');
 		$kode_kantor = $this->session->userdata('kd_cabang');
+		$kode_kantor_lokasi_jaminan = $this->input->post('kode_kantor_lokasi_jaminan');
 		
 
-		$getJaminanDokumen = $this->Request_Jaminan_Centro_Model->getJaminanDokumen($kode_kantor);
+		$getJaminanDokumen = $this->Request_Jaminan_Centro_Model->getJaminanDokumen($kode_kantor, $kode_kantor_lokasi_jaminan);
 		foreach ($getJaminanDokumen as $row) :	
 			
 			$data[]    = ['<tr> <td>'. $row['no_reff'] . '</td> <td>'

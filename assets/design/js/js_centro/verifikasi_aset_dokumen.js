@@ -420,10 +420,13 @@ function mappingFieldSertifikat(JaminanHeader,JaminanDokument, JaminanSlik){
 
      
     }
-    $('#sertSLikStatusJoinAccount').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
-    $('#sertSlikAsuransi').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
-    $('#sertSlikParipasu').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
-    $('#sertSlikStatusAgunan').append('<option value="1">1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
+    else if(JaminanSlik == null){
+        $('#sertSLikStatusJoinAccount').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        $('#sertSlikAsuransi').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        $('#sertSlikParipasu').append('<option value="T">T</option> <option value="Y" selected>Y</option>');
+        $('#sertSlikStatusAgunan').append('<option value="1">1 - Tersedia</option> <option value="2" selected>2 - Indent</option>');
+
+    }
     
 }
 function mappingFieldBPKB(JaminanHeader,JaminanDokument){

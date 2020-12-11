@@ -70,13 +70,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="main_kode_kantor">Kode Kantor</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control form-control-sm select2" id="main_kode_kantor" name="main_kode_kantor" onchange='searchData()'>
-                                      <option value="<?php echo $this->session->userdata('kd_cabang');?>"><?php echo $this->session->userdata('kd_cabang');?></option>
-                                      <?php foreach ($selectKodeKantor as $row) : ?>
-                                         <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
-                                      <?php endforeach;?>
-
-                                    </select>
+                                    <?php if($kode_kantor == '00' || $divisi_id == 'IT'){ ?>
+                                      <select class="form-control form-control-sm select2" id="main_kode_kantor" name="main_kode_kantor" onchange='searchData()'>
+                                        <option value="<?php echo $this->session->userdata('kd_cabang');?>"><?php echo $this->session->userdata('kd_cabang');?></option>
+                                        <?php foreach ($selectKodeKantor as $row) : ?>
+                                          <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
+                                        <?php endforeach;?>
+                                      </select>
+                                    <?php }else if($kode_kantor != '00' || $divisi_id != 'IT'){
+                                        echo '<input class="form-control form-control-sm" id="main_kode_kantor" name="main_kode_kantor" value="'.$kode_kantor.'" readonly>'; 
+                                      } ?> 
                                   </div>
                               </div>
                       </div>
@@ -101,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <th>Nomor</th>
                                 <th>Tanggal</th>
                                 <th>Nama Kantor Asal</th>
-                                <th>Nama Custodian</th>
+                                <th>Nama Kantor Tujuan</th>
                                 <th>Verifikasi</th>
                                 <th>Action</th>
                             </tr>

@@ -57,6 +57,12 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenViewAsetController/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>View Aset Dokumen</p>
+                  </a>
+                </li>
               <?php  if($this->session->userdata('entry_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>entry_asset_document" class="nav-link">

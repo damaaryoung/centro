@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Form ATAS -->
       <div class="card card-info">
             <div class="card-header with-border">
-              <h3 class="card-title">Tambah Data Aset Dokumen</h3>
+              <h3 class="card-title">HEADER PEMINDAHAN DATA</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -62,6 +62,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
+                                  <div class="col-sm-9">
+                                     
+                                  </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomor">Verifikasi</label>
                                   </div>
@@ -95,8 +98,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Kode Kantor Tujuan</label>
                                   </div>   
-                                  <div class="col-sm-3">   
-                                  <select class="form-control form-control-sm select2" id="kode_kantor_tujuan" name="kode_kantor_tujuan">
+                                  <div class="col-sm-4">   
+                                  <select class="form-control form-control-sm select2" id="kode_kantor_tujuan" name="kode_kantor_tujuan" readonly>
                                         <option value="<?php echo $kode_kantor_tujuan?>" selected ><?php echo $kode_kantor_tujuan?></option>
                                         <?php foreach ($selectKodeKantor as $row) : ?>
                                         <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
@@ -106,36 +109,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </div>
                           <!-- Form ATAS -->
 
-                          <div id="BPKB" class="tabcontent">
-                            <table id="tablePemindahanUpdateMain" class="table table-striped table-bordered display" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>No.&nbsp;Reff</th>
-                                            <th>Agunan&nbsp;ID</th>
-                                            <th>Jenis</th>
-                                            <th style="width: 500px;">Deskripsi&nbsp;Jaminan</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody  id="bodytablePemindahanUpdateMain">
-                                            <td></td> 
-                                            <td></td> 
-                                            <td></td> 
-                                            <td></td> 
-                                            <td></td> 
-                                    </tbody>
-                            </table>
-                      </div>
+                        
 
                       
                       <div class="form-group row">
                                   <div class="col-sm-2">
-                                    <button type="button" class="btn btn-success"  id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
-                                  </div>
-                                  <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="mainLokasiJaminan">Kode Lokasi Penyimpanan</label>
                                   </div>
-                                  <div class="col-sm-3">  
+                                  <div class="col-sm-4">  
                                   <select class="form-control form-control-sm select2" id="kode_lokasi_penyimpanan" name="kode_lokasi_penyimpanan">
                                           <option value="<?php echo $lokasi_penyimpanan?>" selected ><?php echo $lokasi_penyimpanan?></option>
                                           <?php foreach ($getCentro as $row) : ?>
@@ -143,10 +124,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                           <?php endforeach;?>
                                   </select>
                                   </div>
-                                  <div class="col-sm-1">
+                                  <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="mainKeterangan">Keterangan</label>
                                   </div>
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-4">
                                     <textarea style="height: 75px;" type="text" 
                                             class="form-control" name="mainKeterangan" 
                                             id="mainKeterangan"><?php echo $ket;?></textarea>
@@ -155,12 +136,56 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </div>
                   </div>
               </div>
-              <div class="card-footer text-center">
+       </div>
+        <!-- Form BAWAH -->
+        <div class="card card-danger">
+                <div class="card-header with-border">
+                  <h3 class="card-title">DETAIL PEMINDAHAN DATA</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <div class="container py-5" style="font-size: 12px;">
+                    <div class="row">
+                        <div class="col-md-12 mx-auto">
+                            <div class="form-group row">
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-success btn-sm" style="width: 200px;"  id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-12">
+                                <div id="BPKB" class="tabcontent">
+                                  <table id="tablePemindahanUpdateMain" class="table table-striped table-bordered display" style="width:100%">
+                                          <thead>
+                                              <tr>
+                                                  <th>No.&nbsp;Reff</th>
+                                                  <th>Agunan&nbsp;ID</th>
+                                                  <th>Jenis</th>
+                                                  <th style="width: 500px;">Deskripsi&nbsp;Jaminan</th>
+                                                  <th>Action</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody  id="bodytablePemindahanUpdateMain">
+                                                  <td></td> 
+                                                  <td></td> 
+                                                  <td></td> 
+                                                  <td></td> 
+                                                  <td></td> 
+                                          </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
                     <button type="button" class="btn btn-danger"  id="btn_kembali_update_pemindahan_lokasi">Kembali</button>
                     <button type="button" class="btn btn-primary" id="btn_simpan_update_pemindahan_lokasi" >Simpan</button>
-             </div>
+                </div>
+        </div>
 
-       </div>
 
        <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">                                  
        <input type="hidden" class="form-control" id="getNomor" name="getNomor" value = "<?php echo $getNomor; ?>"> 

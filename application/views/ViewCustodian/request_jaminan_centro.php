@@ -111,6 +111,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                               </div>
                       </div>
+                      <div class="col-md-12 mx-auto">
+                              <div class="form-group row">
+                                  <div class="col-sm-2" style="text-align: left;">
+                                    <label style="padding-top: 5px;" class="control-label" for="main_keterangan">PIC Peminjam</label>
+                                  </div>
+                                  <div class="col-sm-1">
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <input type="text" class="form-control form-control-sm" id="main_pic" name="main_pic">
+                                  </div>
+                                  <div class="col-sm-2" style="text-align: left;">
+                                      <label style="padding-top: 5px;" class="control-label" for="main_keterangan">Keterangan</label>
+                                  </div>
+                                  <div class="col-sm-4">
+                                        <textarea style="height: 75px;" type="text" 
+                                            class="form-control" name="main_keterangan" 
+                                            id="main_keterangan" placeholder="Keterangan...."></textarea>
+                                  </div>
+                              </div>
+                      </div>
                 </div>
                    
             </div>            
@@ -122,10 +142,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Data Tables -->
         <div class="card card-danger">
                 <div class="card-header">
-                <h3 class="card-title"></h3>
+                <h3 class="card-title">DATA REQUEST JAMINAN</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12 mx-auto">
+                              <div class="form-group row">
+                                  <div class="col-sm-1">
+                                    <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
+                                  </div>
+                              </div>
+                      </div>
+                    </div>
                     <table id="table_request_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
                         <thead>
                             <tr>
@@ -147,31 +176,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </tbody>
                     </table>
                     <br>    
-                    <div class="row">
-                      <div class="col-md-12 mx-auto">
-                              <div class="form-group row">
-                                  <div class="col-sm-1">
-                                    <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
-                                  </div>
-                                  <div class="col-sm-2" style="text-align: right;">
-                                    <label style="padding-top: 5px;" class="control-label" for="main_keterangan">PIC Peminjam</label>
-                                  </div>
-                                  <div class="col-sm-3">
-                                    <input type="text" class="form-control form-control-sm" id="main_pic" name="main_pic">
-                                  </div>
-                                  <div class="col-sm-1">
-                                  </div>
-                                  <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="main_keterangan">Keterangan</label>
-                                  </div>
-                                  <div class="col-sm-3">
-                                        <textarea style="height: 75px;" type="text" 
-                                            class="form-control" name="main_keterangan" 
-                                            id="main_keterangan" placeholder="Keterangan...."></textarea>
-                                  </div>
-                              </div>
-                      </div>
-                </div>
+                  
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer text-center">

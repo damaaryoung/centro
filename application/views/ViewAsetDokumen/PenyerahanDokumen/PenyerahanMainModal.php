@@ -158,10 +158,11 @@
                                 </tr>
                             </tbody>
                     </table>
-                        <a type="button" data-toggle="modal" data-target="#penyerahanBPKBModal"
-                            class="btn btn-primary btn-sm" id="btnPenyerahanBPKB" >  
-                        <i class="fa fa-pencil-square-o"></i> Detail</a>  
-                                      
+                            <div style="text-align: right">
+                                <a type="button" data-toggle="modal" data-target="#penyerahanBPKBModal"
+                                    class="btn btn-primary btn-sm" id="btnPenyerahanBPKB" style="width: 200px; color:white;">  
+                                    <i class="fas fa-info-circle"></i> Detail</a>  
+                            </div>                  
                   </div>
                   <!-- END BPKB -->
 
@@ -191,9 +192,11 @@
                               </tr>
                           </tbody>
                       </table>
-                        <a type="button" data-toggle="modal" data-target="#penyerahanSertifikatModal"
-                            class="btn btn-primary btn-sm" id="btnPenyerahanSertif" >  
-                         <i class="fa fa-pencil-square-o"></i> Detail</a>  
+                            <div style="text-align: right">
+                              <a type="button" data-toggle="modal" data-target="#penyerahanSertifikatModal"
+                                  class="btn btn-primary btn-sm" id="btnPenyerahanSertif" style="width: 200px; color:white;">  
+                                  <i class="fas fa-info-circle"></i> Detail</a>  
+                            </div>
                   </div>
                   <!-- End Sertifikat -->
 

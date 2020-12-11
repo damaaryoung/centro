@@ -688,6 +688,17 @@ class AsetDokumenEntryModel extends CI_Model{
         
         return $query->result_array();
 	}
+	public function getTypeKend2($merk){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT kd_type, nm_type, flg_aktif, kd_merk
+					FROM jaminan_type_kendaraan
+					WHERE kd_merk='$merk'
+					ORDER BY kd_type;";
+        $query = $this->db2->query($str);
+        
+        return $query->result_array();
+
+	}
 	public function insertJaminanHeaderBPKB($mainAreaKerja,
 											$mainTanggal,
 											$mainNama,
