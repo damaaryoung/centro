@@ -106,7 +106,7 @@ class BSSModel extends CI_Model{
 				ORDER BY id DESC LIMIT 10 OFFSET 0";
 		$str2 = "SELECT * FROM view_bss_notif 
 				WHERE kode_kantor_received='$kode_cabang' 
-				AND WHERE (kartu_number_awal LIKE '%$no_received%' OR kartu_number_akhir LIKE '%$no_received%')
+				AND (kartu_number_awal LIKE '%$no_received%' OR kartu_number_akhir LIKE '%$no_received%')
 				ORDER BY id DESC LIMIT 10 OFFSET 0";
 
 		if($kode_cabang == '00'){
@@ -208,6 +208,13 @@ class BSSModel extends CI_Model{
 						}
 					}
 				
+			}else if($appoved == 'ApprovedToKolektor'){ // Approval dari HEAD OP ke Kolektor
+				$this->db->query("SELECT IFNULL(MAX(bundle_id),0) + 1 INTO @bundle_id FROM bss");
+				for ($kartu_number_awal;$kartu_number_awal <= $kartu_number_akhir; $kartu_number_awal++){
+					$result = "INSERT INTO bss(kartu_number, bundle_id, user_id, kode_kantor, status_kartu)
+								VALUES($kartu_number_awal, @bundle_id, $userId	, '$kode_kantor_received','2')";
+					$this->db->query($result);
+				}
 			}else{ // reject
 				if($is_migrasi == '1'){ // jika rejek, maka balikin status kartu pusat in transit jadi NEW
 					
@@ -223,7 +230,7 @@ class BSSModel extends CI_Model{
 		// update bss_notif
 		$str_notif = "UPDATE bss_notif SET
 					tgl_approved=NOW(),
-					status='".($appoved == 'Approved' ? '1' :'2')."',
+					status='".($appoved == 'Approved' || 'ApprovedToKolektor' ? '1' :'2')."',
 					keterangan=".($appoved == 'Approved' ?  'NULL' : "'$keterangan'")."	
 					WHERE id=$id ";
 		return $this->db->query($str_notif);

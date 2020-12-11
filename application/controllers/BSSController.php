@@ -155,6 +155,8 @@ class BSSController extends CI_Controller {
 
 	public function search_received_bss(){
 		$session = $this->session->userdata('nama');
+		$divisi_id = $this->session->userdata('divisi_id');
+		$jabatan = $this->session->userdata('jabatan');
 		if($session != ''){
 			$model = new BSSModel(); 
 			$model->kode_cabang = $this->session->userdata('kd_cabang'); 
@@ -163,6 +165,8 @@ class BSSController extends CI_Controller {
 			echo json_encode([
 				"success" => true,
 				"message" => "",
+				"divisi_id" => $divisi_id,
+				"jabatan" => $jabatan,
 				"data" => $data
 			]);
 		}

@@ -38,7 +38,7 @@
                     <th>TANGGAL</th>
                     <th>APPROVAL</th>
                     <th style="width: 500px;">KETERANGAN</th>
-                    <th class="action">ACTION</th>
+                    <th style="width: 90px;" class="action">ACTION</th>
                   </tr>
               </thead>
               <tbody>
