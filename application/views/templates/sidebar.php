@@ -173,22 +173,7 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <?php if($this->session->userdata('update_kirim_jaminan_controller') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>update_kirim_jaminan" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p > Update Kirim Jaminan</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('update_kirim_jaminan_verifikasi_controller') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>update_kirim_jaminan_verifikasi" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p > Verifikasi Update Kirim Jaminan</p>
-                    </a>
-                  </li>
-                <?php }?>
+             
                 </ul>
             </li> 
          
@@ -201,6 +186,19 @@
               <i class="nav-icon fas fa-paste icon_color_sidebar"></i>
                 <p>
                   BSS
+                </p>
+              </a>
+            </li>   
+          <?php } else{} ?>
+          <!--- END MENU BSS -->
+
+          <!-- MENU BSS -->
+          <?php  if($this->session->userdata('divisi_id') == 'IT' ){ ?>
+            <li class="nav-item">
+              <a href="<?php echo base_url(); ?>bss" class="nav-link">
+              <i class="nav-icon fas fa-paste icon_color_sidebar"></i>
+                <p>
+                  E-FILLING
                 </p>
               </a>
             </li>   

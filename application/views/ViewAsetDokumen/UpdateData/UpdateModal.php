@@ -139,6 +139,7 @@
                                     <th>Alamat&nbsp;Pemilik</th>
                                     <th>No.&nbsp;Polisi</th>
                                     <th>Verifikasi</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,15 +149,13 @@
                                     <td><p id='rowBPKBNamaPemilik'></p></td> 
                                     <td><p id='rowBPKBAlamat'></p></td>
                                     <td><p id='rowBPKBNoPolisi'></p></td> 
-                                    <td><p id='rowBPKBVerif'></p></td>                                  
+                                    <td><p id='rowBPKBVerif'></p></td> 
+                                    <td><a type="button" data-toggle="modal" data-target="#updateBPKB"
+                                        class="btn btn-primary btn-sm" id="btnUpdateBPKB" style="width: 150px; color:white;">  
+                                        <i class="fas fa-info-circle"></i> Detail</a></td>                                 
                                 </tr>
                             </tbody>
                     </table>
-                        <div style="text-align: right">
-                            <a type="button" data-toggle="modal" data-target="#updateBPKB"
-                                class="btn btn-primary btn-sm" id="btnUpdateBPKB" style="width: 200px; color:white;">  
-                                <i class="fas fa-info-circle"></i> Detail</a> 
-                        </div> 
                                       
                   </div>
                   <!-- END BPKB -->
@@ -173,6 +172,7 @@
                                   <th>Luas Tanah</th>
                                   <th>Nama&nbsp;Pemilik</th>
                                   <th>Verifikasi</th>
+                                  <th style="width: 170px;">Action</th>
                               </tr>
                           </thead>
                           <tbody>
@@ -184,14 +184,12 @@
                                   <td><p id='rowSertLuasTanah'></p></td>
                                   <td><p id='rowSertPemilik'></p></td>
                                   <td><p id='rowSertVerif'></p></td>
+                                  <td><a type="button" data-toggle="modal" data-target="#updateSertifikat"
+                                        class="btn btn-primary btn-sm" id="btnUpdateSertif" style="width: 150px; color:white;">  
+                                        <i class="fas fa-info-circle"></i> Detail</a></td>
                               </tr>
                           </tbody>
                       </table>
-                        <div style="text-align: right">
-                          <a type="button" data-toggle="modal" data-target="#updateSertifikat"
-                              class="btn btn-primary btn-sm" id="btnUpdateSertif" style="width: 200px; color:white;">  
-                              <i class="fas fa-info-circle"></i> Detail</a>  
-                        </div>
                   </div>
                   <!-- End Sertifikat -->
 

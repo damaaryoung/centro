@@ -92,7 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <!-- Data Tables -->
-        <div class="card card-danger">
+        <div class="card ">
                 <div class="card-header">
                 <h3 class="card-title"></h3>
                 </div>

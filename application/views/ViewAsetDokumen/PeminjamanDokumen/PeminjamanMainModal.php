@@ -145,6 +145,7 @@
                                     <th>Alamat&nbsp;Pemilik</th>
                                     <th>No.&nbsp;Polisi</th>
                                     <th>Verifikasi</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -155,14 +156,12 @@
                                     <td><p id='rowBPKBAlamatPinjam'></p></td>
                                     <td><p id='rowBPKBNoPolisiPinjam'></p></td> 
                                     <td><p id='rowBPKBVerifPinjam'></p></td>
+                                    <td><a type="button" data-toggle="modal" data-target="#peminjamanBPKBModal"
+                                        class="btn btn-primary btn-sm" id="btnPinjamBPKB" style="width: 150px; color:white;">  
+                                        <i class="fas fa-info-circle"></i> Detail</a></td>
                                 </tr>
                             </tbody>
-                    </table>
-                      <div style="text-align: right">
-                        <a type="button" data-toggle="modal" data-target="#peminjamanBPKBModal"
-                            class="btn btn-primary btn-sm" id="btnPinjamBPKB" style="width: 200px; color:white;">  
-                            <i class="fas fa-info-circle"></i> Detail</a>  
-                      </div>                
+                    </table>              
                   </div>
                   <!-- END BPKB -->
 
@@ -178,6 +177,7 @@
                                   <th>Luas Tanah</th>
                                   <th>Nama&nbsp;Pemilik</th>
                                   <th>Verifikasi</th>
+                                  <th style="width: 170px;">Action</th>
                               </tr>
                           </thead>
                           <tbody>
@@ -189,14 +189,12 @@
                                   <td><p id='rowSertLuasTanahPinjam'></p></td>
                                   <td><p id='rowSertPemilikPinjam'></p></td>
                                   <td><p id='rowSertVerifPinjam'></p></td>
+                                  <td><a type="button" data-toggle="modal" data-target="#pinjamSertifikatModal"
+                                      class="btn btn-primary btn-sm" id="btnPinjamSertif" style="width: 150px; color:white;">  
+                                      <i class="fas fa-info-circle"></i> Detail</a></td>
                               </tr>
                           </tbody>
                       </table>
-                          <div style="text-align: right">
-                            <a type="button" data-toggle="modal" data-target="#pinjamSertifikatModal"
-                                class="btn btn-primary btn-sm" id="btnPinjamSertif" style="width: 200px; color:white;">  
-                                <i class="fas fa-info-circle"></i> Detail</a>  
-                          </div>
                   </div>
                   <!-- End Sertifikat -->
 

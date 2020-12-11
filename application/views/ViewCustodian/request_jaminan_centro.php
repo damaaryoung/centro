@@ -150,7 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
                                   <div class="col-sm-1">
-                                    <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
+                                    <button type="button" class="btn btn-success btn-sm" style="width: 250px;" id="btn_tambah_jaminan_main">Tambah <i class="fas fa-plus-circle"></i></button>
                                   </div>
                               </div>
                       </div>

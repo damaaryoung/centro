@@ -166,13 +166,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                           <div class="col-md-12 mx-auto">
                                   <div class="form-group row">
-                                      <div class="col-sm-2">
+                                      <div class="col-sm-8">
                                         <div class="form-inline">
-                                          <button type="button" class="btn btn-success btn-sm"  id="btn_tambah_jaminan_main" disabled>Tambah <i class="fas fa-plus-circle"></i></button>
+                                          <button type="button" class="btn btn-success btn-sm" style="width: 250px;" id="btn_tambah_jaminan_main" disabled>Tambah <i class="fas fa-plus-circle"></i></button>
                                         
                                           <div style ="padding-left: 5px;">
                                             <form method="post" target="_blank" style ="display:inline;" action="<?php echo base_url();?>Request_Jaminan_Verifikasi_Controller/cetakProses"> 
-                                              <button type="submit" class="btn btn-primary btn-sm"  id="btn_print" disabled
+                                              <button type="submit" class="btn btn-primary btn-sm" style="width: 250px;"  id="btn_print" disabled
                                                       data-nomor="<?php echo $nomor?>" 
                                                     >Print &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-print"></i>
                                               </button>
