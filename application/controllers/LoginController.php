@@ -115,7 +115,7 @@ class LoginController extends CI_Controller {
 
 	public function logout_process(){
 		$this->session->sess_destroy();  
-		redirect('LoginController/index'); 
+		//redirect('LoginController/index'); 
 	}
 
 	

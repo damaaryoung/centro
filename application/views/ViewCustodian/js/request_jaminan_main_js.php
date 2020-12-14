@@ -27,6 +27,9 @@ function getData(){
             url : base_url + "index.php/Request_Jaminan_Centro_Controller/getListRequest",
             type : "POST",
             dataType : "json",
+            headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
             data : {"proses" : "getAwal"},
 
             success : function(response) {

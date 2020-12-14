@@ -34,7 +34,7 @@
             <span class="float-right text-muted text-sm"></span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="<?php echo base_url(); ?>index.php/LoginController/logout_process" class="dropdown-item dropdown-footer">Log Out</a>
+          <a onclick="logoutProcess()" class="dropdown-item dropdown-footer">Log Out</a>
         </div>
       </li>
      <!--  <li class="nav-item">
@@ -44,3 +44,25 @@
     </ul>
   </nav>
   <!-- /.navbar -->
+
+
+  <script>
+    function logoutProcess(){
+        $.ajax({
+              url :  "<?= base_url(); ?>LoginController/logout_process",
+              type : "get",
+              headers: {
+                          'Authorization': 'Bearer ' + localStorage.getItem('token')
+                      },
+              success : function(response) {
+                console.log("sukses");
+                  localStorage.clear();
+                  sessionStorage.clear();
+                  window.location = '<?= base_url(); ?>LoginController/index';
+              },
+              error : function(response) {
+                  console.log('logout gagal :' + response);
+              }
+      });
+    } 
+  </script>
