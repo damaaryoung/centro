@@ -183,7 +183,7 @@
           <?php  if($this->session->userdata('divisi_id') == 'IT' ||$this->session->userdata('divisi_id') == 'GA' ||$this->session->userdata('divisi_id') == 'OPERASIONAL' || $this->session->userdata('BSS') == 'ok'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>bss" class="nav-link">
-              <i class="nav-icon fas fa-paste icon_color_sidebar"></i>
+              <i class="nav-icon fas fa-file-invoice-dollar icon_color_sidebar"></i>
                 <p>
                   BSS
                 </p>
@@ -195,7 +195,7 @@
           <!-- MENU BSS -->
           <?php  if($this->session->userdata('divisi_id') == 'IT' ){ ?>
             <li class="nav-item">
-              <a href="<?php echo base_url(); ?>bss" class="nav-link">
+              <a href="<?php echo base_url(); ?>e_filing" class="nav-link">
               <i class="nav-icon fas fa-paste icon_color_sidebar"></i>
                 <p>
                   E-FILLING

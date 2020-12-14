@@ -118,7 +118,7 @@ function serchBSS(status, kode_area, searching) {
             status_color = `color:#fab504`;
           }
           row += ` <tr  ${form_update} user_id_request = "${obj[i]['user_id']}">
-                            <td class='details-control'>${i+1}</td>
+                            <td class='details-control'></td>
                             <td class="kartu_number">${obj[i]['kartu_number']}</td>
                             <td><span style="${status_color};font-weight: bold;">${obj[i]['status']}</span></td>
                             <td>${obj[i]['nama_kantor']}</td>
