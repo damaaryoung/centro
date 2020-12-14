@@ -61,7 +61,7 @@ tr.shown td.details-click {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><i class="fas fa-file-invoice" style="color:#dc3545"></i> Biaya Setoran Sementara</h1>
+            <h1><i class="fas fa-file-invoice-dollar" style="color:#dc3545"></i> Biaya Setoran Sementara</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -165,7 +165,7 @@ tr.shown td.details-click {
                <table id="employeeTable1" class="table table-striped table-bordered" style="width:100% text-align:center" >
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th></th>
                             <th>Nomor</th>
                             <th>Status</th>
                             <th>Area Kerja</th>
@@ -180,7 +180,7 @@ tr.shown td.details-click {
                     </thead>
                     <tbody id="list_dt">
                       <?php
-                            $idx = 1;
+                          
                             foreach ($getAll  as $row) {
                               $status = '';
                               if($row['status']='USED'){
@@ -189,7 +189,7 @@ tr.shown td.details-click {
                                   $status = $row['status'];
                               }
                                 echo "<tr>";
-                                echo "<td  class='details-click'>".$idx."</td>";
+                                echo "<td  class='details-click'></td>";
                                 echo "<td class='kartu_number'>".$row['kartu_number']."</td>";
                                 echo "<td>".$status."</td>";
                                 echo "<td>".$row['nama_kantor']."</td>";
@@ -203,7 +203,7 @@ tr.shown td.details-click {
                       ?>
                             </tr>
                             
-                      <?php $idx++;}  ?>
+                      <?php }  ?>
                     </tbody>
                 </table>
                </div>
