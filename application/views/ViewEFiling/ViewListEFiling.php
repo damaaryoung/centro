@@ -81,7 +81,7 @@ tr.shown td.details-click {
                 <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
               </div>
           <div class="col-12">
-            <div class="card">
+          
             
             <!-- Horizontal Form -->
           <div class="card card-info">
@@ -133,7 +133,7 @@ tr.shown td.details-click {
                     <div class="form-group row">
                       <label class="col col-form-label"> Pencarian</label>
                       <div class="col">
-                      <input type="search" class="form-control" name="search" id="search" placeholder="Nomor/Kolektor" aria-label="Search" style="width: 200px;" > 
+                      <input type="search" class="form-control" name="search" id="search" placeholder="Nomor Rekening/Nama Debet" aria-label="Search" style="width: 200px;" > 
                       </div>
                     </div>   
                 </div>
@@ -143,49 +143,63 @@ tr.shown td.details-click {
           <!-- /.card -->
 
             <div class="card">
-            <div class="card-header">
-             
-            </div>
-            
-            <!-- /.card-header -->
-              <!-- /.card-header -->
               <div class="card-body">
               
                <div class= "col-12">
                 <div class="table-responsive">
-                        <table id="efilingTable1" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                        <table id="efilingTable1" class="table table-striped table-bordered" style="text-align:center; width:100%; white-space: nowrap;">
                             <thead style="text-align: center;">
-                                <tr>
-                                    <th>No Rekening </th>
-                                    <th>Nasabah</th>
-                                    <th>Area Kerja</th>
-                                    <th>Tgl.Realiasi</th>
-                                    <th>Plafon</th>
-                                    <th>Tenor</th>
-                                    <th>Baki Debet</th>
-                                    <th>Status Dokumen</th>
-                                    <th>Status Verifikasi</th>
-                                    <th>Action</th>
-                                </tr>
+                            <tr>
+                                <th rowspan="2">No Rekening</th>
+                                <th rowspan="2">Nasabah </th>
+                                <th rowspan="2">Area Kerja</th>
+                                <th rowspan="2">Tgl.Realias </th>
+                                <th rowspan="2">Plafon</th>
+                                <th rowspan="2">Tenor</th>
+                                <th rowspan="2">Baki Debet</th>
+                                <th rowspan="2">Status Dokumen</th>
+                                <th colspan="2">User</th>
+                                <th colspan="3">Tanggal</th>
+                                <th rowspan="2" colspan="1">Status Verifikasi</th>
+                                <th rowspan="2" colspan="1">Action</th>
+                            </tr>
+                            <tr>
+                                <th>Upload</th>
+                                <th>Verifikasi</th>
+                                <th>Buat</th>
+                                <th>Update</th>
+                                <th>Verifikasi</th>
+                            </tr>
                             </thead>
                             <tbody style="text-align: center;" id="list_dt">
-                            <tr>
-                                <td  style="width: 150px;">33-38-00050-20</td>
-                                <td style="width: 180px;">INTIFADA AYU SULISTYA</td>
-                                <td>SINDANG BARANG</td>
-                                <td>07-10-2020</td>
-                                <td>30,000,000</td>
-                                <td>36</td>
-                                <td>30,000,000</td>
-                                <td></td>
-                                <td>WAITING</td>
-                                <td style="width: 180px;">
-                                    <button type="button" class="btn btn-info btn-sm edit" title="Ubah Pengajuan" disabled="" data-target="#update" data="5113"><i class="fas fa-pencil-alt"></i></button>
-                                    <button type="button" class="btn btn-warning btn-sm edit" title="Detail Pengajuan" onclick="click_detail()" data-target="#update" data="5113"><i style="color: #fff;" class="fas fa-eye"></i></button>
-                                    <button type="button" disabled="" class="btn btn-warning btn-sm note" title="Note Pengajuan" style="background-color: #6610f2; border-color: #6f42c1;" data="5113"><i style="color: #fff;" class="fas fa-sticky-note"></i></button>
-                                    <button type="button" disabled="" class="btn btn-default bg-gradient-danger btn-sm cancel" title="Cancel Pengajuan" data="5113"><i style="color: #fff;" class="fas fa-window-close"></i></button>
-                                </td>
-                            </tr>
+                            <?php
+                              //  if (value == "NOT COMPLETED") background += 'color:#B6AC47'
+                              //  else if (value == "DONE")background += 'color:#00AE39'
+                              //   else if (value == "WAITING")background += 'color:#D60404'
+                              //   else if (value == "REVISI")background += 'color:#FF6412'
+                            echo '<tr>
+                                    <td style="width: 120px;">33-38-00050-20</td>
+                                    <td>INTIFADA AYU SULISTYA</td>
+                                    <td>SINDANG BARANG</td>
+                                    <td>07-10-2020</td>
+                                    <td>30,000,000</td>
+                                    <td>36</td>
+                                    <td>30,000,000</td>
+                                    <td></td>
+                                    <td style="width: 120px;">SULUH DAMAR GRAHITA</td>
+                                    <td></td>
+                                    <td>11-12-2020 14:29</td>
+                                    <td></td>
+                                    <td>22 jam yang lalu</td>
+                                    <td>WAITING</td>
+                                    <td style="width: 120px;">
+                                        <button type="button" class="btn btn-primary btn-sm tambah" title="Tambah Data" disabled="" data-target="#update" data="5113"><i class="fas fa-plus"></i></button>
+                                        <button type="button" class="btn btn-info btn-sm edit" title="Edit Data" ><i class="fas fa-pencil-alt"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm detail" title="Detail Data" ><i style="color: #fff;" class="fas fa-eye"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm verifikasi" title="Verifikasi"   style="background-color: #6610f2; border-color: #6f42c1;" data="5113"><i style="color: #fff;" class="fas fa-user-check"></i></button>
+                                    </td>
+                                  </tr>';
+                            ?>
                             </tbody>
                         </table>
                     </div>
@@ -212,9 +226,12 @@ tr.shown td.details-click {
         echo $footer;
         echo $ctrlbar;
         echo $js;
+        echo $Modaldetail_efiling;
 	?>
  
 </body>
 </html>
 
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/bs-custom-file-input.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_efiling/list_efiling.js"></script>

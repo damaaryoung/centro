@@ -19,6 +19,8 @@ class E_FilingController extends CI_Controller {
 		$data['footer'] = $this->load->view('templates/footer.php', NULL, TRUE);
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
 
+		$data['Modaldetail_efiling'] = $this->load->view('ViewEFiling/modal_detail_efiling', NULL, TRUE);
+
 		if($session != ''){
             $data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			$this->load->view('ViewEFiling/ViewListEFiling.php', $data);
