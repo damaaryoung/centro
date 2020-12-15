@@ -69,6 +69,7 @@ class Model_cek_sertifikat extends CI_Model{
       'ssb_tahun' =>$this->input->post('ssb_tahun',TRUE),
       'ssb_atas_nama' =>$this->input->post('ssb_atas_nama',TRUE),
       'status' =>$this->input->post('status',TRUE),
+      'plan_akad' =>$this->input->post('plan_akad',TRUE),
     );
     $url="/api/master/sertifikat/update/".$this->input->post('id_data', TRUE)."";
     $curl     = $this->config->item('api_url') . $url ;

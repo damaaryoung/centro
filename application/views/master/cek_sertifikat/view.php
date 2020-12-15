@@ -398,6 +398,10 @@
                                   }?>
                                 </select>
                         </div>
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal Rencana Akad</label>
+                                <input type="date" name="plan_akad" class="form-control" id="tgl-plan_akad" value="<?=$key['plan_akad'];?>">
+                        </div>
                     </fieldset>
                   </div>
                 </div>
