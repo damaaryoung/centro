@@ -10,7 +10,7 @@ class update_kirim_jaminan_verifikasi_model extends CI_Model{
     public function selectKodeKantor(){
             $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
             $str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
-                    FROM dpm_online.`app_kode_kantor` AKK;
+                    FROM `app_kode_kantor` AKK;
                 ";
             $query = $this->db2->query($str);
             

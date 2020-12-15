@@ -11,7 +11,7 @@ class Request_Jaminan_Centro_Model extends CI_Model{
     public function selectKodeKantor(){
             $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
             $str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
-                    FROM dpm_online.`app_kode_kantor` AKK;
+                    FROM `app_kode_kantor` AKK;
                 ";
             $query = $this->db2->query($str);
             
@@ -150,7 +150,7 @@ class Request_Jaminan_Centro_Model extends CI_Model{
     public function getCentro(){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT kode_centro AS `kode`, nama_centro AS `nama`, flg_aktif AS `flg_aktif`
-                FROM dpm_online.kre_kode_centro
+                FROM kre_kode_centro
                 WHERE 0=0 
                 ORDER BY kode;";
         $query = $this->db2->query($str);
@@ -167,7 +167,7 @@ class Request_Jaminan_Centro_Model extends CI_Model{
     public function generateNomor($kode_kantor_tujuan){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT CONCAT('$kode_kantor_tujuan','.',LPAD(SUBSTR(nomor, 4, 6) + 1, 6, '0')) AS hasil 
-                FROM dpm_online.jaminan_request_pemindahan 
+                FROM jaminan_request_pemindahan 
                 WHERE nomor LIKE CONCAT('$kode_kantor_tujuan', '.%') 
                     ORDER BY hasil DESC 
                     LIMIT 1;";
@@ -187,7 +187,7 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                                             $main_pic){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.`jaminan_request_pemindahan` (
+		$this->db2->query("INSERT INTO `jaminan_request_pemindahan` (
                                 `nomor`,
                                 `tgl`,
                                 `kode_kantor_lokasi_jaminan`,
@@ -213,7 +213,7 @@ class Request_Jaminan_Centro_Model extends CI_Model{
     public function insertDataPemindahanDetail($nomor,$nomorReffDeatail,$agunanIdDetail){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.jaminan_request_pemindahan_detail (
+		$this->db2->query("INSERT INTO jaminan_request_pemindahan_detail (
                                     `nomor`, 
                                     `no_reff`, 
                                     `agunan_id`)
@@ -225,7 +225,7 @@ class Request_Jaminan_Centro_Model extends CI_Model{
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
         $this->db2->trans_start();
-        $this->db2->query("INSERT INTO dpm_online.user_log (USER, kd_menu, waktu, ket, AppVer, ip) 
+        $this->db2->query("INSERT INTO user_log (USER, kd_menu, waktu, ket, AppVer, ip) 
                             VALUES('$usename',
                                 'Request Jaminan Ke Centro',
                                 NOW(),
@@ -233,8 +233,8 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                                 '$version',
                                 (SELECT SUBSTRING(HOST, 1, 20) FROM information_schema.processlist WHERE ID=CONNECTION_ID())
                             );");
-        $this->db2->query("DELETE FROM dpm_online.jaminan_request_pemindahan WHERE nomor='$nomor';");
-        $this->db2->query("DELETE FROM dpm_online.jaminan_request_pemindahan_detail WHERE nomor='$nomor';");
+        $this->db2->query("DELETE FROM jaminan_request_pemindahan WHERE nomor='$nomor';");
+        $this->db2->query("DELETE FROM jaminan_request_pemindahan_detail WHERE nomor='$nomor';");
 		$this->db2->trans_complete();
     }
 

@@ -44,7 +44,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 	}
 	public function nextID(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT dpm_online.get_auto_next_id('dpm_online','jaminan_dokument') AS 'id';";
+		$str = "SELECT get_auto_next_id('dpm_online','jaminan_dokument') AS 'id';";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
@@ -52,7 +52,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 	public function selectKodeKantor(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
-				FROM dpm_online.`app_kode_kantor` AKK;
+				FROM `app_kode_kantor` AKK;
                ";
         $query = $this->db2->query($str);
         
@@ -61,7 +61,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 	public function getSlikKodeJenisAgunan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT `nomor`, `kode`, `nama`
-				FROM dpm_online.slik_ref_jenis_agunan
+				FROM slik_ref_jenis_agunan
 				WHERE flg_aktif='1'
 				ORDER BY `nomor`;
 				";
@@ -83,7 +83,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 	public function getSlikJenisPengikatan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT `nomor`, `kode`, `nama`
-				FROM dpm_online.slik_ref_jenis_pengikatan
+				FROM slik_ref_jenis_pengikatan
 				WHERE flg_aktif='1'
 				ORDER BY `nomor`;
 				";
@@ -94,7 +94,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 	public function getSlikDati2(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT `nomor`, `kode`, `nama`
-				FROM dpm_online.slik_ref_dati
+				FROM slik_ref_dati
 				WHERE flg_aktif='1'
 				ORDER BY `nomor`;
 				";
@@ -133,10 +133,10 @@ class AsetDokumenUpdateModel extends CI_Model{
 					DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate',
 					VBK.`nama_nasabah`
 				FROM
-					dpm_online.jaminan_header JH
-				LEFT JOIN dpm_online.`app_kode_kantor` KK
+					jaminan_header JH
+				LEFT JOIN `app_kode_kantor` KK
 					ON jh.`kode_kantor` = kk.`kode_kantor`
-				LEFT JOIN dpm_online.`vmicro_browse_kredit` VBK
+				LEFT JOIN `vmicro_browse_kredit` VBK
 					ON JH.`no_rekening` = VBK.`no_rekening`
 					WHERE nomor = '$nomorAgunan'
 					AND no_reff = '$nomorRefAgunan'";
@@ -159,8 +159,8 @@ class AsetDokumenUpdateModel extends CI_Model{
 					JMK.`nm_merk` AS nama_merk,
 					jtk.`nm_type` AS nama_type
 				FROM
-					dpm_online.jaminan_dokument JD 
-					LEFT JOIN dpm_online.`app_kode_kantor` KK 
+					jaminan_dokument JD 
+					LEFT JOIN `app_kode_kantor` KK 
 					ON JD.kode_kantor_lokasi_jaminan = KK.kode_kantor 
 					LEFT JOIN kre_kode_jenis_agunan KKJA 
 					ON JD.`jenis_agunan_detail` = KKJA.`KODE_JENIS_AGUNAN` 
@@ -215,8 +215,8 @@ class AsetDokumenUpdateModel extends CI_Model{
 					CONCAT(SRJP.`kode`,' - ',SRJP.`nama`) AS SlikJenisPengikatan,
 					CONCAT(SRD.`kode`,' - ',SRD.`nama`) AS SlikKodeDati2
 				FROM
-					dpm_online.slik_agunan SA
-				LEFT JOIN dpm_online.slik_ref_jenis_agunan SRJ
+					slik_agunan SA
+				LEFT JOIN slik_ref_jenis_agunan SRJ
 					ON SRJ.KODE = SA.kode_jenis_agunan
 				LEFT JOIN slik_ref_lembaga_pemeringkat RLP
 					ON RLP.`kode` = SA.`kode_lembaga_pemeringkat`
@@ -232,7 +232,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 
 	public function getCoverNotes($agunanID, $nomorRefAgunan){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT * FROM dpm_online.`jaminan_cover_notes`
+		$str = "SELECT * FROM `jaminan_cover_notes`
 				WHERE agunan_id = '$agunanID'
 				AND no_reff = '$nomorRefAgunan'
 				ORDER BY id DESC;";
@@ -301,7 +301,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("UPDATE dpm_online.jaminan_header 
+		$this->db2->query("UPDATE jaminan_header 
 							SET tgl              = '$mainTanggal',
 								nama             = '$mainNama',
 								alamat           = '$mainAlamat',
@@ -381,7 +381,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 												$verifikasi){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("UPDATE dpm_online.jaminan_dokument 
+		$this->db2->query("UPDATE jaminan_dokument 
 							SET jenis					   = '$jenisJaminan',
 								no_shm                     = '$no_shm',
 								no_shgb 				   = '$no_shgb',
@@ -475,7 +475,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 										){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("UPDATE  dpm_online.`slik_agunan` 
+		$this->db2->query("UPDATE  `slik_agunan` 
 								SET	`flag_detail`				      = 'D',
 									`no_rekening`      				  = '$mainNomorRekening',
 									`cif`			   				  = '$cif',
@@ -528,7 +528,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 
 										$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 
-										$this->db2->query("UPDATE dpm_online.jaminan_header 
+										$this->db2->query("UPDATE jaminan_header 
 										SET tgl          = '$mainTanggal',
 										nama             = '$mainNama',
 										alamat           = '$mainAlamat',
@@ -591,7 +591,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 												$bpkbNoReff){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query(" UPDATE dpm_online.jaminan_dokument
+		$this->db2->query(" UPDATE jaminan_dokument
 						    SET	`jenis` 					= '$jenisJaminan', #MULAI
 								`jenis_agunan_detail`       = '$bpkbKodeJenisAgunan',
 								`nomor_bpkb`                = '$bpkbNoBPKB',
@@ -664,7 +664,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 
 										$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 
-										$this->db2->query("UPDATE dpm_online.jaminan_header 
+										$this->db2->query("UPDATE jaminan_header 
 										SET tgl          = '$mainTanggal',
 										nama             = '$mainNama',
 										alamat           = '$mainAlamat',
@@ -697,7 +697,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
 												
-		$this->db2->query(" UPDATE dpm_online.jaminan_dokument 
+		$this->db2->query(" UPDATE jaminan_dokument 
 						    SET `jenis`				   = '$jenisJaminan', #MULAI
 								`verifikasi`           = '$verifikasi',
 								`karat`                = '$emasKarat',
@@ -720,7 +720,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
 												
-		$this->db2->query(" UPDATE dpm_online.jaminan_header 
+		$this->db2->query(" UPDATE jaminan_header 
 						    SET tgl_rencana_kembali = '$tanggalRencanaKembaliDueDate' 
 							WHERE id= '$mainIdDueDate';
 						");
@@ -730,7 +730,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
 												
-		$this->db2->query(" UPDATE dpm_online.jaminan_header 
+		$this->db2->query(" UPDATE jaminan_header 
 						    SET upload_cover_notes = '$namafileUpload' 
 							WHERE id= '$CoverNotesID';
 						");

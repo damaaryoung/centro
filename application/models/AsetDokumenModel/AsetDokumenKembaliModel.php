@@ -32,8 +32,8 @@ class AsetDokumenKembaliModel extends CI_Model{
 						JH.verifikasi,
 						kk.`kode_cabang`,
 						kk.`nama_kantor`
-					FROM dpm_online.jaminan_header JH,
-						dpm_online.`app_kode_kantor` KK
+					FROM jaminan_header JH,
+						`app_kode_kantor` KK
 					WHERE nomor = '$nomorAgunan'
 					AND no_reff = '$nomorRefAgunan'
 					AND jh.`kode_kantor` = kk.`kode_kantor`;
@@ -56,8 +56,8 @@ class AsetDokumenKembaliModel extends CI_Model{
 					JMK.`nm_merk` AS nama_merk,
 					jtk.`nm_type` AS nama_type
 				FROM
-					dpm_online.jaminan_dokument JD 
-					LEFT JOIN dpm_online.`app_kode_kantor` KK 
+					jaminan_dokument JD 
+					LEFT JOIN `app_kode_kantor` KK 
 					ON JD.kode_kantor_lokasi_jaminan = KK.kode_kantor 
 					LEFT JOIN kre_kode_jenis_agunan KKJA 
 					ON JD.`jenis_agunan_detail` = KKJA.`KODE_JENIS_AGUNAN` 
@@ -76,7 +76,7 @@ class AsetDokumenKembaliModel extends CI_Model{
 		return $query->result_array();
 	}
 	public function getJaminanHistory($nomorRefAgunan){
-		$str = "SELECT * from dpm_online.jaminan_history WHERE no_reff='$nomorRefAgunan' and status='MASUK'  limit 1;";
+		$str = "SELECT * from jaminan_history WHERE no_reff='$nomorRefAgunan' and status='MASUK'  limit 1;";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
@@ -106,7 +106,7 @@ class AsetDokumenKembaliModel extends CI_Model{
 		//step : update jaminan header dengan data awal, lali insert kembali ke history dg staatus 
 		$this->db2->trans_start();
 		$this->db2->query("UPDATE 
-								dpm_online.jaminan_header 
+								jaminan_header 
 							SET
 								tgl = '$mainTanggalHistory',
 								nomor = '$mainNomorHistory',
@@ -118,7 +118,7 @@ class AsetDokumenKembaliModel extends CI_Model{
 								tgl_rencana_kembali = '$mainTanggalRencanaHistory',
 								jenis_pengurusan = '$mainJenisPengurusanHistory' 
 							WHERE no_reff = '$mainNoReffHistory';");
-		$this->db2->query("INSERT INTO dpm_online.jaminan_history 
+		$this->db2->query("INSERT INTO jaminan_history 
 								SELECT NULL AS `id`,
 								nomor,
 								no_reff,
@@ -141,7 +141,7 @@ class AsetDokumenKembaliModel extends CI_Model{
 								'$mainTanggalRencanaKembali' as tgl_rencana_kembali,
 								jenis_pengurusan 
 							FROM
-								dpm_online.jaminan_header 
+								jaminan_header 
 							WHERE id = '$mainIdKembali';");
 		
 		$this->db2->trans_complete();

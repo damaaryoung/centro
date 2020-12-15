@@ -12,7 +12,7 @@ class PemindahanJaminanMainModel extends CI_Model{
     public function selectKodeKantor(){
             $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
             $str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
-                    FROM dpm_online.`app_kode_kantor` AKK;
+                    FROM `app_kode_kantor` AKK;
                 ";
             $query = $this->db2->query($str);
             
@@ -72,7 +72,7 @@ class PemindahanJaminanMainModel extends CI_Model{
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
         $this->db2->trans_start();
-        $this->db2->query("INSERT INTO dpm_online.user_log (USER, kd_menu, waktu, ket, AppVer, ip) 
+        $this->db2->query("INSERT INTO user_log (USER, kd_menu, waktu, ket, AppVer, ip) 
                             VALUES
                             (
                                 '$usename',
@@ -82,8 +82,8 @@ class PemindahanJaminanMainModel extends CI_Model{
                                 '$version',
                                 (SELECT SUBSTRING(HOST, 1, 20) FROM information_schema.processlist WHERE ID=CONNECTION_ID())
                             );");
-        $this->db2->query("DELETE FROM dpm_online.jaminan_pemindahan WHERE nomor='$nomor';");
-        $this->db2->query("DELETE FROM dpm_online.jaminan_pemindahan_detail WHERE nomor='$nomor';");
+        $this->db2->query("DELETE FROM jaminan_pemindahan WHERE nomor='$nomor';");
+        $this->db2->query("DELETE FROM jaminan_pemindahan_detail WHERE nomor='$nomor';");
 		$this->db2->trans_complete();
     }
 

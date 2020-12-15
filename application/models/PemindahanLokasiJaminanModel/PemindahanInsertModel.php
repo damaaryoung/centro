@@ -10,7 +10,7 @@ class PemindahanInsertModel extends CI_Model{
     public function selectKodeKantor(){
             $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
             $str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
-                    FROM dpm_online.`app_kode_kantor` AKK;
+                    FROM `app_kode_kantor` AKK;
                 ";
             $query = $this->db2->query($str);
             
@@ -88,7 +88,7 @@ class PemindahanInsertModel extends CI_Model{
     public function getCentro(){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT kode_centro AS `kode`, nama_centro AS `nama`, flg_aktif AS `flg_aktif`
-                FROM dpm_online.kre_kode_centro
+                FROM kre_kode_centro
                 WHERE 0=0 
                 
                 ORDER BY kode;";
@@ -106,7 +106,7 @@ class PemindahanInsertModel extends CI_Model{
     public function generateNomor($kode_kantor){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT CONCAT('$kode_kantor','.',LPAD(SUBSTR(nomor, 4, 6) + 1, 6, '0')) AS hasil 
-                FROM dpm_online.jaminan_pemindahan 
+                FROM jaminan_pemindahan 
                 WHERE nomor LIKE CONCAT('$kode_kantor', '.%') 
                     ORDER BY hasil DESC 
                     LIMIT 1";
@@ -125,7 +125,7 @@ class PemindahanInsertModel extends CI_Model{
                                         ){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.jaminan_pemindahan (
+		$this->db2->query("INSERT INTO jaminan_pemindahan (
                                 `nomor`,
                                 `tgl`,
                                 `kode_kantor_asal`,
@@ -148,7 +148,7 @@ class PemindahanInsertModel extends CI_Model{
     public function insertDataPemindahanDetail($nomor,$nomorReffDeatail,$agunanIdDetail){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.jaminan_pemindahan_detail (
+		$this->db2->query("INSERT INTO jaminan_pemindahan_detail (
                                     `nomor`, 
                                     `no_reff`, 
                                     `agunan_id`)

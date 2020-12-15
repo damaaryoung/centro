@@ -23,7 +23,7 @@ class LoginModel extends CI_Model{
 	public function userAccess($userId){
 		$this->db3 = $this->load->database('DB_TEST', true);
 		$str = "SELECT access_id
-				FROM test.`user_access_centro`
+				FROM `user_access_centro`
 				WHERE user_id = $userId; 
 			   ";
 		$query = $this->db3->query($str);

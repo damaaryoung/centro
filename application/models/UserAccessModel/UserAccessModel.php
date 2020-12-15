@@ -47,10 +47,10 @@ class UserAccessModel extends CI_Model{
 						UAC.`tanggal_tambah` 'TANGGAL', 
 						UAC.`added_by` 'TAMBAH',
 						UAC.`access_id`
-				FROM TEST.user_access_centro UAC
+				FROM user_access_centro UAC
 				LEFT JOIN DPM_ONLINE.`user` U
 				ON U.`user_id` = UAC.`user_id`
-				LEFT JOIN TEST.`access_centro` AC
+				LEFT JOIN `access_centro` AC
 				ON AC.`access_id` = UAC.`access_id`
 				WHERE UAC.`user_id` = '$userId'
 				ORDER BY  UAC.`access_id` ASC; ";
