@@ -10,11 +10,12 @@ var mainJenisPengurusan = '';
 var mainNomorRekening = '';
 var mainNamaNasabah = '';
 var mainTanggalRealisasi = '';
+var sertTglRegister = '';
+var bpkbTglRegister = '';
 var base_url = $('#base_url').val();
 
 $('#mainBtnSearchRekening').click(function () {
-    dataRekening()
-    
+    dataRekening(); 
 });
 $('#bodyNomorRekening').on('click','.btnPilihRekening', function () {
     var namaNasabah   = $(this).data("nama");
@@ -282,3 +283,76 @@ $('#btnTambahSertif').click(function () {
     }); 
 });
 
+
+$('#btnKembali').click(function () {
+    if (confirm("Apakah Anda Yakin Akan Kembali Ke Halaman List Aset Dokumen ?")) {
+          $('#loading').show();
+            $.ajax({
+                url : base_url + "AsetDokumenEntryController/buttonBack",
+                type : "GET",
+                success : function(response) {
+                    window.location = base_url + 'AsetDokumenEntryController/index';  
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    alert('Terjadi Kesalahan Mohon Coba Lagi');
+                    $('#loading').hide();
+                }
+            }); 
+    } else {
+        return;
+    }
+});
+
+$('#btnSubmit').click(function () {
+    console.log('test');
+    if (confirm("Apakah Anda Yakin Akan Menambahkan Data Aset Dokumen ?")) {
+        mainAreaKerja        =  $('#mainAreaKerja').val();
+        mainTanggal          =  $('#mainTanggal').val();
+        mainTransaksi        =  $('#mainTransaksi').val();
+        mainNama             =  $('#mainNama').val();
+        mainKeterangan       =  $('#mainKeterangan').val(); 
+        mainAlamat           =  $('#mainAlamat').val(); 
+        mainKota             =  $('#mainKota').val();
+        mainJenisPengurusan  =  $('#mainJenisPengurusan').val();
+        mainNomorRekening    =  $('#mainNomorRekening').val();
+        mainNamaNasabah      =  $('#mainNamaNasabah').val();
+        mainTanggalRealisasi =  $('#mainTanggalRealisasi').val();
+
+        sertTglRegister = $('#sertTglRegister').val();
+        bpkbTglRegister =  $('#bpkbTglRegister').val();
+
+        console.log(mainAreaKerja,mainTransaksi, mainTanggal);
+        if(sertTglRegister == '' && bpkbTglRegister == ''){
+            alert('Anda Belum Mengisi Detail Aset Dokumen!');
+            return;
+        }
+        $('#loading').show();
+        $.ajax({
+                url : base_url + "AsetDokumenEntryController/insertDataToDB",
+                type : "POST",
+                data : {'mainAreaKerja'      :  mainAreaKerja,
+                      'mainTanggal'          :  mainTanggal,
+                      'mainTransaksi'        :  mainTransaksi,
+                      'mainNama'             :  mainNama,
+                      'mainKeterangan'       :  mainKeterangan,
+                      'mainAlamat'           :  mainAlamat,
+                      'mainKota'             :  mainKota,
+                      'mainJenisPengurusan'  :  mainJenisPengurusan,
+                      'mainNomorRekening'    :  mainNomorRekening,
+                      'mainNamaNasabah'      :  mainNamaNasabah,
+                      'mainTanggalRealisasi' :  mainTanggalRealisasi},
+                success : function(response) {
+                    alert('Data Aset Dokumen Berhasil Disimpan');
+                    window.location = base_url + 'AsetDokumenEntryController/index';  
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    alert('Terjadi Kesalahan Mohon Coba Lagi');
+                    $('#loading').hide();
+                }
+        }); 
+    } else {
+        return;
+    }
+});

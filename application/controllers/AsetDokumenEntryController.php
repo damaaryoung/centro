@@ -994,15 +994,15 @@ class AsetDokumenEntryController extends CI_Controller {
 		$session = $this->session->userdata('nama');
 		
 		/// MAIN FORM /// 
-		$mainAreaKerja = $this->input->post('mainAreaKerja');
-		$mainTanggal = $this->input->post('mainTanggal');
-		$mainTransaksi = $this->input->post('mainTransaksi');
-		$mainNama = $this->input->post('mainNama');
-		$mainKeterangan = $this->input->post('mainKeterangan');
-		$mainAlamat = $this->input->post('mainAlamat');
-		$mainKota = $this->input->post('mainKota');
-		$mainJenisPengurusan = $this->input->post('mainJenisPengurusan');
-		$mainNomorRekening = $this->input->post('mainNomorRekening');
+		$mainAreaKerja        = $this->input->post('mainAreaKerja');
+		$mainTanggal          = $this->input->post('mainTanggal');
+		$mainTransaksi        = $this->input->post('mainTransaksi');
+		$mainNama             = $this->input->post('mainNama');
+		$mainKeterangan       = $this->input->post('mainKeterangan');
+		$mainAlamat           = $this->input->post('mainAlamat');
+		$mainKota             = $this->input->post('mainKota');
+		$mainJenisPengurusan  = $this->input->post('mainJenisPengurusan');
+		$mainNomorRekening    = $this->input->post('mainNomorRekening');
 		$mainTanggalRealisasi = $this->input->post('mainTanggalRealisasi');
 
 		
@@ -1243,92 +1243,8 @@ class AsetDokumenEntryController extends CI_Controller {
 																		$sertSlikKeterangan);
 					
 					//// UNSET SESSION /////
-					$this->session->unset_tempdata('sertAgunanID');
-					$this->session->unset_tempdata('sertTglRegister'); 
-					$this->session->unset_tempdata('sertTglPenilaian'); 
-					$this->session->unset_tempdata('sertKantorLokasi'); 
-					$this->session->unset_tempdata('sertKodeJenisAgunan');
-					$this->session->unset_tempdata('sertKodeIkatanAgunan');    
-					$this->session->unset_tempdata('sertNilaiTaksasiAgunan');  
-					$this->session->unset_tempdata('sertNJOP');    
-					$this->session->unset_tempdata('sertHargaPasar');
-					$this->session->unset_tempdata('sertAPHT'); 
-					$this->session->unset_tempdata('sertPersenDijamin');
-					// DATA SERTIFIKAT
-					$this->session->unset_tempdata('sertAgunanID');
-					$this->session->unset_tempdata('sertID');
-					$this->session->unset_tempdata('sertNoSert');
-					$this->session->unset_tempdata('sertKOHIR');
-					$this->session->unset_tempdata('sertJenisSertifikat');
-					$this->session->unset_tempdata('sertNoPERSIL');
-					$this->session->unset_tempdata('sertTanggalSertifikat');
-					$this->session->unset_tempdata('sertJTSHGB');
-					$this->session->unset_tempdata('sertNoSuratUkur');
-					$this->session->unset_tempdata('sertPLBangunan');
-					$this->session->unset_tempdata('sertLuasTanah');
-					$this->session->unset_tempdata('sertNamaPPAT');
-					$this->session->unset_tempdata('sertNamaPemilik');
-					$this->session->unset_tempdata('sertAlamatSertifikat');
-					$this->session->unset_tempdata('sertKelurahan');
-					$this->session->unset_tempdata('sertKecamatan');
-					$this->session->unset_tempdata('sertKota');
-					$this->session->unset_tempdata('sertPorpinsi');
-					$this->session->unset_tempdata('sertBatasTanah');
-					// DATA LAMPIRAN
-					$this->session->unset_tempdata('sertDokAJB');
-					$this->session->unset_tempdata('sertNomorAJB');
-					$this->session->unset_tempdata('sertTanggalAJB');
-					$this->session->unset_tempdata('sertDokIMB');
-					$this->session->unset_tempdata('sertNomorIMB');
-				    $this->session->unset_tempdata('sertDokSPPT');
-					$this->session->unset_tempdata('sertNomorSPPT');
-					$this->session->unset_tempdata('sertTahunSPPT');
-					$this->session->unset_tempdata('sertDokSKHMT');
-					$this->session->unset_tempdata('sertDokDenah');
-					$this->session->unset_tempdata('sertDokRoya');
-					$this->session->unset_tempdata('sertDokSHT');
-					$this->session->unset_tempdata('sertNoSHT');
-					$this->session->unset_tempdata('sertPropinsiSHT');
-					$this->session->unset_tempdata('sertKotaSHT');
-					$this->session->unset_tempdata('sertDokSTTS');
-					$this->session->unset_tempdata('sertTahunSTTS');
-					$this->session->unset_tempdata('sertDokSSB');
-					$this->session->unset_tempdata('sertAtasNamaSSBBPHTB');
-					$this->session->unset_tempdata('sertLainnya');
-					///check BOX
-					$this->session->unset_tempdata('ajb');
-					$this->session->unset_tempdata('imb');
-					$this->session->unset_tempdata('sppt');
-					$this->session->unset_tempdata('skmht');
-					$this->session->unset_tempdata('denah');
-					$this->session->unset_tempdata('roya');
-					$this->session->unset_tempdata('sht');
-					$this->session->unset_tempdata('stts');
-					$this->session->unset_tempdata('ssb_bpht');
-					///end check box///
-					// DATA SID
-					$this->session->unset_tempdata('sertSlikStatusAgunan');
-					$this->session->unset_tempdata('sertSlikJenisAgunan');
-					$this->session->unset_tempdata('sertSlikPeringkatAgunan');
-					$this->session->unset_tempdata('sertSlikLembagaPemeringkat');
-					$this->session->unset_tempdata('sertSlikJenisPengikatan');
-					$this->session->unset_tempdata('sertSlikTanggalPengikatan');
-					$this->session->unset_tempdata('sertSlikNamaPemilikAgunan');
-					$this->session->unset_tempdata('sertSlikBuktiKepemilikanAgunan');
-					$this->session->unset_tempdata('sertSlikAlamat');
-					$this->session->unset_tempdata('sertSlikKodeDati2');
-					$this->session->unset_tempdata('sertSlikNilaiNJOP');
-					$this->session->unset_tempdata('sertSlikNilaiLJK');
-					$this->session->unset_tempdata('sertSlikTanggalLJK');
-					$this->session->unset_tempdata('sertSlikNilaiIndependen');
-					$this->session->unset_tempdata('sertSlikTglIndependen');
-					$this->session->unset_tempdata('sertSlikNamaIndependen');
-					$this->session->unset_tempdata('sertSlikKeterangan');
-					$this->session->unset_tempdata('sertSlikParipasu');
-					$this->session->unset_tempdata('sertSlikParipasuPersen');
-					$this->session->unset_tempdata('sertSLikStatusJoinAccount');
-					$this->session->unset_tempdata('sertSlikAsuransi');
-					/// END FORM TAMBAH SERTIFIKAT ///
+					$this->buttonBack();
+			
 			}
 			else if($this->session->tempdata('bpkbTglRegister') != ''){
 
@@ -1512,89 +1428,10 @@ class AsetDokumenEntryController extends CI_Controller {
 																		$sertSLikStatusJoinAccount,
 																		$sertSlikAsuransi,
 																		$sertSlikKeterangan);
+
+
 				// UNSET SESISON DATA
-
-				$this->session->unset_tempdata('bpkbTglRegister');
-				$this->session->unset_tempdata('bpkbTglPenilaian');
-				$this->session->unset_tempdata('bpkbKantorLokasi');
-				$this->session->unset_tempdata('bpkbKodeJenisAgunan');
-				$this->session->unset_tempdata('bpkbKodeIkatanAgunan');
-				$this->session->unset_tempdata('bpkbNilaiTaksasiAgunan');
-				$this->session->unset_tempdata('bpkbNJOP');
-				$this->session->unset_tempdata('bpkbHargaPasar');
-				$this->session->unset_tempdata('bpkbAPHT');
-				$this->session->unset_tempdata('bpkbPersenDijamin');
-
-				$this->session->unset_tempdata('bpkbAgunanID');
-				$this->session->unset_tempdata('bpkbNoBPKB');
-				$this->session->unset_tempdata('bpkbNamaPemilik');
-				$this->session->unset_tempdata('bpkbAlamatPemlik');
-				$this->session->unset_tempdata('bpkbKotaPemilik');
-				$this->session->unset_tempdata('bpkbMerk');
-				$this->session->unset_tempdata('bpkbType');
-				$this->session->unset_tempdata('bpkbJenis');
-				$this->session->unset_tempdata('bpkbSilinder');
-				$this->session->unset_tempdata('bpkbNoRangka');
-				$this->session->unset_tempdata('bpkbNoMesin');
-				$this->session->unset_tempdata('bpkbTahun');
-				$this->session->unset_tempdata('bpkbWarna');
-				$this->session->unset_tempdata('bpkbTglExpPajak');
-				$this->session->unset_tempdata('bpkbNoPolisi');
-				$this->session->unset_tempdata('bpkbTglExpSTNK');
-				$this->session->unset_tempdata('bpkbNoSTNK');
-
-				$this->session->unset_tempdata('bpkbDokKwitansiBlanko');
-				$this->session->unset_tempdata('bpkbDokFakturPemilik');
-				$this->session->unset_tempdata('bpkbDokKwJualBeli');
-				$this->session->unset_tempdata('bpkbDokSKTrayek');
-				$this->session->unset_tempdata('blanko');
-				$this->session->unset_tempdata('faktur_pemilik');
-				$this->session->unset_tempdata('kwitansi_jb');
-				$this->session->unset_tempdata('sk_trayek');
-				$this->session->unset_tempdata('bpkbNoFakturPemilik');
-				$this->session->unset_tempdata('noSKTrayek');
-				$this->session->unset_tempdata('bpkbBerlakuSD');
-				$this->session->unset_tempdata('bpkbLainnya');
-
-				$this->session->unset_tempdata('bpkbSIDJenisAgunan');
-				$this->session->unset_tempdata('bpkbSIDPengikatSurat');
-				$this->session->unset_tempdata('bpkbSIDJenisPengikatan');
-				$this->session->unset_tempdata('bpkbSIDNamaPemilikAgunan');
-				$this->session->unset_tempdata('bpkbSIDStatusBuktiKepemilikan');
-				$this->session->unset_tempdata('bpkbSIDAlamat');
-				$this->session->unset_tempdata('bpkbSIDLokasi');
-				$this->session->unset_tempdata('bpkbSIDNJOP');
-				$this->session->unset_tempdata('nilaiSIDAgunanBank');
-				$this->session->unset_tempdata('bpkbSIDNilaiIndependen');
-				$this->session->unset_tempdata('bpkbSIDNamaIndependen');
-				$this->session->unset_tempdata('bpkbSIDParipasu');
-				$this->session->unset_tempdata('bpkbSIDAsuransi');
-				
-				// DATA SLIK
-				$this->session->unset_tempdata('sertSlikStatusAgunan');
-				$this->session->unset_tempdata('sertSlikJenisAgunan');
-				$this->session->unset_tempdata('sertSlikPeringkatAgunan');
-				$this->session->unset_tempdata('sertSlikLembagaPemeringkat');
-				$this->session->unset_tempdata('sertSlikJenisPengikatan');
-				$this->session->unset_tempdata('sertSlikTanggalPengikatan');
-				$this->session->unset_tempdata('sertSlikNamaPemilikAgunan');
-				$this->session->unset_tempdata('sertSlikBuktiKepemilikanAgunan');
-				$this->session->unset_tempdata('sertSlikAlamat');
-				$this->session->unset_tempdata('sertSlikKodeDati2');
-				$this->session->unset_tempdata('sertSlikNilaiNJOP');
-				$this->session->unset_tempdata('sertSlikNilaiLJK');
-				$this->session->unset_tempdata('sertSlikTanggalLJK');
-				$this->session->unset_tempdata('sertSlikNilaiIndependen');
-				$this->session->unset_tempdata('sertSlikTglIndependen');
-				$this->session->unset_tempdata('sertSlikNamaIndependen');
-				$this->session->unset_tempdata('sertSlikKeterangan');
-				$this->session->unset_tempdata('sertSlikParipasu');
-				$this->session->unset_tempdata('sertSlikParipasuPersen');
-				$this->session->unset_tempdata('sertSLikStatusJoinAccount');
-				$this->session->unset_tempdata('sertSlikAsuransi');
-
-				redirect('AsetDokumenEntryController/index'); 
-
+				$this->buttonBack();
 			}
 			else if($this->session->tempdata('emasNoSeri') != ''){
 
@@ -2077,7 +1914,6 @@ class AsetDokumenEntryController extends CI_Controller {
 		else if($this->session->tempdata('sertTglRegister') != ''){
 			$this->deleteTempSert();
 		}
-		redirect('AsetDokumenEntryController/index'); 
 	}
 
 	public function deleteTempEmas(){

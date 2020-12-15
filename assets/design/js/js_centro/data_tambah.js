@@ -91,8 +91,7 @@ function selectTypeKendaraan(){
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert('Gagal setting user acces, mohon coba beberapa saat lagi');
-          //  window.location = base_url + 'AsetDokumenEntryController/displayTambahDataBPKB';
+            alert('Gagal Get Tipe Kendaraan');
         }
     });    
 }
