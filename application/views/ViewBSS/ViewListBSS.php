@@ -61,7 +61,7 @@ tr.shown td.details-click {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><i class="fas fa-file-invoice-dollar" style="color:#dc3545"></i> Biaya Setoran Sementara</h1>
+            <h1><i class="fas fa-file-invoice-dollar" style="color:#dc3545"></i> Bukti Setoran Sementara</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -81,7 +81,7 @@ tr.shown td.details-click {
                 <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
               </div>
           <div class="col-12">
-            <div class="card">
+          
             
             <!-- Horizontal Form -->
           <div class="card card-info">
