@@ -33,8 +33,8 @@ class AsetDokumenPinjamModel extends CI_Model{
 						JH.verifikasi,
 						kk.`kode_cabang`,
 						kk.`nama_kantor`
-					FROM dpm_online.jaminan_header JH,
-						dpm_online.`app_kode_kantor` KK
+					FROM jaminan_header JH,
+						`app_kode_kantor` KK
 					WHERE nomor = '$nomorAgunan'
 					AND no_reff = '$nomorRefAgunan'
 					AND jh.`kode_kantor` = kk.`kode_kantor`;
@@ -57,8 +57,8 @@ class AsetDokumenPinjamModel extends CI_Model{
 					JMK.`nm_merk` AS nama_merk,
 					jtk.`nm_type` AS nama_type
 				FROM
-					dpm_online.jaminan_dokument JD 
-					LEFT JOIN dpm_online.`app_kode_kantor` KK 
+					jaminan_dokument JD 
+					LEFT JOIN `app_kode_kantor` KK 
 					ON JD.kode_kantor_lokasi_jaminan = KK.kode_kantor 
 					LEFT JOIN kre_kode_jenis_agunan KKJA 
 					ON JD.`jenis_agunan_detail` = KKJA.`KODE_JENIS_AGUNAN` 
@@ -79,7 +79,7 @@ class AsetDokumenPinjamModel extends CI_Model{
 	public function getKodeNotaris(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT kode_notaris AS `kode`, nama_notaris AS `nama`, flg_aktif AS `flg_aktif`, alamat_notaris, kota_notaris
-				FROM dpm_online.kre_kode_notaris
+				FROM kre_kode_notaris
 				WHERE flg_aktif = 1 
 				ORDER BY kode;
 			";
@@ -90,7 +90,7 @@ class AsetDokumenPinjamModel extends CI_Model{
 	public function getJaminanPengurusan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT id as kode, jenis_pengurusan as nama, jangka_waktu as keterangan, flg_aktif as flg_aktif, DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate'
-				FROM dpm_online.jaminan_pengurusan
+				FROM jaminan_pengurusan
 				WHERE flg_aktif = 1;
 			";
 		$query = $this->db2->query($str);
@@ -124,25 +124,25 @@ class AsetDokumenPinjamModel extends CI_Model{
 									$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 									//step : insert jaminan history, +1 nomor di dpm counter untuk OUT, update jaminan header, insert jaminan pinjam mirror dari jaminan dokument
 									$this->db2->trans_start();
-									$this->db2->query("UPDATE dpm_online.counter 
+									$this->db2->query("UPDATE counter 
 														SET nomor = nomor + 1  
 														WHERE setting= CONCAT('ASSET_TEMP_OUT','$mainAreaKerjaPinjam')
 														AND nomor <= nomor + 1;
 													");
 
-									$this->db2->query("UPDATE dpm_online.jaminan_header 
+									$this->db2->query("UPDATE jaminan_header 
 													   SET  tgl = '$mainTanggalPinjam',
 															nama = '$mainNamaPinjam',
 															alamat = '$mainAlamatPinjam',
 															kota = '$mainKotaPinjam',
 															jenis_jaminan = '$jenisJaminanPinjam',
-															nomor = (SELECT CONCAT('$mainAreaKerjaPinjam','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_TEMP_OUT','$mainAreaKerjaPinjam')))),
+															nomor = (SELECT CONCAT('$mainAreaKerjaPinjam','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_TEMP_OUT','$mainAreaKerjaPinjam')))),
 															STATUS = '$mainTransaksiPinjam',
 															ket = '$mainKeteranganPinjam',
 															tgl_rencana_kembali = '$mainTanggalRencanaKembaliPinjam',
 															jenis_pengurusan = '$mainJenisPengurusanPinjam' 
 															WHERE id = '$mainIdPinjam';");
-									$this->db2->query("INSERT INTO dpm_online.jaminan_pinjam (
+									$this->db2->query("INSERT INTO jaminan_pinjam (
 															`id`,
 															`no_reff`,
 															`jenis`,
@@ -340,7 +340,7 @@ class AsetDokumenPinjamModel extends CI_Model{
 															`lain_lain`,
 															`inc_bpkb`,
 															`keterangan`,
-															(SELECT CONCAT('$mainAreaKerjaPinjam','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_TEMP_OUT','$mainAreaKerjaPinjam')))),
+															(SELECT CONCAT('$mainAreaKerjaPinjam','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_TEMP_OUT','$mainAreaKerjaPinjam')))),
 															`agunan_id`,
 															`verifikasi`,
 															`karat`,
@@ -354,7 +354,7 @@ class AsetDokumenPinjamModel extends CI_Model{
 															`kode_kantor_lokasi_jaminan`,
 															`no_rekening_agunan` 
 														FROM
-															dpm_online.jaminan_dokument
+															jaminan_dokument
 															WHERE id = '$jaminanDokumentID';");
 									$this->db2->trans_complete();
 	}

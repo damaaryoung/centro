@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   
                                     <select class="form-control select2" id="mainAreaKerja" name="mainAreaKerja" required>
                                                 <?php if($this->session->tempdata('mainAreaKerja') != null){
-                                                  echo '<option value="'.$this->session->tempdata('sertKantorLokasi').'" selected>'.$this->session->tempdata('mainAreaKerja').'</option>';
+                                                  echo '<option value="'.$this->session->tempdata('mainAreaKerja').'" selected>'.$this->session->tempdata('mainAreaKerja').'</option>';
                                                 } else {?> 
                                                     <option value="<?php echo $this->session->userdata('kd_cabang'); ?>" selected><?php echo $this->session->userdata('kd_cabang'); ?></option>
                                                 <?php }?>                                                
@@ -358,184 +358,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- END Emas -->
 
 
-             <!-- END SID -->
              <div class="card-footer text-center">
-
-             <!-- Test keluarin variable -->
-             <?php 
-                // test keluarin paramenter sertifikat
-
-                // DATA FORM ATAS   
-                    // echo 'Tgl register ' . $sertTglRegister   . '<br>';  
-                    // echo 'sertTglPenilaian ' .              $sertTglPenilaian   . '<br>'; 
-                    // echo 'sertKantorLokasi ' .              $sertKantorLokasi  . '<br>'; 
-                    // echo 'sertKodeJenisAgunan '.               $sertKodeJenisAgunan  . '<br>';
-                    // echo 'sertNilaiTaksasiAgunan ' .               $sertNilaiTaksasiAgunan  . '<br>';  
-                    // echo 'sertNJOP '.         $sertNJOP  . '<br>';    
-                    // echo 'sertHargaPasar '   .           $sertHargaPasar  . '<br>';
-                    // echo 'sertAPHT ' .             $sertAPHT  . '<br>'; 
-                    // echo 'sertPersenDijamin '.              $sertPersenDijamin  . '<br>';
-
-                    // // DATA SERTIFIKAT
-                    //      echo 'Tgl sertAgunanID ' . $sertAgunanID   . '<br>';
-                    //      echo 'Tgl sertID ' . $sertID  . '<br>';
-                    //      echo 'Tgl sertNoSert ' . $sertNoSert  . '<br>';
-                    //      echo 'Tgl register ' . $sertKOHIR  . '<br>';
-                    //      echo 'Tgl sertKOHIR ' . $sertJenisSertifikat  . '<br>';
-                    //      echo 'Tgl sertNoPERSIL ' . $sertNoPERSIL  . '<br>';
-                    //      echo 'Tgl sertTanggalSertifikat ' . $sertTanggalSertifikat  . '<br>';
-                    //      echo 'Tgl sertJTSHGB ' . $sertJTSHGB  . '<br>';
-                    //      echo 'Tgl sertNoSuratUkur ' . $sertNoSuratUkur  . '<br>';
-                    //      echo 'Tgl sertPLBangunan ' . $sertPLBangunan  . '<br>';
-                    //      echo 'Tgl sertLuasTanah ' . $sertLuasTanah  . '<br>';
-                    //      echo 'Tgl sertNamaPPAT ' . $sertNamaPPAT  . '<br>';
-                    //      echo 'Tgl sertNamaPemilik ' . $sertNamaPemilik  . '<br>';
-                    //      echo 'Tgl sertAlamatSertifikat ' . $sertAlamatSertifikat  . '<br>';
-                    //      echo 'Tgl sertKelurahan ' . $sertKelurahan  . '<br>';
-                    //      echo 'Tgl sertKecamatan ' .$sertKecamatan  . '<br>';
-                    //      echo 'Tgl sertKota ' . $sertKota  . '<br>';
-                    //      echo 'Tgl sertPorpinsi ' . $sertPorpinsi  . '<br>';
-                    //      echo 'Tgl sertBatasTanah ' .$sertBatasTanah  . '<br>';
-
-                    //       // DATA LAMPIRAN
-                    //       echo 'Tgl sertDokAJB ' .$sertDokAJB  . '<br>';
-                    //       echo 'Tgl sertNomorAJB ' .$sertNomorAJB  . '<br>';
-                    //       echo 'Tgl sertTanggalAJB ' .$sertTanggalAJB  . '<br>';
-                    //       echo 'Tgl sertDokIMB ' .$sertDokIMB;
-                    //       echo 'Tgl sertNomorIMB ' .$sertNomorIMB  . '<br>';
-                    //       echo 'Tgl sertDokSPPT ' .$sertDokSPPT  . '<br>';
-                    //       echo 'Tgl sertNomorSPPT ' .$sertNomorSPPT  . '<br>';
-                    //       echo 'Tgl sertTahunSPPT ' .$sertTahunSPPT  . '<br>';
-                    //       echo 'Tgl sertDokSKHMT ' .$sertDokSKHMT  . '<br>';
-                    //       echo 'Tgl sertDokDenah ' .$sertDokDenah  . '<br>';
-                    //       echo 'Tgl sertDokRoya ' .$sertDokRoya  . '<br>';
-                    //       echo 'Tgl sertDokSHT ' .$sertDokSHT  . '<br>';
-                    //       echo 'Tgl sertNoSHT ' .$sertNoSHT  . '<br>';
-                    //       echo 'Tgl sertPropinsiSHT ' .$sertPropinsiSHT  . '<br>';
-                    //       echo 'Tgl sertKotaSHT ' .$sertKotaSHT  . '<br>';
-                    //       echo 'Tgl sertDokSTTS ' .$sertDokSTTS  . '<br>';
-                    //       echo 'Tgl sertTahunSTTS ' .$sertTahunSTTS  . '<br>';
-                    //       echo 'Tgl sertDokSSB ' .$sertDokSSB  . '<br>';
-                    //       echo 'Tgl sertAtasNamaSSBBPHTB ' .$sertAtasNamaSSBBPHTB  . '<br>';
-                    //       echo 'Tgl sertLainnya ' .$sertLainnya  . '<br>';
-
-                    //       // DATA SID
-                    //        echo 'Tgl sertSIDJenisAgunan ' .$sertSIDJenisAgunan  . '<br>';
-                    //        echo 'Tgl sertSIDPeringkatSurat ' .$sertSIDPeringkatSurat  . '<br>';
-                    //        echo 'Tgl sertJenisPengikatan ' .$sertJenisPengikatan  . '<br>';
-                    //        echo 'Tgl sertSIDNamaPemilikAgunan ' .$sertSIDNamaPemilikAgunan  . '<br>';
-                    //        echo 'Tgl sertSIDBuktiPemilikAgunan ' .$sertSIDBuktiPemilikAgunan  . '<br>';
-                    //        echo 'Tgl sertSIDAlamat ' .$sertSIDAlamat  . '<br>';
-                    //        echo 'Tgl sertSIDLokasi ' .$sertSIDLokasi  . '<br>';
-                    //        echo 'Tgl sertNilaiNJOP ' .$sertNilaiNJOP  . '<br>';
-                    //        echo 'Tgl sertNilaiBank ' .$sertNilaiBank  . '<br>';
-                    //        echo 'Tgl sertNilaiIndependen ' .$sertNilaiIndependen  . '<br>';
-                    //        echo 'Tgl sertNamaIndependen ' .$sertNamaIndependen  . '<br>';
-                    //        echo 'Tgl sertParipasu ' .$sertParipasu  . '<br>';
-                    //        echo 'Tgl sertAsuransi ' .$sertAsuransi  . '<br>';
-                    //         // END FORM TAMBAH SERTIFIKAT ///
-
-                    //         echo 'checkajb ' .$ajb  . '<br>';
-                    //         echo ' imb ' .$imb  . '<br>';
-                    //         echo ' sppt ' .$sppt  . '<br>';
-                    //         echo ' skmht ' .$skmht  . '<br>';
-                    //         echo ' denah ' .$denah  . '<br>';
-                    //         echo ' roya ' .$roya  . '<br>';
-                    //         echo ' sht ' .$sht  . '<br>';
-                    //         echo ' stts ' .$stts  . '<br>';
-                    //         echo ' ssb ' .$ssb_bpht  . '<br>';
-
-                    //test keluarin paramenter BPKB
-
-
-                  // //DATA FORM ATAS   
-                  //   echo 'Tgl register BPKB ' . $bpkbTglRegister   . '<br>';  
-                  //   echo 'bpkbTglPenilaian ' .              $bpkbTglPenilaian   . '<br>'; 
-                  //   echo 'bpkbKantorLokasi ' .              $bpkbKantorLokasi  . '<br>'; 
-                  //   echo 'bpkbKodeJenisAgunan '.               $bpkbKodeJenisAgunan  . '<br>';
-                  //   echo 'bpkbKodeIkatanAgunan ' .               $bpkbKodeIkatanAgunan  . '<br>';  
-                  //   echo 'bpkbNilaiTaksasiAgunan '.         $bpkbNilaiTaksasiAgunan  . '<br>';    
-                  //   echo 'bpkbNJOP '   .           $bpkbNJOP  . '<br>';
-                  //   echo 'bpkbHargaPasar ' .             $bpkbHargaPasar  . '<br>'; 
-                  //   echo 'bpkbAPHT '.              $bpkbAPHT  . '<br>';
-                  //   echo 'bpkbPersenDijamin '.              $bpkbPersenDijamin  . '<br>';
-
-
-                  //   // DATA BPKB
-                  //        echo 'Tgl bpkbAgunanID ' . $bpkbAgunanID   . '<br>';
-                  //        echo 'Tgl bpkbNoBPKB ' . $bpkbNoBPKB  . '<br>';
-                  //        echo 'Tgl bpkbNamaPemilik ' . $bpkbNamaPemilik  . '<br>';
-                  //        echo 'Tgl bpkbAlamatPemlik ' . $bpkbAlamatPemlik  . '<br>';
-                  //        echo 'Tgl bpkbKotaPemilik ' . $bpkbKotaPemilik  . '<br>';
-                  //        echo 'Tgl bpkbMerk ' . $bpkbMerk  . '<br>';
-                  //        echo 'Tgl bpkbType ' . $bpkbType  . '<br>';
-                  //        echo 'Tgl bpkbJenis ' . $bpkbJenis  . '<br>';
-                  //        echo 'Tgl bpkbSilinder ' . $bpkbSilinder  . '<br>';
-                  //        echo 'Tgl bpkbNoRangka ' . $bpkbNoRangka  . '<br>';
-                  //        echo 'Tgl bpkbNoMesin ' . $bpkbNoMesin  . '<br>';
-                  //        echo 'Tgl bpkbTahun ' . $bpkbTahun  . '<br>';
-                  //        echo 'Tgl bpkbTglExpPajak ' . $bpkbTglExpPajak  . '<br>';
-                  //        echo 'Tgl bpkbNoPolisi ' . $bpkbNoPolisi  . '<br>';
-                  //        echo 'Tgl bpkbTglExpSTNK ' . $bpkbTglExpSTNK  . '<br>';
-                  //        echo 'Tgl bpkbNoSTNK ' .$bpkbNoSTNK  . '<br>';
-
-                  //         // DATA LAMPIRAN
-
-                  //         echo 'Tgl bpkbDokKwitansiBlanko ' .$bpkbDokKwitansiBlanko  . '<br>';
-                  //         echo 'Tgl bpkbDokFakturPemilik ' .$bpkbDokFakturPemilik  . '<br>';
-                  //         echo 'Tgl bpkbDokKwJualBeli ' .$bpkbDokKwJualBeli  . '<br>';
-                  //         echo 'Tgl bpkbDokSKTrayek ' .$bpkbDokSKTrayek;
-                  //         echo 'Tgl blanko ' .$blanko  . '<br>';
-                  //         echo 'Tgl faktur_pemilik ' .$faktur_pemilik  . '<br>';
-                  //         echo 'Tgl kwitansi_jb ' .$kwitansi_jb  . '<br>';
-                  //         echo 'Tgl sk_trayek ' .$sk_trayek  . '<br>';
-                  //         echo 'Tgl bpkbNoFakturPemilik ' .$bpkbNoFakturPemilik  . '<br>';
-                  //         echo 'Tgl noSKTrayek ' .$noSKTrayek  . '<br>';
-                  //         echo 'Tgl bpkbBerlakuSD ' .$bpkbBerlakuSD  . '<br>';
-                  //         echo 'Tgl bpkbLainnya ' .$bpkbLainnya  . '<br>';
-
-                  //         // DATA SID
-                  //         $data['bpkbSIDJenisAgunan'] 			= $this->session->tempdata('bpkbSIDJenisAgunan');
-                  //         $data['bpkbSIDPengikatSurat'] 			= $this->session->tempdata('bpkbSIDPengikatSurat');
-                  //         $data['bpkbSIDJenisPengikatan']			= $this->session->tempdata('bpkbSIDJenisPengikatan');
-                  //         $data['bpkbSIDNamaPemilikAgunan'] 		= $this->session->tempdata('bpkbSIDNamaPemilikAgunan');
-                  //         $data['bpkbSIDStatusBuktiKepemilikan'] 	= $this->session->tempdata('bpkbSIDStatusBuktiKepemilikan');
-                  //         $data['bpkbSIDAlamat'] 					= $this->session->tempdata('bpkbSIDAlamat');
-                  //         $data['bpkbSIDLokasi'] 					= $this->session->tempdata('bpkbSIDLokasi');
-                  //         $data['bpkbSIDNJOP'] 					= $this->session->tempdata('bpkbSIDNJOP');
-                  //         $data['nilaiSIDAgunanBank'] 			= $this->session->tempdata('nilaiSIDAgunanBank');
-                  //         $data['bpkbSIDNilaiIndependen'] 		= $this->session->tempdata('bpkbSIDNilaiIndependen');
-                  //         $data['bpkbSIDNamaIndependen'] 			= $this->session->tempdata('bpkbSIDNamaIndependen');
-                  //         $data['bpkbSIDParipasu'] 				= $this->session->tempdata('bpkbSIDParipasu');
-                  //         $data['bpkbSIDAsuransi'] 				= $this->session->tempdata('bpkbSIDAsuransi');
-
-
-                  //          echo 'Tgl bpkbSIDJenisAgunan ' .$bpkbSIDJenisAgunan  . '<br>';
-                  //          echo 'Tgl bpkbSIDPengikatSurat ' .$bpkbSIDPengikatSurat  . '<br>';
-                  //          echo 'Tgl bpkbSIDJenisPengikatan ' .$bpkbSIDJenisPengikatan  . '<br>';
-                  //          echo 'Tgl bpkbSIDNamaPemilikAgunan ' .$bpkbSIDNamaPemilikAgunan  . '<br>';
-                  //          echo 'Tgl bpkbSIDStatusBuktiKepemilikan ' .$bpkbSIDStatusBuktiKepemilikan  . '<br>';
-                  //          echo 'Tgl bpkbSIDAlamat ' .$bpkbSIDAlamat  . '<br>';
-                  //          echo 'Tgl bpkbSIDLokasi ' .$bpkbSIDLokasi  . '<br>';
-                  //          echo 'Tgl bpkbSIDNJOP ' .$bpkbSIDNJOP  . '<br>';
-                  //          echo 'Tgl nilaiSIDAgunanBank ' .$nilaiSIDAgunanBank  . '<br>';
-                  //          echo 'Tgl bpkbSIDNilaiIndependen ' .$bpkbSIDNilaiIndependen  . '<br>';
-                  //          echo 'Tgl bpkbSIDNamaIndependen ' .$bpkbSIDNamaIndependen  . '<br>';
-                  //          echo 'Tgl bpkbSIDParipasu ' .$bpkbSIDParipasu  . '<br>';
-                  //          echo 'Tgl bpkbSIDAsuransi ' .$bpkbSIDAsuransi  . '<br>';
-                  //           // END FORM TAMBAH SERTIFIKAT ///
-
-             ?>
              <!--END Test keluarin variable -->
-                <button type="submit" 
-                        id='btnSubmit' 
-                        style="float: left; margin-left:42%; margin-top:5px; margin-right:20px;" 
-                        class="btn btn-info">
-                        Simpan
-                </button>
-            </form>
-            <form method="post" class='form-inline' action="<?php echo base_url("index.php/AsetDokumenEntryController/buttonBack")?>">
-                <button type="submit" id='btnKembali' style="margin:5px;" class="btn btn-danger">Kembali</button>
+                <button type="button" id='btnKembali' style="margin:5px;" class="btn btn-danger"> Kembali </button>
+                <button type="button" id='btnSubmit' class="btn btn-info"> Simpan </button>
             </form>
           </div>
           <!-- /.card-footer -->
@@ -545,6 +371,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
   <!-- /.content-wrapper -->
  <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+
+ <input type="hidden" class="form-control" id="sertTglRegister" name="sertTglRegister" value = "<?php echo $sertTglRegister;?>">
+ <input type="hidden" class="form-control" id="bpkbTglRegister" name="bpkbTglRegister" value = "<?php echo $bpkbTglRegister;?>">
 
 <!-- REQUIRED JS SCRIPTS -->
 

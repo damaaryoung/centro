@@ -37,16 +37,8 @@ class UserAccessController extends CI_Controller {
 											. $row['nik']. '</td> <td>'
 											. $row['jabatan'].'</td> <td>'
 											. $row['email'] . '</td>  <td>'
-											. $row['user'] . '</td>'.
-											// '<td>
-											// 	<div>
-											// 			<form method="post" action="'. base_url("index.php/UserAccessController/infoUserAccess").'">
-											// 				<button type="submit" class="btn btn-primary btn-sm"> <i class="fas fa-pen"></i></button>       
-											// 				<input type="hidden" name="userId" value="'.$row['user_id'].'">            
-											// 			</form>
-											// 	</div></td>
-																						
-												' </tr>'];
+											. $row['user'] . '</td>'
+											. ' </tr>'];
 												
 										
 			endforeach;	
@@ -65,16 +57,8 @@ class UserAccessController extends CI_Controller {
 											. $row['nik']. '</td> <td>'
 											. $row['jabatan'].'</td> <td>'
 											. $row['email'] . '</td> <td>'
-											. $row['user'] . '</td>'.
-											// '<td>
-											// 	<div>
-											// 			<form method="post" action="'. base_url("index.php/UserAccessController/infoUserAccess").'">
-											// 				<button type="submit" class="btn btn-primary btn-sm"> <i class="fas fa-pen"></i></button>       
-											// 				<input type="hidden" name="userId" value="'.$row['user_id'].'">            
-											// 			</form>
-											// 	</div></td>
-																						
-												' </tr>'];
+											. $row['user'] . '</td>'
+											. ' </tr>'];
 												
 										
 			endforeach;	

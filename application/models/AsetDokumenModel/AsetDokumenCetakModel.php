@@ -32,8 +32,8 @@ class AsetDokumenCetakModel extends CI_Model{
 						JH.verifikasi,
 						kk.`kode_cabang`,
 						kk.`nama_kantor`
-					FROM dpm_online.jaminan_header JH,
-						dpm_online.`app_kode_kantor` KK
+					FROM jaminan_header JH,
+						`app_kode_kantor` KK
 					WHERE nomor = '$nomorAgunan'
 					AND no_reff = '$nomorRefAgunan'
 					AND jh.`kode_kantor` = kk.`kode_kantor`;
@@ -57,8 +57,8 @@ class AsetDokumenCetakModel extends CI_Model{
 					JMK.`nm_merk` AS nama_merk,
 					jtk.`nm_type` AS nama_type
 				FROM
-					dpm_online.jaminan_dokument JD 
-					LEFT JOIN dpm_online.`app_kode_kantor` KK 
+					jaminan_dokument JD 
+					LEFT JOIN `app_kode_kantor` KK 
 					ON JD.kode_kantor_lokasi_jaminan = KK.kode_kantor 
 					LEFT JOIN kre_kode_jenis_agunan KKJA 
 					ON JD.`jenis_agunan_detail` = KKJA.`KODE_JENIS_AGUNAN` 
@@ -87,7 +87,7 @@ class AsetDokumenCetakModel extends CI_Model{
 
 	public function getAlamatHeader(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT CONCAT(alamat, ' ', kota, ' Telp.', telp, ' Fax.',fax) AS hasil FROM dpm_online.setup LIMIT 1;";
+		$str = "SELECT CONCAT(alamat, ' ', kota, ' Telp.', telp, ' Fax.',fax) AS hasil FROM setup LIMIT 1;";
         $query = $this->db2->query($str);
         
         return $query->result_array();

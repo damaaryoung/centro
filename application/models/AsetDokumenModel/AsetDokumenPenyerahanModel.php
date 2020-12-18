@@ -33,8 +33,8 @@ class AsetDokumenPenyerahanModel extends CI_Model{
 						JH.verifikasi,
 						kk.`kode_cabang`,
 						kk.`nama_kantor`
-					FROM dpm_online.jaminan_header JH,
-						dpm_online.`app_kode_kantor` KK
+					FROM jaminan_header JH,
+						`app_kode_kantor` KK
 					WHERE nomor = '$nomorAgunan'
 					AND no_reff = '$nomorRefAgunan'
 					AND jh.`kode_kantor` = kk.`kode_kantor`;
@@ -57,8 +57,8 @@ class AsetDokumenPenyerahanModel extends CI_Model{
 					JMK.`nm_merk` AS nama_merk,
 					jtk.`nm_type` AS nama_type
 				FROM
-					dpm_online.jaminan_dokument JD 
-					LEFT JOIN dpm_online.`app_kode_kantor` KK 
+					jaminan_dokument JD 
+					LEFT JOIN `app_kode_kantor` KK 
 					ON JD.kode_kantor_lokasi_jaminan = KK.kode_kantor 
 					LEFT JOIN kre_kode_jenis_agunan KKJA 
 					ON JD.`jenis_agunan_detail` = KKJA.`KODE_JENIS_AGUNAN` 
@@ -80,7 +80,7 @@ class AsetDokumenPenyerahanModel extends CI_Model{
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT COUNT(*) AS jml 
 				FROM
-					dpm_online.jaminan_dokument 
+					jaminan_dokument 
 				WHERE no_reff = '$nomorRefAgunan' 
 					AND kode_kantor_lokasi_jaminan <> kode_kantor;";
 		$query = $this->db2->query($str);
@@ -121,16 +121,16 @@ class AsetDokumenPenyerahanModel extends CI_Model{
 									$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 									//step : insert jaminan history, +1 nomor di dpm counter untuk OUT, update jaminan header, insert jaminan Penyerahan mirror dari jaminan dokument
 									$this->db2->trans_start();
-									$this->db2->query("UPDATE dpm_online.counter 
+									$this->db2->query("UPDATE counter 
 														SET nomor = nomor + 1  
 														WHERE setting= CONCAT('ASSET_OUT','$mainAreaKerjaPenyerahan')
 														AND nomor <= nomor + 1;
 													");
 
 									$this->db2->query("UPDATE 
-															dpm_online.jaminan_header 
+															jaminan_header 
 														SET tgl = '$mainTanggalPenyerahan',
-															nomor = (SELECT CONCAT('$mainAreaKerjaPenyerahan','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_OUT','$mainAreaKerjaPenyerahan')))),
+															nomor = (SELECT CONCAT('$mainAreaKerjaPenyerahan','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_OUT','$mainAreaKerjaPenyerahan')))),
 															status = '$mainTransaksiPenyerahan',
 														    ket = '$mainKeteranganPenyerahan' 
 														WHERE id = '$mainIdPenyerahan';");

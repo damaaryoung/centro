@@ -231,8 +231,8 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 						JH.verifikasi,
 						kk.`kode_cabang`,
 						kk.`nama_kantor`
-					FROM dpm_online.jaminan_header JH,
-						dpm_online.`app_kode_kantor` KK
+					FROM jaminan_header JH,
+						`app_kode_kantor` KK
 					WHERE nomor = '$nomorAgunan'
 					AND no_reff = '$nomorRefAgunan'
 					AND jh.`kode_kantor` = kk.`kode_kantor`;
@@ -255,8 +255,8 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 					JMK.`nm_merk` AS nama_merk,
 					jtk.`nm_type` AS nama_type
 				FROM
-					dpm_online.jaminan_dokument JD 
-					LEFT JOIN dpm_online.`app_kode_kantor` KK 
+					jaminan_dokument JD 
+					LEFT JOIN `app_kode_kantor` KK 
 					ON JD.kode_kantor_lokasi_jaminan = KK.kode_kantor 
 					LEFT JOIN kre_kode_jenis_agunan KKJA 
 					ON JD.`jenis_agunan_detail` = KKJA.`KODE_JENIS_AGUNAN` 
@@ -277,8 +277,7 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 	public function selectKodeKantor(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
-				FROM dpm_online.`app_kode_kantor` AKK;
-               ";
+				FROM `app_kode_kantor` AKK;";
         $query = $this->db2->query($str);
         
         return $query->result_array();
@@ -289,7 +288,7 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 		
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$this->db2->trans_start();
-		$this->db2->query("UPDATE dpm_online.jaminan_header 
+		$this->db2->query("UPDATE jaminan_header 
 							SET
 								#nama = 'TES KALI INI ',
 								#alamat = 'ALAMAT TEST',
@@ -301,8 +300,8 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 								verifikasi = '$verifHeader' 
 							WHERE id = '$idHeader';");
 
-		$this->db2->query("UPDATE `dpm_online`.`jaminan_dokument` SET verifikasi='$verifDokument' WHERE id='$idDokument';"); 
-		$this->db2->query("UPDATE `dpm_online`.`kre_agunan` SET verifikasi='$verifDokument' WHERE agunan_id='$varIdAgunanDokument';");
+		$this->db2->query("UPDATE `jaminan_dokument` SET verifikasi='$verifDokument' WHERE id='$idDokument';"); 
+		$this->db2->query("UPDATE `kre_agunan` SET verifikasi='$verifDokument' WHERE agunan_id='$varIdAgunanDokument';");
 		$this->db2->trans_complete();
 						
 	}

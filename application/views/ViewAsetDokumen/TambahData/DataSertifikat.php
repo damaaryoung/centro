@@ -1007,8 +1007,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
             <div class="card-footer text-center">
-                <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
                 <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
+                <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
             </div>
             </form>
             <!-- /.card-footer -->

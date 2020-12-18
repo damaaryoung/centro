@@ -73,28 +73,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-// $db['default'] = array(
-// 	'dsn'	=> '',
-// 	'hostname' => '103.234.254.186:3308',
-// 	'username' => 'test',
-// 	'password' => 'test123!',
-// 	'database' => 'newwebtool',
-// 	'dbdriver' => 'mysqli',
-// 	'dbprefix' => '',
-// 	'pconnect' => FALSE,
-// 	'db_debug' => (ENVIRONMENT !== 'production'),
-// 	'cache_on' => FALSE,
-// 	'cachedir' => '',
-// 	'char_set' => 'utf8',
-// 	'dbcollat' => 'utf8_general_ci',
-// 	'swap_pre' => '',
-// 	'encrypt' => FALSE,
-// 	'compress' => FALSE,
-// 	'stricton' => FALSE,
-// 	'failover' => array(),
-// 	'save_queries' => TRUE
-// );
-
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => '103.31.232.148:3307',
@@ -123,7 +101,7 @@ $db['DB_DPM_ONLINE'] = array(
 	'hostname' => '103.234.254.186:3308',
 	'username' => 'test',
 	'password' => 'test123!',
-	'database' => 'dpm_online',
+	'database' => 'centro',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -141,12 +119,12 @@ $db['DB_DPM_ONLINE'] = array(
 );
 
 
-$db['DB_TEST'] = array(
+$db['DB_CENTRO'] = array(
 	'dsn'	=> '',
 	'hostname' => '103.234.254.186:3308',
 	'username' => 'test',
 	'password' => 'test123!',
-	'database' => 'test',
+	'database' => 'centro',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -163,49 +141,6 @@ $db['DB_TEST'] = array(
 	'save_queries' => TRUE
 );
 
-$db['DB_OLD_WEBTOOL'] = array(
-	'dsn'	=> '',
-	'hostname' => '103.234.254.186:3308',
-	'username' => 'test',
-	'password' => 'test123!',
-	'database' => 'webtool',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
-
-$db['DB_WEBTOOL'] = array(
-	'dsn'	=> '',
-	'hostname' => '103.31.232.148:3307',
-	'username' => 'u2Qi7Jfui',
-	'password' => 'qJ7ysIkg8ce!',
-	'database' => 'newwebtool',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
 
 $db['db2'] = array(
 	'dsn'	=> '',

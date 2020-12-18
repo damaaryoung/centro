@@ -39,25 +39,23 @@ class AsetDokumenEntryModel extends CI_Model{
 	}
 	public function KreKodeJenisAgunan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT kode_jenis_agunan, CONCAT(kode_jenis_agunan,' - ',deskripsi_jenis_agunan) AS jenis_agunan, persen_default
-				FROM kre_kode_jenis_agunan;
-               ";
+		$str = "SELECT kode_jenis_agunan as kode_jenis_agunan, CONCAT(kode_jenis_agunan,' - ',deskripsi_jenis_agunan) AS jenis_agunan, persen_default as persen_default
+				FROM kre_kode_jenis_agunan;";
         $query = $this->db2->query($str);
         
         return $query->result_array();
 	}	
 	public function KreKodeIkatanHukumAgunan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT kode_ikatan_hukum, CONCAT(kode_ikatan_hukum,' - ',deskripsi_ikatan_hukum) AS ikatan_agunan, persen_default
-				FROM kre_kode_ikatan_hukum_agunan;
-			";
+		$str = "SELECT kode_ikatan_hukum as kode_ikatan_hukum, CONCAT(kode_ikatan_hukum,' - ',deskripsi_ikatan_hukum) AS ikatan_agunan, persen_default as persen_default
+				FROM kre_kode_ikatan_hukum_agunan;";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
 	}
 	public function nextID(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT dpm_online.get_auto_next_id('dpm_online','jaminan_dokument') AS 'id';";
+		$str = "SELECT get_auto_next_id('dpm_online','jaminan_dokument') AS 'id';";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
@@ -65,7 +63,7 @@ class AsetDokumenEntryModel extends CI_Model{
 	public function selectKodeKantor(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
-				FROM dpm_online.`app_kode_kantor` AKK;
+				FROM `app_kode_kantor` AKK;
                ";
         $query = $this->db2->query($str);
         
@@ -74,7 +72,7 @@ class AsetDokumenEntryModel extends CI_Model{
 	public function getSlikKodeJenisAgunan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT `nomor`, `kode`, `nama`
-				FROM dpm_online.slik_ref_jenis_agunan
+				FROM slik_ref_jenis_agunan
 				WHERE flg_aktif='1'
 				ORDER BY `nomor`;
 				";
@@ -96,7 +94,7 @@ class AsetDokumenEntryModel extends CI_Model{
 	public function getSlikJenisPengikatan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT `nomor`, `kode`, `nama`
-				FROM dpm_online.slik_ref_jenis_pengikatan
+				FROM slik_ref_jenis_pengikatan
 				WHERE flg_aktif='1'
 				ORDER BY `nomor`;
 				";
@@ -107,7 +105,7 @@ class AsetDokumenEntryModel extends CI_Model{
 	public function getSlikDati2(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT `nomor`, `kode`, `nama`
-				FROM dpm_online.slik_ref_dati
+				FROM slik_ref_dati
 				WHERE flg_aktif='1'
 				ORDER BY `nomor`;
 				";
@@ -262,7 +260,7 @@ class AsetDokumenEntryModel extends CI_Model{
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
 		$this->db2->query("UPDATE 
-							dpm_online.counter 
+							counter 
 							SET nomor = nomor + 1  
 							WHERE setting= CONCAT('ASSET_IN','$mainAreaKerja')
 							AND nomor <= nomor + 1
@@ -272,7 +270,7 @@ class AsetDokumenEntryModel extends CI_Model{
 	public function generateAgunanID($mainAreaKerja){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$str = "SELECT CONCAT('$mainAreaKerja','.',LPAD(SUBSTR(agunan_id, 4, 6) + 1, 6, '0')) AS hasil 
-	  			FROM dpm_online.kre_agunan 
+	  			FROM kre_agunan 
 				WHERE agunan_id LIKE CONCAT('$mainAreaKerja', '.%') 
 				ORDER BY hasil DESC 
 				LIMIT 1";
@@ -299,7 +297,7 @@ class AsetDokumenEntryModel extends CI_Model{
 
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.jaminan_header (
+		$this->db2->query("INSERT INTO jaminan_header (
 							id,
 							nomor,
 							no_reff,
@@ -318,9 +316,9 @@ class AsetDokumenEntryModel extends CI_Model{
 							verifikasi
 						) 
 						VALUES(
-							dpm_online.get_auto_next_id ('dpm_online', 'jaminan_header'),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							get_auto_next_id ('dpm_online', 'jaminan_header'),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
 							'$mainTanggal',
 							'$mainNama',
 							'$mainAlamat',
@@ -397,7 +395,7 @@ class AsetDokumenEntryModel extends CI_Model{
 											$sertLainnya,
 											$verifikasi){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$this->db2->query("INSERT INTO dpm_online.jaminan_dokument (
+		$this->db2->query("INSERT INTO jaminan_dokument (
 							id,
 							no_reff,
 							jenis,
@@ -462,8 +460,8 @@ class AsetDokumenEntryModel extends CI_Model{
 							verifikasi
 						)
 						VALUES(
-							dpm_online.get_auto_next_id('dpm_online','jaminan_dokument'),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							get_auto_next_id('dpm_online','jaminan_dokument'),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
 							'$jenisJaminan',
 							'$no_shm',
 							'$no_shgb',
@@ -564,7 +562,7 @@ class AsetDokumenEntryModel extends CI_Model{
 
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.`slik_agunan` (
+		$this->db2->query("INSERT INTO `slik_agunan` (
 								`flag_detail`,
 								`kode_register_agunan`,
 								`no_rekening`,
@@ -715,7 +713,7 @@ class AsetDokumenEntryModel extends CI_Model{
 											){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.jaminan_header (
+		$this->db2->query("INSERT INTO jaminan_header (
 							id,
 							nomor,
 							no_reff,
@@ -734,9 +732,9 @@ class AsetDokumenEntryModel extends CI_Model{
 							verifikasi
 						)  
 						VALUES(
-							dpm_online.get_auto_next_id ('dpm_online', 'jaminan_header'),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							get_auto_next_id ('dpm_online', 'jaminan_header'),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
 							'$mainTanggal',
 							'$mainNama',
 							'$mainAlamat',
@@ -796,7 +794,7 @@ class AsetDokumenEntryModel extends CI_Model{
 												$mainNomorRekening){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.jaminan_dokument (
+		$this->db2->query("INSERT INTO jaminan_dokument (
 							`id`,
 							`no_reff`,
 							`jenis`, #MULAI
@@ -911,8 +909,8 @@ class AsetDokumenEntryModel extends CI_Model{
 							`no_rekening_agunan`
 						)
 						VALUES(
-							dpm_online.get_auto_next_id('dpm_online','jaminan_dokument'),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							get_auto_next_id('dpm_online','jaminan_dokument'),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
 							'$jenisJaminan',
 							'$bpkbKodeJenisAgunan',
 							'$bpkbNoBPKB',
@@ -974,7 +972,7 @@ class AsetDokumenEntryModel extends CI_Model{
 											$verifikasi){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-		$this->db2->query("INSERT INTO dpm_online.jaminan_header (
+		$this->db2->query("INSERT INTO jaminan_header (
 							id,
 							nomor,
 							no_reff,
@@ -993,9 +991,9 @@ class AsetDokumenEntryModel extends CI_Model{
 							verifikasi
 						)  
 						VALUES(
-							dpm_online.get_auto_next_id ('dpm_online', 'jaminan_header'),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							get_auto_next_id ('dpm_online', 'jaminan_header'),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
 							'$mainTanggal',
 							'$mainNama',
 							'$mainAlamat',
@@ -1027,7 +1025,7 @@ class AsetDokumenEntryModel extends CI_Model{
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
 												
-		$this->db2->query("INSERT INTO dpm_online.jaminan_dokument (
+		$this->db2->query("INSERT INTO jaminan_dokument (
 							`id`,
 							`no_reff`,
 							`jenis`, #MULAI
@@ -1141,8 +1139,8 @@ class AsetDokumenEntryModel extends CI_Model{
 							`no_rekening_agunan`
 						)
 						VALUES(
-							dpm_online.get_auto_next_id('dpm_online','jaminan_dokument'),
-							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM dpm_online.counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
+							get_auto_next_id('dpm_online','jaminan_dokument'),
+							concat('$mainAreaKerja','.',(SELECT SUBSTR(nomor, 3, 6) FROM counter WHERE setting=CONCAT('ASSET_IN','$mainAreaKerja'))),
 							'$jenisJaminan',
 							'$emasSIDNJOP',
 							'$agunan_id',
@@ -1166,21 +1164,21 @@ class AsetDokumenEntryModel extends CI_Model{
 										$agunanID){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		$this->db2->trans_start();
-		$this->db2->query("UPDATE  dpm_online.`slik_agunan` 
+		$this->db2->query("UPDATE  `slik_agunan` 
 							SET	`operasi_data`= 'D'
 							WHERE kode_register_agunan = '$agunanID' ;");
 		$this->db2->query("DELETE 
-							FROM dpm_online.jaminan_header 
+							FROM jaminan_header 
 							WHERE no_reff = '$nomorRefAgunan' 
 							AND nomor = '$nomorAgunan' 
 							AND STATUS = '$dataStatus';");
 		$this->db2->query("DELETE 
-							FROM dpm_online.jaminan_history 
+							FROM jaminan_history 
 							WHERE no_reff = '$nomorRefAgunan' 
 							AND nomor = '$nomorAgunan' 
 							AND STATUS = '$dataStatus';");
 		$this->db2->query("DELETE 
-							FROM dpm_online.jaminan_dokument 
+							FROM jaminan_dokument 
 							WHERE no_reff = '$nomorRefAgunan';");
 		$this->db2->trans_complete();
 		// if ($this->db2->trans_status() === FALSE)

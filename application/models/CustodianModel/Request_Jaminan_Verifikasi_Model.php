@@ -10,7 +10,7 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
     public function selectKodeKantor(){
             $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
             $str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
-                    FROM dpm_online.`app_kode_kantor` AKK;
+                    FROM `app_kode_kantor` AKK;
                 ";
             $query = $this->db2->query($str);
             
@@ -81,7 +81,7 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
     public function getJaminanPemindahanHeader($tblNomor){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT * 
-                FROM dpm_online.jaminan_request_pemindahan JP
+                FROM jaminan_request_pemindahan JP
                 WHERE JP.`nomor` = '$tblNomor';";
         $query = $this->db2->query($str);
         
@@ -104,7 +104,7 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                                     ' TAHUN ', IFNULL(`tahun`,''),' NO. POL : ', IFNULL(`no_polisi`,''))
                         ), 450) AS deskripsi_ringkas,
                     `no_rekening_agunan`
-                FROM dpm_online.jaminan_request_pemindahan_detail jpd
+                FROM jaminan_request_pemindahan_detail jpd
                     LEFT JOIN `jaminan_dokument` jd ON jd.`no_reff`=jpd.`no_reff`
                 WHERE  jpd.`nomor`='$dataNomor' ORDER BY id LIMIT 0, 25;";
         $query = $this->db2->query($str);
@@ -124,18 +124,18 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
         $this->db2->trans_start();
-        $this->db2->query("UPDATE dpm_online.jaminan_request_pemindahan 
+        $this->db2->query("UPDATE jaminan_request_pemindahan 
                             SET `verifikasi` = '$mainVerifikasi',
                                  `ket`       = '$main_keterangan'
                             WHERE `nomor` = '$main_nomor';");
-        $this->db2->query("UPDATE dpm_online.jaminan_request_pemindahan_detail
+        $this->db2->query("UPDATE jaminan_request_pemindahan_detail
                             SET `updated_at` = NOW()
                             WHERE `nomor` = '$main_nomor';"); 
         //looping update di jaminan dokument
         for($i = 0; $i < $lengthParsed; $i++){
 			$nomorReffDetail = $parsedDataDetailArr[$i][0];
             $agunanIdDetail   = $parsedDataDetailArr[$i][1];
-            $this->db2->query("UPDATE dpm_online.jaminan_dokument 
+            $this->db2->query("UPDATE jaminan_dokument 
                                 SET `kode_kantor_lokasi_jaminan`='$kode_kantor_tujuan', 
                                      lokasi_penyimpanan = '$kode_custodian' 
                                 WHERE no_reff = '$nomorReffDetail'
@@ -160,10 +160,10 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                     kode_custodian,
                     pic_request_pemindahan
                     
-                FROM dpm_online.jaminan_request_pemindahan JP 
-                LEFT JOIN dpm_online.`app_kode_kantor` kk1
+                FROM jaminan_request_pemindahan JP 
+                LEFT JOIN `app_kode_kantor` kk1
                     ON kk1.`kode_kantor` = jp.`kode_kantor_lokasi_jaminan`
-                LEFT JOIN dpm_online.`app_kode_kantor` kk2
+                LEFT JOIN `app_kode_kantor` kk2
                     ON kk2.`kode_kantor` = jp.`kode_kantor_tujuan`
                 WHERE JP.`nomor` = '$tblNomor';";
         $query = $this->db2->query($str);
@@ -201,7 +201,7 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
     }
     public function getAlamatHeader(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT CONCAT(alamat, ' ', kota, ' Telp.', telp, ' Fax.',fax) AS hasil FROM dpm_online.setup LIMIT 1;";
+		$str = "SELECT CONCAT(alamat, ' ', kota, ' Telp.', telp, ' Fax.',fax) AS hasil FROM setup LIMIT 1;";
         $query = $this->db2->query($str);
         
         return $query->result_array();
