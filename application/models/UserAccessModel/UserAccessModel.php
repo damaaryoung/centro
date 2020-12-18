@@ -33,14 +33,14 @@ class UserAccessModel extends CI_Model{
         return $query->result_array();
 	}
 	public function userAccessList(){
-		$this->db3 = $this->load->database('DB_TEST', true);
+		$this->db3 = $this->load->database('DB_CENTRO', true);
 		$str = "SELECT access_id , menu_access_name FROM ACCESS_CENTRO;";
 		$query = $this->db3->query($str);
         
         return $query->result_array();
 	}
 	public function accessExisting($userId){
-		$this->db3 = $this->load->database('DB_TEST', true);
+		$this->db3 = $this->load->database('DB_CENTRO', true);
 		$str = "SELECT UAC.`user_access_id` 'user_access_id', 
 						U.`nama` AS 'NAMA', 
 						AC.`menu_access_name` AS 'HAK_AKSES', 
@@ -59,7 +59,7 @@ class UserAccessModel extends CI_Model{
         return $query->result_array();
 	}
 	public function addUserAccessNew($userId,$access_id,$addBy){
-		$this->db3 = $this->load->database('DB_TEST', true);
+		$this->db3 = $this->load->database('DB_CENTRO', true);
 		
 		$this->db3->query("INSERT INTO user_access_centro (user_id,
 															access_id,
@@ -71,7 +71,7 @@ class UserAccessModel extends CI_Model{
 							AND access_id = '$access_id');");
 	}
 	public function revokeAksesNew($userId,$access_id){
-		$this->db3 = $this->load->database('DB_TEST', true);
+		$this->db3 = $this->load->database('DB_CENTRO', true);
 		
 		$this->db3->query("DELETE FROM user_access_centro
 							WHERE user_id = '$userId'

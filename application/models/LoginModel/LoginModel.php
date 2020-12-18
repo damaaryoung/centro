@@ -21,7 +21,7 @@ class LoginModel extends CI_Model{
 
 	/// select menu akses untuk dokumen dummy
 	public function userAccess($userId){
-		$this->db3 = $this->load->database('DB_TEST', true);
+		$this->db3 = $this->load->database('DB_CENTRO', true);
 		$str = "SELECT access_id
 				FROM `user_access_centro`
 				WHERE user_id = $userId; 

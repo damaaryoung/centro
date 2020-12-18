@@ -93,13 +93,6 @@ class LoginController extends CI_Controller {
 				else if( $row['access_id'] == '13'){
 					$data1['verifikasi_request_jaminan_ke_centro'] = 'ok';
 				}
-				else if( $row['access_id'] == '14'){
-					$data1['update_kirim_jaminan_controller'] = 'ok';
-				}
-				else if( $row['access_id'] == '15'){
-					$data1['update_kirim_jaminan_verifikasi_controller'] = 'ok';
-				}
-                
 			endforeach;	
 
 			$data1['version']    = 'CentroSystem Web Versi Dev';

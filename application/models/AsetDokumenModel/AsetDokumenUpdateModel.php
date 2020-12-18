@@ -231,8 +231,8 @@ class AsetDokumenUpdateModel extends CI_Model{
 	}
 
 	public function getCoverNotes($agunanID, $nomorRefAgunan){
-		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT * FROM `jaminan_cover_notes`
+		$this->db2 = $this->load->database('DB_CENTRO', true);
+		$str = "SELECT * FROM `jaminan_upload_cover_notes_pinjam`
 				WHERE agunan_id = '$agunanID'
 				AND no_reff = '$nomorRefAgunan'
 				ORDER BY id DESC;";
@@ -744,10 +744,10 @@ class AsetDokumenUpdateModel extends CI_Model{
 	}
 
 	public function insertCoverNotes($CoverNotesNoReff,$CoverNotesAgunanID,$namafileUpload){
-		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$this->db2 = $this->load->database('DB_CENTRO', true);
 		
 												
-		$this->db2->query("INSERT INTO jaminan_cover_notes
+		$this->db2->query("INSERT INTO jaminan_upload_cover_notes_pinjam
 							(no_reff, agunan_id, tanggal_upload, upload_cover_notes)
 							VALUES(
 								'$CoverNotesNoReff',
