@@ -228,11 +228,22 @@ class BSSModel extends CI_Model{
 		
 
 		// update bss_notif
-		$str_notif = "UPDATE bss_notif SET
+		if($appoved == 'Approved'){
+			$str_notif = "UPDATE bss_notif SET
 					tgl_approved=NOW(),
-					status='".($appoved == 'Approved' || 'ApprovedToKolektor' ? '1' :'2')."',
-					keterangan=".($appoved == 'Approved' ?  'NULL' : "'$keterangan'")."	
+					status=' 1',keterangan= NULL	
 					WHERE id=$id ";
+		}elseif ($appoved == 'ApprovedToKolektor') {
+			$str_notif = "UPDATE bss_notif SET
+					tgl_approved=NOW(),
+					status= '1',keterangan= NULL	
+					WHERE id=$id ";
+		}else{
+			$str_notif = "UPDATE bss_notif SET
+					tgl_approved=NOW(),
+					status= '2', keterangan = '$keterangan'	
+					WHERE id= $id ";
+		}
 		return $this->db->query($str_notif);
 			
 		return $message  = "Update status data success";	

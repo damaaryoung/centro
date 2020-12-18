@@ -269,6 +269,7 @@ $('#send_approval_reject').click(function () {
     keterangan: $('#message-text').val(),
     appoved: "Reject"
   }
+ 
   $.ajax({
     url: base_url + "BSSController/insertReceivedApproved",
     type: "POST",
