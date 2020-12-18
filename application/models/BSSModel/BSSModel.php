@@ -455,7 +455,7 @@ class BSSModel extends CI_Model{
 	public function queryLogBSS(){
 		$kartu_number = $this->kartu_number ;
 		$this->db = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT * FROM view_bss_log WHERE kartu_number=SUBSTRING('$kartu_number',4)LIMIT 5";
+		$str = "SELECT * FROM view_bss_log WHERE `kartu_number` = '$kartu_number' LIMIT 5; ";
 		$query = $this->db->query($str);
 		return $query->result_array();
 	}
