@@ -172,34 +172,7 @@ tr.shown td.details-click {
                             </tr>
                             </thead>
                             <tbody style="text-align: center;" id="list_dt">
-                            <?php
-                              //  if (value == "NOT COMPLETED") background += 'color:#B6AC47'
-                              //  else if (value == "DONE")background += 'color:#00AE39'
-                              //   else if (value == "WAITING")background += 'color:#D60404'
-                              //   else if (value == "REVISI")background += 'color:#FF6412'
-                            echo '<tr>
-                                    <td style="width: 120px;">33-38-00050-20</td>
-                                    <td>INTIFADA AYU SULISTYA</td>
-                                    <td>SINDANG BARANG</td>
-                                    <td>07-10-2020</td>
-                                    <td>30,000,000</td>
-                                    <td>36</td>
-                                    <td>30,000,000</td>
-                                    <td></td>
-                                    <td style="width: 120px;">SULUH DAMAR GRAHITA</td>
-                                    <td></td>
-                                    <td>11-12-2020 14:29</td>
-                                    <td></td>
-                                    <td>22 jam yang lalu</td>
-                                    <td>WAITING</td>
-                                    <td style="width: 120px;">
-                                        <button type="button" class="btn btn-primary btn-sm tambah" title="Tambah Data" disabled="" data-target="#update" data="5113"><i class="fas fa-plus"></i></button>
-                                        <button type="button" class="btn btn-info btn-sm edit" title="Edit Data" ><i class="fas fa-pencil-alt"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm detail" title="Detail Data" ><i style="color: #fff;" class="fas fa-eye"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm verifikasi" title="Verifikasi"   style="background-color: #6610f2; border-color: #6f42c1;" data="5113"><i style="color: #fff;" class="fas fa-user-check"></i></button>
-                                    </td>
-                                  </tr>';
-                            ?>
+                            
                             </tbody>
                         </table>
                     </div>
@@ -227,6 +200,7 @@ tr.shown td.details-click {
         echo $ctrlbar;
         echo $js;
         echo $Modaldetail_efiling;
+        echo $Modalview_efiling;
 	?>
  
 </body>

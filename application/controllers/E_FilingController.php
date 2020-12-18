@@ -20,11 +20,12 @@ class E_FilingController extends CI_Controller {
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
 
 		$data['Modaldetail_efiling'] = $this->load->view('ViewEFiling/modal_detail_efiling', NULL, TRUE);
+		$data['Modalview_efiling'] = $this->load->view('ViewEFiling/modal_view_efiling', NULL, TRUE);
 
 		if($session != ''){
+			
             $data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			$this->load->view('ViewEFiling/ViewListEFiling.php', $data);
-
 		}
 		else{
 			redirect('LoginController/index'); 
