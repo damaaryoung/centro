@@ -37,8 +37,8 @@ var base_url = $('#base_url').val();
       cache: false,
       type: 'POST',
       data: {
-        "user" : user
-       // "password" : password
+        "user" : user,
+        "password" : password
       },
       dataType: 'json',
       success : function(response){
