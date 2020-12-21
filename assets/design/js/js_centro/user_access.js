@@ -41,7 +41,6 @@ $(document).ready(function () {
             error : function(response) {
                 console.log('failed :' + response);
                 alert('Gagal Get Data, Mohon Coba Kembali Beberapa Saat Lagi');
-                window.location = base_url + 'DashboardController/index';
                 $('#loading').hide();
             }
     });    
@@ -93,7 +92,6 @@ function getDetail(user_id){
             error : function(response) {
                 console.log('failed :' + response);
                 alert('Gagal Get Data, Mohon Coba Kembali Beberapa Saat Lagi');
-            //  window.location = base_url + 'UserAccessController/index';
                 $('#loading').hide();
             }
     }); 
