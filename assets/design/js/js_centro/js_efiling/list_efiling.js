@@ -1,50 +1,80 @@
+let base_url = $('#base_url').val();
 $(document).ready(function () {
-    getAll()
-    $('#efilingTable1').DataTable({
-        "scrollX": true,
-        "autoWidth": false,
-        "aaSorting": [],
-        "searching": false,
-        "searchable": false 
-      });
+    
+      getAll()
     bsCustomFileInput.init();
     
 })
 
 //Get all list Efiling
 function getAll(){
-    let value = 'WAITING';
-    let stcolor= '';
-    if (value == "NOT COMPLETED") {stcolor = 'color:#B6AC47'
-    }else if (value == "DONE") {stcolor = 'color:#00AE39'
-    }else if (value == "WAITING"){stcolor = 'color:#D60404'
-    }else if (value == "REVISI"){stcolor = 'color:#FF6412'}
+    $.ajax({
+        url: base_url + "E_FilingController/getEfiling",
+        type: "GET",
+        dataType: "json",
+        beforeSend: function () {
+            $('#loading').show();
+        },
+        success: function (respon) {
+            $('#loading').hide();
+        for (let i = 0; i < respon.data.length; i++) {
 
+            let baki_debet = splitPrice(respon.data[i]['baki_debet'])
 
-    let row = `<tr>
-        <td style="width: 120px;">33-38-00050-20</td>
-        <td>INTIFADA AYU SULISTYA</td>
-        <td>SINDANG BARANG</td>
-        <td>07-10-2020</td>
-        <td>30,000,000</td>
-        <td>36</td>
-        <td>30,000,000</td>
-        <td></td>
-        <td style="width: 120px;">SULUH DAMAR GRAHITA</td>
-        <td></td>
-        <td>11-12-2020 14:29</td>
-        <td></td>
-        <td>22 jam yang lalu</td>
-        <td style="${stcolor}; font-weight:bold;">WAITING</td>
-        <td style="width: 120px;">
-            <button type="button" class="btn btn-primary btn-sm add" title="Tambah Data" ><i class="fas fa-plus"></i></button>
-            <button type="button" class="btn btn-info btn-sm edit" title="Edit Data" ><i class="fas fa-pencil-alt"></i></button>
-            <button type="button" class="btn btn-warning btn-sm detail" title="Detail Data" ><i style="color: #fff;" class="fas fa-eye"></i></button>
-            <button type="button" class="btn btn-warning btn-sm verifikasi" title="Verifikasi"  style="background-color: #6610f2; border-color: #6f42c1;" data="5113"><i style="color: #fff;" class="fas fa-user-check"></i></button>
-        </td>
-    </tr>`
-    $('#efilingTable1').find('tbody').append(row);
-    console.log('test')
+            function splitPrice(x) {
+                let split_price = x.split('.00')
+                let list_price = split_price[0]
+                let price = parseInt(list_price).toLocaleString();
+                return price;
+            }
+
+            let stcolor= '';
+            if ( respon.data[i]['status_verifikasi'] == "NOT COMPLETED") {stcolor = 'color:#B6AC47'
+            }else if (respon.data[i]['status_verifikasi'] == "DONE") {stcolor = 'color:#00AE39'
+            }else if (respon.data[i]['status_verifikasi'] == "WAITING"){stcolor = 'color:#D60404'
+            }else if (respon.data[i]['status_verifikasi'] == "REVISI"){stcolor = 'color:#FF6412'
+            }else{stcolor= ''}
+
+            let stcolor_upload ='';
+            if(respon.data[i]['nama_user'] == "WAITING"){stcolor_upload ='color:#D60404'}else{stcolor_upload =''}
+
+            let row = `<tr>
+                <td style="width: 120px;" class="no_rekening">${respon.data[i]['no_rekening']}</td>
+                <td>${respon.data[i]['nama_debitur']}</td>
+                <td>${respon.data[i]['nama_kantor']}</td>
+                <td>${respon.data[i]['tgl_realisasi']}</td>
+                <td>${respon.data[i]['plafon']}</td>
+                <td>${respon.data[i]['tenor']}</td>
+                <td>${baki_debet}</td>
+                <td>${((respon.data[i]['status_dokument']== null)?'' :respon.data[i]['status_dokument'])}</td>
+                <td style="${stcolor_upload}; font-weight:bold;" style="width: 120px;">${respon.data[i]['nama_user']}</td>
+                <td style="font-weight:bold;">${((respon.data[i]['nama_user_verif']== null)?'' :respon.data[i]['nama_user_verif'])}</td>
+                <td>${((respon.data[i]['timeline']== null)?'' :respon.data[i]['timeline'])}</td>
+                <td>${((respon.data[i]['timeline_update']== null)?'' : respon.data[i]['timeline_update'])}</td>
+                <td>${((respon.data[i]['timeline_verifikasi']== null)?'' :respon.data[i]['timeline_verifikasi'])}</td>
+                <td style="${stcolor}; font-weight:bold;">${((respon.data[i]['status_verifikasi']== null)?'': respon.data[i]['status_verifikasi'])}</td>
+                <td style="width: 120px;">
+                    
+                    <button type="button" class="btn btn-info btn-sm edit" title="Edit Data" ><i class="fas fa-pencil-alt"></i></button>
+                    <button type="button" class="btn btn-warning btn-sm detail" title="Detail Data" ><i style="color: #fff;" class="fas fa-eye"></i></button>
+                    <button type="button" class="btn btn-warning btn-sm verifikasi" title="Verifikasi"  style="background-color: #6610f2; border-color: #6f42c1;" data="5113"><i style="color: #fff;" class="fas fa-user-check"></i></button>
+                </td>
+            </tr>`
+            
+            $('#efilingTable1').find('tbody').append(row);
+        }
+        $('#efilingTable1').DataTable({
+            "scrollX": true,
+            "autoWidth": false,
+            "aaSorting": [],
+            "searching": false,
+            "searchable": false 
+          });
+        
+        }
+        // <button type="button" class="btn btn-primary btn-sm add" title="Tambah Data" ><i class="fas fa-plus"></i></button>
+    })
+    
 }
 
 // Btn action list Efiling
@@ -62,6 +92,7 @@ $('#efilingTable1').on('click', '.edit', function () {
     $('#modal_pengisian_efiling').modal('show');
     $('#title_form').text("Form Edit E-Filling");
     $('.form-verifikasi').css("display", "block");
+    $( ".custom-file-input" ).append( $(this).parents("tr").find('td.no_rekening').text() );
 })
 
 $('#efilingTable1').on('click', '.verifikasi', function () {
@@ -69,6 +100,20 @@ $('#efilingTable1').on('click', '.verifikasi', function () {
     $('#title_form').text("Form Verifikasi E-Filling");
     $('.form-verifikasi').css("display", "block");
 })
+
+function getImg(evt){
+    var files = evt.target.files[0];
+    var idFile = evt.target.getAttribute('id');
+    var no_rekening = $( '#'+idFile+'' ).text();
+    console.log(files.name, idFile, no_rekening);
+    
+}
+
+function closeFormEfiling(){
+    $('#modal_pengisian_efiling').modal('hide');
+    $( ".custom-file-input" ).empty();
+    location.reload();
+}
 
 // Check verifikasi form E Filing
 function check(id,ket){
@@ -80,9 +125,3 @@ function check(id,ket){
     }
 }
 
-function getImg(evt,id){
-    var files = evt.target.files;
-    var file = files[0];
-    console.log(file.name, id);
-    // ajax
-}

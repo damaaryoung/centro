@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class E_FilingController extends CI_Controller {
 	public function __construct() {
         parent:: __construct();
-       
+		$this->load->model('EFilingModel/EFilingModel');
 		$this->load->model('AsetDokumenModel/AsetDokumenEntryModel');
 	}
 
@@ -30,5 +30,26 @@ class E_FilingController extends CI_Controller {
 		else{
 			redirect('LoginController/index'); 
 		}
-    }
+	}
+	
+	public function getEfiling(){
+		$session = $this->session->userdata('nama');
+		$divisi_id = $this->session->userdata('divisi_id');
+		$jabatan = $this->session->userdata('jabatan');
+		if($session != ''){
+			$model = new EFilingModel();
+			$model->kode_cabang = $this->session->userdata('kd_cabang'); 
+			$data =$model->get_efiling();
+			echo json_encode([
+				"success" => true,
+				"message" => "",
+				"divisi_id" => $divisi_id,
+				"jabatan" => $jabatan,
+				"data" => $data
+			]);
+		}
+		else{
+			redirect('LoginController/index'); 
+		}
+	}
 }
