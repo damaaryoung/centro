@@ -164,6 +164,7 @@
           <!-- END MENU CREDIT CHECKING -->
 
           <!-- MENU CUSTODIAN -->
+          <?php  if($this->session->userdata('divisi_id') == 'IT' ){ ?>
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-file-contract icon_color_sidebar"></i>
@@ -176,7 +177,7 @@
              
                 </ul>
             </li> 
-         
+          <?php } else{} ?>
           <!-- END MENU CUSTODIAN -->
 
           <!-- MENU BSS -->
