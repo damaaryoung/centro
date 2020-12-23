@@ -287,5 +287,5 @@ tr.shown td.details-click {
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/received_bss.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/migrasi_bss.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/app_assets_js_autocomplete-custom.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/BsstoPic.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/bss_to_pic.js"></script>
 

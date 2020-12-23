@@ -98,6 +98,7 @@ class BSSController extends CI_Controller {
 		$model->area	= $this->input->post('area');
 		$model->search = $this->input->post('search');
 		$searchlist = $model->querySearch();
+		// var_dump($searchlist); die();
 		if( count($searchlist) > 0){
 			$data = $searchlist;
 			$success = true;

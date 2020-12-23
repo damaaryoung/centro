@@ -210,3 +210,25 @@ $db['db2'] = array(
 // 	'failover' => array(),
 // 	'save_queries' => TRUE
 // );
+
+// $db['DB_WEBTOOL'] = array(
+// 	'dsn'	=> '',
+// 	'hostname' => '103.234.254.186:3308',
+// 	'username' => 'test',
+// 	'password' => 'test123!',
+// 	'database' => 'webtool',
+// 	'dbdriver' => 'mysqli',
+// 	'dbprefix' => '',
+// 	'pconnect' => FALSE,
+// 	'db_debug' => (ENVIRONMENT !== 'production'),
+// 	'cache_on' => FALSE,
+// 	'cachedir' => '',
+// 	'char_set' => 'utf8',
+// 	'dbcollat' => 'utf8_general_ci',
+// 	'swap_pre' => '',
+// 	'encrypt' => FALSE,
+// 	'compress' => FALSE,
+// 	'stricton' => FALSE,
+// 	'failover' => array(),
+// 	'save_queries' => TRUE
+// );

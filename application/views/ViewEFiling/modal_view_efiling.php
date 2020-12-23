@@ -8,7 +8,9 @@
               </button>
             </div>
             <div class="modal-body" style="height: 500px; overflow-y: auto">
-
+            <div id="loading-2">
+              <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+            </div>
               <!-- card header start -->
               <div class="card card-info">
                 <div class="card-header">

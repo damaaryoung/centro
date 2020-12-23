@@ -8,7 +8,9 @@
               </button>
             </div>
             <div class="modal-body" style="height: 500px; overflow-y: auto">
-
+            <div id="loading-1">
+              <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+            </div>
               <!-- card header start -->
               <div class="card card-info">
                 <div class="card-header">
@@ -119,23 +121,26 @@
                                               <div class="form-group">
                                                 <label for="customFile">KTP All</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="ktp_all"  onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="ktp_all">Choose file</label>
+                                                  <input type="file" class="custom-file-input" id="ktp"  onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="ktp">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-ktp"></div>
                                               </div>
                                               <div class="form-group">
                                                 <label for="customFile">Kartu Keluarga</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="kartu_keluarga" onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="kartu_keluarga">Choose file</label>
+                                                  <input type="file" class="custom-file-input" id="kk" onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="kk">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-kk"></div>
                                               </div>
                                               <div class="form-group">
                                                 <label for="customFile">NPWP</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="inp_npwp"  onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="inp_npwp">Choose file</label>
+                                                  <input type="file" class="custom-file-input" id="npwp"  onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="npwp">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-npwp"></div>
                                               </div>
                                               <div class="form-group">
                                                 <label for="customFile">Surat Nikah</label>
@@ -143,6 +148,7 @@
                                                   <input type="file" class="custom-file-input" id="surat_nikah"  onchange='getImg(event)'>
                                                   <label class="custom-file-label" for="surat_nikah">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-surat_nikah"></div>
                                               </div>
                                               <div class="form-group">
                                                 <label for="customFile">Surat Cerai</label>
@@ -150,6 +156,7 @@
                                                   <input type="file" class="custom-file-input" id="surat_cerai" onchange='getImg(event)'>
                                                   <label class="custom-file-label" for="surat_cerai">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-surat_cerai"></div>
                                               </div>  
                                               <div class="form-group">
                                                 <label for="customFile">Surat Lahir</label>
@@ -157,6 +164,7 @@
                                                   <input type="file" class="custom-file-input" id="surat_lahir"  onchange='getImg(event)'>
                                                   <label class="custom-file-label" for="surat_lahir">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-surat_lahir"></div>
                                               </div> 
                                               <div class="form-group">
                                                 <label for="customFile">Surat Kematian</label>
@@ -164,13 +172,15 @@
                                                   <input type="file" class="custom-file-input" id="surat_kematian" onchange='getImg(event)'>
                                                   <label class="custom-file-label" for="surat_kematian">Choose file </label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-surat_kematian"></div>
                                               </div>     
                                               <div class="form-group">
                                                 <label for="customFile">Surat Keterangan Desa/PM1/PM2</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="surat_keterangan_desa" onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="surat_keterangan_desa">Choose file</label>
+                                                  <input type="file" class="custom-file-input" id="skd" onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="skd">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-skd"></div>
                                               </div>    
                                               <div class="form-group">
                                                 <label for="customFile">Slip Gaji</label>
@@ -178,6 +188,7 @@
                                                   <input type="file" class="custom-file-input" id="slip_gaji" onchange='getImg(event)'>
                                                   <label class="custom-file-label" for="slip_gaji">Choose file </label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-slip_gaji"></div>
                                               </div>   
                                               <div class="form-group">
                                                 <label for="customFile">Take Over</label>
@@ -185,41 +196,47 @@
                                                   <input type="file" class="custom-file-input" id="take_over" onchange='getImg(event)'>
                                                   <label class="custom-file-label" for="take_over">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-take_over"></div>
                                               </div> 
                                               <div class="form-group">
                                                 <label for="customFile">Surat Keterangan Kerja</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="surat_keterangan_kerja" onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="surat_keterangan_kerja">Choose file </label>
+                                                  <input type="file" class="custom-file-input" id="sk_kerja" onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="sk_kerja">Choose file </label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-sk_kerja"></div>
                                               </div>     
                                               <div class="form-group">
                                                 <label for="customFile">Surat Keterangan Usaha</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="surat_keterangan_usaha"  onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="surat_keterangan_usaha">Choose file </label>
+                                                  <input type="file" class="custom-file-input" id="sk_usaha"  onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="sk_usaha">Choose file </label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-sk_usaha"></div>
                                               </div>  
                                               <div class="form-group">
                                                 <label for="customFile">Rekening Koran</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="rekening_koran"  onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="rekening_koran">Choose file</label>
+                                                  <input type="file" class="custom-file-input" id="rek_koran"  onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="rek_koran">Choose file</label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-rek_koran"></div>
                                               </div> 
                                               <div class="form-group">
                                                 <label for="customFile">TDP/SIUP</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="tdp_siup" onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="tdp_siup">Choose file </label>
+                                                  <input type="file" class="custom-file-input" id="tdp" onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="tdp">Choose file </label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-tdp"></div>
                                               </div>     
                                               <div class="form-group">
                                                 <label for="customFile">Bon-Bon Usaha</label>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="bon_bon_usaha"  onchange='getImg(event)'>
-                                                  <label class="custom-file-label" for="bon_bon_usaha">Choose file </label>
+                                                  <input type="file" class="custom-file-input" id="bon_usaha"  onchange='getImg(event)'>
+                                                  <label class="custom-file-label" for="bon_usaha">Choose file </label>
                                                 </div>
+                                                <div class="row" style="padding-top: 10px;" id="file-bon_usaha"></div>
                                               </div>      
                                             </div>
                                       <!-- END NASABAH -->
@@ -837,7 +854,7 @@
 
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeFormEfiling()">Close</button>
               <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>

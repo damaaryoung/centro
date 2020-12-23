@@ -35,8 +35,14 @@ function getData(){
             success : function(response) {
                 $('#table_request_jaminan').DataTable().clear();
                 $('#table_request_jaminan').DataTable().destroy();
-                dataTableeee.push(response); 
-                $('#table_request_jaminan > tbody:first').html(dataTableeee);
+                dataTableeee.push(response);
+                if(response == ''){
+                    alert('Data tidak di temukan');
+                    $('#table_request_jaminan > tbody:first').html('');
+                }else{
+                    $('#table_request_jaminan > tbody:first').html(dataTableeee);
+                }
+               
                 $(document).ready(function() {
                     $('#table_request_jaminan').DataTable( {
                         "destroy": true,
@@ -91,7 +97,18 @@ function searchData(){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                //alert('Data Tidak Ditemukan');
+                $('#table_request_jaminan').DataTable().clear();
+                $('#table_request_jaminan').DataTable().destroy();
+                $('#table_request_jaminan > tbody:first').html('');
+                $(document).ready(function() {
+                    $('#table_request_jaminan').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "aaSorting" : []
+                    } );
+                } );
                 toastr["warning"]("Data Tidak Ditemukan", "Perhatian!");
 
                 toastr.options = {

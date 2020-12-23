@@ -35,41 +35,46 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		if($proses == 'getAwal'){
 			$kode_kantor = $this->session->userdata('kd_cabang');
 			$list_request_jaminan = $this->Request_Jaminan_Centro_Model->list_request_jaminan($kode_kantor);
-	
-			foreach ($list_request_jaminan as $row) :
-				$data[]    = 	['<tr> <td>'
-											. $row['nomor'] . '</td> <td>'
-											. $row['tgl']. '</td> <td>'
-											. $row['nama_kantor_asal']. '</td> <td>'
-											. $row['nama_kantor_tujuan'].'</td> <td>'
-											. $row['verifikasi'].'</td> <td>'
-											. '<div class="form-inline">
-														<form method="post" action="'. base_url("Request_Jaminan_Update_Controller/index").'">
-															<button type="submit" 
-																class="btn btn-primary btn-sm" 
-																data-toggle="tooltip" 
-																data-placement="bottom" 
-																title="Edit"> 
-																	<i class="far fa-edit"></i>
-															</button>       
-															<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">            
-														</form>
-														<div style ="padding-left: 5px;">
-															<button type="button" class="btn btn-danger btn-sm btnDeleteRequestJaminan" style ="padding-left: 5px;"
-																		data-id="'.$row['id'].'"
-																		data-nomor="'.$row['nomor'].'" 
-																		data-verifikasi="'.$row['verifikasi'].'" 
-																		data-toggle="tooltip" 
-																		data-placement="bottom" 
-																		title="Delete"
-																		name="btnDeleteRequestJaminan"> 
-																		<i style="padding-left: 5px;" class="fa fa-trash"></i> 
-															</button>  
-														</div>
-												</div> </td></tr>'];
-												
-										
-			endforeach;	
+			if(count($list_request_jaminan) == 0){
+				$data [] = '';
+				
+			}else{
+				foreach ($list_request_jaminan as $row) :
+					$data[]    = 	['<tr> <td>'
+												. $row['nomor'] . '</td> <td>'
+												. $row['tgl']. '</td> <td>'
+												. $row['nama_kantor_asal']. '</td> <td>'
+												. $row['nama_kantor_tujuan'].'</td> <td>'
+												. $row['verifikasi'].'</td> <td>'
+												. '<div class="form-inline">
+															<form method="post" action="'. base_url("Request_Jaminan_Update_Controller/index").'">
+																<button type="submit" 
+																	class="btn btn-primary btn-sm" 
+																	data-toggle="tooltip" 
+																	data-placement="bottom" 
+																	title="Edit"> 
+																		<i class="far fa-edit"></i>
+																</button>       
+																<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">            
+															</form>
+															<div style ="padding-left: 5px;">
+																<button type="button" class="btn btn-danger btn-sm btnDeleteRequestJaminan" style ="padding-left: 5px;"
+																			data-id="'.$row['id'].'"
+																			data-nomor="'.$row['nomor'].'" 
+																			data-verifikasi="'.$row['verifikasi'].'" 
+																			data-toggle="tooltip" 
+																			data-placement="bottom" 
+																			title="Delete"
+																			name="btnDeleteRequestJaminan"> 
+																			<i style="padding-left: 5px;" class="fa fa-trash"></i> 
+																</button>  
+															</div>
+													</div> </td></tr>'];
+													
+											
+				endforeach;	
+			}
+			
 		
 
 		} else if($proses == 'searchData'){
