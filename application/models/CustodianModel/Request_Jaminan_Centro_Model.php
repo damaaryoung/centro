@@ -138,7 +138,6 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                 OR nomor_bpkb LIKE '%$search%' OR nama_bpkb LIKE '%$search%' 
                 OR no_mesin LIKE '%$search%' 
                 OR no_polisi LIKE '%$search%') 
-                AND kode_kantor='$kode_kantor'  
                 AND `status`= 'MASUK' 
                 ORDER BY no_reff
                 LIMIT 0, 25

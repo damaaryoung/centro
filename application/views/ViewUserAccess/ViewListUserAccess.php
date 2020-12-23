@@ -143,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		    echo $js;
 	?>
   
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/user_access.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_user_access/user_access.js"></script>
  
 </body>
 </html>

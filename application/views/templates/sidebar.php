@@ -225,6 +225,14 @@
                   </a>
                 </li>
               </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>user_access_group" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Group Menu</p>
+                  </a>
+                </li>
+              </ul>
             </li>
           <?php } else{} ?>
           <!-- END MENU USER ACCESS -->

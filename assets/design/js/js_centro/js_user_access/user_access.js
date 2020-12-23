@@ -4,7 +4,7 @@ var data = [];
 var dataAkses = [];
 var arrSaveUserAccess = [];
 var base_url = $('#base_url').val();
-var user_id = '';
+var id_headeruser_id = '';
 var id_user_get = '';
 var MenuData = '';
 var AksesData = '';
@@ -85,7 +85,7 @@ function getDetail(user_id){
                     $('#akses'+AksesData[i]['access_id']).prop("checked", true);
                 }
                 $('#loading1').hide(); 
-                $('#id_user_get').val(user_id); 
+                $('#id_user_get').val(id_header); 
 
                 $('#loading1').hide();
             },
