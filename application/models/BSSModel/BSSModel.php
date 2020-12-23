@@ -353,6 +353,7 @@ class BSSModel extends CI_Model{
 			if($query->result_array() == NULL){
 				$str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
 								  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
+				var_dump($str2); die();
 				$this->db->query($str2);
 				$pesan = "Send Nomor BSS TO Kolektor Success";
 			}else {
