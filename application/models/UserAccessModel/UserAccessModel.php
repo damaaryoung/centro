@@ -78,5 +78,73 @@ class UserAccessModel extends CI_Model{
 							AND access_id = '$access_id';");
 	}
 
+	/// ACCESS GROUP MENU
+	public function getGroupMenu(){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		$str = "SELECT * FROM group_access_centro_header h
+				WHERE h.flag_aktif = '1';";
+		$query = $this->db3->query($str);
+        
+        return $query->result_array();
+	}
+	public function accessGroupHeader($id_header){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		$str = "SELECT * FROM group_access_centro_header H
+				WHERE h.`id` = '$id_header';";
+		$query = $this->db3->query($str);
+        
+        return $query->result_array();
+	}
+	public function accessGroupExisting($id_header){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		$str = "SELECT d.access_group_header_id, d.access_id, d.tanggal_tambah
+				FROM group_access_centro_details d
+				WHERE d.access_group_header_id = '$id_header';";
+		$query = $this->db3->query($str);
+        
+        return $query->result_array();
+	}
+	public function generateID(){
+		$this->db = $this->load->database('DB_CENTRO', true);
+		$str = "SELECT MAX(id) + 1 AS id FROM group_access_centro_header;";
+		$query = $this->db->query($str);
+		$id = $query->result_array();
+        
+        return $id[0]["id"];
+	}
+	public function insert_header($id,$input_nama_grup,$input_deskripsi){
+		$this->db = $this->load->database('DB_CENTRO', true);
+		$str = "INSERT INTO group_access_centro_header (id,group_access,flag_aktif,description)
+				VALUES ('$id','$input_nama_grup','1','$input_deskripsi');";
+		$query = $this->db->query($str);
+	}
+	public function add_group_details($id,$access_id){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		
+		$this->db3->query("INSERT INTO group_access_centro_details (access_group_header_id,access_id,tanggal_tambah) 
+							SELECT '$id','$access_id',SYSDATE() FROM DUAL
+							WHERE NOT EXISTS 
+							(SELECT 1 FROM group_access_centro_details WHERE access_group_header_id = '$id'
+							AND access_id = '$access_id');");
+	}
+	public function remove_group_details($id,$access_id){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		
+		$this->db3->query("DELETE FROM group_access_centro_details
+							WHERE access_group_header_id = '$id'
+							AND access_id = '$access_id';");
+	}
+	public function update_header($id,$input_nama_grup,$input_deskripsi){
+		$this->db = $this->load->database('DB_CENTRO', true);
+		$str = "UPDATE group_access_centro_header H
+				SET H.`group_access` = '$input_nama_grup',
+					H.`description`  = '$input_deskripsi'
+				WHERE H.`id` = '$id'; ";
+		$query = $this->db->query($str);
+	}
+
+
 }
+
+
 

@@ -56,6 +56,7 @@ $route['dashboard'] = 'DashboardController/index';
 $route['bss'] = 'BSSController/index';
 $route['entry_asset_document'] = 'AsetDokumenEntryController/index';
 $route['user_access']= 'UserAccessController/index';
+$route['user_access_group']= 'UserAccessController/groupAccessIndex';
 $route['request_jaminan_centro']= 'Request_Jaminan_Centro_Controller/index';
 $route['request_jaminan_verifikasi']= 'Request_Jaminan_Verifikasi_Controller/index';
 $route['update_kirim_jaminan']= 'Update_Kirim_Jaminan_Controller/index';

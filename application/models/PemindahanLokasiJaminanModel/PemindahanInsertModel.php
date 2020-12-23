@@ -75,8 +75,7 @@ class PemindahanInsertModel extends CI_Model{
                 OR nama_pemilik_sertifikat LIKE '%$search%' 
                 OR nomor_bpkb LIKE '%$search%' OR nama_bpkb LIKE '%$search%' 
                 OR no_mesin LIKE '%$search%' 
-                OR no_polisi LIKE '%$search%') 
-                AND kode_kantor_lokasi_jaminan='$kode_kantor'  
+                OR no_polisi LIKE '%$search%')   
                 AND `status`= 'MASUK' 
                 ORDER BY no_reff
                 LIMIT 0, 25
