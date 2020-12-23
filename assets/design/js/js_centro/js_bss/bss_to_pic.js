@@ -99,7 +99,7 @@ $('#assign_kolektor').click(function(){
       },
       success: function (respon) {
         toastr["success"](respon.message)
-        window.location = base_url + 'bss';
+        // window.location = base_url + 'bss';
         $('#loading-3').hide();
       }
     })
