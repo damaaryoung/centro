@@ -1,5 +1,7 @@
 let base_url = $('#base_url').val();
  $(document).ready(function () {
+
+  $('.select2').select2()
   var table = $('#employeeTable1').DataTable({
     "scrollX": true,
     "autoWidth": false,
