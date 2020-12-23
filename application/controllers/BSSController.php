@@ -217,6 +217,7 @@ class BSSController extends CI_Controller {
 		$model->kartu_number =$this->input->post('kartu_number');
 		$model->kolektor_id = $this->input->post('kolektor_id');
 		$send_to_kolektor = $model->queryAssigntoKolektor();
+		var_dump($send_to_kolektor); die();
 		echo json_encode([
 			"success" => true,
 			"message" => $send_to_kolektor,

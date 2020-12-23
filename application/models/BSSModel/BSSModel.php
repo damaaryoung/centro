@@ -354,14 +354,14 @@ class BSSModel extends CI_Model{
 			$query = $this->db->query($str);
 			$row = $query->row_array();
 			$isAda = isset($row['is_ada']) ? $row['is_ada'] : 0;
-
+			// var_dump($isAda); die();
 			if( $isAda == "Y"){
 				$pesan = "Maaf Anda Tidak diperkenankan menyerahkan kembali No. BSS yang sama di hari yang sama untuk satu kolektor yang sama. Silahkan ganti dengan NO. BSS yang berbeda.";
 			}else {
-				$str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
-								  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
+				// $str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
+				// 				  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
 				
-				$this->db->query($str2);
+				// $this->db->query($str2);
 				$pesan = "Send Nomor BSS TO Kolektor Success";
 				
 			}
