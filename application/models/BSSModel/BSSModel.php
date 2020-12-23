@@ -350,16 +350,18 @@ class BSSModel extends CI_Model{
 						FROM bss_log
 						WHERE DATE(tgl_buat) = CURDATE() AND  kartu_number=SUBSTRING('$kartu_number',4) AND  status_kartu='4'";
 			$query = $this->db->query($str);
-			if($query->result_array() == NULL){
-				$str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
-								  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
-				var_dump($str2); die();
-				$this->db->query($str2);
+			$result =$query->result_array();
+			
+			if( $result== NULL){
+				// $str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
+				// 				  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
+				// var_dump($str2); die();
+				// $this->db->query($str2);
 				$pesan = "Send Nomor BSS TO Kolektor Success";
 			}else {
 				$pesan = "Maaf Anda Tidak diperkenankan menyerahkan kembali No. BSS yang sama di hari yang sama untuk satu kolektor yang sama. Silahkan ganti dengan NO. BSS yang berbeda.";
 			}
-
+			var_dump($pesan); die();
 			return $pesan;
 		}
 	}
