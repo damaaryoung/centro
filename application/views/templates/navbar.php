@@ -25,7 +25,7 @@
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> <?php echo $this->session->userdata('nik'); ?>
+            <i class="fas fa-users mr-2"></i> <?php echo $this->session->userdata('nik') . ' (' . $this->session->userdata('jabatan') . ')'; ?>
             <span class="float-right text-muted text-sm"></span>
           </a>
           <div class="dropdown-divider"></div>

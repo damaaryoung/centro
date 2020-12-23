@@ -38,8 +38,7 @@ $(document).ready(function () {
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert('Gagal Get Data, Mohon Coba Beberapa Saat Lagi');
-            window.location = base_url + 'index.php/DashboardController/index'
+            alert('Gagal Get Data, Tidak Ada Data Atau Mohon Coba Beberapa Saat Lagi');
             $('#loading').hide(); 
         }
     });       

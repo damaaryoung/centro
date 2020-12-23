@@ -94,7 +94,6 @@ $(document).ready(function () {
             error : function(response) {
                 console.log('failed :' + response);
                 alert('Gagal Get Data, Mohon Coba Kembali Beberapa Saat Lagi');
-                window.location = base_url + 'index.php/DashboardController/index';
                 $('#loading').hide();
             }
     });    
