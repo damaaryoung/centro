@@ -157,7 +157,7 @@ function serchBSS(status, kode_area, searching) {
         } );
       } else {
         toastr["info"](respon.message)
-        window.location = base_url + 'bss';
+        // window.location = base_url + 'bss';
         $('#loading').hide();
       }
     }
