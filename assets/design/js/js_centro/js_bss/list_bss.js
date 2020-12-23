@@ -157,7 +157,18 @@ function serchBSS(status, kode_area, searching) {
         } );
       } else {
         toastr["info"](respon.message)
+        $('#employeeTable1').DataTable().clear();
+        $('#employeeTable1').DataTable().destroy();
         // window.location = base_url + 'bss';
+        $('#employeeTable1 tbody').html("");
+        var table =$('#employeeTable1').DataTable({
+          "destroy": true,
+          "scrollX": true,
+          "autoWidth": false,
+          "aaSorting": [],
+          "searching": false,
+          "searchable": false 
+        });
         $('#loading').hide();
       }
     }
