@@ -351,7 +351,7 @@ class BSSModel extends CI_Model{
 						WHERE DATE(tgl_buat) = CURDATE() AND  kartu_number=SUBSTRING('$kartu_number',4) AND  status_kartu='4'";
 			$query = $this->db->query($str);
 			$result =$query->result_array();
-			
+			var_dump($result); die();
 			if( $result== NULL){
 				// $str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
 				// 				  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
