@@ -41,10 +41,10 @@ function getAll(){
             let row = `<tr>
                 <td style="width: 120px;" class="no_rekening">${respon.data[i]['no_rekening']}</td>
                 <td>${respon.data[i]['nama_debitur']}</td>
-                <td>${respon.data[i]['nama_kantor']}</td>
-                <td>${respon.data[i]['tgl_realisasi']}</td>
-                <td>${respon.data[i]['plafon']}</td>
-                <td>${respon.data[i]['tenor']}</td>
+                <td class="area_kerja>${respon.data[i]['nama_kantor']}</td>
+                <td class="tgl_realisasi">${respon.data[i]['tgl_realisasi']}</td>
+                <td class="plafon">${respon.data[i]['plafon']}</td>
+                <td class="tenor">${respon.data[i]['tenor']}</td>
                 <td>${baki_debet}</td>
                 <td>${((respon.data[i]['status_dokument']== null)?'' :respon.data[i]['status_dokument'])}</td>
                 <td style="${stcolor_upload}; font-weight:bold;" style="width: 120px;">${respon.data[i]['nama_user']}</td>
@@ -80,6 +80,25 @@ function getAll(){
 // Btn action list Efiling
 $('#efilingTable1').on('click', '.detail', function () {
     $('#modal_view_efiling').modal('show');
+    $('#area_kerja')
+    let no_rekening = $(this).parents("tr").find('td.no_rekening').text();
+    let data = {
+        no_rekening : no_rekening,
+    } 
+    $.ajax({
+        url: base_url + "E_FilingController/efiling_detail",
+        type: "POST",
+        dataType: "json",
+        data: data,
+        beforeSend: function () {
+          $('#loading-2').show();
+        },
+        success: function (respon) {
+            $('#loading-2').hide();
+            console.log(respon);
+        }
+    })
+   
 })
 
 $('#efilingTable1').on('click', '.add', function () {
@@ -90,6 +109,7 @@ $('#efilingTable1').on('click', '.add', function () {
 
 $('#efilingTable1').on('click', '.edit', function () {
     $('#modal_pengisian_efiling').modal('show');
+    $('#loading-1').hide();
     $('#title_form').text("Form Edit E-Filling");
     $('.form-verifikasi').css("display", "block");
     $( ".custom-file-input" ).append( $(this).parents("tr").find('td.no_rekening').text() );
@@ -97,16 +117,52 @@ $('#efilingTable1').on('click', '.edit', function () {
 
 $('#efilingTable1').on('click', '.verifikasi', function () {
     $('#modal_pengisian_efiling').modal('show');
+    $('#loading-1').hide();
     $('#title_form').text("Form Verifikasi E-Filling");
     $('.form-verifikasi').css("display", "block");
 })
 
 function getImg(evt){
-    var files = evt.target.files[0];
-    var idFile = evt.target.getAttribute('id');
-    var no_rekening = $( '#'+idFile+'' ).text();
-    console.log(files.name, idFile, no_rekening);
+    let fd = new FormData();
+    let files = evt.target.files[0];
+    let idFile = evt.target.getAttribute('id');
+    let no_rekening = $( '#'+idFile+'' ).text();
+    fd.append('file',files);
+    fd.append('idFile',idFile);
+    fd.append('no_rekening',no_rekening)
     
+    $.ajax({
+        url:base_url + "E_FilingController/upload_efiling",
+        type:"POST",
+        data:fd,
+        processData:false,
+        contentType:false,
+        cache:false,
+        async:false,    
+        dataType: 'json',
+        beforeSend: function () {
+            $('#loading-1').show();
+        },
+        success: function(respon){
+            
+            $( '#file-'+idFile+'' ).append("");
+            $('#loading-1').hide();
+            alert("Upload "+idFile+" sukses");
+            $( '#'+idFile+'' ).val('');
+            console.log(respon.data["link"]);
+
+            let list = `<div class="col-sm-10">
+                            <a href="${respon.data["link"]}" target="_blank"><i class="far fa-file-pdf" style="color: red;font-size: 20px;"></i> ${respon.data["filename"]}</a>
+                        </div>
+                        <div class="col-sm-2">
+                            <form id="form-${idFile}">
+                                <input type="hidden" id="no_rekening" value="${no_rekening}">
+                                <button type="button" class="btn btn-block bg-gradient-danger btn-sm btn_delete_file">Delete</button>
+                            </form>
+                        </div>`;
+            $( '#file-'+idFile+'' ).html(list);
+        }
+    });
 }
 
 function closeFormEfiling(){
@@ -124,4 +180,8 @@ function check(id,ket){
         $('#'+ket+'').css("display", "none");
     }
 }
+
+$('#form-ktp').on('click', '.btn_delete_file', function () {
+    console.log($("#no_rekening").val())
+})
 
