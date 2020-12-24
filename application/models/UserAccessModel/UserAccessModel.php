@@ -58,6 +58,25 @@ class UserAccessModel extends CI_Model{
         
         return $query->result_array();
 	}
+	public function user_access_group_list(){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		$str = "SELECT * FROM group_access_centro_header h
+				WHERE h.`flag_aktif` = '1';";
+		$query = $this->db3->query($str);
+        
+        return $query->result_array();
+	}
+	public function user_access_group_user($userId){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		$str = "SELECT g.`access_group_header_id`, g.`user_id` , h.`id`, h.`group_access`, h.`description`
+				FROM user_group_access_centro g,
+					group_access_centro_header h
+				WHERE g.`user_id` =  '$userId'
+				AND h.`id` = g.`access_group_header_id`;";
+		$query = $this->db3->query($str);
+        
+        return $query->result_array();
+	}
 	public function addUserAccessNew($userId,$access_id,$addBy){
 		$this->db3 = $this->load->database('DB_CENTRO', true);
 		
@@ -76,6 +95,37 @@ class UserAccessModel extends CI_Model{
 		$this->db3->query("DELETE FROM user_access_centro
 							WHERE user_id = '$userId'
 							AND access_id = '$access_id';");
+	}
+	public function add_user_group($userId,$id_group,$addBy){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		
+		$str = "SELECT 1 FROM user_group_access_centro ug
+				WHERE ug.`user_id` = '$userId';";
+		$query = $this->db3->query($str);
+
+		$exist = $query->result_array();
+
+		if(count($exist) == 0){
+			$this->db3->query("INSERT INTO user_group_access_centro (
+									access_group_header_id,
+									user_id,
+									tanggal_aktif,
+									addby) 
+								SELECT '$id_group', '$userId', NOW(), '$addBy' 
+								FROM DUAL 
+								WHERE NOT EXISTS 
+								(SELECT 1 FROM user_group_access_centro G 
+									WHERE access_group_header_id = '$id_group' 
+									AND user_id = '$userId');");
+		}else{
+			$this->db3->query("UPDATE user_group_access_centro UG
+								SET UG.`access_group_header_id` = '$id_group',
+									UG.`addby` = '$addBy',
+									UG.`tanggal_aktif` = NOW()
+								WHERE UG.`user_id` = '$userId';");
+		}
+		
+		
 	}
 
 	/// ACCESS GROUP MENU

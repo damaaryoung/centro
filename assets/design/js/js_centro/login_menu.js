@@ -33,12 +33,12 @@ var base_url = $('#base_url').val();
          
     $('#loading').show();
     $.ajax({
-      url: 'http://103.31.232.146/API_CENTRO/login',//'http://103.31.232.146/API_ABSENSI/' + 'login',
+      url: 'http://103.31.232.146/API_WEBTOOL3_2/login',//'http://103.31.232.146/API_CENTRO/login',
       cache: false,
       type: 'POST',
       data: {
         "user" : user,
-        "password" : password
+       // "password" : password
       },
       dataType: 'json',
       success : function(response){

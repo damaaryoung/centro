@@ -92,6 +92,8 @@ class PemindahanInsertController extends CI_Controller {
 							. '<button type="button" class="btn btn-success btn-sm btnPilihJaminan" style ="padding-left: 5px;"
 										data-nomorreff="'.$row['no_reff'].'"
 										data-agunanid="'.$row['agunan_id'].'"
+									    data-jenis="'.$row['jenis'].'"
+									    data-deskripsi="'.$row['deskripsi_ringkas'].'"
 										name="btnPilihJaminan"> 
 										<i style="padding-left: 5px;" class="fa fa-check"></i>
 								</button>  </td> </tr>'];
