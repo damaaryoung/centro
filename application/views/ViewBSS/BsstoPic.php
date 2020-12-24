@@ -54,7 +54,7 @@ ul:not(.browser-default) {
         <div class="form-group row">
           <label  class="col-sm-4 col-form-label">PIC Penerima</label>
           <div class="col-sm-8">
-          <select class="form-control custom-select" id="user_pic"></select>
+          <select class="form-control custom-select select2" id="user_pic" style="width: 100%!important;"></select>
           </div>
         </div>
       
@@ -73,7 +73,7 @@ ul:not(.browser-default) {
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-file-signature"></i> Assign No BSS</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-file-signature"></i> Assign No BSS To Kolektor</h5>
       </div>
           <div class="modal-body">
           <div id="loading-3">
@@ -87,7 +87,7 @@ ul:not(.browser-default) {
             </div>
             <div class="form-group row">
               <label>Nama Kolektor</label>
-              <select class="form-control custom-select" id="kolektor_id"></select>
+              <select class="form-control custom-select select2" id="kolektor_id" style="width: 100%!important;"></select>
             </div>
           </div>
       <div class="modal-footer">

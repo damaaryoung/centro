@@ -14,7 +14,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  
+
+  <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
 </head>
 <style>
 .kolektorClick:hover td{
@@ -44,7 +45,9 @@ tr.shown td.details-click {
     background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
 }
 
-
+.select2-container .select2-selection--single {
+    height: calc(2.25rem + 2px) !important;
+}
 </style>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -250,7 +253,7 @@ tr.shown td.details-click {
         <div class="form-group row">
           <label  class="col-sm-4 col-form-label">Ke Area Kerja</label>
           <div class="col-sm-8">
-          <select class="form-control " id="area_kerja">
+          <select class="form-control custom-select select2" id="area_kerja" style="width: 100%!important;">
             <?php foreach ($selectKodeKantor as $row) : ?>
               <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
             <?php endforeach;?>
@@ -283,6 +286,8 @@ tr.shown td.details-click {
 </html>
 
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/select2.full.min.js"></script>
+
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/list_bss.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/received_bss.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/migrasi_bss.js"></script>

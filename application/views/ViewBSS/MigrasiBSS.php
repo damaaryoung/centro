@@ -52,7 +52,7 @@ ul:not(.browser-default) {
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Ke Area Kerja</label>
           <div class="col-sm-8">
-          <select class="form-control" id="AreaKantor"></select>
+          <select class="form-control custom-select select2" id="AreaKantor" style="width: 100%!important;"></select>
           </div>
         </div>
       
