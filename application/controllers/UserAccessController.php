@@ -98,22 +98,22 @@ class UserAccessController extends CI_Controller {
 			$this->UserAccessModel->add_user_group($userId,$id_group,$addBy);
 		}
 
-		// for($i = 0; $i < $lengthParsed; $i++){
-		// 	$access_id =  $arrSaveUserAccess[$i][0];
+		for($i = 0; $i < $lengthParsed; $i++){
+			$access_id =  $arrSaveUserAccess[$i][0];
 
-		// 	if($arrSaveUserAccess[$i][1] == 'Y'){
-		// 		$this->UserAccessModel->addUserAccessNew($userId,$access_id,$addBy);
-		// 	}
-		// 	else if($arrSaveUserAccess[$i][1] == 'N'){
-		// 		$this->UserAccessModel->revokeAksesNew($userId,$access_id);
-		// 	}
+			if($arrSaveUserAccess[$i][1] == 'Y'){
+				$this->UserAccessModel->addUserAccessNew($userId,$access_id,$addBy);
+			}
+			else if($arrSaveUserAccess[$i][1] == 'N'){
+				$this->UserAccessModel->revokeAksesNew($userId,$access_id);
+			}
 			
-		// }
+		}
 		
 		echo json_encode($data);
 	}
 
-	/// access group menuS
+	/// access group menu
 	public function groupAccessIndex(){
 		$session = $this->session->userdata('nama');
 		$data['active'] = 'dokumen';
