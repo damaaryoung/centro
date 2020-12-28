@@ -98,9 +98,14 @@ $('#assign_kolektor').click(function(){
         $('#loading-3').show();
       },
       success: function (respon) {
-        toastr["success"](respon.message)
-        // window.location = base_url + 'bss';
-        $('#loading-3').hide();
+        if(respon.success == true){
+          toastr["success"](respon.message)
+          window.location = base_url + 'bss';
+          $('#loading-3').hide();
+        }else{
+            toastr["error"](respon.message)
+            $('#loading-3').hide();
+        }
       }
     })
   }else{

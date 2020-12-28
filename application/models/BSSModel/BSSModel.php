@@ -349,20 +349,28 @@ class BSSModel extends CI_Model{
 			$str   = "SELECT IF(kolektor_id='$kolektor_id','Y','N') AS is_ada
 						FROM bss_log
 						WHERE DATE(tgl_buat) = CURDATE() 
-						AND  kartu_number=SUBSTRING('$kartu_number',4) 
-						AND  status_kartu='4'";
+						AND kartu_number=SUBSTRING('$kartu_number',4) 
+						AND status_kartu='4'";
 			$query = $this->db->query($str);
 			$row = $query->row_array();
-			$isAda = isset($row['is_ada']) ? $row['is_ada'] : 0;
-			// var_dump($isAda); die();
-			if( $isAda == "Y"){
-				$pesan = "Maaf Anda Tidak diperkenankan menyerahkan kembali No. BSS yang sama di hari yang sama untuk satu kolektor yang sama. Silahkan ganti dengan NO. BSS yang berbeda.";
-			}else {
+			if(isset($row) != null){
+				$isAda = $row['is_ada'];
+			}else{
+				$isAda = null;
+			}
+			if( $isAda == 'Y'){
+				$pesan = array([
+					"msg" => "Maaf Anda Tidak diperkenankan menyerahkan kembali No. BSS yang sama di hari yang sama untuk satu kolektor yang 			sama. Silahkan ganti dengan NO. BSS yang berbeda.",
+					"success" => false]);
+			}else{
 				$str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
 								  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
 				
 				$this->db->query($str2);
-				$pesan = "Send Nomor BSS TO Kolektor Success";
+				$pesan = array([
+					"msg" => "Send Nomor BSS TO Kolektor Success",
+					"success" => true
+				]);
 				
 			}
 			return $pesan;
