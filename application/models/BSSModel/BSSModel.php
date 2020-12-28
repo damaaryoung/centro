@@ -360,8 +360,9 @@ class BSSModel extends CI_Model{
 			}
 			if( $isAda == 'Y'){
 				$pesan = array([
-					"msg" => "Maaf Anda Tidak diperkenankan menyerahkan kembali No. BSS yang sama di hari yang sama untuk satu kolektor yang 			sama. Silahkan ganti dengan NO. BSS yang berbeda.",
-					"success" => false]);
+					"msg" => "Maaf Anda Tidak diperkenankan menyerahkan kembali No. BSS yang sama di hari yang sama untuk satu kolektor yang sama. Silahkan ganti dengan NO. BSS yang berbeda.",
+					"success" => false
+				]);
 			}else{
 				$str2= "UPDATE bss SET status_kartu=3, kolektor_id='$kolektor_id', 
 								  last_update=NOW() WHERE kartu_number=SUBSTRING('$kartu_number',4)";
@@ -371,7 +372,6 @@ class BSSModel extends CI_Model{
 					"msg" => "Send Nomor BSS TO Kolektor Success",
 					"success" => true
 				]);
-				
 			}
 			return $pesan;
 		}
