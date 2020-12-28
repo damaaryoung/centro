@@ -207,5 +207,5 @@ tr.shown td.details-click {
 </html>
 
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/bs-custom-file-input.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_efiling/list_efiling.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/bs-custom-file-input.min.js"></script>

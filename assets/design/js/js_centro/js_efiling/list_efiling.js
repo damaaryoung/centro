@@ -1,7 +1,6 @@
 let base_url = $('#base_url').val();
 $(document).ready(function () {
-    
-      getAll()
+    getAll()
     bsCustomFileInput.init();
     
 })
@@ -17,59 +16,60 @@ function getAll(){
         },
         success: function (respon) {
             $('#loading').hide();
-        for (let i = 0; i < respon.data.length; i++) {
+            for (let i = 0; i < respon.data.length; i++) {
 
-            let baki_debet = splitPrice(respon.data[i]['baki_debet'])
+                let baki_debet = splitPrice(respon.data[i]['baki_debet']);
+                let plafon = splitPrice(respon.data[i]['plafon']);
 
-            function splitPrice(x) {
-                let split_price = x.split('.00')
-                let list_price = split_price[0]
-                let price = parseInt(list_price).toLocaleString();
-                return price;
+                function splitPrice(x) {
+                    let split_price = x.split('.00')
+                    let list_price = split_price[0]
+                    let price = parseInt(list_price).toLocaleString();
+                    return price;
+                }
+
+                let stcolor= '';
+                if ( respon.data[i]['status_verifikasi'] == "NOT COMPLETED") {stcolor = 'color:#B6AC47'
+                }else if (respon.data[i]['status_verifikasi'] == "DONE") {stcolor = 'color:#00AE39'
+                }else if (respon.data[i]['status_verifikasi'] == "WAITING"){stcolor = 'color:#D60404'
+                }else if (respon.data[i]['status_verifikasi'] == "REVISI"){stcolor = 'color:#FF6412'
+                }else{stcolor= ''}
+
+                let stcolor_upload ='';
+                if(respon.data[i]['nama_user'] == "WAITING"){stcolor_upload ='color:#D60404'}else{stcolor_upload =''}
+
+                let row = `<tr>
+                    <td style="width: 120px;" class="no_rekening">${respon.data[i]['no_rekening']}</td>
+                    <td>${respon.data[i]['nama_debitur']}</td>
+                    <td class="area_kerja">${respon.data[i]['nama_kantor']}</td>
+                    <td class="tgl_realisasi">${respon.data[i]['tgl_realisasi']}</td>
+                    <td class="plafon">${plafon}</td>
+                    <td class="tenor">${respon.data[i]['tenor']}</td>
+                    <td>${baki_debet}</td>
+                    <td>${((respon.data[i]['status_dokument']== null)?'' :respon.data[i]['status_dokument'])}</td>
+                    <td style="${stcolor_upload}; font-weight:bold;" style="width: 120px;">${respon.data[i]['nama_user']}</td>
+                    <td style="font-weight:bold;">${((respon.data[i]['nama_user_verif']== null)?'' :respon.data[i]['nama_user_verif'])}</td>
+                    <td>${((respon.data[i]['timeline']== null)?'' :respon.data[i]['timeline'])}</td>
+                    <td>${((respon.data[i]['timeline_update']== null)?'' : respon.data[i]['timeline_update'])}</td>
+                    <td>${((respon.data[i]['timeline_verifikasi']== null)?'' :respon.data[i]['timeline_verifikasi'])}</td>
+                    <td style="${stcolor}; font-weight:bold;">${((respon.data[i]['status_verifikasi']== null)?'': respon.data[i]['status_verifikasi'])}</td>
+                    <td style="width: 120px;">
+                        
+                        <button type="button" class="btn btn-info btn-sm edit" title="Edit Data" ><i class="fas fa-pencil-alt"></i></button>
+                        <button type="button" class="btn btn-warning btn-sm detail" title="Detail Data" ><i style="color: #fff;" class="fas fa-eye"></i></button>
+                        <button type="button" class="btn btn-warning btn-sm verifikasi" title="Verifikasi"  style="background-color: #6610f2; border-color: #6f42c1;" data="5113"><i style="color: #fff;" class="fas fa-user-check"></i></button>
+                    </td>
+                </tr>`
+                
+                $('#efilingTable1').find('tbody').append(row);
             }
-
-            let stcolor= '';
-            if ( respon.data[i]['status_verifikasi'] == "NOT COMPLETED") {stcolor = 'color:#B6AC47'
-            }else if (respon.data[i]['status_verifikasi'] == "DONE") {stcolor = 'color:#00AE39'
-            }else if (respon.data[i]['status_verifikasi'] == "WAITING"){stcolor = 'color:#D60404'
-            }else if (respon.data[i]['status_verifikasi'] == "REVISI"){stcolor = 'color:#FF6412'
-            }else{stcolor= ''}
-
-            let stcolor_upload ='';
-            if(respon.data[i]['nama_user'] == "WAITING"){stcolor_upload ='color:#D60404'}else{stcolor_upload =''}
-
-            let row = `<tr>
-                <td style="width: 120px;" class="no_rekening">${respon.data[i]['no_rekening']}</td>
-                <td>${respon.data[i]['nama_debitur']}</td>
-                <td class="area_kerja>${respon.data[i]['nama_kantor']}</td>
-                <td class="tgl_realisasi">${respon.data[i]['tgl_realisasi']}</td>
-                <td class="plafon">${respon.data[i]['plafon']}</td>
-                <td class="tenor">${respon.data[i]['tenor']}</td>
-                <td>${baki_debet}</td>
-                <td>${((respon.data[i]['status_dokument']== null)?'' :respon.data[i]['status_dokument'])}</td>
-                <td style="${stcolor_upload}; font-weight:bold;" style="width: 120px;">${respon.data[i]['nama_user']}</td>
-                <td style="font-weight:bold;">${((respon.data[i]['nama_user_verif']== null)?'' :respon.data[i]['nama_user_verif'])}</td>
-                <td>${((respon.data[i]['timeline']== null)?'' :respon.data[i]['timeline'])}</td>
-                <td>${((respon.data[i]['timeline_update']== null)?'' : respon.data[i]['timeline_update'])}</td>
-                <td>${((respon.data[i]['timeline_verifikasi']== null)?'' :respon.data[i]['timeline_verifikasi'])}</td>
-                <td style="${stcolor}; font-weight:bold;">${((respon.data[i]['status_verifikasi']== null)?'': respon.data[i]['status_verifikasi'])}</td>
-                <td style="width: 120px;">
-                    
-                    <button type="button" class="btn btn-info btn-sm edit" title="Edit Data" ><i class="fas fa-pencil-alt"></i></button>
-                    <button type="button" class="btn btn-warning btn-sm detail" title="Detail Data" ><i style="color: #fff;" class="fas fa-eye"></i></button>
-                    <button type="button" class="btn btn-warning btn-sm verifikasi" title="Verifikasi"  style="background-color: #6610f2; border-color: #6f42c1;" data="5113"><i style="color: #fff;" class="fas fa-user-check"></i></button>
-                </td>
-            </tr>`
-            
-            $('#efilingTable1').find('tbody').append(row);
-        }
         $('#efilingTable1').DataTable({
             "scrollX": true,
             "autoWidth": false,
             "aaSorting": [],
             "searching": false,
             "searchable": false 
-          });
+        });
         
         }
         // <button type="button" class="btn btn-primary btn-sm add" title="Tambah Data" ><i class="fas fa-plus"></i></button>
@@ -80,7 +80,12 @@ function getAll(){
 // Btn action list Efiling
 $('#efilingTable1').on('click', '.detail', function () {
     $('#modal_view_efiling').modal('show');
-    $('#area_kerja')
+    $('#loading-2').hide();
+    $('#view_area_kerja').val($(this).parents("tr").find('td.area_kerja').text())
+    $('#view_nomor_rekening').val($(this).parents("tr").find('td.no_rekening').text())
+    $('#view_inp_plafon').val($(this).parents("tr").find('td.plafon').text())
+    $('#view_inp_tenor').val($(this).parents("tr").find('td.tenor').text())
+    $('#view_tanggal_realisasi').val($(this).parents("tr").find('td.tgl_realisasi').text())
     let no_rekening = $(this).parents("tr").find('td.no_rekening').text();
     let data = {
         no_rekening : no_rekening,
@@ -112,6 +117,11 @@ $('#efilingTable1').on('click', '.edit', function () {
     $('#loading-1').hide();
     $('#title_form').text("Form Edit E-Filling");
     $('.form-verifikasi').css("display", "block");
+    $('#area_kerja').val($(this).parents("tr").find('td.area_kerja').text())
+    $('#nomor_rekening').val($(this).parents("tr").find('td.no_rekening').text())
+    $('#inp_plafon').val($(this).parents("tr").find('td.plafon').text())
+    $('#inp_tenor').val($(this).parents("tr").find('td.tenor').text())
+    $('#tanggal_realisasi').val($(this).parents("tr").find('td.tgl_realisasi').text())
     $( ".custom-file-input" ).append( $(this).parents("tr").find('td.no_rekening').text() );
 })
 

@@ -39,17 +39,17 @@
                                                     <label class="control-label" style="padding-top: 5px;"  for="inp_plafon">PLafon & Tenor</label>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                      <input type="number" class="form-control form-control-sm" id="inp_plafon" name="inp_plafon" disabled>
+                                                      <input type="text" class="form-control form-control-sm" id="inp_plafon" name="inp_plafon" disabled>
                                                 </div>
                                                 <div class="col-sm-1">
-                                                      <input type="number" class="form-control form-control-sm" id="inp_tenor" name="inp_tenor" disabled>
+                                                      <input type="text" class="form-control form-control-sm" id="inp_tenor" name="inp_tenor" disabled>
                                                 </div>
                                                 <div class="col-sm-1">  <span>Bulan</span></div>
                                                 <div class="col-sm-2">
                                                     <label style="padding-top: 5px;" class="control-label" for="inp_nomor_rekening">Tanggal Realisasi</label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                      <input type="date" class="form-control form-control-sm" id="inp_nomor_rekening" name="inp_nomor_rekening" disabled>
+                                                      <input type="text" class="form-control form-control-sm" id="tanggal_realisasi" name="tanggal_realisasi" disabled>
                                                 </div>
                                 </div>
                             </div>
