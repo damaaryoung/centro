@@ -8,8 +8,11 @@ var id_headeruser_id = '';
 var id_user_get = '';
 var MenuData = '';
 var AksesData = '';
-var search = '';
+var AksesGroup = '';
+var AksesGroupUser = '';
 
+var search = '';
+var id_group = '';
 
 $(document).ready(function () {     
    
@@ -61,6 +64,8 @@ function getDetail(user_id){
     data = [];
     menuDataArr = [];
 
+    $('#input_nama_grup_edit').find('option').remove().end();
+
     $.ajax({
             url : base_url + "UserAccessController/getDetail",
             type : "POST",
@@ -69,8 +74,10 @@ function getDetail(user_id){
             success : function(response) {
             console.log(response);
             
-                MenuData  = response.MenuData;
-                AksesData = response.AksesData;
+                MenuData       = response.MenuData;
+                AksesData      = response.AksesData;
+                AksesGroup     = response.AksesGroup;
+                AksesGroupUser = response.AksesGroupUser;
 
                 for(i = 0; i < MenuData.length; i++ ){
                     data = [ '<tr>' +
@@ -85,7 +92,18 @@ function getDetail(user_id){
                     $('#akses'+AksesData[i]['access_id']).prop("checked", true);
                 }
                 $('#loading1').hide(); 
-                $('#id_user_get').val(id_header); 
+                $('#id_user_get').val(user_id); 
+
+                if(AksesGroupUser == ''){
+                    $('#input_nama_grup_edit').append('<option value="" selected disabled hidden>Silahkan Pilih</option>');
+                }else{
+                    $('#input_nama_grup_edit').append('<option value="'+AksesGroupUser[0]['access_group_header_id']+'" selected>'+ AksesGroupUser[0]['group_access']+'</option>');
+                }
+                
+                
+                $.each(AksesGroup,function(i,data){
+                    $('#input_nama_grup_edit').append('<option value="'+data.id+'">' + data.group_access +'</option>');
+                });
 
                 $('#loading1').hide();
             },
@@ -101,6 +119,7 @@ function saveUserAccess(){
     arrSaveUserAccess = [];
     var checked = '';
     id_user_get = $('#id_user_get').val();
+    id_group    = $('#input_nama_grup_edit').val();
     $('#loading1').show();
 
     for(i = 0; i < MenuData.length; i++ ){
@@ -121,7 +140,8 @@ function saveUserAccess(){
         dataType : "json",
         data : {"id_user_get"       : id_user_get,
                 "arrSaveUserAccess" : arrSaveUserAccess,
-                "lengthParsed"      : lengthParsed},
+                "lengthParsed"      : lengthParsed,
+                "id_group"          : id_group},
         success : function(response) {
            console.log('sukses : ' + response);
            $('#exampleModalCenter').modal('hide');
@@ -129,7 +149,7 @@ function saveUserAccess(){
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal setting user acces, mohon coba beberapa saat lagi');
-            window.location = base_url + 'DashboardController/index';
+           // window.location = base_url + 'UserAccessController/index';
         }
     });    
 

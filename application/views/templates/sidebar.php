@@ -58,34 +58,34 @@
               </a>
               <ul class="nav nav-treeview">
               <li class="nav-item">
-              <?php  if($this->session->userdata('entry_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL HEAD' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL STAFF'){ ?>
+              <?php  if($this->session->userdata('entry_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('user_access_group') == 'ok'){ ?>
                   <a href="<?php echo base_url(); ?>index.php/AsetDokumenViewAsetController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>View Aset Dokumen</p>
                   </a>
                 </li>
-              <?php } if($this->session->userdata('entry_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL HEAD' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL STAFF'){ ?>
+              <?php } if($this->session->userdata('entry_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('entry_aset_dokumen_group') == 'ok'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>entry_asset_document" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Entry Aset Dokumen</p>
                   </a>
                 </li>
-             <?php } if($this->session->userdata('verifikasi_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL HEAD'){ ?>
+             <?php } if($this->session->userdata('verifikasi_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('verifikasi_aset_dokumen_group') == 'ok'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Verifikasi Aset Dokumen</p>
                   </a>
                 </li>
-              <?php } if($this->session->userdata('pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL HEAD' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL STAFF'){ ?>
+              <?php } if($this->session->userdata('pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('pemindahan_lokasi_group') == 'ok'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/PemindahanJaminanMainController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Pemindahan Lokasi</p>
                   </a>
                 </li>
-              <?php } if($this->session->userdata('verifikasi_pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL HEAD'){ ?>
+              <?php } if($this->session->userdata('verifikasi_pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('verifikasi_pemindahan_lokasi_group') == 'ok'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -93,7 +93,7 @@
                   </a>
                 </li>
               <?php } ?>
-              <?php if($this->session->userdata('request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL HEAD' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL STAFF'){ ?>
+              <?php if($this->session->userdata('request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('request_jaminan_ke_centro_group') == 'ok' ){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>request_jaminan_centro" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -101,7 +101,7 @@
                     </a>
                   </li>
                 <?php }?>
-                <?php if($this->session->userdata('verifikasi_request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'CENTRAL OPERATIONAL HEAD'){ ?>
+                <?php if($this->session->userdata('verifikasi_request_jaminan_ke_centro') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('verifikasi_request_jaminan_ke_centro_group') == 'ok'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>request_jaminan_verifikasi" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -123,35 +123,35 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <?php  if($this->session->userdata('proses_credit_checking') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT'){ ?>
+                <?php  if($this->session->userdata('proses_credit_checking') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('proses_credit_checking_group') == 'ok'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>SefinController/index" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Proses Credit Checking</p>
                     </a>
                   </li>
-                <?php  } if($this->session->userdata('hasil_credit_checking') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT'){ ?>
+                <?php  } if($this->session->userdata('hasil_credit_checking') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('hasil_credit_checking_group') == 'ok'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>SefinController/ds_spv" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Hasil Credit Checking</p>
                     </a>
                   </li>
-                <?php } if($this->session->userdata('pengajuan_LPDK') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT'){ ?>
+                <?php } if($this->session->userdata('pengajuan_LPDK') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('pengajuan_LPDK_group') == 'ok'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>SefinController/pengajuan_lpdk" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> Pengajuan LPDK</p>
                     </a>
                   </li>
-                <?php } if($this->session->userdata('LPDK') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT'){ ?>
+                <?php } if($this->session->userdata('LPDK') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('LPDK_group') == 'ok'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>SefinController/lpdk" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p> LPDK</p>
                     </a>
                   </li>
-                <?php } if($this->session->userdata('cek_sertifikat') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'ADMIN' || $this->session->userdata('jabatan') == 'ADMIN KREDIT'){ ?>
+                <?php } if($this->session->userdata('cek_sertifikat') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('cek_sertifikat_group') == 'ok'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>SefinController/cek_sertifikat" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -182,7 +182,7 @@
           <!-- END MENU CUSTODIAN -->
 
           <!-- MENU BSS -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('divisi_id') == 'GA' || $this->session->userdata('divisi_id') == 'OPERASIONAL' || $this->session->userdata('BSS') == 'ok' || $this->session->userdata('jabatan') == 'HEAD OPERASIONAL' || $this->session->userdata('jabatan') == 'HEAD OPERATIONAL' || $this->session->userdata('jabatan') == 'SUPERVISOR OPERASIONAL' || $this->session->userdata('jabatan') == 'TELLER'){ ?>
+          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('divisi_id') == 'GA' || $this->session->userdata('divisi_id') == 'OPERASIONAL' || $this->session->userdata('BSS') == 'ok' || $this->session->userdata('BSS_group') == 'ok'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>bss" class="nav-link">
               <i class="nav-icon fas fa-file-invoice-dollar icon_color_sidebar"></i>
@@ -195,7 +195,7 @@
           <!--- END MENU BSS -->
 
           <!-- MENU BSS -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT' ){ ?>
+          <?php  if($this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>e_filing" class="nav-link">
               <i class="nav-icon fas fa-paste icon_color_sidebar"></i>
@@ -208,7 +208,7 @@
           <!--- END MENU BSS -->
 
           <!-- START MENU USER ACCESS -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('user_access') == 'ok' ){ ?>
+          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('user_access') == 'ok' || $this->session->userdata('user_access_group') == 'ok'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users-cog icon_color_sidebar"></i>

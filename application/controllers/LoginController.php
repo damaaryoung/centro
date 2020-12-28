@@ -51,49 +51,96 @@ class LoginController extends CI_Controller {
 		
 
 		if($this->input->post('nama') != ''){ //ada data di parsing -> set session login
-			//akses menu admin
+		
 			$userAccess = $this->LoginModel->userAccess($userId);
-			foreach ($userAccess as $row) :
-				if( $row['access_id'] == '1'){
-					$data1['user_access'] = 'ok';
-				}
-				else if( $row['access_id'] == '2'){
-					$data1['entry_aset_dokumen'] = 'ok';
-				}
-				else if( $row['access_id'] == '3'){
-					$data1['verifikasi_aset_dokumen'] = 'ok';
-				}
-				else if( $row['access_id'] == '4'){
-					$data1['pemindahan_lokasi'] = 'ok';
-				}
-				else if( $row['access_id'] == '5'){
-					$data1['verifikasi_pemindahan_lokasi'] = 'ok';
-				}
-				else if( $row['access_id'] == '6'){
-					$data1['proses_credit_checking'] = 'ok';
-				}
-				else if( $row['access_id'] == '7'){
-					$data1['hasil_credit_checking'] = 'ok';
-				}
-				else if( $row['access_id'] == '8'){
-					$data1['pengajuan_LPDK'] = 'ok';
-				}
-				else if( $row['access_id'] == '9'){
-					$data1['LPDK'] = 'ok';
-				}
-				else if( $row['access_id'] == '10'){
-					$data1['cek_sertifikat'] = 'ok';
-				}
-				else if( $row['access_id'] == '11'){
-					$data1['BSS'] = 'ok';
-				}
-				else if( $row['access_id'] == '12'){
-					$data1['request_jaminan_ke_centro'] = 'ok';
-				}
-				else if( $row['access_id'] == '13'){
-					$data1['verifikasi_request_jaminan_ke_centro'] = 'ok';
-				}
-			endforeach;	
+			if(count($userAccess) > 0){
+				foreach ($userAccess as $row) :
+					if( $row['access_id'] == '1'){
+						$data1['user_access'] = 'ok';
+					}
+					else if( $row['access_id'] == '2'){
+						$data1['entry_aset_dokumen'] = 'ok';
+					}
+					else if( $row['access_id'] == '3'){
+						$data1['verifikasi_aset_dokumen'] = 'ok';
+					}
+					else if( $row['access_id'] == '4'){
+						$data1['pemindahan_lokasi'] = 'ok';
+					}
+					else if( $row['access_id'] == '5'){
+						$data1['verifikasi_pemindahan_lokasi'] = 'ok';
+					}
+					else if( $row['access_id'] == '6'){
+						$data1['proses_credit_checking'] = 'ok';
+					}
+					else if( $row['access_id'] == '7'){
+						$data1['hasil_credit_checking'] = 'ok';
+					}
+					else if( $row['access_id'] == '8'){
+						$data1['pengajuan_LPDK'] = 'ok';
+					}
+					else if( $row['access_id'] == '9'){
+						$data1['LPDK'] = 'ok';
+					}
+					else if( $row['access_id'] == '10'){
+						$data1['cek_sertifikat'] = 'ok';
+					}
+					else if( $row['access_id'] == '11'){
+						$data1['BSS'] = 'ok';
+					}
+					else if( $row['access_id'] == '12'){
+						$data1['request_jaminan_ke_centro'] = 'ok';
+					}
+					else if( $row['access_id'] == '13'){
+						$data1['verifikasi_request_jaminan_ke_centro'] = 'ok';
+					}
+				endforeach;	
+			}
+
+			$userAccessGroup = $this->LoginModel->userAccessGroup($userId);
+			if(count($userAccessGroup) > 0){
+				foreach ($userAccessGroup as $row) :
+					if( $row['access_id'] == '1'){
+						$data1['user_access_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '2'){
+						$data1['entry_aset_dokumen_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '3'){
+						$data1['verifikasi_aset_dokumen_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '4'){
+						$data1['pemindahan_lokasi_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '5'){
+						$data1['verifikasi_pemindahan_lokasi_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '6'){
+						$data1['proses_credit_checking_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '7'){
+						$data1['hasil_credit_checking_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '8'){
+						$data1['pengajuan_LPDK_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '9'){
+						$data1['LPDK_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '10'){
+						$data1['cek_sertifikat_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '11'){
+						$data1['BSS_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '12'){
+						$data1['request_jaminan_ke_centro_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '13'){
+						$data1['verifikasi_request_jaminan_ke_centro_group'] = 'ok';
+					}
+				endforeach;	
+			}
 
 			$data1['version']    = 'CentroSystem Web Versi Dev';
 			$this->session->set_userdata($data1);

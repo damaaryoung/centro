@@ -73,6 +73,11 @@ class UserAccessController extends CI_Controller {
 			$data['MenuData'] = $this->UserAccessModel->userAccessList();
 			//DATA MENU
 			$data['AksesData'] = $this->UserAccessModel->accessExisting($userId);
+
+			// data user access group list
+			$data['AksesGroup'] = $this->UserAccessModel->user_access_group_list();
+			// data user access group 
+			$data['AksesGroupUser'] = $this->UserAccessModel->user_access_group_user($userId);
 			
 
 			echo json_encode($data);
@@ -83,10 +88,15 @@ class UserAccessController extends CI_Controller {
 		$userId       = $this->input->post('id_user_get');
 		$arrSaveUserAccess = $this->input->post('arrSaveUserAccess');
 		$lengthParsed      = $this->input->post('lengthParsed');
+		$id_group		   = $this->input->post('id_group');
 		$addBy             = $this->session->userdata('usename'); 
 
 		$data['arrSaveUserAccess']     = $this->input->post('arrSaveUserAccess');
-		$data['lengthParsed']     = $this->input->post('lengthParsed');
+		$data['lengthParsed']          = $this->input->post('lengthParsed');
+		
+		if($id_group != null){
+			$this->UserAccessModel->add_user_group($userId,$id_group,$addBy);
+		}
 
 		for($i = 0; $i < $lengthParsed; $i++){
 			$access_id =  $arrSaveUserAccess[$i][0];
@@ -103,7 +113,7 @@ class UserAccessController extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	/// access group menuS
+	/// access group menu
 	public function groupAccessIndex(){
 		$session = $this->session->userdata('nama');
 		$data['active'] = 'dokumen';

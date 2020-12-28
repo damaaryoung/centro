@@ -111,6 +111,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
               </div>
 
+              <div class="row">
+                        <div class="col-md-12 mx-auto">
+                              <div class="form-group row">
+                                  <div class="col-sm-4" style="text-align: left;">
+                                      <label style="padding-top: 6px;" class="control-label" for="input_nama_grup_edit">Group Menu</label>
+                                  </div>
+                                  <div class="col-sm-8">
+                                      <select class="form-control select2" id="input_nama_grup_edit" name="input_nama_grup_edit">
+                                      </select>
+                                  </div>
+                              </div>
+                        </div>
+              </div>
+
               <div  id="formUserAccess">
                 <table id="tableAkses" class="table table-striped" style="width:100%; text-align:center; height: 500px;">
                     <thead>

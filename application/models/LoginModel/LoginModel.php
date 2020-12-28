@@ -31,5 +31,17 @@ class LoginModel extends CI_Model{
         return $query->result_array();
 	}
 
+	public function userAccessGroup($userId){
+		$this->db3 = $this->load->database('DB_CENTRO', true);
+		$str = "SELECT GAD.`access_id` AS access_id
+				FROM user_group_access_centro UG
+				LEFT JOIN group_access_centro_details GAD
+				ON UG.`access_group_header_id` = GAD.`access_group_header_id`
+				WHERE UG.`user_id` = '$userId';";
+		$query = $this->db3->query($str);
+        
+        return $query->result_array();
+	}
+
 
 }
