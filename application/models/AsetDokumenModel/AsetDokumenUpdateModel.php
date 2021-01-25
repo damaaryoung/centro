@@ -26,18 +26,16 @@ class AsetDokumenUpdateModel extends CI_Model{
 	}
 	public function KreKodeJenisAgunan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT kode_jenis_agunan, CONCAT(kode_jenis_agunan,' - ',deskripsi_jenis_agunan) AS jenis_agunan, persen_default
-				FROM kre_kode_jenis_agunan;
-               ";
+		$str = "SELECT kode_jenis_agunan as kode_jenis_agunan, CONCAT(kode_jenis_agunan,' - ',deskripsi_jenis_agunan) AS jenis_agunan, persen_default as persen_default
+				FROM kre_kode_jenis_agunan;";
         $query = $this->db2->query($str);
         
         return $query->result_array();
 	}	
 	public function KreKodeIkatanHukumAgunan(){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT kode_ikatan_hukum, CONCAT(kode_ikatan_hukum,' - ',deskripsi_ikatan_hukum) AS ikatan_agunan, persen_default
-				FROM kre_kode_ikatan_hukum_agunan;
-			";
+		$str = "SELECT kode_ikatan_hukum as kode_ikatan_hukum, CONCAT(kode_ikatan_hukum,' - ',deskripsi_ikatan_hukum) AS ikatan_agunan, persen_default as persen_default
+				FROM kre_kode_ikatan_hukum_agunan;";
 		$query = $this->db2->query($str);
 		
 		return $query->result_array();
