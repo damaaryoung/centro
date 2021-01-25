@@ -3734,7 +3734,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             $('#file_npwp').html(html7);
                         }
 
-                        if (data.lampiran[0].lampiran_kk == null) {
+                        if (data.lampiran_debitur.lampiran_kk == null) {
                             var i = [
                                 '<p style="font-size: 13px; font-weight: 400;">Data tidak ada</p>'
                             ].join('\n');
@@ -3742,7 +3742,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             $('#file_kk').html(html8);
                         } else {
                             var i = [
-                                '<a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran[0].lampiran_kk + '"><p style="font-size: 13px; font-weight: 400;">' + data.lampiran[0].lampiran_kk.substr(32) + '</p></a>'
+                                '<a class="example-image-link" target="_blank" href="<?php echo $this->config->item('img_url') ?>' + data.lampiran_debitur.lampiran_kk + '"><p style="font-size: 13px; font-weight: 400;">' + data.lampiran_debitur.lampiran_kk.substr(32) + '</p></a>'
                             ].join('\n');
                             html8.push(i);
                             $('#file_kk').html(html8);
