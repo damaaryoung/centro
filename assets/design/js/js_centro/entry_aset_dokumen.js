@@ -65,38 +65,7 @@ $('#sertKodeIkatanAgunan').change(function(){
 
 $(document).ready(function () {     
    
-    dataTableeee = [];
-    $('#loading').show(); 
-
-    $.ajax({
-            url : base_url + "index.php/AsetDokumenEntryController/getListAsetDokumen",
-            type : "POST",
-            dataType : "json",
-            data : {"test" : "test"},
-
-            success : function(response) {
-                $('#employeeTable').DataTable().clear();
-                $('#employeeTable').DataTable().destroy();
-                dataTableeee.push(response); 
-                $('#employeeTable > tbody:first').html(dataTableeee);
-                $(document).ready(function() {
-                    $('#employeeTable').DataTable( {
-                        "destroy": true,
-                        "scrollX": true,
-                        "autoWidth" : false,
-                        "searching": false,
-                        "aaSorting" : []
-                    } );
-                } );
-                $('#loading').hide();  
-                
-            },
-            error : function(response) {
-                console.log('failed :' + response);
-                alert('Gagal Get Data, Mohon Coba Kembali Beberapa Saat Lagi');
-                $('#loading').hide();
-            }
-    });    
+    loadDataAwal();
     
 });
 
@@ -157,21 +126,9 @@ $('#btn_simpan_update_modal').click(function () {
 });
 $('#btn_kembali_update_modal').click(function () { 
     $('#mainUpdateModal').modal('hide');
-    $('#loading').show();
-    if( menuAsset == '1'){
-        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
-    }else if( menuAsset == '2'){
-        window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
-    }
 });
 $('#btn_kembali_update_modal2').click(function () {
     $('#mainUpdateModal').modal('hide');
-    $('#loading').show();
-    if( menuAsset == '1'){
-        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
-    }else if( menuAsset == '2'){
-        window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
-    }
 });
 // modal sertifikat
 $('#sert_button_simpan').click(function () {
@@ -255,13 +212,9 @@ $('#btn_simpan_modal_pinjam').click(function () {
 });
 $('#btn_kembali_pinjam_modal').click(function () { 
     $('#PeminjamanMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_kembali_pinjam_modal2').click(function () {
     $('#PeminjamanMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 // modal sertifikat
 $('#sert_button_kembali_pinjam').click(function () {
@@ -290,13 +243,9 @@ $('#emas_button_kembali_pinjam2').click(function () {
 //modal kembali
 $('#btn_kembali_kembali_modal').click(function () {
     $('#KembaliMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_kembali_kembali_modal2').click(function () {
     $('#KembaliMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_simpan_modal_kembali').click(function () {
    $('#loading5').show();
@@ -566,13 +515,9 @@ $('#btn_simpan_modal_penyerahan').click(function () {
 });
 $('#btn_kembali_penyerahan_modal').click(function () { 
     $('#PenyerahanMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_kembali_penyerahan_modal2').click(function () {
     $('#PenyerahanMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 // modal sertifikat
 $('#sert_button_kembali_penyerahan').click(function () {
@@ -619,6 +564,7 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
         url : base_url + "index.php/AsetDokumenUpdateController/displayDetails",
         type : "POST",
         dataType : "json",
+        timeout : 60000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -701,10 +647,10 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
             $('#loading1').hide();
         },
         error : function(response) {
-            alert('Gagal Get Detail');
+            alert('Gagal Get Detail, Mohon Periksa Jaringan Anda!');
             console.log('failed :' + response);
+            $('#mainUpdateModal').modal('hide');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
         }
     });
 });
@@ -759,6 +705,7 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
         url : base_url + "index.php/AsetDokumenPinjamController/displayDetails",
         type : "POST",
         dataType : "json",
+        timeout : 60000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -803,9 +750,9 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert("Gagal Get Detail");
+            alert("Gagal Get Detail, Mohon Periksa Jaringan Anda!");
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            $('#PeminjamanMainModal').modal('hide');
         }
     });   
 });
@@ -825,6 +772,7 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
         url : base_url + "index.php/AsetDokumenKembaliController/displayDetails",
         type : "POST",
         dataType : "json",
+        timeout : 60000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -881,9 +829,9 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
             $('#loading5').hide();
         },
         error : function(response) {
-            alert('Gagal Get Detail');
+            alert('Gagal Get Detail, Mohon Periksa Jaringan Anda!');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            $('#KembaliMainModal').modal('hide');
         }
     });    
 });
@@ -904,6 +852,7 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
         url : base_url + "index.php/AsetDokumenUpdateController/getDueDate",
         type : "POST",
         dataType : "json",
+        timeout : 60000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -964,9 +913,9 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert('Gagal Get Due Date');
+            alert('Gagal Get Details, Mohon Periksa Jaringan Anda!');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            $('#mainDueDateModal').modal('hide');
         }
     }); 
 });
@@ -978,11 +927,13 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
     idAgunan = $(this).data("agunan");
     data_rekening = $(this).data("rekening");
     $('#PenyerahanMainModal').modal('show');
+    $('#loadingPenyerahan').show();
 
     $.ajax({
         url : base_url + "index.php/AsetDokumenPenyerahanController/displayDetails",
         type : "POST",
         dataType : "json",
+        timeout : 60000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -1039,9 +990,9 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert("Gagal Get Detail");
+            alert("Gagal Get Detail, Mohon Periksa Jaringan Anda!");
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            $('#PenyerahanMainModal').modal('hide');
         }
     });   
 });
@@ -1095,7 +1046,7 @@ $('#btn_kembali_norek_modal2').click(function () {
 });
 
 
-function  mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument,JaminanSlik,SlikKodeJenisAgunan,SlikLembagaPemeringkat,SlikJenisPengikatan,SlikDati2){
+function mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument,JaminanSlik,SlikKodeJenisAgunan,SlikLembagaPemeringkat,SlikJenisPengikatan,SlikDati2){
               
                 $('#main_tab_bpkb').hide(); 
                 $('#main_tab_emas').hide(); 
@@ -3463,6 +3414,7 @@ function serchAsetDokumen(){
             url : base_url + "index.php/AsetDokumenEntryController/getDataSearchA",
             type : "POST",
             dataType : "json",
+            timeout : 60000,
             data : {"search"    : search,
                     "status"    : status,
                     "kode_kantor" : kode_kantor,
@@ -3487,7 +3439,7 @@ function serchAsetDokumen(){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                alert('Data Tidak Ditemukan, Mohon Periksa Kembali');
+                alert('Gagal Get Data, Mohon Periksa Jaringan Anda!');
                 $('#loading').hide();
             }
     });    
@@ -3504,6 +3456,7 @@ function serchAsetDokumenB(){
             url : base_url + "index.php/AsetDokumenEntryController/getDataSearchB",
             type : "POST",
             dataType : "json",
+            timeout : 60000,
             data : {"search"    : search,
                     "status"    : status,
                     "kode_kantor" : kode_kantor,
@@ -3578,6 +3531,43 @@ function serchDataRekening(){
                 alert('Data Tidak Ditemukan');
             }
     });    
+}
+
+function loadDataAwal(){
+    dataTableeee = [];
+    $('#loading').show(); 
+
+    $.ajax({
+            url : base_url + "index.php/AsetDokumenEntryController/getListAsetDokumen",
+            type : "POST",
+            dataType : "json",
+            timeout : 60000,
+            data : {"test" : "test"},
+
+            success : function(response) {
+                $('#employeeTable').DataTable().clear();
+                $('#employeeTable').DataTable().destroy();
+                dataTableeee.push(response); 
+                $('#employeeTable > tbody:first').html(dataTableeee);
+                $(document).ready(function() {
+                    $('#employeeTable').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "paging":   false,
+                        "aaSorting" : []
+                    } );
+                } );
+                $('#loading').hide();  
+                
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Gagal Get Data, Mohon Periksa Jaringan Anda');
+                $('#loading').hide();
+            }
+    });
 }
 
 $('#uploadForm').on('submit', function (e) {
