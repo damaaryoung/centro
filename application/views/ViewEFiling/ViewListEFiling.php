@@ -14,7 +14,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  
+        <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
+
 </head>
 <style>
 .kolektorClick:hover td{
@@ -44,7 +45,9 @@ tr.shown td.details-click {
     background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
 }
 
-
+.select2-container .select2-selection--single {
+    height: calc(2.25rem + 2px) !important;
+}
 </style>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -108,7 +111,7 @@ tr.shown td.details-click {
                     <div class="form-group row">
                       <label class="col col-form-label">Filter Release</label>
                       <div class="col">
-                          <select class="form-control browser-default custom-select" id="status"   style="width: 200px;">
+                          <select class="form-control browser-default custom-select" id="filter_release"   style="width: 200px;">
                             <option value="all">ALL DATA</option>
                             <option value= "1">BAKI DEBET NOL DAN RELEASE</option>
                           </select>
@@ -133,7 +136,7 @@ tr.shown td.details-click {
                     <div class="form-group row">
                       <label class="col col-form-label"> Pencarian</label>
                       <div class="col">
-                      <input type="search" class="form-control" name="search" id="search" placeholder="Nomor Rekening/Nama Debet" aria-label="Search" style="width: 200px;" > 
+                      <input type="search" class="form-control" name="search" id="search" placeholder="No.Rek /Nama Debet" aria-label="Search" style="width: 200px;" > 
                       </div>
                     </div>   
                 </div>
@@ -178,6 +181,8 @@ tr.shown td.details-click {
                     </div>
                </div>
                <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+               <input type="hidden" class="form-control" id="api_url" name="api_url" value = "<?php echo config_item('api_url'); ?>">
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -198,14 +203,19 @@ tr.shown td.details-click {
 	<?php
         echo $footer;
         echo $ctrlbar;
-        echo $js;
         echo $Modaldetail_efiling;
         echo $Modalview_efiling;
+        echo $js;
 	?>
  
 </body>
 </html>
 
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_efiling/list_efiling.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/bs-custom-file-input.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_efiling/list_efiling.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_efiling/action_efiling.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_efiling/edit_efiling.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_efiling/view_efiling.js"></script>
+
