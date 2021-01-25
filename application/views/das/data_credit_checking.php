@@ -29,6 +29,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <link href="<?php echo base_url('assets/dist/css/datepicker.min.css') ?>" rel="stylesheet" type="text/css">
 <script src="<?php echo base_url('assets/dist/js/datepicker.js') ?>"></script>
+<script src="<?php echo base_url('assets/dist/js/bootbox.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/dist/js/bootbox.locales.min.js') ?>"></script>
 <div id="lihat_data_credit" class="content-wrapper" style="padding-left: 15px; padding-right: 15px;">
     <section class="content-header">
         <div class="container-fluid">
