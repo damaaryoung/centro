@@ -144,11 +144,11 @@ class PemindahanUpdateModel extends CI_Model{
                     tgl,
                     `kode_kantor_asal`, 
                     IF(`kode_kantor_asal`='00','Kantor Cabang Bekasi Utara',kk1.nama_kantor) AS nama_kantor_asal,
+                    kk1.`domisili_hukum` AS `kota`,
                     `kode_kantor_tujuan`, 
                     IF(`kode_kantor_tujuan`='00','Kantor Cabang Bekasi Utara',kk2.nama_kantor) AS nama_kantor_tujuan,
                     ket,
                     lokasi_penyimpanan
-                    
                 FROM jaminan_pemindahan JP 
                 LEFT JOIN `app_kode_kantor` kk1
                     ON kk1.`kode_kantor` = jp.`kode_kantor_asal`

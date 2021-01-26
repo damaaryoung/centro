@@ -20,13 +20,13 @@ class PemindahanCetakController extends CI_Controller {
 		$getJaminanPemindahanHeaderCetak = $this->PemindahanUpdateModel->getJaminanPemindahanHeaderCetak($nomorCetak);
 		foreach ($getJaminanPemindahanHeaderCetak as $row) :
 			$data['nomor'] =  $row['nomor'];
-			$data['tgl'] =  $row['tgl'];
+            $data['tgl'] =  $row['tgl'];
+            $data['kota'] =  $row['kota'];
             $data['kode_kantor_asal'] =  $row['kode_kantor_asal'];
             $data['nama_kantor_asal'] =  $row['nama_kantor_asal'];
             $data['kode_kantor_tujuan'] =  $row['kode_kantor_tujuan'];
             $data['nama_kantor_tujuan'] =  $row['nama_kantor_tujuan'];
 			$data['ket'] =  $row['ket'];
-			$data['verifikasi'] =  $row['verifikasi'];
 			$data['lokasi_penyimpanan'] =  $row['lokasi_penyimpanan'];
         endforeach;	
         $getAlamatHeader = $this->PemindahanUpdateModel->getAlamatHeader();

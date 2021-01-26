@@ -53,9 +53,9 @@
                     <td><?php echo  $agunan_id; ?></td>
                 </tr>
                 <tr>
-                    <td width="115px">No SHM</td>
+                    <td width="115px"><?php if($no_shm != null){ echo 'No SHM ';}else if($no_shgb != null){ echo 'No SHGB ';}else{echo 'No AJB ';} ?> </td>
                     <td width="10px">:</td>
-                    <td><?php echo $no_shm; ?></td>
+                    <td><?php echo $no_shm; ?> <?php echo $no_shgb; ?> <?php echo $no_ajb; ?> <?php echo ' A/N ' . $nama_pemilik_sertifikat?></td>
                 </tr>
                 <tr>
                     <td width="115px">No. Surat Ukur</td>
@@ -202,7 +202,7 @@
                             <td width="300px"> <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><label for="vehicle1"> &nbsp; Foto Copy KTP</label><br></td>
                         </tr>
                         <tr>
-                            <td width="300px"> <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><label for="vehicle1"> &nbsp; <strong>Melanjutkan Rekening Tabungan <strong></label><br></td>
+                            <td width="300px"> <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><label for="vehicle1"> &nbsp; Melanjutkan Rekening Tabungan</label><br></td>
                         </tr>
                     </table>
                     <br><br>

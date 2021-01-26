@@ -52,9 +52,9 @@
                     <td><?php echo  $agunan_id; ?></td>
                 </tr>
                 <tr>
-                    <td width="115px">No SHM</td>
+                    <td width="115px"><?php if($no_shm != null){ echo 'No SHM ';}else if($no_shgb != null){ echo 'No SHGB ';}else{echo 'No AJB ';} ?> </td>
                     <td width="10px">:</td>
-                    <td><?php echo $no_shm; ?></td>
+                    <td><?php echo $no_shm; ?> <?php echo $no_shgb; ?> <?php echo $no_ajb; ?> <?php echo ' A/N ' . $nama_pemilik_sertifikat?></td>
                 </tr>
                 <tr>
                     <td width="115px">No. Surat Ukur</td>

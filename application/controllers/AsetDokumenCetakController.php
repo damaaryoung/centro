@@ -41,7 +41,10 @@ class AsetDokumenCetakController extends CI_Controller {
 		foreach ($getJaminanDokument as $row) :
             $data['agunan_id']    = $row["agunan_id"];
             //sertifikat
-            $data["no_shm"]             = $row["no_shm"];
+            $data["no_shm"]                   = $row["no_shm"];
+            $data["no_shgb"]                  = $row["no_shgb"];
+            $data["no_ajb"]                   = $row["no_ajb"];
+            $data["nama_pemilik_sertifikat"]  = $row["nama_pemilik_sertifikat"];
             $data["no_surat_ukur"]      = $row["no_surat_ukur"];
             $data["tgl_sertifikat"]     = $row["tgl_sertifikat"];
             $data["alamat_sertifikat"]  = $row["alamat_sertifikat"];
