@@ -295,10 +295,89 @@ class AsetDokumenUpdateModel extends CI_Model{
 											$mainAreaKerja,
 											$mainNomorRekening,
 											$mainTanggalRealisasi,
+											$no_shm,
+											$no_shgb,
+											$sertTanggalSertifikat,
+											$sertJTSHGB,
+											$sertNoSuratUkur,
+											$sertLuasTanah,
+											$sertNamaPemilik,
+											$sertAlamatSertifikat,
+											$sertKelurahan,
+											$sertKecamatan,
+											$sertKota,
+											$sertPorpinsi,
+											$ajb,
+											$no_ajb,
+											$imb,
+											$sertNomorIMB,
+											$sppt,
+											$sertNomorSPPT,
+											$sertTahunSPPT,
+											$skmht,
+											$denah,
+											$roya,
+											$sht,
+											$sertNoSHT,
+											$sertPropinsiSHT,
+											$sertKotaSHT,
+											$stts,
+											$sertTahunSTTS,
+											$ssb_bpht,
+											$sertAtasNamaSSBBPHTB,
+											$sertKodeJenisAgunan,
+											$sertTanggalAJB,
+											$sertKOHIR,
+											$sertNoPERSIL,
+											$sertPLBangunan,
+											$sertBatasTanah,
+											$sertNamaPPAT,
+											$sertKodeIkatanAgunan,
+											$sertPersenDijamin,
+											$sertNilaiTaksasiAgunan,
+											$sertNJOP,
+											$sertHargaPasar,
+											$sertAPHT,
+											$sertDokAJB,
+											$sertDokIMB,
+											$sertDokSPPT,
+											$sertDokSKHMT,
+											$sertDokDenah,
+											$sertDokRoya,
+											$sertDokSHT,
+											$sertDokSTTS,
+											$sertDokSSB,
+											$sertTglRegister,
+											$sertKantorLokasi,
+											$sertAgunanID,
+											$sertID,
+											$sertLainnya,
+											$cif,
+											$sertSlikStatusAgunan,
+											$sertSlikJenisAgunan,
+											$sertSlikPeringkatAgunan,
+											$sertSlikLembagaPemeringkat,
+											$sertSlikJenisPengikatan,
+											$sertSlikTanggalPengikatan,
+											$sertSlikNamaPemilikAgunan,
+											$sertSlikBuktiKepemilikanAgunan,
+											$sertSlikAlamat,
+											$sertSlikKodeDati2,
+											$sertSlikNilaiNJOP,
+											$sertSlikNilaiLJK,
+											$sertSlikTanggalLJK,
+											$sertSlikNilaiIndependen,
+											$sertSlikNamaIndependen,
+											$sertSlikTglIndependen,
+											$sertSlikParipasu,
+											$sertSlikParipasuPersen,
+											$sertSLikStatusJoinAccount,
+											$sertSlikAsuransi,
+											$sertSlikKeterangan,
 											$verifikasi){
 
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		
+		$this->db2->trans_start();
 		$this->db2->query("UPDATE jaminan_header 
 							SET tgl              = '$mainTanggal',
 								nama             = '$mainNama',
@@ -314,70 +393,6 @@ class AsetDokumenUpdateModel extends CI_Model{
 								jenis_pengurusan = '$mainJenisPengurusan',
 								verifikasi       = '$verifikasi'
 							WHERE id = '$mainId';");
-						
-	}
-	public function updateJaminanDokumentSert($jenisJaminan,
-												$no_shm,
-												$no_shgb,
-												$sertTanggalSertifikat,
-												$sertJTSHGB,
-												$sertNoSuratUkur,
-												$sertLuasTanah,
-												$sertNamaPemilik,
-												$sertAlamatSertifikat,
-												$sertKelurahan,
-												$sertKecamatan,
-												$sertKota,
-												$sertPorpinsi,
-												$ajb,
-												$no_ajb,
-												$imb,
-												$sertNomorIMB,
-												$sppt,
-												$sertNomorSPPT,
-												$sertTahunSPPT,
-												$skmht,
-												$denah,
-												$roya,
-												$sht,
-												$sertNoSHT,
-												$sertPropinsiSHT,
-												$sertKotaSHT,
-												$stts,
-												$sertTahunSTTS,
-												$ssb_bpht,
-												$sertAtasNamaSSBBPHTB,
-												$sertKodeJenisAgunan,
-												$sertTanggalAJB,
-												$sertKOHIR,
-												$sertNoPERSIL,
-												$sertPLBangunan,
-												$sertBatasTanah,
-												$sertNamaPPAT,
-												$sertKodeIkatanAgunan,
-												$sertPersenDijamin,
-												$sertNilaiTaksasiAgunan,
-												$sertNJOP,
-												$sertHargaPasar,
-												$sertAPHT,
-												$sertDokAJB,
-												$sertDokIMB,
-												$sertDokSPPT,
-												$sertDokSKHMT,
-												$sertDokDenah,
-												$sertDokRoya,
-												$sertDokSHT,
-												$sertDokSTTS,
-												$sertDokSSB,
-												$mainAreaKerja,
-												$sertTglRegister,
-												$sertKantorLokasi,
-												$mainNomorRekening,
-												$sertAgunanID,
-												$sertID,
-												$sertLainnya,
-												$verifikasi){
-		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
 		$this->db2->query("UPDATE jaminan_dokument 
 							SET jenis					   = '$jenisJaminan',
@@ -438,11 +453,44 @@ class AsetDokumenUpdateModel extends CI_Model{
 								kode_kantor_lokasi_jaminan = '$sertKantorLokasi',
 								no_rekening_agunan         = '$mainNomorRekening',
 								lain_lain                  = '$sertLainnya',
-								verifikasi                 = '$verifikasi'			
-
+								verifikasi                 = '$verifikasi'		
 								WHERE id = '$sertID'
 								AND agunan_id = '$sertAgunanID';");
 
+		$this->db2->query("UPDATE  `slik_agunan` 
+							SET	`flag_detail`				      = 'D',
+								`no_rekening`      				  = '$mainNomorRekening',
+								`cif`			   				  = '$cif',
+								`kode_jenis_segment_fasilitas` 	  = 'F01',
+								`kode_status_agunan`   			  = '$sertSlikStatusAgunan',
+								`kode_jenis_agunan` 			  = '$sertSlikJenisAgunan',
+								`peringkat_agunan` 				  = '$sertSlikPeringkatAgunan',
+								`kode_lembaga_pemeringkat` 		  = '$sertSlikLembagaPemeringkat',
+								`kode_jenis_pengikatan` 		  = '$sertSlikJenisPengikatan',
+								`tanggal_pengikatan` 			  = '$sertSlikTanggalPengikatan',
+								`nama_pemilik_agunan` 			  = '$sertSlikNamaPemilikAgunan',
+								`bukti_kepemilikan` 			  = '$sertSlikBuktiKepemilikanAgunan',
+								`alamat_agunan` 			      = '$sertSlikAlamat',
+								`kode_kab_kota` 			      = '$sertSlikKodeDati2',
+								`nilai_agunan` 					  = '$sertSlikNilaiNJOP',
+								`nilai_agunan_menurut_ljk` 		  = '$sertSlikNilaiLJK',
+								`tanggal_penilaian_ljk` 		  = '$sertSlikTanggalLJK',
+								`nilai_agunan_penilai_independen` = '$sertSlikNilaiIndependen',
+								`nama_penilai_independen`         = '$sertSlikNamaIndependen',
+								`tanggal_penilaian_independen`    = '$sertSlikTglIndependen',
+								`status_paripasu` 				  = '$sertSlikParipasu',
+								`prosentase_paripasu` 			  = '$sertSlikParipasuPersen',
+								`status_kredit_join` 			  = '$sertSLikStatusJoinAccount',
+								`diasuransikan` 				  = '$sertSlikAsuransi',
+								`keterangan` 					  = '$sertSlikKeterangan',
+								`kode_kantor_cabang` 			  = (SELECT sandi_cabang AS kode
+																		FROM app_kode_kantor akk
+																		WHERE akk.`kode_kantor` = '$sertKantorLokasi'
+																		LIMIT 1),
+								`operasi_data`					  = 'U'
+							WHERE kode_register_agunan = '$sertAgunanID' ;");										
+		$this->db2->trans_complete();
+						
 	}
 
 	public function updateJaminanSlik($sertAgunanID, 
@@ -510,40 +558,18 @@ class AsetDokumenUpdateModel extends CI_Model{
 
 	//update bpkb
 	public function updateJaminanHeaderBPKB($mainId,
-											$mainTanggal,
-											$mainNama,
-											$mainAlamat,
-											$mainKota,
-											$jenisJaminan,
-											$rodaKendaraan,
-											$mainTransaksi, 
-											$mainKeterangan, 
-											$mainJenisPengurusan,
-											$mainAreaKerja,
-											$mainNomorRekening,
-											$mainTanggalRealisasi,
-											$verifikasi){
-
-										$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-
-										$this->db2->query("UPDATE jaminan_header 
-										SET tgl          = '$mainTanggal',
-										nama             = '$mainNama',
-										alamat           = '$mainAlamat',
-										kota             = '$mainKota',
-										jenis_jaminan    = '$jenisJaminan',
-										roda_kendaraan   = '$rodaKendaraan',
-										STATUS           = '$mainTransaksi',
-										ket              = '$mainKeterangan',
-										kode_kantor      = '$mainAreaKerja',
-										no_rekening      = '$mainNomorRekening',
-										tgl_realisasi    = '$mainTanggalRealisasi',
-										jenis_pengurusan = '$mainJenisPengurusan',
-										verifikasi       = '$verifikasi'
-										WHERE id = '$mainId';");
-
-	}
-	public function updateJaminanDokumentBPKB($jenisJaminan, //mulai index 3
+												$mainTanggal,
+												$mainNama,
+												$mainAlamat,
+												$mainKota,
+												$jenisJaminan,
+												$rodaKendaraan,
+												$mainTransaksi, 
+												$mainKeterangan, 
+												$mainJenisPengurusan,
+												$mainAreaKerja,
+												$mainNomorRekening,
+												$mainTanggalRealisasi,
 												$bpkbKodeJenisAgunan,
 												$bpkbNoBPKB,
 												$bpkbNamaPemilik,
@@ -580,29 +606,59 @@ class AsetDokumenUpdateModel extends CI_Model{
 												$bpkbAPHT,
 												$bpkbLainnya,
 												$bpkbAgunanID,
-												$verifikasi,
-												$mainAreaKerja,
 												$bpkbTglRegister,
 												$bpkbKantorLokasi,
-												$mainNomorRekening,
 												$bpkbID,
-												$bpkbNoReff){
-		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		
-		$this->db2->query(" UPDATE jaminan_dokument
-						    SET	`jenis` 					= '$jenisJaminan', #MULAI
+												$bpkbNoReff,
+												$cif,
+												$bpkbSlikStatusAgunan,
+												$bpkbSlikJenisAgunan,
+												$bpkbSlikPeringkatAgunan,
+												$bpkbSlikLembagaPemeringkat,
+												$bpkbSlikJenisPengikatan,
+												$bpkbSlikTanggalPengikatan,
+												$bpkbSlikNamaPemilikAgunan,
+												$bpkbSlikBuktiKepemilikanAgunan,
+												$bpkbSlikAlamat,
+												$bpkbSlikKodeDati2,
+												$bpkbSlikNilaiNJOP,
+												$bpkbSlikNilaiLJK,
+												$bpkbSlikTanggalLJK,
+												$bpkbSlikNilaiIndependen,
+												$bpkbSlikNamaIndependen,
+												$bpkbSlikTglIndependen,
+												$bpkbSlikParipasu,
+												$bpkbSlikParipasuPersen,
+												$bpkbSLikStatusJoinAccount,
+												$bpkbSlikAsuransi,
+												$bpkbSlikKeterangan,
+												$verifikasi){
+
+			$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+			$this->db2->trans_start();
+			$this->db2->query("UPDATE jaminan_header 
+										SET tgl          = '$mainTanggal',
+										nama             = '$mainNama',
+										alamat           = '$mainAlamat',
+										kota             = '$mainKota',
+										jenis_jaminan    = '$jenisJaminan',
+										roda_kendaraan   = '$rodaKendaraan',
+										STATUS           = '$mainTransaksi',
+										ket              = '$mainKeterangan',
+										kode_kantor      = '$mainAreaKerja',
+										no_rekening      = '$mainNomorRekening',
+										tgl_realisasi    = '$mainTanggalRealisasi',
+										jenis_pengurusan = '$mainJenisPengurusan',
+										verifikasi       = '$verifikasi'
+										WHERE id = '$mainId';");
+			
+			$this->db2->query(" UPDATE jaminan_dokument
+						    SET	`jenis` 					= '$jenisJaminan', 
 								`jenis_agunan_detail`       = '$bpkbKodeJenisAgunan',
 								`nomor_bpkb`                = '$bpkbNoBPKB',
 								`nama_bpkb`                 = '$bpkbNamaPemilik',
 								`alamat_bpkb`               = '$bpkbAlamatPemlik',
 								`kota_bpkb`                 = '$bpkbKotaPemilik',
-								#HAPUS
-								#`kelurahan_bpkb`,
-								#`kecamatan_bpkb`,
-								#`kode_pos_bpkb`,
-								#`propinsi_bpkb`,
-								#`kd_merk_old`,
-								#END HAPUS
 								`kd_merk`                    = '$bpkbMerk',
 								`kd_type`                    = '$bpkbType',
 								`kd_jenis`                   = '$bpkbJenis',
@@ -633,7 +689,6 @@ class AsetDokumenUpdateModel extends CI_Model{
 								`nilai_pasar_detail`         = '$bpkbHargaPasar',
 								`nilai_apht_detail`          = '$bpkbAPHT',
 								`lain_lain`                  = '$bpkbLainnya',
-								#`inc_bpkb`,
 								`verifikasi`                 = '$verifikasi',
 								`kode_kantor`                = '$mainAreaKerja',
 								`tgl_register`               = '$bpkbTglRegister',
@@ -642,7 +697,43 @@ class AsetDokumenUpdateModel extends CI_Model{
 							WHERE id = '$bpkbID'
 							AND no_reff = '$bpkbNoReff';
 						");
+
+			$this->db2->query("UPDATE  `slik_agunan` 
+								SET	`flag_detail`				      = 'D',
+									`no_rekening`      				  = '$mainNomorRekening',
+									`cif`			   				  = '$cif',
+									`kode_jenis_segment_fasilitas` 	  = 'F01',
+									`kode_status_agunan`   			  = '$bpkbSlikStatusAgunan,',
+									`kode_jenis_agunan` 			  = '$bpkbSlikJenisAgunan,',
+									`peringkat_agunan` 				  = '$bpkbSlikPeringkatAgunan,',
+									`kode_lembaga_pemeringkat` 		  = '$bpkbSlikLembagaPemeringkat,',
+									`kode_jenis_pengikatan` 		  = '$bpkbSlikJenisPengikatan',
+									`tanggal_pengikatan` 			  = '$bpkbSlikTanggalPengikatan',
+									`nama_pemilik_agunan` 			  = '$bpkbSlikNamaPemilikAgunan',
+									`bukti_kepemilikan` 			  = '$bpkbSlikBuktiKepemilikanAgunan',
+									`alamat_agunan` 			      = '$bpkbSlikAlamat',
+									`kode_kab_kota` 			      = '$bpkbSlikKodeDati2',
+									`nilai_agunan` 					  = '$bpkbSlikNilaiNJOP',
+									`nilai_agunan_menurut_ljk` 		  = '$bpkbSlikNilaiLJK',
+									`tanggal_penilaian_ljk` 		  = '$bpkbSlikTanggalLJK',
+									`nilai_agunan_penilai_independen` = '$bpkbSlikNilaiIndependen',
+									`nama_penilai_independen`         = '$bpkbSlikNamaIndependen',
+									`tanggal_penilaian_independen`    = '$bpkbSlikTglIndependen',
+									`status_paripasu` 				  = '$bpkbSlikParipasu',
+									`prosentase_paripasu` 			  = '$bpkbSlikParipasuPersen',
+									`status_kredit_join` 			  = '$bpkbSLikStatusJoinAccount',
+									`diasuransikan` 				  = '$bpkbSlikAsuransi',
+									`keterangan` 					  = '$bpkbSlikKeterangan',
+									`kode_kantor_cabang` 			  = (SELECT sandi_cabang AS kode
+																			FROM app_kode_kantor akk
+																			WHERE akk.`kode_kantor` = '$bpkbKantorLokasi'
+																			LIMIT 1),
+									`operasi_data`					  = 'U'
+								WHERE kode_register_agunan = '$bpkbAgunanID' ;");
+			$this->db2->trans_complete();
+
 	}
+
 
 	//update emas
 	public function updateJaminanHeaderEMAS($mainId,
