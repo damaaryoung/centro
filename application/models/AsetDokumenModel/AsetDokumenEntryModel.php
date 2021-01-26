@@ -1257,7 +1257,7 @@ class AsetDokumenEntryModel extends CI_Model{
 					OR jaminan_dokument.agunan_id LIKE '$search%'
 					) 
 				ORDER BY jaminan_header.nomor DESC 
-				LIMIT 0, 25 ";
+				LIMIT 0, 10";
         $query = $this->db2->query($str);
         
         return $query->result_array();
