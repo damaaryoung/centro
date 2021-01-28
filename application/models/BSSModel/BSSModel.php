@@ -49,7 +49,7 @@ class BSSModel extends CI_Model{
 			  and
 			  IF('$search'<> '', (kartu_number LIKE '%$search%' OR nama_kolektor LIKE '%$search%'), 1)
 			
-			  ORDER BY kode_kantor, kartu_number DESC LIMIT 20 OFFSET 0 ";
+			  ORDER BY kode_kantor, kartu_number ASC LIMIT 50 OFFSET 0 ";
 			//   var_dump($str1);die();
 			
 			$query = $this->db->query($str1);
