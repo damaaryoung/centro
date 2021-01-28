@@ -104,19 +104,28 @@ class PemindahanVerifikasiController extends CI_Controller {
         
 		$dataNomor                    = $this->input->post('dataNomor');
 		$getPemindahanJaminanDetail   = $this->PemindahanVerifikasiModel->getPemindahanJaminanDetail($dataNomor);
-		
+		$idx=0;
 		foreach ($getPemindahanJaminanDetail as $row) :
+			// $data[]    = ['<tr> <td>'. $row['no_reff'] . '</td> <td>'
+			// 							. $row['agunan_id'] . '</td> <td>'
+			// 							. $row['jenis'] .'</td> <td>'
+			// 							. $row['deskripsi_ringkas'] .'</td> <td>'
+			// 							. '<button type="button" class="btn btn-danger btn-sm btnDeleteJaminanData" style ="padding-left: 5px;"'
+			// 							.           'data-nomorreff="'.$row['no_reff'].'"'
+			// 							.           'data-agunanid="'.$row['agunan_id'] .'"'
+			// 							.           'data-jenis="'. $row['jenis'] .'"'
+			// 							.           'data-deskripsi="'.$row['deskripsi_ringkas'].'"'
+			// 							.           'name="btnDeleteJaminanData">' 
+			// 							.           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>',$row['no_reff'], $row['agunan_id']];
+			
 			$data[]    = ['<tr> <td>'. $row['no_reff'] . '</td> <td>'
 										. $row['agunan_id'] . '</td> <td>'
 										. $row['jenis'] .'</td> <td>'
 										. $row['deskripsi_ringkas'] .'</td> <td>'
-										. '<button type="button" class="btn btn-danger btn-sm btnDeleteJaminanData" style ="padding-left: 5px;"'
-										.           'data-nomorreff="'.$row['no_reff'].'"'
-										.           'data-agunanid="'.$row['agunan_id'] .'"'
-										.           'data-jenis="'. $row['jenis'] .'"'
-										.           'data-deskripsi="'.$row['deskripsi_ringkas'].'"'
-										.           'name="btnDeleteJaminanData">' 
-										.           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>',$row['no_reff'], $row['agunan_id']];
+										. '<input type="text" class="form-control form-control-sm" 
+												id="rack'.$idx.'" name="fname" value="'.$row['lokasi_rack'].'"> </td> </tr>',
+											$row['no_reff'], $row['agunan_id']];
+			$idx++;
 
 		endforeach;	
 		echo json_encode($data);

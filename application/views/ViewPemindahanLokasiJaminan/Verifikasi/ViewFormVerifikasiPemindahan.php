@@ -163,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <th>Agunan&nbsp;ID</th>
                                                     <th>Jenis</th>
                                                     <th style="width: 500px;">Deskripsi&nbsp;Jaminan</th>
-                                                    <th>Action</th>
+                                                    <th>Nomor&nbsp;Rack/Laci</th>
                                                 </tr>
                                             </thead>
                                             <tbody  id="bodytablePemindahanVerifikasiMain">

@@ -620,7 +620,7 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
             }
             
             /// validasi nomor rekening sudah cair atau belum
-            if(JaminanHeader.no_rekening != ''){
+            if(JaminanHeader.no_rekening != '' && JaminanHeader.verifikasi == '1'){
                 alert('Maaf, Data sudah masuk BO Kredit( ' + JaminanHeader.no_rekening + ' ) dan sudah Go-Live, Data tidak dapat dirubah!');
                 
                 $("#btn_simpan_update_modal").prop("disabled", true);
