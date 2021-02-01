@@ -5,6 +5,8 @@ var mainTable           = [];
 var arrNomorReff        = [];
 var arrAgunanID         = [];
 var parsedDataDetailArr = [];
+var email               = [];
+var emailData           = [];
 var lengthParsed  = '';
 var nomorreff     = '';
 var agunan_id     = '';
@@ -113,13 +115,19 @@ $('#bodyTableModalJaminan').on('click','.btnPilihJaminan', function () {
                     +           'data-jenis="'+ jenis +'"'
                     +           'data-deskripsi="'+deskripsi+'"'
                     +           'name="btnDeleteJaminanData">' 
-                    +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>'];   
+                    +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>'];
+    email = ['<tr> <td>'+ nomorreff + '</td> <td>'
+                    + agunan_id + '</td> <td>'
+                    + jenis +'</td> <td>'
+                    + deskripsi +'</td>'
+                    + '</tr>'];   
    
     if(arrNomorReff.includes(nomorreff) == true && arrAgunanID.includes(agunan_id) == true){
         alert('Data Dengan Nomor Ref ' + nomorreff + ' dan Agunan ID ' +agunan_id+' Sudah Ada Dalam List');
         return
     }else{
         mainTable.push(selectedData);
+        emailData.push(email);
         arrNomorReff.push(nomorreff);
         arrAgunanID.push(agunan_id);
     }
@@ -144,13 +152,19 @@ $('#table_body_request_jaminan').on('click','.btnDeleteJaminanData', function ()
                     +           'data-jenis="'+ jenis +'"'
                     +           'data-deskripsi="'+deskripsi+'"'
                     +           'name="btnDeleteJaminanData">' 
-                    +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>'];  
+                    +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>']; 
+    email = ['<tr> <td>'+ nomorreff + '</td> <td>'
+                    + agunan_id + '</td> <td>'
+                    + jenis +'</td> <td>'
+                    + deskripsi +'</td>'
+                    + '</tr>'];
     $('#loading').show();  
     if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan No. Reff " + nomorreff)) {
         for(i = 0; i < mainTable.length; i++ ){
             var detaDelete = mainTable[i].toString();
             if(detaDelete == selectedData){
                 mainTable.splice (i, 1);
+                emailData.splice (i, 1);
                 arrNomorReff.splice (i, 1);
                 arrAgunanID.splice (i, 1);
             }
@@ -175,7 +189,7 @@ $('#btn_simpan').click(function () {
     main_pic        = $('#main_pic').val();
 
     for(i = 0; i < mainTable.length; i++ ){
-        var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
+        var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString(), emailData[i].toString()];
         parsedDataDetailArr.push(data);
     }
     lengthParsed = parsedDataDetailArr.length;
@@ -187,6 +201,7 @@ $('#btn_simpan').click(function () {
         alert("Anda Belum Menambahkan Detail Data Pengajuan !");
         return;
     }
+    console.log(mainTable);
     $('#loading').show(); 
     $.ajax({
         url : "<?= base_url(); ?>Request_Jaminan_Centro_Controller/insertDataPemindahan",
@@ -219,7 +234,7 @@ $('#btn_simpan').click(function () {
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal Request Jaminan Ke Centro, Silahkan Coba Beberapa Saat Lagi');
-            window.location = '<?= base_url(); ?>request_jaminan_centro';
+          //  window.location = '<?= base_url(); ?>request_jaminan_centro';
         }
     });
     

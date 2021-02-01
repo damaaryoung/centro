@@ -171,7 +171,27 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 																				$main_keterangan,            
 																				$mainVerifikasi,		        
 																				$parsedDataDetailArr,      
-																				$lengthParsed);           
+																				$lengthParsed);  
+		
+		$email_to = $this->Request_Jaminan_Verifikasi_Model->getEmailKaops($kode_kantor_tujuan);
+		$email = $this->load->view('ViewCustodian/Cetak/email_verifikasi.php', $data, TRUE);
+
+		$email = array(
+			'subyek' => 'Permintaan Aset Jaminan',
+			'tujuan' => $email_to,
+			'cc' => 'staf_tisupport@kreditmandiri.co.id',
+			'pesan' => $email
+			// 'attach1' => $req->file('attach1')
+		);
+		require_once("vendor/autoload.php");
+		$client = new \GuzzleHttp\Client();
+		$request = $client->request('POST', 'http://103.31.232.149:3838/email',  [
+			'Content-type' => 'application/x-www-form-urlencoded',
+			'form_params'          => $email
+		]);
+		$response = $request->getBody()->getContents();
+		$sendEmail = json_decode($response, true);
+		
 		echo json_encode($data);
 	}
 
