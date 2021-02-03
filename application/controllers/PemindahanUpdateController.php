@@ -94,17 +94,11 @@ class PemindahanUpdateController extends CI_Controller {
 															$kode_kantor_tujuan,
 															$mainKeterangan,
 															$userIdLogin,
-															$kode_lokasi_penyimpanan
+															$kode_lokasi_penyimpanan,
+															$lengthParsed,
+															$parsedDataDetailArr
 														  );
 
-		for($i = 0; $i < $lengthParsed; $i++){
-			$nomorReffDeatail = $parsedDataDetailArr[$i][0];
-			$agunanIdDetail   = $parsedDataDetailArr[$i][1];
-			
-			$this->PemindahanUpdateModel->updateDataPemindahanDetail($mainNomor,$nomorReffDeatail,$agunanIdDetail);
-			
-		}
-	
 		echo json_encode($data);
 	}
 

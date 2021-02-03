@@ -118,7 +118,8 @@ class PemindahanVerifikasiController extends CI_Controller {
 			// 							.           'name="btnDeleteJaminanData">' 
 			// 							.           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>',$row['no_reff'], $row['agunan_id']];
 			
-			$data[]    = ['<tr> <td>'. $row['no_reff'] . '</td> <td>'
+			$data[]    = ['<tr> <td>'. $row['no_centro'] . '</td> <td>'
+										. $row['no_reff'] . '</td> <td>'
 										. $row['agunan_id'] . '</td> <td>'
 										. $row['jenis'] .'</td> <td>'
 										. $row['deskripsi_ringkas'] .'</td> <td>'

@@ -91,7 +91,7 @@ class PemindahanVerifikasiModel extends CI_Model{
     }
     public function getPemindahanJaminanDetail($dataNomor){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-        $str = "SELECT jpd.`id`, jpd.`nomor`, jpd.`no_reff`, jd.`agunan_id`, jd.`jenis`, jpd.`lokasi_rack`,
+        $str = "SELECT jpd.`id`, jpd.`nomor`, jpd.`no_reff`, jd.`agunan_id`, jd.`jenis`, jpd.`lokasi_rack`, jd.`no_centro`,
                     LEFT( IF(jd.`jenis`='SERTIFIKAT',
                         CONCAT(IF(IFNULL(`no_shm`,'')<>'','SHM',
                                         IF(IFNULL(`no_shgb`,'')<>'','SHGB','AJB')),' NO. ', 
