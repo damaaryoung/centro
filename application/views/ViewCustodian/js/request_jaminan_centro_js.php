@@ -234,7 +234,7 @@ $('#btn_simpan').click(function () {
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal Request Jaminan Ke Centro, Silahkan Coba Beberapa Saat Lagi');
-          //  window.location = '<?= base_url(); ?>request_jaminan_centro';
+            window.location = '<?= base_url(); ?>request_jaminan_centro';
         }
     });
     

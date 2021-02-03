@@ -246,7 +246,14 @@ class Request_Jaminan_Centro_Model extends CI_Model{
         $query = $this->db2->query($str);
         
         $result = $query->result_array();
-        return $result[0]["email"];
+        if($result[0]["email"] != null){
+            return $result[0]["email"];
+        }
+        if($result[0]["email"] == null){
+            $email = 'staf_tisupport@kreditmandiri.co.id';
+            return $email;
+        }
+        
     }
 
 
