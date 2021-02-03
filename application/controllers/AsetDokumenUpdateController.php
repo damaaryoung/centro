@@ -231,178 +231,89 @@ class AsetDokumenUpdateController extends CI_Controller {
 																$mainAreaKerja,
 																$mainNomorRekening,
 																$mainTanggalRealisasi,
-																$verifikasi);
+																$no_shm,
+																$no_shgb,
+																$sertTanggalSertifikat,
+																$sertJTSHGB,
+																$sertNoSuratUkur,
+																$sertLuasTanah,
+																$sertNamaPemilik,
+																$sertAlamatSertifikat,
+																$sertKelurahan,
+																$sertKecamatan,
+																$sertKota,
+																$sertPorpinsi,
+																$ajb,
+																$no_ajb,
+																$imb,
+																$sertNomorIMB,
+																$sppt,
+																$sertNomorSPPT,
+																$sertTahunSPPT,
+																$skmht,
+																$denah,
+																$roya,
+																$sht,
+																$sertNoSHT,
+																$sertPropinsiSHT,
+																$sertKotaSHT,
+																$stts,
+																$sertTahunSTTS,
+																$ssb_bpht,
+																$sertAtasNamaSSBBPHTB,
+																$sertKodeJenisAgunan,
+																$sertTanggalAJB,
+																$sertKOHIR,
+																$sertNoPERSIL,
+																$sertPLBangunan,
+																$sertBatasTanah,
+																$sertNamaPPAT,
+																$sertKodeIkatanAgunan,
+																$sertPersenDijamin,
+																$sertNilaiTaksasiAgunan,
+																$sertNJOP,
+																$sertHargaPasar,
+																$sertAPHT,
+																$sertDokAJB,
+																$sertDokIMB,
+																$sertDokSPPT,
+																$sertDokSKHMT,
+																$sertDokDenah,
+																$sertDokRoya,
+																$sertDokSHT,
+																$sertDokSTTS,
+																$sertDokSSB,
+																$sertTglRegister,
+																$sertKantorLokasi,
+																$sertAgunanID,
+																$sertID,
+																$sertLainnya,
+																$cif,
+																$sertSlikStatusAgunan,
+																$sertSlikJenisAgunan,
+																$sertSlikPeringkatAgunan,
+																$sertSlikLembagaPemeringkat,
+																$sertSlikJenisPengikatan,
+																$sertSlikTanggalPengikatan,
+																$sertSlikNamaPemilikAgunan,
+																$sertSlikBuktiKepemilikanAgunan,
+																$sertSlikAlamat,
+																$sertSlikKodeDati2,
+																$sertSlikNilaiNJOP,
+																$sertSlikNilaiLJK,
+																$sertSlikTanggalLJK,
+																$sertSlikNilaiIndependen,
+																$sertSlikNamaIndependen,
+																$sertSlikTglIndependen,
+																$sertSlikParipasu,
+																$sertSlikParipasuPersen,
+																$sertSLikStatusJoinAccount,
+																$sertSlikAsuransi,
+																$sertSlikKeterangan,
+																$verifikasi);						
 
-		$this->AsetDokumenUpdateModel->updateJaminanDokumentSert($jenisJaminan,
-																	$no_shm,
-																	$no_shgb,
-																	$sertTanggalSertifikat,
-																	$sertJTSHGB,
-																	$sertNoSuratUkur,
-																	$sertLuasTanah,
-																	$sertNamaPemilik,
-																	$sertAlamatSertifikat,
-																	$sertKelurahan,
-																	$sertKecamatan,
-																	$sertKota,
-																	$sertPorpinsi,
-																	$ajb,
-																	$no_ajb,
-																	$imb,
-																	$sertNomorIMB,
-																	$sppt,
-																	$sertNomorSPPT,
-																	$sertTahunSPPT,
-																	$skmht,
-																	$denah,
-																	$roya,
-																	$sht,
-																	$sertNoSHT,
-																	$sertPropinsiSHT,
-																	$sertKotaSHT,
-																	$stts,
-																	$sertTahunSTTS,
-																	$ssb_bpht,
-																	$sertAtasNamaSSBBPHTB,
-																	$sertKodeJenisAgunan,
-																	$sertTanggalAJB,
-																	$sertKOHIR,
-																	$sertNoPERSIL,
-																	$sertPLBangunan,
-																	$sertBatasTanah,
-																	$sertNamaPPAT,
-																	$sertKodeIkatanAgunan,
-																	$sertPersenDijamin,
-																	$sertNilaiTaksasiAgunan,
-																	$sertNJOP,
-																	$sertHargaPasar,
-																	$sertAPHT,
-																	$sertDokAJB,
-																	$sertDokIMB,
-																	$sertDokSPPT,
-																	$sertDokSKHMT,
-																	$sertDokDenah,
-																	$sertDokRoya,
-																	$sertDokSHT,
-																	$sertDokSTTS,
-																	$sertDokSSB,
-																	$mainAreaKerja,
-																	$sertTglRegister,
-																	$sertKantorLokasi,
-																	$mainNomorRekening,
-																	$sertAgunanID,
-																	$sertID,
-																	$sertLainnya,
-																	$verifikasi);							
-
-		$this->AsetDokumenUpdateModel->updateJaminanSlik($sertAgunanID, 
-															$mainNomorRekening,
-															$cif,
-															$sertKantorLokasi,
-															$sertSlikStatusAgunan,
-															$sertSlikJenisAgunan,
-															$sertSlikPeringkatAgunan,
-															$sertSlikLembagaPemeringkat,
-															$sertSlikJenisPengikatan,
-															$sertSlikTanggalPengikatan,
-															$sertSlikNamaPemilikAgunan,
-															$sertSlikBuktiKepemilikanAgunan,
-															$sertSlikAlamat,
-															$sertSlikKodeDati2,
-															$sertSlikNilaiNJOP,
-															$sertSlikNilaiLJK,
-															$sertSlikTanggalLJK,
-															$sertSlikNilaiIndependen,
-															$sertSlikNamaIndependen,
-															$sertSlikTglIndependen,
-															$sertSlikParipasu,
-															$sertSlikParipasuPersen,
-															$sertSLikStatusJoinAccount,
-															$sertSlikAsuransi,
-															$sertSlikKeterangan);
-
-		$data['jenisJaminan']  = $jenisJaminan;
-		$data['no_shm']  = $no_shm;
-		$data['no_shgb']  = $no_shgb;
-		$data['sertTanggalSertifikat']  = $sertTanggalSertifikat;
-		$data['sertJTSHGB']  = $sertJTSHGB;
-		$data['sertNoSuratUkur']  = $sertNoSuratUkur;
-		$data['sertLuasTanah']  = $sertLuasTanah;
-		$data['sertNamaPemilik']  = $sertNamaPemilik;
-		$data['sertAlamatSertifikat']  = $sertAlamatSertifikat;
-		$data['sertKelurahan']  = $sertKelurahan;
-		$data['sertKecamatan']  = $sertKecamatan;
-		$data['sertKota']  = $sertKota;
-		$data['sertPorpinsi']  = $sertPorpinsi;
-		$data['ajb']  = $ajb;
-		$data['no_ajb']  = $no_ajb;
-		$data['imb']  = $imb;
-		$data['sertNomorIMB']  = $sertNomorIMB;
-		$data['sppt']  = $sppt;
-		$data['sertNomorSPPT']  = $sertNomorSPPT;
-		$data['sertTahunSPPT']  = $sertTahunSPPT;
-		$data['skmht']  = $skmht;
-		$data['denah']  = $denah;
-		$data['roya']  = $roya;
-		$data['sht']  = $sht;
-		$data['sertNoSHT']  = $sertNoSHT;
-		$data['sertPropinsiSHT']  = $sertPropinsiSHT;
-		$data['sertKotaSHT']  = $sertKotaSHT;
-		$data['stts']  = $stts;
-		$data['sertTahunSTTS']  = $sertTahunSTTS;
-		$data['ssb_bpht']  = $ssb_bpht;
-		$data['sertAtasNamaSSBBPHTB']  = $sertAtasNamaSSBBPHTB;
-		$data['sertKodeJenisAgunan']  = $sertKodeJenisAgunan;
-		$data['sertTanggalAJB']  = $sertTanggalAJB;
-		$data['sertKOHIR']  = $sertKOHIR;
-		$data['sertNoPERSIL']  = $sertNoPERSIL;
-		$data['sertPLBangunan']  = $sertPLBangunan;
-		$data['sertBatasTanah']  = $sertBatasTanah;
-		$data['sertNamaPPAT']  = $sertNamaPPAT;
-		$data['sertKodeIkatanAgunan']  = $sertKodeIkatanAgunan;
-		$data['sertPersenDijamin']  = $sertPersenDijamin;
-		$data['sertNilaiTaksasiAgunan']  = $sertNilaiTaksasiAgunan;
-		$data['sertNJOP']  = $sertNJOP;
-		$data['sertHargaPasar']  = $sertHargaPasar;
-		$data['sertAPHT']  = $sertAPHT;
-		$data['sertDokAJB']  = $sertDokAJB;
-		$data['sertDokIMB']  = $sertDokIMB;
-		$data['sertDokSPPT']  = $sertDokSPPT;
-		$data['sertDokSKHMT']  = $sertDokSKHMT;
-		$data['sertDokDenah']  = $sertDokDenah;
-		$data['sertDokRoya']  = $sertDokRoya;
-		$data['sertDokSHT']  = $sertDokSHT;
-		$data['sertDokSTTS']  = $sertDokSTTS;
-		$data['sertDokSSB']  = $sertDokSSB;
-		$data['mainAreaKerja']  = $mainAreaKerja;
-		$data['sertTglRegister']  = $sertTglRegister;
-		$data['sertKantorLokasi']  = $sertKantorLokasi;
-		$data['mainNomorRekening']  = $mainNomorRekening;
-		$data['sertAgunanID']  = $sertAgunanID;
-		$data['sertID']  = $sertID;
-		$data['verifikasi']  = $verifikasi;
-
-		$data['sertSlikPeringkatAgunan'] = $sertSlikPeringkatAgunan   ;
-		$data['sertSlikParipasuPersen'] = $sertSlikParipasuPersen      ;
-		$data['sertSlikTanggalPengikatan'] = $sertSlikTanggalPengikatan  ;
-		$data['sertSlikNamaPemilikAgunan'] = $sertSlikNamaPemilikAgunan   ;
-		$data['sertSlikBuktiKepemilikanAgunan'] = $sertSlikBuktiKepemilikanAgunan ;
-		$data['sertSlikAlamat'] = $sertSlikAlamat             ;
-		$data['sertSlikNilaiNJOP'] = $sertSlikNilaiNJOP           ;
-		$data['sertSlikNilaiLJK'] = $sertSlikNilaiLJK        ; 
-		$data['sertSlikTanggalLJK'] = $sertSlikTanggalLJK            ; 
-		$data['sertSlikNilaiIndependen'] = $sertSlikNilaiIndependen  ;
-		$data['sertSlikNamaIndependen'] = $sertSlikNamaIndependen   ; 
-		$data['sertSlikTglIndependen'] = $sertSlikTglIndependen;           
-		$data['sertSlikKeterangan'] = $sertSlikKeterangan         ; 
-		$data['sertSlikJenisAgunan'] =  $sertSlikJenisAgunan   ;
-		$data['sertSlikLembagaPemeringkat'] =  $sertSlikLembagaPemeringkat  ;   
-		$data['sertSlikJenisPengikatan'] =  $sertSlikJenisPengikatan ;      
-		$data['sertSlikKodeDati2'] = $sertSlikKodeDati2 ;             
-		$data['sertSlikStatusAgunan'] = $sertSlikStatusAgunan;            
-		$data['sertSlikParipasu'] = $sertSlikParipasu ;             
-		$data['sertSLikStatusJoinAccount'] =  $sertSLikStatusJoinAccount;    
-		$data['sertSlikAsuransi'] = $sertSlikAsuransi;                
+		$data['message']  = 'sukses';
+		             
 
 		echo json_encode($data);
 	}
@@ -539,8 +450,6 @@ class AsetDokumenUpdateController extends CI_Controller {
 																	$mainAreaKerja,
 																	$mainNomorRekening,
 																	$mainTanggalRealisasi,
-																	$verifikasi);
-			$this->AsetDokumenUpdateModel->updateJaminanDokumentBPKB($jenisJaminan, //mulai index 3
 																	$bpkbKodeJenisAgunan,
 																	$bpkbNoBPKB,
 																	$bpkbNamaPemilik,
@@ -577,122 +486,35 @@ class AsetDokumenUpdateController extends CI_Controller {
 																	$bpkbAPHT,
 																	$bpkbLainnya,
 																	$bpkbAgunanID,
-																	$verifikasi,
-																	$mainAreaKerja,
 																	$bpkbTglRegister,
 																	$bpkbKantorLokasi,
-																	$mainNomorRekening,
 																	$bpkbID,
-																	$bpkbNoReff);
+																	$bpkbNoReff,
+																	$cif,
+																	$bpkbSlikStatusAgunan,
+																	$bpkbSlikJenisAgunan,
+																	$bpkbSlikPeringkatAgunan,
+																	$bpkbSlikLembagaPemeringkat,
+																	$bpkbSlikJenisPengikatan,
+																	$bpkbSlikTanggalPengikatan,
+																	$bpkbSlikNamaPemilikAgunan,
+																	$bpkbSlikBuktiKepemilikanAgunan,
+																	$bpkbSlikAlamat,
+																	$bpkbSlikKodeDati2,
+																	$bpkbSlikNilaiNJOP,
+																	$bpkbSlikNilaiLJK,
+																	$bpkbSlikTanggalLJK,
+																	$bpkbSlikNilaiIndependen,
+																	$bpkbSlikNamaIndependen,
+																	$bpkbSlikTglIndependen,
+																	$bpkbSlikParipasu,
+																	$bpkbSlikParipasuPersen,
+																	$bpkbSLikStatusJoinAccount,
+																	$bpkbSlikAsuransi,
+																	$bpkbSlikKeterangan,
+																	$verifikasi);
 
-			$this->AsetDokumenUpdateModel->updateJaminanSlik($bpkbAgunanID, 
-															$mainNomorRekening,
-															$cif,
-															$bpkbKantorLokasi,
-															$bpkbSlikStatusAgunan,
-															$bpkbSlikJenisAgunan,
-															$bpkbSlikPeringkatAgunan,
-															$bpkbSlikLembagaPemeringkat,
-															$bpkbSlikJenisPengikatan,
-															$bpkbSlikTanggalPengikatan,
-															$bpkbSlikNamaPemilikAgunan,
-															$bpkbSlikBuktiKepemilikanAgunan,
-															$bpkbSlikAlamat,
-															$bpkbSlikKodeDati2,
-															$bpkbSlikNilaiNJOP,
-															$bpkbSlikNilaiLJK,
-															$bpkbSlikTanggalLJK,
-															$bpkbSlikNilaiIndependen,
-															$bpkbSlikNamaIndependen,
-															$bpkbSlikTglIndependen,
-															$bpkbSlikParipasu,
-															$bpkbSlikParipasuPersen,
-															$bpkbSLikStatusJoinAccount,
-															$bpkbSlikAsuransi,
-															$bpkbSlikKeterangan);
-
-			$data['mainAreaKerja'] =	$mainAreaKerja;
-			$data['mainTanggal'] =	$mainTanggal;
-			$data['mainTransaksi'] =	$mainTransaksi;
-			$data['mainNama'] =	$mainNama;
-			$data['mainKeterangan'] =	$mainKeterangan;
-			$data['mainAlamat'] =	$mainAlamat;
-			$data['mainKota'] =	$mainKota;
-			$data['mainJenisPengurusan'] =	$mainJenisPengurusan;
-			$data['mainNomorRekening'] = $mainNomorRekening;
-			$data['mainTanggalRealisasi'] =	$mainTanggalRealisasi;
-			$data['mainId'] = $mainId;
-			$data['bpkbNoReff'] = $bpkbNoReff;
-					
-			
-
-			$data['bpkbTglRegister']  = $bpkbTglRegister;
-			$data['bpkbTglPenilaian']  = $bpkbTglPenilaian;
-			$data['bpkbKantorLokasi']  = $bpkbKantorLokasi;
-			$data['bpkbKodeJenisAgunan']  = $bpkbKodeJenisAgunan;
-			$data['bpkbKodeIkatanAgunan']  = $bpkbKodeIkatanAgunan;
-			$data['bpkbNilaiTaksasiAgunan']  = $bpkbNilaiTaksasiAgunan;
-			$data['bpkbNJOP']  = $bpkbNJOP;
-			$data['bpkbHargaPasar']  = $bpkbHargaPasar;
-			$data['bpkbAPHT']  = $bpkbAPHT;
-			$data['bpkbPersenDijamin']  = $bpkbPersenDijamin;
-
-			$data['bpkbAgunanID']  =  $bpkbAgunanID; 				
-			$data['bpkbNoBPKB']  =  $bpkbNoBPKB ;				
-			$data['bpkbNamaPemilik']  =  $bpkbNamaPemilik 	;		
-			$data['bpkbAlamatPemlik']  =  $bpkbAlamatPemlik	;		
-			$data['bpkbKotaPemilik']  =  $bpkbKotaPemilik	;		
-			$data['bpkbMerk']  =  $bpkbMerk	;			
-			$data['bpkbType']  =  $bpkbType	;				
-			$data['bpkbJenis']  =  $bpkbJenis	;			
-			$data['bpkbSilinder']  =  $bpkbSilinder		;	
-			$data['bpkbNoRangka']  =  $bpkbNoRangka	;			
-			$data['bpkbNoMesin']  =  $bpkbNoMesin;					
-			$data['bpkbTahun']  =  $bpkbTahun;					
-			$data['bpkbWarna']  =  $bpkbWarna;					
-			$data['bpkbTglExpPajak']  =  $bpkbTglExpPajak;		
-			$data['bpkbNoPolisi']  =  $bpkbNoPolisi;				
-			$data['bpkbTglExpSTNK']  =  $bpkbTglExpSTNK;				
-			$data['bpkbNoSTNK']  =  $bpkbNoSTNK			;
-			$data['bpkbID']  =  $bpkbID;
-			
-
-			$data['bpkbDokKwitansiBlanko']  = $bpkbDokKwitansiBlanko;
-			$data['bpkbDokFakturPemilik']  =  $bpkbDokFakturPemilik;
-			$data['bpkbDokKwJualBeli']  =  $bpkbDokKwJualBeli;
-			$data['bpkbDokSKTrayek']  = $bpkbDokSKTrayek;
-
-			$data['bpkbNoFakturPemilik']  = $bpkbNoFakturPemilik;
-			$data['noSKTrayek']  = $noSKTrayek;
-			$data['bpkbBerlakuSD']  = $bpkbBerlakuSD;
-			$data['bpkbLainnya']  = $bpkbLainnya;
-			
-			$data['blanko'] = $blanko;
-			$data['faktur_pemilik'] = $faktur_pemilik;
-			$data['kwitansi_jb'] = $kwitansi_jb;
-			$data['sk_trayek'] = $sk_trayek;
-
-			$data['bpkbSlikPeringkatAgunan'] = $bpkbSlikPeringkatAgunan   ;
-			$data['bpkbSlikParipasuPersen'] = $bpkbSlikParipasuPersen      ;
-			$data['bpkbSlikTanggalPengikatan'] = $bpkbSlikTanggalPengikatan  ;
-			$data['bpkbSlikNamaPemilikAgunan'] = $bpkbSlikNamaPemilikAgunan   ;
-			$data['bpkbSlikBuktiKepemilikanAgunan'] = $bpkbSlikBuktiKepemilikanAgunan ;
-			$data['bpkbSlikAlamat'] = $bpkbSlikAlamat             ;
-			$data['bpkbSlikNilaiNJOP'] = $bpkbSlikNilaiNJOP           ;
-			$data['bpkbSlikNilaiLJK'] = $bpkbSlikNilaiLJK        ; 
-			$data['bpkbSlikTanggalLJK'] = $bpkbSlikTanggalLJK            ; 
-			$data['bpkbSlikNilaiIndependen'] = $bpkbSlikNilaiIndependen  ;
-			$data['bpkbSlikNamaIndependen'] = $bpkbSlikNamaIndependen   ; 
-			$data['bpkbSlikTglIndependen'] = $bpkbSlikTglIndependen;           
-			$data['bpkbSlikKeterangan'] = $bpkbSlikKeterangan         ; 
-			$data['bpkbSlikJenisAgunan'] =  $bpkbSlikJenisAgunan   ;
-			$data['bpkbSlikLembagaPemeringkat'] =  $bpkbSlikLembagaPemeringkat  ;   
-			$data['bpkbSlikJenisPengikatan'] =  $bpkbSlikJenisPengikatan ;      
-			$data['bpkbSlikKodeDati2'] = $bpkbSlikKodeDati2 ;             
-			$data['bpkbSlikStatusAgunan'] = $bpkbSlikStatusAgunan;            
-			$data['bpkbSlikParipasu'] = $bpkbSlikParipasu ;             
-			$data['bpkbSLikStatusJoinAccount'] =  $bpkbSLikStatusJoinAccount;    
-			$data['bpkbSlikAsuransi'] = $bpkbSlikAsuransi;  
+			$data['message'] =	'sukses'; 
 
 			echo json_encode($data);
 

@@ -81,8 +81,13 @@ function getKolektor() {
   });
 }
 
-// ASSIGN form Kolektor 
+// ASSIGN to Kolektor 
 $('#assign_kolektor').click(function(){
+  //Value serch
+    let status = $('#status').val();
+    let kode_area = $('#kode_kantor').val();
+    let searching = $("#search").val();
+  //end value search  
   let data = {
     user_id_request : $("#user_request").val(),
     kartu_number : $("#kartu_nomer_bss").val(),
@@ -100,8 +105,10 @@ $('#assign_kolektor').click(function(){
       success: function (respon) {
         if(respon.success == true){
           toastr["success"](respon.message)
-          window.location = base_url + 'bss';
+          // window.location = base_url + 'bss';
+          $('#form_assign_kolektor').modal('hide');
           $('#loading-3').hide();
+          serchBSS(status, kode_area, searching)
         }else{
             toastr["error"](respon.message)
             $('#loading-3').hide();
@@ -121,6 +128,11 @@ $('#employeeTable1').on('click','.update_assignClick', function () {
 
 //Update form ASSIGN 
 $('#update_form_assign').click(function(){
+  //Value serch
+  let status = $('#status').val();
+  let kode_area = $('#kode_kantor').val();
+  let searching = $("#search").val();
+//end value search  
   let data ={
     kartu_number: $("#kartu_number").val(),
     status_assign : $("#status_assign").val(),
@@ -137,8 +149,9 @@ $('#update_form_assign').click(function(){
     success: function (respon) {
       if(respon.success == true){
         toastr["success"](respon.message)
-        window.location = base_url + 'bss';
+        $('#form_assign_update').modal('hide');
         $('#loading-4').hide();
+        serchBSS(status, kode_area, searching)
       }else{
           toastr["error"](respon.message)
           $('#loading-4').hide();

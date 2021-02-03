@@ -207,4 +207,15 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
         return $query->result_array();
 	}
 
+    public function getEmailKaops($kode_kantor_tujuan){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT GROUP_CONCAT(VALUE) AS `email` 
+                FROM parameter
+                WHERE id LIKE '%EMAIL_HEAD_OPS$kode_kantor_tujuan%';";
+        $query = $this->db2->query($str);
+        
+        $result = $query->result_array();
+        return $result[0]["email"];
+    }
+
 }

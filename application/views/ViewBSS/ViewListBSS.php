@@ -181,33 +181,7 @@ tr.shown td.details-click {
                             <th>Last Update</th>
                         </tr>
                     </thead>
-                    <tbody id="list_dt">
-                      <?php
-                          
-                            foreach ($getAll  as $row) {
-                              $status = '';
-                              if($row['status']='USED'){
-                                  $status = '<span style="color:#00AE39;font-weight: bold;">'.$row['status'].'</span>';
-                              }else{
-                                  $status = $row['status'];
-                              }
-                                echo "<tr>";
-                                echo "<td  class='details-click'></td>";
-                                echo "<td class='kartu_number'>".$row['kartu_number']."</td>";
-                                echo "<td>".$status."</td>";
-                                echo "<td>".$row['nama_kantor']."</td>";
-                                echo "<td>".$row['nama_kolektor']."</td>";
-                                echo "<td>".$row['no_rekening']."</td>";
-                                echo "<td>".$row['nominal']."</td>";
-                                echo "<td>".$row['tgl_bss']."</td>";
-                                echo "<td>".$row['nama_pic']."</td>";
-                                echo "<td>".$row['timeline_tgl_buat']."</td>";
-                                echo "<td>".$row['timeline_tgl_update']."</td>";
-                      ?>
-                            </tr>
-                            
-                      <?php }  ?>
-                    </tbody>
+                    <tbody id="list_dt"></tbody>
                 </table>
                </div>
                <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">

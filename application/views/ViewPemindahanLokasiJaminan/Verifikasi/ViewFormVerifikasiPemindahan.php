@@ -159,14 +159,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <table id="tablePemindahanVerifikasiMain" class="table table-striped table-bordered display" style="width:100%">
                                             <thead>
                                                 <tr>
+                                                    <th style="width: 150px;">No.&nbsp;Centro</th>
                                                     <th>No.&nbsp;Reff</th>
                                                     <th>Agunan&nbsp;ID</th>
                                                     <th>Jenis</th>
                                                     <th style="width: 500px;">Deskripsi&nbsp;Jaminan</th>
-                                                    <th>Action</th>
+                                                    <th>Nomor&nbsp;Rack/Laci</th>
                                                 </tr>
                                             </thead>
                                             <tbody  id="bodytablePemindahanVerifikasiMain">
+                                                    <td></td> 
                                                     <td></td> 
                                                     <td></td> 
                                                     <td></td> 

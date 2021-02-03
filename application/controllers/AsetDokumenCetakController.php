@@ -41,20 +41,36 @@ class AsetDokumenCetakController extends CI_Controller {
 		foreach ($getJaminanDokument as $row) :
             $data['agunan_id']    = $row["agunan_id"];
             //sertifikat
-            $data["no_shm"]             = $row["no_shm"];
+            $data["no_shm"]                   = $row["no_shm"];
+            $data["no_shgb"]                  = $row["no_shgb"];
+            $data["no_ajb"]                   = $row["no_ajb"];
+            $data["no_sppt"]                   = $row["no_sppt"];
+            $data["no_imb"]                   = $row["no_imb"];
+            $data["no_sht"]                   = $row["no_sht"];
+            $data["nama_pemilik_sertifikat"]  = $row["nama_pemilik_sertifikat"];
             $data["no_surat_ukur"]      = $row["no_surat_ukur"];
             $data["tgl_sertifikat"]     = $row["tgl_sertifikat"];
             $data["alamat_sertifikat"]  = $row["alamat_sertifikat"];
             $data["luas_tanah"]         = $row["luas_tanah"];
-            if($row["ajb"]          == "Y"){$data["ajb"] = "YA";}else{$data["ajb"] = "Tidak";}
-            if($row["imb"]          == "Y"){$data["imb"] = "YA";}else{$data["imb"] = "Tidak";}
-            if($row["skmht"]        == "Y"){$data["skmht"] = "YA";}else{$data["skmht"] = "Tidak";}             
-            if($row["sppt"]         == "Y"){$data["sppt"]  = "YA";}else{$data["sppt"]  = "Tidak";}
-            if($row["sht"]          == "Y"){$data["sht"]  = "YA";}else{$data["sht"]  = "Tidak";}
-            if($row["gambar_denah"] == "Y"){$data["gambar_denah"] = "YA";}else{$data["gambar_denah"] = "Tidak";}
-            if($row["stts"]         == "Y"){$data["stts"] = "YA";}else{$data["stts"] = "Tidak";}
-            if($row["ssb"]          == "Y"){$data["ssb"] = "YA";}else{$data["ssb"] = "Tidak";}
-            if($row["surat_roya"]   == "Y"){$data["surat_roya"] = "YA";}else{$data["surat_roya"] = "Tidak";}
+            if($row["ajb"]          == "Y"){$data["ajb"] = "Ada";}else{$data["ajb"] = "Tidak";}
+            if($row["imb"]          == "Y"){$data["imb"] = "Ada";}else{$data["imb"] = "Tidak";}
+            if($row["skmht"]        == "Y"){$data["skmht"] = "Ada";}else{$data["skmht"] = "Tidak";}             
+            if($row["sppt"]         == "Y"){$data["sppt"]  = "Ada";}else{$data["sppt"]  = "Tidak";}
+            if($row["sht"]          == "Y"){$data["sht"]  = "Ada";}else{$data["sht"]  = "Tidak";}
+            if($row["gambar_denah"] == "Y"){$data["gambar_denah"] = "Ada";}else{$data["gambar_denah"] = "Tidak";}
+            if($row["stts"]         == "Y"){$data["stts"] = "Ada";}else{$data["stts"] = "Tidak";}
+            if($row["ssb"]          == "Y"){$data["ssb"] = "Ada";}else{$data["ssb"] = "Tidak";}
+            if($row["surat_roya"]   == "Y"){$data["surat_roya"] = "Ada";}else{$data["surat_roya"] = "Tidak";}
+
+            if($row["asli_ajb"]            == "1"){$data["asli_ajb"] = "ASLI";}else{$data["asli_ajb"] = "Copy";}
+            if($row["asli_sppt"]           == "1"){$data["asli_sppt"] = "ASLI";}else{$data["asli_sppt"] = "Copy";}
+            if($row["asli_stts"]           == "1"){$data["asli_stts"] = "ASLI";}else{$data["asli_stts"] = "Copy";}
+            if($row["asli_imb"]            == "1"){$data["asli_imb"] = "ASLI";}else{$data["asli_imb"] = "Copy";}
+            if($row["asli_sht"]            == "1"){$data["asli_sht"] = "ASLI";}else{$data["asli_sht"] = "Copy";}
+            if($row["asli_ssb"]            == "1"){$data["asli_ssb"] = "ASLI";}else{$data["asli_ssb"] = "Copy";}
+            if($row["asli_skmht"]          == "1"){$data["asli_skmht"] = "ASLI";}else{$data["asli_skmht"] = "Copy";}
+            if($row["asli_gambar_denah"]   == "1"){$data["asli_gambar_denah"] = "ASLI";}else{$data["asli_gambar_denah"] = "Copy";}
+            if($row["asli_surat_roya"]     == "1"){$data["asli_surat_roya"] = "ASLI";}else{$data["asli_surat_roya"] = "Copy";}
             //bpkb
             $data["nomor_bpkb"]            = $row["nomor_bpkb"];
             $data["alamat_bpkb"]           = $row["alamat_bpkb"];

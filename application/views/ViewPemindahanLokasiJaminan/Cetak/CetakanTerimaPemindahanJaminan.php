@@ -52,7 +52,7 @@
                         </tbody>
             </table>
 
-            <p style="text-align: right; font-size: 11px; "><?php //echo $kota.', ' . $tgl;?></p>
+            <p style="text-align: right; font-size: 12px; "><?php echo $kota.', ' . $tgl;?></p>
             <table border="0" style="width: 100%;
                                      font-size: 11px; 
                                      vertical-align:top; 

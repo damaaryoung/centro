@@ -239,6 +239,8 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		$data['main_pic']                   = $main_pic;
 		$data['verifikasi']                 = $verifikasi;
 
+		$data['kode_kantor_tujuan'] = $kode_kantor_tujuan;
+
 		$generateNomor = $this->Request_Jaminan_Centro_Model->generateNomor($kode_kantor_tujuan);
 		foreach ($generateNomor as $row) :
 			$hasilNomor = $row['hasil'];		
@@ -267,8 +269,29 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 			$this->Request_Jaminan_Centro_Model->insertDataPemindahanDetail($nomor,$nomorReffDeatail,$agunanIdDetail);
 			
 		}
-	
+
+		$email_to = $this->Request_Jaminan_Centro_Model->getEmailCentro($kode_custodian);
+		$email = $this->load->view('ViewCustodian/Cetak/email_request.php', $data, TRUE);
+
+		$email = array(
+			'subyek' => 'Permintaan Aset Jaminan',
+			'tujuan' => $email_to,
+			'cc' => 'staf_tisupport@kreditmandiri.co.id, it@kreditmandiri.co.id',
+			'pesan' => $email
+			// 'attach1' => $req->file('attach1')
+		);
+		require_once("vendor/autoload.php");
+		$client = new \GuzzleHttp\Client();
+		$request = $client->request('POST', 'http://103.31.232.149:3838/email',  [
+			'Content-type' => 'application/x-www-form-urlencoded',
+			'form_params'          => $email
+		]);
+		$response = $request->getBody()->getContents();
+		$sendEmail = json_decode($response, true);
+
 		echo json_encode($data);
+	
+		
 	}
 
 	// delete

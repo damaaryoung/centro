@@ -65,38 +65,7 @@ $('#sertKodeIkatanAgunan').change(function(){
 
 $(document).ready(function () {     
    
-    dataTableeee = [];
-    $('#loading').show(); 
-
-    $.ajax({
-            url : base_url + "index.php/AsetDokumenEntryController/getListAsetDokumen",
-            type : "POST",
-            dataType : "json",
-            data : {"test" : "test"},
-
-            success : function(response) {
-                $('#employeeTable').DataTable().clear();
-                $('#employeeTable').DataTable().destroy();
-                dataTableeee.push(response); 
-                $('#employeeTable > tbody:first').html(dataTableeee);
-                $(document).ready(function() {
-                    $('#employeeTable').DataTable( {
-                        "destroy": true,
-                        "scrollX": true,
-                        "autoWidth" : false,
-                        "searching": false,
-                        "aaSorting" : []
-                    } );
-                } );
-                $('#loading').hide();  
-                
-            },
-            error : function(response) {
-                console.log('failed :' + response);
-                alert('Gagal Get Data, Mohon Coba Kembali Beberapa Saat Lagi');
-                $('#loading').hide();
-            }
-    });    
+    loadDataAwal();
     
 });
 
@@ -157,21 +126,9 @@ $('#btn_simpan_update_modal').click(function () {
 });
 $('#btn_kembali_update_modal').click(function () { 
     $('#mainUpdateModal').modal('hide');
-    $('#loading').show();
-    if( menuAsset == '1'){
-        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
-    }else if( menuAsset == '2'){
-        window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
-    }
 });
 $('#btn_kembali_update_modal2').click(function () {
     $('#mainUpdateModal').modal('hide');
-    $('#loading').show();
-    if( menuAsset == '1'){
-        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
-    }else if( menuAsset == '2'){
-        window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
-    }
 });
 // modal sertifikat
 $('#sert_button_simpan').click(function () {
@@ -255,13 +212,9 @@ $('#btn_simpan_modal_pinjam').click(function () {
 });
 $('#btn_kembali_pinjam_modal').click(function () { 
     $('#PeminjamanMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_kembali_pinjam_modal2').click(function () {
     $('#PeminjamanMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 // modal sertifikat
 $('#sert_button_kembali_pinjam').click(function () {
@@ -290,13 +243,9 @@ $('#emas_button_kembali_pinjam2').click(function () {
 //modal kembali
 $('#btn_kembali_kembali_modal').click(function () {
     $('#KembaliMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_kembali_kembali_modal2').click(function () {
     $('#KembaliMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_simpan_modal_kembali').click(function () {
    $('#loading5').show();
@@ -566,13 +515,9 @@ $('#btn_simpan_modal_penyerahan').click(function () {
 });
 $('#btn_kembali_penyerahan_modal').click(function () { 
     $('#PenyerahanMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 $('#btn_kembali_penyerahan_modal2').click(function () {
     $('#PenyerahanMainModal').modal('hide');
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenEntryController/index';
 });
 // modal sertifikat
 $('#sert_button_kembali_penyerahan').click(function () {
@@ -619,6 +564,7 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
         url : base_url + "index.php/AsetDokumenUpdateController/displayDetails",
         type : "POST",
         dataType : "json",
+        timeout : 180000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -674,7 +620,7 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
             }
             
             /// validasi nomor rekening sudah cair atau belum
-            if(JaminanHeader.no_rekening != ''){
+            if(JaminanHeader.no_rekening != '' && JaminanHeader.verifikasi == '1'){
                 alert('Maaf, Data sudah masuk BO Kredit( ' + JaminanHeader.no_rekening + ' ) dan sudah Go-Live, Data tidak dapat dirubah!');
                 
                 $("#btn_simpan_update_modal").prop("disabled", true);
@@ -701,10 +647,10 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
             $('#loading1').hide();
         },
         error : function(response) {
-            alert('Gagal Get Detail');
+            alert('Gagal Get Detail, Mohon Periksa Jaringan Anda!');
             console.log('failed :' + response);
+            $('#mainUpdateModal').modal('hide');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
         }
     });
 });
@@ -759,6 +705,7 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
         url : base_url + "index.php/AsetDokumenPinjamController/displayDetails",
         type : "POST",
         dataType : "json",
+        timeout : 180000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -803,9 +750,9 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert("Gagal Get Detail");
+            alert("Gagal Get Detail, Mohon Periksa Jaringan Anda!");
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            $('#PeminjamanMainModal').modal('hide');
         }
     });   
 });
@@ -825,12 +772,15 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
         url : base_url + "index.php/AsetDokumenKembaliController/displayDetails",
         type : "POST",
         dataType : "json",
+        timeout : 180000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
                 "agunanID"       : idAgunan},
 
         success : function(response) {
+            
+            console.log(response);
             JaminanHeader = response.getJaminanHeader[0];
             JaminanDokument = response.getJaminanDokument[0];
             JaminanHistory = response.getJaminanHistory[0];
@@ -881,9 +831,9 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
             $('#loading5').hide();
         },
         error : function(response) {
-            alert('Gagal Get Detail');
+            alert('Gagal Get Detail, Mohon Periksa Jaringan Anda!');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            $('#KembaliMainModal').modal('hide');
         }
     });    
 });
@@ -904,6 +854,7 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
         url : base_url + "index.php/AsetDokumenUpdateController/getDueDate",
         type : "POST",
         dataType : "json",
+        timeout : 180000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -964,9 +915,9 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert('Gagal Get Due Date');
+            alert('Gagal Get Details, Mohon Periksa Jaringan Anda!');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            $('#mainDueDateModal').modal('hide');
         }
     }); 
 });
@@ -978,11 +929,13 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
     idAgunan = $(this).data("agunan");
     data_rekening = $(this).data("rekening");
     $('#PenyerahanMainModal').modal('show');
+    $('#loadingPenyerahan').show();
 
     $.ajax({
         url : base_url + "index.php/AsetDokumenPenyerahanController/displayDetails",
         type : "POST",
         dataType : "json",
+        timeout : 180000,
         data : {"nomorAgunan"    : nomor, 
                 "nomorRefAgunan" : noref,
                 "dataStatus"     : status,
@@ -1039,9 +992,9 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
         },
         error : function(response) {
             console.log('failed :' + response);
-            alert("Gagal Get Detail");
+            alert("Gagal Get Detail, Mohon Periksa Jaringan Anda!");
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            $('#PenyerahanMainModal').modal('hide');
         }
     });   
 });
@@ -1095,7 +1048,7 @@ $('#btn_kembali_norek_modal2').click(function () {
 });
 
 
-function  mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument,JaminanSlik,SlikKodeJenisAgunan,SlikLembagaPemeringkat,SlikJenisPengikatan,SlikDati2){
+function mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAgunan,JaminanHeader,JaminanDokument,JaminanSlik,SlikKodeJenisAgunan,SlikLembagaPemeringkat,SlikJenisPengikatan,SlikDati2){
               
                 $('#main_tab_bpkb').hide(); 
                 $('#main_tab_emas').hide(); 
@@ -1336,21 +1289,21 @@ function  mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatan
                     $('#sertSlikNamaIndependen').val(JaminanSlik.nama_penilai_independen);
                     $('#sertSlikTglIndependen').val(JaminanSlik.tanggal_penilaian_independen);
                     $('#sertSlikKeterangan').val(JaminanSlik.keterangan);
-                    if(JaminanSlik.kode_jenis_agunan != ''){
+                    if(JaminanSlik.kode_jenis_agunan != null){
                         $('#sertSlikJenisAgunan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
-                    }else { $('#sertSlikJenisAgunan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+                    }else { $('#sertSlikJenisAgunan').append('<option value="" selected> Tidak Dipilih </option>'); }
                     
-                    if(JaminanSlik.kode_lembaga_pemeringkat != ''){
+                    if( JaminanSlik.kode_lembaga_pemeringkat != null ){
                         $('#sertSlikLembagaPemeringkat').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
-                    }else { $('#sertSlikLembagaPemeringkat').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+                    }else { $('#sertSlikLembagaPemeringkat').append('<option value="" selected> Tidak Dipilih </option>'); }
 
-                    if(JaminanSlik.kode_jenis_pengikatan != ''){
+                    if(JaminanSlik.kode_jenis_pengikatan != null){
                         $('#sertSlikJenisPengikatan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
-                    }else { $('#sertSlikJenisPengikatan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+                    }else { $('#sertSlikJenisPengikatan').append('<option value="" selected>  Tidak Dipilih </option>'); }
 
-                    if(JaminanSlik.kode_kab_kota != ''){
+                    if(JaminanSlik.kode_kab_kota != null && JaminanSlik.SlikKodeDati2 != null){
                         $('#sertSlikKodeDati2').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
-                    }else { $('#sertSlikKodeDati2').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+                    }else { $('#sertSlikKodeDati2').append('<option value="" selected> Tidak Dipilih </option>'); }
                     
                 
                     
@@ -1438,6 +1391,11 @@ function mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
      $('#bpkbDokFakturPemilik').find('option').remove().end();
      $('#bpkbDokKwJualBeli').find('option').remove().end();
      $('#bpkbDokSKTrayek').find('option').remove().end();
+
+     $('#bpkbSlikJenisAgunan').find('option').remove().end();
+     $('#bpkbSlikLembagaPemeringkat').find('option').remove().end();
+     $('#bpkbSlikJenisPengikatan').find('option').remove().end();
+     $('#bpkbSlikKodeDati2').find('option').remove().end();
      
     // ISI
     $('#bpkbDokKwitansiBlanko').append(asli_option);
@@ -1563,19 +1521,19 @@ function mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
         $('#bpkbSlikKeterangan').val(JaminanSlik.keterangan);
         if(JaminanSlik.kode_jenis_agunan != ''){
             $('#bpkbSlikJenisAgunan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
-        }else { $('#sertSlikJenisAgunan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#sertSlikJenisAgunan').append('<option value="" selected> Tidak Dipilih </option>'); }
         
         if(JaminanSlik.kode_lembaga_pemeringkat != ''){
             $('#bpkbSlikLembagaPemeringkat').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
-        }else { $('#bpkbSlikLembagaPemeringkat').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikLembagaPemeringkat').append('<option value="" selected> Tidak Dipilih </option>'); }
 
         if(JaminanSlik.kode_jenis_pengikatan != ''){
             $('#bpkbSlikJenisPengikatan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
-        }else { $('#bpkbSlikJenisPengikatan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikJenisPengikatan').append('<option value="" selected>  Tidak Dipilih </option>'); }
 
         if(JaminanSlik.kode_kab_kota != ''){
             $('#bpkbSlikKodeDati2').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
-        }else { $('#bpkbSlikKodeDati2').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikKodeDati2').append('<option value="" selected> Tidak Dipilih </option>'); }
         
         if( JaminanSlik.kode_status_agunan == '1') {
             $('#bpkbSlikStatusAgunan').append('<option value="1" selected>1 - Tersedia</option> <option value="2" >2 - Indent</option>');
@@ -1878,21 +1836,21 @@ function mappingFieldSertifikatPinjam(JaminanHeader, JaminanDokument, JaminanSli
          $('#sertSlikNamaIndependenPinjam').val(JaminanSlik.nama_penilai_independen);
          $('#sertSlikTglIndependenPinjam').val(JaminanSlik.tanggal_penilaian_independen);
          $('#sertSlikKeteranganPinjam').val(JaminanSlik.keterangan);
-         if(JaminanSlik.kode_jenis_agunan != ''){
+         if(JaminanSlik.kode_jenis_agunan != null){
              $('#sertSlikJenisAgunanPinjam').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
-         }else { $('#sertSlikJenisAgunanPinjam').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+         }else { $('#sertSlikJenisAgunanPinjam').append('<option value="" selected> Tidak Dipilih </option>'); }
          
-         if(JaminanSlik.kode_lembaga_pemeringkat != ''){
+         if(JaminanSlik.kode_lembaga_pemeringkat != null){
              $('#sertSlikLembagaPemeringkatPinjam').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
-         }else { $('#sertSlikLembagaPemeringkatPinjam').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+         }else { $('#sertSlikLembagaPemeringkatPinjam').append('<option value="" selected> Tidak Dipilih </option>'); }
 
-         if(JaminanSlik.kode_jenis_pengikatan != ''){
+         if(JaminanSlik.kode_jenis_pengikatan != null){
              $('#sertSlikJenisPengikatanPinjam').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
-         }else { $('#sertSlikJenisPengikatanPinjam').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+         }else { $('#sertSlikJenisPengikatanPinjam').append('<option value="" selected>  Tidak Dipilih </option>'); }
 
-         if(JaminanSlik.kode_kab_kota != ''){
+         if(JaminanSlik.kode_kab_kota != null && JaminanSlik.SlikKodeDati2 != null){
              $('#sertSlikKodeDati2Pinjam').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
-         }else { $('#sertSlikKodeDati2Pinjam').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+         }else { $('#sertSlikKodeDati2Pinjam').append('<option value="" selected> Tidak Dipilih </option>'); }
          
         
          
@@ -1950,6 +1908,11 @@ function mappingFieldBPKBPinjam(JaminanHeader, JaminanDokument, JaminanSlik){
       $('#bpkbDokKwJualBeliPinjam').find('option').remove().end();
       $('#bpkbDokSKTrayekPinjam').find('option').remove().end();
  
+      $('#bpkbSlikJenisAgunanPinjam').find('option').remove().end();
+      $('#bpkbSlikLembagaPemeringkatPinjam').find('option').remove().end();
+      $('#bpkbSlikJenisPengikatanPinjam').find('option').remove().end();
+      $('#bpkbSlikKodeDati2Pinjam').find('option').remove().end();
+
      ///untuk bpkb
      $('#bpkbVerifikasiPinjam').val(JaminanDokument.verifikasi);
      $('#bpkbTglRegisterPinjam').val(JaminanDokument.tgl_register);
@@ -2059,21 +2022,22 @@ function mappingFieldBPKBPinjam(JaminanHeader, JaminanDokument, JaminanSlik){
         $('#bpkbSlikNamaIndependenPinjam').val(JaminanSlik.nama_penilai_independen);
         $('#bpkbSlikTglIndependenPinjam').val(JaminanSlik.tanggal_penilaian_independen);
         $('#bpkbSlikKeteranganPinjam').val(JaminanSlik.keterangan);
+
         if(JaminanSlik.kode_jenis_agunan != ''){
             $('#bpkbSlikJenisAgunanPinjam').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
-        }else { $('#bpkbSlikJenisAgunanPinjam').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikJenisAgunanPinjam').append('<option value="" selected> Tidak Dipilih </option>'); }
         
         if(JaminanSlik.kode_lembaga_pemeringkat != ''){
             $('#bpkbSlikLembagaPemeringkatPinjam').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
-        }else { $('#bpkbSlikLembagaPemeringkatPinjam').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikLembagaPemeringkatPinjam').append('<option value="" selected> Tidak Dipilih </option>'); }
 
         if(JaminanSlik.kode_jenis_pengikatan != ''){
             $('#bpkbSlikJenisPengikatanPinjam').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
-        }else { $('#bpkbSlikJenisPengikatanPinjam').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikJenisPengikatanPinjam').append('<option value="" selected>  Tidak Dipilih </option>'); }
 
         if(JaminanSlik.kode_kab_kota != ''){
             $('#bpkbSlikKodeDati2Pinjam').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
-        }else { $('#bpkbSlikKodeDati2Pinjam').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikKodeDati2Pinjam').append('<option value="" selected> Tidak Dipilih </option>'); }
         
        
         
@@ -2346,21 +2310,21 @@ function mappingFieldSertifikatKembali(JaminanHeader, JaminanDokument, JaminanSl
         $('#sertSlikNamaIndependenKembali').val(JaminanSlik.nama_penilai_independen);
         $('#sertSlikTglIndependenKembali').val(JaminanSlik.tanggal_penilaian_independen);
         $('#sertSlikKeteranganKembali').val(JaminanSlik.keterangan);
-        if(JaminanSlik.kode_jenis_agunan != ''){
+        if(JaminanSlik.kode_jenis_agunan != null){
             $('#sertSlikJenisAgunanKembali').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
-        }else { $('#sertSlikJenisAgunanKembali').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#sertSlikJenisAgunanKembali').append('<option value="" selected> Tidak Dipilih </option>'); }
         
-        if(JaminanSlik.kode_lembaga_pemeringkat != ''){
+        if(JaminanSlik.kode_lembaga_pemeringkat != null){
             $('#sertSlikLembagaPemeringkatKembali').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
-        }else { $('#sertSlikLembagaPemeringkatKembali').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#sertSlikLembagaPemeringkatKembali').append('<option value="" selected> Tidak Dipilih </option>'); }
 
-        if(JaminanSlik.kode_jenis_pengikatan != ''){
+        if(JaminanSlik.kode_jenis_pengikatan != null){
             $('#sertSlikJenisPengikatanKembali').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
-        }else { $('#sertSlikJenisPengikatanKembali').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+        }else { $('#sertSlikJenisPengikatanKembali').append('<option value="" selected>  Tidak Dipilih </option>'); }
 
-        if(JaminanSlik.kode_kab_kota != ''){
+        if(JaminanSlik.kode_kab_kota != null && JaminanSlik.SlikKodeDati2 != null){
             $('#sertSlikKodeDati2Kembali').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
-        }else { $('#sertSlikKodeDati2Kembali').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#sertSlikKodeDati2Kembali').append('<option value="" selected> Tidak Dipilih </option>'); }
         
        
         
@@ -2418,6 +2382,12 @@ function mappingFieldBPKBKembali(JaminanHeader, JaminanDokument, JaminanSlik){
        $('#bpkbDokFakturPemilikKembali').find('option').remove().end();
        $('#bpkbDokKwJualBeliKembali').find('option').remove().end();
        $('#bpkbDokSKTrayekKembali').find('option').remove().end();
+
+       
+       $('#bpkbSlikJenisAgunanKembali').find('option').remove().end();
+       $('#bpkbSlikLembagaPemeringkatKembali').find('option').remove().end();
+       $('#bpkbSlikJenisPengikatanKembali').find('option').remove().end();
+       $('#bpkbSlikKodeDati2Kembali').find('option').remove().end();
   
       ///untuk bpkb
       $('#bpkbVerifikasiKembali').val(JaminanDokument.verifikasi);
@@ -2530,19 +2500,19 @@ function mappingFieldBPKBKembali(JaminanHeader, JaminanDokument, JaminanSlik){
         $('#bpkbSlikKeteranganKembali').val(JaminanSlik.keterangan);
         if(JaminanSlik.kode_jenis_agunan != ''){
             $('#bpkbSlikJenisAgunanKembali').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
-        }else { $('#bpkbSlikJenisAgunanKembali').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikJenisAgunanKembali').append('<option value="" selected> Tidak Dipilih </option>'); }
         
         if(JaminanSlik.kode_lembaga_pemeringkat != ''){
             $('#bpkbSlikLembagaPemeringkatKembali').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
-        }else { $('#bpkbSlikLembagaPemeringkatKembali').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikLembagaPemeringkatKembali').append('<option value="" selected> Tidak Dipilih </option>'); }
 
         if(JaminanSlik.kode_jenis_pengikatan != ''){
             $('#bpkbSlikJenisPengikatanKembali').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
-        }else { $('#bpkbSlikJenisPengikatanKembali').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikJenisPengikatanKembali').append('<option value="" selected>  Tidak Dipilih </option>'); }
 
         if(JaminanSlik.kode_kab_kota != ''){
             $('#bpkbSlikKodeDati2Kembali').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
-        }else { $('#bpkbSlikKodeDati2Kembali').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#bpkbSlikKodeDati2Kembali').append('<option value="" selected> Tidak Dipilih </option>'); }
         
        
         
@@ -2815,21 +2785,21 @@ function mappingFieldSertifikatPenyerahan(JaminanHeader, JaminanDokument, Jamina
         $('#sertSlikNamaIndependenPenyerahan').val(JaminanSlik.nama_penilai_independen);
         $('#sertSlikTglIndependenPenyerahan').val(JaminanSlik.tanggal_penilaian_independen);
         $('#sertSlikKeteranganPenyerahan').val(JaminanSlik.keterangan);
-        if(JaminanSlik.kode_jenis_agunan != ''){
+        if(JaminanSlik.kode_jenis_agunan != null){
             $('#sertSlikJenisAgunanPenyerahan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected>' + JaminanSlik.SlikJenisAgunan + '</option>');
-        }else { $('#sertSlikJenisAgunanPenyerahan').append('<option value="'+JaminanSlik.kode_jenis_agunan+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#sertSlikJenisAgunanPenyerahan').append('<option value="" selected> Tidak Dipilih </option>'); }
         
-        if(JaminanSlik.kode_lembaga_pemeringkat != ''){
+        if(JaminanSlik.kode_lembaga_pemeringkat != null){
             $('#sertSlikLembagaPemeringkatPenyerahan').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected>' + JaminanSlik.SlikLembagaPemeringkat + '</option>');
-        }else { $('#sertSlikLembagaPemeringkatPenyerahan').append('<option value="'+JaminanSlik.kode_lembaga_pemeringkat+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#sertSlikLembagaPemeringkatPenyerahan').append('<option value="" selected> Tidak Dipilih </option>'); }
 
-        if(JaminanSlik.kode_jenis_pengikatan != ''){
+        if(JaminanSlik.kode_jenis_pengikatan != null){
             $('#sertSlikJenisPengikatanPenyerahan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>' + JaminanSlik.SlikJenisPengikatan + '</option>');
-        }else { $('#sertSlikJenisPengikatanPenyerahan').append('<option value="'+JaminanSlik.kode_jenis_pengikatan+'" selected>  Tidak Dipilih </option>'); }
+        }else { $('#sertSlikJenisPengikatanPenyerahan').append('<option value="" selected>  Tidak Dipilih </option>'); }
 
-        if(JaminanSlik.kode_kab_kota != ''){
+        if(JaminanSlik.kode_kab_kota != null && JaminanSlik.SlikKodeDati2 != null){
             $('#sertSlikKodeDati2Penyerahan').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected>' + JaminanSlik.SlikKodeDati2 + '</option>');
-        }else { $('#sertSlikKodeDati2Penyerahan').append('<option value="'+JaminanSlik.kode_kab_kota+'" selected> Tidak Dipilih </option>'); }
+        }else { $('#sertSlikKodeDati2Penyerahan').append('<option value="" selected> Tidak Dipilih </option>'); }
         
        
         
@@ -2885,6 +2855,11 @@ function mappingFieldBPKBPenyerahan(JaminanHeader, JaminanDokument, JaminanSlik)
       $('#bpkbDokFakturPemilikPenyerahan').find('option').remove().end();
       $('#bpkbDokKwJualBeliPenyerahan').find('option').remove().end();
       $('#bpkbDokSKTrayekPenyerahan').find('option').remove().end();
+
+      $('#bpkbSlikJenisAgunanPenyerahan').find('option').remove().end();
+      $('#bpkbSlikLembagaPemeringkatPenyerahan').find('option').remove().end();
+      $('#bpkbSlikJenisPengikatanPenyerahan').find('option').remove().end();
+      $('#bpkbSlikKodeDati2Penyerahan').find('option').remove().end();
  
      ///untuk bpkb
      $('#bpkbVerifikasiPenyerahan').val(JaminanDokument.verifikasi);
@@ -3463,6 +3438,7 @@ function serchAsetDokumen(){
             url : base_url + "index.php/AsetDokumenEntryController/getDataSearchA",
             type : "POST",
             dataType : "json",
+            timeout : 300000,
             data : {"search"    : search,
                     "status"    : status,
                     "kode_kantor" : kode_kantor,
@@ -3487,7 +3463,7 @@ function serchAsetDokumen(){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                alert('Data Tidak Ditemukan, Mohon Periksa Kembali');
+                alert('Gagal Get Data, Mohon Periksa Jaringan Anda!');
                 $('#loading').hide();
             }
     });    
@@ -3504,6 +3480,7 @@ function serchAsetDokumenB(){
             url : base_url + "index.php/AsetDokumenEntryController/getDataSearchB",
             type : "POST",
             dataType : "json",
+            timeout : 300000,
             data : {"search"    : search,
                     "status"    : status,
                     "kode_kantor" : kode_kantor,
@@ -3578,6 +3555,43 @@ function serchDataRekening(){
                 alert('Data Tidak Ditemukan');
             }
     });    
+}
+
+function loadDataAwal(){
+    dataTableeee = [];
+    $('#loading').show(); 
+
+    $.ajax({
+            url : base_url + "index.php/AsetDokumenEntryController/getListAsetDokumen",
+            type : "POST",
+            dataType : "json",
+            timeout : 180000,
+            data : {"test" : "test"},
+
+            success : function(response) {
+                $('#employeeTable').DataTable().clear();
+                $('#employeeTable').DataTable().destroy();
+                dataTableeee.push(response); 
+                $('#employeeTable > tbody:first').html(dataTableeee);
+                $(document).ready(function() {
+                    $('#employeeTable').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "paging":   false,
+                        "aaSorting" : []
+                    } );
+                } );
+                $('#loading').hide();  
+                
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Gagal Get Data, Mohon Periksa Jaringan Anda');
+                $('#loading').hide();
+            }
+    });
 }
 
 $('#uploadForm').on('submit', function (e) {

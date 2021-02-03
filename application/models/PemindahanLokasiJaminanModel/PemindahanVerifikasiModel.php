@@ -42,8 +42,8 @@ class PemindahanVerifikasiModel extends CI_Model{
                     LEFT JOIN kre_kode_centro kkc 
                     ON kkc.kode_centro = jp.lokasi_penyimpanan 
                 WHERE jp.kode_kantor_tujuan = '$kode_kantor' 
-                HAVING verifikasi = 0 
-                ORDER BY jp.nomor DESC 
+                #HAVING verifikasi = 0 
+                ORDER BY verifikasi asc, jp.tgl DESC 
                 LIMIT 0, 25;
             ";
         $query = $this->db2->query($str);
@@ -63,8 +63,8 @@ class PemindahanVerifikasiModel extends CI_Model{
                 AND (jp.nomor LIKE '%$search%' 
                     OR kk1.nama_kantor LIKE '%$search%' 
                     OR kk2.nama_kantor LIKE '%$search%') 
-                    HAVING verifikasi = 0 
-                ORDER BY jp.nomor DESC LIMIT 0, 25";
+                    #HAVING verifikasi = 0 
+                ORDER BY verifikasi asc, jp.tgl DESC LIMIT 0, 25";
         $query = $this->db2->query($str);
         
         return $query->result_array();
@@ -91,7 +91,7 @@ class PemindahanVerifikasiModel extends CI_Model{
     }
     public function getPemindahanJaminanDetail($dataNomor){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-        $str = "SELECT jpd.`id`, jpd.`nomor`, jpd.`no_reff`, jd.`agunan_id`, jd.`jenis`, 
+        $str = "SELECT jpd.`id`, jpd.`nomor`, jpd.`no_reff`, jd.`agunan_id`, jd.`jenis`, jpd.`lokasi_rack`, jd.`no_centro`,
                     LEFT( IF(jd.`jenis`='SERTIFIKAT',
                         CONCAT(IF(IFNULL(`no_shm`,'')<>'','SHM',
                                         IF(IFNULL(`no_shgb`,'')<>'','SHGB','AJB')),' NO. ', 
@@ -108,7 +108,7 @@ class PemindahanVerifikasiModel extends CI_Model{
                     `no_rekening_agunan`
                 FROM jaminan_pemindahan_detail jpd
                     LEFT JOIN `jaminan_dokument` jd ON jd.`no_reff`=jpd.`no_reff`
-                WHERE  jpd.`nomor`='$dataNomor' ORDER BY id LIMIT 0, 25
+                WHERE  jpd.`nomor`='$dataNomor' ORDER BY id 
             ";
         $query = $this->db2->query($str);
         
@@ -166,18 +166,23 @@ class PemindahanVerifikasiModel extends CI_Model{
         $this->db2->query("UPDATE jaminan_pemindahan 
                             SET `verifikasi` = '$mainVerifikasi'
                             WHERE `nomor` = '$mainNomor';");
-        $this->db2->query("UPDATE jaminan_pemindahan_detail
-                            SET `last_update` = NOW()
-                            WHERE `nomor` = '$mainNomor';"); 
+       
         //looping update di jaminan dokument
         for($i = 0; $i < $lengthParsed; $i++){
 			$nomorReffDetail = $parsedDataDetailArr[$i][0];
-            $agunanIdDetail   = $parsedDataDetailArr[$i][1];
+            $agunanIdDetail  = $parsedDataDetailArr[$i][1];
+            $nomor_rack      = $parsedDataDetailArr[$i][2];
             $this->db2->query("UPDATE jaminan_dokument 
                                 SET `kode_kantor_lokasi_jaminan`='$kode_kantor_tujuan', 
-                                     lokasi_penyimpanan = '$kode_lokasi_penyimpanan' 
+                                     lokasi_penyimpanan = '$kode_lokasi_penyimpanan',
+                                     `lokasi_rack`  = '$nomor_rack'
                                 WHERE no_reff = '$nomorReffDetail'
                                 and agunan_id = '$agunanIdDetail';"); 
+            $this->db2->query("UPDATE jaminan_pemindahan_detail
+                                SET `last_update` = NOW(),
+                                     `lokasi_rack`  = '$nomor_rack'
+                                WHERE `nomor` = '$mainNomor'
+                                and agunan_id = '$agunanIdDetail';");                       
 			
 		}                   
         $this->db2->trans_complete();
