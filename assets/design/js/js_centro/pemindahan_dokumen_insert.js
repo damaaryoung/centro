@@ -20,7 +20,7 @@ $('#btn_tambah_jaminan_main').click(function () {
     dataTableeee = [];
     $('#modalJaminanDokumen').modal('show');
     $.ajax({
-            url : base_url + "index.php/PemindahanInsertController/getMasterJaminan",
+            url : base_url + "PemindahanInsertController/getMasterJaminan",
             type : "POST",
             dataType : "json",
             data : {"test"    : "test"},
@@ -51,7 +51,7 @@ $('#btn_tambah_jaminan_main').click(function () {
 });
 $('#btn_kembali_insert_pemindahan').click(function () {
     $('#loading').show();
-    window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+    window.location = base_url + 'PemindahanJaminanMainController/index';
 });
 $('#bodyTableModalJaminan').on('click','.btnPilihJaminan', function () {
     nomorreff = $(this).data("nomorreff");
@@ -135,7 +135,7 @@ $('#btn_simpan_insert_pemindahan').click(function () {
     lengthParsed = parsedDataDetailArr.length;
     $('#loading').show(); 
     $.ajax({
-        url : base_url + "index.php/PemindahanInsertController/insertDataPemindahan",
+        url : base_url + "PemindahanInsertController/insertDataPemindahan",
         type : "POST",
         dataType : "json",
         data : {"mainTanggal"             : mainTanggal,
@@ -147,13 +147,13 @@ $('#btn_simpan_insert_pemindahan').click(function () {
 
         success : function(response) {
             alert('Sukses');   
-            window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+            window.location = base_url + 'PemindahanJaminanMainController/index';
 
         },
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal Insert Data Pemindahan Jaminan, Mohon Coba Lagi');
-            window.location = base_url + 'index.php/PemindahanInsertController/index';
+            window.location = base_url + 'PemindahanInsertController/index';
         }
     });
     
@@ -173,7 +173,7 @@ function serchDataJaminan(){
     $('#TableModalJaminan').DataTable().clear();
     $('#TableModalJaminan').DataTable().destroy();
     $.ajax({
-        url : base_url + "index.php/PemindahanInsertController/getMasterJaminanSearch",
+        url : base_url + "PemindahanInsertController/getMasterJaminanSearch",
         type : "POST",
         dataType : "json",
         data : {"search"    : search},

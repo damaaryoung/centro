@@ -23,7 +23,7 @@ function getData(){
     $('#loading').show(); 
 
     $.ajax({
-            url : base_url + "index.php/Request_Jaminan_Verifikasi_Controller/getListRequest",
+            url : base_url + "Request_Jaminan_Verifikasi_Controller/getListRequest",
             type : "POST",
             dataType : "json",
             data : {"proses" : "getAwal"},
@@ -62,7 +62,7 @@ function searchData(){
     console.log(search);
 
     $.ajax({
-            url : base_url + "index.php/Request_Jaminan_Verifikasi_Controller/getListRequest",
+            url : base_url + "Request_Jaminan_Verifikasi_Controller/getListRequest",
             type : "POST",
             dataType : "json",
             data : {"search" : search,

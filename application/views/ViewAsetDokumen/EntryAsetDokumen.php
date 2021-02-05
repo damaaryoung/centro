@@ -111,7 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="card">
             <div class="card-header">
                 <?php  if( $this->session->userdata('menuAset') == '1'){ ?>
-                  <form method="get" action="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen"> 
+                  <form method="get" action="<?php echo base_url(); ?>AsetDokumenEntryController/displayTambahAsetDokumen"> 
                       <button type="submit" class="btn btn-success btn-sm" style="width: 250px;"> <i class="fas fa-plus-circle"></i> Tambah </i></button> 
                   </form>
                 <?php }?>

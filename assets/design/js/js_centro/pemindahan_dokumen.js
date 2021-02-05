@@ -10,7 +10,7 @@ $(document).ready(function () {
 
        
     $.ajax({
-        url : base_url + "index.php/PemindahanJaminanMainController/getListJaminan",
+        url : base_url + "PemindahanJaminanMainController/getListJaminan",
         type : "POST",
         dataType : "json",
         data : {"search"    : 'search'
@@ -52,7 +52,7 @@ function serchDataJaminan(){
     $('#loading').show(); 
    
     $.ajax({
-        url : base_url + "index.php/PemindahanJaminanMainController/getListJaminanSearch",
+        url : base_url + "PemindahanJaminanMainController/getListJaminanSearch",
         type : "POST",
         dataType : "json",
         data : {"search"    : search,
@@ -98,7 +98,7 @@ $('#bodyTableLokasiJaminan').on('click','.btnDeleteLokasiJaminan', function () {
     $('#loading').show();
     if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan Nomor " + nomor)) {
         $.ajax({
-            url : base_url + "index.php/PemindahanJaminanMainController/deleteDataPemindahanLokasi",
+            url : base_url + "PemindahanJaminanMainController/deleteDataPemindahanLokasi",
             type : "POST",
             dataType : "json",
             data : {"nomor"    : nomor,
@@ -107,12 +107,12 @@ $('#bodyTableLokasiJaminan').on('click','.btnDeleteLokasiJaminan', function () {
             success : function(response) {
                 console.log(response)
                 alert('Data Berhasil Dihapus');
-                window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+                window.location = base_url + 'PemindahanJaminanMainController/index';
             },
             error : function(response) {
                 console.log('failed :' + response);
                 alert('Gagal Hapus Data Lokasi Pemindahan Lokasi Jaminan, Mohon Coba Lagi');
-                window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+                window.location = base_url + 'PemindahanJaminanMainController/index';
             }
         }); 
     } else {

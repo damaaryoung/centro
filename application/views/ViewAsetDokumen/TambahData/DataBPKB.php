@@ -64,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="row">
                       <div class="col-md-10 mx-auto">
                       <br><br>
-                          <form method="post" action="<?php echo base_url("index.php/AsetDokumenEntryController/handleUserInputBPKB")?>">
+                          <form method="post" action="<?php echo base_url("AsetDokumenEntryController/handleUserInputBPKB")?>">
                              <div class="form-group row">
                                   <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="bpkbTglRegister">Tanggal Register</label>
@@ -813,7 +813,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
             <div class="card-footer text-center">
-                <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
+                <a href="<?php echo base_url(); ?>AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
                 <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
             </div>
             </form>

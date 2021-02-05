@@ -40,7 +40,7 @@ class PemindahanJaminanMainController extends CI_Controller {
 										. $row['nama_lokasi_penyimpanan'].'</td> <td>'
 										. $row['verifikasi'].'</td> <td>'
 										. '<div class="form-inline">'
-											. '<form method="post" action="'. base_url().'index.php/PemindahanUpdateController/index">'
+											. '<form method="post" action="'. base_url().'PemindahanUpdateController/index">'
 											. '<button type="submit" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
 														data-id="'.$row['id'].'"
 														data-nomor="'.$row['nomor'].'"
@@ -66,7 +66,7 @@ class PemindahanJaminanMainController extends CI_Controller {
 													</button>  
 												</div>
 												<div style ="padding-left: 5px;">
-													<form method="post" target="_blank" style ="display:inline;" action="'. base_url().'index.php/PemindahanCetakController/cetakProses"> 
+													<form method="post" target="_blank" style ="display:inline;" action="'. base_url().'PemindahanCetakController/cetakProses"> 
 														<button type="submit" class="btn btn-success btn-sm btnCetakLokasiJaminan" style ="padding-left: 5px;"
 																	data-id="'.$row['id'].'"
 																	data-nomor="'.$row['nomor'].'" 
@@ -106,7 +106,7 @@ class PemindahanJaminanMainController extends CI_Controller {
 										. $row['nama_lokasi_penyimpanan'].'</td> <td>'
 										. $row['verifikasi'].'</td> <td>'
 										. '<div class="form-inline">'
-											. '<form method="post" action="'. base_url().'index.php/PemindahanUpdateController/index">'
+											. '<form method="post" action="'. base_url().'PemindahanUpdateController/index">'
 											. '<button type="submit" class="btn btn-primary btn-sm btnUpdate" style ="padding-left: 5px;"
 														data-id="'.$row['id'].'"
 														data-nomor="'.$row['nomor'].'"
@@ -132,7 +132,7 @@ class PemindahanJaminanMainController extends CI_Controller {
 													</button>  
 												</div>
 												<div style ="padding-left: 5px;">
-													<form method="post" target="_blank" style ="display:inline;" action="'. base_url().'index.php/PemindahanCetakController/cetakProses"> 
+													<form method="post" target="_blank" style ="display:inline;" action="'. base_url().'PemindahanCetakController/cetakProses"> 
 														<button type="submit" class="btn btn-success btn-sm btnCetakLokasiJaminan" style ="padding-left: 5px;"
 																	data-id="'.$row['id'].'"
 																	data-nomor="'.$row['nomor'].'" 

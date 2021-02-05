@@ -102,7 +102,7 @@ function loginfunction2(nama,
                        token){
       console.log(nama);
          $.ajax({
-              url : base_url +"index.php/LoginController/login_process",
+              url : base_url +"LoginController/login_process",
               type : "POST",
               dataType : "json",
               data : {"nama"   : nama, 
@@ -120,12 +120,12 @@ function loginfunction2(nama,
 
               success : function(response) {
                  console.log('harusnya bisa');
-                 window.location = base_url + 'index.php/DashboardController/index';  
+                 window.location = base_url + 'DashboardController/index';  
               },
               error : function(response) {
                   console.log('failed ' + response);
                  
-                  window.location = base_url + 'index.php/LoginController/index'; 
+                  window.location = base_url + 'LoginController/index'; 
               }
           });
 }

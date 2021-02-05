@@ -14,7 +14,7 @@
  <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #9A0303;" >
     <!-- Brand Logo -->
-    <a href="<?php echo base_url(); ?>index.php/DashboardController/index" class="brand-link">
+    <a href="<?php echo base_url(); ?>dashboard" class="brand-link">
       <img src="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light"><b>CENTRO</b>&nbsp;SYSTEM</span>
@@ -73,21 +73,21 @@
                 </li>
              <?php } if($this->session->userdata('verifikasi_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('verifikasi_aset_dokumen_group') == 'ok'){ ?>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>verifikasi_aset_dokumen" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Verifikasi Aset Dokumen</p>
                   </a>
                 </li>
               <?php } if($this->session->userdata('pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('pemindahan_lokasi_group') == 'ok'){ ?>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/PemindahanJaminanMainController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>pemindahan_jaminan" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Pemindahan Lokasi</p>
                   </a>
                 </li>
               <?php } if($this->session->userdata('verifikasi_pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('verifikasi_pemindahan_lokasi_group') == 'ok'){ ?>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>verifikasi_pemindahan_jaminan" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Verifikasi Pemindahan Lokasi</p>
                   </a>

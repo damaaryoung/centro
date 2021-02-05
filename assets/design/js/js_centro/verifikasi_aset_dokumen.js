@@ -20,6 +20,11 @@ var jenis_verifikasi0 = '<option value="0">0</option>';
 var jenis_verifikasi1 = '<option value="1">1</option>';
 var base_url = $('#base_url').val();
 
+$(document).ready(function () {     
+   
+    loadDataAwal();
+    
+});
 
 
 $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
@@ -33,9 +38,9 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
 
     $('#mainVerifikasi').find('option').remove().end();
 
-
+    $('#loading1').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenVerifikasiController/displayDetails",
+        url : base_url + "AsetDokumenVerifikasiController/displayDetails",
         type : "POST",
         dataType : "json",
         data : {"nomorAgunan"    : nomor, 
@@ -85,7 +90,7 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
             console.log('failed :' + response);
             alert('Gagal get Details');
             $('#loading1').hide();
-            window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';
+            window.location = base_url + 'AsetDokumenVerifikasiController/index';
         }
     });  
 });
@@ -93,13 +98,9 @@ $('#bodyTableVerif').on('click','.btnVerifikasi', function () {
 //main
 $('#btn_kembali_verifikasi_modal').click(function () { 
     $('#mainVerifikasiModal').modal('hide'); 
-    $('#loading').show();
-    window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index'; 
 });
 $('#btn_kembali_verifikasi_modal2').click(function () {
     $('#mainVerifikasiModal').modal('hide'); 
-    $('#loading').show(); 
-    window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';
 });
 //sertifikat
 $('#sert_button_kembali').click(function () {
@@ -683,7 +684,7 @@ function verifikasiHeader(){
     $("#btn_simpan_verifikasi_modal").prop("disabled", true);
 
     $.ajax({
-        url : base_url + "index.php/AsetDokumenVerifikasiController/verifikasi",
+        url : base_url + "AsetDokumenVerifikasiController/verifikasi",
         type : "POST",
         dataType : "json",
         data : {"idHeader"            : idHeader, 
@@ -697,16 +698,15 @@ function verifikasiHeader(){
 
         success : function(response) {
             alert('Data Verifikasi Sukses');
-            window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';  
+            window.location = base_url + 'AsetDokumenVerifikasiController/index';  
         },
         error : function(response) {
             console.log('failed :' + response);
             alert('Data Gagal Di Verifikasi');
-            window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';
+            window.location = base_url + 'AsetDokumenVerifikasiController/index';
         }
     });    
 }
-
 function serchDataVerif(){
     $('#employeeTable').DataTable().clear();
     $('#employeeTable').DataTable().destroy();
@@ -717,7 +717,7 @@ function serchDataVerif(){
     $('#loading').show(); 
 
     $.ajax({
-            url : base_url + "index.php/AsetDokumenVerifikasiController/getDataSearch",
+            url : base_url + "AsetDokumenVerifikasiController/getDataSearch",
             type : "POST",
             dataType : "json",
             data : {"search"    : search,
@@ -742,7 +742,43 @@ function serchDataVerif(){
             error : function(response) {
                 console.log('failed :' + response);
                 alert('Data Tidak Ditemukan');
-                window.location = base_url + 'index.php/AsetDokumenVerifikasiController/index';
+                window.location = base_url + 'AsetDokumenVerifikasiController/index';
             }
     });    
+}
+
+function loadDataAwal(){
+    dataTableeee = [];
+    $('#loading').show(); 
+
+    $.ajax({
+            url : base_url + "AsetDokumenVerifikasiController/getDataAwal",
+            type : "POST",
+            dataType : "json",
+            timeout : 180000,
+
+            success : function(response) {
+                $('#employeeTable').DataTable().clear();
+                $('#employeeTable').DataTable().destroy();
+                dataTableeee.push(response); 
+                $('#employeeTable > tbody:first').html(dataTableeee);
+                $(document).ready(function() {
+                    $('#employeeTable').DataTable( {
+                        "destroy": true,
+                        "scrollX": true,
+                        "autoWidth" : false,
+                        "searching": false,
+                        "paging":   true,
+                        "aaSorting" : []
+                    } );
+                } );
+                $('#loading').hide();  
+                
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Gagal Get Data, Mohon Periksa Jaringan Anda');
+                $('#loading').hide();
+            }
+    });
 }

@@ -84,7 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <div class="card" style="min-height: 700px;">
             <div class="card-header">
-              <form method="get" action="<?php echo base_url(); ?>index.php/PemindahanInsertController/index"> 
+              <form method="get" action="<?php echo base_url(); ?>PemindahanInsertController/index"> 
                   <button type="submit" style="width: 250px;" class="btn btn-success btn-sm"> <i class="fas fa-plus-circle"></i> Tambah </i></button> 
                   <!--<input type="hidden" name="idData" value="<?php //echo $idData; ?>">    -->        
                </form>

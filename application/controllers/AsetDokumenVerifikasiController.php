@@ -28,9 +28,6 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 
 
 		if($session != ''){
-			//$data['ListAsset'] = $this->AsetDokumenVerifikasiModel->listAsetDokumen();
-			$data['ListAssetVerifikasi'] = $this->AsetDokumenVerifikasiModel->listDokumenVerifikasi($kode_kantor);
-			
 			$this->load->view('ViewAsetDokumen/MainViewVerifikasi.php', $data);
 		}
 		else{
@@ -77,41 +74,87 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 		$search 	= $this->input->post('search');
 		$status     = $this->input->post('status');
         $kode_kantor = $this->input->post('kode_kantor');
-		//$searchlist	= $this->AsetDokumenVerifikasiModel->searching($search);
 		$searchlist = $this->AsetDokumenVerifikasiModel->searching($search,$status,$kode_kantor);
-		foreach ($searchlist as $row) :
-			$nomor              = $row['nomor'];
-			$tgl                = $row['tgl'];
-			$nama               = $row['nama'];
-			$alamat             = $row['alamat'];
-			$jenis_jaminan      = $row['jenis_jaminan'];
-			$status             = $row['status'];
-			$kontrak_status     = $row['kontrak_status'];  
-			
-			
-			$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
-										. $row['tgl']. '</td> <td>'
-										. $row['nama'].'</td> <td>'
-										. $row['alamat'] . '</td> <td>'
-										. $row['jenis_jaminan']. '</td> <td>'
-										. $row['status'].'</td> <td>'
-										. $row['kontrak_status'].'</td> <td>'
-										. $row['verifikasi'].'</td> <td>'
-										. '<button type="button" class="btn btn-success btn-sm btnVerifikasi" style ="padding-left: 5px;"
-													data-nomor="'.$row['nomor'].'"
-													data-noref="'.$row['no_reff'].'" 
-													data-status="'.$row['status'].'"
-													data-id="'.$row['id'].'"
-													data-agunanid="'.$row['agunan_id'].'"
-													name="btnVerifikasi"> 
-													<i style="padding-left: 5px;" class="fa fa-check"></i>
-											</button>  </td> </tr>'];
-											
-									
-		endforeach;	
+		if(count($searchlist) == 0){
+			$data [] = '';
+		}else{
+			foreach ($searchlist as $row) :
+				$nomor              = $row['nomor'];
+				$tgl                = $row['tgl'];
+				$nama               = $row['nama'];
+				$alamat             = $row['alamat'];
+				$jenis_jaminan      = $row['jenis_jaminan'];
+				$status             = $row['status'];
+				$kontrak_status     = $row['kontrak_status'];  
+				
+				
+				$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
+											. $row['tgl']. '</td> <td>'
+											. $row['nama'].'</td> <td>'
+											. $row['alamat'] . '</td> <td>'
+											. $row['jenis_jaminan']. '</td> <td>'
+											. $row['status'].'</td> <td>'
+											. $row['kontrak_status'].'</td> <td>'
+											. $row['verifikasi'].'</td> <td>'
+											. '<button type="button" class="btn btn-success btn-sm btnVerifikasi" style ="padding-left: 5px;"
+														data-nomor="'.$row['nomor'].'"
+														data-noref="'.$row['no_reff'].'" 
+														data-status="'.$row['status'].'"
+														data-id="'.$row['id'].'"
+														data-agunanid="'.$row['agunan_id'].'"
+														name="btnVerifikasi"> 
+														<i style="padding-left: 5px;" class="fa fa-check"></i>
+												</button>  </td> </tr>'];
+												
+										
+			endforeach;	
+		}
+		echo json_encode($data);
+	}
+
+	public function getDataAwal(){
+		$kode_kantor = $this->session->userdata('kd_cabang');
+		
+		$ListAssetVerifikasi = $this->AsetDokumenVerifikasiModel->listDokumenVerifikasi($kode_kantor);
+		if(count($ListAssetVerifikasi) == 0){
+			$data [] = '';
+		}else{
+			foreach ($ListAssetVerifikasi as $row) :
+				$nomor              = $row['nomor'];
+				$tgl                = $row['tgl'];
+				$nama               = $row['nama'];
+				$alamat             = $row['alamat'];
+				$jenis_jaminan      = $row['jenis_jaminan'];
+				$status             = $row['status'];
+				$kontrak_status     = $row['kontrak_status'];  
+				
+				
+				$data[]    = 	['<tr> <td>'. $row['nomor'] . '</td> <td>'
+											. $row['tgl']. '</td> <td>'
+											. $row['nama'].'</td> <td>'
+											. $row['alamat'] . '</td> <td>'
+											. $row['jenis_jaminan']. '</td> <td>'
+											. $row['status'].'</td> <td>'
+											. $row['kontrak_status'].'</td> <td>'
+											. $row['verifikasi'].'</td> <td>'
+											. '<button type="button" class="btn btn-success btn-sm btnVerifikasi" style ="padding-left: 5px;"
+														data-nomor="'.$row['nomor'].'"
+														data-noref="'.$row['no_reff'].'" 
+														data-status="'.$row['status'].'"
+														data-id="'.$row['id'].'"
+														data-agunanid="'.$row['agunan_id'].'"
+														name="btnVerifikasi"> 
+														<i style="padding-left: 5px;" class="fa fa-check"></i>
+												</button>  </td> </tr>'];
+												
+										
+			endforeach;	
+		}
 		//$data['mantap'] = 'mantap';
 		echo json_encode($data);
 	}
+
+	
 		
     
     	

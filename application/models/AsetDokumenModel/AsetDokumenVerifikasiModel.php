@@ -201,7 +201,7 @@ class AsetDokumenVerifikasiModel extends CI_Model{
                     and jaminan_header.kode_kantor = '$kode_kantor' 
                 ORDER BY jaminan_header.nomor DESC 
                 #ORDER BY jaminan_header.id DESC 
-                LIMIT 0, 25;";
+                LIMIT 10;";
 		$query = $this->db2->query($str);
 		return $query->result_array();
     }

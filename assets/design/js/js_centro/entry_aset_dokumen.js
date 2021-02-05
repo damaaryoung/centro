@@ -174,7 +174,7 @@ $('#btn_simpan_modal_pinjam').click(function () {
     $('#loading').show();
     $('#loading2').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenPinjamController/pinjamData",
+        url : base_url + "AsetDokumenPinjamController/pinjamData",
         type : "POST",
         dataType : "json",
         data : {"mainIdPinjam"                : $('#mainIdPinjam').val(),
@@ -200,13 +200,13 @@ $('#btn_simpan_modal_pinjam').click(function () {
         success : function(response) {
             alert('Peminjaman Data Sukses');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
+            window.location = base_url + 'AsetDokumenEntryController/index';  
         },
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal Melakukan Peminjaman Data');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            window.location = base_url + 'AsetDokumenEntryController/index';
         }
     });  
 });
@@ -251,7 +251,7 @@ $('#btn_simpan_modal_kembali').click(function () {
    $('#loading5').show();
 
    $.ajax({
-    url : base_url + "index.php/AsetDokumenKembaliController/kembaliDokumen",
+    url : base_url + "AsetDokumenKembaliController/kembaliDokumen",
     type : "POST",
     dataType : "json",
     data : {"mainIdKembali"                : $('#mainIdKembali').val(),
@@ -297,13 +297,13 @@ $('#btn_simpan_modal_kembali').click(function () {
     success : function(response) {
         alert('Data Sukses Di Kembalikan');
         $('#loading5').hide();
-        window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
+        window.location = base_url + 'AsetDokumenEntryController/index';  
     },
     error : function(response) {
         console.log('failed :' + response);
         alert('Gagal Kembalikan Data');
         $('#loading').hide();
-        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+        window.location = base_url + 'AsetDokumenEntryController/index';
     }
  });     
 });
@@ -338,7 +338,7 @@ $('#btn_simpan_dueDate_modal').click(function () {
 
    $('#loading6').show();
    $.ajax({
-    url : base_url + "index.php/AsetDokumenUpdateController/updateDueDate",
+    url : base_url + "AsetDokumenUpdateController/updateDueDate",
     type : "POST",
     dataType : "json",
     data : {"tanggalRencanaKembaliDueDate" : tanggalRencanaKembaliDueDate, 
@@ -349,13 +349,13 @@ $('#btn_simpan_dueDate_modal').click(function () {
     success : function(response) {
         alert('Sukses Update Due Date');
 
-        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+        window.location = base_url + 'AsetDokumenEntryController/index';
     },
     error : function(response) {
         console.log('failed :' + response);
         alert('Gagal Get Due Date');
         $('#loading').hide();
-        window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+        window.location = base_url + 'AsetDokumenEntryController/index';
     }
     }); 
 });
@@ -377,7 +377,7 @@ $('#btn_cari_notaris').click(function () {
     $('#ListNotarisModal').modal('show');
     dataTableeee = [];
    $.ajax({
-        url : base_url + "index.php/AsetDokumenPinjamController/getNotaris",
+        url : base_url + "AsetDokumenPinjamController/getNotaris",
         type : "POST",
         dataType : "json",
         data : {"test"    : "test"},
@@ -427,7 +427,7 @@ $('#btn_cari_jenis_pengurusan').click(function () {
     dataTableeee = [];
  
    $.ajax({
-    url : base_url + "index.php/AsetDokumenPinjamController/getJenisPengurusan",
+    url : base_url + "AsetDokumenPinjamController/getJenisPengurusan",
     type : "POST",
     dataType : "json",
     data : {"test"    : "test"},
@@ -477,7 +477,7 @@ $('#btn_simpan_modal_penyerahan').click(function () {
     $('#loading').show();
     $('#loadingPenyerahan').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenPenyerahanController/penyerahanData",
+        url : base_url + "AsetDokumenPenyerahanController/penyerahanData",
         type : "POST",
         dataType : "json",
         data : {"mainIdPenyerahan"                : $('#mainIdPenyerahan').val(),
@@ -503,13 +503,13 @@ $('#btn_simpan_modal_penyerahan').click(function () {
         success : function(response) {
             alert('Penyerahan Data Sukses');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
+            window.location = base_url + 'AsetDokumenEntryController/index';  
         },
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal Melakukan Peminjaman Data');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            window.location = base_url + 'AsetDokumenEntryController/index';
         }
     });  
 });
@@ -561,7 +561,7 @@ $('#bodyTableAsetDokumen').on('click','.btnUpdate', function () {
     $('#mainTransaksi').append(main_transaksi);
 
     $.ajax({
-        url : base_url + "index.php/AsetDokumenUpdateController/displayDetails",
+        url : base_url + "AsetDokumenUpdateController/displayDetails",
         type : "POST",
         dataType : "json",
         timeout : 180000,
@@ -702,7 +702,7 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
     $('#PeminjamanMainModal').modal('show');
 
     $.ajax({
-        url : base_url + "index.php/AsetDokumenPinjamController/displayDetails",
+        url : base_url + "AsetDokumenPinjamController/displayDetails",
         type : "POST",
         dataType : "json",
         timeout : 180000,
@@ -769,7 +769,7 @@ $('#bodyTableAsetDokumen').on('click','.btnKembaliDokumen', function () {
     $('#mainAreaKerjaKembali').find('option').remove().end();
 
     $.ajax({
-        url : base_url + "index.php/AsetDokumenKembaliController/displayDetails",
+        url : base_url + "AsetDokumenKembaliController/displayDetails",
         type : "POST",
         dataType : "json",
         timeout : 180000,
@@ -851,7 +851,7 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
     $('#loading').show();
     $('#mainDueDateModal').modal('show');
     $.ajax({
-        url : base_url + "index.php/AsetDokumenUpdateController/getDueDate",
+        url : base_url + "AsetDokumenUpdateController/getDueDate",
         type : "POST",
         dataType : "json",
         timeout : 180000,
@@ -932,7 +932,7 @@ $('#bodyTableAsetDokumen').on('click','.btnPenyerahan', function () {
     $('#loadingPenyerahan').show();
 
     $.ajax({
-        url : base_url + "index.php/AsetDokumenPenyerahanController/displayDetails",
+        url : base_url + "AsetDokumenPenyerahanController/displayDetails",
         type : "POST",
         dataType : "json",
         timeout : 180000,
@@ -1004,7 +1004,7 @@ $('#mainBtnSearchRekening').click(function () {
     $('#modalNomorRekening').modal('show');
     dataTableeee = [];
     $.ajax({
-            url : base_url + "index.php/AsetDokumenUpdateController/getNomorRekening",
+            url : base_url + "AsetDokumenUpdateController/getNomorRekening",
             type : "POST",
             dataType : "json",
             data : {"test"    : "test"},
@@ -3055,7 +3055,7 @@ function updateSertifikat(){
     $('#loading1').show();
     $('#loading').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenUpdateController/updateDataSertifikat",
+        url : base_url + "AsetDokumenUpdateController/updateDataSertifikat",
         type : "POST",
         dataType : "json",
         data :  {"mainId"               : $('#mainId').val(),
@@ -3155,9 +3155,9 @@ function updateSertifikat(){
         success : function(response) {
             alert('Data Sukses Di Update');
             if( menuAsset == '1'){
-                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+                window.location = base_url + 'AsetDokumenEntryController/index';
             }else if( menuAsset == '2'){
-                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+                window.location = base_url + 'AsetDokumenViewAsetController/index';
             }
         },
         error : function(response) {
@@ -3165,9 +3165,9 @@ function updateSertifikat(){
             alert('Data Gagal Update Data');
             $('#loading1').hide();
             if( menuAsset == '1'){
-                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+                window.location = base_url + 'AsetDokumenEntryController/index';
             }else if( menuAsset == '2'){
-                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+                window.location = base_url + 'AsetDokumenViewAsetController/index';
             }
         }
     });    
@@ -3178,7 +3178,7 @@ function updateBPKB(){
     checkBPKB();
     
     $.ajax({
-        url : base_url + "index.php/AsetDokumenUpdateController/updateBPKB",
+        url : base_url + "AsetDokumenUpdateController/updateBPKB",
         type : "POST",
         dataType : "json",
         data : {"mainId"                : $('#mainId').val(),
@@ -3261,9 +3261,9 @@ function updateBPKB(){
             alert('Data Sukses Di Update');
             $('#loading1').hide();
             if( menuAsset == '1'){
-                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+                window.location = base_url + 'AsetDokumenEntryController/index';
             }else if( menuAsset == '2'){
-                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+                window.location = base_url + 'AsetDokumenViewAsetController/index';
             }
         },
         error : function(response) {
@@ -3271,9 +3271,9 @@ function updateBPKB(){
             alert('Data Gagal Di Update');
             $('#loading').hide();
             if( menuAsset == '1'){
-                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+                window.location = base_url + 'AsetDokumenEntryController/index';
             }else if( menuAsset == '2'){
-                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+                window.location = base_url + 'AsetDokumenViewAsetController/index';
             }
         }
     });    
@@ -3283,7 +3283,7 @@ function updateEmas(){
     $('#loading').show();
     $('#loading1').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenUpdateController/updateEmas",
+        url : base_url + "AsetDokumenUpdateController/updateEmas",
         type : "POST",
         dataType : "json",
         data : {"mainId"                : $('#mainId').val(),
@@ -3314,9 +3314,9 @@ function updateEmas(){
             alert('Data Sukses Di Update');
             $('#loading').hide();
             if( menuAsset == '1'){
-                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+                window.location = base_url + 'AsetDokumenEntryController/index';
             }else if( menuAsset == '2'){
-                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+                window.location = base_url + 'AsetDokumenViewAsetController/index';
             } 
         },
         error : function(response) {
@@ -3324,9 +3324,9 @@ function updateEmas(){
             alert('Data Gagal Di Update');
             $('#loading').hide();
             if( menuAsset == '1'){
-                window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+                window.location = base_url + 'AsetDokumenEntryController/index';
             }else if( menuAsset == '2'){
-                window.location = base_url + 'index.php/AsetDokumenViewAsetController/index';
+                window.location = base_url + 'AsetDokumenViewAsetController/index';
             }
         }
     });    
@@ -3334,7 +3334,7 @@ function updateEmas(){
 function deleteFunction() {
     $('#loading').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenEntryController/deleteDataDokumen",
+        url : base_url + "AsetDokumenEntryController/deleteDataDokumen",
         type : "POST",
         dataType : "json",
         data : {"nomorAgunan"    : nomor, 
@@ -3345,13 +3345,13 @@ function deleteFunction() {
         success : function(response) {
             alert('Data Sukses Di Delete');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';  
+            window.location = base_url + 'AsetDokumenEntryController/index';  
         },
         error : function(response) {
             console.log('failed :' + response);
             alert('Data Gagal Di Delete');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/index';
+            window.location = base_url + 'AsetDokumenEntryController/index';
         }
     });    
 
@@ -3435,7 +3435,7 @@ function serchAsetDokumen(){
     $('#loading').show(); 
 
     $.ajax({
-            url : base_url + "index.php/AsetDokumenEntryController/getDataSearchA",
+            url : base_url + "AsetDokumenEntryController/getDataSearchA",
             type : "POST",
             dataType : "json",
             timeout : 300000,
@@ -3477,7 +3477,7 @@ function serchAsetDokumenB(){
     $('#loading').show(); 
 
     $.ajax({
-            url : base_url + "index.php/AsetDokumenEntryController/getDataSearchB",
+            url : base_url + "AsetDokumenEntryController/getDataSearchB",
             type : "POST",
             dataType : "json",
             timeout : 300000,
@@ -3530,7 +3530,7 @@ function serchDataRekening(){
 
     //// bareng pakai function search nya di controller Aset Dokumen Entry
     $.ajax({
-            url : base_url + "index.php/AsetDokumenEntryController/getDataSearchRekening",
+            url : base_url + "AsetDokumenEntryController/getDataSearchRekening",
             type : "POST",
             dataType : "json",
             data : {"search"    : search},
@@ -3562,7 +3562,7 @@ function loadDataAwal(){
     $('#loading').show(); 
 
     $.ajax({
-            url : base_url + "index.php/AsetDokumenEntryController/getListAsetDokumen",
+            url : base_url + "AsetDokumenEntryController/getListAsetDokumen",
             type : "POST",
             dataType : "json",
             timeout : 180000,
@@ -3602,7 +3602,7 @@ $('#uploadForm').on('submit', function (e) {
     else{
         $("#loading6").show();
         $.ajax({
-            url : base_url + "index.php/AsetDokumenUpdateController/uploadCoverNotes",
+            url : base_url + "AsetDokumenUpdateController/uploadCoverNotes",
             type : "POST",
             data : new FormData(this),
             contentType: false,

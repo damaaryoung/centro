@@ -99,40 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </tr>
                         </thead>
                         <tbody id="bodyTableLokasiJaminan">
-                        <?php
-                                        foreach ($listJaminan as $row) :
-                                            // $idData = $row['id_data'];
-                                            $idx= 0;
-                                            echo "<tr>";
-                                            echo "<td>".$row['nomor']."</td>";
-                                            echo "<td>".$row['tgl']."</td>";
-                                            echo "<td>".$row['nama_kantor_asal']."</td>";     
-                                            echo "<td>".$row['nama_kantor_tujuan']."</td>";
-                                            echo "<td>".$row['nama_lokasi_penyimpanan']."</td>";
-                                            echo "<td>".$row['verifikasi']."</td>";
-                                        
-                                ?>  
-                                <td>
-                                        <div class="form-inline">
-                                          <form method="post" action="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/verifikasiMenu"> 
-                                                <button type="submit" class="btn btn-success btn-sm btnVerifikasi" style ='padding-left: 5px;'
-                                                        data-id="<?= $row['id'] ?>"
-                                                        data-nomor="<?= $row['nomor'] ?>" 
-                                                        data-toggle="tooltip" 
-                                                        data-placement="bottom" 
-                                                        title="Verifikasi"
-                                                        name="btnVerifikasi"> 
-                                                        <i style="padding-left: 5px;" class="fas fa-check"></i>
-                                                        <input type="hidden" class="form-control" name="tblID" value = "<?= $row['id'] ?>">
-                                                        <input type="hidden" class="form-control" name="tblNomor" value = "<?= $row['nomor'] ?>">
-                                                </button>
-                                          </form>
-                                        </div>
-                                </td>
-                                </tr>
-                                <?php
-                                        endforeach;
-                                ?>
+                        
                         </tbody>
                     </table>
             </div>
