@@ -107,4 +107,66 @@ class Cover_asuransi_controller extends CI_Controller {
 		$data['data_details']       = $data_details;
 		echo json_encode($data);
 	}
+
+	public function cover_jiwa_process(){
+		$files	= $this->input->post('files');
+		$rekening			    = $this->input->post('rekening');
+		$modal_rate_jiwa	    = $this->input->post('modal_rate_jiwa');
+		$modal_premi_jiwa	    = $this->input->post('modal_premi_jiwa');
+		$modal_extra_premi_jiwa	= $this->input->post('modal_extra_premi_jiwa');
+		$userID                = $this->session->userdata('userIdLogin');
+		if(isset($_FILES["files"])){
+			
+			$fileName 	= $_FILES["files"]["name"];
+			$tmpName  	= $_FILES["files"]["tmp_name"];
+			$error 		= $_FILES["files"]["error"];
+			// $fileName   	= str_replace(", ","-",str_replace(",","-",$fileName));
+			// $fileName   	= str_replace("&","-",$fileName);
+			// $fileName       = str_replace('(','-',$fileName);
+			// $fileName   	= str_replace(')','',$fileName);
+
+			$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
+			$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
+
+			if (!file_exists("$root_document/public_centro")){
+				mkdir("$root_document/public_centro");
+			} 
+				
+			if (!file_exists("$root_document/public_centro/$rekening")) {
+				mkdir("$root_document/public_centro/$rekening");
+			}
+			if (!file_exists("$root_document/public_centro/$rekening/asuransi_jiwa")) {
+				mkdir("$root_document/public_centro/$rekening/asuransi_jiwa");
+			}
+
+ 
+			$config['upload_path']   = "$root_document/public_centro/$rekening/asuransi_jiwa";
+			$config['allowed_types'] = "*";
+			$config['overwrite']	 = false;
+			$config['file_name'] = $rekening;
+
+			$this->load->library('upload', $config);
+			if(!$this->upload->do_upload('files') ){
+				echo $this->upload->display_errors();
+			} else{
+				$data = $this->upload->data();
+				$namafileUpload = $data["file_name"];
+				$pathFile = "public_centro/$rekening/asuransi_jiwa/$namafileUpload";
+				$data_details = $this->Cover_asuransi_model->cover_jiwa($rekening,
+																			$userID,
+																			$modal_rate_jiwa,
+																			$modal_premi_jiwa,
+																			$modal_extra_premi_jiwa,
+																			$root_document,
+																			$root_address,
+																			$pathFile
+																		);
+				echo json_encode([
+					"success" => true,
+					"message" => "",
+					"data" => $data
+				]);
+			}
+		}
+	}
 }

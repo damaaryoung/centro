@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	?>
 <script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/bs-custom-file-input.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
 
 
@@ -404,19 +404,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="form-group row">
                                                   <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_selisih_jiwa">Selisih</label>
-                                                  </div>
-                                                  <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_selisih_jiwa" name="modal_selisih_jiwa">
-                                                  </div>
-                                                  <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_file_spa_spajk_jiwa">File SPA/SPAJK</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                      <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="modal_file_spa_spajk_jiwa">
-                                                        <label class="custom-file-label" for="surat_cerai">Choose file</label>
-                                                      </div>
+                                                        <div class="custom-file">
+                                                          <input type="file" class="custom-file-input" id="modal_file_spa_spajk_jiwa" required>
+                                                          <label class="custom-file-label" for="modal_file_spa_spajk_jiwa">Choose file</label>
+                                                        </div>
+                                                        
                                                   </div>
                                   </div>
                               </div>

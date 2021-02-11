@@ -19,6 +19,8 @@
 
     $(document).ready(function () {     
        
+            bsCustomFileInput.init();
+
         
             $('.select2').select2();
             if(menu_kode == '1'){
@@ -64,16 +66,8 @@
 
             
         } else if(menu_kode == '2'){
-            modal_rate_jiwa        = $('#modal_rate_jiwa').val();
-            modal_premi_jiwa       = accounting.unformat($('#modal_premi_jiwa').val());
-            modal_selisih_jiwa     = accounting.unformat($('#modal_selisih_jiwa').val());
-            if (document.getElementById('modal_extra_premi_jiwa').checked) {
-                modal_extra_premi_jiwa = '1';
-            } else {
-                modal_extra_premi_jiwa = '0';
-            }
-
-            console.log(modal_rate_jiwa, modal_premi_jiwa, modal_selisih_jiwa, modal_extra_premi_jiwa);
+            
+            cover_jiwa_process();
         }
     });
 
@@ -241,7 +235,7 @@
                             "rekening"             : rekening},
 
                     success : function(response) {
-                        
+                        $('#loading-1').hide();
                         //alert('Sukses');
                         Swal.fire({
                             position: 'center',
@@ -258,14 +252,71 @@
                     },
                     error : function(response) {
                         console.log('failed :' + response);
-                        alert('Gagal Cover Jaminan');
-                        $('#loading').hide();
+                        alert('Gagal Cover Jaminan, Mohon Periksa Jaringan Anda');
+                        $('#loading-1').hide();
                     }
             });    
    }
    
    function cover_jiwa_process(){
+
+        modal_rate_jiwa        = $('#modal_rate_jiwa').val();
+        modal_premi_jiwa       = accounting.unformat($('#modal_premi_jiwa').val());
+        if (document.getElementById('modal_extra_premi_jiwa').checked) {
+            modal_extra_premi_jiwa = '1';
+        } else {
+            modal_extra_premi_jiwa = '0';
+        }
+
+        if($('#modal_file_spa_spajk_jiwa')[0].files[0] == null){
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Anda Belum Memilih File SPA/SPAJK Untuk Di Upload!'
+            });
+        }
+
+        let fd = new FormData();
+        let files = $('#modal_file_spa_spajk_jiwa')[0].files[0];
+
+        fd.append('files',files);
+        fd.append('rekening',rekening);
+        fd.append('modal_rate_jiwa',modal_rate_jiwa);
+        fd.append('modal_premi_jiwa',modal_premi_jiwa);
+        fd.append('modal_extra_premi_jiwa',modal_extra_premi_jiwa);
        
+        console.log(files);
+        $('#loading-1').show();
+        $.ajax({
+            url: base_url + "Asuransi/Cover_asuransi_controller/cover_jiwa_process",
+            type:"POST",
+            data:fd,
+            processData:false,
+            contentType:false,
+            cache:false,  
+            dataType: 'json',
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+            success : function(response) {
+            
+                    $('#loading-1').hide();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Cover Asuransi Jaminan',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(()=> {
+                        $('#modal_data_asuransi').modal('hide');
+                        getData();
+                    });  
+                    console.log(response);
+            },
+            error : function(response) {
+                console.log(response);
+                alert('Gagal Cover Jiwa');
+                $('#loading-1').hide();
+            }
+        });
    }
     
 </script>

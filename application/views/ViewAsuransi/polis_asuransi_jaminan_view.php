@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- /.card-header -->
                   <div class="card-body">
                       <div class="table-responsive">
-                          <table id="tbl_polis_asuransi_jiwa" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                          <table id="tbl_polis_asuransi_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
                               <thead style="text-align: center;" class="bg-danger">
                                   <tr>
                                       <th>No&nbsp;Polis</th>
@@ -109,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <th>Action</th>
                                   </tr>
                               </thead>
-                              <tbody id="table_body_request_jaminan">
+                              <tbody id="tbl_body_polis_asuransi_jaminan">
                                   <tr>
                                       <td></td>
                                       <td></td>
@@ -146,9 +146,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </button>
                 </div>
                 <div class="modal-body">
-                <!-- <div id="loading-1">
+                <div id="loading-1">
                   <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
-                </div> -->
+                </div>
                 
                 <!-- card data nasabah start -->
                 <div class="card card-info">
@@ -233,6 +233,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <div class="col-md-12 mx-auto">
                                   <div class="form-group row">
                                                   <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_inp_asuransi">Asuransi</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_inp_asuransi" name="modal_inp_asuransi" readonly>
+                                                  </div>
+                                  </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
                                                       <label style="padding-top: 5px;" class="control-label" for="modal_tanggal_realisasi">Tanggal Realisasi</label>
                                                   </div>
                                                   <div class="col-sm-4">
@@ -285,7 +293,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_no_polis">No Polis</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_no_polis" name="modal_no_polis" readonly>
+                                                        <input type="text" class="form-control form-control-sm" id="modal_no_polis" name="modal_no_polis" >
                                                   </div>
                                   </div>
                                   <div class="form-group row">
@@ -309,9 +317,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   
                 </div>
                 <!-- /.modal-body -->
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer text-center" style="margin: 0 auto;">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="btn_save_polis">Save changes</button>
                 </div>
               </div>
               <!-- /.modal-content -->
@@ -337,8 +345,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $footer;
         
 	?>
-<?php //$this->view('ViewCustodian/js/request_jaminan_main_js.php'); ?>
-<script src="<?php echo base_url('assets/design/js/js_centro/js_asuransi/cover_asuransi.js')?>"></script>
+<?php $this->view('ViewAsuransi/js/polis_asuransi_jaminan_js.php'); ?>
+<!-- <script src="<?php //echo base_url('assets/design/js/js_centro/js_asuransi/cover_asuransi.js')?>"></script> -->
+<script src="<?php echo base_url('assets/dist/js/accounting.min.js')?>"></script>
 <style>
               /* Important part */
               .modal-dialog{

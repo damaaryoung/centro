@@ -153,6 +153,33 @@ class Cover_asuransi_model extends CI_Model{
 		$this->db2->trans_complete();
 		return 'sukses';
 	}
+
+	public function cover_jiwa($rekening,
+								$userID,
+								$modal_rate_jiwa,
+								$modal_premi_jiwa,
+								$modal_extra_premi_jiwa,
+								$root_document,
+								$root_address,
+								$pathFile){
+		$this->db2 = $this->load->database('DB_CENTRO', true);
+		
+		$this->db2->trans_start();
+		$this->db2->query("UPDATE ASURANSI_COVER AC
+							SET AC.`premi_asuransi` = '$modal_premi_jiwa',
+								AC.`rate`           = '$modal_rate_jiwa',
+								AC.`last_update`    = NOW(),
+								AC.`last_update_by` = '$userID',
+								AC.`extra_premi`	= '$modal_extra_premi_jiwa',
+								AC.`root_document`  = '$root_document',
+								AC.`root_address`   = '$root_address',
+								AC.`path_file`      = '$pathFile',
+								AC.`status_cover`   = 'SUDAH'
+							WHERE AC.`no_rekening`  = '$rekening'
+							AND AC.`jenis_asuransi` = 'JIWA';");
+		$this->db2->trans_complete();
+		return 'sukses';
+	}
 }
 
 

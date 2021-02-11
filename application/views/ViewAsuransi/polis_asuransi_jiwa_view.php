@@ -110,7 +110,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <th>Action</th>
                                   </tr>
                               </thead>
-                              <tbody id="table_body_request_jaminan">
+                              <tbody id="tbl_body_polis_asuransi_jiwa">
                                   <tr>
                                       <td></td>
                                       <td></td>
@@ -267,7 +267,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_no_polis">No Polis</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_no_polis" name="modal_no_polis" disabled>
+                                                        <input type="text" class="form-control form-control-sm" id="modal_no_polis" name="modal_no_polis">
                                                   </div>
                                   </div>
                                   <div class="form-group row">
@@ -291,9 +291,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   
                 </div>
                 <!-- /.modal-body -->
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer text-center" style="margin: 0 auto;">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="btn_save_polis">Save changes</button>
                 </div>
               </div>
               <!-- /.modal-content -->
@@ -319,8 +319,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $footer;
         
 	?>
-<?php //$this->view('ViewCustodian/js/request_jaminan_main_js.php'); ?>
-<script src="<?php echo base_url('assets/design/js/js_centro/js_asuransi/cover_asuransi.js')?>"></script>
+<?php $this->view('ViewAsuransi/js/polis_asuransi_jiwa_js.php'); ?>
+<!-- <script src="<?php// echo base_url('assets/design/js/js_centro/js_asuransi/cover_asuransi.js')?>"></script> -->
+<script src="<?php echo base_url('assets/dist/js/accounting.min.js')?>"></script>
 <style>
               /* Important part */
               .modal-dialog{
