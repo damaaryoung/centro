@@ -127,22 +127,25 @@ class PemindahanInsertModel extends CI_Model{
                                         ){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         
-        /// check apakah ada data counter di DB
-        $str = "SELECT 1
-                FROM kre_kode_centro_counter c
-                WHERE c.`kode_centro` = '$kode_lokasi_penyimpanan'
-                AND c.`tahun` = YEAR(NOW());";
-        $query = $this->db2->query($str);
-        $result = $query->result_array();
-        if($result == null){
-            $this->db2->query("INSERT INTO kre_kode_centro_counter (
-                `kode_centro`,
-                `tahun`,
-                `flg_aktif`) 
-            VALUES('$kode_lokasi_penyimpanan',
-                    YEAR(NOW()),
-                    '1');");
+        if($kode_lokasi_penyimpanan != null){
+                /// check apakah ada data counter di DB
+                $str = "SELECT 1
+                        FROM kre_kode_centro_counter c
+                        WHERE c.`kode_centro` = '$kode_lokasi_penyimpanan'
+                        AND c.`tahun` = YEAR(NOW());";
+                $query = $this->db2->query($str);
+                $result = $query->result_array();
+                if($result == null){
+                    $this->db2->query("INSERT INTO kre_kode_centro_counter (
+                        `kode_centro`,
+                        `tahun`,
+                        `flg_aktif`) 
+                    VALUES('$kode_lokasi_penyimpanan',
+                            YEAR(NOW()),
+                            '1');");
+                }
         }
+               
 
 		$this->db2->trans_start();
 		$this->db2->query("INSERT INTO jaminan_pemindahan (
@@ -166,16 +169,7 @@ class PemindahanInsertModel extends CI_Model{
         
         for($i = 0; $i < $lengthParsed; $i++){
 			$nomorReffDeatail = $parsedDataDetailArr[$i][0];
-            $agunanIdDetail   = $parsedDataDetailArr[$i][1];
-            
-            $str = "SELECT LPAD(c.counter + 1,8,'0') AS counter 
-                    FROM kre_kode_centro_counter c	
-                    WHERE c.kode_centro = '$kode_lokasi_penyimpanan'
-                    AND c.tahun = YEAR(NOW());";
-            $query = $this->db2->query($str);
-            $res = $query->result_array();
-
-            $no_centro = $res[0]["counter"];
+            $agunanIdDetail   = $parsedDataDetailArr[$i][1];            
 			
 			$this->db2->query("INSERT INTO jaminan_pemindahan_detail (
                                     `nomor`, 
@@ -185,14 +179,23 @@ class PemindahanInsertModel extends CI_Model{
                                     '$nomorReffDeatail',
                                     '$agunanIdDetail');
                                 ");
-            $this->db2->query("UPDATE jaminan_dokument d
-                                SET d.`no_centro` = CONCAT('$kode_lokasi_penyimpanan','-',YEAR(NOW()),'-','$no_centro')
-                                WHERE d.`agunan_id` = '$agunanIdDetail'
-                                AND d.`no_reff` = '$nomorReffDeatail';");
-            $this->db2->query("UPDATE kre_kode_centro_counter C
-                                SET C.`counter` = $no_centro 
-                                WHERE C.`kode_centro` = '$kode_lokasi_penyimpanan'
-                                AND C.`tahun` =  YEAR(NOW());");
+            if($kode_lokasi_penyimpanan != null){
+                $str = "SELECT LPAD(c.counter + 1,8,'0') AS counter 
+                        FROM kre_kode_centro_counter c	
+                        WHERE c.kode_centro = '$kode_lokasi_penyimpanan'
+                        AND c.tahun = YEAR(NOW());";
+                $query = $this->db2->query($str);
+                $res = $query->result_array();
+                $no_centro = $res[0]["counter"];
+                $this->db2->query("UPDATE jaminan_dokument d
+                                    SET d.`no_centro` = CONCAT('$kode_lokasi_penyimpanan','-',YEAR(NOW()),'-','$no_centro')
+                                    WHERE d.`agunan_id` = '$agunanIdDetail'
+                                    AND d.`no_reff` = '$nomorReffDeatail';");
+                $this->db2->query("UPDATE kre_kode_centro_counter C
+                                    SET C.`counter` = $no_centro 
+                                    WHERE C.`kode_centro` = '$kode_lokasi_penyimpanan'
+                                    AND C.`tahun` =  YEAR(NOW());");
+            }
 			
         }
         $this->db2->trans_complete();

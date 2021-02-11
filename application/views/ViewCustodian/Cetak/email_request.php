@@ -17,7 +17,7 @@
                             <tr>
                                 <th class="th">No.&nbsp;Reff</th>
                                 <th class="th">Agunan&nbsp;Id</th>
-                                <th class="th">Nama&nbsp;Nasabah</th>
+                                <th class="th">Jenis</th>
                                 <th class="th">Deskripsi&nbsp;Jaminan</th>
                             </tr>
                         </thead>

@@ -96,7 +96,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="kode_lokasi_penyimpanan">Kode Lokasi Penyimpanan</label>
                                   </div>
                                   <div class="col-sm-4">
-                                  <select class="form-control form-control-sm select2" id="kode_lokasi_penyimpanan" name="kode_lokasi_penyimpanan">ssssssssssssssssssssssssssssssssss
+                                  <select class="form-control form-control-sm select2" id="kode_lokasi_penyimpanan" name="kode_lokasi_penyimpanan">
+                                        <option value="0" selected disabled hidden>Silahkan Pilih</option>
                                         <?php foreach ($getCentro as $row) : ?>
                                           <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - ' .$row['nama'];?></option>
                                         <?php endforeach;?>
