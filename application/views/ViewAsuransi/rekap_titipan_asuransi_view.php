@@ -61,11 +61,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-1">
+                                  <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="src_tgl_realisasi">Tgl&nbsp;Realisasi</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="date" class="form-control form-control-sm" id="src_tgl_realisasi" name="src_tgl_realisasi">
+                                    <input type="date" class="form-control form-control-sm" id="src_tgl_realisasi" name="src_tgl_realisasi" onchange="search_tanggal()">
                                   </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="src_search">Search</label>

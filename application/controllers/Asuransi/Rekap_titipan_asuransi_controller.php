@@ -55,18 +55,67 @@ class Rekap_titipan_asuransi_controller extends CI_Controller {
 	}
 
 	public function get_data_rekap_jaminan(){
-		$sysdate       = $this->Rekap_titipan_asuransi_model->sysdate();
-		$rekap_jaminan = $this->Rekap_titipan_asuransi_model->get_data_rekap_jaminan($sysdate);
+		$menu = $this->session->userdata('menu_rekap_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
 
-		$data['sysdate']       = $sysdate;
+		$date       = $this->Rekap_titipan_asuransi_model->sysdate();
+		$rekap_jaminan = $this->Rekap_titipan_asuransi_model->get_data_rekap($jenis, $date);
+
+		$data['sysdate']       = $date;
 		$data['rekap_jaminan'] = $rekap_jaminan;
 		echo json_encode($data);
 	}
 	public function get_data_rekap_jiwa(){
-		$sysdate       = $this->Rekap_titipan_asuransi_model->sysdate();
-		$rekap_jaminan = $this->Rekap_titipan_asuransi_model->get_data_rekap_jiwa($sysdate);
+		$menu = $this->session->userdata('menu_rekap_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+		$date       = $this->Rekap_titipan_asuransi_model->sysdate();
+		$rekap_jaminan = $this->Rekap_titipan_asuransi_model->get_data_rekap($jenis, $date);
 
-		$data['sysdate']       = $sysdate;
+		$data['sysdate']       = $date;
+		$data['rekap_jaminan'] = $rekap_jaminan;
+		echo json_encode($data);
+	}
+	public function getSearch_Tanggal(){
+		$tanggal = $this->input->post('src_tgl_realisasi');
+		$menu = $this->session->userdata('menu_rekap_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+
+		$rekap_jaminan = $this->Rekap_titipan_asuransi_model->get_data_rekap($jenis, $tanggal);
+
+		$data['rekap_jaminan'] = $rekap_jaminan;
+		echo json_encode($data);
+	}
+	public function get_search(){
+		$search = $this->input->post('src_search');
+		$menu = $this->session->userdata('menu_rekap_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+
+		$rekap_jaminan = $this->Rekap_titipan_asuransi_model->get_search($jenis, $search);
+
 		$data['rekap_jaminan'] = $rekap_jaminan;
 		echo json_encode($data);
 	}

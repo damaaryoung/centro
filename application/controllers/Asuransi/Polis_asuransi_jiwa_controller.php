@@ -27,10 +27,10 @@ class Polis_asuransi_jiwa_controller extends CI_Controller {
 		
 	}
 	public function get_data_polis_jiwa(){
-		$sysdate       = $this->Polis_asuransi_jiwa_model->sysdate();
-		$rekap_jaminan = $this->Polis_asuransi_jiwa_model->get_data_polis_jiwa($sysdate);
+		$date       = $this->Polis_asuransi_jiwa_model->sysdate();
+		$rekap_jaminan = $this->Polis_asuransi_jiwa_model->get_data_polis_jiwa($date);
 
-		$data['sysdate']       = $sysdate;
+		$data['sysdate']       = $date;
 		$data['rekap_jaminan'] = $rekap_jaminan;
 		echo json_encode($data);
 	}
@@ -59,6 +59,20 @@ class Polis_asuransi_jiwa_controller extends CI_Controller {
 		
 		
 		$data['proses']       = $proses;
+		echo json_encode($data);
+	}
+	public function search_periode(){
+		$date       = $this->input->post('src_periode');
+		$rekap_jaminan = $this->Polis_asuransi_jiwa_model->get_data_polis_jiwa($date);
+
+		$data['rekap_jaminan'] = $rekap_jaminan;
+		echo json_encode($data);
+	}
+	public function get_search(){
+		$search       = $this->input->post('src_search');
+		$rekap_jaminan = $this->Polis_asuransi_jiwa_model->get_search($search);
+
+		$data['rekap_jaminan'] = $rekap_jaminan;
 		echo json_encode($data);
 	}
 }

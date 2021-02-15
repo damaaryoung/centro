@@ -15,6 +15,8 @@
     var modal_selisih_jiwa     = '';
     var modal_extra_premi_jiwa = '';
     var modal_no_polis         = '';
+    var src_periode            = '';
+    var src_search             = '';
 
     var root_server    = <?php $_SERVER["DOCUMENT_ROOT"]; ?>
 
@@ -43,6 +45,24 @@
         process_polis_jiwa();
     });
 
+    $('#btn_refresh').click(function () {
+        getData();
+    });
+
+    $('#src_periode').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            search_periode();
+        }
+    }); 
+    $('#src_search').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            search();
+        }
+    }); 
+
+
     function getData(){
         data = '';
         $('#tbl_polis_asuransi_jiwa').DataTable().clear();
@@ -52,6 +72,7 @@
             $.ajax({
                     url : base_url + "Asuransi/Polis_asuransi_jiwa_controller/get_data_polis_jiwa",
                     type : "POST",
+                    timeout : 180000,
                     dataType : "json",
                     headers: {
                                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -59,42 +80,8 @@
 
                     success : function(response) {
                         console.log(response);
-                        $('#src_tgl_realisasi').val(response.sysdate);
-
-
-                        for(i = 0; i < response.rekap_jaminan.length; i++ ){ 
-                            data += `<tr>
-                                        <td>${response.rekap_jaminan[i]['no_polis']}</td>
-                                        <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
-                                        <td>${response.rekap_jaminan[i]['no_rekening']}</td>
-                                        <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
-                                        <td>${response.rekap_jaminan[i]['status_endorsement']}</td>
-                                        <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
-                                        <td><a href="${response.rekap_jaminan[i]['root_address']}${response.rekap_jaminan[i]['path_file']}" target="_blank">SPA/SPAJK</a></td>
-                                        <td>        
-                                            <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
-                                                    data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
-                                                    data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
-                                                    data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
-                                                    data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
-                                                    data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
-                                                    'name="btn_proses">
-                                                    <i class="fa fa-pen"></i> </button>
-                                        </td>
-                                    </tr>`;
-                        }
-                        $('#tbl_polis_asuransi_jiwa > tbody:first').html(data);
-                    
-                        $(document).ready(function() {
-                            $('#tbl_polis_asuransi_jiwa').DataTable( {
-                                "destroy": true,
-                                "scrollX": true,
-                                "autoWidth" : false,
-                                "searching": false,
-                                "aaSorting" : []
-                            } );
-                        } );
-                        $('#loading').hide();  
+                        $('#src_periode').val(response.sysdate);
+                        mapping_get_data(response);
                         
                     },
                     error : function(response) {
@@ -183,6 +170,7 @@
             url : base_url + "Asuransi/Polis_asuransi_jiwa_controller/polis_jiwa_process",
             type : "POST",
             dataType : "json",
+            timeout : 240000,
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
             data:{  "modal_no_polis" : modal_no_polis,
                     "rekening"       : rekening},
@@ -213,6 +201,106 @@
             }
         });    
         
+    }
+    function search_periode(){
+        data = '';
+        src_periode = $('#src_periode').val();
+        $('#tbl_polis_asuransi_jiwa').DataTable().clear();
+        $('#tbl_polis_asuransi_jiwa').DataTable().destroy();
+        $('#loading').show(); 
+        
+        $.ajax({
+                url : base_url + "Asuransi/Polis_asuransi_jiwa_controller/search_periode",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data: {  "src_periode"         : src_periode},
+                success : function(response) {
+                    console.log(response);
+                    mapping_get_data(response);
+                    
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+    }
+    function search(){
+        data = '';
+        src_search = $('#src_search').val();
+        $('#tbl_polis_asuransi_jiwa').DataTable().clear();
+        $('#tbl_polis_asuransi_jiwa').DataTable().destroy();
+        $('#loading').show(); 
+        
+        $.ajax({
+                url : base_url + "Asuransi/Polis_asuransi_jiwa_controller/get_search",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data: {  "src_periode"         : src_periode},
+                success : function(response) {
+                    console.log(response);
+                    mapping_get_data(response);
+                    
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+    }
+
+    function mapping_get_data(response){
+        for(i = 0; i < response.rekap_jaminan.length; i++ ){ 
+            data += `<tr>
+                        <td>${response.rekap_jaminan[i]['no_polis']}</td>
+                        <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
+                        <td>${response.rekap_jaminan[i]['no_rekening']}</td>
+                        <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
+                        <td>${response.rekap_jaminan[i]['status_endorsement']}</td>
+                        <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
+                        <td><a href="${response.rekap_jaminan[i]['root_address']}${response.rekap_jaminan[i]['path_file']}" target="_blank">SPA/SPAJK</a></td>
+                        <td>        
+                            <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
+                                    data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
+                                    data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
+                                    data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
+                                    data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
+                                    data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
+                                    'name="btn_proses">
+                                    <i class="fa fa-pen"></i> </button>
+                        </td>
+                    </tr>`;
+        }
+        $('#tbl_polis_asuransi_jiwa > tbody:first').html(data);
+                    
+        $(document).ready(function() {
+            $('#tbl_polis_asuransi_jiwa').DataTable( {
+                "destroy": true,
+                "scrollX": true,
+                "autoWidth" : false,
+                "searching": false,
+                "aaSorting" : []
+            } );
+        } );
+        $('#loading').hide(); 
     }
 
 </script>

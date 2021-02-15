@@ -9,12 +9,12 @@ class Cover_asuransi_model extends CI_Model{
 
 	public function sysdate(){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
-		$str    = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
+		$str    = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m') AS 'sysdate';";
         $query  = $this->db2->query($str);
         $result = $query->result_array();
         return $result[0]["sysdate"];
 	}
-	public function get_data_rekap_jaminan($sysdate){
+	public function get_data_cover($date,$jenis){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		$str    = "SELECT 
 						K.`TGL_REALISASI`,
@@ -42,12 +42,12 @@ class Cover_asuransi_model extends CI_Model{
 						ON JH.`no_rekening` = AC.`no_rekening` 
 					LEFT JOIN kre_kode_asuransi KKA 
 						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
-					WHERE AC.`jenis_asuransi` = 'JAMINAN' 
-						AND K.`TGL_REALISASI` = '2020-01-17' ;";
+					WHERE AC.`jenis_asuransi` = '$jenis' 
+						AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$date';";
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
-	public function get_data_rekap_jiwa($sysdate){
+	public function get_search($jenis,$search){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		$str    = "SELECT 
 						K.`TGL_REALISASI`,
@@ -75,8 +75,10 @@ class Cover_asuransi_model extends CI_Model{
 						ON JH.`no_rekening` = AC.`no_rekening` 
 					LEFT JOIN kre_kode_asuransi KKA 
 						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
-					WHERE AC.`jenis_asuransi` = 'JIWA'
-					AND K.`TGL_REALISASI` = '2020-01-17';";
+					WHERE AC.`jenis_asuransi` = '$jenis'
+					AND (N.`NAMA_NASABAH` LIKE '$search%'
+						 OR AC.`no_rekening` LIKE '$search%')
+					limit 30;";
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}

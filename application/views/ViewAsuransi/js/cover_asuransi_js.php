@@ -15,6 +15,8 @@
     var modal_premi_jiwa       = '';
     var modal_selisih_jiwa     = '';
     var modal_extra_premi_jiwa = '';
+    var src_tgl_realisasi      = '';
+    var src_search             = '';
 
 
     $(document).ready(function () {     
@@ -71,6 +73,24 @@
         }
     });
 
+    $('#src_search').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            search();
+        }
+    }); 
+    $('#src_tgl_realisasi').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            search_periode()
+        }
+    }); 
+    $('#btn_refresh').click(function(event) {
+        getData();
+    }); 
+  
+
+
     ///// FUNCTION HERE //////
 
     function getData(){
@@ -83,6 +103,7 @@
                     url : get_data_url,
                     type : "POST",
                     dataType : "json",
+                    timeout : 180000,
                     headers: {
                                 'Authorization': 'Bearer ' + localStorage.getItem('token')
                             },
@@ -90,44 +111,7 @@
                     success : function(response) {
                         //console.log(response);
                         $('#src_tgl_realisasi').val(response.sysdate);
-
-
-                        for(i = 0; i < response.rekap_jaminan.length; i++ ){
-                            data += `<tr>
-                                        <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
-                                        <td>${response.rekap_jaminan[i]['no_rekening']}</td>
-                                        <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
-                                        <td>${response.rekap_jaminan[i]['jenis_jaminan']}</td>
-                                        <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
-                                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi'], '', 0, ',', '.')}</td>
-                                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['komisi_asuransi'], '', 0, ',', '.')}</td>
-                                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['premi_asuransi'], '', 0, ',', '.')}</td>
-                                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['sisa_titipan_asuransi'], '', 0, ',', '.')}</td>
-                                        <td>${response.rekap_jaminan[i]['status_cover']}</td>
-                                        <td>        
-                                            <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
-                                                    data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
-                                                    data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
-                                                    data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
-                                                    data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
-                                                    data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
-                                                    'name="btn_proses">
-                                                    <i class="fa fa-pen"></i> </button>
-                                        </td>
-                                    </tr>`;
-                        }
-                        $('#tbl_cover_asuransi > tbody:first').html(data);
-                    
-                        $(document).ready(function() {
-                            $('#tbl_cover_asuransi').DataTable( {
-                                "destroy": true,
-                                "scrollX": true,
-                                "autoWidth" : false,
-                                "searching": false,
-                                "aaSorting" : []
-                            } );
-                        } );
-                        $('#loading').hide();  
+                        mapping_search(response);
                         
                     },
                     error : function(response) {
@@ -144,6 +128,7 @@
                     url : base_url + "Asuransi/Cover_asuransi_controller/get_data_detail",
                     type : "POST",
                     dataType : "json",
+                    timeout : 240000,
                     headers: {
                                 'Authorization': 'Bearer ' + localStorage.getItem('token')
                             },
@@ -228,6 +213,7 @@
                     url : base_url + "Asuransi/Cover_asuransi_controller/cover_jaminan_process",
                     type : "POST",
                     dataType : "json",
+                    timeout : 180000,
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
                     data:{  "data_okupasi_jaminan" : data_okupasi_jaminan,
                             "premi_jaminan"        : premi_jaminan,
@@ -290,6 +276,7 @@
         $.ajax({
             url: base_url + "Asuransi/Cover_asuransi_controller/cover_jiwa_process",
             type:"POST",
+            timeout : 240000,
             data:fd,
             processData:false,
             contentType:false,
@@ -318,5 +305,102 @@
             }
         });
    }
+
+   function search_periode(){
+        data = '';
+        src_tgl_realisasi = $('#src_tgl_realisasi').val();
+
+        $('#tbl_cover_asuransi').DataTable().clear();
+        $('#tbl_cover_asuransi').DataTable().destroy();
+        $('#loading').show(); 
+        
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/search_periode",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "src_tgl_realisasi" : src_tgl_realisasi},
+
+                success : function(response) {
+                    mapping_search(response);
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    alert('Gagal Get Data, Tidak Ada Data / Mohon Coba Kembali Beberapa Saat Lagi');
+                    $('#loading').hide();
+                }
+        });    
+   }
+
+   function search(){
+        data = '';
+        src_search = $('#src_search').val();
+        $('#tbl_cover_asuransi').DataTable().clear();
+        $('#tbl_cover_asuransi').DataTable().destroy();
+        $('#loading').show(); 
+        
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/search",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "src_search" : src_search},
+
+                success : function(response) {
+                    mapping_search(response);
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    alert('Gagal Get Data, Tidak Ada Data / Mohon Coba Kembali Beberapa Saat Lagi');
+                    $('#loading').hide();
+                }
+        });    
+       
+   }
     
+    function mapping_search(response){
+        for(i = 0; i < response.rekap_jaminan.length; i++ ){
+            data += `<tr>
+                        <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
+                        <td>${response.rekap_jaminan[i]['no_rekening']}</td>
+                        <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
+                        <td>${response.rekap_jaminan[i]['jenis_jaminan']}</td>
+                        <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['komisi_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['premi_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['sisa_titipan_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${response.rekap_jaminan[i]['status_cover']}</td>
+                        <td>        
+                            <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
+                                    data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
+                                    data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
+                                    data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
+                                    data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
+                                    data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
+                                    'name="btn_proses">
+                                    <i class="fa fa-pen"></i> </button>
+                        </td>
+                    </tr>`;
+        }
+        $('#tbl_cover_asuransi > tbody:first').html(data);
+        
+        $(document).ready(function() {
+            $('#tbl_cover_asuransi').DataTable( {
+                "destroy": true,
+                "scrollX": true,
+                "autoWidth" : false,
+                "searching": false,
+                "aaSorting" : []
+            } );
+        } );
+        $('#loading').hide(); 
+    }
+
 </script>
