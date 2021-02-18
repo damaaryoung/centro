@@ -184,7 +184,7 @@ class Cover_asuransi_model extends CI_Model{
 	}
 	public function export_cover($periode,$jenis){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
-		$str    = "SELECT DISTINCT 
+		$str    = "SELECT 
 		                  AC.`no_rekening` as `no_rekening`,
 		                  '' AS `code`,
 		                  SA.`cif` as `cif`,
@@ -219,7 +219,8 @@ class Cover_asuransi_model extends CI_Model{
 				    LEFT JOIN kre_kode_asuransi KKA 
 				      ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
 				    LEFT JOIN slik_agunan SA 
-				      ON SA.`no_rekening` = AC.`no_rekening` 
+				      ON SA.`no_rekening` = AC.`no_rekening`
+					  AND SA.`kode_register_agunan` = AC.`agunan_id` 
 				    LEFT JOIN css_kode_jenis_identitas CKJI 
 				      ON CKJI.`jenis_id` = n.`JENIS_ID` 
 				    LEFT JOIN css_kode_dati CKD 
