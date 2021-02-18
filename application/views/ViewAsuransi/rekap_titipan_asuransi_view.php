@@ -84,15 +84,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <!-- Data Tables -->
-          <div class="card ">
+          <div class="card card-danger">
                   <div class="card-header">
                     <h3 class="card-title"></h3>
                     <div class="row">
-                        <div class="col-md-12 mx-auto">
+                      <!--  <div class="col-md-12 mx-auto">
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-success btn-sm" style="width: 250px;"  id="btn_tambah"><i class="fas fa-file-export"></i> Export To Excel</button>
                                     </div>
-                        </div>
+                        </div> -->
                     </div>
                   </div>
                   <!-- /.card-header -->
@@ -157,6 +157,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
 	?>
 <?php $this->view('ViewAsuransi/js/rekap_titipan_asuransi_js.php'); ?>
+<script src="<?php echo base_url('assets/dist/js/accounting.min.js')?>"></script>
 <style>
               /* Important part */
               .modal-dialog{

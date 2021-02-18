@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Horizontal Form -->
           <div class="card card-info">
             <div class="card-header with-border">
-              <h3 class="card-title"></h3>
+              <h3 class="card-title">FILTER</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body text-center">  
@@ -83,15 +83,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- From card Atas -->
           
           <!-- Data Tables -->
-          <div class="card">
+          <div class="card card-danger">
                   <div class="card-header">
-                    <h3 class="card-title"></h3>
+                    <h3 class="card-title">DATA POLIS ASURANSI JAMINAN</h3>
                     <div class="row">
-                        <div class="col-md-12 mx-auto">
+                      <!--   <div class="col-md-12 mx-auto">
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-success btn-sm" style="width: 250px;" id="btn_export_report_polis_asuransi" data-toggle="modal" data-target="#modal_data_polis_asuransi"><i class="fas fa-file-export"></i> Export Report Cover Asuransi</button>
                                     </div>
-                        </div>
+                             </div> -->
                     </div>
                   </div>
                   <!-- /.card-header -->

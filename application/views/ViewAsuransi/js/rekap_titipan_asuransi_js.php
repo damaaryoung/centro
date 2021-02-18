@@ -11,10 +11,7 @@
     var src_tgl_realisasi = '';
     var src_search        = '';
 
-    $(document).ready(function () {     
-       
-        
-            
+    $(document).ready(function () {   
             if(menu_kode == '1'){
                 get_data_url = base_url + "Asuransi/Rekap_titipan_asuransi_controller/get_data_rekap_jaminan";
             } else if(menu_kode == '2'){
@@ -50,35 +47,8 @@
                             },
 
                     success : function(response) {
-                        console.log(response);
                         $('#src_tgl_realisasi').val(response.sysdate);
-
-
-                        for(i = 0; i < response.rekap_jaminan.length; i++ ){
-                            data += `<tr>
-                                        <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
-                                        <td>${response.rekap_jaminan[i]['no_rekening']}</td>
-                                        <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
-                                        <td>${response.rekap_jaminan[i]['jenis_jaminan']}</td>
-                                        <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
-                                        <td>${response.rekap_jaminan[i]['titipan_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['komisi_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['premi_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['sisa_titipan_asuransi']}</td>
-                                    </tr>`;
-                        }
-                        $('#tbl_rekap_titipan_asuransi > tbody:first').html(data);
-                    
-                        $(document).ready(function() {
-                            $('#tbl_rekap_titipan_asuransi').DataTable( {
-                                "destroy": true,
-                                "scrollX": true,
-                                "autoWidth" : false,
-                                "searching": false,
-                                "aaSorting" : []
-                            } );
-                        } );
-                        $('#loading').hide();  
+                        mapping_get_data(response);
                         
                     },
                     error : function(response) {
@@ -87,9 +57,6 @@
                         $('#loading').hide();
                     }
             });    
-       
-
-
     }
 
     function search_tanggal(){
@@ -111,34 +78,7 @@
                     data:{  "src_tgl_realisasi"         : src_tgl_realisasi},
 
                     success : function(response) {
-                        console.log(response); 
-
-                        for(i = 0; i < response.rekap_jaminan.length; i++ ){
-                            data += `<tr>
-                                        <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
-                                        <td>${response.rekap_jaminan[i]['no_rekening']}</td>
-                                        <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
-                                        <td>${response.rekap_jaminan[i]['jenis_jaminan']}</td>
-                                        <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
-                                        <td>${response.rekap_jaminan[i]['titipan_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['komisi_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['premi_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['sisa_titipan_asuransi']}</td>
-                                    </tr>`;
-                        }
-                        $('#tbl_rekap_titipan_asuransi > tbody:first').html(data);
-                    
-                        $(document).ready(function() {
-                            $('#tbl_rekap_titipan_asuransi').DataTable( {
-                                "destroy": true,
-                                "scrollX": true,
-                                "autoWidth" : false,
-                                "searching": false,
-                                "aaSorting" : []
-                            } );
-                        } );
-                        $('#loading').hide();  
-                        
+                        mapping_get_data(response);
                     },
                     error : function(response) {
                         console.log('failed :' + response);
@@ -165,34 +105,7 @@
                     data:{  "src_search"         : src_search},
 
                     success : function(response) {
-                        console.log(response); 
-
-                        for(i = 0; i < response.rekap_jaminan.length; i++ ){
-                            data += `<tr>
-                                        <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
-                                        <td>${response.rekap_jaminan[i]['no_rekening']}</td>
-                                        <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
-                                        <td>${response.rekap_jaminan[i]['jenis_jaminan']}</td>
-                                        <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
-                                        <td>${response.rekap_jaminan[i]['titipan_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['komisi_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['premi_asuransi']}</td>
-                                        <td>${response.rekap_jaminan[i]['sisa_titipan_asuransi']}</td>
-                                    </tr>`;
-                        }
-                        $('#tbl_rekap_titipan_asuransi > tbody:first').html(data);
-                    
-                        $(document).ready(function() {
-                            $('#tbl_rekap_titipan_asuransi').DataTable( {
-                                "destroy": true,
-                                "scrollX": true,
-                                "autoWidth" : false,
-                                "searching": false,
-                                "aaSorting" : []
-                            } );
-                        } );
-                        $('#loading').hide();  
-                        
+                        mapping_get_data(response);                        
                     },
                     error : function(response) {
                         console.log('failed :' + response);
@@ -200,6 +113,34 @@
                         $('#loading').hide();
                     }
             });    
+    }
+    function mapping_get_data(response){
+        
+        for(i = 0; i < response.rekap_jaminan.length; i++ ){
+            data += `<tr>
+                        <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
+                        <td>${response.rekap_jaminan[i]['no_rekening']}</td>
+                        <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
+                        <td>${response.rekap_jaminan[i]['jenis_jaminan']}</td>
+                        <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['komisi_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['premi_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['sisa_titipan_asuransi'], '', 0, ',', '.')}</td>
+                    </tr>`;
+        }
+        $('#tbl_rekap_titipan_asuransi > tbody:first').html(data);
+                    
+        $(document).ready(function() {
+            $('#tbl_rekap_titipan_asuransi').DataTable( {
+                "destroy": true,
+                "scrollX": true,
+                "autoWidth" : false,
+                "searching": false,
+                "aaSorting" : []
+            } );
+        } );
+        $('#loading').hide();                    
     }
     
     

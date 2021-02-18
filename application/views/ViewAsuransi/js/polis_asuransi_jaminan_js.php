@@ -17,6 +17,7 @@
     var modal_no_polis         = '';
     var src_periode            = '';
     var src_search             = '';
+    var modal_status_endorsement = '';
 
     $(document).ready(function () {     
         getData();
@@ -141,11 +142,10 @@
                         $('#modal_inp_asuransi').val(response.data_details[0]['DESKRIPSI_ASURANSI']); 
                         $("#modal_no_polis").val(response.data_details[0]['no_polis']);
 
-                        if(response.data_details[0]['status_endorsement'] != null){
+                        if(response.data_details[0]['status_endorsement'] == '1'){
                             document.getElementById("modal_status_endorsement").checked = true;
-                            $("#modal_status_endorsement").prop("disabled", true);
                         }else{
-                            $("#modal_status_endorsement").prop("disabled", !this.checked);
+                            document.getElementById("modal_status_endorsement").checked = false;
                         }
                         
                         
@@ -167,6 +167,11 @@
 
     function process_polis_jaminan(){
         modal_no_polis = $("#modal_no_polis").val();
+        if (document.getElementById('modal_status_endorsement').checked) {
+            modal_status_endorsement = '1';
+        } else {
+            modal_status_endorsement = '0';
+        }
         $('#loading-1').show();
         
         $.ajax({
@@ -175,8 +180,9 @@
             dataType : "json",
             timeout : 180000,
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
-            data:{  "modal_no_polis" : modal_no_polis,
-                    "rekening"       : rekening},
+            data:{  "modal_no_polis"           : modal_no_polis,
+                    "modal_status_endorsement" : modal_status_endorsement,
+                    "rekening"                 : rekening},
 
             success : function(response) {
                 $('#loading-1').hide();
@@ -271,13 +277,21 @@
     }
 
     function mapping_get_data(response){
+        var endorse = '';
         for(i = 0; i < response.rekap_jaminan.length; i++ ){
+            if(response.rekap_jaminan[i]['status_endorsement'] == '1'){
+                endorse = 'YA';
+            }else if(response.rekap_jaminan[i]['status_endorsement'] == '0'){
+                endorse = 'TIDAK';
+            }else{
+                endorse = '';
+            }
             data += `<tr>
                         <td>${response.rekap_jaminan[i]['no_polis']}</td>
                         <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
                         <td>${response.rekap_jaminan[i]['no_rekening']}</td>
                         <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
-                        <td>${response.rekap_jaminan[i]['status_endorsement']}</td>
+                        <td>${endorse}</td>
                         <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
                         <td>        
                             <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"

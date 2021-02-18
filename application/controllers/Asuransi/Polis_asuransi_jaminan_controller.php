@@ -52,11 +52,13 @@ class Polis_asuransi_jaminan_controller extends CI_Controller {
 	}
 
 	public function polis_jaminan_process(){
-		$modal_no_polis     = $this->input->post('modal_no_polis');
-		$rekening           = $this->input->post('rekening');
-		$jenis_asuransi = 'JAMINAN';
+		$modal_no_polis            = $this->input->post('modal_no_polis');
+		$modal_status_endorsement  = $this->input->post('modal_status_endorsement');
+		$rekening                  = $this->input->post('rekening');
+		$jenis_asuransi            = 'JAMINAN';
+		$userID                = $this->session->userdata('nik');
 
-		$proses = $this->Polis_asuransi_jaminan_model->polis_jaminan_process($modal_no_polis,$rekening,$jenis_asuransi);
+		$proses = $this->Polis_asuransi_jaminan_model->polis_jaminan_process($modal_no_polis,$modal_status_endorsement,$rekening,$jenis_asuransi, $userID);
 		
 		
 		$data['proses']       = $proses;

@@ -52,10 +52,11 @@ class Polis_asuransi_jiwa_controller extends CI_Controller {
 	}
 	public function polis_jiwa_process(){
 		$modal_no_polis     = $this->input->post('modal_no_polis');
+		$modal_status_endorsement  = $this->input->post('modal_status_endorsement');
 		$rekening           = $this->input->post('rekening');
 		$jenis_asuransi = 'JIWA';
-
-		$proses = $this->Polis_asuransi_jiwa_model->polis_jiwa_process($modal_no_polis,$rekening,$jenis_asuransi);
+		$userID                = $this->session->userdata('nik');
+		$proses = $this->Polis_asuransi_jiwa_model->polis_jiwa_process($modal_no_polis,$modal_status_endorsement,$rekening,$jenis_asuransi,$userID);
 		
 		
 		$data['proses']       = $proses;

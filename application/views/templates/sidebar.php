@@ -169,7 +169,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
                 <p>
-                  Form Asuransi
+                  Form Asuransi Jaminan
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -184,14 +184,6 @@
                 <?php }?>
                 <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Rekap Titipan Asuransi Jiwa</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
                     <a href="<?php echo base_url(); ?>cover_asuransi_jaminan" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Pengcoveran Asuransi Jaminan</p>
@@ -200,17 +192,37 @@
                 <?php }?>
                 <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>cover_asuransi_jiwa" class="nav-link">
+                    <a href="<?php echo base_url(); ?>polis_asuransi_jaminan" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Pengcoveran Asuransi Jiwa</p>
+                      <p>Polis Asuransi Jaminan</p>
+                    </a>
+                  </li>
+                <?php }?>
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
+                <p>
+                  Form Asuransi Jiwa
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Rekap Titipan Asuransi Jiwa</p>
                     </a>
                   </li>
                 <?php }?>
                 <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>polis_asuransi_jaminan" class="nav-link">
+                    <a href="<?php echo base_url(); ?>cover_asuransi_jiwa" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Polis Asuransi Jaminan</p>
+                      <p>Pengcoveran Asuransi Jiwa</p>
                     </a>
                   </li>
                 <?php }?>

@@ -17,13 +17,11 @@
     var modal_extra_premi_jiwa = '';
     var src_tgl_realisasi      = '';
     var src_search             = '';
-
+    var periode = '';
 
     $(document).ready(function () {     
        
             bsCustomFileInput.init();
-
-        
             $('.select2').select2();
             if(menu_kode == '1'){
                 get_data_url = base_url + "Asuransi/Cover_asuransi_controller/get_data_rekap_jaminan";
@@ -88,6 +86,10 @@
     $('#btn_refresh').click(function(event) {
         getData();
     }); 
+    $('#btn_export_report_cover_asuransi').click(function() {
+        export_to_excel();
+    }); 
+    
   
 
 
@@ -99,27 +101,31 @@
         $('#tbl_cover_asuransi').DataTable().destroy();
         $('#loading').show(); 
         
-            $.ajax({
-                    url : get_data_url,
-                    type : "POST",
-                    dataType : "json",
-                    timeout : 180000,
-                    headers: {
-                                'Authorization': 'Bearer ' + localStorage.getItem('token')
-                            },
+        $.ajax({
+                url : get_data_url,
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
 
-                    success : function(response) {
-                        //console.log(response);
-                        $('#src_tgl_realisasi').val(response.sysdate);
-                        mapping_search(response);
-                        
-                    },
-                    error : function(response) {
-                        console.log('failed :' + response);
-                        alert('Gagal Get Data, Tidak Ada Data / Mohon Coba Kembali Beberapa Saat Lagi');
-                        $('#loading').hide();
-                    }
-            });    
+                success : function(response) {
+                    //console.log(response);
+                    $('#src_tgl_realisasi').val(response.sysdate);
+                    mapping_search(response);
+                    
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
     }
 
     function get_details(){
@@ -201,8 +207,12 @@
                     },
                     error : function(response) {
                         console.log('failed :' + response);
-                        alert('Gagal Get Data, Tidak Ada Data / Mohon Coba Kembali Beberapa Saat Lagi');
                         $('#loading').hide();
+                        return Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal Get Data!',
+                                text: 'Mohon Periksa Jaringan Anda'
+                        });
                     }
             });    
        
@@ -238,8 +248,12 @@
                     },
                     error : function(response) {
                         console.log('failed :' + response);
-                        alert('Gagal Cover Jaminan, Mohon Periksa Jaringan Anda');
                         $('#loading-1').hide();
+                        return Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Get Data!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                        });
                     }
             });    
    }
@@ -300,8 +314,12 @@
             },
             error : function(response) {
                 console.log(response);
-                alert('Gagal Cover Jiwa');
                 $('#loading-1').hide();
+                return Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Get Data!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                        });
             }
         });
    }
@@ -329,8 +347,12 @@
                 },
                 error : function(response) {
                     console.log('failed :' + response);
-                    alert('Gagal Get Data, Tidak Ada Data / Mohon Coba Kembali Beberapa Saat Lagi');
                     $('#loading').hide();
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Get Data!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                        });
                 }
         });    
    }
@@ -357,14 +379,18 @@
                 },
                 error : function(response) {
                     console.log('failed :' + response);
-                    alert('Gagal Get Data, Tidak Ada Data / Mohon Coba Kembali Beberapa Saat Lagi');
                     $('#loading').hide();
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Get Data!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                        });
                 }
         });    
        
    }
     
-    function mapping_search(response){
+   function mapping_search(response){
         for(i = 0; i < response.rekap_jaminan.length; i++ ){
             data += `<tr>
                         <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
@@ -401,6 +427,46 @@
             } );
         } );
         $('#loading').hide(); 
-    }
+   }
+
+   function export_to_excel(){
+        $('#loading').show(); 
+        periode = $('#src_tgl_realisasi').val();
+        console.log(periode);
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/export",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                data:{  "periode" : periode},
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+
+                success : function(response) {
+                    console.log(response);
+                    $('#loading').hide(); 
+                    window.location.href = response.download;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Download Report Cover Asuransi',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+   }
+
+
 
 </script>

@@ -135,12 +135,15 @@ class Polis_asuransi_jiwa_model extends CI_Model{
         $query  = $this->db2->query($str);
 		return $query->result_array();
 	}
-    public function polis_jiwa_process($modal_no_polis,$rekening,$jenis_asuransi){
+    public function polis_jiwa_process($modal_no_polis,$modal_status_endorsement,$rekening,$jenis_asuransi,$userID){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		
 		$this->db2->trans_start();
 		$this->db2->query("UPDATE ASURANSI_COVER AC
-							SET AC.`no_polis`  = '$modal_no_polis'
+							SET AC.`no_polis`  = '$modal_no_polis',
+								AC.`status_endorsement` = '$modal_status_endorsement',
+								AC.`last_update`    = NOW(),
+								AC.`last_update_by` = '$userID'
 							WHERE AC.`no_rekening`  = '$rekening'
 							AND AC.`jenis_asuransi` = 'JIWA';");
 		$this->db2->trans_complete();
