@@ -1808,12 +1808,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             var disabled_edit = "";
                         }
                         var plafon = (rubah(item.plafon));
+                        ///perbaikan created at tidak ada dari API///
+                        if( item.tanggal_selesai.length > 0){
+                            var new_tgl_Selesai = item.tanggal_selesai[0].created_at;
+                        }else{
+                            var new_tgl_Selesai = '';
+                        }
+                        ///perbaikan created at tidak ada dari API///
                         var tr = [
                             '<tr>',
                             '<td title="Detail" class="details-control" data="' + item.trans_so + '"></td>',
                             '<td>' + item.status_kredit + '</td>',
                             '<td>' + item.created_at + '</td>',
-                            '<td>' + item.tanggal_selesai[0].created_at + '</td>',
+                            '<td>' + new_tgl_Selesai + '</td>',
                             '<td>' + item.nomor_so + '</td>',
                             '<td>' + item.nama_so + '</td>',
                             '<td>' + item.request_by + '</td>',
