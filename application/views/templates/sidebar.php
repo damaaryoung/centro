@@ -165,6 +165,7 @@
           <!-- END MENU CREDIT CHECKING -->
 
           <!-- START MENU ASURANSI -->
+          <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
           <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
@@ -216,7 +217,8 @@
                 <?php }?>
               </ul>
             </li>
-
+            <?php }?>
+            <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
@@ -276,7 +278,7 @@
                 <?php }?>
               </ul>
             </li>
-
+            <?php }?>
           <!-- END MENU ASURANSI -->
 
 
