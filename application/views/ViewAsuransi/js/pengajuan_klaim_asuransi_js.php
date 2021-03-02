@@ -23,12 +23,8 @@ var modal_jenis_klaim_jiwa   = '';
         
         bsCustomFileInput.init();
         $('.select2').select2();
-        
-        
-        
         $('#src_kode_kantor').append('<option value="' + kd_kantor_user + '" selected>'+ kd_kantor_user +'</option>');
         
-
         if(menu_kode == '1'){
             $('#loading-1').hide();
             get_data_jaminan();
@@ -148,6 +144,14 @@ var modal_jenis_klaim_jiwa   = '';
             get_data_jiwa();
         }
     });
+    $('#table_body_pengajuan_klaim_jaminan').on('click','.btn_update_jiwa', function () {    
+        rekening         = $(this).data("rekening");
+        jenis            = $(this).data("jenis");
+        no_reff_asuransi = $(this).data("noreff-asuransi");
+        no_transaksi     = $(this).data("no-trans");
+        get_data_update_jiwa(rekening,jenis,no_reff_asuransi,no_transaksi);
+           
+    });
     
     ///END PENGAJUAN KLAIM JIWA ///
 
@@ -212,11 +216,11 @@ var modal_jenis_klaim_jiwa   = '';
                     
                 }
         });    
-    }
+    }   
     function mapping_get_data(response){
-        
-        for(i = 0; i < response.klaim_jaminan.length; i++ ){
-            data += `<tr style="text-align: center;">
+        if(menu_kode == '1'){
+            for(i = 0; i < response.klaim_jaminan.length; i++ ){
+                data += `<tr style="text-align: center;">
                         <td>${response.klaim_jaminan[i]['TGL_REALISASI']}</td>
                         <td>${response.klaim_jaminan[i]['no_rekening']}</td>
                         <td>${response.klaim_jaminan[i]['NAMA_NASABAH']}</td>
@@ -242,7 +246,40 @@ var modal_jenis_klaim_jiwa   = '';
                                     <i class="fa fa-trash"></i> </button>
                         </td>
                     </tr>`;
+            }
+
+        }else if(menu_kode == '2'){
+            for(i = 0; i < response.klaim_jaminan.length; i++ ){
+                data += `<tr style="text-align: center;">
+                        <td>${response.klaim_jaminan[i]['TGL_REALISASI']}</td>
+                        <td>${response.klaim_jaminan[i]['no_rekening']}</td>
+                        <td>${response.klaim_jaminan[i]['NAMA_NASABAH']}</td>
+                        <td>${response.klaim_jaminan[i]['jenis_jaminan']}</td>
+                        <td>${response.klaim_jaminan[i]['jenis_klaim']}</td>
+                        <td>${response.klaim_jaminan[i]['status_klaim']}</td>
+                        <td>        
+                            <button type="button" class="btn btn-primary btn-sm btn_update_jiwa" id="btn_update_jiwa"
+                                    data-rekening="${response.klaim_jaminan[i]['no_rekening']}"
+                                    data-jenis="${response.klaim_jaminan[i]['jenis_asuransi']}"  
+                                    data-noreff-asuransi="${response.klaim_jaminan[i]['no_reff_asuransi']}"  
+                                    data-status="${response.klaim_jaminan[i]['status_klaim']}" 
+                                    data-no-trans="${response.klaim_jaminan[i]['no_transaksi']}" 
+                                    'name="btn_update_jiwa">
+                                    <i class="fa fa-pen"></i> </button>
+                            <button type="button" class="btn btn-danger btn-sm btn_delete_jaminan" id="btn_delete_jaminan"
+                                    data-rekening="${response.klaim_jaminan[i]['no_rekening']}"
+                                    data-jenis="${response.klaim_jaminan[i]['jenis_asuransi']}"  
+                                    data-noreff-asuransi="${response.klaim_jaminan[i]['no_reff_asuransi']}"  
+                                    data-status="${response.klaim_jaminan[i]['status_klaim']}" 
+                                    data-no-trans="${response.klaim_jaminan[i]['no_transaksi']}" 
+                                    'name="btn_delete_jaminan">
+                                    <i class="fa fa-trash"></i> </button>
+                        </td>
+                    </tr>`;
+            }
+
         }
+        
         $('#tbl_pengajuan_klaim_jaminan > tbody:first').html(data);
                     
         $(document).ready(function() {
@@ -256,6 +293,7 @@ var modal_jenis_klaim_jiwa   = '';
         } );
         $('#loading').hide();                    
     }
+
 
     /// PENGAJUAN KLAIM JAMINAN ///
     function get_data_jaminan(){
@@ -560,7 +598,6 @@ var modal_jenis_klaim_jiwa   = '';
         
     }
     
-    
     function close_jaminan(){
         clear_modal_jaminan();
         $('#modal_pengajuan_klaim_jaminan').modal('hide');
@@ -797,7 +834,6 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_premi_jiwa').val('');
         $('#modal_kantor_jiwa').val('');
         $('#modal_reff_asuransi_jiwa').val('');
-        
     }
     function mapping_modal_jiwa(response){
         $('#loading-2').hide();
@@ -815,8 +851,47 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_kantor_jiwa').val(response.data_details[0]['nama_kantor']);
         $('#modal_reff_asuransi_jiwa').val(response.data_details[0]['no_reff_asuransi']);
     }
-    
+    function get_data_update_jiwa(rekening,jenis,no_reff_asuransi,no_transaksi){
+        $('#loading').show();
+        $.ajax({
+                url : base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/get_data_update",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "rekening" : rekening,
+                        "jenis" : jenis,
+                        "no_reff_asuransi" : no_reff_asuransi,
+                        "no_transaksi" : no_transaksi},
 
+                success : function(response) {
+                    $('#loading').hide();
+                    console.log(response);
+                    $('#modal_pengajuan_klaim_jaminan_update').modal('show');
+                    // if(response.data_details.length == 0){
+                    //     $('#loading-1').hide();
+                    //     clear_modal_jaminan();
+                    //     return Swal.fire({
+                    //         icon: 'error',
+                    //         title: 'Data Tidak Ditemukan!',
+                    //         text: 'Mohon Periksa Kembali Nomor Rekening/Nomor Polis Nasabah'
+                    //     });
+                    // }
+                    mapping_modal_jaminan_update(response)
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading-1').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+    }
 
     /// END PENGAJUAN KLAIM JIWA ///
 

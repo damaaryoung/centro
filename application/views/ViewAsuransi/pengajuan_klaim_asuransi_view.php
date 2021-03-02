@@ -623,6 +623,157 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.modal-dialog -->
           </div>
 
+          <div class="modal fade" id="modal_pengajuan_klaim_jiwa_update">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Pengajuan Klaim Asuransi Jiwa</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick="close_jiwa()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <div id="loading-4">
+                    <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+                  </div>
+                </div>
+                <div class="modal-body">   
+                <div class="row">
+                              <!-- form atas -->
+                              <div class="col-md-12 mx-auto">
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_rek_jiwa_update">Nomor Rekening</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                      <input type="text" class="form-control form-control-sm" id="modal_rek_jiwa_update" name="modal_rek_jiwa_update" readonly>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_polis_jiwa_update">Nomor Polis</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                      <input type="text" class="form-control form-control-sm" id="modal_polis_jiwa_update" name="modal_polis_jiwa_update" readonly>
+                                                      <input type="hidden" class="form-control form-control-sm" id="modal_reff_asuransi_jiwa_update" name="modal_reff_asuransi_jiwa_update" readonly>
+                                                  </div>
+                                  </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_nama_asuransi_jiwa_update">Nama Asuransi</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_nama_asuransi_jiwa_update" name="modal_nama_asuransi_jiwa_update" readonly>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_tgl_realisasi_jiwa_update">Tanggal Realisasi</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_tgl_realisasi_jiwa_update" name="modal_tgl_realisasi_jiwa_update" readonly>
+                                                  </div>
+                                                  
+                                  </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_nama_nasabah_jiwa_update">Nama Nasabah</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_nama_nasabah_jiwa_update" name="modal_nama_nasabah_jiwa_update" readonly>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_tempat_lahir_update">Tempat Lahir</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_tempat_lahir_update" name="modal_tempat_lahir_update" readonly>
+                                                  </div>
+                                                  
+                                  </div>
+                                  
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_tgl_lahir_jiwa_update">Tgl Lahir</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_tgl_lahir_jiwa_update" name="modal_tgl_lahir_jiwa_update" readonly>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_no_telepon_jiwa_update">No Telepon</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_no_telepon_jiwa_update" name="modal_no_telepon_jiwa_update" readonly>
+                                                  </div>
+                                                  
+                                  </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-6">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa"></label>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Alamat</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <textarea style="height: 150px;" type="text" class="form-control" id="modal_alamat_jiwa_update" name="modal_alamat_jiwa_update" readonly></textarea>
+                                                  </div>
+                                                  
+                                  </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_pertanggungan_jiwa_update">Pertanggungan</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_pertanggungan_jiwa_update" name="modal_pertanggungan_jiwa_update" readonly>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jiwa_update">Premi</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jiwa_update" name="modal_premi_jiwa_update" readonly>
+                                                  </div>
+                                                  
+                                  </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jiwa_update">Kantor Cabang</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_kantor_jiwa_update" name="modal_kantor_jiwa_update" readonly>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_jenis_klaim_jiwa_update">Jenis Klaim</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jiwa_update" name="modal_jenis_klaim_jiwa_update">
+                                                  </div>
+                                  </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_jenis_jaminan_update">Attachment</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                      <div class="custom-file">
+                                                        <input type="file" class="custom-file-input form-control form-control-sm" id="modal_upload_jiwa_update">
+                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                      </div>
+                                                    </div>
+                                                  </div>                                                  
+                                  </div>
+                                  
+                              </div>
+                </div>
+
+
+
+
+
+                </div>
+                <!-- /.modal-body -->
+                <div class="modal-footer text-center" style="margin: 0 auto;">
+                  <button type="button" class="btn btn-danger" onclick="close_jiwa()">Close</button>
+                  <button type="button" class="btn btn-primary" id="btn_simpan_modal_jiwa">Save changes</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
           <!-- END MODAL UPDATE -->
           
           
