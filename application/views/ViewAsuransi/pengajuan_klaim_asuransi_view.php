@@ -604,7 +604,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                   </div>
                                                   <div class="col-sm-2">
                                                       <label style="padding-top: 5px;" class="control-label">
-                                                        <i class="fas fa-file"></i> <a href="https://www.w3schools.com" id="attachment_jaminan_update" target="_blank">File Upload</a>
+                                                        <i class="fas fa-file"></i> <a href="" id="attachment_jaminan_update" target="_blank">File Upload</a>
                                                       </label>
                                                   </div>
                                   </div>
@@ -628,7 +628,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="modal-content">
                 <div class="modal-header">
                   <h4 class="modal-title">Pengajuan Klaim Asuransi Jiwa</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick="close_jiwa()">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick="close_jiwa_update()">
                     <span aria-hidden="true">&times;</span>
                   </button>
                   <div id="loading-4">
@@ -652,6 +652,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                   <div class="col-sm-4">
                                                       <input type="text" class="form-control form-control-sm" id="modal_polis_jiwa_update" name="modal_polis_jiwa_update" readonly>
                                                       <input type="hidden" class="form-control form-control-sm" id="modal_reff_asuransi_jiwa_update" name="modal_reff_asuransi_jiwa_update" readonly>
+                                                      <input type="hidden" class="form-control form-control-sm" id="modal_jenis_asuransi_jiwa_update" name="modal_jenis_asuransi_jiwa_update" readonly>
+                                                      <input type="hidden" class="form-control form-control-sm" id="modal_no_transaksi_jiwa_update" name="modal_no_transaksi_jiwa_update" readonly>
                                                   </div>
                                   </div>
                                   <div class="form-group row">
@@ -754,6 +756,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                   </div>                                                  
                                   </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan_update">File Attachment</label>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label style="padding-top: 5px;" class="control-label">
+                                                        <i class="fas fa-file"></i> <a href="" id="attachment_jiwa_update" target="_blank">File Upload</a>
+                                                      </label>
+                                                  </div>
+                                  </div>
                                   
                               </div>
                 </div>
@@ -765,8 +777,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.modal-body -->
                 <div class="modal-footer text-center" style="margin: 0 auto;">
-                  <button type="button" class="btn btn-danger" onclick="close_jiwa()">Close</button>
-                  <button type="button" class="btn btn-primary" id="btn_simpan_modal_jiwa">Save changes</button>
+                  <button type="button" class="btn btn-danger" onclick="close_jiwa_update()">Close</button>
+                  <button type="button" class="btn btn-primary" id="btn_simpan_modal_jiwa_update">Save changes</button>
                 </div>
               </div>
               <!-- /.modal-content -->

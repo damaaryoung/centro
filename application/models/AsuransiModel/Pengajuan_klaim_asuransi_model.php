@@ -250,7 +250,7 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
-  public function update_jaminan_without_upload($rek_update,$no_transaksi,$jenis_asuransi,$upload_update,$jenis_klaim,$userID){
+  public function update_without_upload($rek_update,$no_transaksi,$jenis_asuransi,$upload_update,$jenis_klaim,$userID){
     $this->db2 = $this->load->database('DB_CENTRO', true);
         $this->db2->trans_start();
         $this->db2->query("UPDATE asuransi_klaim AK
@@ -263,7 +263,7 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
         $this->db2->trans_complete();
         return 'sukses';
   }  
-  public function update_jaminan_with_upload($rek_update,
+  public function update_with_upload($rek_update,
                                               $no_transaksi,
                                               $jenis_asuransi,
                                               $jenis_klaim,

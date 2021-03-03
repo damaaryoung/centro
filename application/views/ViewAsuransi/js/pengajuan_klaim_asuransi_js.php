@@ -152,6 +152,35 @@ var modal_jenis_klaim_jiwa   = '';
         get_data_update_jiwa(rekening,jenis,no_reff_asuransi,no_transaksi);
            
     });
+    $('#btn_simpan_modal_jiwa_update').click(function () {
+         
+         if($('#modal_upload_jiwa_update')[0].files[0] == null){
+             
+             Swal.fire({
+                title: 'Anda Belum Memilih File Attachment Untuk Di Upload!',
+                text: "Lanjutkan ?",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Lanjutkan',
+                cancelButtonText: 'Batalkan',
+                showLoaderOnConfirm: true,
+                reverseButtons: true,
+                preConfirm: function() {
+                 return new Promise(function(resolve) {
+                     upload_update = '0';
+                     proses_update_jiwa(upload_update);
+     
+                 });
+                },
+                allowOutsideClick: false     
+             });
+          
+         }else{
+             upload_update = '1';
+             proses_update_jiwa(upload_update);
+         }
+     });
     
     ///END PENGAJUAN KLAIM JIWA ///
 
@@ -461,11 +490,17 @@ var modal_jenis_klaim_jiwa   = '';
                           Swal.fire({
                               position: 'center',
                               icon: 'success',
-                              title: 'Sukses Hapus Data Klaim Asuransi Jaminan',
+                              title: 'Sukses Hapus Data Klaim Asuransi',
                               showConfirmButton: false,
                               timer: 2000
                           }).then(()=> {
-                            get_data_jaminan();
+                            if(menu_kode == '1'){
+                                $('#loading-1').hide();
+                                get_data_jaminan();
+                            } else if(menu_kode == '2'){
+                                $('#loading-2').hide();
+                                get_data_jiwa();
+                            }
                           }); 
                           
                             
@@ -506,16 +541,7 @@ var modal_jenis_klaim_jiwa   = '';
                     $('#loading').hide();
                     console.log(response);
                     $('#modal_pengajuan_klaim_jaminan_update').modal('show');
-                    // if(response.data_details.length == 0){
-                    //     $('#loading-1').hide();
-                    //     clear_modal_jaminan();
-                    //     return Swal.fire({
-                    //         icon: 'error',
-                    //         title: 'Data Tidak Ditemukan!',
-                    //         text: 'Mohon Periksa Kembali Nomor Rekening/Nomor Polis Nasabah'
-                    //     });
-                    // }
-                    mapping_modal_jaminan_update(response)
+                    mapping_modal_jaminan_update(response);
                 },
                 error : function(response) {
                     console.log('failed :' + response);
@@ -701,7 +727,7 @@ var modal_jenis_klaim_jiwa   = '';
                 data:{  "src_kode_kantor" : src_kode_kantor},
                 success : function(response) {
                    console.log(response);
-                   mapping_get_data(response)
+                   mapping_get_data(response);
                 },
                 error : function(response) {
                     console.log('failed :' + response);
@@ -814,6 +840,39 @@ var modal_jenis_klaim_jiwa   = '';
             }
         });
     }
+    function get_data_update_jiwa(rekening,jenis,no_reff_asuransi,no_transaksi){
+        $('#loading').show();
+        $.ajax({
+                url : base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/get_data_update",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "rekening" : rekening,
+                        "jenis" : jenis,
+                        "no_reff_asuransi" : no_reff_asuransi,
+                        "no_transaksi" : no_transaksi},
+
+                success : function(response) {
+                    $('#loading').hide();
+                    console.log(response);
+                    $('#modal_pengajuan_klaim_jiwa_update').modal('show');
+                    mapping_modal_jiwa_update(response);
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading-1').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+    }
+
 
     function close_jiwa(){
         clear_modal_jiwa();
@@ -851,48 +910,121 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_kantor_jiwa').val(response.data_details[0]['nama_kantor']);
         $('#modal_reff_asuransi_jiwa').val(response.data_details[0]['no_reff_asuransi']);
     }
-    function get_data_update_jiwa(rekening,jenis,no_reff_asuransi,no_transaksi){
-        $('#loading').show();
-        $.ajax({
-                url : base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/get_data_update",
-                type : "POST",
-                dataType : "json",
-                timeout : 180000,
-                headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem('token')
-                        },
-                data:{  "rekening" : rekening,
-                        "jenis" : jenis,
-                        "no_reff_asuransi" : no_reff_asuransi,
-                        "no_transaksi" : no_transaksi},
+    function mapping_modal_jiwa_update(response){
+        $('#loading-4').hide();
+        $('#modal_rek_jiwa_update').val(response.data_details[0]['no_rekening']);
+        $('#modal_polis_jiwa_update').val(response.data_details[0]['no_polis']);
+        $('#modal_nama_asuransi_jiwa_update').val(response.data_details[0]['DESKRIPSI_ASURANSI']);
+        $('#modal_tgl_realisasi_jiwa_update').val(response.data_details[0]['TGL_REALISASI']);
+        $('#modal_nama_nasabah_jiwa_update').val(response.data_details[0]['NAMA_NASABAH']);
+        $('#modal_tempat_lahir_update').val(response.data_details[0]['TEMPATLAHIR']);
+        $('#modal_tgl_lahir_jiwa_update').val(response.data_details[0]['TGLLAHIR']);
+        $('#modal_no_telepon_jiwa_update').val(response.data_details[0]['TELPON']);
+        $('#modal_alamat_jiwa_update').val(response.data_details[0]['alamat_nasabah']);
+        $('#modal_pertanggungan_jiwa_update').val(accounting.formatMoney(response.data_details[0]['nilai_asuransi_jiwa'], '', 0, ',', '.'));
+        $('#modal_premi_jiwa_update').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.'));
+        $('#modal_kantor_jiwa_update').val(response.data_details[0]['nama_kantor']);
+        $('#modal_reff_asuransi_jiwa_update').val(response.data_details[0]['no_reff_asuransi']);
+        $('#modal_jenis_klaim_jiwa_update').val(response.data_details[0]['jenis_klaim']);
+        $('#modal_jenis_asuransi_jiwa_update').val(response.data_details[0]['jenis_asuransi']);
+        $('#modal_no_transaksi_jiwa_update').val(response.data_details[0]['no_transaksi']);
 
-                success : function(response) {
-                    $('#loading').hide();
-                    console.log(response);
-                    $('#modal_pengajuan_klaim_jaminan_update').modal('show');
-                    // if(response.data_details.length == 0){
-                    //     $('#loading-1').hide();
-                    //     clear_modal_jaminan();
-                    //     return Swal.fire({
-                    //         icon: 'error',
-                    //         title: 'Data Tidak Ditemukan!',
-                    //         text: 'Mohon Periksa Kembali Nomor Rekening/Nomor Polis Nasabah'
-                    //     });
-                    // }
-                    mapping_modal_jaminan_update(response)
-                },
-                error : function(response) {
-                    console.log('failed :' + response);
-                    $('#loading-1').hide();
-                    return Swal.fire({
-                        icon: 'error',
-                        title: 'Gagal Get Data!',
-                        text: 'Mohon Periksa Jaringan Anda'
-                    });
-                }
-        });    
+        document.getElementById("attachment_jiwa_update").href = response.data_details[0]['root_address'] + response.data_details[0]['path_file']; 
+
     }
+    function close_jiwa_update(){
+        clear_modal_jiwa_update();
+        $('#modal_pengajuan_klaim_jiwa_update').modal('hide');
+    }
+    function clear_modal_jiwa_update(){
+        $('#loading-4').hide();
+        $('#modal_rek_jiwa_update').val('');
+        $('#modal_polis_jiwa_update').val('');
+        $('#modal_nama_asuransi_jiwa_update').val('');
+        $('#modal_tgl_realisasi_jiwa_update').val('');
+        $('#modal_nama_nasabah_jiwa_update').val('');
+        $('#modal_tempat_lahir_update').val('');
+        $('#modal_tgl_lahir_jiwa_update').val('');
+        $('#modal_no_telepon_jiwa_update').val('');
+        $('#modal_alamat_jiwa_update').val('');
+        $('#modal_pertanggungan_jiwa_update').val('');
+        $('#modal_premi_jiwa_update').val('');
+        $('#modal_kantor_jiwa_update').val('');
+        $('#modal_reff_asuransi_jiwa_update').val('');
+        $('#modal_jenis_klaim_jiwa_update').val('');
+        $('#modal_jenis_asuransi_jiwa_update').val('');
+        $('#modal_no_transaksi_jiwa_update').val('');
 
+        document.getElementById("attachment_jiwa_update").href = '';
+    }
+    function proses_update_jiwa(upload_update){
+        var rek_update = $('#modal_rek_jiwa_update').val();
+        var no_transaksi = $('#modal_no_transaksi_jiwa_update').val();
+        var jenis_asuransi = $('#modal_jenis_asuransi_jiwa_update').val();
+        var jenis_klaim = $('#modal_jenis_klaim_jiwa_update').val();
+
+        if(upload_update == '0'){
+            var fd_up = new FormData();
+            fd_up.append('rek_update',rek_update);
+            fd_up.append('no_transaksi',no_transaksi);
+            fd_up.append('jenis_asuransi',jenis_asuransi);
+            fd_up.append('upload_update',upload_update);
+            fd_up.append('jenis_klaim',jenis_klaim);
+
+        }else if(upload_update == '1'){
+            var fd_up = new FormData();
+            let files = $('#modal_upload_jiwa_update')[0].files[0];
+
+            fd_up.append('files',files);
+            fd_up.append('rek_update',rek_update);
+            fd_up.append('no_transaksi',no_transaksi);
+            fd_up.append('jenis_asuransi',jenis_asuransi);
+            fd_up.append('upload_update',upload_update);
+            fd_up.append('jenis_klaim',jenis_klaim);
+
+        }
+
+        $('#loading-4').show();
+        $.ajax({
+            url: base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/update_process",
+            type:"POST",
+            timeout : 240000,
+            data:fd_up,
+            processData:false,
+            contentType:false,
+            cache:false,  
+            dataType: 'json',
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+            success : function(response) {
+                console.log(response);
+                    $('#loading-4').hide();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Update Pengajuan Klaim Asuransi Jiwa',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(()=> {
+                        close_jiwa_update();
+                        get_data_jiwa();
+                    });  
+                    
+            },
+            error : function(response) {
+                console.log(response);
+                $('#loading-4').hide();
+                close_jiwa_update();
+                return Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Update Pengajuan Klaim Asuransi Jiwa!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                });
+            }
+        });
+       
+        
+    }
+    
     /// END PENGAJUAN KLAIM JIWA ///
 
 </script>

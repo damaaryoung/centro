@@ -185,7 +185,7 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 		$userID             = $this->session->userdata('nik');
 
 		if($upload_update == '0'){
-			$update = $this->Pengajuan_klaim_asuransi_model->update_jaminan_without_upload($rek_update,$no_transaksi,$jenis_asuransi,$upload_update,$jenis_klaim,$userID);
+			$update = $this->Pengajuan_klaim_asuransi_model->update_without_upload($rek_update,$no_transaksi,$jenis_asuransi,$upload_update,$jenis_klaim,$userID);
 
 			$data['update'] = $update;
 			echo json_encode($data);
@@ -223,7 +223,7 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 					$data = $this->upload->data();
 					$namafileUpload = $data["file_name"];
 					$pathFile = "public_centro/$rek_update/klaim_asuransi_jaminan/$namafileUpload";
-					$data_details = $this->Pengajuan_klaim_asuransi_model->update_jaminan_with_upload($rek_update,
+					$data_details = $this->Pengajuan_klaim_asuransi_model->update_with_upload($rek_update,
 																									$no_transaksi,
 																									$jenis_asuransi,
 																									$jenis_klaim,

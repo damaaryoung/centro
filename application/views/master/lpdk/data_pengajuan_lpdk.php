@@ -4919,8 +4919,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 formData.append('nama_pas_sertifikat', $('input[name=edit_nama_pas_pemilik_sertifikat]', this).val());
                 formData.append('hub_cadeb', $('select[name=edit_hubungan_cadeb]', this).val());
                 formData.append('tgl_berlaku_shgb', $('input[name=edit_tgl_shgb]', this).val());
-                formData.append('status_sertifikat', $('input[type=radio][name="edit_status_hidup[]"]', this).val());
-                formData.append('status_pas_sertifikat', $('input[type=radio][name="edit_status_hidup_pas[]"]', this).val());
+                //formData.append('status_sertifikat', $('input[type=radio][name="edit_status_hidup[]"]', this).val());
+                //formData.append('status_pas_sertifikat', $('input[type=radio][name="edit_status_hidup_pas[]"]', this).val());
+                
+                //PERBAIKAN UPDATE STATUS HIDUP / MENINGGAL //
+                formData.append('status_sertifikat', $('input[name="edit_status_hidup[]"]:checked').val());
+                formData.append('status_pas_sertifikat', $('input[name="edit_status_hidup_pas[]"]:checked').val());
+                //END PERBAIKAN UPDATE STATUS HIDUP / MENINGGAL //
 
                 ubah_sertifikat(formData, id, id_so)
                     .done(function(res) {
