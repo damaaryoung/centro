@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CENTRO | BPR Kredit Mandriri</title>
+  <title>CENTRO | BPR Kredit Mandiri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
@@ -125,7 +125,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     ?>
                       <td>
                             <div>
-                                  <form method="post" action="<?php echo base_url("index.php/UserAccessController/revokeAksesUser")?>">
+                                  <form method="post" action="<?php echo base_url("UserAccessController/revokeAksesUser")?>">
                                       <button type="submit" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i></button>           
                                       <input type="hidden" name="user_access_id" value="<?php echo $user_access_id;?>">
                                       <input type="hidden" name="userId" id="userId" value="<?php echo $userId;?>"> 
@@ -155,7 +155,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- /.card-header -->
               <div class="card-body">
 
-              <form class="form-horizontal"  method="post" action="<?php echo base_url("index.php/UserAccessController/addUserAccess")?>">
+              <form class="form-horizontal"  method="post" action="<?php echo base_url("UserAccessController/addUserAccess")?>">
               <div class="box-body"> 
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Menu Access</label>
@@ -173,7 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <!-- /.box-body -->
               <div class="card-footer text-center">
-                <a href="<?php echo base_url(); ?>index.php/UserAccessController/index" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
+                <a href="<?php echo base_url(); ?>UserAccessController/index" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
                 <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
               </div>
               <!-- /.box-footer -->

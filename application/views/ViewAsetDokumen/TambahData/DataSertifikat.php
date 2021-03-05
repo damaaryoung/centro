@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CENTRO | BPR Kredit Mandriri</title>
+  <title>CENTRO | BPR Kredit Mandiri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
@@ -60,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="col-md-10 mx-auto">
                       <br><br>
                       <!-- MAIN FORM -->
-                          <form  method="post" action="<?php echo base_url("index.php/AsetDokumenEntryController/handleUserInputSertifikat")?>">
+                          <form  method="post" action="<?php echo base_url("AsetDokumenEntryController/handleUserInputSertifikat")?>">
                               <div class="form-group row">
                                   <div class="col-sm-2">
                                       <label class="control-label" style="padding-top: 5px;"  for="sertTglRegister">Tanggal Register</label>
@@ -1007,7 +1007,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
             <div class="card-footer text-center">
-                <a href="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
+                <a href="<?php echo base_url(); ?>AsetDokumenEntryController/displayTambahAsetDokumen" type="button" style="margin:5px;" class="btn btn-danger">Kembali</a>
                 <button type="submit" id='btnSubmit' style="margin:5px;" class="btn btn-info">Simpan</button>
             </div>
             </form>

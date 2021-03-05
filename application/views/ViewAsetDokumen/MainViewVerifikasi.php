@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CENTRO | BPR Kredit Mandriri</title>
+  <title>CENTRO | BPR Kredit Mandiri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
@@ -115,42 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </tr>
                 </thead>
                 <tbody id="bodyTableVerif">
-                <?php
-                            $idx = 1;
-                                foreach ($ListAssetVerifikasi as $row) :
-                                    // $idData = $row['id_data'];
-                                    $idx= 0;
-                                    echo "<tr>";
-                                    echo "<td>".$row['nomor']."</td>";
-                                    echo "<td>".$row['tgl']."</td>";
-                                    echo "<td>".$row['nama']."</td>";     
-                                    echo "<td>".$row['alamat']."</td>";
-                                    echo "<td>".$row['jenis_jaminan']."</td>";
-                                    echo "<td>".$row['status']."</td>";
-                                    echo "<td>".$row['kontrak_status']."</td>";
-                                    echo "<td>".$row['verifikasi']."</td>";
-                                
-                        ?>
-                        <td>
-                                <div>
-                                        <button type="button" class="btn btn-success btn-sm btnVerifikasi" style ='padding-left: 5px;'
-                                                data-nomor="<?= $row['nomor'] ?>"
-                                                data-noref="<?= $row['no_reff'] ?>" 
-                                                data-status="<?= $row['status'] ?>"
-                                                data-id="<?= $row['id'] ?>"
-                                                data-agunanid="<?= $row['agunan_id'] ?>"
-                                                name="btnVerifikasi"> 
-                                                <i style="padding-left: 5px;" class="fa fa-check"></i>
-                                        </button>
-
-                                    
-                                </div>
-                        </td>
-                        </tr>
-                        <?php
-                            $idx++;
-                            endforeach;
-                        ?>
+              
                 </tbody>
             </table>
             </div>
@@ -233,15 +198,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               }
 </style>
 <script>
-         $(document).ready(function() {
-            $('#employeeTable').DataTable( {
-                "scrollX": true,
-                "autoWidth" : true,
-                "searching": false,
-                "aaSorting" : []
-            } );
-        } );
-
         function openTab(evt, tabName) {
               var i, tabcontent, tablinks;
               tabcontent = document.getElementsByClassName("tabcontent");

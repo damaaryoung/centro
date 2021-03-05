@@ -135,24 +135,16 @@ class PemindahanInsertController extends CI_Controller {
 			$nomor = $kode_kantor . '.000001';
 		}
 
-		$this->PemindahanInsertModel->insertDataPemindahan($mainTanggal,
+		$test = $this->PemindahanInsertModel->insertDataPemindahan($mainTanggal,
 															$nomor,
 															$kode_kantor,
 															$kode_kantor_tujuan,
 															$mainKeterangan,
 															$userIdLogin,
 															$kode_lokasi_penyimpanan,
-															$verifikasi
-														  );
-
-		for($i = 0; $i < $lengthParsed; $i++){
-			$nomorReffDeatail = $parsedDataDetailArr[$i][0];
-			$agunanIdDetail   = $parsedDataDetailArr[$i][1];
-			
-			$this->PemindahanInsertModel->insertDataPemindahanDetail($nomor,$nomorReffDeatail,$agunanIdDetail);
-			
-		}
-	
+															$verifikasi,
+															$lengthParsed,
+															$parsedDataDetailArr);
 		echo json_encode($data);
 	}
 

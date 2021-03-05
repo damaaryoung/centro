@@ -24,7 +24,7 @@ function getData(){
     $('#loading').show(); 
 
     $.ajax({
-            url : base_url + "index.php/Request_Jaminan_Centro_Controller/getListRequest",
+            url : base_url + "Request_Jaminan_Centro_Controller/getListRequest",
             type : "POST",
             dataType : "json",
             headers: {
@@ -72,7 +72,7 @@ function searchData(){
     //console.log(search);
 
     $.ajax({
-            url : base_url + "index.php/Request_Jaminan_Centro_Controller/getListRequest",
+            url : base_url + "Request_Jaminan_Centro_Controller/getListRequest",
             type : "POST",
             dataType : "json",
             data : {"search" : search,
@@ -146,7 +146,7 @@ $('#table_body_request_jaminan').on('click','.btnDeleteRequestJaminan', function
     $('#loading').show();
     if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan Nomor " + nomor)) {
         $.ajax({
-            url : base_url + "index.php/Request_Jaminan_Centro_Controller/deleteDataPemindahanLokasi",
+            url : base_url + "Request_Jaminan_Centro_Controller/deleteDataPemindahanLokasi",
             type : "POST",
             dataType : "json",
             data : {"nomor"    : nomor,

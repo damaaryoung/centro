@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CENTRO | BPR Kredit Mandriri</title>
+  <title>CENTRO | BPR Kredit Mandiri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
@@ -4919,8 +4919,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 formData.append('nama_pas_sertifikat', $('input[name=edit_nama_pas_pemilik_sertifikat]', this).val());
                 formData.append('hub_cadeb', $('select[name=edit_hubungan_cadeb]', this).val());
                 formData.append('tgl_berlaku_shgb', $('input[name=edit_tgl_shgb]', this).val());
-                formData.append('status_sertifikat', $('input[type=radio][name="edit_status_hidup[]"]', this).val());
-                formData.append('status_pas_sertifikat', $('input[type=radio][name="edit_status_hidup_pas[]"]', this).val());
+                //formData.append('status_sertifikat', $('input[type=radio][name="edit_status_hidup[]"]', this).val());
+                //formData.append('status_pas_sertifikat', $('input[type=radio][name="edit_status_hidup_pas[]"]', this).val());
+                
+                //PERBAIKAN UPDATE STATUS HIDUP / MENINGGAL //
+                formData.append('status_sertifikat', $('input[name="edit_status_hidup[]"]:checked').val());
+                formData.append('status_pas_sertifikat', $('input[name="edit_status_hidup_pas[]"]:checked').val());
+                //END PERBAIKAN UPDATE STATUS HIDUP / MENINGGAL //
 
                 ubah_sertifikat(formData, id, id_so)
                     .done(function(res) {

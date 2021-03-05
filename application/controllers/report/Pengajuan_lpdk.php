@@ -64,9 +64,9 @@ class Pengajuan_lpdk extends CI_Controller
         //     $rows = 0;
         //     $data['row'] = $rows;
         // }
-        $agunan_tanah = $this->db->query("SELECT a.id,a.id_trans_so,a.no_sertifikat,a.nama_pemilik_sertifikat,b.status_sertifikat,a.tgl_berlaku_shgb,a.jenis_sertifikat
-        ,b.nama_pas_sertifikat,b.status_pas_sertifikat,b.hub_cadeb FROM agunan_tanah AS a LEFT JOIN lpdk_sertifikat AS b ON a.id_trans_so=b.trans_so 
-        WHERE a.id IN (SELECT id_agunan_tanah FROM  view_report_pengajuan_lpdk WHERE id_ao ='$id_ao' )");
+        $agunan_tanah = $this->db->query("SELECT b.trans_so AS id_trans_so, b.no_sertifikat,b.nama_sertifikat AS nama_pemilik_sertifikat,b.status_sertifikat,b.tgl_berlaku_shgb,b.jenis_sertifikat,
+        b.nama_pas_sertifikat,b.status_pas_sertifikat,b.hub_cadeb FROM lpdk_sertifikat AS b WHERE b.trans_so =(SELECT
+        id_trans_so FROM view_report_pengajuan_lpdk WHERE id_ao='$id_ao')");
         $data['agunan_tanah'] = $agunan_tanah;
 
         $footerHTML = '

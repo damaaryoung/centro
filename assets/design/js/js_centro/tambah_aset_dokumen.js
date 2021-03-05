@@ -36,7 +36,7 @@ function dataRekening(){
     $('#modalNomorRekening').modal('show');
     dataTableeee = [];
     $.ajax({
-            url : base_url + "index.php/AsetDokumenEntryController/getNomorRekening",
+            url : base_url + "AsetDokumenEntryController/getNomorRekening",
             type : "POST",
             dataType : "json",
             data : {"test"    : "test"},
@@ -73,7 +73,7 @@ function serchDataRekening(){
     $('#loading2').show(); 
 
     $.ajax({
-            url : base_url + "index.php/AsetDokumenEntryController/getDataSearchRekening",
+            url : base_url + "AsetDokumenEntryController/getDataSearchRekening",
             type : "POST",
             dataType : "json",
             data : {"search"    : search},
@@ -137,7 +137,7 @@ $(document).ready(function () {
 $('#delTempSert').click(function () {
     $('#loading').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenEntryController/deleteTempSert",
+        url : base_url + "AsetDokumenEntryController/deleteTempSert",
         type : "POST",
         dataType : "json",
         data : {"data"    : "data"},
@@ -145,13 +145,13 @@ $('#delTempSert').click(function () {
         success : function(response) {
             alert('Data Sukses Di Hapus');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahAsetDokumen';  
         },
         error : function(response) {
             alert('Data Gagal Di Hapus');
             console.log('failed :' + response);
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahAsetDokumen';
         }
     }); 
 });
@@ -159,7 +159,7 @@ $('#delTempSert').click(function () {
 $('#deleteTempBPKB').click(function () {
     $('#loading').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenEntryController/deleteTempBPKB",
+        url : base_url + "AsetDokumenEntryController/deleteTempBPKB",
         type : "POST",
         dataType : "json",
         data : {"data"    : "data"},
@@ -167,13 +167,13 @@ $('#deleteTempBPKB').click(function () {
         success : function(response) {
             alert('Data Sukses Di Hapus');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahAsetDokumen';  
         },
         error : function(response) {
             alert('Data Gagal Di Hapus');
             console.log('failed :' + response);
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahAsetDokumen';
         }
     }); 
 });
@@ -181,7 +181,7 @@ $('#deleteTempBPKB').click(function () {
 $('#delTempEmas').click(function () {
     $('#loading').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenEntryController/deleteTempEmas",
+        url : base_url + "AsetDokumenEntryController/deleteTempEmas",
         type : "POST",
         dataType : "json",
         data : {"data"    : "data"},
@@ -189,13 +189,13 @@ $('#delTempEmas').click(function () {
         success : function(response) {
             alert('Data Sukses Di Hapus');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';  
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahAsetDokumen';  
         },
         error : function(response) {
             alert('Data Gagal Di Hapus');
             console.log('failed :' + response);
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahAsetDokumen';
         }
     }); 
 });
@@ -216,7 +216,7 @@ $('#btnTambahBPKB').click(function () {
     
     $('#loading').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenEntryController/handleInputHeader",
+        url : base_url + "AsetDokumenEntryController/handleInputHeader",
         type : "POST",
         dataType : "json",
         data : {'mainAreaKerja'        :  mainAreaKerja,
@@ -232,12 +232,12 @@ $('#btnTambahBPKB').click(function () {
                 'mainTanggalRealisasi' :  mainTanggalRealisasi},
 
         success : function(response) {
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahDataBPKB';  
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahDataBPKB';  
         },
         error : function(response) {
             alert('Proses Gagal, Mohon Coba Lagi');
             console.log('failed :' + response);
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahAsetDokumen';
         }
     }); 
 });
@@ -256,7 +256,7 @@ $('#btnTambahSertif').click(function () {
     mainTanggalRealisasi =  $('#mainTanggalRealisasi').val();
     $('#loading').show();
     $.ajax({
-        url : base_url + "index.php/AsetDokumenEntryController/handleInputHeader",
+        url : base_url + "AsetDokumenEntryController/handleInputHeader",
         type : "POST",
         dataType : "json",
         data : {'mainAreaKerja'        :  mainAreaKerja,
@@ -272,13 +272,13 @@ $('#btnTambahSertif').click(function () {
                 'mainTanggalRealisasi' :  mainTanggalRealisasi},
 
         success : function(response) {
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahDataSertifikat';  
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahDataSertifikat';  
         },
         error : function(response) {
             console.log('failed :' + response);
             alert('Proses Gagal, Mohon Coba Lagi');
             $('#loading').hide();
-            window.location = base_url + 'index.php/AsetDokumenEntryController/displayTambahAsetDokumen';
+            window.location = base_url + 'AsetDokumenEntryController/displayTambahAsetDokumen';
         }
     }); 
 });

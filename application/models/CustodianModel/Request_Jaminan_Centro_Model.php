@@ -237,6 +237,25 @@ class Request_Jaminan_Centro_Model extends CI_Model{
 		$this->db2->trans_complete();
     }
 
+    public function getEmailCentro($kode_custodian){
+        $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+        $str = "SELECT GROUP_CONCAT(VALUE)  AS `email`
+                FROM parameter p1
+                WHERE id LIKE '%EMAIL_CENTRO_HEAD_$kode_custodian%'
+                OR id LIKE '%EMAIL_CENTRO_STAFF_$kode_custodian%';";
+        $query = $this->db2->query($str);
+        
+        $result = $query->result_array();
+        if($result[0]["email"] != null){
+            return $result[0]["email"];
+        }
+        if($result[0]["email"] == null){
+            $email = 'staf_tisupport@kreditmandiri.co.id';
+            return $email;
+        }
+        
+    }
+
 
 
     

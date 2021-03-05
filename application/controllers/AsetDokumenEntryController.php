@@ -146,7 +146,7 @@ class AsetDokumenEntryController extends CI_Controller {
 													<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
 												</button>
 
-												<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
+												<form method="post" target="_blank" style ="display:inline;" action="'.base_url("AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
 													<button type="submit" class="btn btn-info btn-sm btnCetaks" 
 															data-nomor="'. $row['nomor'] .'"
 															data-noref="'. $row['no_reff'] .'" 
@@ -1620,7 +1620,7 @@ class AsetDokumenEntryController extends CI_Controller {
 														<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
 													</button>
 	
-													<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
+													<form method="post" target="_blank" style ="display:inline;" action="'.base_url("AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
 														<button type="submit" class="btn btn-info btn-sm btnCetaks" 
 																data-nomor="'. $row['nomor'] .'"
 																data-noref="'. $row['no_reff'] .'" 
@@ -1774,7 +1774,7 @@ class AsetDokumenEntryController extends CI_Controller {
 														<i style ="padding-left: 5px;"  class="fas fa-file-import"></i>
 													</button>
 	
-													<form method="post" target="_blank" style ="display:inline;" action="'.base_url("index.php/AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
+													<form method="post" target="_blank" style ="display:inline;" action="'.base_url("AsetDokumenCetakController/cetakTransaksiAsetDokumen").'"> 
 														<button type="submit" class="btn btn-info btn-sm btnCetaks" 
 																data-nomor="'. $row['nomor'] .'"
 																data-noref="'. $row['no_reff'] .'" 

@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CENTRO | BPR Kredit Mandriri</title>
+  <title>CENTRO | BPR Kredit Mandiri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
@@ -111,7 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="card">
             <div class="card-header">
                 <?php  if( $this->session->userdata('menuAset') == '1'){ ?>
-                  <form method="get" action="<?php echo base_url(); ?>index.php/AsetDokumenEntryController/displayTambahAsetDokumen"> 
+                  <form method="get" action="<?php echo base_url(); ?>AsetDokumenEntryController/displayTambahAsetDokumen"> 
                       <button type="submit" class="btn btn-success btn-sm" style="width: 250px;"> <i class="fas fa-plus-circle"></i> Tambah </i></button> 
                   </form>
                 <?php }?>

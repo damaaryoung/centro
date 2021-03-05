@@ -14,7 +14,7 @@
  <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #9A0303;" >
     <!-- Brand Logo -->
-    <a href="<?php echo base_url(); ?>index.php/DashboardController/index" class="brand-link">
+    <a href="<?php echo base_url(); ?>dashboard" class="brand-link">
       <img src="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light"><b>CENTRO</b>&nbsp;SYSTEM</span>
@@ -57,9 +57,9 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-              <li class="nav-item">
               <?php  if($this->session->userdata('entry_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('user_access_group') == 'ok'){ ?>
-                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenViewAsetController/index" class="nav-link">
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>AsetDokumenViewAsetController/index" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>View Aset Dokumen</p>
                   </a>
@@ -73,21 +73,21 @@
                 </li>
              <?php } if($this->session->userdata('verifikasi_aset_dokumen') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('verifikasi_aset_dokumen_group') == 'ok'){ ?>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/AsetDokumenVerifikasiController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>verifikasi_aset_dokumen" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Verifikasi Aset Dokumen</p>
                   </a>
                 </li>
               <?php } if($this->session->userdata('pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('pemindahan_lokasi_group') == 'ok'){ ?>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/PemindahanJaminanMainController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>pemindahan_jaminan" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Pemindahan Lokasi</p>
                   </a>
                 </li>
               <?php } if($this->session->userdata('verifikasi_pemindahan_lokasi') == 'ok' || $this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('verifikasi_pemindahan_lokasi_group') == 'ok'){ ?>
                 <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>index.php/PemindahanVerifikasiController/index" class="nav-link">
+                  <a href="<?php echo base_url(); ?>verifikasi_pemindahan_jaminan" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Verifikasi Pemindahan Lokasi</p>
                   </a>
@@ -164,22 +164,123 @@
          
           <!-- END MENU CREDIT CHECKING -->
 
-          <!-- MENU CUSTODIAN -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT' ){ ?>
+          <!-- START MENU ASURANSI -->
+          <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+          <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
+                <p>
+                  Asuransi Jaminan
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+              <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jaminan" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Rekap Titipan Asuransi Jaminan</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>cover_asuransi_jaminan" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pengcoveran Asuransi Jaminan</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>polis_asuransi_jaminan" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Polis Asuransi Jaminan</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jaminan" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pengajuan Klaim Asuransi Jaminan</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>proses_klaim_asuransi" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Proses Klaim Asuransi Jaminan</p>
+                    </a>
+                  </li>
+                <?php }?>
+              </ul>
+            </li>
+            <?php }?>
+            <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-file-contract icon_color_sidebar"></i>
-                  <p>
-                    CUSTODIAN
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-             
-                </ul>
-            </li> 
-          <?php } else{} ?>
-          <!-- END MENU CUSTODIAN -->
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
+                <p>
+                  Asuransi Jiwa
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Rekap Titipan Asuransi Jiwa</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>cover_asuransi_jiwa" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pengcoveran Asuransi Jiwa</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>polis_asuransi_jiwa" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Polis Asuransi Jiwa</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jiwa" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pengajuan Klaim Asuransi Jiwa</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>proses_klaim_asuransi" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Proses Klaim Asuransi Jiwa</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>laporan_asuransi" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Laporan Asuransi</p>
+                    </a>
+                  </li>
+                <?php }?>
+              </ul>
+            </li>
+            <?php }?>
+          <!-- END MENU ASURANSI -->
+
 
           <!-- MENU BSS -->
           <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('divisi_id') == 'GA' || $this->session->userdata('divisi_id') == 'OPERASIONAL' || $this->session->userdata('BSS') == 'ok' || $this->session->userdata('BSS_group') == 'ok'){ ?>
@@ -193,8 +294,8 @@
             </li>   
           <?php } else{} ?>
           <!--- END MENU BSS -->
-
-          <!-- MENU BSS -->
+    
+          <!-- MENU EFILING -->
           <?php  if($this->session->userdata('divisi_id') == 'IT'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>e_filing" class="nav-link">
@@ -205,7 +306,7 @@
               </a>
             </li>   
           <?php } else{} ?>
-          <!--- END MENU BSS -->
+          <!--- END MENU EFILING -->
 
           <!-- START MENU USER ACCESS -->
           <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('user_access') == 'ok' || $this->session->userdata('user_access_group') == 'ok'){ ?>

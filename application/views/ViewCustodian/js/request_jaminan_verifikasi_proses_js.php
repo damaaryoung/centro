@@ -65,7 +65,7 @@ $(document).ready(function () {
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal Get Data, Mohon Coba Lagi');
-            window.location = base_url + 'index.php/PemindahanJaminanMainController/index';
+            window.location = base_url + 'PemindahanJaminanMainController/index';
         }
     });
     

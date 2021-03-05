@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CENTRO | BPR Kredit Mandriri</title>
+  <title>CENTRO | BPR Kredit Mandiri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -159,6 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <table id="tablePemindahanVerifikasiMain" class="table table-striped table-bordered display" style="width:100%">
                                             <thead>
                                                 <tr>
+                                                    <th style="width: 150px;">No.&nbsp;Centro</th>
                                                     <th>No.&nbsp;Reff</th>
                                                     <th>Agunan&nbsp;ID</th>
                                                     <th>Jenis</th>
@@ -167,6 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 </tr>
                                             </thead>
                                             <tbody  id="bodytablePemindahanVerifikasiMain">
+                                                    <td></td> 
                                                     <td></td> 
                                                     <td></td> 
                                                     <td></td> 

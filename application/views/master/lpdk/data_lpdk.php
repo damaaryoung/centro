@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CENTRO | BPR Kredit Mandriri</title>
+  <title>CENTRO | BPR Kredit Mandiri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
@@ -1808,12 +1808,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             var disabled_edit = "";
                         }
                         var plafon = (rubah(item.plafon));
+                        ///perbaikan created at tidak ada dari API///
+                        if( item.tanggal_selesai.length > 0){
+                            var new_tgl_Selesai = item.tanggal_selesai[0].created_at;
+                        }else{
+                            var new_tgl_Selesai = '';
+                        }
+                        ///perbaikan created at tidak ada dari API///
                         var tr = [
                             '<tr>',
                             '<td title="Detail" class="details-control" data="' + item.trans_so + '"></td>',
                             '<td>' + item.status_kredit + '</td>',
                             '<td>' + item.created_at + '</td>',
-                            '<td>' + item.tanggal_selesai[0].created_at + '</td>',
+                            '<td>' + new_tgl_Selesai + '</td>',
                             '<td>' + item.nomor_so + '</td>',
                             '<td>' + item.nama_so + '</td>',
                             '<td>' + item.request_by + '</td>',

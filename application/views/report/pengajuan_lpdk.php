@@ -146,7 +146,7 @@
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td><input type="radio" checked="checked">Masih Hidup<input type="radio">Meninggal Dunia</td>
+                                <td><input type="radio" checked="checked">' . $status_sertifikat1  . '</td>
                             </tr>
                             <tr>
                                 <td>Nama Pasangan Sertifikat</td>
@@ -156,7 +156,7 @@
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td><input type="radio" checked="checked" >Masih Hidup<input type="radio">Meninggal Dunia</td>
+                                <td><input type="radio" checked="checked" >' . $status_pas_sertifikat . '</td>
                             </tr>
                             <tr>
                                 <td>Hubungan Cadeb</td>

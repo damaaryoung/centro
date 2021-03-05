@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CENTRO | BPR Kredit Mandriri</title>
+  <title>CENTRO | BPR Kredit Mandiri</title>
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-4">
                                   <select class="form-control form-control-sm select2" id="kode_lokasi_penyimpanan" name="kode_lokasi_penyimpanan">
-                                          <option value="" selected disabled hidden>Silahkan Pilih</option>
+                                        <option value="0" selected disabled hidden>Silahkan Pilih</option>
                                         <?php foreach ($getCentro as $row) : ?>
                                           <option value="<?php echo $row['kode'];?>"><?php echo $row['kode'] .' - ' .$row['nama'];?></option>
                                         <?php endforeach;?>

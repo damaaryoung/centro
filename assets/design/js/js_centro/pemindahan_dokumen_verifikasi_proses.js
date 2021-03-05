@@ -22,7 +22,7 @@ $(document).ready(function () {
     $('#loading').show(); 
 
     $.ajax({
-        url : base_url + "index.php/PemindahanVerifikasiController/getDataDetail",
+        url : base_url + "PemindahanVerifikasiController/getDataDetail",
         type : "POST",
         dataType : "json",
         data : {"dataNomor" : dataNomor},
@@ -41,7 +41,7 @@ $(document).ready(function () {
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal Get Data, Mohon Coba Lagi');
-            window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
+            window.location = base_url + 'PemindahanVerifikasiController/index';
         }
     });
     
@@ -49,7 +49,7 @@ $(document).ready(function () {
 
 $('#btn_kembali_verifikasi_pemindahan_lokasi').click(function () {
     $('#loading').show();
-    window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
+    window.location = base_url + 'PemindahanVerifikasiController/index';
 });
 
 $('#btn_simpan_verifikasi_pemindahan_lokasi').click(function () {
@@ -71,7 +71,7 @@ $('#btn_simpan_verifikasi_pemindahan_lokasi').click(function () {
 
     $('#loading').show(); 
     $.ajax({
-        url : base_url + "index.php/PemindahanVerifikasiController/prosesVerifikasi",
+        url : base_url + "PemindahanVerifikasiController/prosesVerifikasi",
         type : "POST",
         dataType : "json",
         data : {"mainTanggal"             : mainTanggal,
@@ -86,13 +86,13 @@ $('#btn_simpan_verifikasi_pemindahan_lokasi').click(function () {
 
         success : function(response) {
             alert('Data Sukses di Verifikasi');   
-            window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
+            window.location = base_url + 'PemindahanVerifikasiController/index';
 
         },
         error : function(response) {
             console.log('failed :' + response);
             alert('Gagal Verifikasi Data Pemindahan Jaminan, Mohon Coba Lagi');
-            window.location = base_url + 'index.php/PemindahanVerifikasiController/index';
+            window.location = base_url + 'PemindahanVerifikasiController/index';
         }
     });
     
