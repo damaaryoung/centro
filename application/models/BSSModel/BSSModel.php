@@ -350,7 +350,9 @@ class BSSModel extends CI_Model{
 						FROM bss_log
 						WHERE DATE(tgl_buat) = CURDATE() 
 						AND kartu_number=SUBSTRING('$kartu_number',4) 
-						AND status_kartu='4'";
+						AND status_kartu='4'
+						ORDER BY id DESC
+						LIMIT 0,1 ";
 			$query = $this->db->query($str);
 			$row = $query->row_array();
 			if(isset($row) != null){
@@ -390,14 +392,16 @@ class BSSModel extends CI_Model{
 				"success" => false
 			);
 		}else{
-				if($status_kartu =='4') {// jika statusnya return, maka balikin ke open : update 2x buat log di trigger
-					$str = "UPDATE bss SET status_kartu=2, nominal=NULL, kolektor_id=NULL, last_update=NOW() 
+				$this->db->query("SET @user_id=$userId");
+				$this->db->query("SET @keteranganBrokLost='$keterangan'");
+				if($status_kartu ==='4' ) {// jika statusnya return, maka balikin ke open : update 2x buat log di trigger
+					$str = "UPDATE bss SET status_kartu=2, nominal=NULL, kolektor_id=NULL, last_update=NOW() , keterangan = '$keterangan'
 							WHERE kartu_number=SUBSTRING('$kartu_number',4)";
 				}else{
-					$str = "UPDATE bss SET status_kartu='$status_kartu', nominal=NULL, last_update=NOW()
+					$str = "UPDATE bss SET status_kartu='$status_kartu', nominal=NULL, last_update=NOW(), keterangan = '$keterangan'
 							WHERE kartu_number=SUBSTRING('$kartu_number',4)";
 				}
-				
+				// print_r($str); die();
 				$this->db->query($str);
 				$pesan  = array(
 					"msg"=> "Update Assign Success",
