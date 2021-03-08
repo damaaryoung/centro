@@ -13,6 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <title>AdminLTE 3 | Starter</title>
   <?php echo $css;?>
+  <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
 </head>
 <body class="hold-transition sidebar-mini" style="min-height: 700px;" onload="zoom()">
 <div class="wrapper">
@@ -64,16 +65,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                <div class="form-inline">
                     <div class="form-group">
                       <label for="search">Search</label> &nbsp; &nbsp;
-                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchDataJaminan()"> 
+                      <input type="text" class="form-control form-control-sm" name="search" id="search" placeholder="Search" onchange="serchDataJaminan()"> 
                      &nbsp;&nbsp;
                     </div>
                     <div class="form-group">
                       <label for="pwd">Kode Kantor</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 400px;" onchange="serchDataJaminan()">
-                            <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
-                            <?php foreach ($selectKodeKantor as $row) : ?>
-                              <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
-                            <?php endforeach;?>
+                      <select class="form-control form-control-sm select2 custom-select" id="kode_kantor" name="kode_kantor" style="width: 400px;" onchange="serchDataJaminan()">
                       </select>&nbsp;&nbsp;
                     </div>                  
                 </div> 
@@ -111,6 +108,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.card-body -->
           </div>  
           <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+          <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
+          <input type="hidden" class="form-control" id="user_divisi_id" name="user_divisi_id" value = "<?php echo $divisi_id; ?>">
 
       </div>
       <!-- /.container-fluid -->
@@ -124,7 +123,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $js;
   
   ?>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/pemindahan_dokumen.js"></script>
+  
 
 
 <!-- ./wrapper -->

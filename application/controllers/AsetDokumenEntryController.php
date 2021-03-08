@@ -50,7 +50,6 @@ class AsetDokumenEntryController extends CI_Controller {
 
 		if($session != ''){
 			
-			$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			
 			$this->load->view('ViewAsetDokumen/EntryAsetDokumen.php', $data);
 		}
@@ -196,6 +195,13 @@ class AsetDokumenEntryController extends CI_Controller {
 										
 			endforeach;
 		}
+		echo json_encode($data);
+	}
+	public function get_kode_kantor(){
+
+		$kode_kantor = $this->AsetDokumenEntryModel->selectKodeKantor();
+
+		$data['kode_kantor'] = $kode_kantor;
 		echo json_encode($data);
 	}
 

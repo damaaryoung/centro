@@ -14,6 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
@@ -58,21 +59,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                <div class="form-inline">
                     <div class="form-group">
                       <label for="email">Search</label> &nbsp; &nbsp;
-                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchDataVerif()"> 
+                      <input type="text" class="form-control form-control-sm" name="search" id="search" placeholder="Search" onchange="serchDataVerif()"> 
                      &nbsp;&nbsp;
                     </div>
                     <div class="form-group">
                       <label for="pwd">Kode Kantor</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 200px;"  onchange="serchDataVerif()">
-                            <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
-                            <?php foreach ($selectKodeKantor as $row) : ?>
-                              <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
-                            <?php endforeach;?>
+                      <select class="form-control form-control-sm select2 custom-select" id="kode_kantor" name="kode_kantor" style="width: 200px;"  onchange="serchDataVerif()">
                       </select>&nbsp;&nbsp;
                     </div>   
                     <div class="form-group">
                       <label for="pwd">Status</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="status" name="status" style="width: 200px;"  onchange="serchDataVerif()">
+                      <select class="form-control form-control-sm select2 custom-select" id="status" name="status" style="width: 200px;"  onchange="serchDataVerif()">
                               <option value="MASUK">MASUK</option>
                               <option value="KELUAR">KELUAR</option>
                               <option value="PINJAM">PINJAM</option>
@@ -124,6 +121,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <!-- End Data Tables-->
         <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+        <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
+        <input type="hidden" class="form-control" id="user_divisi_id" name="user_divisi_id" value = "<?php echo $divisi_id; ?>">
 
     </section>
     <!-- /.content -->
@@ -143,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $VerifikasieModalBPKB;
         echo $VerifikasiModalEmas;
 	?>
-
+<script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/verifikasi_aset_dokumen.js"></script>
 
 <style>

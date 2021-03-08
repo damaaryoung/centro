@@ -20,13 +20,16 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		if($session != ''){ 
 			$data['kode_kantor'] = $this->session->userdata('kd_cabang');
 			$data['divisi_id']   = $this->session->userdata('divisi_id');
-			$data['selectKodeKantor'] = $this->Request_Jaminan_Centro_Model->selectKodeKantor();
 			$this->load->view('ViewCustodian/request_jaminan_main.php', $data);
 		}
 		else{
 			redirect('LoginController/index'); 
 		}
 		
+	}
+	public function get_kode_kantor(){
+		$data['kode_kantor'] = $this->Request_Jaminan_Centro_Model->selectKodeKantor();
+		echo json_encode($data);
 	}
 
 	public function getListRequest(){
@@ -81,41 +84,45 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 			$search      = $this->input->post('search');
 			$kode_kantor = $this->input->post('kode_kantor');
 			$listJaminanSearch = $this->Request_Jaminan_Centro_Model->listJaminanSearch($search,$kode_kantor);
-	
-			foreach ($listJaminanSearch as $row) :
-				$data[]    = 	['<tr> <td>'
-											. $row['nomor'] . '</td> <td>'
-											. $row['tgl']. '</td> <td>'
-											. $row['nama_kantor_asal']. '</td> <td>'
-											. $row['nama_kantor_tujuan'].'</td> <td>'
-											. $row['verifikasi'].'</td> <td>'
-											. '<div class="form-inline">
-														<form method="post" action="'. base_url("Request_Jaminan_Update_Controller/index").'">
-															<button type="submit" 
-																class="btn btn-primary btn-sm" 
-																data-toggle="tooltip" 
-																data-placement="bottom" 
-																title="Edit"> 
-																	<i class="far fa-edit"></i>
-															</button>       
-															<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">            
-														</form>
-														<div style ="padding-left: 5px;">
-															<button type="button" class="btn btn-danger btn-sm btnDeleteRequestJaminan" style ="padding-left: 5px;"
-																		data-id="'.$row['id'].'"
-																		data-nomor="'.$row['nomor'].'" 
-																		data-verifikasi="'.$row['verifikasi'].'" 
-																		data-toggle="tooltip" 
-																		data-placement="bottom" 
-																		title="Delete"
-																		name="btnDeleteRequestJaminan"> 
-																		<i style="padding-left: 5px;" class="fa fa-trash"></i> 
-															</button>  
-														</div>
-												</div> </td></tr>'];
-												
-										
-			endforeach;
+			if(count($listJaminanSearch) == 0){
+				$data [] = '';
+				
+			}else{
+				foreach ($listJaminanSearch as $row) :
+					$data[]    = 	['<tr> <td>'
+												. $row['nomor'] . '</td> <td>'
+												. $row['tgl']. '</td> <td>'
+												. $row['nama_kantor_asal']. '</td> <td>'
+												. $row['nama_kantor_tujuan'].'</td> <td>'
+												. $row['verifikasi'].'</td> <td>'
+												. '<div class="form-inline">
+															<form method="post" action="'. base_url("Request_Jaminan_Update_Controller/index").'">
+																<button type="submit" 
+																	class="btn btn-primary btn-sm" 
+																	data-toggle="tooltip" 
+																	data-placement="bottom" 
+																	title="Edit"> 
+																		<i class="far fa-edit"></i>
+																</button>       
+																<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">            
+															</form>
+															<div style ="padding-left: 5px;">
+																<button type="button" class="btn btn-danger btn-sm btnDeleteRequestJaminan" style ="padding-left: 5px;"
+																			data-id="'.$row['id'].'"
+																			data-nomor="'.$row['nomor'].'" 
+																			data-verifikasi="'.$row['verifikasi'].'" 
+																			data-toggle="tooltip" 
+																			data-placement="bottom" 
+																			title="Delete"
+																			name="btnDeleteRequestJaminan"> 
+																			<i style="padding-left: 5px;" class="fa fa-trash"></i> 
+																</button>  
+															</div>
+													</div> </td></tr>'];
+													
+											
+				endforeach;
+			}
 		}
 		
 		
@@ -155,42 +162,13 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		
 
 		$getJaminanDokumen = $this->Request_Jaminan_Centro_Model->getJaminanDokumen($kode_kantor, $kode_kantor_lokasi_jaminan);
-		foreach ($getJaminanDokumen as $row) :	
+		if(count($getJaminanDokumen) == 0){
+			$data [] = '';
 			
-			$data[]    = ['<tr> <td>'. $row['no_reff'] . '</td> <td>'
-						. $row['agunan_id']. '</td> <td>'
-						. $row['deskripsi_ringkas'].'</td> <td>'
-						. $row['no_rekening_agunan'].'</td> <td>'										
-						. $row['kode_kantor'].'</td> <td>'
-						. $row['kode_kantor_lokasi_jaminan'].'</td> <td>'
-						. $row['lokasi_penyimpanan'].'</td> <td>'
-						. '<button type="button" class="btn btn-success btn-sm btnPilihJaminan" style ="padding-left: 5px;"
-									data-nomorreff="'.$row['no_reff'].'"
-									data-agunanid="'.$row['agunan_id'].'"
-									data-jenis="'.$row['jenis'].'"
-									data-deskripsi="'.$row['deskripsi_ringkas'].'"
-									name="btnPilihJaminan"> 
-									<i style="padding-left: 5px;" class="fa fa-check"></i>
-							</button>  </td> </tr>'];
-											
-									
-		endforeach;	
-
-		echo json_encode($data);
-		
-	}
-
-	public function getMasterJaminanSearch(){
-        $session = $this->session->userdata('nama');
-		$kode_kantor = $this->session->userdata('kd_cabang');
-		$search = $this->input->post('search');
-		
-
-		$getSearchJaminanDokumen = $this->Request_Jaminan_Centro_Model->getSearchJaminanDokumen($kode_kantor,$search);
-		
-		foreach ($getSearchJaminanDokumen as $row) :
-			
-			$data[]    = 	['<tr> <td>'. $row['no_reff'] . '</td> <td>'
+		}else{
+			foreach ($getJaminanDokumen as $row) :	
+				
+				$data[]    = ['<tr> <td>'. $row['no_reff'] . '</td> <td>'
 							. $row['agunan_id']. '</td> <td>'
 							. $row['deskripsi_ringkas'].'</td> <td>'
 							. $row['no_rekening_agunan'].'</td> <td>'										
@@ -205,9 +183,46 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 										name="btnPilihJaminan"> 
 										<i style="padding-left: 5px;" class="fa fa-check"></i>
 								</button>  </td> </tr>'];
-											
-									
-		endforeach;	
+												
+										
+			endforeach;	
+		}
+		echo json_encode($data);
+		
+	}
+
+	public function getMasterJaminanSearch(){
+        $session = $this->session->userdata('nama');
+		$kode_kantor = $this->session->userdata('kd_cabang');
+		$search = $this->input->post('search');
+		
+
+		$getSearchJaminanDokumen = $this->Request_Jaminan_Centro_Model->getSearchJaminanDokumen($kode_kantor,$search);
+		if(count($getSearchJaminanDokumen) == 0){
+			$data [] = '';
+			
+		}else{
+			foreach ($getSearchJaminanDokumen as $row) :
+				
+				$data[]    = 	['<tr> <td>'. $row['no_reff'] . '</td> <td>'
+								. $row['agunan_id']. '</td> <td>'
+								. $row['deskripsi_ringkas'].'</td> <td>'
+								. $row['no_rekening_agunan'].'</td> <td>'										
+								. $row['kode_kantor'].'</td> <td>'
+								. $row['kode_kantor_lokasi_jaminan'].'</td> <td>'
+								. $row['lokasi_penyimpanan'].'</td> <td>'
+								. '<button type="button" class="btn btn-success btn-sm btnPilihJaminan" style ="padding-left: 5px;"
+											data-nomorreff="'.$row['no_reff'].'"
+											data-agunanid="'.$row['agunan_id'].'"
+											data-jenis="'.$row['jenis'].'"
+											data-deskripsi="'.$row['deskripsi_ringkas'].'"
+											name="btnPilihJaminan"> 
+											<i style="padding-left: 5px;" class="fa fa-check"></i>
+									</button>  </td> </tr>'];
+												
+										
+			endforeach;
+		}	
 
 		echo json_encode($data);		
 	}

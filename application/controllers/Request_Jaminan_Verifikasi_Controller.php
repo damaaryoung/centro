@@ -21,7 +21,6 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		if($session != ''){ 
 			$data['kode_kantor'] = $this->session->userdata('kd_cabang');
 			$data['divisi_id']   = $this->session->userdata('divisi_id');
-			$data['selectKodeKantor'] = $this->Request_Jaminan_Verifikasi_Model->selectKodeKantor();
 			$this->load->view('ViewCustodian/request_jaminan_verifikasi.php', $data);
 		}
 		else{
@@ -29,54 +28,67 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		}
 		
 	}
+	public function get_kode_kantor(){
+		$data['kode_kantor'] = $this->Request_Jaminan_Verifikasi_Model->selectKodeKantor();
+		echo json_encode($data);
+	}
+
 	public function getListRequest(){
 		$proses 	= $this->input->post('proses');
 
 		if($proses == 'getAwal'){
 			$kode_kantor = $this->session->userdata('kd_cabang');
 			$list_request_jaminan = $this->Request_Jaminan_Verifikasi_Model->list_request_jaminan($kode_kantor);
-	
-			foreach ($list_request_jaminan as $row) :
-				$data[]    = 	['<tr> <td>'
-											. $row['nomor'] . '</td> <td>'
-											. $row['tgl']. '</td> <td>'
-											. $row['nama_kantor_asal']. '</td> <td>'
-											. $row['nama_kantor_tujuan'].'</td> <td>'
-											. $row['verifikasi'].'</td> <td>'
-											. '<div>
-														<form method="post" action="'. base_url("Request_Jaminan_Verifikasi_Controller/prosesVerifikasiMain").'">
-															<button type="submit" class="btn btn-success btn-sm"> <i class="fas fa-check"></i></button>       
-															<input type="hidden" name="userId" value="'.$row['user_id'].'">   
-															<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">               
-														</form>
-												</div> </td></tr>'];
-												
-										
-			endforeach;	
-		
+			if(count($list_request_jaminan) == 0){
+				$data [] = '';
+				
+			}else{
+				foreach ($list_request_jaminan as $row) :
+					$data[]    = 	['<tr> <td>'
+												. $row['nomor'] . '</td> <td>'
+												. $row['tgl']. '</td> <td>'
+												. $row['nama_kantor_asal']. '</td> <td>'
+												. $row['nama_kantor_tujuan'].'</td> <td>'
+												. $row['verifikasi'].'</td> <td>'
+												. '<div>
+															<form method="post" action="'. base_url("Request_Jaminan_Verifikasi_Controller/prosesVerifikasiMain").'">
+																<button type="submit" class="btn btn-success btn-sm"> <i class="fas fa-check"></i></button>       
+																<input type="hidden" name="userId" value="'.$row['user_id'].'">   
+																<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">               
+															</form>
+													</div> </td></tr>'];
+													
+											
+				endforeach;	
+			}
 
 		} else if($proses == 'searchData'){
 			$search      = $this->input->post('search');
 			$kode_kantor = $this->input->post('kode_kantor');
 			$listJaminanSearch = $this->Request_Jaminan_Verifikasi_Model->listJaminanSearch($search,$kode_kantor);
 	
-			foreach ($listJaminanSearch as $row) :
-				$data[]    = 	['<tr> <td>'
-											. $row['nomor'] . '</td> <td>'
-											. $row['tgl']. '</td> <td>'
-											. $row['nama_kantor_asal']. '</td> <td>'
-											. $row['nama_kantor_tujuan'].'</td> <td>'
-											. $row['verifikasi'].'</td> <td>'
-											. '<div>
-														<form method="post" action="'. base_url("Request_Jaminan_Verifikasi_Controller/prosesVerifikasiMain").'">
-															<button type="submit" class="btn btn-success btn-sm"> <i class="fas fa-check"></i></button>       
-															<input type="hidden" name="userId" value="'.$row['user_id'].'">   
-															<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">           
-														</form>
-												</div> </td></tr>'];
-												
-										
-			endforeach;
+			if(count($listJaminanSearch) == 0){
+				$data [] = '';
+				
+			}else{
+				foreach ($listJaminanSearch as $row) :
+					$data[]    = 	['<tr> <td>'
+												. $row['nomor'] . '</td> <td>'
+												. $row['tgl']. '</td> <td>'
+												. $row['nama_kantor_asal']. '</td> <td>'
+												. $row['nama_kantor_tujuan'].'</td> <td>'
+												. $row['verifikasi'].'</td> <td>'
+												. '<div>
+															<form method="post" action="'. base_url("Request_Jaminan_Verifikasi_Controller/prosesVerifikasiMain").'">
+																<button type="submit" class="btn btn-success btn-sm"> <i class="fas fa-check"></i></button>       
+																<input type="hidden" name="userId" value="'.$row['user_id'].'">   
+																<input type="hidden" name="tblNomor" value="'.$row['nomor'].'">           
+															</form>
+													</div> </td></tr>'];
+													
+											
+				endforeach;
+			}
 		}
 		
 		

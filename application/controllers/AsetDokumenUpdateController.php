@@ -133,47 +133,47 @@ class AsetDokumenUpdateController extends CI_Controller {
 
 		if($check_ajb == 'Y'){
 			$ajb = $check_ajb;
-		}else if($check_ajb == 'N'){
+		}else{
 			$ajb = 'N';
 		}
 		if($check_imb == 'Y'){
 			$imb = $check_imb;
-		}else if($check_imb == 'N'){
+		}else{
 			$imb = 'N';
 		}
 		if($check_sppt == 'Y'){
 			$sppt = $check_sppt;
-		}else if($check_sppt == 'N'){
+		}else{
 			$sppt = 'N';
 		}
 		if($check_skmht == 'Y'){
 			$skmht = $check_skmht;
-		}else if($check_skmht == 'N'){
+		}else{
 			$skmht = 'N';
 		}
 		if($check_denah == 'Y'){
 			$denah = $check_denah;
-		}else if($check_denah == 'N'){
+		}else{
 			$denah = 'N';
 		}
 		if($check_roya  == 'Y'){
 			$roya = $check_roya;
-		}else if($check_roya  == 'N'){
+		}else{
 			$roya = 'N';
 		}
 		if($check_sht  == 'Y'){
 			$sht = $check_sht;
-		}else if($check_sht  == 'N'){
+		}else{
 			$sht = 'N';
 		}
 		if($check_stts  == 'Y'){
 			$stts = $check_stts;
-		}else if($check_stts  == 'N'){
+		}else{
 			$stts = 'N';
 		}
 		if($check_ssb_bpht  == 'Y'){
 			$ssb_bpht = $check_ssb_bpht;
-		}else if($check_ssb_bpht  == 'N'){
+		}else{
 			$ssb_bpht = 'N';
 		}
 

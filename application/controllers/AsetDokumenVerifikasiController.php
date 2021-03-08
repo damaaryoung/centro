@@ -6,20 +6,19 @@ class AsetDokumenVerifikasiController extends CI_Controller {
         parent:: __construct();
 		$this->load->model('AsetDokumenModel/AsetDokumenVerifikasiModel');
 		$this->load->model('AsetDokumenModel/AsetDokumenUpdateModel');
-       
 	}
 
 	/// START DISPLAY CONTROL///
 	public function index(){
 		$session = $this->session->userdata('nama');
-		$kode_kantor = $this->session->userdata('kd_cabang');
+		$data['kode_kantor'] = $this->session->userdata('kd_cabang');
+		$data['divisi_id']   = $this->session->userdata('divisi_id');
 		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
 		$data['navbar'] = $this->load->view('templates/navbar.php', NULL, TRUE);
 		$data['sidebar'] = $this->load->view('templates/sidebar.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('templates/footer.php', NULL, TRUE);
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
-		$data['selectKodeKantor'] = $this->AsetDokumenVerifikasiModel->selectKodeKantor();
 
 		$data['VerifikasiMainModal'] = $this->load->view('ViewAsetDokumen/Verifikasi/VerifikasiMainModal.php', NULL, TRUE);
 		$data['VerifikasiModalSertifikat'] = $this->load->view('ViewAsetDokumen/Verifikasi/VerifikasiDataSertifikat.php', NULL, TRUE);
@@ -47,6 +46,10 @@ class AsetDokumenVerifikasiController extends CI_Controller {
 		$data['nomorRefAgunan'] = $nomorRefAgunan;
 		$data['agunanID'] = $agunanID;
 		
+		echo json_encode($data);
+	}
+	public function get_kode_kantor(){
+		$data['kode_kantor'] = $this->AsetDokumenVerifikasiModel->selectKodeKantor();
 		echo json_encode($data);
 	}
 	public function verifikasi(){
