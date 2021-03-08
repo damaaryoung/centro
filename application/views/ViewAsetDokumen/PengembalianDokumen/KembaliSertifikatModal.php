@@ -21,7 +21,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="sertVerifikasiKembali">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-2">
-                                      <input class="form-control select2" id="sertVerifikasiKembali" name="sertVerifikasiKembali" disabled>
+                                      <input class="form-control" id="sertVerifikasiKembali" name="sertVerifikasiKembali" disabled>
                                   </div>
                               </div> 
                               <div class="form-group row">
@@ -45,7 +45,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="sertKantorLokasiKembali">Kantor Lokasi Jaminan</label>
                                   </div>
                                   <div class="col-sm-7">
-                                      <select class="form-control select2" id="sertKantorLokasiKembali" name="sertKantorLokasiKembali">
+                                      <select class="form-control" id="sertKantorLokasiKembali" name="sertKantorLokasiKembali">
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                       </select>
                                   </div>
@@ -55,7 +55,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="sertKodeJenisAgunanKembali">Jenis Agunan</label>
                                   </div>
                                   <div class="col-sm-7">
-                                      <select class="form-control select2" id="sertKodeJenisAgunanKembali" name="sertKodeJenisAgunanKembali">
+                                      <select class="form-control" id="sertKodeJenisAgunanKembali" name="sertKodeJenisAgunanKembali">
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                       </select>
                                   </div>
@@ -65,7 +65,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="sertKodeIkatanAgunanKembali">Ikatan Agunan</label>
                                   </div>
                                   <div class="col-sm-7">
-                                    <select class="form-control select2" id="sertKodeIkatanAgunanKembali" name="sertKodeIkatanAgunanKembali">
+                                    <select class="form-control" id="sertKodeIkatanAgunanKembali" name="sertKodeIkatanAgunanKembali">
                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                     </select>
                                   </div>
@@ -153,7 +153,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="sertJenisSertifikatKembali">Jenis Sertifkat</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="sertJenisSertifikatKembali" name="sertJenisSertifikatKembali">
+                                        <select class="form-control" id="sertJenisSertifikatKembali" name="sertJenisSertifikatKembali">
                                         </select>
                                   </div>
                                   <div class="col-sm-2">
@@ -274,7 +274,7 @@
                       <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokAJBKembali" name="sertDokAJBKembali">
+                                    <select class="form-control" id="sertDokAJBKembali" name="sertDokAJBKembali">
                                             
                                     </select>
                                 </div>
@@ -297,7 +297,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokIMBKembali" name="sertDokIMBKembali">
+                                    <select class="form-control" id="sertDokIMBKembali" name="sertDokIMBKembali">
                                                 
                                     </select>
                                 </div>
@@ -314,7 +314,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSPPTKembali" name="sertDokSPPTKembali">
+                                    <select class="form-control" id="sertDokSPPTKembali" name="sertDokSPPTKembali">
                                                 
                                     </select>
                                 </div>
@@ -337,7 +337,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSKHMTKembali" name="sertDokSKHMTKembali">
+                                    <select class="form-control" id="sertDokSKHMTKembali" name="sertDokSKHMTKembali">
                                                
                                     </select>
                                 </div>
@@ -347,7 +347,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokDenahKembali" name="sertDokDenahKembali">
+                                    <select class="form-control" id="sertDokDenahKembali" name="sertDokDenahKembali">
                                                 
                                     </select>
                                 </div>
@@ -357,7 +357,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokRoyaKembali" name="sertDokRoyaKembali">
+                                    <select class="form-control" id="sertDokRoyaKembali" name="sertDokRoyaKembali">
                                                
                                     </select>
                                 </div>
@@ -368,7 +368,7 @@
                             <!--- SHT --->
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSHTKembali" name="sertDokSHTKembali">
+                                    <select class="form-control" id="sertDokSHTKembali" name="sertDokSHTKembali">
                                                
                                     </select>
                                 </div>
@@ -407,7 +407,7 @@
                             <!--- SHT --->
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSTTSKembali" name="sertDokSTTSKembali">
+                                    <select class="form-control" id="sertDokSTTSKembali" name="sertDokSTTSKembali">
                                                 
                                     </select>
                                 </div>
@@ -423,7 +423,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="sertDokSSBKembali" name="sertDokSSBKembali">
+                                    <select class="form-control" id="sertDokSSBKembali" name="sertDokSSBKembali">
                                               
                                     </select>
                                 </div>
@@ -461,7 +461,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Status Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertSlikStatusAgunanKembali" name="sertSlikStatusAgunanKembali">
+                                        <select class="form-control" id="sertSlikStatusAgunanKembali" name="sertSlikStatusAgunanKembali">
                                                 
                                         </select>
                                   </div>
@@ -469,7 +469,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Paripasu</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="sertSlikParipasuKembali" name="sertSlikParipasuKembali">
+                                        <select class="form-control" id="sertSlikParipasuKembali" name="sertSlikParipasuKembali">
                                         </select>
                                   </div>
                               </div>                
@@ -478,7 +478,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertSlikJenisAgunanKembali" name="sertSlikJenisAgunanKembali">
+                                        <select class="form-control" id="sertSlikJenisAgunanKembali" name="sertSlikJenisAgunanKembali">
                                         
                                         </select>
                                   </div>
@@ -502,7 +502,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Status Join Account</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="sertSLikStatusJoinAccountKembali" name="sertSLikStatusJoinAccountKembali">
+                                        <select class="form-control" id="sertSLikStatusJoinAccountKembali" name="sertSLikStatusJoinAccountKembali">
                                         </select>
                                   </div>
                               </div>
@@ -511,7 +511,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Lembaga Pemeringkat</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertSlikLembagaPemeringkatKembali" name="sertSlikLembagaPemeringkatKembali">
+                                        <select class="form-control" id="sertSlikLembagaPemeringkatKembali" name="sertSlikLembagaPemeringkatKembali">
                                                
                                         </select>
                                   </div>
@@ -519,7 +519,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Diasuransikan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="sertSlikAsuransiKembali" name="sertSlikAsuransiKembali">
+                                        <select class="form-control" id="sertSlikAsuransiKembali" name="sertSlikAsuransiKembali">
                                        
                                         </select>
                                   </div>
@@ -529,7 +529,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Pengikatan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertSlikJenisPengikatanKembali" name="sertSlikJenisPengikatanKembali">
+                                        <select class="form-control" id="sertSlikJenisPengikatanKembali" name="sertSlikJenisPengikatanKembali">
                                                
                                         </select>
                                   </div>
@@ -571,7 +571,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Kode Dati 2 Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="sertSlikKodeDati2Kembali" name="sertSlikKodeDati2Kembali">
+                                        <select class="form-control" id="sertSlikKodeDati2Kembali" name="sertSlikKodeDati2Kembali">
                                                 
                                         </select>
                                   </div>

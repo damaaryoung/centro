@@ -22,7 +22,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbVerifikasiPinjam">Verifikasi</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <input class="form-control select2" id="bpkbVerifikasiPinjam" name="bpkbVerifikasiPinjam" disabled>
+                                            <input class="form-control" id="bpkbVerifikasiPinjam" name="bpkbVerifikasiPinjam" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -44,7 +44,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKantorLokasiPinjam">Kantor Lokasi Jaminan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKantorLokasiPinjam" name="bpkbKantorLokasiPinjam">
+                                            <select class="form-control" id="bpkbKantorLokasiPinjam" name="bpkbKantorLokasiPinjam">
                                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -54,7 +54,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKodeJenisAgunanPinjam">Jenis Agunan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKodeJenisAgunanPinjam" name="bpkbKodeJenisAgunanPinjam">
+                                            <select class="form-control" id="bpkbKodeJenisAgunanPinjam" name="bpkbKodeJenisAgunanPinjam">
                                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -64,7 +64,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKodeIkatanAgunanPinjam">Ikatan Agunan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKodeIkatanAgunanPinjam" name="bpkbKodeIkatanAgunanPinjam">
+                                            <select class="form-control" id="bpkbKodeIkatanAgunanPinjam" name="bpkbKodeIkatanAgunanPinjam">
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -167,12 +167,12 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Merk/Type</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbMerkPinjam" name="bpkbMerkPinjam">
+                                    <select class="form-control" id="bpkbMerkPinjam" name="bpkbMerkPinjam">
                                               
                                     </select>
                                   </div>
                                   <div class="col-sm-4">
-                                        <select class="form-control select2" id="bpkbTypePinjam" name="bpkbTypePinjam">
+                                        <select class="form-control" id="bpkbTypePinjam" name="bpkbTypePinjam">
                                                
                                         </select>
                                   </div>
@@ -182,7 +182,7 @@
                                       <label class="control-label" style="padding-top: 6px;" for="">Jenis / Silinder</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbJenisPinjam" name="bpkbJenisPinjam">
+                                    <select class="form-control" id="bpkbJenisPinjam" name="bpkbJenisPinjam">
                                                
                                     </select>
                                   </div>
@@ -268,7 +268,7 @@
                       <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokKwitansiBlankoPinjam" name="bpkbDokKwitansiBlankoPinjam">
+                                    <select class="form-control" id="bpkbDokKwitansiBlankoPinjam" name="bpkbDokKwitansiBlankoPinjam">
                                           
                                     </select>
                                 </div>
@@ -280,7 +280,7 @@
 
                             <div class="form-group row">
                             <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokFakturPemilikPinjam" name="bpkbDokFakturPemilikPinjam">
+                                    <select class="form-control" id="bpkbDokFakturPemilikPinjam" name="bpkbDokFakturPemilikPinjam">
                                            
                                     </select>
                                 </div>
@@ -297,7 +297,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokKwJualBeliPinjam" name="bpkbDokKwJualBeliPinjam">
+                                    <select class="form-control" id="bpkbDokKwJualBeliPinjam" name="bpkbDokKwJualBeliPinjam">
                                            
                                     </select>
                                 </div>
@@ -309,7 +309,7 @@
                             <!-- SK TRAYEK -->
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokSKTrayekPinjam" name="bpkbDokSKTrayekPinjam">
+                                    <select class="form-control" id="bpkbDokSKTrayekPinjam" name="bpkbDokSKTrayekPinjam">
                                            
                                     </select>
                                 </div>
@@ -364,7 +364,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Status Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikStatusAgunanPinjam" name="bpkbSlikStatusAgunanPinjam">
+                                        <select class="form-control" id="bpkbSlikStatusAgunanPinjam" name="bpkbSlikStatusAgunanPinjam">
                                                 
                                         </select>
                                   </div>
@@ -372,7 +372,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Paripasu</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSlikParipasuPinjam" name="bpkbSlikParipasuPinjam">
+                                        <select class="form-control" id="bpkbSlikParipasuPinjam" name="bpkbSlikParipasuPinjam">
                                         </select>
                                   </div>
                               </div>                
@@ -381,7 +381,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikJenisAgunanPinjam" name="bpkbSlikJenisAgunanPinjam">
+                                        <select class="form-control" id="bpkbSlikJenisAgunanPinjam" name="bpkbSlikJenisAgunanPinjam">
                                         
                                         </select>
                                   </div>
@@ -405,7 +405,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Status Join Account</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSLikStatusJoinAccountPinjam" name="bpkbSLikStatusJoinAccountPinjam">
+                                        <select class="form-control" id="bpkbSLikStatusJoinAccountPinjam" name="bpkbSLikStatusJoinAccountPinjam">
                                         </select>
                                   </div>
                               </div>
@@ -414,7 +414,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Lembaga Pemeringkat</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikLembagaPemeringkatPinjam" name="bpkbSlikLembagaPemeringkatPinjam">
+                                        <select class="form-control" id="bpkbSlikLembagaPemeringkatPinjam" name="bpkbSlikLembagaPemeringkatPinjam">
                                                
                                         </select>
                                   </div>
@@ -422,7 +422,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Diasuransikan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSlikAsuransiPinjam" name="bpkbSlikAsuransiPinjam">
+                                        <select class="form-control" id="bpkbSlikAsuransiPinjam" name="bpkbSlikAsuransiPinjam">
                                        
                                         </select>
                                   </div>
@@ -432,7 +432,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Pengikatan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikJenisPengikatanPinjam" name="bpkbSlikJenisPengikatanPinjam">
+                                        <select class="form-control" id="bpkbSlikJenisPengikatanPinjam" name="bpkbSlikJenisPengikatanPinjam">
                                                
                                         </select>
                                   </div>
@@ -474,7 +474,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Kode Dati 2 Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikKodeDati2Pinjam" name="bpkbSlikKodeDati2Pinjam">
+                                        <select class="form-control " id="bpkbSlikKodeDati2Pinjam" name="bpkbSlikKodeDati2Pinjam">
                                                 
                                         </select>
                                   </div>

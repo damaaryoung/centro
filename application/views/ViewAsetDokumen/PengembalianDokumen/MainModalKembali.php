@@ -24,7 +24,7 @@
                                     <label style="padding-top: 6px;" class="control-label" for="mainVerifikasiKembali">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input class="form-control select2" id="mainVerifikasiKembali" name="mainVerifikasiKembali" disabled>
+                                    <input class="form-control" id="mainVerifikasiKembali" name="mainVerifikasiKembali" disabled>
                                   </div>
                               </div>     
                               <div class="form-group row">
@@ -32,7 +32,7 @@
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerjaKembali">Area Kerja</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <select class="form-control select2" id="mainAreaKerjaKembali" name="mainAreaKerjaKembali" required>
+                                    <select class="form-control" id="mainAreaKerjaKembali" name="mainAreaKerjaKembali" required>
                                     </select>
                                   </div>
                                   <div class="col-sm-1">
@@ -47,7 +47,7 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainTransaksiKembali">Transaksi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="mainTransaksiKembali" name="mainTransaksiKembali" readonly>
+                                        <select class="form-control" id="mainTransaksiKembali" name="mainTransaksiKembali" readonly>
                                           <option value="MASUK">MASUK</option> 
                                         </select>
                                   </div>

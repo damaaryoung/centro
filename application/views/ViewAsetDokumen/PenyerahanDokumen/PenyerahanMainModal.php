@@ -24,7 +24,7 @@
                                     <label style="padding-top: 6px;" class="control-label" for="mainVerifikasiPenyerahan">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input class="form-control select2" id="mainVerifikasiPenyerahan" name="mainVerifikasiPenyerahan" disabled>
+                                    <input class="form-control" id="mainVerifikasiPenyerahan" name="mainVerifikasiPenyerahan" disabled>
                                   </div>
                               </div>                                
                               <div class="form-group row">
@@ -32,7 +32,7 @@
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerja">Area Kerja</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <select class="form-control select2" id="mainAreaKerjaPenyerahan" name="mainAreaKerjaPenyerahan" required>
+                                    <select class="form-control" id="mainAreaKerjaPenyerahan" name="mainAreaKerjaPenyerahan" required>
                                     </select>
                                   </div>
                                   <div class="col-sm-1">
@@ -47,7 +47,7 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainTransaksi">Transaksi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="mainTransaksiPenyerahan" name="mainTransaksi" readonly>
+                                        <select class="form-control" id="mainTransaksiPenyerahan" name="mainTransaksi" readonly>
                                           <option value="KELUAR">KELUAR</option> 
                                         </select>
                                   </div>
