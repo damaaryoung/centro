@@ -15,7 +15,7 @@ class EFilingModel extends CI_Model{
 				IF($kode_cabang IN ('32', '00'), 1, kode_kantor= $kode_cabang)
                 AND (no_rekening LIKE '%' OR nama_debitur LIKE '%%') 
 				AND baki_debet > 0 
-				AND no_rekening = '02-38-00029-18' OR no_rekening = '40-55-00001-45'
+				AND no_rekening = '00-04-00030-18' OR no_rekening = '40-55-00001-45'
 				ORDER BY tgl_realisasi_eng DESC LIMIT 10 OFFSET 0 ";
 		$query = $this->db->query($str);
         return $query->result_array();
@@ -172,11 +172,11 @@ class EFilingModel extends CI_Model{
 		$kode_kantor = $this->kode_kantor;
         $baki_debet = $this->baki_debet;
         $status_verifikasi = $this->status_verifikasi;
-		$search = $this->search;
+		$no_rekening = $this->no_rekening;
 		
 			$this->db= $this->load->database('DB_CENTRO', true);
 
-			$str1 = "SELECT * FROM `view_efiling_header`
+			$str1 = "SELECT * FROM `view_efiling_header_test`
 			WHERE
 			IF('$kode_kantor'='all', 1, 
 				baki_debet > 0 AND kode_kantor='$kode_kantor'
@@ -187,7 +187,7 @@ class EFilingModel extends CI_Model{
 			IF('$status_verifikasi' = 'all', 1,
 				status_verifikasi = '$status_verifikasi'
 			)AND
-			IF('$search' <> '', (no_rekening LIKE '$search%' OR nama_debitur LIKE '%$search%'), 1)
+			IF('$no_rekening' <> '', (no_rekening LIKE '$no_rekening%'), 1)
 			ORDER BY tgl_realisasi_eng DESC LIMIT 10 OFFSET 0";
 			//   var_dump($str1);die();
 			
@@ -195,14 +195,15 @@ class EFilingModel extends CI_Model{
 			return $query->result_array(); 
 	}
 
-	public function queryInsertFile(){
-		$ktp = $this->ktp;
-		$no_rekening = $this->no_rekening;
-		$this->db2 = $this->load->database('DB_CENTRO', true);
-		$str ="UPDATE efiling_nasabah SET ktp='$ktp'
-		WHERE no_rekening ='$no_rekening'";
-		$this->db2->query($str);
-        $pesan = "Send Nomor BSS TO Kolektor Success";
-		return $pesan;
+	public function user_access_efiling(){
+		$user_id = $this->userID;
+		$divisi_id = $this->divisi_id;
+		$jabatan = $this->jabatan;
+		$this->db= $this->load->database('DB_CENTRO', true);
+		$str = "SELECT flag_aktif, menu FROM `efiling_user_access`
+				WHERE (user_id = '$user_id' or divisi_id = '$divisi_id' or jabatan = '$jabatan')
+				and flag_aktif = '1' ";
+		$query = $this->db->query($str);
+		return $query->row_array();
 	}
 }
