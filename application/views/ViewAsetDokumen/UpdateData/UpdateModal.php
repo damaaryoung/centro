@@ -260,16 +260,22 @@
 
     <!-- Data Tables -->
     <div class="box">
+    
+    <div class="px-2 bg-light">
+              <marquee class="py-3" direction="left" onmouseover="this.stop()" onmouseout="this.start()" style=" color:#ff0018">
+                  Scroll ke Kanan Untuk Tombol Aksi
+              </marquee>
+    </div>
     <div class="form-inline" style="padding : 10px; float: right">
                     <div class="form-group">
                       <label for="email">Search</label> &nbsp; &nbsp;
                       <input type="text" class="form-control" name="searchRekeningUpdate" id="searchRekeningUpdate" onchange="serchDataRekening()"> 
                      &nbsp;&nbsp;
                     </div>
-      </div>
+    </div>
     <div id="loading7">
               <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
-      </div>
+    </div>
         <div class="card-body">
             <table id="TableNoRek" class="table table-striped table-bordered" style="width:100% text-align:center" >
               <thead>

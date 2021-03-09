@@ -25,6 +25,11 @@
               <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
       </div>
             <div class="card-body">
+            <div class="px-2 bg-light">
+              <marquee class="py-3" direction="left" onmouseover="this.stop()" onmouseout="this.start()" style=" color:#ff0018">
+                  Scroll ke Kanan Untuk Tombol Aksi
+              </marquee>
+            </div>
             <table id="TableNoRek" class="table table-striped table-bordered" style="width:100% text-align:center" >
               <thead>
                   <tr>

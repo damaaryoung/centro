@@ -6,202 +6,41 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 	{
 		parent::__construct();
     }
-    
-    public function listAsetDokumen(){
-		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT 
-				`jaminan_dokument`.`agunan_id`,
-				LEFT(
-				IF(
-					`jenis` = 'SERTIFIKAT',
-					CONCAT(
-					IF(
-						IFNULL(`no_shm`, '') <> '',
-						'SHM',
-						IF(
-						IFNULL(`no_shgb`, '') <> '',
-						'SHGB',
-						'AJB'
-						)
-					),
-					' NO. ',
-					IF(
-						IFNULL(`no_shm`, '') <> '',
-						`no_shm`,
-						IF(
-						IFNULL(`no_shgb`, '') <> '',
-						`no_shgb`,
-						`no_ajb`
-						)
-					),
-					' A/N : ',
-					`nama_pemilik_sertifikat`,
-					' ALAMAT : ',
-					`alamat_sertifikat`
-					),
-					CONCAT(
-					'BPKB NO. ',
-					IFNULL(`nomor_bpkb`, ''),
-					' A/N : ',
-					`nama_bpkb`,
-					' ALAMAT : ',
-					`alamat_bpkb`,
-					' NO RANGKA : ',
-					`no_rangka`,
-					' NO MESIN : ',
-					`no_mesin`,
-					' TAHUN ',
-					`tahun`,
-					' NO. POL : ',
-					`no_polisi`
-					)
-				),
-				450
-				) AS deskripsi_ringkas_jaminan,
-				`flg_cetak`.`nomor` AS nomor_cetak,
-				jaminan_header.id,
-				LEFT(jaminan_header.nomor, 10) AS nomor,
-				LEFT(jaminan_header.no_reff, 10) AS no_reff,
-				jaminan_header.tgl,
-				IF(
-				jaminan_header.`status` = 'PINJAM',
-				CONCAT(
-					jaminan_header.nama,
-					' (Nasabah a.n:',
-					`jaminan_history`.nama_nasabah,
-					')'
-				),
-				jaminan_header.nama
-				) AS nama,
-				LEFT(jaminan_header.alamat, 200) AS alamat,
-				jaminan_header.kelurahan,
-				jaminan_header.kecamatan,
-				jaminan_header.kota,
-				jaminan_header.propinsi,
-				jaminan_header.kode_pos,
-				jaminan_header.jenis_jaminan,
-				jaminan_header.roda_kendaraan,
-				jaminan_header.status,
-				jaminan_header.kontrak_status,
-				jaminan_header.ket,
-				jaminan_header.no_rekening,
-				jaminan_header.tgl_realisasi,
-				jaminan_header.kode_kantor,
-				jaminan_header.tgl_rencana_kembali,
-				jaminan_header.jenis_pengurusan,
-				jaminan_header.verifikasi,
-				`jaminan_history`.nama_nasabah,
-				jaminan_dokument.kode_kantor_lokasi_jaminan,
-				jaminan_pemindahan.`lokasi_penyimpanan` AS lokasi_penyimpanan #, app_kode_kantor.nama_kantor 
-			FROM
-				jaminan_header 
-				LEFT JOIN `flg_cetak` 
-				ON `flg_cetak`.nomor = jaminan_header.nomor 
-				AND `flg_cetak`.setting = IF(
-					jaminan_header.status = 'MASUK',
-					'ASSET_IN',
-					IF(
-					jaminan_header.status = 'KELUAR',
-					'ASSET_OUT',
-					'ASSET_TEMP_OUT'
-					)
-				) 
-				LEFT JOIN 
-				(SELECT DISTINCT 
-					kode_kantor AS kd_kantor,
-					nomor,
-					no_reff,
-					nama AS nama_nasabah 
-				FROM
-					`jaminan_history` 
-				WHERE `status` = 'MASUK') `jaminan_history` 
-				ON `jaminan_history`.kd_kantor = jaminan_header.kode_kantor 
-				AND `jaminan_history`.no_reff = jaminan_header.no_reff 
-				LEFT JOIN 
-				(SELECT 
-					no_reff,
-					agunan_id,
-					jenis,
-					no_shm,
-					no_shgb,
-					no_ajb,
-					nama_pemilik_sertifikat,
-					alamat_sertifikat,
-					nomor_bpkb,
-					nama_bpkb,
-					alamat_bpkb,
-					no_rangka,
-					no_mesin,
-					tahun,
-					no_polisi,
-					kode_kantor_lokasi_jaminan 
-				FROM
-					jaminan_dokument) jaminan_dokument 
-				ON jaminan_dokument.no_reff = jaminan_header.no_reff 
-				LEFT JOIN 
-				(SELECT 
-					jpd.nomor,
-					jpd.no_reff,
-					jpd.agunan_id,
-					jaminan_pemindahan.lokasi_penyimpanan,
-					jaminan_pemindahan.`ket` 
-				FROM
-					`jaminan_pemindahan` 
-					INNER JOIN `jaminan_pemindahan_detail` jpd 
-					ON jpd.`nomor` = jaminan_pemindahan.`nomor`) jaminan_pemindahan 
-				ON jaminan_pemindahan.no_reff = jaminan_header.nomor #WHERE jaminan_header.status='PINJAM'
-				LEFT JOIN app_kode_kantor ON app_kode_kantor.kode_kantor = jaminan_dokument.kode_kantor_lokasi_jaminan 
-			WHERE #jaminan_header.kode_kantor = '00' 
-				#AND 
-				jaminan_header.status = 'MASUK' 
-				AND jaminan_header.jenis_jaminan in ('SERTIFIKAT', 'BPKB', 'EMAS')
-			#ORDER BY jaminan_header.nomor DESC 
-			ORDER BY jaminan_header.id DESC 
-			LIMIT 0, 25;
-			";
-		$query = $this->db2->query($str);
-		return $query->result_array();
-    }
     public function listDokumenVerifikasi($kode_kantor){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT 
-                    id,
-                    LEFT(nomor, 10) AS nomor,
-                    LEFT(no_reff, 10) AS no_reff,
-                    tgl,
-                    nama,
-                    LEFT(alamat, 200) AS alamat,
-                    kelurahan,
-                    kecamatan,
-                    kota,
-                    propinsi,
-                    kode_pos,
-                    jenis_jaminan,
-                    roda_kendaraan,
-                    status,
-                    kontrak_status,
-                    ket,
-                    no_rekening,
-                    tgl_realisasi,
-                    kode_kantor,
-                    verifikasi,
-                    jd.agunan_id
-                FROM
-                    jaminan_header 
-                    LEFT JOIN 
-                    (SELECT 
-                        LEFT(no_reff, 10) AS no_reff2,
-                        agunan_id
-                    FROM
-                        jaminan_dokument 
-                    WHERE agunan_id <> '' #AND verifikasi = 0 
-                         ) jd 
-                    ON jd.no_reff2 = jaminan_header.no_reff 
-                WHERE STATUS = 'MASUK' 
-                    and jaminan_header.kode_kantor = '$kode_kantor' 
-                ORDER BY jaminan_header.nomor DESC 
-                #ORDER BY jaminan_header.id DESC 
-                LIMIT 10;";
+						jh.id AS `id`,
+						LEFT(jh.nomor, 10) AS nomor,
+						LEFT(jh.no_reff, 10) AS no_reff,
+						jh.tgl,
+						jh.nama,
+						LEFT(jh.alamat, 200) AS alamat,
+						jh.kelurahan,
+						jh.kecamatan,
+						jh.kota,
+						jh.propinsi,
+						jh.kode_pos,
+						jh.jenis_jaminan,
+						jh.roda_kendaraan,
+						jh.status,
+						jh.kontrak_status,
+						jh.ket,
+						jh.no_rekening,
+						jh.tgl_realisasi,
+						jh.kode_kantor,
+						jh.verifikasi,
+						jd.agunan_id
+					FROM
+						jaminan_header  jh
+					LEFT JOIN jaminan_dokument jd
+						ON jd.no_reff = jh.no_reff 
+					WHERE STATUS = 'MASUK' 
+					AND jh.kode_kantor = '$kode_kantor' 
+					AND jd.agunan_id <> '' 
+					ORDER BY jh.nomor DESC 
+					#ORDER BY jaminan_header.id DESC 
+					LIMIT 10;
+				";
 		$query = $this->db2->query($str);
 		return $query->result_array();
     }
