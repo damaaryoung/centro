@@ -83,16 +83,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                    <table id="tableLokasiJaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                    <table id="tableLokasiJaminan" class="table table-striped table-bordered" style="width:100%" >
                         <thead>
-                            <tr>
+                            <tr  style="text-align:center">
                                 <th>Nomor</th>
                                 <th>Tanggal</th>
                                 <th>Nama&nbsp;Kantor&nbsp;Asal</th>
                                 <th>Nama&nbsp;Kantor&nbsp;Tujuan</th>
                                 <th>Nama&nbsp;Lokasi&nbsp;Penyimpanan</th>
                                 <th>Verifikasi</th>
-                                <th style="width:200px;">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id="bodyTableLokasiJaminan">
@@ -176,19 +176,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </style>
 
   <script>
-        $(document).ready(function() {
-            $('#tableLokasiJaminan').DataTable( {
-                "scrollX": true,
-                "autoWidth" : true,
-                "searching": false,
-                "aaSorting" : []
-            } );
-        } );
-
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         })
-        
 
         function openTab(evt, tabName) {
               var i, tabcontent, tablinks;

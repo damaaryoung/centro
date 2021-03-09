@@ -108,9 +108,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <table id="employeeTable" class="table table-striped table-bordered" style="width:100% text-align:center" >
+            <div class="px-2 bg-light">
+              <marquee class="py-3" direction="left" onmouseover="this.stop()" onmouseout="this.start()" style=" color:#ff0018">
+                  Scroll ke Kanan Untuk Tombol Aksi
+              </marquee>
+            </div>
+            <table id="employeeTable" class="table table-striped table-bordered" style="width:120%" >
               <thead>
-                  <tr>
+                  <tr style="text-align:center">
                       <th>Nomor</th>
                       <th>Agunan_ID</th>
                       <th>Tanggal</th>
@@ -118,24 +123,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th>Alamat</th>
                       <th>Jaminan</th>
                       <th>Status</th>
-                      <th style="width:150px;">Deskripsi</th>
+                      <th>Deskripsi</th>
                       <th>Lokasi</th>
-                      <th style="width:250px;">Action</th>
+                      <th>Action</th>
                   </tr>
               </thead>
               <tbody id="bodyTableAsetDokumen">
-                <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                </tr>
+
               </tbody>
           </table>
             </div>
@@ -227,15 +221,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </style>
 
   <script>
-        $(document).ready(function() {
-            $('#employeeTable').DataTable( {
-                "scrollX": true,
-                "autoWidth" : true,
-                "searching": false,
-                "aaSorting" : []
-            } );
-        } );
-
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         })

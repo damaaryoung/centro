@@ -90,9 +90,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="table_request_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                    <table id="table_request_jaminan" class="table table-striped table-bordered" style="width:100%" >
                         <thead>
-                            <tr>
+                            <tr  style="text-align:center">
                                 <th>Nomor</th>
                                 <th>Tanggal</th>
                                 <th>Nama Kantor Asal</th>
@@ -102,14 +102,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </tr>
                         </thead>
                         <tbody id="table_body_request_jaminan">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                         </tbody>
                     </table>
                     <br>    
