@@ -165,120 +165,128 @@
           <!-- END MENU CREDIT CHECKING -->
 
           <!-- START MENU ASURANSI -->
-          <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-          <li class="nav-item has-treeview">
+            <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
+                <p>
+                  Asuransi
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-home icon_color_sidebar"></i>
                 <p>
                   Asuransi Jaminan
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-              <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                <ul class="nav nav-treeview">
+                  <?php if($this->session->userdata('rekap_titipan_asuransi_jaminan') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jaminan" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Rekap Titipan Asuransi Jaminan</p>
                     </a>
                   </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>cover_asuransi_jaminan" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Pengcoveran Asuransi Jaminan</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>polis_asuransi_jaminan" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Polis Asuransi Jaminan</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jaminan" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Pengajuan Klaim Asuransi Jaminan</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>proses_klaim_asuransi" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Proses Klaim Asuransi Jaminan</p>
-                    </a>
-                  </li>
-                <?php }?>
-              </ul>
-            </li>
-            <?php }?>
-            <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
-                <p>
-                  Asuransi Jiwa
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Rekap Titipan Asuransi Jiwa</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>cover_asuransi_jiwa" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Pengcoveran Asuransi Jiwa</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>polis_asuransi_jiwa" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Polis Asuransi Jiwa</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jiwa" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Pengajuan Klaim Asuransi Jiwa</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>proses_klaim_asuransi" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Proses Klaim Asuransi Jiwa</p>
-                    </a>
-                  </li>
-                <?php }?>
-                <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                  <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>laporan_asuransi" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Laporan Asuransi</p>
-                    </a>
-                  </li>
-                <?php }?>
-              </ul>
-            </li>
-            <?php }?>
+                  <?php }?>
+                  <?php if($this->session->userdata('pengcoveran_asuransi_jaminan') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>cover_asuransi_jaminan" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pengcoveran Asuransi Jaminan</p>
+                      </a>
+                    </li>
+                  <?php }?>
+                  <?php if($this->session->userdata('polis_asuransi_jaminan') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>polis_asuransi_jaminan" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Polis Asuransi Jaminan</p>
+                      </a>
+                    </li>
+                  <?php }?>
+                  <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jaminan" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pengajuan Klaim Asuransi Jaminan</p>
+                      </a>
+                    </li>
+                  <?php }?>
+                  <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>proses_klaim_asuransi" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Proses Klaim Asuransi Jaminan</p>
+                      </a>
+                    </li>
+                  <?php }?>
+                </ul>
+              </li>
+
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-heartbeat icon_color_sidebar"></i>
+                  <p>
+                    Asuransi Jiwa
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <?php if($this->session->userdata('rekap_titipan_asuransi_jiwa') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Rekap Titipan Asuransi Jiwa</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('polis_asuransi_jiwa') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>cover_asuransi_jiwa" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Pengcoveran Asuransi Jiwa</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('pengcoveran_asuransi_jiwa') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>polis_asuransi_jiwa" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Polis Asuransi Jiwa</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jiwa" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Pengajuan Klaim Asuransi Jiwa</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>proses_klaim_asuransi" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Proses Klaim Asuransi Jiwa</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>laporan_asuransi" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Laporan Asuransi</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                </ul>
+              </li>
+            </ul>
+          </li>
           <!-- END MENU ASURANSI -->
 
 
