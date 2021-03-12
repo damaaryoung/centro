@@ -32,9 +32,9 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                     WHEN AK.`status_klaim` = '0' 
                     THEN 'WAITING' 
                     WHEN AK.`status_klaim` = '1' 
-                    THEN 'PROSES' 
+                    THEN 'RETURN'
                     WHEN AK.`status_klaim` = '2' 
-                    THEN 'RETURN' 
+                    THEN 'PROSES' 
                   END AS `status_klaim`,
                   K.`TGL_REALISASI`,
                   N.`NAMA_NASABAH`,
@@ -69,9 +69,9 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                     WHEN AK.`status_klaim` = '0' 
                     THEN 'WAITING' 
                     WHEN AK.`status_klaim` = '1' 
-                    THEN 'PROSES' 
+                    THEN 'RETURN'
                     WHEN AK.`status_klaim` = '2' 
-                    THEN 'RETURN' 
+                    THEN 'PROSES' 
                   END AS `status_klaim`,
                   K.`TGL_REALISASI`,
                   N.`NAMA_NASABAH`,
@@ -174,12 +174,7 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                                                             created_by,
                                                             create_date)
                                 SELECT '$no_trans','$modal_reff_asuransi_jaminan', '$modal_rek_jaminan', '$jenis_asuransi', '$modal_jenis_klaim_jaminan', '0',
-                                        '$root_document', '$root_address', '$pathFile', '$userID', NOW() FROM DUAL
-                                WHERE NOT EXISTS 
-                                        (SELECT 1 FROM asuransi_klaim 
-                                            WHERE no_reff_asuransi = '$modal_reff_asuransi_jaminan'
-                                            AND no_rekening = '$modal_rek_jaminan'
-                                            AND jenis_asuransi = '$jenis_asuransi');");
+                                        '$root_document', '$root_address', '$pathFile', '$userID', NOW() FROM DUAL;");
         $this->db2->trans_complete();
         return 'sukses';
   }
@@ -227,7 +222,8 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                   AK.`jenis_klaim`,
                   AK.`root_document`,
                   AK.`root_address`,
-                  AK.`path_file` 
+                  AK.`path_file`,
+                  AK.`ket_return`
                 FROM
                   ASURANSI_KLAIM AK 
                   LEFT JOIN ASURANSI_COVER AC
@@ -250,11 +246,13 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
-  public function update_without_upload($rek_update,$no_transaksi,$jenis_asuransi,$upload_update,$jenis_klaim,$userID){
+  public function update_without_upload($rek_update,$no_transaksi,$jenis_asuransi,$upload_update,$jenis_klaim,$userID,$status){
     $this->db2 = $this->load->database('DB_CENTRO', true);
         $this->db2->trans_start();
         $this->db2->query("UPDATE asuransi_klaim AK
                             SET AK.`jenis_klaim` = '$jenis_klaim',
+                                AK.`ket_return`   = '',
+                                AK.`status_klaim` = '$status',
                                 AK.`updated_by`  = '$userID',
                                 AK.`updated_date`= NOW()
                             WHERE AK.`no_rekening` = '$rek_update'
@@ -268,6 +266,7 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                                               $jenis_asuransi,
                                               $jenis_klaim,
                                               $userID,
+                                              $status,
                                               $root_document,
                                               $root_address,
                                               $pathFile){
@@ -278,6 +277,8 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                                AK.`root_document` = '$root_document',
                                AK.`root_address` = '$root_address',
                                AK.`path_file` = '$pathFile',
+                               AK.`ket_return`   = '',
+                               AK.`status_klaim` = '$status',
                                AK.`updated_by`  = '$userID',
                                AK.`updated_date`= NOW()
                            WHERE AK.`no_rekening` = '$rek_update'

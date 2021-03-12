@@ -217,7 +217,7 @@
                   <?php }?>
                   <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
-                      <a href="<?php echo base_url(); ?>proses_klaim_asuransi" class="nav-link">
+                      <a href="<?php echo base_url(); ?>proses_klaim_jaminan" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Proses Klaim Asuransi Jaminan</p>
                       </a>
@@ -269,22 +269,22 @@
                     <?php }?>
                     <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
-                        <a href="<?php echo base_url(); ?>proses_klaim_asuransi" class="nav-link">
+                        <a href="<?php echo base_url(); ?>proses_klaim_jiwa" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Proses Klaim Asuransi Jiwa</p>
                         </a>
                       </li>
                     <?php }?>
-                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url(); ?>laporan_asuransi" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Laporan Asuransi</p>
-                        </a>
-                      </li>
-                    <?php }?>
                 </ul>
               </li>
+              <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>laporan_asuransi" class="nav-link">
+                    <i class="fas fa-file-medical-alt nav-icon icon_color_sidebar"></i>
+                    <p>Laporan Asuransi</p>
+                  </a>
+                </li>
+              <?php }?>
             </ul>
           </li>
           <!-- END MENU ASURANSI -->

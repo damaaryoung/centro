@@ -602,10 +602,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                   <div class="col-sm-2">
                                                       <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan_update">File Attachment</label>
                                                   </div>
-                                                  <div class="col-sm-2">
+                                                  <div class="col-sm-4">
                                                       <label style="padding-top: 5px;" class="control-label">
                                                         <i class="fas fa-file"></i> <a href="" id="attachment_jaminan_update" target="_blank">File Upload</a>
                                                       </label>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Keterangan Return</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <textarea style="height: 150px;" type="text" class="form-control" id="modal_ket_return_update" name="modal_ket_return_update" readonly></textarea>
                                                   </div>
                                   </div>
                               </div>
@@ -764,6 +770,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label style="padding-top: 5px;" class="control-label">
                                                         <i class="fas fa-file"></i> <a href="" id="attachment_jiwa_update" target="_blank">File Upload</a>
                                                       </label>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Keterangan Return</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <textarea style="height: 150px;" type="text" class="form-control" id="modal_ket_return_jiwa_update" name="modal_ket_return_jiwa_update" readonly></textarea>
                                                   </div>
                                   </div>
                                   

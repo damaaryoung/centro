@@ -73,5 +73,6 @@ $route['polis_asuransi_jaminan'] = 'Asuransi/Polis_asuransi_jaminan_controller/m
 $route['polis_asuransi_jiwa'] = 'Asuransi/Polis_asuransi_jiwa_controller/main_view_polis_asuransi_jiwa';
 $route['pengajuan_klaim_asuransi_jaminan'] = 'Asuransi/Pengajuan_klaim_asuransi_controller/menu_klaim_jaminan';
 $route['pengajuan_klaim_asuransi_jiwa'] = 'Asuransi/Pengajuan_klaim_asuransi_controller/menu_klaim_jiwa';
-$route['proses_klaim_asuransi'] = 'Asuransi/Proses_klaim_asuransi_controller/index';
+$route['proses_klaim_jiwa'] = 'Asuransi/Proses_klaim_jiwa_controller/index';
+$route['proses_klaim_jaminan'] = 'Asuransi/Proses_klaim_jaminan_controller/index';
 $route['laporan_asuransi'] = 'Asuransi/Laporan_asuransi_controller/index';
