@@ -89,7 +89,6 @@ function getData(){
                 $('#table_request_jaminan').DataTable().destroy();
                 dataTableeee.push(response);
                 if(response == ''){
-                    alert('Data tidak di temukan');
                     $('#table_request_jaminan > tbody:first').html('');
                 }else{
                     $('#table_request_jaminan > tbody:first').html(dataTableeee);

@@ -39,7 +39,7 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 			$kode_kantor = $this->session->userdata('kd_cabang');
 			$list_request_jaminan = $this->Request_Jaminan_Centro_Model->list_request_jaminan($kode_kantor);
 			if(count($list_request_jaminan) == 0){
-				$data [] = '';
+				$data[] = '';
 				
 			}else{
 				foreach ($list_request_jaminan as $row) :
@@ -85,7 +85,7 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 			$kode_kantor = $this->input->post('kode_kantor');
 			$listJaminanSearch = $this->Request_Jaminan_Centro_Model->listJaminanSearch($search,$kode_kantor);
 			if(count($listJaminanSearch) == 0){
-				$data [] = '';
+				$data[] = '';
 				
 			}else{
 				foreach ($listJaminanSearch as $row) :
@@ -163,7 +163,7 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 
 		$getJaminanDokumen = $this->Request_Jaminan_Centro_Model->getJaminanDokumen($kode_kantor, $kode_kantor_lokasi_jaminan);
 		if(count($getJaminanDokumen) == 0){
-			$data [] = '';
+			$data[] = '';
 			
 		}else{
 			foreach ($getJaminanDokumen as $row) :	
@@ -199,7 +199,7 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 
 		$getSearchJaminanDokumen = $this->Request_Jaminan_Centro_Model->getSearchJaminanDokumen($kode_kantor,$search);
 		if(count($getSearchJaminanDokumen) == 0){
-			$data [] = '';
+			$data[] = '';
 			
 		}else{
 			foreach ($getSearchJaminanDokumen as $row) :
