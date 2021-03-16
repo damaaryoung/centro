@@ -232,6 +232,10 @@ class Model_cek_sertifikat extends CI_Model{
               $this->db->query("UPDATE agunan_tanah AT
                                 SET at.`agunan_id` = '$agunan_id'
                                 WHERE at.`id_trans_so` = '$id_so';");
+              $this->db2->query("UPDATE counter 
+                                  SET nomor = nomor + 1  
+                                  WHERE setting= CONCAT('ASSET_IN','$kode_kantor')
+                                  AND nomor <= nomor + 1;");
               $this->db2->query("INSERT INTO jaminan_header(id,nomor,no_reff,tgl,nama, alamat,kota,jenis_jaminan,roda_kendaraan,STATUS,ket,
                                       kode_kantor,
                                       no_rekening,
