@@ -123,5 +123,12 @@ class E_FilingController extends CI_Controller {
 		$data = $model->user_access_efiling();
 		echo json_encode($data);
 	}
+
+	public function Get_verifikasi(){
+		$model = new EFilingModel();
+		$model->no_rekening = $this->input->post('no_rekening');
+		$data = $model->query_get_verifikasi();
+		echo json_encode($data);
+	}
 }
 

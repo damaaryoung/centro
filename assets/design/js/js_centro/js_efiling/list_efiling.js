@@ -22,7 +22,7 @@ $(document).ready(function () {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   }
-  console.log(parseJwt(token))
+console.log(parseJwt(token))
 })
 
 let token = localStorage.getItem("token");
@@ -97,7 +97,6 @@ function getAll(url) {
     },
     "initComplete": function (settings, json) {
       if (json.status == "success") {
-        // userAccess()
         list_data(json.data.data)
         buildPagination(json.data);
       } else {
@@ -172,15 +171,15 @@ function filter_efiling(kode_area, filter_release, status, search) {
         $('#efilingTable1').DataTable().clear();
         $('#efilingTable1').DataTable().destroy();
         $('#loading').hide();
-          list_data(respon.data)
-          $('#efilingTable1').DataTable({
-            "destroy": true,
-            "scrollX": true,
-            "autoWidth": false,
-            "aaSorting": [],
-            "searching": false,
-            "searchable": false
-          });
+        list_data(respon.data)
+        $('#efilingTable1').DataTable({
+          "destroy": true,
+          "scrollX": true,
+          "autoWidth": false,
+          "aaSorting": [],
+          "searching": false,
+          "searchable": false
+        });
         console.log(respon)
       },
       error: function (jqXHR, exception) {
@@ -195,6 +194,7 @@ function filter_efiling(kode_area, filter_release, status, search) {
 
 // inner data efiling
 function list_data(respon) {
+  userAccess()
   $('#loading').hide();
   let data = respon
   let row = ''
@@ -246,50 +246,65 @@ function list_data(respon) {
                 <td style="${stcolor}; font-weight: bold;">${((data[i]['status_verifikasi']== null)?'':data[i]['status_verifikasi'])}</td>
                 <td>
                   <div style ="display : flex; ">
-                    <div class="btn-action">
-                    <button type="button" class="btn btn-info btn-sm edit" title="Edit" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top" ><i class="fas fa-pencil-alt"></i></button>
-                    </div>
-                    <div class="btn-action">
-                    <button type="button" class="btn btn-warning btn-sm detail" title="View" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-eye"></i></button>
-                    </div>
-                    <div class="btn-action">
-                    <button type="button" class="btn btn-warning btn-sm verifikasi" title="Verifikasi"  style="background-color: #6610f2; border-color: #6f42c1;" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-user-check"></i></button>
+                  ${((data[i]['status_verifikasi']== "DONE") ? `<div class="btn-action">
+                  <button type="button" class="btn btn-warning btn-sm detail" title="View" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-eye"></i></button>
+                  </div>`:`
+                  <div class="btn-action">
+                    <button type="button" class="btn btn-info btn-sm edit" title="Edit" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top" ><i class="fas fa-pencil-alt"></i></button>
+                  </div>
+                  <div class="btn-action">
+                    <button type="button" class="btn btn-success btn-sm verifikasi" title="Verifikasi" style="display:none;"   kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-user-check"></i></button>
+                  </div> 
+                  `)}
                     </div>  
                   </div >
                 </td>
             </tr>`
   }
 
+  // <div class="btn-action">
+  //                   <button type="button" class="btn btn-info btn-sm edit" title="Edit" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top" ><i class="fas fa-pencil-alt"></i></button>
+  //                   </div>
+  //                   <div class="btn-action">
+  //                   <button type="button" class="btn btn-warning btn-sm detail" title="View" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-eye"></i></button>
+  //                   </div>
+  //                   <div class="btn-action">
+  //                   <button type="button" class="btn btn-success btn-sm verifikasi" title="Verifikasi" style="display:none;"   kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-user-check"></i></button>
   // $('#efilingTable1').find('tbody').html(row);
   document.getElementById('list_dt').innerHTML = row
   action_Data();
 }
 
 function userAccess() {
-  let data ={
-    user_id : parseJwt(token).id,
-    divisi_id : parseJwt(token).divisi_id,
-    jabatan : parseJwt(token).jabatan
-  } 
+  let data = {
+    user_id: parseJwt(token).id,
+    divisi_id: parseJwt(token).divisi_id,
+    jabatan: parseJwt(token).jabatan
+  }
   $.ajax({
     url: base_url + "E_FilingController/UserAccess_Efiling/",
     type: "POST",
-    data :data,
+    data: data,
     dataType: "json",
     success: function (respon) {
-      let menu = JSON.parse(respon.menu);
-      let data = {
-        edit : menu.find(element => element == 1),
-        view : menu.find(element => element == 2),
-        upload_aset_ra : menu.find(element => element == 3),
-        verifikasi : menu.find(element => element == 4),
-        update_status : menu.find(element => element == 5),
+      let menu = ''
+      if(respon == null){
+        $('.edit').show();
+      }else{
+        let menu = JSON.parse(respon.menu)
 
-      }
-      
-     
-      if(menu.find(element => element == 1) == undefined){
-        return $('.edit').css('display','none');
+        if (menu.find(element => element == 1)) {
+          $('.edit').show();
+        }
+        if (menu.find(element => element == 2)) {
+          $('.frm-release-asset').show();
+        } 
+        if (menu.find(element => element == 3)) {
+          $('.verifikasi').show();
+        } 
+        if (menu.find(element => element == 4)) {
+          $('#vert-tabs-status-tab').show();
+        }
       }
     }
   })
