@@ -20,6 +20,7 @@ var main_nomor                 = '';
 var mainVerifikasi   = '';
 var dataDefaultVerif = '';
 var main_pic         = '';
+var kode_kantor_tujuan = '';
 
 
 $(document).ready(function () {     
@@ -87,7 +88,7 @@ $('#btn_simpan').click(function () {
     main_nomor                 = $('#main_nomor').val();
     mainVerifikasi             = $('#mainVerifikasi').val();
     main_pic                   = $('#main_pic').val();
-    
+    kode_kantor_tujuan         = $('#kode_kantor_tujuan').val();
     dataDefaultVerif = $('#dataDefaultVerif').val();
 
     for(i = 0; i < mainTable.length; i++ ){
@@ -120,6 +121,7 @@ $('#btn_simpan').click(function () {
                 "main_tanggal"               : main_tanggal,
                 "kode_custodian"             : kode_custodian,
                 "kode_kantor_lokasi_jaminan" : kode_kantor_lokasi_jaminan,
+                "kode_kantor_tujuan"         : kode_kantor_tujuan,
                 "main_keperluan"             : main_keperluan,
                 "main_keterangan"            : main_keterangan,
                 "mainVerifikasi"             : mainVerifikasi,

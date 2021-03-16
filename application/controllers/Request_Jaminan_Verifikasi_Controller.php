@@ -150,7 +150,7 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		$main_nomor                 = $this->input->post('main_nomor');
 		$main_tanggal               = $this->input->post('main_tanggal');
 		$kode_custodian             = $this->input->post('kode_custodian');
-		$kode_kantor_tujuan         = $this->session->userdata('kd_cabang');
+		$kode_kantor_tujuan         = $this->input->post('kode_kantor_tujuan');
 		$kode_kantor_lokasi_jaminan = $this->input->post('kode_kantor_lokasi_jaminan');
 		$main_keperluan             = $this->input->post('main_keperluan');
 		$main_keterangan            = $this->input->post('main_keterangan');
@@ -163,7 +163,7 @@ class Request_Jaminan_Verifikasi_Controller extends CI_Controller {
 		$data['main_nomor']                 = $this->input->post('main_nomor');
 		$data['main_tanggal']               = $this->input->post('main_tanggal');
 		$data['kode_custodian']             = $this->input->post('kode_custodian');
-		$data['kode_kantor_tujuan']         = $this->session->userdata('kd_cabang');
+		$data['kode_kantor_tujuan']         = $this->input->post('kode_kantor_tujuan');;
 		$data['kode_kantor_lokasi_jaminan'] = $this->input->post('kode_kantor_lokasi_jaminan');
 		$data['main_keperluan']             = $this->input->post('main_keperluan');
 		$data['main_keterangan']            = $this->input->post('main_keterangan');
