@@ -679,7 +679,8 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_jenis_klaim_jaminan_update').val(response.data_details[0]['jenis_klaim']);
         $('#modal_no_transaksi_jaminan_update').val(response.data_details[0]['no_transaksi']);
         $('#modal_jenis_asuransi_jaminan_update').val(response.data_details[0]['jenis_asuransi']);
-        
+        $('#modal_ket_return_update').val(response.data_details[0]['ket_return']);
+
 
         document.getElementById("attachment_jaminan_update").href = response.data_details[0]['root_address'] + response.data_details[0]['path_file']; 
         
@@ -701,6 +702,7 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_polis_jaminan_update').val('');
         $('#modal_no_transaksi_jaminan_update').val('');
         $('#modal_jenis_asuransi_jaminan_update').val('');
+        $('#modal_ket_return_update').val('');
         document.getElementById("attachment_jaminan_update").href = '';
     }
     ///END PENGAJUAN KLAIM JAMINAN ///
@@ -928,6 +930,7 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_jenis_klaim_jiwa_update').val(response.data_details[0]['jenis_klaim']);
         $('#modal_jenis_asuransi_jiwa_update').val(response.data_details[0]['jenis_asuransi']);
         $('#modal_no_transaksi_jiwa_update').val(response.data_details[0]['no_transaksi']);
+        $('#modal_ket_return_jiwa_update').val(response.data_details[0]['ket_return']);
 
         document.getElementById("attachment_jiwa_update").href = response.data_details[0]['root_address'] + response.data_details[0]['path_file']; 
 
@@ -954,6 +957,7 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_jenis_klaim_jiwa_update').val('');
         $('#modal_jenis_asuransi_jiwa_update').val('');
         $('#modal_no_transaksi_jiwa_update').val('');
+        $('#modal_ket_return_jiwa_update').val('');
 
         document.getElementById("attachment_jiwa_update").href = '';
     }

@@ -66,9 +66,9 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                     LEFT JOIN app_kode_kantor kk2 
                     ON kk2.kode_kantor = jp.kode_kantor_tujuan 
                 WHERE jp.kode_kantor_lokasi_jaminan = '$kode_kantor' 
-                    OR (jp.nomor LIKE '$search' 
-                        OR kk1.nama_kantor LIKE '$search' 
-                        OR kk2.nama_kantor LIKE '$search'
+                    AND (jp.nomor LIKE '$search%' 
+                        OR kk1.nama_kantor LIKE '$search%' 
+                        OR kk2.nama_kantor LIKE '$search%'
                     ) #HAVING verifikasi = 0 
                 ORDER BY verifikasi ASC, tgl DESC,  jp.nomor DESC 
                 LIMIT 0, 25 ;";

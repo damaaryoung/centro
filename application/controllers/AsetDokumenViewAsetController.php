@@ -50,7 +50,7 @@ class AsetDokumenViewAsetController extends CI_Controller {
 
 		if($session != ''){
 			
-			$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
+			//$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			
 			$this->load->view('ViewAsetDokumen/EntryAsetDokumen.php', $data);
 		}

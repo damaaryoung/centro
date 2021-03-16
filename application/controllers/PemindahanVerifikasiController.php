@@ -10,7 +10,8 @@ class PemindahanVerifikasiController extends CI_Controller {
 
 	public function index(){
         $session = $this->session->userdata('nama');
-        $kode_kantor = $this->session->userdata('kd_cabang');
+        $data['kode_kantor'] = $this->session->userdata('kd_cabang');
+		$data['divisi_id']  = $this->session->userdata('divisi_id');
 		$data['js'] = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css'] = $this->load->view('includes/css.php', NULL, TRUE);
 		$data['navbar'] = $this->load->view('templates/navbar.php', NULL, TRUE);
@@ -19,7 +20,6 @@ class PemindahanVerifikasiController extends CI_Controller {
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
 
 		if($session != ''){
-            $data['selectKodeKantor'] = $this->PemindahanVerifikasiModel->selectKodeKantor();
 			$this->load->view('ViewPemindahanLokasiJaminan/Verifikasi/PemindahanVerifikasiMain.php', $data);
 		}
 		else{
@@ -63,6 +63,10 @@ class PemindahanVerifikasiController extends CI_Controller {
 		echo json_encode($data);
 		
     }
+	public function get_kode_kantor(){
+		$data['kode_kantor'] = $this->PemindahanVerifikasiModel->selectKodeKantor();;
+		echo json_encode($data);
+	}
     public function getListJaminanSearch(){
         $session = $this->session->userdata('nama');
 		$search = $this->input->post('search');

@@ -50,7 +50,6 @@ class AsetDokumenEntryController extends CI_Controller {
 
 		if($session != ''){
 			
-			$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			
 			$this->load->view('ViewAsetDokumen/EntryAsetDokumen.php', $data);
 		}
@@ -196,6 +195,13 @@ class AsetDokumenEntryController extends CI_Controller {
 										
 			endforeach;
 		}
+		echo json_encode($data);
+	}
+	public function get_kode_kantor(){
+
+		$kode_kantor = $this->AsetDokumenEntryModel->selectKodeKantor();
+
+		$data['kode_kantor'] = $kode_kantor;
 		echo json_encode($data);
 	}
 
@@ -1497,34 +1503,37 @@ class AsetDokumenEntryController extends CI_Controller {
 	public function getNomorRekening(){
 		//$data['getNomorRek']   = $this->AsetDokumenEntryModel->getNomorRek();
 		$getNomorRek           = $this->AsetDokumenEntryModel->getNomorRek();
-		foreach ($getNomorRek as $row) :
-			$no_rek            = $row['no_rekening'];
-			$no_alternatif     = $row['no_alternatif'];
-			$nama_nasabah      = $row['nama_nasabah'];
-			$alamat            = $row['alamat'];
-			$jml_pinjaman      = $row['jml_pinjaman'];
-			$tgl_realisasi     = $row['tgl_realisasi'];
-			$tgl_jatuh_tempo   = $row['tgl_jatuh_tempo'];  
-			$pokok_saldo_akhir = $row['pokok_saldo_akhir']; 
-			$verifikasi        = $row['verifikasi'];  
-			$kode_kantor       = $row['kode_kantor']; 
-			
-			$data1[]    = 	['<tr> <td>'. $row['no_rekening'] . '</td> <td>'
-										. $row['no_alternatif']. '</td> <td>'
-										. $row['nama_nasabah'].'</td> <td>'
-										. $row['alamat'] . '</td> <td>'
-										. $row['jml_pinjaman']. '</td> <td>'
-										. $row['tgl_realisasi'].'</td> <td>'
-										. $row['tgl_jatuh_tempo'].'</td> <td>'
-										. $row['pokok_saldo_akhir'] . '</td> <td>'
-										. $row['verifikasi']. '</td> <td>'
-										. $row['kode_kantor'].'</td> <td>'
-										. '<button type="button" class="btn btn-success btn-sm btnPilihRekening"
-											data-norek="'.$no_rek.'" 
-											data-nama="'.$nama_nasabah.'" 
-										    style ="padding-left: 5px;"> Pilih </button> </td> </tr>'];
-		endforeach;	
-		
+		if(count($getNomorRek) == 0){
+			$data1 [] = '';
+		}else{
+			foreach ($getNomorRek as $row) :
+				$no_rek            = $row['no_rekening'];
+				$no_alternatif     = $row['no_alternatif'];
+				$nama_nasabah      = $row['nama_nasabah'];
+				$alamat            = $row['alamat'];
+				$jml_pinjaman      = $row['jml_pinjaman'];
+				$tgl_realisasi     = $row['tgl_realisasi'];
+				$tgl_jatuh_tempo   = $row['tgl_jatuh_tempo'];  
+				$pokok_saldo_akhir = $row['pokok_saldo_akhir']; 
+				$verifikasi        = $row['verifikasi'];  
+				$kode_kantor       = $row['kode_kantor']; 
+				
+				$data1[]    = 	['<tr> <td>'. $row['no_rekening'] . '</td> <td>'
+											. $row['no_alternatif']. '</td> <td>'
+											. $row['nama_nasabah'].'</td> <td>'
+											. $row['alamat'] . '</td> <td>'
+											. $row['jml_pinjaman']. '</td> <td>'
+											. $row['tgl_realisasi'].'</td> <td>'
+											. $row['tgl_jatuh_tempo'].'</td> <td>'
+											. $row['pokok_saldo_akhir'] . '</td> <td>'
+											. $row['verifikasi']. '</td> <td>'
+											. $row['kode_kantor'].'</td> <td>'
+											. '<button type="button" class="btn btn-success btn-sm btnPilihRekening"
+												data-norek="'.$no_rek.'" 
+												data-nama="'.$nama_nasabah.'" 
+												style ="padding-left: 5px;"> Pilih </button> </td> </tr>'];
+			endforeach;	
+		}
 		echo json_encode($data1);
 	}
 
@@ -1836,34 +1845,37 @@ class AsetDokumenEntryController extends CI_Controller {
 	public function getDataSearchRekening(){
 			$search 	= $this->input->post('search');
 			$getNomorRek           = $this->AsetDokumenEntryModel->searchNoRek($search);
-			foreach ($getNomorRek as $row) :
-				$no_rek            = $row['no_rekening'];
-				$no_alternatif     = $row['no_alternatif'];
-				$nama_nasabah      = $row['nama_nasabah'];
-				$alamat            = $row['alamat'];
-				$jml_pinjaman      = $row['jml_pinjaman'];
-				$tgl_realisasi     = $row['tgl_realisasi'];
-				$tgl_jatuh_tempo   = $row['tgl_jatuh_tempo'];  
-				$pokok_saldo_akhir = $row['pokok_saldo_akhir']; 
-				$verifikasi        = $row['verifikasi'];  
-				$kode_kantor       = $row['kode_kantor']; 
-				
-				$data1[]    = 	['<tr> <td>'. $row['no_rekening'] . '</td> <td>'
-											. $row['no_alternatif']. '</td> <td>'
-											. $row['nama_nasabah'].'</td> <td>'
-											. $row['alamat'] . '</td> <td>'
-											. $row['jml_pinjaman']. '</td> <td>'
-											. $row['tgl_realisasi'].'</td> <td>'
-											. $row['tgl_jatuh_tempo'].'</td> <td>'
-											. $row['pokok_saldo_akhir'] . '</td> <td>'
-											. $row['verifikasi']. '</td> <td>'
-											. $row['kode_kantor'].'</td> <td>'
-											. '<button type="button" class="btn btn-success btn-sm btnPilihRekening"
-												data-norek="'.$no_rek.'" 
-												data-nama="'.$nama_nasabah.'" 
-												style ="padding-left: 5px;"> Pilih </button> </td> </tr>'];
-			endforeach;	
-			
+			if(count($getNomorRek) == 0){
+				$data1 [] = '';
+			}else{
+				foreach ($getNomorRek as $row) :
+					$no_rek            = $row['no_rekening'];
+					$no_alternatif     = $row['no_alternatif'];
+					$nama_nasabah      = $row['nama_nasabah'];
+					$alamat            = $row['alamat'];
+					$jml_pinjaman      = $row['jml_pinjaman'];
+					$tgl_realisasi     = $row['tgl_realisasi'];
+					$tgl_jatuh_tempo   = $row['tgl_jatuh_tempo'];  
+					$pokok_saldo_akhir = $row['pokok_saldo_akhir']; 
+					$verifikasi        = $row['verifikasi'];  
+					$kode_kantor       = $row['kode_kantor']; 
+					
+					$data1[]    = 	['<tr> <td>'. $row['no_rekening'] . '</td> <td>'
+												. $row['no_alternatif']. '</td> <td>'
+												. $row['nama_nasabah'].'</td> <td>'
+												. $row['alamat'] . '</td> <td>'
+												. $row['jml_pinjaman']. '</td> <td>'
+												. $row['tgl_realisasi'].'</td> <td>'
+												. $row['tgl_jatuh_tempo'].'</td> <td>'
+												. $row['pokok_saldo_akhir'] . '</td> <td>'
+												. $row['verifikasi']. '</td> <td>'
+												. $row['kode_kantor'].'</td> <td>'
+												. '<button type="button" class="btn btn-success btn-sm btnPilihRekening"
+													data-norek="'.$no_rek.'" 
+													data-nama="'.$nama_nasabah.'" 
+													style ="padding-left: 5px;"> Pilih </button> </td> </tr>'];
+				endforeach;	
+			}
 			echo json_encode($data1);
 	}
 

@@ -22,7 +22,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbVerifikasiKembali">Verifikasi</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <input class="form-control select2" id="bpkbVerifikasiKembali" name="bpkbVerifikasiKembali" disabled>
+                                            <input class="form-control" id="bpkbVerifikasiKembali" name="bpkbVerifikasiKembali" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -44,7 +44,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKantorLokasiKembali">Kantor Lokasi Jaminan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKantorLokasiKembali" name="bpkbKantorLokasiKembali">
+                                            <select class="form-control" id="bpkbKantorLokasiKembali" name="bpkbKantorLokasiKembali">
                                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -54,7 +54,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKodeJenisAgunanKembali">Jenis Agunan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKodeJenisAgunanKembali" name="bpkbKodeJenisAgunanKembali">
+                                            <select class="form-control" id="bpkbKodeJenisAgunanKembali" name="bpkbKodeJenisAgunanKembali">
                                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -64,7 +64,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKodeIkatanAgunanKembali">Ikatan Agunan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKodeIkatanAgunanKembali" name="bpkbKodeIkatanAgunanKembali">
+                                            <select class="form-control" id="bpkbKodeIkatanAgunanKembali" name="bpkbKodeIkatanAgunanKembali">
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -167,12 +167,12 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Merk/Type</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbMerkKembali" name="bpkbMerkKembali">
+                                    <select class="form-control" id="bpkbMerkKembali" name="bpkbMerkKembali">
                                               
                                     </select>
                                   </div>
                                   <div class="col-sm-4">
-                                        <select class="form-control select2" id="bpkbTypeKembali" name="bpkbTypeKembali">
+                                        <select class="form-control" id="bpkbTypeKembali" name="bpkbTypeKembali">
                                                
                                         </select>
                                   </div>
@@ -182,7 +182,7 @@
                                       <label class="control-label" style="padding-top: 6px;" for="">Jenis / Silinder</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbJenisKembali" name="bpkbJenisKembali">
+                                    <select class="form-control" id="bpkbJenisKembali" name="bpkbJenisKembali">
                                                
                                     </select>
                                   </div>
@@ -268,7 +268,7 @@
                       <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokKwitansiBlankoKembali" name="bpkbDokKwitansiBlankoKembali">
+                                    <select class="form-control" id="bpkbDokKwitansiBlankoKembali" name="bpkbDokKwitansiBlankoKembali">
                                           
                                     </select>
                                 </div>
@@ -280,7 +280,7 @@
 
                             <div class="form-group row">
                             <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokFakturPemilikKembali" name="bpkbDokFakturPemilikKembali">
+                                    <select class="form-control" id="bpkbDokFakturPemilikKembali" name="bpkbDokFakturPemilikKembali">
                                            
                                     </select>
                                 </div>
@@ -297,7 +297,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokKwJualBeliKembali" name="bpkbDokKwJualBeliKembali">
+                                    <select class="form-control" id="bpkbDokKwJualBeliKembali" name="bpkbDokKwJualBeliKembali">
                                            
                                     </select>
                                 </div>
@@ -309,7 +309,7 @@
                             <!-- SK TRAYEK -->
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokSKTrayekKembali" name="bpkbDokSKTrayekKembali">
+                                    <select class="form-control" id="bpkbDokSKTrayekKembali" name="bpkbDokSKTrayekKembali">
                                            
                                     </select>
                                 </div>
@@ -364,7 +364,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Status Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikStatusAgunanKembali" name="bpkbSlikStatusAgunanKembali">
+                                        <select class="form-control" id="bpkbSlikStatusAgunanKembali" name="bpkbSlikStatusAgunanKembali">
                                                 
                                         </select>
                                   </div>
@@ -372,7 +372,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Paripasu</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSlikParipasuKembali" name="bpkbSlikParipasuKembali">
+                                        <select class="form-control" id="bpkbSlikParipasuKembali" name="bpkbSlikParipasuKembali">
                                         </select>
                                   </div>
                               </div>                
@@ -381,7 +381,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikJenisAgunanKembali" name="bpkbSlikJenisAgunanKembali">
+                                        <select class="form-control" id="bpkbSlikJenisAgunanKembali" name="bpkbSlikJenisAgunanKembali">
                                         
                                         </select>
                                   </div>
@@ -405,7 +405,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Status Join Account</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSLikStatusJoinAccountKembali" name="bpkbSLikStatusJoinAccountKembali">
+                                        <select class="form-control" id="bpkbSLikStatusJoinAccountKembali" name="bpkbSLikStatusJoinAccountKembali">
                                         </select>
                                   </div>
                               </div>
@@ -414,7 +414,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Lembaga Pemeringkat</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikLembagaPemeringkatKembali" name="bpkbSlikLembagaPemeringkatKembali">
+                                        <select class="form-control" id="bpkbSlikLembagaPemeringkatKembali" name="bpkbSlikLembagaPemeringkatKembali">
                                                
                                         </select>
                                   </div>
@@ -422,7 +422,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Diasuransikan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSlikAsuransiKembali" name="bpkbSlikAsuransiKembali">
+                                        <select class="form-control" id="bpkbSlikAsuransiKembali" name="bpkbSlikAsuransiKembali">
                                        
                                         </select>
                                   </div>
@@ -432,7 +432,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Pengikatan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikJenisPengikatanKembali" name="bpkbSlikJenisPengikatanKembali">
+                                        <select class="form-control" id="bpkbSlikJenisPengikatanKembali" name="bpkbSlikJenisPengikatanKembali">
                                                
                                         </select>
                                   </div>
@@ -474,7 +474,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Kode Dati 2 Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikKodeDati2Kembali" name="bpkbSlikKodeDati2Kembali">
+                                        <select class="form-control" id="bpkbSlikKodeDati2Kembali" name="bpkbSlikKodeDati2Kembali">
                                                 
                                         </select>
                                   </div>

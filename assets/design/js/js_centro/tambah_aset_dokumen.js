@@ -39,6 +39,7 @@ function dataRekening(){
             url : base_url + "AsetDokumenEntryController/getNomorRekening",
             type : "POST",
             dataType : "json",
+            timeout : 180000,
             data : {"test"    : "test"},
 
             success : function(response) {
@@ -59,8 +60,10 @@ function dataRekening(){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                alert('Gagal Get Detail Nomor Rekening, Silahkan Coba Lagi');
+                $('#loading2').hide(); 
                 $('#modalNomorRekening').modal('hide');
+                alert('Gagal Get Detail Nomor Rekening, Mohon Periksa Jaringan Anda!');
+                
             }
     });  
 }
@@ -76,6 +79,7 @@ function serchDataRekening(){
             url : base_url + "AsetDokumenEntryController/getDataSearchRekening",
             type : "POST",
             dataType : "json",
+            timeout : 180000,
             data : {"search"    : search},
 
             success : function(response) {
@@ -96,7 +100,8 @@ function serchDataRekening(){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                alert('Data Tidak Ditemukan');
+                $('#loading2').hide(); 
+                alert('Gagal Get Detail Nomor Rekening, Mohon Periksa Jaringan Anda!');
             }
     });    
 }

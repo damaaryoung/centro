@@ -64,10 +64,10 @@ class Request_Jaminan_Centro_Model extends CI_Model{
                     ON kk1.kode_kantor = jp.kode_kantor_lokasi_jaminan 
                     LEFT JOIN app_kode_kantor kk2 
                     ON kk2.kode_kantor = jp.kode_kantor_tujuan 
-                WHERE jp.kode_kantor_tujuan = '$kode_kantor' 
-                    OR (jp.nomor LIKE '$search' 
-                        OR kk1.nama_kantor LIKE '$search' 
-                        OR kk2.nama_kantor LIKE '$search'
+                WHERE jp.kode_kantor_lokasi_jaminan = '$kode_kantor' 
+                AND (jp.nomor LIKE '$search%' 
+                        OR kk1.nama_kantor LIKE '$search%' 
+                        OR kk2.nama_kantor LIKE '$search%'
                     ) #HAVING verifikasi = 0 
                 ORDER BY jp.nomor DESC 
                 LIMIT 0, 25 ;";

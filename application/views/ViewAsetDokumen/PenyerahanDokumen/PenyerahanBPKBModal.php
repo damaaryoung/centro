@@ -22,7 +22,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbVerifikasiPenyerahan">Verifikasi</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <input class="form-control select2" id="bpkbVerifikasiPenyerahan" name="bpkbVerifikasiPenyerahan" disabled>
+                                            <input class="form-control" id="bpkbVerifikasiPenyerahan" name="bpkbVerifikasiPenyerahan" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -44,7 +44,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKantorLokasiPenyerahan">Kantor Lokasi Jaminan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKantorLokasiPenyerahan" name="bpkbKantorLokasiPenyerahan">
+                                            <select class="form-control" id="bpkbKantorLokasiPenyerahan" name="bpkbKantorLokasiPenyerahan">
                                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -54,7 +54,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKodeJenisAgunanPenyerahan">Jenis Agunan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKodeJenisAgunanPenyerahan" name="bpkbKodeJenisAgunanPenyerahan">
+                                            <select class="form-control" id="bpkbKodeJenisAgunanPenyerahan" name="bpkbKodeJenisAgunanPenyerahan">
                                                         <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -64,7 +64,7 @@
                                             <label class="control-label" style="padding-top: 5px;" for="bpkbKodeIkatanAgunanPenyerahan">Ikatan Agunan</label>
                                         </div>
                                         <div class="col-sm-7">
-                                            <select class="form-control select2" id="bpkbKodeIkatanAgunanPenyerahan" name="bpkbKodeIkatanAgunanPenyerahan">
+                                            <select class="form-control" id="bpkbKodeIkatanAgunanPenyerahan" name="bpkbKodeIkatanAgunanPenyerahan">
                                                 <option value="" selected disabled hidden>Silahkan Pilih</option>
                                             </select>
                                         </div>
@@ -167,12 +167,12 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Merk/Type</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbMerkPenyerahan" name="bpkbMerkPenyerahan">
+                                    <select class="form-control" id="bpkbMerkPenyerahan" name="bpkbMerkPenyerahan">
                                               
                                     </select>
                                   </div>
                                   <div class="col-sm-4">
-                                        <select class="form-control select2" id="bpkbTypePenyerahan" name="bpkbTypePenyerahan">
+                                        <select class="form-control" id="bpkbTypePenyerahan" name="bpkbTypePenyerahan">
                                                
                                         </select>
                                   </div>
@@ -182,7 +182,7 @@
                                       <label class="control-label" style="padding-top: 6px;" for="">Jenis / Silinder</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <select class="form-control select2" id="bpkbJenisPenyerahan" name="bpkbJenisPenyerahan">
+                                    <select class="form-control" id="bpkbJenisPenyerahan" name="bpkbJenisPenyerahan">
                                                
                                     </select>
                                   </div>
@@ -268,7 +268,7 @@
                       <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokKwitansiBlankoPenyerahan" name="bpkbDokKwitansiBlankoPenyerahan">
+                                    <select class="form-control" id="bpkbDokKwitansiBlankoPenyerahan" name="bpkbDokKwitansiBlankoPenyerahan">
                                           
                                     </select>
                                 </div>
@@ -280,7 +280,7 @@
 
                             <div class="form-group row">
                             <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokFakturPemilikPenyerahan" name="bpkbDokFakturPemilikPenyerahan">
+                                    <select class="form-control" id="bpkbDokFakturPemilikPenyerahan" name="bpkbDokFakturPemilikPenyerahan">
                                            
                                     </select>
                                 </div>
@@ -297,7 +297,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokKwJualBeliPenyerahan" name="bpkbDokKwJualBeliPenyerahan">
+                                    <select class="form-control" id="bpkbDokKwJualBeliPenyerahan" name="bpkbDokKwJualBeliPenyerahan">
                                            
                                     </select>
                                 </div>
@@ -309,7 +309,7 @@
                             <!-- SK TRAYEK -->
                             <div class="form-group row">
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" id="bpkbDokSKTrayekPenyerahan" name="bpkbDokSKTrayekPenyerahan">
+                                    <select class="form-control" id="bpkbDokSKTrayekPenyerahan" name="bpkbDokSKTrayekPenyerahan">
                                            
                                     </select>
                                 </div>
@@ -364,7 +364,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Status Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikStatusAgunanPenyerahan" name="bpkbSlikStatusAgunanPenyerahan">
+                                        <select class="form-control" id="bpkbSlikStatusAgunanPenyerahan" name="bpkbSlikStatusAgunanPenyerahan">
                                                 
                                         </select>
                                   </div>
@@ -372,7 +372,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Paripasu</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSlikParipasuPenyerahan" name="bpkbSlikParipasuPenyerahan">
+                                        <select class="form-control" id="bpkbSlikParipasuPenyerahan" name="bpkbSlikParipasuPenyerahan">
                                         </select>
                                   </div>
                               </div>                
@@ -381,7 +381,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikJenisAgunanPenyerahan" name="bpkbSlikJenisAgunanPenyerahan">
+                                        <select class="form-control" id="bpkbSlikJenisAgunanPenyerahan" name="bpkbSlikJenisAgunanPenyerahan">
                                         
                                         </select>
                                   </div>
@@ -405,7 +405,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Status Join Account</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSLikStatusJoinAccountPenyerahan" name="bpkbSLikStatusJoinAccountPenyerahan">
+                                        <select class="form-control" id="bpkbSLikStatusJoinAccountPenyerahan" name="bpkbSLikStatusJoinAccountPenyerahan">
                                         </select>
                                   </div>
                               </div>
@@ -414,7 +414,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Lembaga Pemeringkat</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikLembagaPemeringkatPenyerahan" name="bpkbSlikLembagaPemeringkatPenyerahan">
+                                        <select class="form-control" id="bpkbSlikLembagaPemeringkatPenyerahan" name="bpkbSlikLembagaPemeringkatPenyerahan">
                                                
                                         </select>
                                   </div>
@@ -422,7 +422,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Diasuransikan</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="bpkbSlikAsuransiPenyerahan" name="bpkbSlikAsuransiPenyerahan">
+                                        <select class="form-control" id="bpkbSlikAsuransiPenyerahan" name="bpkbSlikAsuransiPenyerahan">
                                        
                                         </select>
                                   </div>
@@ -432,7 +432,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Jenis Pengikatan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikJenisPengikatanPenyerahan" name="bpkbSlikJenisPengikatanPenyerahan">
+                                        <select class="form-control" id="bpkbSlikJenisPengikatanPenyerahan" name="bpkbSlikJenisPengikatanPenyerahan">
                                                
                                         </select>
                                   </div>
@@ -474,7 +474,7 @@
                                       <label class="control-label" style="padding-top: 5px;" for="">Kode Dati 2 Agunan</label>
                                   </div>
                                   <div class="col-sm-5">
-                                        <select class="form-control select2" id="bpkbSlikKodeDati2Penyerahan" name="bpkbSlikKodeDati2Penyerahan">
+                                        <select class="form-control" id="bpkbSlikKodeDati2Penyerahan" name="bpkbSlikKodeDati2Penyerahan">
                                                 
                                         </select>
                                   </div>

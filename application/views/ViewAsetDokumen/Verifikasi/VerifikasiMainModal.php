@@ -23,7 +23,7 @@
                                     <label style="padding-top: 6px;" class="control-label" for="mainVerifikasi">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <select class="form-control select2" id="mainVerifikasi" name="mainVerifikasi"> </select>
+                                    <select class="form-control" id="mainVerifikasi" name="mainVerifikasi"> </select>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -31,7 +31,7 @@
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerja">Area Kerja</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <select class="form-control select2" id="mainAreaKerja" name="mainAreaKerja" required readonly>
+                                    <select class="form-control" id="mainAreaKerja" name="mainAreaKerja" required readonly>
                                     </select>
                                   </div>
                                   <div class="col-sm-1">
@@ -48,7 +48,7 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainTransaksi">Transaksi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="mainTransaksi" name="mainTransaksi" readonly>
+                                        <select class="form-control" id="mainTransaksi" name="mainTransaksi" readonly>
                                             
                                         </select>
                                   </div>

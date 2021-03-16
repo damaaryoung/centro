@@ -24,7 +24,7 @@
                                     <label style="padding-top: 6px;" class="control-label" for="mainVerifikasi">Verifikasi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input class="form-control select2" id="mainVerifikasi" name="mainVerifikasi" disabled>
+                                    <input class="form-control" id="mainVerifikasi" name="mainVerifikasi" disabled>
                                   </div>
                               </div>                          
                               <div class="form-group row">
@@ -32,7 +32,7 @@
                                       <label class="control-label" style="padding-top: 5px;"  for="mainAreaKerja">Area Kerja</label>
                                   </div>
                                   <div class="col-sm-5">
-                                    <select class="form-control select2" id="mainAreaKerja" name="mainAreaKerja" required>
+                                    <select class="form-control" id="mainAreaKerja" name="mainAreaKerja" required>
                                     </select>
                                   </div>
                                   <div class="col-sm-1">
@@ -47,7 +47,7 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainTransaksi">Transaksi</label>
                                   </div>
                                   <div class="col-sm-3">
-                                        <select class="form-control select2" id="mainTransaksi" name="mainTransaksi">
+                                        <select class="form-control" id="mainTransaksi" name="mainTransaksi">
                                             
                                         </select>
                                   </div>
@@ -98,10 +98,10 @@
                                       <label style="padding-top: 6px;" class="control-label" for="mainNomorRekening">Nomor Rekening</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mainNomorRekening" name="mainNomorRekening" readonly>
+                                    <input type="text" class="form-control" id="mainNomorRekening" name="mainNomorRekening">
                                   </div>
                                   <div class="col-sm-1">
-                                      <button type="button" class="btn btn-success btn-sm" id="mainBtnSearchRekening" disabled> <i class="fa fa-search"> </i></button>
+                                      <button type="button" class="btn btn-success btn-sm" id="mainBtnSearchRekening"> <i class="fa fa-search"> </i></button>
                                   </div>
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="mainTanggalRealisasi">Tanggal Realisasi</label>
@@ -260,16 +260,22 @@
 
     <!-- Data Tables -->
     <div class="box">
+    
+    <div class="px-2 bg-light">
+              <marquee class="py-3" direction="left" onmouseover="this.stop()" onmouseout="this.start()" style=" color:#ff0018">
+                  Scroll ke Kanan Untuk Tombol Aksi
+              </marquee>
+    </div>
     <div class="form-inline" style="padding : 10px; float: right">
                     <div class="form-group">
                       <label for="email">Search</label> &nbsp; &nbsp;
                       <input type="text" class="form-control" name="searchRekeningUpdate" id="searchRekeningUpdate" onchange="serchDataRekening()"> 
                      &nbsp;&nbsp;
                     </div>
-      </div>
+    </div>
     <div id="loading7">
               <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
-      </div>
+    </div>
         <div class="card-body">
             <table id="TableNoRek" class="table table-striped table-bordered" style="width:100% text-align:center" >
               <thead>

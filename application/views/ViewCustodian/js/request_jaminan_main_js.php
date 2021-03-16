@@ -3,9 +3,16 @@ var dataTableeee = [];
 var search = '';
 var kode_kantor = '';
 var base_url = $('#base_url').val();
+var user_kode_kantor = $('#user_kode_kantor').val();
+var user_divisi_id = $('#user_divisi_id').val();
 
 $(document).ready(function () {     
     getData();
+    $('.select2').select2();
+    $('#main_kode_kantor').append('<option value="' + user_kode_kantor + '" selected>'+ user_kode_kantor +'</option>');
+    if(user_kode_kantor == '00' || user_divisi_id == 'IT'){
+        get_kode_kantor();
+    }
 });
 
 $('#main_search').keypress(function(event) {
@@ -19,6 +26,51 @@ $('#btn_tambah').click(function () {
     window.location = '<?= base_url(); ?>Request_Jaminan_Centro_Controller/transaksiRequestJaminan';
 });
 
+$('#table_body_request_jaminan').on('click','.btnDeleteRequestJaminan', function () {
+    nomor = $(this).data("nomor");
+    id = $(this).data("id"); 
+    verifikasi = $(this).data("verifikasi"); 
+
+    if(verifikasi == '1'){
+        alert('Data Sudah Di Verifikasi, Data Tidak Dapat Dihapus');
+        return;
+    }
+    //console.log('button di click : ' + nomor + ' ' + id);
+    $('#loading').show();
+    if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan Nomor " + nomor)) {
+        $.ajax({
+            url : base_url + "Request_Jaminan_Centro_Controller/deleteDataPemindahanLokasi",
+            type : "POST",
+            dataType : "json",
+            data : {"nomor"    : nomor,
+                    "id"       : id},
+    
+            success : function(response) {
+                console.log(response)                
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Data Berhasil Dihapus',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(()=> {
+                    window.location = '<?= base_url(); ?>request_jaminan_centro';
+                    $('#loading').hide(); 
+                    console.log(response);
+                });  
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                alert('Gagal Hapus Data Lokasi Pemindahan Lokasi Jaminan, Mohon Coba Lagi');
+                window.location = '<?= base_url(); ?>request_jaminan_centro';
+            }
+        }); 
+    } else {
+        alert('Data Batal Di Hapus');
+        $('#loading').hide();  
+    }
+
+});
 function getData(){
     dataTableeee = [];
     $('#loading').show(); 
@@ -37,7 +89,6 @@ function getData(){
                 $('#table_request_jaminan').DataTable().destroy();
                 dataTableeee.push(response);
                 if(response == ''){
-                    alert('Data tidak di temukan');
                     $('#table_request_jaminan > tbody:first').html('');
                 }else{
                     $('#table_request_jaminan > tbody:first').html(dataTableeee);
@@ -133,51 +184,27 @@ function searchData(){
     });    
 }
 
-$('#table_body_request_jaminan').on('click','.btnDeleteRequestJaminan', function () {
-    nomor = $(this).data("nomor");
-    id = $(this).data("id"); 
-    verifikasi = $(this).data("verifikasi"); 
-
-    if(verifikasi == '1'){
-        alert('Data Sudah Di Verifikasi, Data Tidak Dapat Dihapus');
-        return;
-    }
-    //console.log('button di click : ' + nomor + ' ' + id);
-    $('#loading').show();
-    if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan Nomor " + nomor)) {
-        $.ajax({
-            url : base_url + "Request_Jaminan_Centro_Controller/deleteDataPemindahanLokasi",
+function get_kode_kantor(){
+    $.ajax({
+            url : base_url + "Request_Jaminan_Centro_Controller/get_kode_kantor",
             type : "POST",
             dataType : "json",
-            data : {"nomor"    : nomor,
-                    "id"       : id},
-    
+            timeout : 180000,
+            headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
             success : function(response) {
-                console.log(response)                
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Data Berhasil Dihapus',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(()=> {
-                    window.location = '<?= base_url(); ?>request_jaminan_centro';
-                    $('#loading').hide(); 
-                    console.log(response);
-                });  
+                $.each(response.kode_kantor,function(i,data){
+                    $('#main_kode_kantor').append('<option value="'+data.kode_kantor+'">' + data.kode_kantor + ' - ' + data.nama_kantor+'</option>');
+                });
             },
             error : function(response) {
                 console.log('failed :' + response);
-                alert('Gagal Hapus Data Lokasi Pemindahan Lokasi Jaminan, Mohon Coba Lagi');
-                window.location = '<?= base_url(); ?>request_jaminan_centro';
+                $('#loading').hide();
+                alert('Gagal Get Data, Mohon Periksa Jaringan Anda');
+                
             }
-        }); 
-    } else {
-        alert('Data Batal Di Hapus');
-        $('#loading').hide();  
-    }
-
-});
-
+    });    
+}
 
 </script>

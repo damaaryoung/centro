@@ -112,14 +112,15 @@
                 foreach ($agunan_tanah->result_array() as $data) {
                     $no = $j++;
                     $jenis_sertifikat = $data['jenis_sertifikat'];
-                    $tgl_expired_shgb = $data['tgl_berlaku_shgb'];
                     $no_sertifikat = $data['no_sertifikat'];
                     $nama_sertifikat = $data['nama_pemilik_sertifikat'];
                     $status_sertifikat1 = $data['status_sertifikat'];
                     $nama_pas_sertifikat = $data['nama_pas_sertifikat'];
                     $status_pas_sertifikat = $data['status_pas_sertifikat'];
                     $hub_cadeb = $data['hub_cadeb'];
-
+                    if($jenis_sertifikat == 'SHGB'){
+                        $tgl_expired_shgb = $data['tgl_berlaku_shgb'];
+                    }else{$tgl_expired_shgb = '';}
 
                     echo '  <tr>
                                 <th colspan="6" align="left">Kronologis ' . $no . ' </th>

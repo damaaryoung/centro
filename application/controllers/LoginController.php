@@ -94,6 +94,24 @@ class LoginController extends CI_Controller {
 					else if( $row['access_id'] == '13'){
 						$data1['verifikasi_request_jaminan_ke_centro'] = 'ok';
 					}
+					else if( $row['access_id'] == '14'){
+						$data1['rekap_titipan_asuransi_jaminan'] = 'ok';
+					}
+					else if( $row['access_id'] == '15'){
+						$data1['pengcoveran_asuransi_jaminan'] = 'ok';
+					}
+					else if( $row['access_id'] == '16'){
+						$data1['polis_asuransi_jaminan'] = 'ok';
+					}
+					else if( $row['access_id'] == '17'){
+						$data1['rekap_titipan_asuransi_jiwa'] = 'ok';
+					}
+					else if( $row['access_id'] == '18'){
+						$data1['polis_asuransi_jiwa'] = 'ok';
+					}
+					else if( $row['access_id'] == '19'){
+						$data1['pengcoveran_asuransi_jiwa'] = 'ok';
+					}
 				endforeach;	
 			}
 
@@ -138,6 +156,24 @@ class LoginController extends CI_Controller {
 					}
 					else if( $row['access_id'] == '13'){
 						$data1['verifikasi_request_jaminan_ke_centro_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '14'){
+						$data1['rekap_titipan_asuransi_jaminan_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '15'){
+						$data1['pengcoveran_asuransi_jaminan_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '16'){
+						$data1['polis_asuransi_jaminan_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '17'){
+						$data1['rekap_titipan_asuransi_jiwa_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '18'){
+						$data1['polis_asuransi_jiwa_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '19'){
+						$data1['pengcoveran_asuransi_jiwa_group'] = 'ok';
 					}
 				endforeach;	
 			}

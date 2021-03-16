@@ -13,9 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?php echo $css; ?>
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
-
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
@@ -28,6 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	?>
 <script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -62,25 +61,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
                                   <div class="col-sm-1">
-                                      <label style="padding-top: 6px;" class="control-label" for="main_search">Search</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="main_search">Search</label>
                                   </div>
-                                  <div class="col-sm-2">
+                                  <div class="col-sm-3">
                                     <input type="text" class="form-control form-control-sm" id="main_search" name="main_search">
                                   </div>
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="main_kode_kantor">Kode Kantor</label>
                                   </div>
                                   <div class="col-sm-4">
-                                    <?php if($kode_kantor == '00' || $divisi_id == 'IT'){ ?>
                                         <select class="form-control form-control-sm select2" id="main_kode_kantor" name="main_kode_kantor" onchange='searchData()'>
-                                          <option value="<?php echo $this->session->userdata('kd_cabang');?>"><?php echo $this->session->userdata('kd_cabang');?></option>
-                                          <?php foreach ($selectKodeKantor as $row) : ?>
-                                            <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'];?> - <?php echo $row['nama_kantor'];?> </option>
-                                          <?php endforeach;?>
                                         </select>
-                                    <?php }else if($kode_kantor != '00' || $divisi_id != 'IT'){
-                                        echo '<input class="form-control form-control-sm" id="main_kode_kantor" name="main_kode_kantor" value="'.$kode_kantor.'" readonly>'; 
-                                      } ?> 
                                   </div>
                               </div>
                       </div>
@@ -106,9 +97,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="table_request_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                    <table id="table_request_jaminan" class="table table-striped table-bordered" style="width:100%" >
                         <thead>
-                            <tr>
+                            <tr style="text-align:center">
                                 <th>Nomor</th>
                                 <th>Tanggal</th>
                                 <th>Nama Kantor Asal</th>
@@ -118,14 +109,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </tr>
                         </thead>
                         <tbody id="table_body_request_jaminan">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                         </tbody>
                     </table>
                     <br>    
@@ -144,6 +127,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- End Data Tables-->
             <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+            <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
+            <input type="hidden" class="form-control" id="user_divisi_id" name="user_divisi_id" value = "<?php echo $divisi_id; ?>">
 
     </section>
     <!-- /.content -->

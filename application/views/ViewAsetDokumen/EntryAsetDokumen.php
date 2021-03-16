@@ -14,6 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini" onload="zoom()">
@@ -63,29 +64,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                <div class="form-inline">
                     <div class="form-group">
-                      <label for="email"></label> &nbsp; &nbsp;
-                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" > 
+                      <input type="text" class="form-control form-control-sm" name="search" id="search" placeholder="Search" > 
                      &nbsp;&nbsp;
                     </div>
                     <div class="form-group">
                       <label for="pwd">Kode Kantor</label> &nbsp;&nbsp;
-                      <?php
-                        if($kode_kantor == '00' || $divisi_id == 'IT'){
-                      ?>
-                      <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 200px;">
-                            <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
-                            <?php foreach ($selectKodeKantor as $row) : ?>
-                              <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
-                            <?php endforeach;?>
+                      <select class="form-control form-control-sm select2 custom-select" id="kode_kantor" name="kode_kantor" style="width: 200px;">
                       </select>
-                      <?php }else if($kode_kantor != '00' || $divisi_id != 'IT'){
-                          echo '<input class="form-control" id="kode_kantor" name="kode_kantor" style="width: 200px;" value="'.$kode_kantor.'" readonly>'; 
-                        } ?> 
                       &nbsp;&nbsp;
                     </div>   
                     <div class="form-group">
                       <label for="pwd">Status</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="status" name="status" style="width: 200px;"  onchange="serchAsetDokumenB()">
+                      <select class="form-control form-control-sm select2 custom-select" id="status" name="status" style="width: 200px;"  onchange="serchAsetDokumenB()">
                               <option value="MASUK">MASUK</option>
                               <option value="KELUAR">KELUAR</option>
                               <option value="PINJAM">PINJAM</option>
@@ -95,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>   
                     <div class="form-group">
                       <label for="pwd">Jenis</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="jenis" name="jenis" style="width: 200px;"  onchange="serchAsetDokumenB()">
+                      <select class="form-control form-control-sm select2 custom-select" id="jenis" name="jenis" style="width: 200px;"  onchange="serchAsetDokumenB()">
                               <option value="SERTIFIKAT">SERTIFIKAT</option>
                               <option value="BPKB">BPKB</option>
                               <!-- <option value="EMAS">EMAS</option> -->
@@ -118,9 +108,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <table id="employeeTable" class="table table-striped table-bordered" style="width:100% text-align:center" >
+            <div class="px-2 bg-light">
+              <marquee class="py-3" direction="left" onmouseover="this.stop()" onmouseout="this.start()" style=" color:#ff0018">
+                  Scroll ke Kanan Untuk Tombol Aksi
+              </marquee>
+            </div>
+            <table id="employeeTable" class="table table-striped table-bordered" style="width:120%" >
               <thead>
-                  <tr>
+                  <tr style="text-align:center">
                       <th>Nomor</th>
                       <th>Agunan_ID</th>
                       <th>Tanggal</th>
@@ -128,24 +123,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th>Alamat</th>
                       <th>Jaminan</th>
                       <th>Status</th>
-                      <th style="width:150px;">Deskripsi</th>
+                      <th>Deskripsi</th>
                       <th>Lokasi</th>
-                      <th style="width:250px;">Action</th>
+                      <th>Action</th>
                   </tr>
               </thead>
               <tbody id="bodyTableAsetDokumen">
-                <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                </tr>
+
               </tbody>
           </table>
             </div>
@@ -154,6 +138,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div> 
           <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
           <input type="hidden" class="form-control" id="menuAsset" name="menuAsset" value = "<?php echo $this->session->userdata('menuAset'); ?>">
+          <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
+          <input type="hidden" class="form-control" id="user_divisi_id" name="user_divisi_id" value = "<?php echo $divisi_id; ?>">
     </section>
 
 	<?php
@@ -179,7 +165,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $footer;
         
 	?>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/entry_aset_dokumen.js"></script>
+  
 
   <style>
               /* Style the tab */
@@ -233,15 +221,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </style>
 
   <script>
-        $(document).ready(function() {
-            $('#employeeTable').DataTable( {
-                "scrollX": true,
-                "autoWidth" : true,
-                "searching": false,
-                "aaSorting" : []
-            } );
-        } );
-
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         })

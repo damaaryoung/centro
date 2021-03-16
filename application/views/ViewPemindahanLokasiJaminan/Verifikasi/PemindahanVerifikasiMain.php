@@ -11,6 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css;?>
+  <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
 </head>
 <body class="hold-transition sidebar-mini" onload="zoom();">
 <div class="wrapper">
@@ -62,16 +63,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                <div class="form-inline">
                     <div class="form-group">
                       <label for="search">Search</label> &nbsp; &nbsp;
-                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchDataJaminan()"> 
+                      <input type="text" class="form-control form-control-sm" name="search" id="search" placeholder="Search" onchange="serchDataJaminan()"> 
                      &nbsp;&nbsp;
                     </div>
                     <div class="form-group">
                       <label for="pwd">Kode Kantor Tujuan</label> &nbsp;&nbsp;
-                      <select class="form-control select2" id="kode_kantor" name="kode_kantor" style="width: 400px;" onchange="serchDataJaminan()">
-                            <option value="<?php echo $this->session->userdata('kd_cabang'); ?>"><?php echo $this->session->userdata('kd_cabang'); ?></option>
-                            <?php foreach ($selectKodeKantor as $row) : ?>
-                              <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
-                            <?php endforeach;?>
+                      <select class="form-control form-control-sm select2 custom-select" id="kode_kantor" name="kode_kantor" style="width: 400px;" onchange="serchDataJaminan()">
                       </select>&nbsp;&nbsp;
                     </div>                  
                 </div> 
@@ -86,16 +83,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                    <table id="tableLokasiJaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                    <table id="tableLokasiJaminan" class="table table-striped table-bordered" style="width:100%" >
                         <thead>
-                            <tr>
+                            <tr  style="text-align:center">
                                 <th>Nomor</th>
                                 <th>Tanggal</th>
                                 <th>Nama&nbsp;Kantor&nbsp;Asal</th>
                                 <th>Nama&nbsp;Kantor&nbsp;Tujuan</th>
                                 <th>Nama&nbsp;Lokasi&nbsp;Penyimpanan</th>
                                 <th>Verifikasi</th>
-                                <th style="width:200px;">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id="bodyTableLokasiJaminan">
@@ -106,6 +103,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.card-body -->
           </div>  
           <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+          <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">  
+          <input type="hidden" class="form-control" id="user_divisi_id" name="user_divisi_id" value = "<?php echo $divisi_id; ?>">
 
       </div>
       <!-- /.container-fluid -->
@@ -119,6 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $js;
   
   ?>
+  <script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/pemindahan_dokumen_verifikasi.js"></script>
 
 
@@ -176,19 +176,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </style>
 
   <script>
-        $(document).ready(function() {
-            $('#tableLokasiJaminan').DataTable( {
-                "scrollX": true,
-                "autoWidth" : true,
-                "searching": false,
-                "aaSorting" : []
-            } );
-        } );
-
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         })
-        
 
         function openTab(evt, tabName) {
               var i, tabcontent, tablinks;
