@@ -675,14 +675,6 @@ function verifikasiHeader(){
         verifDokument       = $('#emasVerifikasi').val(); 
      }
 
-    if(verifHeader == '0'){
-        alert('Status Verifikasi Jaminan Header masih 0');
-        return;
-    }else if(verifDokument == '0'){
-        alert('Status Verifikasi Jaminan Dokument Detail masih 0');
-        return;
-    }
-
     $('#mainVerifikasiModal').scrollTop(0); 
     $('#loading1').show();   
     $('#loading').show();   
