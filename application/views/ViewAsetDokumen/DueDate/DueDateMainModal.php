@@ -40,7 +40,7 @@
                                   </div>
                                         <div class="col-sm-5" style ='display:inline;'>
                                               <div class="custom-file">
-                                                <input type="file" id="coverNotes" name="coverNotes" accept=".img,.jpg,.jpeg,.png">
+                                                <input type="file" id="coverNotes" name="coverNotes">
                                               </div>
                                         </div>
                                         <div class="col-sm-3" style ='display:inline;'>

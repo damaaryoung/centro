@@ -671,32 +671,44 @@ class AsetDokumenUpdateController extends CI_Controller {
 		$CoverNotesID		 = $this->input->post('CoverNotesID');
 		$CoverNotesAgunanID  = $this->input->post('CoverNotesAgunanID');
 		$CoverNotesNoReff    = $this->input->post('CoverNotesNoReff');
+		$coverNotes    = $this->input->post('coverNotes');
 
 
 		$sysdate      = $this->AsetDokumenUpdateModel->sysdate1();
 		foreach ($sysdate as $row) :
 			$tanggal    = $row['sysdate'];
 		endforeach;
-		$namaFile     = "CoverNotes_".$CoverNotesID."_".$tanggal;
+		
 			
 		if(isset($_FILES["coverNotes"]["name"])){
+			$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
+			$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
 
+			if (!file_exists("$root_document/public_centro")){
+				mkdir("$root_document/public_centro");
+			} 
+				
+			if (!file_exists("$root_document/public_centro/CoverNotes")) {
+				mkdir("$root_document/public_centro/CoverNotes");
+			}
+			if (!file_exists("$root_document/public_centro/CoverNotes/$CoverNotesAgunanID")) {
+				mkdir("$root_document/public_centro/CoverNotes/$CoverNotesAgunanID");
+			}
 
-			$config['upload_path']   = './PUBLIC/CoverNotes/';
+			$config['upload_path']   = "$root_document/public_centro/CoverNotes/$CoverNotesAgunanID";
 			$config['allowed_types'] = "*";
 			$config['overwrite']	 = false;
-			$config['file_name']     = $namaFile;
+			$config['file_name']     = $CoverNotesID."_".$tanggal;
 			$this->load->library("upload", $config);
 
 			if(!$this->upload->do_upload('coverNotes') ){
 				echo $this->upload->display_errors();
 			} else{
-				
 				$data = $this->upload->data();
 				$namafileUpload = $data["file_name"];
-			//	$this->AsetDokumenUpdateModel->updateCoverNotes($CoverNotesID,$namafileUpload);
-				$this->AsetDokumenUpdateModel->insertCoverNotes($CoverNotesNoReff,$CoverNotesAgunanID,$namafileUpload);
-				echo base_url().'PUBLIC/CoverNotes/'.$data["file_name"];		
+				$pathFile = "public_centro/CoverNotes/$CoverNotesAgunanID/$namafileUpload";
+				$this->AsetDokumenUpdateModel->insertCoverNotes($CoverNotesNoReff,$CoverNotesAgunanID,$root_document,$root_address,$pathFile);
+				echo $root_address.$pathFile;		
 			}
 		}
 	}

@@ -915,8 +915,8 @@ $('#bodyTableAsetDokumen').on('click','.btnDueDate', function () {
                 $('#btn_simpan_dueDate_modal').prop("disabled", true);
                 $('#btnUploadCoverNotes').prop("disabled", false);
             }else{
-                $("#imgCoverNotes").attr('src',  base_url + 'PUBLIC/CoverNotes/' + JaminanCoverNotes.upload_cover_notes);
-                $("#imgCoverNotes2").attr("href", base_url + 'PUBLIC/CoverNotes/' + JaminanCoverNotes.upload_cover_notes);
+                $("#imgCoverNotes").attr('src', JaminanCoverNotes.root_address + JaminanCoverNotes.path_file);
+                $("#imgCoverNotes2").attr("href", JaminanCoverNotes.root_address + JaminanCoverNotes.path_file);
                 $('#btn_simpan_dueDate_modal').prop("disabled", false);
                 $('#btnUploadCoverNotes').prop("disabled", false);
             }
