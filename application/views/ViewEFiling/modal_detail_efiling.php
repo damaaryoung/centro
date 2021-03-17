@@ -1035,16 +1035,16 @@
                                                                     style="padding-top: 10px;" id="file-asuransi"></div>
                                                             </div>
                                                         </div>
-                                                        <!-- <div class="col-6">
-                                                    <div class="form-group">
-                                                      <label for="customFile">SPAJK/ SPA/ FPK</label>
-                                                      <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="spajk_spa_fpk" onchange='getImg(event)'>
-                                                        <label class="custom-file-label" for="spajk_spa_fpk">Choose file </label>
-                                                      </div>
-                                                      <div class="row inner_list_upload" style="padding-top: 10px;" id="file-spajk_spa_fpk"></div>
-                                                    </div>
-                                                  </div> -->
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="customFile">SPAJK/ SPA/ FPK</label>
+                                                                <div class="custom-file">
+                                                                    <input type="file" class="custom-file-input" id="spajk_spa_fpk" onchange='getImg(event)'>
+                                                                    <label class="custom-file-label" for="spajk_spa_fpk">Choose file </label>
+                                                                </div>
+                                                                <div class="row inner_list_upload" style="padding-top: 10px;" id="file-spajk_spa_fpk"></div>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label for="customFile">Surat Pernyataan Tidak Ada

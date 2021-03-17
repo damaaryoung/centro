@@ -200,9 +200,35 @@ class EFilingModel extends CI_Model{
 		$divisi_id = $this->divisi_id;
 		$jabatan = $this->jabatan;
 		$this->db= $this->load->database('DB_CENTRO', true);
-		$str = "SELECT flag_aktif, menu FROM `efiling_user_access`
-				WHERE (user_id = '$user_id' or divisi_id = '$divisi_id' or jabatan = '$jabatan')
-				and flag_aktif = '1' ";
+		$str = "SELECT * FROM efiling_user_access
+				WHERE (user_id = $user_id OR jabatan = '$jabatan')
+				AND divisi_id = '$divisi_id'
+				AND flag_aktif = 1";
+		// var_dump($str); die();
+		$query = $this->db->query($str);
+		return $query->row_array();
+	}
+
+	public function query_get_verifikasi(){
+		$no_rekening = $this->no_rekening;
+		$this->db= $this->load->database('DB_CENTRO', true);
+		$str = "SELECT * ,
+		(
+			CASE 
+				WHEN verif_bi = 1  THEN 1
+				WHEN 1 = verif_bi && verif_ca = 1 || verif_ca = NULL THEN 1
+				WHEN 1 = verif_ca && verif_foto = 1 || verif_foto = NULL THEN 1
+				WHEN 1 = verif_foto && verif_jaminan = 1 || verif_jaminan = NULL THEN 1
+				WHEN 1 = verif_jaminan && verif_legal = 1 || verif_legal = NULL THEN 1
+				WHEN 1 = verif_legal && verif_nasabah = 1 || verif_nasabah = NULL THEN 1
+				WHEN 1 = verif_nasabah && verif_permohonan_kredit = 1 || verif_permohonan_kredit = NULL THEN 1
+				WHEN 1 = verif_permohonan_kredit && verif_ra = 1 || verif_ra =NULL THEN 1
+				WHEN 1 = verif_ra && verif_spk = 1 || verif_spk = NULL THEN 1
+				#when 1 = verif_spk  then 1
+				ELSE 2
+			END) AS verifikasi_efiling
+		FROM view_verifikasi_efilling
+		WHERE no_rekening = '$no_rekening'";
 		$query = $this->db->query($str);
 		return $query->row_array();
 	}
