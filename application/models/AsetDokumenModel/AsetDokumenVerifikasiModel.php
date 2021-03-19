@@ -148,43 +148,36 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 	//search list data
 	public function searching($search,$status,$kode_kantor){
 	    $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$str = "SELECT 
-					id,
-					LEFT(nomor, 10) AS nomor,
-					LEFT(no_reff, 10) AS no_reff,
-					tgl,
-					nama,
-					LEFT(alamat, 200) AS alamat,
-					kelurahan,
-					kecamatan,
-					kota,
-					propinsi,
-					kode_pos,
-					jenis_jaminan,
-					roda_kendaraan,
-									status,
-					kontrak_status,
-					ket,
-					no_rekening,
-					tgl_realisasi,
-					kode_kantor,
-					verifikasi,
-									jd.agunan_id
+		$str = "SELECT jaminan_header.id,
+                   LEFT(jaminan_header.nomor, 10) AS nomor,
+                   LEFT(jaminan_header.no_reff, 10) AS no_reff,
+                   jaminan_header.tgl,
+                   jaminan_header.nama,
+                   LEFT(jaminan_header.alamat, 200) AS alamat,
+                   jaminan_header.kelurahan,
+                   jaminan_header.kecamatan,
+                   jaminan_header.kota,
+                   jaminan_header.propinsi,
+                   jaminan_header.kode_pos,
+                   jaminan_header.jenis_jaminan,
+                   jaminan_header.roda_kendaraan,
+                   jaminan_header.status,
+                   jaminan_header.kontrak_status,
+                   jaminan_header.ket,
+                   jaminan_header.no_rekening,
+                   jaminan_header.tgl_realisasi,
+                   jaminan_header.kode_kantor,
+                   jaminan_header.verifikasi,
+                   jd.agunan_id
 				FROM
 					jaminan_header 
-					LEFT JOIN 
-					(SELECT 
-						LEFT(no_reff, 10) AS no_reff2,
-									agunan_id
-					FROM
-						jaminan_dokument 
-								WHERE agunan_id <> '' #AND verifikasi = 0 
-										) jd 
-					ON jd.no_reff2 = jaminan_header.no_reff 
+				LEFT JOIN jaminan_dokument jd
+					ON jd.no_reff = jaminan_header.no_reff 
 				WHERE STATUS = '$status' 
 					AND jaminan_header.kode_kantor = '$kode_kantor' 
 					AND (
 					jaminan_header.nomor LIKE '%$search%' 
+					OR jd.`agunan_id` LIKE '%$search%'
 					OR nama LIKE '%$search%'
 					) 
 				#ORDER BY jaminan_header.nomor DESC 
@@ -197,5 +190,4 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 	}
 
 }
-
 
