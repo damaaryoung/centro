@@ -1287,7 +1287,8 @@ function mappingFieldSertifikat(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanH
                 }
 
                 /// SLIK ///
-                if(JaminanSlik != null){    
+                if(JaminanSlik != null){   
+                    $('#sertTglPenilaian').val(JaminanSlik.tanggal_penilaian_independen); 
                     $('#sertSlikPeringkatAgunan').val(JaminanSlik.peringkat_agunan);  
                     $('#sertSlikParipasuPersen').val(JaminanSlik.prosentase_paripasu); 
                     $('#sertSlikTanggalPengikatan').val(JaminanSlik.tanggal_pengikatan); 
@@ -1517,7 +1518,8 @@ function mappingFieldBPKB(ListKodeKantor,KreKodeJenisAgunan,KreKodeIkatanHukumAg
     }
 
     /// SLIK ///
-    if(JaminanSlik != null){                 
+    if(JaminanSlik != null){    
+        $('#bpkbTglPenilaian').val(JaminanSlik.tanggal_penilaian_independen);             
         $('#bpkbSlikPeringkatAgunan').val(JaminanSlik.peringkat_agunan);  
         $('#bpkbSlikParipasuPersen').val(JaminanSlik.prosentase_paripasu); 
         $('#bpkbSlikTanggalPengikatan').val(JaminanSlik.tanggal_pengikatan); 
@@ -1834,7 +1836,8 @@ function mappingFieldSertifikatPinjam(JaminanHeader, JaminanDokument, JaminanSli
     }
 
     /// SLIK ///
-    if(JaminanSlik != null){            
+    if(JaminanSlik != null){        
+         $('#sertTglPenilaianPinjam').val(JaminanSlik.tanggal_penilaian_independen);    
          $('#sertSlikPeringkatAgunanPinjam').val(JaminanSlik.peringkat_agunan);  
          $('#sertSlikParipasuPersenPinjam').val(JaminanSlik.prosentase_paripasu); 
          $('#sertSlikTanggalPengikatanPinjam').val(JaminanSlik.tanggal_pengikatan); 
@@ -2020,7 +2023,8 @@ function mappingFieldBPKBPinjam(JaminanHeader, JaminanDokument, JaminanSlik){
          $("#check_sk_trayekPinjam").prop("checked", false);
      }
 
-    if(JaminanSlik != null){            
+    if(JaminanSlik != null){      
+        $('#bpkbTglPenilaianPinjam').val(JaminanSlik.tanggal_penilaian_independen);         
         $('#bpkbSlikPeringkatAgunanPinjam').val(JaminanSlik.peringkat_agunan);  
         $('#bpkbSlikParipasuPersenPinjam').val(JaminanSlik.prosentase_paripasu); 
         $('#bpkbSlikTanggalPengikatanPinjam').val(JaminanSlik.tanggal_pengikatan); 
@@ -2308,7 +2312,8 @@ function mappingFieldSertifikatKembali(JaminanHeader, JaminanDokument, JaminanSl
      }
 
      /// SLIK ///
-    if(JaminanSlik != null){            
+    if(JaminanSlik != null){ 
+        $('#sertTglPenilaianKembali').val(JaminanSlik.tanggal_penilaian_independen);           
         $('#sertSlikPeringkatAgunanKembali').val(JaminanSlik.peringkat_agunan);  
         $('#sertSlikParipasuPersenKembali').val(JaminanSlik.prosentase_paripasu); 
         $('#sertSlikTanggalPengikatanKembali').val(JaminanSlik.tanggal_pengikatan); 
@@ -2497,6 +2502,7 @@ function mappingFieldBPKBKembali(JaminanHeader, JaminanDokument, JaminanSlik){
       }
 
     if(JaminanSlik != null){            
+        $('#bpkbTglPenilaianPinjamKembali').val(JaminanSlik.tanggal_penilaian_independen);  
         $('#bpkbSlikPeringkatAgunanKembali').val(JaminanSlik.peringkat_agunan);  
         $('#bpkbSlikParipasuPersenKembali').val(JaminanSlik.prosentase_paripasu); 
         $('#bpkbSlikTanggalPengikatanKembali').val(JaminanSlik.tanggal_pengikatan); 
@@ -2783,7 +2789,8 @@ function mappingFieldSertifikatPenyerahan(JaminanHeader, JaminanDokument, Jamina
         $("#check_ssb_bphtPenyerahan").prop("checked", false);
     }
      /// SLIK ///
-     if(JaminanSlik != null){            
+     if(JaminanSlik != null){    
+        $('#sertTglPenilaianPenyerahan').val(JaminanSlik.tanggal_penilaian_independen);        
         $('#sertSlikPeringkatAgunanPenyerahan').val(JaminanSlik.peringkat_agunan);  
         $('#sertSlikParipasuPersenPenyerahan').val(JaminanSlik.prosentase_paripasu); 
         $('#sertSlikTanggalPengikatanPenyerahan').val(JaminanSlik.tanggal_pengikatan); 
@@ -2967,7 +2974,8 @@ function mappingFieldBPKBPenyerahan(JaminanHeader, JaminanDokument, JaminanSlik)
      else{
          $("#check_sk_trayekPenyerahan").prop("checked", false);
      }
-     if(JaminanSlik != null){            
+     if(JaminanSlik != null){      
+        $('#bpkbTglPenilaianPinjamPenyerahan').val(JaminanSlik.tanggal_penilaian_independen);      
         $('#bpkbSlikPeringkatAgunanPenyerahan').val(JaminanSlik.peringkat_agunan);  
         $('#bpkbSlikParipasuPersenPenyerahan').val(JaminanSlik.prosentase_paripasu); 
         $('#bpkbSlikTanggalPengikatanPenyerahan').val(JaminanSlik.tanggal_pengikatan); 

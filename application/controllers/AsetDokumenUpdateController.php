@@ -218,6 +218,13 @@ class AsetDokumenUpdateController extends CI_Controller {
 		$sertSLikStatusJoinAccount      = $this->input->post('sertSLikStatusJoinAccount'); 
 		$sertSlikAsuransi               = $this->input->post('sertSlikAsuransi'); 
 
+		if($sertTglPenilaian != null || $sertTglPenilaian != ''){
+			$tgl_penilaian = $sertTglPenilaian;
+		}else if($sertSlikTglIndependen != null || $sertSlikTglIndependen != ''){
+			$tgl_penilaian = $sertSlikTglIndependen;
+		}else{
+			$tgl_penilaian = '';
+		}
 		$this->AsetDokumenUpdateModel->updateJaminanHeaderSert($mainId,
 																$mainTanggal,
 																$mainNama,
@@ -304,7 +311,7 @@ class AsetDokumenUpdateController extends CI_Controller {
 																$sertSlikTanggalLJK,
 																$sertSlikNilaiIndependen,
 																$sertSlikNamaIndependen,
-																$sertSlikTglIndependen,
+																$tgl_penilaian,
 																$sertSlikParipasu,
 																$sertSlikParipasuPersen,
 																$sertSLikStatusJoinAccount,
@@ -436,6 +443,14 @@ class AsetDokumenUpdateController extends CI_Controller {
 			$bpkbSLikStatusJoinAccount      = $this->input->post('bpkbSLikStatusJoinAccount'); 
 			$bpkbSlikAsuransi               = $this->input->post('bpkbSlikAsuransi'); 
 
+			if($bpkbTglPenilaian != null || $bpkbTglPenilaian != ''){
+				$tgl_penilaian = $bpkbTglPenilaian;
+			}else if($bpkbSlikTglIndependen != null || $bpkbSlikTglIndependen != ''){
+				$tgl_penilaian = $bpkbSlikTglIndependen;
+			}else{
+				$tgl_penilaian = '';
+			}
+
 
 			$this->AsetDokumenUpdateModel->updateJaminanHeaderBPKB($mainId,
 																	$mainTanggal,
@@ -506,7 +521,7 @@ class AsetDokumenUpdateController extends CI_Controller {
 																	$bpkbSlikTanggalLJK,
 																	$bpkbSlikNilaiIndependen,
 																	$bpkbSlikNamaIndependen,
-																	$bpkbSlikTglIndependen,
+																	$tgl_penilaian,
 																	$bpkbSlikParipasu,
 																	$bpkbSlikParipasuPersen,
 																	$bpkbSLikStatusJoinAccount,
