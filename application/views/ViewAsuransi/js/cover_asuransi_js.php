@@ -197,7 +197,7 @@
                             $('#modal_tinggi_badan_jiwa').val(response.data_details[0]['tinggi_asuransi_jiwa']); 
                             $('#modal_berat_badan_jiwa').val(response.data_details[0]['berat_asuransi_jiwa']); 
                             $('#modal_rate_jiwa').val(response.data_details[0]['rate']); 
-                            $('#modal_premi_jiwa').val(response.data_details[0]['premi_asuransi']); 
+                            $('#modal_premi_jiwa').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.')); 
                             $('#modal_selisih_jiwa').val(0); 
                         }
 

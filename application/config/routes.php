@@ -75,4 +75,6 @@ $route['pengajuan_klaim_asuransi_jaminan'] = 'Asuransi/Pengajuan_klaim_asuransi_
 $route['pengajuan_klaim_asuransi_jiwa'] = 'Asuransi/Pengajuan_klaim_asuransi_controller/menu_klaim_jiwa';
 $route['proses_klaim_jiwa'] = 'Asuransi/Proses_klaim_jiwa_controller/index';
 $route['proses_klaim_jaminan'] = 'Asuransi/Proses_klaim_jaminan_controller/index';
+$route['pengajuan_cis'] = 'Asuransi/Cash_in_save_controller/index';
+$route['pengcoveran_cis'] = 'Asuransi/Cash_in_save_controller/index_cover';
 $route['laporan_asuransi'] = 'Asuransi/Laporan_asuransi_controller/index';

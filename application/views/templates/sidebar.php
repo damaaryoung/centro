@@ -165,7 +165,7 @@
           <!-- END MENU CREDIT CHECKING -->
 
           <!-- START MENU ASURANSI -->
-            <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt icon_color_sidebar"></i>
                 <p>
@@ -277,6 +277,33 @@
                     <?php }?>
                 </ul>
               </li>
+              <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                <li class="nav-item has-treeview">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-money-bill-alt nav-icon icon_color_sidebar"></i>
+                    <p>Cash In Save</p>
+                    <i class="fas fa-angle-left right"></i>
+                  </a>
+                      <ul class="nav nav-treeview">
+                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                          <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>pengajuan_cis" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Pengajuan Asuransi CIS</p>
+                            </a>
+                          </li>
+                        <?php }?>
+                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                          <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>pengcoveran_cis" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Pengcoveran Asuransi CIS</p>
+                            </a>
+                          </li>
+                        <?php }?>
+                    </ul>
+                </li>
+              <?php }?>
               <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>laporan_asuransi" class="nav-link">
