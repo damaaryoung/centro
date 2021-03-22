@@ -9,6 +9,14 @@
     background-color: rgba(254, 255, 255, 0.4);
     animation: spin 7s linear infinite;
 }
+
+.frm-release-asset{
+    display : none;
+}
+
+#vert-tabs-status-tab {
+    display : none;
+}
 </style>
 <div class="modal fade" id="modal_view_efiling" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-xl">
@@ -610,11 +618,11 @@
                                                         <div class="custom-file-view" id="view_asuransi">
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="form-group col-sm-6">
-                                              <label for="customFile">SPAJK/ SPA/ FPK</label>
-                                              <div class="custom-file-view" id="view_spajk_spa_fpk">
-                                              </div>
-                                            </div> -->
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="customFile">SPAJK/ SPA/ FPK</label>
+                                                        <div class="custom-file-view" id="view_spajk_spa_fpk">
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group col-sm-6">
                                                         <label for="customFile">Surat Pernyataan Tidak Ada IMB</label>
                                                         <div class="custom-file-view" id="view_no_IMB">

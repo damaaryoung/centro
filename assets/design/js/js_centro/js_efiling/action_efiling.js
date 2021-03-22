@@ -110,7 +110,7 @@ function form_option_verifikasi(frm_verifikasi, id, menu_title) {
     <label for="${id}" class="col-sm-2 col-form-label">Status</label>
     <div class="col-sm-8">
     <select class="form-group form-control" id="${id}"  onchange="check('${id}','ket-${id}')">
-        <option value="null">SELECT STATUS</option>
+        <option value="">SELECT STATUS</option>
         <option value="1">COMPLETED</option>
         <option value="2">NOT COMPLETED</option>
     </select>
@@ -183,19 +183,20 @@ function getDetailDataNasabah_to_FormEfiling(no_rekening, loading, menu_title) {
       if (menu_title == 'View') {
         detailViewEfiling(respon)
       } else {
-        detailDataEfiling(respon, menu_title, no_rekening)
+        detailDataEfiling(respon, menu_title)
       }
     }
   })
 }
 
-function detailDataEfiling(respon, menu_title, no_rekening) {
+function detailDataEfiling(respon, menu_title) {
   let data = respon.data;
   // ket Is_jenis 1 = Sefin, Is_jenis 2 = webtool
   let jenis_data = data.efilling['is_jenis'];
+  let no_rekening = ((data.header_efiling== null)? '' : data.header_efiling['no_rekening'])
 
   $(".custom-file-input").attr({
-    "is_jenis": respon.data.efilling['is_jenis']
+    "is_jenis": jenis_data
   })
   let path_file = data.efilling['folder_master'];
   let pathFileUpload = '';
@@ -205,8 +206,7 @@ function detailDataEfiling(respon, menu_title, no_rekening) {
     // link  http://192.168.1.2/efiling/2018/03/02/02-38-00029-18/fatmah%20-%20PH.pdf
     let tgl_realisasi = ((data.header_efiling == null)? '' : data.header_efiling['tgl_realisasi'])
     let kode_kantor = ((data.header_efiling==  null)? '': data.header_efiling['kode_kantor'])
-    let no_rekening = ((data.header_efiling== null)? '' : data.header_efiling['no_rekening'])
-    let y = tgl_realisasi.split("-")[2],
+    let y = tgl_realisasi.split("-")[0],
       m = tgl_realisasi.split("-")[1];
     pathFileUpload = `http://192.168.1.2/${path_file}/${y}/${m}/${kode_kantor}/${no_rekening}/`;
   }
@@ -317,7 +317,7 @@ function detailDataEfiling(respon, menu_title, no_rekening) {
   let spk_ndk_surat_aksep = innerListData(data.efilling_spkndk['surat_aksep'], data.efilling_spkndk['surat_aksep_nama'], jenis_data, pathFileUpload, "srt_aksep", no_rekening);
   let spk_ndk_surat_transfer = innerListData(data.efilling_spkndk['surat_transfer'], data.efilling_spkndk['surat_transfer_nama'], jenis_data, pathFileUpload, "srt_transfer", no_rekening);
   let spk_ndk_tt_uang = innerListData(data.efilling_spkndk['tt_uang'], data.efilling_spkndk['tt_uang_nama'], jenis_data, pathFileUpload, "tt_uang", no_rekening);
-  // let spk_ndk_spajk_spa_fpk = innerListData(data.efilling_spkndk['spajk_spa_fpk'], jenis_data, pathFileUpload, "spajk_spa_fpk", no_rekening);
+  let spk_ndk_spajk_spa_fpk = innerListData(data.efilling_spkndk['spajk_spa_fpk'], data.efilling_spkndk['spajk_spa_fpk_nama'], jenis_data, pathFileUpload, "spajk_spa_fpk", no_rekening);
   // Data foto
   let foto_ft_domisili = innerListData(data.efilling_foto['ft_domisili'], data.efilling_foto['ft_domisili_nama'], jenis_data, pathFileUpload, "foto_domisili", no_rekening);
   let foto_ft_jaminan = innerListData(data.efilling_foto['ft_jaminan'], data.efilling_foto['ft_jaminan_nama'], jenis_data, pathFileUpload, "foto_jaminan", no_rekening);

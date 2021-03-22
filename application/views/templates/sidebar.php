@@ -331,7 +331,7 @@
           <!--- END MENU BSS -->
     
           <!-- MENU EFILING -->
-          <?php  if($this->session->userdata('divisi_id') == 'IT'){ ?>
+          <?php  if($this->session->userdata('divisi_id') == 'IT' || $this->session->userdata('divisi_id') == 'OPERASIONAL'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>e_filing" class="nav-link">
               <i class="nav-icon fas fa-paste icon_color_sidebar"></i>
