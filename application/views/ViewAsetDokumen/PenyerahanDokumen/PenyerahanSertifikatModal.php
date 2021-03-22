@@ -223,7 +223,7 @@
                               </div>
                               <div class="form-group row">
                                   <div class="col-sm-3">
-                                      <label class="control-label" style="padding-top: 5px;" for="sertKelurahanPenyerahan">Keluarhan</label>
+                                      <label class="control-label" style="padding-top: 5px;" for="sertKelurahanPenyerahan">Kelurahan</label>
                                   </div>
                                   <div class="col-sm-5">
                                       <input type="text" class="form-control" id="sertKelurahanPenyerahan" name="sertKelurahanPenyerahan" >

@@ -98,6 +98,7 @@ class Cover_asuransi_model extends CI_Model{
 						K.`jkw_asuransi_jiwa`,
 						K.`tinggi_asuransi_jiwa`,
 						K.`berat_asuransi_jiwa`,
+						K.`JML_PINJAMAN` AS `plafon`,
 						JH.`jenis_jaminan`,
 						JH.`nama`,
 						JH.`alamat` AS `alamat_jaminan`,
@@ -232,8 +233,44 @@ class Cover_asuransi_model extends CI_Model{
 				    LEFT JOIN app_kode_kantor AKK 
 				      ON AKK.kode_kantor = u.kd_cabang 
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
-				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode';";
+				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode'
+					AND AC.`status_cover` = 'SUDAH';";
 
+        $query  = $this->db2->query($str);
+        return $query->result_array();
+	}
+
+	public function get_data_cover_team_asuransi($date,$jenis){
+		$this->db2 = $this->load->database('DB_CENTRO', true);
+		$str    = "SELECT 
+						K.`TGL_REALISASI`,
+						N.NAMA_NASABAH,
+						JH.`jenis_jaminan`,
+						KKA.`DESKRIPSI_ASURANSI`,
+						ac.`no_rekening`,
+						AC.`nasabah_id`,
+						AC.`agunan_id`,
+						AC.`no_polis`,
+						AC.`no_reff_asuransi`,
+						AC.`no_reff_jaminan`,
+						AC.`titipan_asuransi`,
+						AC.`komisi_asuransi`,
+						AC.`premi_asuransi`,
+						AC.`sisa_titipan_asuransi`,
+						AC.`status_cover`
+					FROM
+						asuransi_cover AC 
+					LEFT JOIN NASABAH N 
+						ON N.`NASABAH_ID` = AC.`nasabah_id` 
+					LEFT JOIN KREDIT K 
+						ON K.`NO_REKENING` = AC.`no_rekening` 
+					LEFT JOIN JAMINAN_HEADER JH 
+						ON JH.`no_rekening` = AC.`no_rekening` 
+					LEFT JOIN kre_kode_asuransi KKA 
+						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+					WHERE AC.`jenis_asuransi` = '$jenis' 
+						AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$date'
+						AND AC.`status_cover` = 'SUDAH';";
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}

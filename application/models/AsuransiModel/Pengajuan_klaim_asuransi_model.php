@@ -139,6 +139,7 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                 WHERE (AC.`no_rekening` = '$modal_rek_polis_jaminan' 
                        OR AC.`no_polis` = '$modal_rek_polis_jaminan')
                 AND AC.`jenis_asuransi` = '$jenis_asuransi'
+                AND AC.`status_cover` = 'SUDAH'
                 LIMIT 1;";
         $query  = $this->db2->query($str);
         return $query->result_array();
@@ -333,6 +334,7 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                 WHERE (AC.`no_rekening` = '$modal_rek_polis_jiwa' 
                        OR AC.`no_polis` = '$modal_rek_polis_jiwa')
                 AND AC.`jenis_asuransi` = '$jenis_asuransi'
+                AND AC.`status_cover` = 'SUDAH'
                 LIMIT 1;";
         $query  = $this->db2->query($str);
         return $query->result_array();
