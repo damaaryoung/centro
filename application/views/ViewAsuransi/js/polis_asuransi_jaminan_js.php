@@ -135,7 +135,7 @@
                         $('#modal_alamat_jaminan').val(response.data_details[0]['alamat_jaminan']); 
 
                         $('#modal_pertanggungan').val(accounting.formatMoney(response.data_details[0]['NILAI_ASURANSI'], '', 0, ',', '.')); 
-                        $('#modal_plafon').val(accounting.formatMoney(response.data_details[0]['plafond'], '', 0, ',', '.')); 
+                        $('#modal_plafon').val(accounting.formatMoney(response.data_details[0]['plafon'], '', 0, ',', '.')); 
                         $('#modal_lama_cover_m').val(jkw_asuransi_m); 
                         $('#modal_rate').val(response.data_details[0]['rate']); 
                         $('#modal_premi').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.')); 
