@@ -15,12 +15,12 @@ function detailViewEfiling(respon) {
   if (jenis_data == 1) {
     pathFileUpload = `${path_file}/`;
   } else {
-   // link  http://192.168.1.2/efiling/2018/03/02/02-38-00029-18/fatmah%20-%20PH.pdf
+   // link  http://103.234.254.186/efiling/2018/03/02/02-38-00029-18/fatmah%20-%20PH.pdf
     let tgl_realisasi = ((data.header_efiling == null)? '' : data.header_efiling['tgl_realisasi'])
     let kode_kantor = ((data.header_efiling==  null)? '': data.header_efiling['kode_kantor'])
     let y = tgl_realisasi.split("-")[0],
         m = tgl_realisasi.split("-")[1];
-    pathFileUpload = `http://192.168.1.2/${path_file}/${y}/${m}/${kode_kantor}/${no_rekening}/`;
+    pathFileUpload = `http://103.234.254.186/${path_file}/${y}/${m}/${kode_kantor}/${no_rekening}/`;
   }
 
   let verifikasi_nasabah = status(data.efilling_nasabah['verifikasi_nasabah'], "verifikasi_nasabah")
