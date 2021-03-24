@@ -1,5 +1,6 @@
 let base_url = $('#base_url').val();
 let api_url = $('#api_url').val();
+
 $(document).ready(function () {
   $('.select2').select2()
   getAll()
@@ -70,7 +71,7 @@ $(document).on("click", ".pager_info", function (e) {
 function getAll(url) {
   let url_api = ''
   if (url == null || url == undefined) {
-    url_api = "http://103.31.232.146/API_WEBTOOL3_2/api/master/centro/index?page=1"
+    url_api = api_url+"api/master/centro/index?page=1"
   } else {
     url_api = url
   }
@@ -157,7 +158,7 @@ function filter_efiling(kode_area, filter_release, status, search) {
   } else {
     $.ajax({
       type: "POST",
-      url: "http://103.31.232.146/API_WEBTOOL3_2/api/master/centro/viewHeader",
+      url: api_url+"api/master/centro/viewHeader",
       dataType: "json",
       data: data,
       headers: {
@@ -180,7 +181,6 @@ function filter_efiling(kode_area, filter_release, status, search) {
           "searching": false,
           "searchable": false
         });
-        console.log(respon)
       },
       error: function (jqXHR, exception) {
         toastr["error"]("Data Tidak di Temukan")
@@ -228,7 +228,6 @@ function list_data(respon) {
     } else {
       stcolor_upload = ''
     }
-
     row += `<tr>
                 <td style= "text-align : center; "class="no_rekening">${data[i]['no_rekening']}</td>
                 <td class="nama_debitur">${(data[i]['nama_debitur']== null)? '': data[i]['nama_debitur']}</td>
@@ -248,29 +247,24 @@ function list_data(respon) {
                   <div style ="display : flex; ">
                   ${((data[i]['status_verifikasi']== "DONE") ? `<div class="btn-action">
                   <button type="button" class="btn btn-warning btn-sm detail" title="View" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-eye"></i></button>
-                  </div>`:`
-                  <div class="btn-action">
+                  </div>`:
+                  ((data[i]['nama_user'] == 'WAITING')?
+                  `<div class="btn-action">
+                    <button type="button" class="btn btn-info btn-sm edit" title="Edit" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top" ><i class="fas fa-pencil-alt"></i></button>
+                  </div>`:
+                  `<div class="btn-action">
                     <button type="button" class="btn btn-info btn-sm edit" title="Edit" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top" ><i class="fas fa-pencil-alt"></i></button>
                   </div>
                   <div class="btn-action">
                     <button type="button" class="btn btn-success btn-sm verifikasi" title="Verifikasi" style="display:none;"   kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-user-check"></i></button>
-                  </div> 
-                  `)}
+                  </div>`
+                  )
+                  )}
                     </div>  
                   </div >
                 </td>
             </tr>`
   }
-
-  // <div class="btn-action">
-  //                   <button type="button" class="btn btn-info btn-sm edit" title="Edit" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top" ><i class="fas fa-pencil-alt"></i></button>
-  //                   </div>
-  //                   <div class="btn-action">
-  //                   <button type="button" class="btn btn-warning btn-sm detail" title="View" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-eye"></i></button>
-  //                   </div>
-  //                   <div class="btn-action">
-  //                   <button type="button" class="btn btn-success btn-sm verifikasi" title="Verifikasi" style="display:none;"   kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-user-check"></i></button>
-  // $('#efilingTable1').find('tbody').html(row);
   document.getElementById('list_dt').innerHTML = row
   action_Data();
 }
@@ -282,7 +276,7 @@ function userAccess() {
     jabatan: parseJwt(token).jabatan
   }
   $.ajax({
-    url: base_url + "E_FilingController/UserAccess_Efiling/",
+    url: base_url + "E_FilingController/UserAccess_Efiling",
     type: "POST",
     data: data,
     dataType: "json",

@@ -1,4 +1,3 @@
-
 // Upload File Efiling
 function getImg(evt) {
   let token = localStorage.getItem("token");
@@ -144,7 +143,7 @@ function getImg(evt) {
         file_name = 'penilaian_jaminan[]'
       }
       if (idFile == 'checklist_survey') {
-        file_name = 'cheklistsurvey[]'
+        file_name = 'cheklist_survey[]'
       }
       if (idFile == 'persetujuan_kredit') {
         file_name = 'persetujuan_kredit[]'
@@ -165,7 +164,7 @@ function getImg(evt) {
       }
       /*End Menu Legal ------------------------------------------------------------*/
       /*Start Menu Spkndk  --------------------------------------------------------*/ //done
-      if (idFile == 'spkndk') {
+      if (idFile == 'spk') {
         file_name = 'spk_ndk[]'
       }
       if (idFile == 'asuransi') {
@@ -261,18 +260,18 @@ function getImg(evt) {
         user_upload = 'user_id' //field body up user
       }
 
-      let userID = parseJwt (token).id;
+      let userID = parseJwt(token).id;
       let dateNOW = get_date_time_now();
       let url_upload = ''
 
       fd.append(file_name, files);
       fd.append(user_upload, userID)
       fd.append('tgl_buat', dateNOW)
-      
-      if(is_jenis == 2){
-        url_upload = 'http://103.31.232.146/API_WEBTOOL3_2/api/master/centro/update/webtool/'
-      }else{
-        url_upload = 'http://103.31.232.146/API_WEBTOOL3_2/api/master/centro/update/'
+
+      if (is_jenis == 2) {
+        url_upload = api_url+'api/master/centro/update/webtool/' //url upload webtool
+      } else {
+        url_upload = api_url+'api/master/centro/update/' //url upload sefin
       }
       $.ajax({
         url: url_upload + no_rekening,
@@ -298,7 +297,7 @@ function getImg(evt) {
           }).then((result) => {
             if (result.value) {
               $('#' + idFile + '').next('label').html('Choose file');
-              update_detail_data('',is_jenis)
+              update_detail_data('', is_jenis)
             }
           })
         },
@@ -333,10 +332,10 @@ $('#update_verifikasi_data').click(function () {
       let verifikasi_legal = $('#verifikasi_legal').val()
       let verifikasi_spk = $('#verifikasi_spk').val()
 
-      let notes_nasabah = ((verifikasi_nasabah == 1)? '' : $('#note_verifikasi_nasabah').val())
-      let notes_jaminan = ((verifikasi_jaminan == 1)? '' : $('#note_verifikasi_jaminan').val())
-      let notes_legal = ((verifikasi_legal == 1)? '' : $('#note_verifikasi_legal').val())
-      let notes_spk = ((verifikasi_spk == 1)? '' : $('#note_verifikasi_spk').val())
+      let notes_nasabah = ((verifikasi_nasabah == 1) ? '' : $('#note_verifikasi_nasabah').val())
+      let notes_jaminan = ((verifikasi_jaminan == 1) ? '' : $('#note_verifikasi_jaminan').val())
+      let notes_legal = ((verifikasi_legal == 1) ? '' : $('#note_verifikasi_legal').val())
+      let notes_spk = ((verifikasi_spk == 1) ? '' : $('#note_verifikasi_spk').val())
       let notes_permohonan = ((verifikasi_permohonan == 1) ? '' : $('#note_verifikasi_premohonan_kredit').val())
       let notes_bi = ((verifikasi_bi == 1) ? '' : $('#note_verifikasi_bi_checking').val())
       let notes_ca = ((verifikasi_ca == 1) ? '' : $('#note_verifikasi_credit_analist').val())
@@ -365,31 +364,30 @@ $('#update_verifikasi_data').click(function () {
             verifikasi_ca: verifikasi_ca,
             verifikasi_foto: verifikasi_foto,
             verifikasi_legal: verifikasi_legal,
-            verifikasi_spk: verifikasi_spk,
-            notes_nasabah:  notes_nasabah,
-            notes_permohonan:  notes_permohonan,
+            verifikasi_spkndk: verifikasi_spk,
+            notes_nasabah: notes_nasabah,
+            notes_permohonan: notes_permohonan,
             notes_bi: notes_bi,
-            notes_ca:  notes_ca,
+            notes_ca: notes_ca,
             notes_foto: notes_foto,
             notes_jaminan: notes_jaminan,
             notes_legal: notes_legal,
-            notes_spk: notes_spk,
-            user_verif : parseJwt (token).id,
-            tgl_verif : get_date_time_now()
+            notes_spkndk: notes_spk,
+            user_verif: parseJwt(token).id,
+            tgl_verif: get_date_time_now()
           }
           break;
       }
       let is_jenis = this.getAttribute('jenis_data')
-      update_detail_data(data,is_jenis)
+      update_detail_data(data, is_jenis)
       // console.log(data)
-    } 
-    else if (result.dismiss === 'Tidak') {
+    } else if (result.dismiss === 'Tidak') {
       return false
     }
   })
 })
 
-function update_detail_data(data,is_jenis) {
+function update_detail_data(data, is_jenis) {
   let dt = {}
   if (data !== undefined) {
     dt = data
@@ -409,11 +407,11 @@ function update_detail_data(data,is_jenis) {
     title = menu_title
   }
 
-  let url_upload =''
-  if(is_jenis == 2){
-    url_upload = 'http://103.31.232.146/API_WEBTOOL3_2/api/master/centro/update/webtool/'
-  }else{
-    url_upload = 'http://103.31.232.146/API_WEBTOOL3_2/api/master/centro/update/'
+  let url_upload = ''
+  if (is_jenis == 2) {
+    url_upload = api_url+'api/master/centro/update/webtool/'
+  } else {
+    url_upload = api_url+'api/master/centro/update/'
   }
   $.ajax({
     url: url_upload + no_rekening,
@@ -427,8 +425,8 @@ function update_detail_data(data,is_jenis) {
       $('#' + page_load).show();
     },
     success: function (respon) {
-      getDetailDataNasabah_to_FormEfiling(no_rekening, page_load, title);
       $('#' + page_load).hide();
+      getDetailDataNasabah_to_FormEfiling(no_rekening, page_load, title);
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -442,12 +440,17 @@ function update_detail_data(data,is_jenis) {
   })
 }
 
-function closeFormEfiling() {
+function closeFormEfiling(evt) {
   $('#modal_pengisian_efiling').modal('hide');
   $('.inner_list_upload').each(function (index, item) {
     $(item).empty();
   });
-  location.reload();
+
+  let kode_area = $('#kode_kantor').val();
+  let filter_release = $('#filter_release').val();
+  let status = $('#status').val();
+  let search = $("#search").val();
+  filter_efiling(kode_area, filter_release, status, search);
 }
 
 /** Function delete file efiling */
@@ -657,7 +660,7 @@ function delete_file(d) {
       }
       /*End Menu Legal ------------------------------------------------------------*/
       /*Start Menu Spkndk  --------------------------------------------------------*/ //done
-      if (idFile == 'spkndk') {
+      if (idFile == 'spk') {
         tbl = 'efiling_spk_ndk'
         col = 'spk_ndk'
       }
@@ -723,7 +726,7 @@ function delete_file(d) {
       }
       if (idFile == 'sp_plang') {
         tbl = 'efiling_spk_ndk'
-        col = 'surat_aksep'
+        col = 'sp_plang'
       }
       if (idFile == 'hal_penting') {
         tbl = 'efiling_spk_ndk'
@@ -769,7 +772,7 @@ function delete_file(d) {
         col = 'ra_serah_terima'
       }
 
-      let title =''
+      let title = ''
       let page_load = ''
       if (menu_title == undefined || menu_title == '') {
         page_load = 'loading-2'
@@ -785,7 +788,7 @@ function delete_file(d) {
         files: d.getAttribute("nm-file")
       }
       $.ajax({
-        url: "http://103.31.232.146/API_WEBTOOL3_2/api/master/centro/delete/file/" + no_rekening,
+        url: api_url+"api/master/centro/delete/file/" + no_rekening,
         type: "POST",
         data: data,
         dataType: 'json',
@@ -805,7 +808,6 @@ function delete_file(d) {
           }).then((result) => {
             if (result.value) {
               getDetailDataNasabah_to_FormEfiling(no_rekening, page_load, title);
-
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -815,11 +817,21 @@ function delete_file(d) {
               })
             }
           })
+        },
+        error: function (xhr, status, error) {
+          $('#' + page_load).hide();
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: xhr.responseText.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       });
-    }else if (result.dismiss === 'Tidak') {
+    } else if (result.dismiss === 'Tidak') {
       return false
     }
   })
-  
+
 }

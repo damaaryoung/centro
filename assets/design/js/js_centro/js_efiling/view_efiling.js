@@ -9,6 +9,9 @@ function detailViewEfiling(respon) {
   $(".custom-file-input").attr({
     "is_jenis": jenis_data
   })
+  $("#inputStatusVerifikasi").attr({
+    "no_rekening": no_rekening
+  })
   if (jenis_data == 1) {
     pathFileUpload = `${path_file}/`;
   } else {
@@ -45,17 +48,17 @@ function detailViewEfiling(respon) {
     }
   }
 
-  let notes_bi_checking = notes(data.efilling_bichecking['notes_bichecking'], "notes_bi_checking")
-  let notes_credit_analist = notes(data.efilling_ca['notes_ca'], "notes_credit_analist")
-  let notes_foto = notes(data.efilling_foto['notes_foto'], "notes_foto")
-  let notes_jaminan = notes(data.efilling_jaminan['notes_jaminan'], "notes_jaminan")
-  let notes_legal = notes(data.efilling_legal['notes_legal'], "notes_legal")
-  let notes_nasabah = notes(data.efilling_nasabah['notes_nasabah'], "notes_nasabah")
-  let notes_permohonan_kredit = notes(data.efilling_permohonan['notes_permohonan'], "notes_permohonan_kredit")
-  let notes_spk_ndk = notes(data.efilling_spkndk['notes_spkndk'], "notes_spk_ndk")
+  let notes_bi_checking = notes(data.efilling_bichecking['notes_bichecking'],data.efilling_bichecking['verifikasi_bichecking'],"notes_bi_checking")
+  let notes_credit_analist = notes(data.efilling_ca['notes_ca'],data.efilling_ca['verifikasi_ca'], "notes_credit_analist")
+  let notes_foto = notes(data.efilling_foto['notes_foto'],data.efilling_foto['verifikasi_foto'], "notes_foto")
+  let notes_jaminan = notes(data.efilling_jaminan['notes_jaminan'],data.efilling_jaminan['verifikasi_jaminan'], "notes_jaminan")
+  let notes_legal = notes(data.efilling_legal['notes_legal'],data.efilling_legal['verifikasi_legal'], "notes_legal")
+  let notes_nasabah = notes(data.efilling_nasabah['notes_nasabah'],data.efilling_nasabah['verifikasi_nasabah'], "notes_nasabah")
+  let notes_permohonan_kredit = notes(data.efilling_permohonan['notes_permohonan'],data.efilling_permohonan['verifikasi_permohonan'], "notes_permohonan_kredit")
+  let notes_spk_ndk = notes(data.efilling_spkndk['notes_spkndk'],data.efilling_spkndk['verifikasi_spkndk'], "notes_spk_ndk")
 
-  function notes(notes, id_dt) {
-    if (notes == null) {
+  function notes(notes, status ,id_dt) {
+    if (notes == null || status == 1 || status == null) {
       $('#view_' + id_dt).html("-")
     } else {
       $('#view_' + id_dt).html(notes)
@@ -150,7 +153,7 @@ function detailViewEfiling(respon) {
 }
 
 function innerDataNasabah(file,file_name, jenis_data, pathFileUpload, id) {
-  if (file == null || file == '') {
+  if (file == null || file == '' || JSON.parse(file)== '') {
     return $('#' + id + '').html(`<p class="ket-data-null"> Data tidak ada</p>`);
   } else {
     let parse_file = ''
@@ -202,13 +205,59 @@ function innerDataAsset(file,file_name, jenis_data, pathFileUpload, id, no_reken
       }
     }
     return $('#file-' + id + '').html(list_data);
-
   }
 }
 
 $('#inputStatusVerifikasi').change(function () {
-  let status = $(this).val();
-  console.log(status)
+  Swal.fire({
+    title: 'Apakah Anda Yakin Ingin Mengubah Status E-Filling?',
+    showCancelButton: true,
+    confirmButtonText: `Simpan`,
+    icon: 'question',
+  }).then((result) => {
+    if (result.value) {
+      let data = {
+        status : $(this).val(),
+        user_id : parseJwt(token).id,
+        no_rekening : $(this).attr('no_rekening')
+      }
+      $.ajax({
+        url: base_url + "E_FilingController/Update_status",
+        type: "POST",
+        data: data,
+        dataType: 'json',
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        beforeSend: function () {
+          $('#loading-2').show();
+        },
+        success: function (respon) {
+          $('#loading-2').hide();
+          if(respon.success == true){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: respon.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }else{
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: respon.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }
+        }
+      })
+    } else if (result.dismiss === 'Tidak') {
+      return false
+    }
+  })
+  
 });
 
 function closeViewEfiling() {
@@ -216,5 +265,9 @@ function closeViewEfiling() {
   $('.custom-file-view').each(function (index, item) {
     $(item).empty();
   });
-  location.reload();
+  let kode_area = $('#kode_kantor').val();
+  let filter_release = $('#filter_release').val();
+  let status = $('#status').val();
+  let search = $("#search").val();
+  filter_efiling(kode_area, filter_release, status, search);
 }

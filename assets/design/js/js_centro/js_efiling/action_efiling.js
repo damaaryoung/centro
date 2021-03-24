@@ -169,7 +169,7 @@ function check(id, ket) {
 
 function getDetailDataNasabah_to_FormEfiling(no_rekening, loading, menu_title) {
   $.ajax({
-    url: "http://103.31.232.146/API_WEBTOOL3_2/api/master/centro/show/" + no_rekening,
+    url: api_url+"api/master/centro/show/" + no_rekening,
     type: "GET",
     dataType: "json",
     headers: {
@@ -349,7 +349,8 @@ function innerListData(file,file_name, jenis_data, pathFileUpload, id, no_rekeni
              <a class="example-image-link" target="_blank"  href="${pathFileUpload}${parse_file[i]}"><i class="far fa-file-pdf" style="color: red;font-size: 20px;"></i>${((jenis_data == 1)? parse_name[i] : parse_file[i])}</a>
            </div>
           <div class="col-2">
-           <button type="button" class="btn bg-gradient-danger btn-sm btn_delete_file" nm-file="${((jenis_data == 1)? parse_name[i] : parse_file[i])}" no-rek="${no_rekening}" id-file ="${id}" onclick="delete_file(this)">Delete</button>
+           <button type="button" class="btn bg-gradient-danger btn-sm btn_delete_file" nm-file="${((jenis_data == 1)? parse_name[i] : parse_file[i])}" no-rek="${no_rekening}" id-file ="${id}" onclick="delete_file(this)" data-toggle="tooltip" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i>
+           </button>
            </div>
           </div>`
       }
@@ -388,7 +389,7 @@ function innerStatusVerifikasi(statusVal, id, menu_title) {
 // inner notes edit data 
 function innertNotes(data, id, status, menu_title) {
   if (menu_title == 'Edit') {
-    if (data == null) {
+    if (data == null|| status== null || status == 1) {
       $('#note_' + id).html("-")
     } else {
       $('#note_' + id).html(data)
