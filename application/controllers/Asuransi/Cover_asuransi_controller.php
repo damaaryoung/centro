@@ -56,6 +56,7 @@ class Cover_asuransi_controller extends CI_Controller {
 
 	public function get_data_rekap_jaminan(){
 		$menu = $this->session->userdata('menu_cover_asuransi');
+		$divisi_id  = $this->session->userdata('divisi_id');
 		if($menu == '1'){
 			$jenis = 'JAMINAN';
 		}else if($menu == '2'){
@@ -64,7 +65,11 @@ class Cover_asuransi_controller extends CI_Controller {
 			$jenis = '';
 		}
 		$date       = $this->Cover_asuransi_model->sysdate();
-		$rekap_jaminan = $this->Cover_asuransi_model->get_data_cover($date,$jenis);
+		if($divisi_id == 'ASURANSI'){
+			$rekap_jaminan = $this->Cover_asuransi_model->get_data_cover_team_asuransi($date,$jenis);
+		}else{
+			$rekap_jaminan = $this->Cover_asuransi_model->get_data_cover($date,$jenis);
+		}
 
 		$data['sysdate']       = $date;
 		$data['rekap_jaminan'] = $rekap_jaminan;
@@ -72,6 +77,7 @@ class Cover_asuransi_controller extends CI_Controller {
 	}
 	public function get_data_rekap_jiwa(){
 		$menu = $this->session->userdata('menu_cover_asuransi');
+		$divisi_id  = $this->session->userdata('divisi_id');
 		if($menu == '1'){
 			$jenis = 'JAMINAN';
 		}else if($menu == '2'){
@@ -80,8 +86,11 @@ class Cover_asuransi_controller extends CI_Controller {
 			$jenis = '';
 		}
 		$date          = $this->Cover_asuransi_model->sysdate();
-		$rekap_jaminan = $this->Cover_asuransi_model->get_data_cover($date,$jenis);
-
+		if($divisi_id == 'ASURANSI'){
+			$rekap_jaminan = $this->Cover_asuransi_model->get_data_cover_team_asuransi($date,$jenis);
+		}else{
+			$rekap_jaminan = $this->Cover_asuransi_model->get_data_cover($date,$jenis);
+		}
 		$data['sysdate']       = $date;
 		$data['rekap_jaminan'] = $rekap_jaminan;
 		echo json_encode($data);

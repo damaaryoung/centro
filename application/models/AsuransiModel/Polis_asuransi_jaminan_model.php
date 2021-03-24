@@ -98,6 +98,7 @@ class Polis_asuransi_jaminan_model extends CI_Model{
 						K.`jkw_asuransi_jiwa`,
 						K.`tinggi_asuransi_jiwa`,
 						K.`berat_asuransi_jiwa`,
+						K.`JML_PINJAMAN` AS `plafon`,
 						JH.`jenis_jaminan`,
 						JH.`nama`,
 						JH.`alamat` AS `alamat_jaminan`,

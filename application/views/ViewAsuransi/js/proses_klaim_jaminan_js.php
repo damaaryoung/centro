@@ -68,6 +68,29 @@ $('#btn_simpan_modal_jaminan').click(function(event) {
     });
 });
 $('#btn_email_modal_jaminan').click(function(event) {
+    $('#modal_send_mail').modal('show');
+});
+
+$('#save_return').click(function(event) {
+    Swal.fire({
+       title: 'Apakah Anda Yakin Akan Melakukan RETURN Klaim ?',
+       text: "Lanjutkan ?",
+       showCancelButton: true,
+       confirmButtonColor: '#3085d6',
+       cancelButtonColor: '#d33',
+       confirmButtonText: 'Lanjutkan',
+       cancelButtonText: 'Batalkan',
+       showLoaderOnConfirm: true,
+       reverseButtons: true,
+       preConfirm: function() {
+        return new Promise(function(resolve) {
+            proses_return();
+        });
+       },
+       allowOutsideClick: false     
+    });
+});
+$('#send_mail').click(function(event) {
     if(send_mail == '1'){
         Swal.fire({
            title: 'Data Ini Sudah Dikirimkan Email Ke INSCO, Kirim Ulang?',
@@ -106,28 +129,7 @@ $('#btn_email_modal_jaminan').click(function(event) {
            allowOutsideClick: false     
         });
     }
-    
 });
-$('#save_return').click(function(event) {
-    Swal.fire({
-       title: 'Apakah Anda Yakin Akan Melakukan RETURN Klaim ?',
-       text: "Lanjutkan ?",
-       showCancelButton: true,
-       confirmButtonColor: '#3085d6',
-       cancelButtonColor: '#d33',
-       confirmButtonText: 'Lanjutkan',
-       cancelButtonText: 'Batalkan',
-       showLoaderOnConfirm: true,
-       reverseButtons: true,
-       preConfirm: function() {
-        return new Promise(function(resolve) {
-            proses_return();
-        });
-       },
-       allowOutsideClick: false     
-    });
-});
-
 
 
 function get_kode_kantor(){
@@ -349,7 +351,8 @@ function proses_emails(){
     var no_polis_email = $('#modal_polis_jaminan').val();
     var rek_update = $('#modal_rek_jaminan').val();
     var no_transaksi = $('#modal_no_transaksi_jaminan').val();
-    console.log(nama_nasabah_email,no_polis_email,tgl_klaim,email_insco);
+    var modal_email_penerima = $('#modal_email_penerima').val();
+    console.log(nama_nasabah_email,no_polis_email,tgl_klaim,email_insco,modal_email_penerima);
 
     $.ajax({
             url : base_url + "Asuransi/Proses_klaim_jaminan_controller/proses_email",
@@ -359,12 +362,13 @@ function proses_emails(){
             headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     },
-            data:{"nama_nasabah_email" : nama_nasabah_email,
-                  "no_polis_email"     : no_polis_email,
-                  "tgl_klaim"          : tgl_klaim,
-                  "email_insco"        : email_insco,
-                  "rek_update"         : rek_update,
-                  "no_transaksi"       : no_transaksi
+            data:{"nama_nasabah_email"   : nama_nasabah_email,
+                  "no_polis_email"       : no_polis_email,
+                  "tgl_klaim"            : tgl_klaim,
+                  "email_insco"          : email_insco,
+                  "rek_update"           : rek_update,
+                  "no_transaksi"         : no_transaksi,
+                  "modal_email_penerima" : modal_email_penerima
                 },
             success : function(response) {
                 console.log(response);
@@ -375,12 +379,16 @@ function proses_emails(){
                     showConfirmButton: false,
                     timer: 2000
                 }).then(()=> {
+                    $('#modal_send_mail').modal('hide');
+                    $('#modal_email_penerima').val('');
                     close_jaminan();
                 });  
             },
             error : function(response) {
                 console.log('failed :' + response);
                 $('#loading').hide();
+                $('#modal_send_mail').modal('hide');
+                $('#modal_email_penerima').val('');
                 return Swal.fire({
                     icon: 'error',
                     title: 'Gagal Kirim Email',

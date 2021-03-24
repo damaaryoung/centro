@@ -368,7 +368,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 											$sertSlikTanggalLJK,
 											$sertSlikNilaiIndependen,
 											$sertSlikNamaIndependen,
-											$sertSlikTglIndependen,
+											$tgl_penilaian,
 											$sertSlikParipasu,
 											$sertSlikParipasuPersen,
 											$sertSLikStatusJoinAccount,
@@ -477,7 +477,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 								`tanggal_penilaian_ljk` 		  = '$sertSlikTanggalLJK',
 								`nilai_agunan_penilai_independen` = '$sertSlikNilaiIndependen',
 								`nama_penilai_independen`         = '$sertSlikNamaIndependen',
-								`tanggal_penilaian_independen`    = '$sertSlikTglIndependen',
+								`tanggal_penilaian_independen`    = '$tgl_penilaian',
 								`status_paripasu` 				  = '$sertSlikParipasu',
 								`prosentase_paripasu` 			  = '$sertSlikParipasuPersen',
 								`status_kredit_join` 			  = '$sertSLikStatusJoinAccount',
@@ -626,7 +626,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 												$bpkbSlikTanggalLJK,
 												$bpkbSlikNilaiIndependen,
 												$bpkbSlikNamaIndependen,
-												$bpkbSlikTglIndependen,
+												$tgl_penilaian,
 												$bpkbSlikParipasu,
 												$bpkbSlikParipasuPersen,
 												$bpkbSLikStatusJoinAccount,
@@ -718,7 +718,7 @@ class AsetDokumenUpdateModel extends CI_Model{
 									`tanggal_penilaian_ljk` 		  = '$bpkbSlikTanggalLJK',
 									`nilai_agunan_penilai_independen` = '$bpkbSlikNilaiIndependen',
 									`nama_penilai_independen`         = '$bpkbSlikNamaIndependen',
-									`tanggal_penilaian_independen`    = '$bpkbSlikTglIndependen',
+									`tanggal_penilaian_independen`    = '$tgl_penilaian',
 									`status_paripasu` 				  = '$bpkbSlikParipasu',
 									`prosentase_paripasu` 			  = '$bpkbSlikParipasuPersen',
 									`status_kredit_join` 			  = '$bpkbSLikStatusJoinAccount',
@@ -832,17 +832,19 @@ class AsetDokumenUpdateModel extends CI_Model{
         return $query->result_array();
 	}
 
-	public function insertCoverNotes($CoverNotesNoReff,$CoverNotesAgunanID,$namafileUpload){
+	public function insertCoverNotes($CoverNotesNoReff,$CoverNotesAgunanID,$root_document,$root_address,$pathFile){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		
 												
 		$this->db2->query("INSERT INTO jaminan_upload_cover_notes_pinjam
-							(no_reff, agunan_id, tanggal_upload, upload_cover_notes)
+							(no_reff, agunan_id, tanggal_upload, root_document, root_address, path_file)
 							VALUES(
 								'$CoverNotesNoReff',
 								'$CoverNotesAgunanID',
-								NOW(),
-								'$namafileUpload');
+								 NOW(),
+								'$root_document',
+								'$root_address',
+								'$pathFile');
 						 ");
 	}
 

@@ -157,7 +157,7 @@
                         $('#modal_alamat').val(response.data_details[0]['alamat_nasabah']); 
                         $('#modal_tanggal_realisasi').val(response.data_details[0]['TGL_REALISASI']); 
                         $('#modal_tgl_jt_tempo').val(response.data_details[0]['TGL_JATUH_TEMPO']); 
-                        $('#modal_plafon').val(accounting.formatMoney(response.data_details[0]['plafond'], '', 0, ',', '.')); 
+                        $('#modal_plafon').val(accounting.formatMoney(response.data_details[0]['plafon'], '', 0, ',', '.')); 
                         $('#modal_nilai_titipan').val(accounting.formatMoney(response.data_details[0]['titipan_asuransi'], '', 0, ',', '.')); 
                         $('#modal_jaminan').val(response.data_details[0]['jenis_jaminan']); 
                         $('#modal_atas_nama').val(response.data_details[0]['nama']); 
@@ -197,7 +197,7 @@
                             $('#modal_tinggi_badan_jiwa').val(response.data_details[0]['tinggi_asuransi_jiwa']); 
                             $('#modal_berat_badan_jiwa').val(response.data_details[0]['berat_asuransi_jiwa']); 
                             $('#modal_rate_jiwa').val(response.data_details[0]['rate']); 
-                            $('#modal_premi_jiwa').val(response.data_details[0]['premi_asuransi']); 
+                            $('#modal_premi_jiwa').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.')); 
                             $('#modal_selisih_jiwa').val(0); 
                         }
 

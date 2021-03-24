@@ -327,6 +327,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
   <!-- /.modal -->
 
+  <div class="modal fade" id="modal_send_mail">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Masukan Penerima Email</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 300px;">
+          
+          <div class="row" style="padding-top: 20px;">
+            <!-- form atas -->
+            <div class="col-md-12 mx-auto">
+              <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label style="padding-top: 5px;" class="control-label" for="modal_email_penerima">Email Penerima</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <p>Pisahkan Dengan Tanda Koma (,) Jika Penerima Lebih Dari Satu !</p>
+                    </div>
+                    
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <textarea style="height: 150px;" type="text" class="form-control" id="modal_email_penerima" name="modal_email_penerima"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="send_mail">Send Email</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
 
 
 	<?php

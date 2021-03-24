@@ -103,23 +103,24 @@ class Proses_klaim_jaminan_controller extends CI_Controller {
 		echo json_encode($data);
 	}
     public function proses_email(){
-        $nama_nasabah_email = $this->input->post('nama_nasabah_email');
-        $no_polis_email     = $this->input->post('no_polis_email');
-        $tgl_klaim          = $this->input->post('tgl_klaim');
-        $email_insco        = $this->input->post('email_insco');
-        $rek_update         = $this->input->post('rek_update');
-        $no_transaksi       = $this->input->post('no_transaksi');
-        $userID             = $this->session->userdata('nik');
+        $nama_nasabah_email   = $this->input->post('nama_nasabah_email');
+        $no_polis_email       = $this->input->post('no_polis_email');
+        $tgl_klaim            = $this->input->post('tgl_klaim');
+        $email_insco          = $this->input->post('email_insco');
+        $rek_update           = $this->input->post('rek_update');
+        $no_transaksi         = $this->input->post('no_transaksi');
+		$modal_email_penerima = $this->input->post('modal_email_penerima');
+        $userID               = $this->session->userdata('nik');
         
         $data['nama_nasabah']  = $nama_nasabah_email;
         $data['no_polis']      = $no_polis_email;
         $data['tgl_klaim']     = $tgl_klaim;
-		$email = $this->load->view('ViewAsuransi/cetak/email_insco.php', $data, TRUE);
+	    $email = $this->load->view('ViewAsuransi/cetak/email_insco.php', $data, TRUE);
 
 		$email = array(
 			'subyek' => 'Klaim Asuransi Jaminan',
-			'tujuan' => $email_insco,
-			'cc' => 'staf_tisupport@kreditmandiri.co.id, it@kreditmandiri.co.id',
+			'tujuan' => $modal_email_penerima,
+			'cc' => 'staf_tisupport@kreditmandiri.co.id, it@kreditmandiri.co.id, dudik.bdg@kreditmandiri.co.id, mufti@kreditmandiri.co.id',
 			'pesan' => $email
 			// 'attach1' => $req->file('attach1')
 		);
