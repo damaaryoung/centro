@@ -234,7 +234,7 @@ function list_data(respon) {
                 <td class="area_kerja">${(data[i]['nama_kantor']== null)?'':data[i]['nama_kantor']}</td>
                 <td class="tgl_realisasi">${(data[i]['tgl_realisasi']== null)?'':data[i]['tgl_realisasi']}</td>
                 <td class="plafon">${plafon}</td>
-                <td class="tenor">${(data[i]['tenor']== null)? 0: respon.data[i]['tenor']}</td>
+                <td class="tenor">${(data[i]['tenor']== null)? 0: data[i]['tenor']}</td>
                 <td>${baki_debet}</td>
                 <td style="font-weight: bold;">${(data[i]['status_dokument']== null)?'' :data[i]['status_dokument']}</td>
                 <td style="${stcolor_upload}; font-weight: bold;" >${data[i]['nama_user']}</td>
@@ -242,7 +242,7 @@ function list_data(respon) {
                 <td>${(data[i]['timeline']== null)?'' :data[i]['timeline']}</td>
                 <td>${(data[i]['timeline_update']== null)?'' : data[i]['timeline_update']}</td>
                 <td>${(data[i]['timeline_verifikasi']== null)?'' :data[i]['timeline_verifikasi']}</td>
-                <td style="${stcolor}; font-weight: bold;">${(data[i]['status_verifikasi']== null)?'':data[i]['status_verifikasi']}</td>
+                <td style="${stcolor}; font-weight: bold;">${(data[i]['status_verifikasi']== null)?'':data[i]['status_verifikasi']  }</td>
                 <td>
                   <div style ="display : flex; ">
                   ${((data[i]['status_verifikasi']== "DONE") ? `<div class="btn-action">
