@@ -31,89 +31,6 @@ class E_FilingController extends CI_Controller {
 			redirect('LoginController/index'); 
 		}
 	}
-	
-	public function getEfiling(){
-		$session = $this->session->userdata('nama');
-		$divisi_id = $this->session->userdata('divisi_id');
-		$jabatan = $this->session->userdata('jabatan');
-		if($session != ''){
-			$model = new EFilingModel();
-			$model->kode_cabang = $this->session->userdata('kd_cabang'); 
-			$data =$model->get_efiling();
-			if( count($data) > 0){
-				$data = $data;
-				$success = true;
-				$message = '';
-			}else {
-				$data = '' ;
-				$message = "Data does not exist";
-				$success = false;
-			};
-
-			echo json_encode([
-				"success" => $success,
-				"message" => $message,
-				"divisi_id" => $divisi_id,
-				"jabatan" => $jabatan,
-				"data" => $data
-			]);
-		}
-		else{
-			redirect('LoginController/index'); 
-		}
-	}
-
-
-	public function efiling_detail(){
-		$session = $this->session->userdata('nama');
-		if($session != ''){
-			$model = new EFilingModel();
-			$model->no_rekening = $this->input->post('no_rekening');
-			$data =$model->query_detail_efiling();
-			// var_dump(json_encode($data['nasabah_ktp'])); die();
-			echo json_encode([
-				"success" => true,
-				"message" => "",
-				"data" => $data
-			]);
-		}
-		else{
-			redirect('LoginController/index'); 
-		}
-	}
-
-	public function getSearch(){
-		$session = $this->session->userdata('nama');
-		$divisi_id = $this->session->userdata('divisi_id');
-		$jabatan = $this->session->userdata('jabatan');
-		if($session != ''){
-			$model = new EFilingModel();
-			$model->kode_kantor = $this->input->post('kode_kantor');
-			$model->baki_debet = $this->input->post('baki_debet');
-			$model->status_verifikasi = $this->input->post('status_verifikasi');
-			$model->no_rekening = $this->input->post('no_rekening');
-			$data =$model->query_filter_efiling();
-			if( count($data) > 0){
-				$data = $data;
-				$success = true;
-				$message = '';
-			}else {
-				$data = '' ;
-				$message = "Data is not found";
-				$success = false;
-			};
-
-			echo json_encode([
-				"success" => $success,
-				"message" => $message,
-				"divisi_id" => $divisi_id,
-				"jabatan" => $jabatan,
-				"data" => $data
-			]);
-		}else{
-			redirect('LoginController/index'); 
-		}
-	}
 
 	public function UserAccess_Efiling(){// untuk mengaktifkan menu perubahan status 
 		$model = new EFilingModel();
@@ -124,10 +41,12 @@ class E_FilingController extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function Get_verifikasi(){
+	public function Update_status(){ //update status verifikasi 
 		$model = new EFilingModel();
 		$model->no_rekening = $this->input->post('no_rekening');
-		$data = $model->query_get_verifikasi();
+		$model->userID = $this->input->post('user_id');
+		$model->status = $this->input->post('status');
+		$data = $model->update_status_verifikasi();
 		echo json_encode($data);
 	}
 }

@@ -1013,7 +1013,7 @@
                                                                 <label for="customFile">SPK & NDK</label>
                                                                 <div class="custom-file">
                                                                     <input type="file" class="custom-file-input"
-                                                                        id="spkndk" onchange='getImg(event)'>
+                                                                        id="spk" onchange='getImg(event)'>
                                                                     <label class="custom-file-label" for="spk">Choose
                                                                         file </label>
                                                                 </div>
@@ -1366,6 +1366,7 @@
                     </div>
                 </div>
             </form>
+            <input type="hidden" class="form-control" id="api_url" name="api_url" value = "<?php echo config_item('api_url'); ?>">
         </div>
         <!-- /.modal-content -->
     </div>

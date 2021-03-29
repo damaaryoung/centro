@@ -26,7 +26,7 @@
             </div>
             <div class="modal-body" style="height: 450px; overflow-y: auto">
                 <div id="loading-2">
-                    <img id="loading-image" style="index:999999;"
+                    <img id="loading-image" 
                         src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
                 </div>
                 <!-- card header start -->
@@ -889,6 +889,7 @@
                 <div id="btn_save_data"></div>
             </div>
             <!--card footer end -->
+            <input type="hidden" class="form-control" id="api_url" name="api_url" value = "<?php echo config_item('api_url'); ?>">
         </div>
     </div>
 </div>
