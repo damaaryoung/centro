@@ -20,19 +20,22 @@ function detailViewEfiling(respon) {
     let kode_kantor = '';
     let y = '';
     let m = '';
+    let no_rek_webtool = '';
     if (data.efilling['no_rekening_lama'] == null) {
+      no_rek_webtool = ((data.header_efiling == null) ? '' : data.header_efiling['no_rekening'])
       tgl_realisasi = ((data.header_efiling == null) ? '' : data.header_efiling['tgl_realisasi'])
       kode_kantor = ((data.header_efiling == null) ? '' : data.header_efiling['kode_kantor'])
       y = tgl_realisasi.split("-")[2]
       m = tgl_realisasi.split("-")[1]
     } else {
+      no_rek_webtool = data.efilling['no_rekening_lama']
       tgl_realisasi = data.efilling['tgl_realisasi_eng_lama']
       kode_kantor = data.efilling['kode_kantor_lama']
       y = tgl_realisasi.split("-")[0]
       m = tgl_realisasi.split("-")[1]
     }
 
-    pathFileUpload = `http://103.234.254.186/${path_file}/${y}/${m}/${kode_kantor}/${no_rekening}/`;
+    pathFileUpload = `http://103.234.254.186/${path_file}/${y}/${m}/${kode_kantor}/${no_rek_webtool}/`;
   }
 
   let verifikasi_nasabah = status(data.efilling_nasabah['verifikasi_nasabah'], "verifikasi_nasabah")
