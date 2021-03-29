@@ -12,6 +12,12 @@ var src_search       = '';
 var send_mail        = '';
 var email_insco      = '';
 var tgl_klaim        = '';
+var fileUploads = [];
+var uploads     = '';
+var root_document = '';
+var root_address  = '';
+var path_file     = '';
+var file_name     = '';
 
 $(document).ready(function () {  
     bsCustomFileInput.init();
@@ -471,7 +477,33 @@ function mapping_modal_jiwa(response){
         email_insco = response.data_details[0]['email'];
         tgl_klaim   = response.data_details[0]['create_date'];
 
-        document.getElementById("attachment_jiwa").href = response.data_details[0]['root_address'] + response.data_details[0]['path_file']; 
+        fileUploads = [];
+        uploads     = '';
+        root_document = response.data_details[0]['root_document'];
+        root_address  = response.data_details[0]['root_address'];
+        path_file     = response.data_details[0]['path_file'];
+        file_name     = JSON.parse(response.data_details[0]['file_name']);
+
+        uploads += `<div class="col-sm-2">
+                        <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment: </label>
+                    </div>`;
+        if(file_name == null){
+            fileUploads = [];
+        }else if(file_name == ''){
+            fileUploads = [];
+        }else{
+            fileUploads.push(file_name);
+           // loop_view_file(fileUploads,uploads);
+            for(i = 0; i < fileUploads[0].length; i++ ){
+                uploads += `<div class="col-sm-8">
+                                <label style="padding-top: 5px;" class="control-label">
+                                  <a href="${root_address+path_file+fileUploads[0][i]}" id="attachment_jaminan" target="_blank">${fileUploads[0][i]}</a>
+                                </label>
+                            </div>`;
+            }
+        }
+        $('#file_uploads_jiwa_update').html(uploads);
+        document.getElementById("file_uploads_jiwa_update").style.display = "block";      
 }
 function clear_modal_jiwa(){
         $('#loading-1').hide();
@@ -496,6 +528,6 @@ function clear_modal_jiwa(){
         email_insco = '';
         tgl_klaim   = '';
 
-        document.getElementById("attachment_jiwa").href = '';
+        document.getElementById("file_uploads_jiwa_update").style.display = "none";
 }
 </script>

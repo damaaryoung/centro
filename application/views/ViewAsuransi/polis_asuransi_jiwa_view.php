@@ -148,9 +148,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </button>
                 </div>
                 <div class="modal-body">
-                <!-- <div id="loading-1">
+                <div id="loading-1">
                   <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
-                </div> -->
+                </div>
                 
                 <!-- card data nasabah start -->
                 <div class="card card-info">

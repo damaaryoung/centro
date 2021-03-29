@@ -231,15 +231,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jaminan" name="modal_jenis_klaim_jaminan" readonly>
                                                       </div>
                                       </div>
-                                      <div class="form-group row">
-                                                      <div class="col-sm-2">
-                                                          <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan_update">File Attachment</label>
-                                                      </div>
-                                                      <div class="col-sm-2">
-                                                          <label style="padding-top: 5px;" class="control-label">
-                                                            <i class="fas fa-file"></i> <a href="" id="attachment_jaminan" target="_blank">File Upload</a>
-                                                          </label>
-                                                      </div>
+                                      <div class="form-group row" id="file_uploads_update">
                                       </div>
                                   </div>
                     </div>

@@ -123,7 +123,11 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                     AC.`titipan_asuransi`,
                     AC.`no_reff_asuransi`,
                     AC.`no_polis`,
-                    AKK.`nama_kantor`
+                    AKK.`nama_kantor`,
+                    AKU.`root_document`,
+                    AKU.`root_address`,
+                    AKU.`path_file`,
+                    AKU.`file_name`
                 FROM
                     ASURANSI_COVER AC 
                 LEFT JOIN NASABAH N 
@@ -136,22 +140,23 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                     ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi`  
                 LEFT JOIN app_kode_kantor AKK
 					          ON AKK.`kode_kantor` = AC.`kode_kantor`
+                LEFT JOIN asuransi_klaim_upload AKU
+		                ON AKU.`no_rekening` = AC.`no_rekening`
+		                AND AKU.`jenis_asuransi` = AC.`jenis_asuransi`    
                 WHERE (AC.`no_rekening` = '$modal_rek_polis_jaminan' 
                        OR AC.`no_polis` = '$modal_rek_polis_jaminan')
                 AND AC.`jenis_asuransi` = '$jenis_asuransi'
                 AND AC.`status_cover` = 'SUDAH'
+                AND AC.`no_polis` IS NOT NULL
                 LIMIT 1;";
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
   public function pengajuan_klaim_jaminan($modal_rek_jaminan,
-                                            $modal_reff_asuransi_jaminan,
-                                            $userID,
-                                            $root_document,
-                                            $root_address,
-                                            $pathFile,
-                                            $jenis_asuransi,
-                                            $modal_jenis_klaim_jaminan){
+                                          $modal_reff_asuransi_jaminan,
+                                          $userID,
+                                          $jenis_asuransi,
+                                          $modal_jenis_klaim_jaminan){
         $this->db2 = $this->load->database('DB_CENTRO', true);
 		
         $this->db2->trans_start();
@@ -164,7 +169,8 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
         if($result[0]["no_transaksi"] == null){
           $no_trans = null;
         }
-        $this->db2->query("INSERT INTO asuransi_klaim (no_transaksi,no_reff_asuransi, 
+        $this->db2->query("INSERT INTO asuransi_klaim (no_transaksi,
+                                                            no_reff_asuransi, 
                                                             no_rekening, 
                                                             jenis_asuransi, 
                                                             jenis_klaim,
@@ -172,10 +178,38 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                                                             root_document, 
                                                             root_address,
                                                             path_file,
+                                                            file_name,
                                                             created_by,
                                                             create_date)
-                                SELECT '$no_trans','$modal_reff_asuransi_jaminan', '$modal_rek_jaminan', '$jenis_asuransi', '$modal_jenis_klaim_jaminan', '0',
-                                        '$root_document', '$root_address', '$pathFile', '$userID', NOW() FROM DUAL;");
+                            SELECT  D.no_transaksi,
+                                    D.no_reff_asuransi,
+                                    D.no_rekening,
+                                    D.jenis_asuransi,
+                                    D.jenis_klaim,
+                                    D.status_klaim,
+                                    AKU.`root_document`,
+                                    AKU.`root_address`,
+                                    AKU.`path_file`,
+                                    AKU.`file_name`,
+                                    D.created_by,
+                                    D.create_date 
+                            FROM
+                             (SELECT 
+                               '$no_trans' AS `no_transaksi`,
+                               '$modal_reff_asuransi_jaminan' AS `no_reff_asuransi`,
+                               '$modal_rek_jaminan' AS `no_rekening`,
+                               '$jenis_asuransi' AS `jenis_asuransi`,
+                               '$modal_jenis_klaim_jaminan' AS `jenis_klaim`,
+                               '0' AS `status_klaim`,
+                               '$userID' AS `created_by`,
+                               NOW() AS `create_date` 
+                             FROM DUAL) D 
+                             LEFT JOIN asuransi_klaim_upload AKU 
+                               ON AKU.no_rekening = '$modal_rek_jaminan' 
+                               AND AKU.jenis_asuransi = '$jenis_asuransi';");
+        $this->db2->query("DELETE FROM asuransi_klaim_upload 
+                            WHERE no_rekening = '$modal_rek_jaminan' 
+                            AND jenis_asuransi = '$jenis_asuransi';");                     
         $this->db2->trans_complete();
         return 'sukses';
   }
@@ -224,6 +258,7 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                   AK.`root_document`,
                   AK.`root_address`,
                   AK.`path_file`,
+                  AK.`file_name`,
                   AK.`ket_return`
                 FROM
                   ASURANSI_KLAIM AK 
@@ -262,32 +297,6 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
         $this->db2->trans_complete();
         return 'sukses';
   }  
-  public function update_with_upload($rek_update,
-                                              $no_transaksi,
-                                              $jenis_asuransi,
-                                              $jenis_klaim,
-                                              $userID,
-                                              $status,
-                                              $root_document,
-                                              $root_address,
-                                              $pathFile){
-    $this->db2 = $this->load->database('DB_CENTRO', true);
-        $this->db2->trans_start();
-        $this->db2->query("UPDATE asuransi_klaim AK
-                           SET AK.`jenis_klaim` = '$jenis_klaim',
-                               AK.`root_document` = '$root_document',
-                               AK.`root_address` = '$root_address',
-                               AK.`path_file` = '$pathFile',
-                               AK.`ket_return`   = '',
-                               AK.`status_klaim` = '$status',
-                               AK.`updated_by`  = '$userID',
-                               AK.`updated_date`= NOW()
-                           WHERE AK.`no_rekening` = '$rek_update'
-                           AND AK.`no_transaksi` = '$no_transaksi'
-                           AND AK.`jenis_asuransi` = '$jenis_asuransi';");
-        $this->db2->trans_complete();
-        return 'sukses';
-  } 
 
   /// jiwa ///
   public function get_data_jiwa($modal_rek_polis_jiwa,$jenis_asuransi){
@@ -318,7 +327,11 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                     AC.`titipan_asuransi`,
                     AC.`no_reff_asuransi`,
                     AC.`no_polis`,
-                    AKK.`nama_kantor`
+                    AKK.`nama_kantor`,
+                    AKU.`root_document`,
+                    AKU.`root_address`,
+                    AKU.`path_file`,
+                    AKU.`file_name`
                 FROM
                     ASURANSI_COVER AC 
                 LEFT JOIN NASABAH N 
@@ -331,22 +344,23 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                     ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi`  
                 LEFT JOIN app_kode_kantor AKK
 					          ON AKK.`kode_kantor` = AC.`kode_kantor`
+                LEFT JOIN asuransi_klaim_upload AKU
+		                ON AKU.`no_rekening` = AC.`no_rekening`
+		                AND AKU.`jenis_asuransi` = AC.`jenis_asuransi` 
                 WHERE (AC.`no_rekening` = '$modal_rek_polis_jiwa' 
                        OR AC.`no_polis` = '$modal_rek_polis_jiwa')
                 AND AC.`jenis_asuransi` = '$jenis_asuransi'
                 AND AC.`status_cover` = 'SUDAH'
+                AND AC.`no_polis` IS NOT NULL
                 LIMIT 1;";
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
   public function pengajuan_klaim_jiwa($modal_rek_jiwa,
-                                        $modal_reff_asuransi_jiwa,
-                                        $userID,
-                                        $root_document,
-                                        $root_address,
-                                        $pathFile,
-                                        $jenis_asuransi,
-                                        $modal_jenis_klaim_jiwa){
+																					$modal_reff_asuransi_jiwa,
+																					$userID,
+																					$jenis_asuransi,
+																					$modal_jenis_klaim_jiwa){
         $this->db2 = $this->load->database('DB_CENTRO', true);
 		
         $this->db2->trans_start();
@@ -359,7 +373,8 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
         if($result[0]["no_transaksi"] == null){
           $no_trans = null;
         }
-        $this->db2->query("INSERT INTO asuransi_klaim (no_transaksi,no_reff_asuransi, 
+        $this->db2->query("INSERT INTO asuransi_klaim (no_transaksi,
+                                                            no_reff_asuransi, 
                                                             no_rekening, 
                                                             jenis_asuransi, 
                                                             jenis_klaim,
@@ -367,18 +382,117 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                                                             root_document, 
                                                             root_address,
                                                             path_file,
+                                                            file_name,
                                                             created_by,
                                                             create_date)
-                                SELECT '$no_trans','$modal_reff_asuransi_jiwa', '$modal_rek_jiwa', '$jenis_asuransi', '$modal_jenis_klaim_jiwa', '0',
-                                        '$root_document', '$root_address', '$pathFile', '$userID', NOW() FROM DUAL
-                                WHERE NOT EXISTS 
-                                        (SELECT 1 FROM asuransi_klaim 
-                                            WHERE no_reff_asuransi = '$modal_reff_asuransi_jiwa'
-                                            AND no_rekening = '$modal_rek_jiwa'
-                                            AND jenis_asuransi = '$jenis_asuransi');");
+                            SELECT  D.no_transaksi,
+                                    D.no_reff_asuransi,
+                                    D.no_rekening,
+                                    D.jenis_asuransi,
+                                    D.jenis_klaim,
+                                    D.status_klaim,
+                                    AKU.`root_document`,
+                                    AKU.`root_address`,
+                                    AKU.`path_file`,
+                                    AKU.`file_name`,
+                                    D.created_by,
+                                    D.create_date 
+                            FROM
+                             (SELECT 
+                               '$no_trans' AS `no_transaksi`,
+                               '$modal_reff_asuransi_jiwa' AS `no_reff_asuransi`,
+                               '$modal_rek_jiwa' AS `no_rekening`,
+                               '$jenis_asuransi' AS `jenis_asuransi`,
+                               '$modal_jenis_klaim_jiwa' AS `jenis_klaim`,
+                               '0' AS `status_klaim`,
+                               '$userID' AS `created_by`,
+                               NOW() AS `create_date` 
+                             FROM DUAL) D 
+                             LEFT JOIN asuransi_klaim_upload AKU 
+                               ON AKU.no_rekening = '$modal_rek_jiwa' 
+                               AND AKU.jenis_asuransi = '$jenis_asuransi';");
+        $this->db2->query("DELETE FROM asuransi_klaim_upload 
+                            WHERE no_rekening = '$modal_rek_jiwa' 
+                            AND jenis_asuransi = '$jenis_asuransi';"); 
         $this->db2->trans_complete();
         return 'sukses';
   }
+
+  public function upload_file($up_rek,
+                              $up_polis,
+                              $userID,
+                              $fileUploadsLength,
+                              $jenis,
+                              $root_document,
+                              $root_address,
+                              $pathFile,
+                              $files_upload){
+        $this->db2 = $this->load->database('DB_CENTRO', true);
+
+        $str    = "SELECT 1 FROM asuransi_klaim_upload AKU
+                    WHERE AKU.`no_rekening` = '$up_rek'
+                    AND AKU.`jenis_asuransi` = '$jenis';";
+        $query  = $this->db2->query($str);
+        $result = $query->result_array();
+        
+            
+        if(isset($result[0]["1"])){
+          $data =  $result[0]["1"];
+        }else{
+          $data = null;
+        }
+		
+        $this->db2->trans_start();
+        if($data != null){
+          $this->db2->query("UPDATE asuransi_klaim_upload AKU
+                            SET AKU.`root_document`  = '$root_document', 
+                                AKU.`root_address`   = '$root_address',
+                                AKU.`path_file`      = '$pathFile',
+                                AKU.`file_name`      = '$files_upload'
+                            WHERE AKU.`no_rekening`  = '$up_rek'
+                            AND AKU.`jenis_asuransi` = '$jenis';");
+        }else{
+          $fileUploads = array();
+            $this->db2->query("INSERT INTO asuransi_klaim_upload(no_rekening, 
+                                                            jenis_asuransi, 
+                                                            root_document, 
+                                                            root_address,
+                                                            path_file,
+                                                            file_name)
+                                SELECT '$up_rek','$jenis', '$root_document', '$root_address', '$pathFile', '$files_upload' FROM DUAL;");
+        }
+        
+        $this->db2->trans_complete();
+        return 'sukses';
+  }
+  public function delete_upload_file($up_rek,$jenis,$files_upload){
+    $this->db2 = $this->load->database('DB_CENTRO', true);
+        $this->db2->trans_start();
+        $this->db2->query("UPDATE asuransi_klaim_upload AKU
+                            SET AKU.`file_name` = '$files_upload'
+                            WHERE AKU.`no_rekening` = '$up_rek'
+                            AND AKU.`jenis_asuransi` = '$jenis';");
+        $this->db2->trans_complete();
+        return 'sukses';
+  }  
+  public function upload_file_update($up_rek,
+																						$up_polis,
+																						$no_transaksi,
+																						$jenis,
+																						$userID,
+																						$files_upload){
+    $this->db2 = $this->load->database('DB_CENTRO', true);
+        $this->db2->trans_start();
+        $this->db2->query("UPDATE asuransi_klaim AK
+                           SET AK.`file_name` = '$files_upload',
+                               AK.`updated_by`  = '$userID',
+                               AK.`updated_date`= NOW()
+                           WHERE AK.`no_rekening` = '$up_rek'
+                           AND AK.`no_transaksi` = '$no_transaksi'
+                           AND AK.`jenis_asuransi` = '$jenis';");
+        $this->db2->trans_complete();
+        return 'sukses';
+  } 
 
 }
 ?>

@@ -133,6 +133,7 @@ class Proses_klaim_asuransi_model extends CI_Model{
                   AK.`root_document`,
                   AK.`root_address`,
                   AK.`path_file` ,
+                  AK.`file_name`,
                   AK.`status_klaim`,
                   AK.`send_mail`,
                   KKA.`email` as `email`,
