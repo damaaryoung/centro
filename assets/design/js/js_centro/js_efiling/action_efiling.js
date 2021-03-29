@@ -204,10 +204,22 @@ function detailDataEfiling(respon, menu_title) {
     pathFileUpload = `${path_file}/`;
   } else {
     // link  http://103.234.254.186/efiling/2018/03/02/02-38-00029-18/fatmah%20-%20PH.pdf
-    let tgl_realisasi = ((data.header_efiling == null)? '' : data.header_efiling['tgl_realisasi'])
-    let kode_kantor = ((data.header_efiling==  null)? '': data.header_efiling['kode_kantor'])
-    let y = tgl_realisasi.split("-")[2],
-      m = tgl_realisasi.split("-")[1];
+    let tgl_realisasi = '';
+    let kode_kantor = '';
+    let y = '';
+    let m = '';
+    if (data.efilling['no_rekening_lama'] == null) {
+      tgl_realisasi = ((data.header_efiling == null) ? '' : data.header_efiling['tgl_realisasi'])
+      kode_kantor = ((data.header_efiling == null) ? '' : data.header_efiling['kode_kantor'])
+      y = tgl_realisasi.split("-")[2]
+      m = tgl_realisasi.split("-")[1]
+    } else {
+      tgl_realisasi = data.efilling['tgl_realisasi_eng_lama']
+      kode_kantor = data.efilling['kode_kantor_lama']
+      y = tgl_realisasi.split("-")[0]
+      m = tgl_realisasi.split("-")[1]
+    }
+
     pathFileUpload = `http://103.234.254.186/${path_file}/${y}/${m}/${kode_kantor}/${no_rekening}/`;
   }
 
