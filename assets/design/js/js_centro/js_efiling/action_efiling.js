@@ -206,7 +206,7 @@ function detailDataEfiling(respon, menu_title) {
     // link  http://103.234.254.186/efiling/2018/03/02/02-38-00029-18/fatmah%20-%20PH.pdf
     let tgl_realisasi = ((data.header_efiling == null)? '' : data.header_efiling['tgl_realisasi'])
     let kode_kantor = ((data.header_efiling==  null)? '': data.header_efiling['kode_kantor'])
-    let y = tgl_realisasi.split("-")[0],
+    let y = tgl_realisasi.split("-")[2],
       m = tgl_realisasi.split("-")[1];
     pathFileUpload = `http://103.234.254.186/${path_file}/${y}/${m}/${kode_kantor}/${no_rekening}/`;
   }
