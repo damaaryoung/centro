@@ -303,7 +303,7 @@
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Sukses Cover Asuransi Jaminan',
+                        title: 'Sukses Cover Asuransi Jiwa',
                         showConfirmButton: false,
                         timer: 2000
                     }).then(()=> {

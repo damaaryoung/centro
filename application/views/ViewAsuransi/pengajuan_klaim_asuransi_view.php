@@ -282,14 +282,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                                       </div>
                                                     </div>
-                                                  </div>                                                  
+                                                  </div>  
+                                                  <div class="col-sm-4" style="padding-top: 5px;">
+                                                        <button type="button" class="btn btn-success btn-sm control-label" 
+                                                                style=" width: 150px;" id="btn_upload">
+                                                                  <i class="fas fa-upload"></i> UPLOAD
+                                                        </button>
+                                                  </div>                                           
                                   </div>
+                                   
+                                  <div class="form-group row uplpads_list" id="file_uploads">
+                                      <div class="col-sm-2">
+                                          <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment</label>
+                                      </div>
+                                  </div>  
+                                  
                               </div>
                 </div>
-
-
-
-
 
                 </div>
                 <!-- /.modal-body -->
@@ -454,8 +463,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                                       </div>
                                                     </div>
+                                                  </div>   
+                                                  <div class="col-sm-4" style="padding-top: 5px;">
+                                                        <button type="button" class="btn btn-success btn-sm control-label" 
+                                                                style=" width: 150px;" id="btn_upload_jiwa">
+                                                                  <i class="fas fa-upload"></i> UPLOAD
+                                                        </button>
                                                   </div>                                                  
                                   </div>
+                                  <div class="form-group row uplpads_list" id="file_uploads_jiwa">
+                                      <div class="col-sm-2">
+                                          <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment</label>
+                                      </div>
+                                  </div>     
                                   
                               </div>
                 </div>
@@ -596,24 +616,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                                       </div>
                                                     </div>
-                                                  </div>                                                  
+                                                  </div>   
+                                                  <div class="col-sm-4" style="padding-top: 5px;">
+                                                        <button type="button" class="btn btn-success btn-sm control-label" 
+                                                                style=" width: 150px;" id="btn_upload_jaminan">
+                                                                  <i class="fas fa-upload"></i> UPLOAD
+                                                        </button>
+                                                  </div>                                                
+                                  </div>
+                                  <div class="form-group row" id="file_uploads_update">
                                   </div>
                                   <div class="form-group row">
-                                                  <div class="col-sm-2">
-                                                      <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan_update">File Attachment</label>
-                                                  </div>
-                                                  <div class="col-sm-4">
-                                                      <label style="padding-top: 5px;" class="control-label">
-                                                        <i class="fas fa-file"></i> <a href="" id="attachment_jaminan_update" target="_blank">File Upload</a>
-                                                      </label>
-                                                  </div>
-                                                  <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Keterangan Return</label>
-                                                  </div>
-                                                  <div class="col-sm-4">
-                                                        <textarea style="height: 150px;" type="text" class="form-control" id="modal_ket_return_update" name="modal_ket_return_update" readonly></textarea>
-                                                  </div>
-                                  </div>
+                                        <div class="col-sm-6">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Keterangan Return</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                              <textarea style="height: 150px;" type="text" class="form-control" id="modal_ket_return_update" name="modal_ket_return_update" readonly></textarea>
+                                        </div>
+                                  </div>  
                               </div>
                 </div>
 
@@ -633,7 +655,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Pengajuan Klaim Asuransi Jiwa</h4>
+                  <h4 class="modal-title">Update Pengajuan Klaim Asuransi Jiwa</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick="close_jiwa_update()">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -760,26 +782,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                                       </div>
                                                     </div>
+                                                  </div>  
+                                                  <div class="col-sm-4" style="padding-top: 5px;">
+                                                        <button type="button" class="btn btn-success btn-sm control-label" 
+                                                                style=" width: 150px;" id="btn_upload_jiwa_update">
+                                                                  <i class="fas fa-upload"></i> UPLOAD
+                                                        </button>
                                                   </div>                                                  
                                   </div>
-                                  <div class="form-group row">
-                                                  <div class="col-sm-2">
-                                                      <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan_update">File Attachment</label>
-                                                  </div>
-                                                  <div class="col-sm-2">
-                                                      <label style="padding-top: 5px;" class="control-label">
-                                                        <i class="fas fa-file"></i> <a href="" id="attachment_jiwa_update" target="_blank">File Upload</a>
-                                                      </label>
-                                                  </div>
-                                                  <div class="col-sm-2">
-                                                  </div>
-                                                  <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Keterangan Return</label>
-                                                  </div>
-                                                  <div class="col-sm-4">
-                                                        <textarea style="height: 150px;" type="text" class="form-control" id="modal_ket_return_jiwa_update" name="modal_ket_return_jiwa_update" readonly></textarea>
-                                                  </div>
+                                  <div class="form-group row" id="file_uploads_jiwa_update">
                                   </div>
+                                  <div class="form-group row">
+                                        <div class="col-sm-6">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Keterangan Return</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                              <textarea style="height: 150px;" type="text" class="form-control" id="modal_ket_return_jiwa_update" name="modal_ket_return_jiwa_update" readonly></textarea>
+                                        </div>
+                                  </div>  
                                   
                               </div>
                 </div>

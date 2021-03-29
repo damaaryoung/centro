@@ -100,61 +100,19 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function pengajuan_klaim_jaminan_process(){
-		$files	                        = $this->input->post('files');
+	    //	$files	                        = $this->input->post('files');
 		$modal_rek_jaminan			    = $this->input->post('modal_rek_jaminan');
 		$modal_reff_asuransi_jaminan	= $this->input->post('modal_reff_asuransi_jaminan');
 		$modal_jenis_klaim_jaminan	    = $this->input->post('modal_jenis_klaim_jaminan');
 		$jenis_asuransi                 = 'JAMINAN';				
 		$userID                         = $this->session->userdata('nik');
-		if(isset($_FILES["files"])){
-			
-			$fileName 	= $_FILES["files"]["name"];
-			$tmpName  	= $_FILES["files"]["tmp_name"];
-			$error 		= $_FILES["files"]["error"];
 
-			$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
-			$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
-
-			if (!file_exists("$root_document/public_centro")){
-				mkdir("$root_document/public_centro");
-			} 
-				
-			if (!file_exists("$root_document/public_centro/$modal_rek_jaminan")) {
-				mkdir("$root_document/public_centro/$modal_rek_jaminan");
-			}
-			if (!file_exists("$root_document/public_centro/$modal_rek_jaminan/klaim_asuransi_jaminan")) {
-				mkdir("$root_document/public_centro/$modal_rek_jaminan/klaim_asuransi_jaminan");
-			}
-
- 
-			$config['upload_path']   = "$root_document/public_centro/$modal_rek_jaminan/klaim_asuransi_jaminan";
-			$config['allowed_types'] = "*";
-			$config['overwrite']	 = false;
-			$config['file_name'] = $modal_rek_jaminan;
-
-			$this->load->library('upload', $config);
-			if(!$this->upload->do_upload('files') ){
-				echo $this->upload->display_errors();
-			} else{
-				$data = $this->upload->data();
-				$namafileUpload = $data["file_name"];
-				$pathFile = "public_centro/$modal_rek_jaminan/klaim_asuransi_jaminan/$namafileUpload";
-				$data_details = $this->Pengajuan_klaim_asuransi_model->pengajuan_klaim_jaminan($modal_rek_jaminan,
+		$data_details = $this->Pengajuan_klaim_asuransi_model->pengajuan_klaim_jaminan($modal_rek_jaminan,
 																						$modal_reff_asuransi_jaminan,
 																						$userID,
-																						$root_document,
-																						$root_address,
-																						$pathFile,
 																						$jenis_asuransi,
 																						$modal_jenis_klaim_jaminan);
-																						
-				echo json_encode([
-					"success" => true,
-					"message" => "",
-					"data" => $data
-				]);
-			}
-		}
+		echo json_encode($data_details);
 	}
 	public function delete_pengajuan_klaim_jaminan(){
 		$rekening	    = $this->input->post('rekening');
@@ -185,64 +143,11 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 		$status             = '0';				
 		$userID             = $this->session->userdata('nik');
 
-		if($upload_update == '0'){
-			$update = $this->Pengajuan_klaim_asuransi_model->update_without_upload($rek_update,$no_transaksi,$jenis_asuransi,$upload_update,$jenis_klaim,$userID,$status);
+	
+		$update = $this->Pengajuan_klaim_asuransi_model->update_without_upload($rek_update,$no_transaksi,$jenis_asuransi,$upload_update,$jenis_klaim,$userID,$status);
 
-			$data['update'] = $update;
-			echo json_encode($data);
-		}else if($upload_update == '1'){
-			if(isset($_FILES["files"])){
-			
-				$fileName 	= $_FILES["files"]["name"];
-				$tmpName  	= $_FILES["files"]["tmp_name"];
-				$error 		= $_FILES["files"]["error"];
-	
-				$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
-				$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
-	
-				if (!file_exists("$root_document/public_centro")){
-					mkdir("$root_document/public_centro");
-				} 
-					
-				if (!file_exists("$root_document/public_centro/$rek_update")) {
-					mkdir("$root_document/public_centro/$rek_update");
-				}
-				if (!file_exists("$root_document/public_centro/$rek_update/klaim_asuransi_jaminan")) {
-					mkdir("$root_document/public_centro/$rek_update/klaim_asuransi_jaminan");
-				}
-	
-	 
-				$config['upload_path']   = "$root_document/public_centro/$rek_update/klaim_asuransi_jaminan";
-				$config['allowed_types'] = "*";
-				$config['overwrite']	 = false;
-				$config['file_name'] = $rek_update;
-	
-				$this->load->library('upload', $config);
-				if(!$this->upload->do_upload('files') ){
-					echo $this->upload->display_errors();
-				} else{
-					$data = $this->upload->data();
-					$namafileUpload = $data["file_name"];
-					$pathFile = "public_centro/$rek_update/klaim_asuransi_jaminan/$namafileUpload";
-					$data_details = $this->Pengajuan_klaim_asuransi_model->update_with_upload($rek_update,
-																									$no_transaksi,
-																									$jenis_asuransi,
-																									$jenis_klaim,
-																									$userID,
-																									$status,
-																									$root_document,
-																									$root_address,
-																									$pathFile);
-																							
-					echo json_encode([
-						"success" => true,
-						"message" => "",
-						"data" => $data
-					]);
-				}
-			}
-		}
-		
+		$data['update'] = $update;
+		echo json_encode($data);		
 	}
 
 	/// JIWA ///
@@ -255,12 +160,47 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function pengajuan_klaim_jiwa_process(){
-		$files	                    = $this->input->post('files');
 		$modal_rek_jiwa			    = $this->input->post('modal_rek_jiwa');
 		$modal_reff_asuransi_jiwa	= $this->input->post('modal_reff_asuransi_jiwa');
 		$modal_jenis_klaim_jiwa	    = $this->input->post('modal_jenis_klaim_jiwa');
 		$jenis_asuransi             = 'JIWA';				
 		$userID                     = $this->session->userdata('nik');
+
+		$data_details = $this->Pengajuan_klaim_asuransi_model->pengajuan_klaim_jiwa($modal_rek_jiwa,
+																					$modal_reff_asuransi_jiwa,
+																					$userID,
+																					$jenis_asuransi,
+																					$modal_jenis_klaim_jiwa);
+		echo json_encode($data_details);
+	}
+
+	/// END ///
+
+	public function proses_upload(){
+		$files	             = $this->input->post('files');
+		$up_rek		         = $this->input->post('up_rek');
+		$up_polis	         = $this->input->post('up_polis');
+		$fileUploadsLength	 = $this->input->post('fileUploadsLength');
+		$proses_flag	     = $this->input->post('proses_flag');
+		$menu                = $this->session->userdata('pengajuan_klaim');
+		$userID              = $this->session->userdata('nik');
+		$parsedArray =  explode(",",$this->input->post('fileUploads'));
+		$fileUploads = array();
+		
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}			
+		if($fileUploadsLength > 0){
+			for($i = 0; $i < $fileUploadsLength; $i++){
+				array_push($fileUploads, $parsedArray[$i]);
+			}
+		}
+
+		
 		if(isset($_FILES["files"])){
 			
 			$fileName 	= $_FILES["files"]["name"];
@@ -274,18 +214,18 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 				mkdir("$root_document/public_centro");
 			} 
 				
-			if (!file_exists("$root_document/public_centro/$modal_rek_jiwa")) {
-				mkdir("$root_document/public_centro/$modal_rek_jiwa");
+			if (!file_exists("$root_document/public_centro/$up_rek")) {
+				mkdir("$root_document/public_centro/$up_rek");
 			}
-			if (!file_exists("$root_document/public_centro/$modal_rek_jiwa/klaim_asuransi_jiwa")) {
-				mkdir("$root_document/public_centro/$modal_rek_jiwa/klaim_asuransi_jiwa");
+			if (!file_exists("$root_document/public_centro/$up_rek/klaim_asuransi_jaminan")) {
+				mkdir("$root_document/public_centro/$up_rek/klaim_asuransi_jaminan");
 			}
 
  
-			$config['upload_path']   = "$root_document/public_centro/$modal_rek_jiwa/klaim_asuransi_jiwa";
+			$config['upload_path']   = "$root_document/public_centro/$up_rek/klaim_asuransi_jaminan";
 			$config['allowed_types'] = "*";
 			$config['overwrite']	 = false;
-			$config['file_name'] = $modal_rek_jiwa;
+			$config['file_name'] = $fileName;
 
 			$this->load->library('upload', $config);
 			if(!$this->upload->do_upload('files') ){
@@ -293,16 +233,31 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 			} else{
 				$data = $this->upload->data();
 				$namafileUpload = $data["file_name"];
-				$pathFile = "public_centro/$modal_rek_jiwa/klaim_asuransi_jiwa/$namafileUpload";
-				$data_details = $this->Pengajuan_klaim_asuransi_model->pengajuan_klaim_jiwa($modal_rek_jiwa,
-																						$modal_reff_asuransi_jiwa,
+				$pathFile = "public_centro/$up_rek/klaim_asuransi_jaminan/";
+				array_push($fileUploads, $namafileUpload);
+				$files_upload = json_encode($fileUploads);
+
+
+				if($proses_flag == 1){
+					$data_details = $this->Pengajuan_klaim_asuransi_model->upload_file($up_rek,
+																						$up_polis,
 																						$userID,
+																						$fileUploadsLength,
+																						$jenis,
 																						$root_document,
 																						$root_address,
 																						$pathFile,
-																						$jenis_asuransi,
-																						$modal_jenis_klaim_jiwa);
-																						
+																						$files_upload);
+
+				}else if($proses_flag == 2){
+					$no_transaksi	     = $this->input->post('no_transaksi');
+					$data_details = $this->Pengajuan_klaim_asuransi_model->upload_file_update($up_rek,
+																						$up_polis,
+																						$no_transaksi,
+																						$jenis,
+																						$userID,
+																						$files_upload);
+				}																
 				echo json_encode([
 					"success" => true,
 					"message" => "",
@@ -310,6 +265,45 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 				]);
 			}
 		}
+	}
+	public function proses_delete_upload(){
+		$menu                = $this->session->userdata('pengajuan_klaim');
+		$userID              = $this->session->userdata('nik');
+		$up_rek		         = $this->input->post('up_rek');
+		$up_polis	         = $this->input->post('up_polis');
+		$proses_flag	     = $this->input->post('proses_flag');
+		
+		$fileUploadsLength	 = $this->input->post('fileUploadsLength');
+		$parsedArray = $this->input->post('fileUploads');
+		$fileUploads = array();
+		
+		
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}			
+		if($fileUploadsLength > 0){
+			for($i = 0; $i < $fileUploadsLength; $i++){
+				array_push($fileUploads, $parsedArray[$i]);
+			}
+		}
+		$files_upload = json_encode($fileUploads);
+
+		if($proses_flag == 1){
+			$delete_process = $this->Pengajuan_klaim_asuransi_model->delete_upload_file($up_rek,$jenis,$files_upload);
+		}else if($proses_flag == 2){
+			$no_transaksi	     = $this->input->post('no_transaksi');
+			$delete_process = $this->Pengajuan_klaim_asuransi_model->upload_file_update($up_rek,
+																				$up_polis,
+																				$no_transaksi,
+																				$jenis,
+																				$userID,
+																				$files_upload);
+		}
+		echo json_encode($delete_process);
 	}
 
 

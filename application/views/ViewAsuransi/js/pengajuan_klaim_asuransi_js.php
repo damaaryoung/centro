@@ -9,6 +9,7 @@ var modal_rek_jaminan = '';
 var modal_reff_asuransi_jaminan = '';
 var modal_jenis_klaim_jaminan = '';
 var data = '';
+var uploads = '';
 var data_asuransi = '';
 var upload_update = '';
 var data_kd_kantor = '';
@@ -18,6 +19,15 @@ var modal_rek_polis_jiwa = '';
 var modal_rek_jiwa           = '';
 var modal_reff_asuransi_jiwa = '';
 var modal_jenis_klaim_jiwa   = '';
+var up_rek = '';
+var up_polis = '';
+var fileUploads = [];
+var root_document = '';
+var root_address = '';
+var path_file = '';
+var file_name = '';
+var parsedArray = [];
+var fileUploadsLength = '';
 
     $(document).ready(function () {     
         
@@ -88,33 +98,7 @@ var modal_jenis_klaim_jiwa   = '';
         }
     });
     $('#btn_simpan_modal_jaminan_update').click(function () {
-         
-        if($('#modal_upload_jaminan_update')[0].files[0] == null){
-            
-            Swal.fire({
-               title: 'Anda Belum Memilih File Attachment Untuk Di Upload!',
-               text: "Lanjutkan ?",
-               showCancelButton: true,
-               confirmButtonColor: '#3085d6',
-               cancelButtonColor: '#d33',
-               confirmButtonText: 'Lanjutkan',
-               cancelButtonText: 'Batalkan',
-               showLoaderOnConfirm: true,
-               reverseButtons: true,
-               preConfirm: function() {
-                return new Promise(function(resolve) {
-                    upload_update = '0';
-                    proses_update(upload_update);
-    
-                });
-               },
-               allowOutsideClick: false     
-            });
-         
-        }else{
-            upload_update = '1';
-            proses_update(upload_update);
-        }
+            proses_update();
     });
     $('#src_search').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -184,6 +168,67 @@ var modal_jenis_klaim_jiwa   = '';
     
     ///END PENGAJUAN KLAIM JIWA ///
 
+    $('#btn_upload').click(function(event) {
+        prosees_upload();
+    });
+    $('#btn_upload_jaminan').click(function(event) {
+        prosees_upload_update();
+    });
+
+    $('#btn_upload_jiwa').click(function(event) {
+        prosees_upload();
+    });
+    $('#btn_upload_jiwa_update').click(function(event) {
+        prosees_upload_update();
+    });
+    
+    $('#file_uploads').on('click','.btn_del_file', function () { 
+        del_name      = $(this).data("file-name");
+        for(i = 0; i < fileUploads[0].length; i++ ){
+            var del_compare = fileUploads[0][i].toString();
+            if(del_compare == del_name){
+                fileUploads[0].splice(i, 1);
+            }
+        }
+        proses_delete_upload();
+    });
+    $('#file_uploads_update').on('click','.btn_del_file', function () { 
+        del_name      = $(this).data("file-name");
+        for(i = 0; i < fileUploads[0].length; i++ ){
+            var del_compare = fileUploads[0][i].toString();
+            if(del_compare == del_name){
+                fileUploads[0].splice(i, 1);
+            }
+        }
+        proses_delete_upload_update();
+    });
+
+    $('#file_uploads_jiwa').on('click','.btn_del_file', function () { 
+        del_name      = $(this).data("file-name");
+        for(i = 0; i < fileUploads[0].length; i++ ){
+            var del_compare = fileUploads[0][i].toString();
+            if(del_compare == del_name){
+                fileUploads[0].splice(i, 1);
+            }
+        }
+        proses_delete_upload();
+    });
+    $('#file_uploads_jiwa_update').on('click','.btn_del_file', function () { 
+        del_name      = $(this).data("file-name");
+        for(i = 0; i < fileUploads[0].length; i++ ){
+            var del_compare = fileUploads[0][i].toString();
+            if(del_compare == del_name){
+                fileUploads[0].splice(i, 1);
+            }
+        }
+        proses_delete_upload_update();
+    });
+
+    
+
+    
+    
+    
 
     //// FUNCTION HERE ////
     function get_kode_kantor(){
@@ -403,18 +448,8 @@ var modal_jenis_klaim_jiwa   = '';
         modal_reff_asuransi_jaminan = $('#modal_reff_asuransi_jaminan').val();
         modal_jenis_klaim_jaminan   = $('#modal_jenis_klaim_jaminan').val();
         
-        if($('#modal_upload_jaminan')[0].files[0] == null){
-            return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Anda Belum Memilih File Attachment Untuk Di Upload!'
-            });
-        }
 
         let fd = new FormData();
-        let files = $('#modal_upload_jaminan')[0].files[0];
-
-        fd.append('files',files);
         fd.append('modal_rek_jaminan',modal_rek_jaminan);
         fd.append('modal_reff_asuransi_jaminan',modal_reff_asuransi_jaminan);
         fd.append('modal_jenis_klaim_jaminan',modal_jenis_klaim_jaminan);
@@ -524,6 +559,7 @@ var modal_jenis_klaim_jiwa   = '';
     }
     function get_data_update(rekening,jenis,no_reff_asuransi,no_transaksi){
         $('#loading').show();
+        $('#loading-3').show();
         $.ajax({
                 url : base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/get_data_update",
                 type : "POST",
@@ -539,6 +575,7 @@ var modal_jenis_klaim_jiwa   = '';
 
                 success : function(response) {
                     $('#loading').hide();
+                    $('#loading-3').hide();
                     console.log(response);
                     $('#modal_pengajuan_klaim_jaminan_update').modal('show');
                     mapping_modal_jaminan_update(response);
@@ -554,32 +591,18 @@ var modal_jenis_klaim_jiwa   = '';
                 }
         });    
     }
-    function proses_update(upload_update){
+    function proses_update(){
         var rek_update = $('#modal_rek_jaminan_update').val();
         var no_transaksi = $('#modal_no_transaksi_jaminan_update').val();
         var jenis_asuransi = $('#modal_jenis_asuransi_jaminan_update').val();
         var jenis_klaim = $('#modal_jenis_klaim_jaminan_update').val();
 
-        if(upload_update == '0'){
-            var fd_up = new FormData();
-            fd_up.append('rek_update',rek_update);
-            fd_up.append('no_transaksi',no_transaksi);
-            fd_up.append('jenis_asuransi',jenis_asuransi);
-            fd_up.append('upload_update',upload_update);
-            fd_up.append('jenis_klaim',jenis_klaim);
+        var fd_up = new FormData();
+        fd_up.append('rek_update',rek_update);
+        fd_up.append('no_transaksi',no_transaksi);
+        fd_up.append('jenis_asuransi',jenis_asuransi);
+        fd_up.append('jenis_klaim',jenis_klaim);
 
-        }else if(upload_update == '1'){
-            var fd_up = new FormData();
-            let files = $('#modal_upload_jaminan_update')[0].files[0];
-
-            fd_up.append('files',files);
-            fd_up.append('rek_update',rek_update);
-            fd_up.append('no_transaksi',no_transaksi);
-            fd_up.append('jenis_asuransi',jenis_asuransi);
-            fd_up.append('upload_update',upload_update);
-            fd_up.append('jenis_klaim',jenis_klaim);
-
-        }
 
         $('#loading-3').show();
         $.ajax({
@@ -645,6 +668,42 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_rek_jaminan').val(response.data_details[0]['no_rekening']);
         $('#modal_reff_asuransi_jaminan').val(response.data_details[0]['no_reff_asuransi']);
         $('#modal_polis_jaminan').val(response.data_details[0]['no_polis']);
+
+        fileUploads = [];
+        uploads     = '';
+        root_document = response.data_details[0]['root_document'];
+        root_address  = response.data_details[0]['root_address'];
+        path_file     = response.data_details[0]['path_file'];
+        file_name     = JSON.parse(response.data_details[0]['file_name']);
+
+        uploads += `<div class="col-sm-2">
+                        <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment: </label>
+                    </div>`;
+        if(file_name == null){
+            fileUploads = [];
+        }else if(file_name == ''){
+            fileUploads = [];
+        }else{
+            fileUploads.push(file_name);
+           // loop_view_file(fileUploads,uploads);
+            for(i = 0; i < fileUploads[0].length; i++ ){
+                uploads += `<div class="col-sm-8" style="padding-top: 5px;">
+                                <label  class="control-label">
+                                  <a href="${root_address+path_file+fileUploads[0][i]}" id="attachment_jaminan" target="_blank">${fileUploads[0][i]}</a>
+                                </label>
+                                <button type="button" class="btn btn-light btn-sm control-label btn_del_file"
+                                        data-file-name="${fileUploads[0][i]}" >
+                                                        <i class="far fa-trash-alt danger" style="color:red"></i> 
+                                                        
+                                </button>
+                                
+                            </div>`;
+            }
+        }
+        
+        $('#file_uploads').html(uploads);
+        document.getElementById("file_uploads").style.display = "block";
+                                    
         $('#loading-1').hide();
     }
     function clear_modal_jaminan(){
@@ -661,6 +720,8 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_reff_asuransi_jaminan').val('');
         $('#modal_jenis_klaim_jaminan').val('');
         $('#modal_polis_jaminan').val('');
+       // document.getElementById("child_file").remove();
+        document.getElementById("file_uploads").style.display = "none";
         
     }
     function mapping_modal_jaminan_update(response){
@@ -681,9 +742,38 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_jenis_asuransi_jaminan_update').val(response.data_details[0]['jenis_asuransi']);
         $('#modal_ket_return_update').val(response.data_details[0]['ket_return']);
 
+        fileUploads = [];
+        uploads     = '';
+        root_document = response.data_details[0]['root_document'];
+        root_address  = response.data_details[0]['root_address'];
+        path_file     = response.data_details[0]['path_file'];
+        file_name     = JSON.parse(response.data_details[0]['file_name']);
 
-        document.getElementById("attachment_jaminan_update").href = response.data_details[0]['root_address'] + response.data_details[0]['path_file']; 
-        
+        uploads += `<div class="col-sm-2">
+                        <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment: </label>
+                    </div>`;
+        if(file_name == null){
+            fileUploads = [];
+        }else if(file_name == ''){
+            fileUploads = [];
+        }else{
+            fileUploads.push(file_name);
+           // loop_view_file(fileUploads,uploads);
+            for(i = 0; i < fileUploads[0].length; i++ ){
+                uploads += `<div class="col-sm-8">
+                                <label style="padding-top: 5px;" class="control-label">
+                                  <a href="${root_address+path_file+fileUploads[0][i]}" id="attachment_jaminan" target="_blank">${fileUploads[0][i]}</a>
+                                </label>
+                                <button type="button" class="btn btn-light btn-sm control-label btn_del_file"
+                                        data-file-name="${fileUploads[0][i]}" >
+                                                        <i class="far fa-trash-alt danger" style="color:red"></i> 
+                                                        
+                                </button>
+                            </div>`;
+            }
+        }
+        $('#file_uploads_update').html(uploads);
+        document.getElementById("file_uploads_update").style.display = "block";        
         $('#loading-3').hide();
     }
     function clear_modal_jaminan_update(){
@@ -703,7 +793,7 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_no_transaksi_jaminan_update').val('');
         $('#modal_jenis_asuransi_jaminan_update').val('');
         $('#modal_ket_return_update').val('');
-        document.getElementById("attachment_jaminan_update").href = '';
+        document.getElementById("file_uploads_update").style.display = "none";
     }
     ///END PENGAJUAN KLAIM JAMINAN ///
 
@@ -786,19 +876,8 @@ var modal_jenis_klaim_jiwa   = '';
         modal_rek_jiwa           = $('#modal_rek_jiwa').val();
         modal_reff_asuransi_jiwa = $('#modal_reff_asuransi_jiwa').val();
         modal_jenis_klaim_jiwa   = $('#modal_jenis_klaim_jiwa').val();
-        
-        if($('#modal_upload_jiwa')[0].files[0] == null){
-            return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Anda Belum Memilih File Attachment Untuk Di Upload!'
-            });
-        }
-
+     
         let fd = new FormData();
-        let files = $('#modal_upload_jiwa')[0].files[0];
-
-        fd.append('files',files);
         fd.append('modal_rek_jiwa',modal_rek_jiwa);
         fd.append('modal_reff_asuransi_jiwa',modal_reff_asuransi_jiwa);
         fd.append('modal_jenis_klaim_jiwa',modal_jenis_klaim_jiwa);
@@ -895,6 +974,7 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_premi_jiwa').val('');
         $('#modal_kantor_jiwa').val('');
         $('#modal_reff_asuransi_jiwa').val('');
+        document.getElementById("file_uploads_jiwa").style.display = "none";
     }
     function mapping_modal_jiwa(response){
         $('#loading-2').hide();
@@ -911,6 +991,41 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_premi_jiwa').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.'));
         $('#modal_kantor_jiwa').val(response.data_details[0]['nama_kantor']);
         $('#modal_reff_asuransi_jiwa').val(response.data_details[0]['no_reff_asuransi']);
+
+        fileUploads = [];
+        uploads     = '';
+        root_document = response.data_details[0]['root_document'];
+        root_address  = response.data_details[0]['root_address'];
+        path_file     = response.data_details[0]['path_file'];
+        file_name     = JSON.parse(response.data_details[0]['file_name']);
+
+        uploads += `<div class="col-sm-2">
+                        <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment: </label>
+                    </div>`;
+        if(file_name == null){
+            fileUploads = [];
+        }else if(file_name == ''){
+            fileUploads = [];
+        }else{
+            fileUploads.push(file_name);
+           // loop_view_file(fileUploads,uploads);
+            for(i = 0; i < fileUploads[0].length; i++ ){
+                uploads += `<div class="col-sm-8" style="padding-top: 5px;">
+                                <label  class="control-label">
+                                  <a href="${root_address+path_file+fileUploads[0][i]}" id="attachment_jaminan" target="_blank">${fileUploads[0][i]}</a>
+                                </label>
+                                <button type="button" class="btn btn-light btn-sm control-label btn_del_file"
+                                        data-file-name="${fileUploads[0][i]}" >
+                                                        <i class="far fa-trash-alt danger" style="color:red"></i> 
+                                                        
+                                </button>
+                                
+                            </div>`;
+            }
+        }
+        
+        $('#file_uploads_jiwa').html(uploads);
+        document.getElementById("file_uploads_jiwa").style.display = "block";
     }
     function mapping_modal_jiwa_update(response){
         $('#loading-4').hide();
@@ -932,7 +1047,38 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_no_transaksi_jiwa_update').val(response.data_details[0]['no_transaksi']);
         $('#modal_ket_return_jiwa_update').val(response.data_details[0]['ket_return']);
 
-        document.getElementById("attachment_jiwa_update").href = response.data_details[0]['root_address'] + response.data_details[0]['path_file']; 
+        fileUploads = [];
+        uploads     = '';
+        root_document = response.data_details[0]['root_document'];
+        root_address  = response.data_details[0]['root_address'];
+        path_file     = response.data_details[0]['path_file'];
+        file_name     = JSON.parse(response.data_details[0]['file_name']);
+
+        uploads += `<div class="col-sm-2">
+                        <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment: </label>
+                    </div>`;
+        if(file_name == null){
+            fileUploads = [];
+        }else if(file_name == ''){
+            fileUploads = [];
+        }else{
+            fileUploads.push(file_name);
+           // loop_view_file(fileUploads,uploads);
+            for(i = 0; i < fileUploads[0].length; i++ ){
+                uploads += `<div class="col-sm-8">
+                                <label style="padding-top: 5px;" class="control-label">
+                                  <a href="${root_address+path_file+fileUploads[0][i]}" id="attachment_jaminan" target="_blank">${fileUploads[0][i]}</a>
+                                </label>
+                                <button type="button" class="btn btn-light btn-sm control-label btn_del_file"
+                                        data-file-name="${fileUploads[0][i]}" >
+                                                        <i class="far fa-trash-alt danger" style="color:red"></i> 
+                                                        
+                                </button>
+                            </div>`;
+            }
+        }
+        $('#file_uploads_jiwa_update').html(uploads);
+        document.getElementById("file_uploads_jiwa_update").style.display = "block";      
 
     }
     function close_jiwa_update(){
@@ -959,7 +1105,7 @@ var modal_jenis_klaim_jiwa   = '';
         $('#modal_no_transaksi_jiwa_update').val('');
         $('#modal_ket_return_jiwa_update').val('');
 
-        document.getElementById("attachment_jiwa_update").href = '';
+        document.getElementById("file_uploads_jiwa_update").style.display = "none";
     }
     function proses_update_jiwa(upload_update){
         var rek_update = $('#modal_rek_jiwa_update').val();
@@ -967,26 +1113,13 @@ var modal_jenis_klaim_jiwa   = '';
         var jenis_asuransi = $('#modal_jenis_asuransi_jiwa_update').val();
         var jenis_klaim = $('#modal_jenis_klaim_jiwa_update').val();
 
-        if(upload_update == '0'){
-            var fd_up = new FormData();
-            fd_up.append('rek_update',rek_update);
-            fd_up.append('no_transaksi',no_transaksi);
-            fd_up.append('jenis_asuransi',jenis_asuransi);
-            fd_up.append('upload_update',upload_update);
-            fd_up.append('jenis_klaim',jenis_klaim);
-
-        }else if(upload_update == '1'){
-            var fd_up = new FormData();
-            let files = $('#modal_upload_jiwa_update')[0].files[0];
-
-            fd_up.append('files',files);
-            fd_up.append('rek_update',rek_update);
-            fd_up.append('no_transaksi',no_transaksi);
-            fd_up.append('jenis_asuransi',jenis_asuransi);
-            fd_up.append('upload_update',upload_update);
-            fd_up.append('jenis_klaim',jenis_klaim);
-
-        }
+       
+        var fd_up = new FormData();
+        fd_up.append('rek_update',rek_update);
+        fd_up.append('no_transaksi',no_transaksi);
+        fd_up.append('jenis_asuransi',jenis_asuransi);
+        fd_up.append('upload_update',upload_update);
+        fd_up.append('jenis_klaim',jenis_klaim);
 
         $('#loading-4').show();
         $.ajax({
@@ -1030,5 +1163,306 @@ var modal_jenis_klaim_jiwa   = '';
     }
     
     /// END PENGAJUAN KLAIM JIWA ///
+
+    //// upload multiple ////
+    function prosees_upload(){
+        
+        if(menu_kode == '1'){
+           up_rek   = $('#modal_rek_jaminan').val();
+           up_polis = $('#modal_polis_jaminan').val();
+           var files = $('#modal_upload_jaminan')[0].files[0];
+           $('#loading-1').show();
+        } else if(menu_kode == '2'){
+            up_rek    = $('#modal_rek_jiwa').val();
+            up_polis  = $('#modal_reff_asuransi_jiwa').val();
+            var files = $('#modal_upload_jiwa')[0].files[0];
+            $('#loading-2').show();
+        }else{
+            up_rek   = '';
+            up_polis = '';
+        }
+
+        if(fileUploads.length > 0){
+            fileUploadsLength = fileUploads[0].length;
+        }else{
+            fileUploadsLength = 0;
+        }
+
+        var proses_flag = 1;
+
+        console.log(fileUploads);
+      
+        var fd_up = new FormData();
+        fd_up.append('files',files);
+        fd_up.append('up_rek',up_rek);
+        fd_up.append('up_polis',up_polis);
+        fd_up.append('fileUploads',fileUploads);
+        fd_up.append('fileUploadsLength',fileUploadsLength);
+        fd_up.append('proses_flag', proses_flag);
+      
+        
+        $.ajax({
+            url: base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/proses_upload",
+            type:"POST",
+            timeout : 240000,
+            data:fd_up,
+            processData:false,
+            contentType:false,
+            cache:false,  
+            dataType: 'json',
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+            success : function(response) {
+                console.log(response);                    
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Upload File Attachment',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(()=> {
+                        if(menu_kode == '1'){
+                            $('#loading-1').hide();
+                            get_data_cover_jaminan();
+                        } else if(menu_kode == '2'){
+                            $('#loading-2').hide();
+                            get_data_cover_jiwa();
+                        }
+                    });  
+                    
+            },
+            error : function(response) {
+                console.log(response);
+                $('#loading-1').hide();
+                clear_modal_jaminan();
+                $('#modal_pengajuan_klaim_jaminan').modal('hide');
+                return Swal.fire({
+                            icon: 'error',
+                            title: 'Proses Gagal!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                });
+            }
+        });
+       
+    }
+    function proses_delete_upload(){
+        if(menu_kode == '1'){
+           up_rek   = $('#modal_rek_jaminan').val();
+           up_polis = $('#modal_polis_jaminan').val();
+            $('#loading-1').show();
+        } else if(menu_kode == '2'){
+            up_rek    = $('#modal_rek_jiwa').val();
+            up_polis  = $('#modal_reff_asuransi_jiwa').val();
+            $('#loading-2').show();
+        }else{
+            up_rek   = '';
+            up_polis = '';
+        }
+
+        if(fileUploads.length > 0){
+            fileUploadsLength = fileUploads[0].length;
+        }else{
+            fileUploadsLength = 0;
+        }
+        var proses_flag = 1;
+        $.ajax({
+                url : base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/proses_delete_upload",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "up_rek"            : up_rek,
+                        "up_polis"          : up_polis,
+                        "fileUploads"       : fileUploads[0],
+                        "fileUploadsLength" : fileUploadsLength,
+                        "proses_flag"       : proses_flag
+                    },
+                success : function(response) {
+                    console.log(response);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'File Berhasil Dihapus',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(()=> {
+                        if(menu_kode == '1'){
+                            $('#loading-1').hide();
+                            get_data_cover_jaminan();
+                        } else if(menu_kode == '2'){
+                            $('#loading-2').hide();
+                            get_data_cover_jiwa();
+                        }
+                    });  
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading-1').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Proses Gagal',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                    
+                }
+        });   
+    }
+
+
+    function prosees_upload_update(){
+        var no_transaksi = '';
+        var proses_flag = 2;
+        debugger;
+        if(menu_kode == '1'){
+           up_rek   = $('#modal_rek_jaminan_update').val();
+           up_polis = $('#modal_polis_jaminan_update').val();
+           no_transaksi = $('#modal_no_transaksi_jaminan_update').val();
+           var files = $('#modal_upload_jaminan_update')[0].files[0];
+            $('#loading-3').show();
+        } else if(menu_kode == '2'){
+            up_rek    = $('#modal_rek_jiwa_update').val();
+            up_polis  = $('#modal_reff_asuransi_jiwa_update').val();
+            no_transaksi = $('#modal_no_transaksi_jiwa_update').val();
+            var files = $('#modal_upload_jiwa_update')[0].files[0];
+            $('#loading-4').show();
+        }else{
+            up_rek   = '';
+            up_polis = '';
+        }
+
+        if(fileUploads.length > 0){
+            fileUploadsLength = fileUploads[0].length;
+        }else{
+            fileUploadsLength = 0;
+        }
+
+      
+        var fd_up = new FormData();
+        fd_up.append('files',files);
+        fd_up.append('up_rek',up_rek);
+        fd_up.append('up_polis',up_polis);
+        fd_up.append('fileUploads',fileUploads);
+        fd_up.append('fileUploadsLength',fileUploadsLength);
+        fd_up.append('no_transaksi',no_transaksi);
+        fd_up.append('proses_flag',proses_flag);
+      
+        $.ajax({
+            url: base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/proses_upload",
+            type:"POST",
+            timeout : 240000,
+            data:fd_up,
+            processData:false,
+            contentType:false,
+            cache:false,  
+            dataType: 'json',
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+            success : function(response) {
+                console.log(response);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Upload File Attachment',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(()=> {
+                        if(menu_kode == '1'){
+                            $('#loading-3').hide();
+                            get_data_update(rekening,jenis,no_reff_asuransi,no_transaksi);
+                        } else if(menu_kode == '2'){
+                            $('#loading-4').hide();
+                            get_data_update_jiwa(rekening,jenis,no_reff_asuransi,no_transaksi)
+                        }
+                    });  
+                    
+            },
+            error : function(response) {
+                console.log(response);
+                if(menu_kode == '1'){
+                    $('#loading-3').hide();
+                } else if(menu_kode == '2'){
+                    $('#loading-4').hide();
+                }
+                return Swal.fire({
+                            icon: 'error',
+                            title: 'Proses Gagal!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                });
+            }
+        });
+       
+    }
+
+    function proses_delete_upload_update(){
+
+         if(menu_kode == '1'){
+           up_rek   = $('#modal_rek_jaminan_update').val();
+           up_polis = $('#modal_polis_jaminan_update').val();
+           no_transaksi = $('#modal_no_transaksi_jaminan_update').val();
+           var files = $('#modal_upload_jaminan_update')[0].files[0];  
+           $('#loading-3').show();
+        } else if(menu_kode == '2'){
+            up_rek    = $('#modal_rek_jiwa_update').val();
+            up_polis  = $('#modal_reff_asuransi_jiwa_update').val();
+            no_transaksi = $('#modal_no_transaksi_jiwa_update').val();
+            var files = $('#modal_upload_jiwa_update')[0].files[0];
+            $('#loading-4').show();
+        }else{
+            up_rek   = '';
+            up_polis = '';
+        }
+
+        if(fileUploads.length > 0){
+            fileUploadsLength = fileUploads[0].length;
+        }else{
+            fileUploadsLength = 0;
+        }
+        var proses_flag = 2;
+        $.ajax({
+                url : base_url + "Asuransi/Pengajuan_klaim_asuransi_controller/proses_delete_upload",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "up_rek"            : up_rek,
+                        "up_polis"          : up_polis,
+                        "fileUploads"       : fileUploads[0],
+                        "fileUploadsLength" : fileUploadsLength,
+                        "no_transaksi"      : no_transaksi,
+                        "proses_flag"       : proses_flag
+                    },
+                success : function(response) {
+                    console.log(response);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'File Berhasil Dihapus',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(()=> {
+                        if(menu_kode == '1'){
+                            $('#loading-3').hide();
+                            get_data_update(rekening,jenis,no_reff_asuransi,no_transaksi);
+                        } else if(menu_kode == '2'){
+                            $('#loading-4').hide();
+                            get_data_update_jiwa(rekening,jenis,no_reff_asuransi,no_transaksi)
+                        }
+                    });  
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading-3').hide();
+                    $('#loading-4').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Proses Gagal',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                    
+                }
+        });   
+    }
 
 </script>
