@@ -183,7 +183,7 @@
                 </p>
               </a>
                 <ul class="nav nav-treeview">
-                  <?php if($this->session->userdata('rekap_titipan_asuransi_jaminan') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <?php if($this->session->userdata('rekap_titipan_asuransi_jaminan') == 'ok' || $this->session->userdata('rekap_titipan_asuransi_jaminan_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                   <li class="nav-item">
                     <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jaminan" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -191,7 +191,7 @@
                     </a>
                   </li>
                   <?php }?>
-                  <?php if($this->session->userdata('pengcoveran_asuransi_jaminan') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <?php if($this->session->userdata('pengcoveran_asuransi_jaminan') == 'ok' || $this->session->userdata('pengcoveran_asuransi_jaminan_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
                       <a href="<?php echo base_url(); ?>cover_asuransi_jaminan" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -199,7 +199,7 @@
                       </a>
                     </li>
                   <?php }?>
-                  <?php if($this->session->userdata('polis_asuransi_jaminan') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <?php if($this->session->userdata('polis_asuransi_jaminan') == 'ok' || $this->session->userdata('polis_asuransi_jaminan_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
                       <a href="<?php echo base_url(); ?>polis_asuransi_jaminan" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -207,7 +207,7 @@
                       </a>
                     </li>
                   <?php }?>
-                  <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <?php if($this->session->userdata('pengajuan_klaim_asuransi_jaminan') == 'ok' || $this->session->userdata('pengajuan_klaim_asuransi_jaminan_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
                       <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jaminan" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -215,7 +215,7 @@
                       </a>
                     </li>
                   <?php }?>
-                  <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <?php if($this->session->userdata('prosess_klaim_asuransi_jaminan') == 'ok' || $this->session->userdata('prosess_klaim_asuransi_jaminan_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
                       <a href="<?php echo base_url(); ?>proses_klaim_jaminan" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -235,7 +235,7 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <?php if($this->session->userdata('rekap_titipan_asuransi_jiwa') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <?php if($this->session->userdata('rekap_titipan_asuransi_jiwa') == 'ok' || $this->session->userdata('rekap_titipan_asuransi_jiwa_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
                         <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
@@ -243,7 +243,7 @@
                         </a>
                       </li>
                     <?php }?>
-                    <?php if($this->session->userdata('polis_asuransi_jiwa') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <?php if($this->session->userdata('pengcoveran_asuransi_jiwa') == 'ok' || $this->session->userdata('pengcoveran_asuransi_jiwa_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
                         <a href="<?php echo base_url(); ?>cover_asuransi_jiwa" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
@@ -251,7 +251,7 @@
                         </a>
                       </li>
                     <?php }?>
-                    <?php if($this->session->userdata('pengcoveran_asuransi_jiwa') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <?php if($this->session->userdata('polis_asuransi_jiwa') == 'ok' || $this->session->userdata('polis_asuransi_jiwa_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
                         <a href="<?php echo base_url(); ?>polis_asuransi_jiwa" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
@@ -259,7 +259,7 @@
                         </a>
                       </li>
                     <?php }?>
-                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <?php if($this->session->userdata('pengajuan_klaim_asuransi_jiwa') == 'ok' || $this->session->userdata('pengajuan_klaim_asuransi_jiwa_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
                         <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jiwa" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
@@ -267,7 +267,7 @@
                         </a>
                       </li>
                     <?php }?>
-                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <?php if($this->session->userdata('prosess_klaim_asuransi_jiwa') == 'ok' || $this->session->userdata('prosess_klaim_asuransi_jiwa_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
                         <a href="<?php echo base_url(); ?>proses_klaim_jiwa" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
