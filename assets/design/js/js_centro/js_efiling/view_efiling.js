@@ -37,6 +37,7 @@ function detailViewEfiling(respon) {
 
     pathFileUpload = `http://103.234.254.186/${path_file}/${y}/${m}/${kode_kantor}/${no_rek_webtool}/`;
   }
+  $('#view_debitur').html(`Data E-Filling ${data.header_efiling['nama_debitur']}`)
 
   let verifikasi_nasabah = status(data.efilling_nasabah['verifikasi_nasabah'], "verifikasi_nasabah")
   let verifikasi_bi_checking = status(data.efilling_bichecking['verifikasi_bichecking'], "verifikasi_bi_checking")

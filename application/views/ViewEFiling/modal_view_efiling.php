@@ -17,6 +17,13 @@
 #vert-tabs-status-tab {
     display : none;
 }
+
+#view_debitur {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #087a8c;
+}
 </style>
 <div class="modal fade" id="modal_view_efiling" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-xl">
@@ -38,11 +45,7 @@
                         <div class="row">
                             <!-- form atas -->
                             <div class="col-md-11 mx-auto">
-                                <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <div id="view_debitur"></div>
-                                    </div>
-                                </div>
+                            <div class="row col-sm-12 " id="view_debitur"></div>
                                 <form>
                                     <div class="form-group row">
                                         <div class="col-sm-2">
