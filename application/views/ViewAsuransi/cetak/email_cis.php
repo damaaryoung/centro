@@ -2,35 +2,14 @@
 <html>
     <body>
         <p>Dear Team Asuransi, 
-        Berikut Kami Lampirkan data pengajuan cover asuransi CASH IN SAVE tanggal <?php echo $tgl;?> sbb:</p>
-        <table>
-            <tr>
-                <td width="115">Nama Nasabah</td>
-                <td width="20px">:</td>
-                <td><?php echo $nama_nasabah; ?></td>
-            </tr>
-            <tr>
-                <td width="115">No Polis</td>
-                <td width="20px">:</td>
-                <td width><?php echo $no_polis;?></td>
-            </tr>
-            <tr>
-                <td width="115">Tgl Klaim</td>
-                <td width="20px">:</td>
-                <td width><?php echo $tgl_klaim;?></td>
-            </tr>
-            <?php
-                foreach ($getPemindahanJaminanCetak as $row) :
-                    // $idData = $row['id_data'];
-                    $idx= 0;
-                    echo "<tr>";
-                    echo "<td>".$row['no_reff']."&nbsp;</td>";
-                    echo "<td>".$row['agunan_id']."</td>";
-                    echo "<td>".$row['nama_nasabah']."</td>";     
-                    echo "<td>".$row['deskripsi_ringkas']."</td>";
-                    echo "</tr>";
-                endforeach;
-            ?>
+        Berikut Kami Lampirkan data pengajuan cover asuransi CASH IN SAVE <?php// echo $tgl;?> sbb:</p>
+        <table border="1" style="width: 100%; 
+                                     font-size: 11px; 
+                                     vertical-align:top; 
+                                     table-layout:fixed; 
+                                     border-collapse: collapse;">
+                        <thead>
+                            <tr><th>No</th><th>Nama&nbsp;Cabang</th><th>Limit&nbsp;Kas&nbsp;Utama</th><th>Saldo&nbsp;Akhir&nbsp;Kas&nbsp;Utama</th></tr></thead><tbody><?php echo $get_data_send_mail;?> </tbody>
         </table>
         <p>Terimakasih.
             Regards,
