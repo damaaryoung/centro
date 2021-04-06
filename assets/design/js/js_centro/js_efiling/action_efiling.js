@@ -45,7 +45,6 @@ function detailData_toFormEfiling() {
   if (menu_title == 'Edit' || menu_title == 'Verifikasi') { // menu get halaman edit dan verifikasi
     $('#modal_pengisian_efiling').modal('show');
     $('#loading-1').hide();
-    $('#nama_debitur').html(`Data E-filing ${$(this).parents("tr").find('td.nama_debitur').text()}`)
     $('#area_kerja').val($(this).parents("tr").find('td.area_kerja').text())
     $('#inp_plafon').val($(this).parents("tr").find('td.plafon').text())
     $('#inp_tenor').val($(this).parents("tr").find('td.tenor').text())
@@ -84,7 +83,6 @@ function detailData_toFormEfiling() {
   } else { // menu get halaman view
     $('#modal_view_efiling').modal('show');
     $('#loading-2').hide();
-    $('#view_debitur').html(`Data E-filing ${$(this).parents("tr").find('td.nama_debitur').text()}`)
     $('#view_area_kerja').val($(this).parents("tr").find('td.area_kerja').text())
     $('#view_nomor_rekening').val($(this).parents("tr").find('td.no_rekening').text())
     $('#view_inp_plafon').val($(this).parents("tr").find('td.plafon').text())
@@ -229,6 +227,7 @@ function detailDataEfiling(respon, menu_title) {
   $("#update_verifikasi_data").attr({
     "jenis_data": jenis_data
   });
+  $('#nama_debitur').html(`Data E-Filling ${data.header_efiling['nama_debitur']}`)
   // variable get data status verifikasi efilling
   let status_nasabah = data.efilling_nasabah['verifikasi_nasabah'];
   let status_permohonan = data.efilling_permohonan['verifikasi_permohonan'];

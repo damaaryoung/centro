@@ -1,16 +1,9 @@
 <style>
 #nama_debitur {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
-    color: darkred;
-}
-
-#view_debitur {
-    font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: darkred;
+    color: #087a8c;
 }
 
 .ket-data-null {
@@ -86,11 +79,7 @@
                             <div class="row">
                                 <!-- form atas -->
                                 <div class="col-md-11 mx-auto">
-                                    <div class="form-group row">
-                                        <div class="col-sm-12">
-                                            <div id="view_debitur"></div>
-                                        </div>
-                                    </div>
+                                    <div class="row col-sm-12" id="nama_debitur"></div>
                                     <div class="form-group row">
                                         <input type="hidden" class="form-control form-control-sm" id="menu_page"
                                             name="page">
