@@ -291,7 +291,7 @@ class Request_Jaminan_Centro_Controller extends CI_Controller {
 		$email = array(
 			'subyek' => 'Permintaan Aset Jaminan',
 			'tujuan' => $email_to,
-			'cc' => 'staf_tisupport@kreditmandiri.co.id, it@kreditmandiri.co.id',
+			'cc' => 'staf_tisupport@kreditmandiri.co.id',
 			'pesan' => $email
 			// 'attach1' => $req->file('attach1')
 		);
