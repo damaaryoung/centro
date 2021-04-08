@@ -65,14 +65,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="src_kantor_kas_cabang">Kode Kantor</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor">
+                                    <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor" onchange="getData()">
                                     </select>
                                   </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="src_search">Search</label>
                                   </div>
-                                  <div class="col-sm-3">
-                                       <input type="text" class="form-control form-control-sm" id="src_search" name="src_search" placeholder=" NO REKENING / NOMOR POLIS">
+                                  <div class="col-sm-4">                                       
+                                        <div class="input-group mb-3">
+                                          <input type="text" class="form-control form-control-sm" id="src_search" name="src_search" placeholder="NO TRANSAKSI">
+                                          <div class="input-group-append">
+                                            <span class="input-group-text btn btn-sm" id="btn_search"><i class="fas fa-search"></i></span>
+                                          </div>
+                                        </div>
                                   </div>
                               </div>
                       </div>
@@ -94,11 +99,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   
                                 <div class="col-md-12 mx-auto">
                                     <div class="form-group row">
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-5">
                                                 <button type="button" class="btn btn-primary btn-sm" 
                                                         style="width: 250px;" id="btn_email">
                                                         <i class="fas fa-envelope"></i> Email To Asuransi
                                                 </button>
+                                            </div>
+                                            <div class="col-sm-5">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button type="button" style="width: 150px;" class="btn btn-success btn-sm"  id="btn_refresh"><i class="fas fa-sync"></i> Refresh</button>
                                             </div>
                                     </div>
                                 </div>
@@ -106,135 +116,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <table id="tbl_cis" class="table table-striped table-bordered" style="width:100% text-align:center" >
                                         <thead style="text-align: center;" class="bg-danger">
                                             <tr style="text-align:center">
-                                                <th><input type="checkbox" name="check" onClick="toggle(this)"></th>
+                                                <th><input type="checkbox" name="check_all" onClick="toggle(this)"></th>
+                                                <th>No&nbsp;Transaksi</th>
                                                 <th>Tgl&nbsp;Cover</th>
                                                 <th>Nama&nbsp;Asuransi</th>
                                                 <th>Nama&nbsp;Cabang</th>
                                                 <th>Limit&nbsp;Kas Utama</th>
                                                 <th>Saldo&nbsp;Akhir Kas Utama</th>
                                                 <th>Status&nbsp;</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tbl_body_cis">
                                         </tbody>
                                     </table>
                                 </div>
-                                <br>    
-                                <div class="row">
-                                  <div class="col-md-12 mx-auto">
-                                          <div class="form-group row">
-                                              <div class="col-sm-2">
-                                                <button type="button" class="btn btn-success btn-sm"  id="btn_refresh"><i class="fas fa-sync"></i> Refresh</button>
-                                              </div>
-                                          </div>
-                                  </div>
-                                </div>
+                                <br>  
                             </div>
                             <!-- /.card-body -->
                   <!-- /.card-body -->
           </div>
 
 
-          <!-- Update -->
-          <div class="modal fade" id="modal_pengajuan_klaim_cis_update"> 
-            <div class="modal-dialog modal-xl">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">Update Pengajuan Asuransi Cash In Save</h4>
-                  <button type="button" class="close" onclick="close_modal_update()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <div id="loading-2">
-                    <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
-                  </div>
-                </div>
-                <div class="modal-body" style="height: 300px;">
-                <div class="row" style="padding-top: 20px;">
-                              <!-- form atas -->
-                              <div class="col-md-12 mx-auto">
-                                  <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label style="padding-top: 5px;" class="control-label" for="modal_nama_asuransi_update">Nama Asuransi</label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <select class="form-control form-control-sm select2 custom-select" 
-                                                            id="modal_nama_asuransi_update" name="modal_nama_asuransi_update" style="width: 300px;">
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label class="control-label" style="padding-top: 5px;"  for="modal_limit_kas_update">Limit Kas Utama</label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <input type="text" class="form-control form-control-sm" id="modal_limit_kas_update" name="modal_limit_kas_update">
-                                                </div>
-                                  </div>
-                                  <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label style="padding-top: 5px;" class="control-label" for="modal_tgl_cover_update">Tanggal Cover</label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <input type="date" class="form-control form-control-sm" id="modal_tgl_cover_update" name="modal_tgl_cover_update" style="width: 300px;">
-                                                </div>  
-                                                <div class="col-sm-2">
-                                                    <label class="control-label" style="padding-top: 5px;"  for="modal_saldo_akhir_kas_update">Saldo Akhir Kas Utama</label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <input type="text" class="form-control form-control-sm" id="modal_saldo_akhir_kas_update" name="modal_saldo_akhir_kas_update">
-                                                </div>
-                                  </div>
-                                  <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label style="padding-top: 5px;" class="control-label" for="modal_kantor_cabang_update">Kantor Cabang</label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <select class="form-control form-control-sm select2 custom-select" 
-                                                              id="modal_kantor_cabang_update" name="modal_kantor_cabang_update" style="width: 300px;">
-                                                      </select>
-                                                </div>    
-                                                  
-                                  </div>
-                                  <div class="form-group row">
-                                                  <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_upload_update">Attachment</label>
-                                                  </div>
-                                                  <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                      <div class="custom-file">
-                                                        <input type="file" class="custom-file-input form-control form-control-sm" id="modal_upload_update">
-                                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                                      </div>
-                                                    </div>
-                                                  </div>                                                  
-                                  </div>
-                                  <div class="form-group row">
-                                                  <div class="col-sm-2">
-                                                      <label style="padding-top: 5px;" class="control-label" for="attachment_update">File Attachment</label>
-                                                  </div>
-                                                  <div class="col-sm-2">
-                                                      <label style="padding-top: 5px;" class="control-label">
-                                                        <i class="fas fa-file"></i> <a href="" id="attachment_update" target="_blank">File Upload</a>
-                                                      </label>
-                                                  </div>
-                                  </div>
-                              </div>
-                              
-                              <input type="hidden" class="form-control form-control-sm" id="id_update" name="id_update" readonly>
-                              <input type="hidden" class="form-control form-control-sm" id="no_transaksi_update" name="no_transaksi_update" readonly>
-                </div>
-
-                </div>
-                <!-- /.modal-body -->
-                <div class="modal-footer text-center" style="margin: 0 auto;">
-                  <button type="button" class="btn btn-danger" onclick="close_modal_update()">Close</button>
-                  <button type="button" class="btn btn-primary" id="btn_simpan_update">Save changes</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- /.modal jaminan -->
-
+   
           
           
         <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
@@ -245,6 +149,139 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <div class="modal fade" id="modal_pengajuan_klaim_cis_update"> 
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Asuransi Cash In Save</h4>
+          <button type="button" class="close" onclick="close_modal_update()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div id="loading-2">
+            <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+          </div>
+        </div>
+        <div class="modal-body" style="height: 400px;">
+        <div class="row" style="padding-top: 20px;">
+                      <!-- form atas -->
+                      <div class="col-md-12 mx-auto">
+                          <div class="form-group row">
+                                        <div class="col-sm-2">
+                                            <label style="padding-top: 5px;" class="control-label" for="modal_nama_asuransi_update">Nama Asuransi</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select class="form-control form-control-sm select2 custom-select" 
+                                                    id="modal_nama_asuransi_update" name="modal_nama_asuransi_update" style="width: 300px;" disabled>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label" style="padding-top: 5px;"  for="modal_limit_kas_update">Limit Kas Utama</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                              <input type="text" class="form-control form-control-sm" id="modal_limit_kas_update" name="modal_limit_kas_update" readonly>
+                                        </div>
+                          </div>
+                          <div class="form-group row">
+                                        <div class="col-sm-2">
+                                            <label style="padding-top: 5px;" class="control-label" for="modal_tgl_cover_update">Tanggal Cover</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                              <input type="date" class="form-control form-control-sm" id="modal_tgl_cover_update" name="modal_tgl_cover_update" style="width: 300px;" readonly>
+                                        </div>  
+                                        <div class="col-sm-2">
+                                            <label class="control-label" style="padding-top: 5px;"  for="modal_saldo_akhir_kas_update">Saldo Akhir Kas Utama</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                              <input type="text" class="form-control form-control-sm" id="modal_saldo_akhir_kas_update" name="modal_saldo_akhir_kas_update" readonly>
+                                        </div>
+                          </div>
+                          <div class="form-group row">
+                                        <div class="col-sm-2">
+                                            <label style="padding-top: 5px;" class="control-label" for="modal_kantor_cabang_update">Kantor Cabang</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                              <select class="form-control form-control-sm select2 custom-select" 
+                                                      id="modal_kantor_cabang_update" name="modal_kantor_cabang_update" style="width: 300px;" disabled>
+                                              </select>
+                                        </div>    
+                                          
+                          </div>
+                          <div class="form-group row" id="file_uploads_update">
+                          </div>
+                          <div class="form-group row">
+                                <div class="col-sm-2">
+                                    <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Add Notes</label>
+                                </div>
+                                <div class="col-sm-8">
+                                      <textarea style="height: 150px;" type="text" class="form-control" id="modal_notes" name="modal_notes"></textarea>
+                                </div>
+                          </div>  
+                      </div>
+                      
+                      <input type="hidden" class="form-control form-control-sm" id="id_update" name="id_update" readonly>
+                      <input type="hidden" class="form-control form-control-sm" id="no_transaksi_update" name="no_transaksi_update" readonly>
+        </div>
+        
+        </div>
+        <!-- /.modal-body -->
+        <div class="modal-footer text-center" style="margin: 0 auto;">
+          <button type="button" class="btn btn-danger" onclick="close_modal_update()">Close</button>
+          <button type="button" class="btn btn-primary" id="btn_simpan_update">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal jaminan -->
+
+
+  <div class="modal fade" id="modal_send_mail">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Masukan Penerima Email</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="loading-3">
+          <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+        </div>
+        <div class="modal-body" style="height: 300px;">
+          
+          <div class="row" style="padding-top: 20px;">
+            <!-- form atas -->
+            <div class="col-md-12 mx-auto">
+              <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label style="padding-top: 5px;" class="control-label" for="modal_email_penerima">Email Penerima</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <p>Pisahkan Dengan Tanda Koma (,) Jika Penerima Lebih Dari Satu !</p>
+                    </div>
+                    
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <textarea style="height: 150px;" type="text" class="form-control" id="modal_email_penerima" name="modal_email_penerima"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="send_mail">Send Email</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
 
 

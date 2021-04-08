@@ -121,7 +121,7 @@ class Proses_klaim_jiwa_controller extends CI_Controller {
 		$email = array(
 			'subyek' => 'Klaim Asuransi Jiwa',
 			'tujuan' => $modal_email_penerima,
-			'cc' => 'staf_tisupport@kreditmandiri.co.id, it@kreditmandiri.co.id, dudik.bdg@kreditmandiri.co.id, mufti@kreditmandiri.co.id',
+			'cc' => 'staf_tisupport@kreditmandiri.co.id, it@kreditmandiri.co.id, dudi@kreditmandiri.co.id, mufti@kreditmandiri.co.id',
 			'pesan' => $email
 			// 'attach1' => $req->file('attach1')
 		);
