@@ -1,3 +1,4 @@
+// function get date time now
 function get_date_time_now(){
   let today = new Date();
   let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -39,7 +40,7 @@ function action_Data() {
     seveOrNot: false,
   }]);
 }
-/*Notes innerdata  form edit, verifikasi, dan detail---------------------------------------------------- */
+/*Notes innerdata  form edit, verifikasi, dan view---------------------------------------------------- */
 function detailData_toFormEfiling() {
   let menu_title = this.getAttribute('title');
   if (menu_title == 'Edit' || menu_title == 'Verifikasi') { // menu get halaman edit dan verifikasi
@@ -53,7 +54,7 @@ function detailData_toFormEfiling() {
     $('#nomor_rekening').val(no_rekening)
     $('#tanggal_realisasi').val(tgl_realisasi)
     let kd_kantor = this.getAttribute('kode_kantor');
-    $(".custom-file-input").attr({
+    $(".custom-file-input").attr({// create atribut kd_kantor, tgl realisasi, & norekening di form upload file
       "kd_kantor": kd_kantor,
       "tgl_realisasi": tgl_realisasi,
       "no_rekening": no_rekening,
@@ -92,7 +93,7 @@ function detailData_toFormEfiling() {
     let kd_kantor = this.getAttribute('kode_kantor');
     let no_rekening = $(this).parents("tr").find('td.no_rekening').text();
 
-    $(".custom-file-input").attr({
+    $(".custom-file-input").attr({ // create atribut kd_kantor, tgl realisasi, & norekening di form upload file
       "kd_kantor": kd_kantor,
       "tgl_realisasi": tgl_realisasi,
       "no_rekening": no_rekening
@@ -165,6 +166,7 @@ function check(id, ket) {
   }
 }
 
+// function get detail data nasabah berdasarkan menu page (no_rekening, id_loading, menu_title)
 function getDetailDataNasabah_to_FormEfiling(no_rekening, loading, menu_title) {
   $.ajax({
     url: api_url+"api/master/centro/show/" + no_rekening,
@@ -179,28 +181,28 @@ function getDetailDataNasabah_to_FormEfiling(no_rekening, loading, menu_title) {
     success: function (respon) {
       $('#' + loading + '').hide();
       if (menu_title == 'View') {
-        detailViewEfiling(respon)
+        detailViewEfiling(respon) // inner data halaman view
       } else {
-        detailDataEfiling(respon, menu_title)
+        detailDataEfiling(respon, menu_title) // inner data halaman verifikasi & edit
       }
     }
   })
 }
 
+// function inner data halaman verifikasi & edit
 function detailDataEfiling(respon, menu_title) {
   let data = respon.data;
   // ket Is_jenis 1 = Sefin, Is_jenis 2 = webtool
   let jenis_data = data.efilling['is_jenis'];
   let no_rekening = ((data.header_efiling== null)? '' : data.header_efiling['no_rekening'])
 
-  $(".custom-file-input").attr({
+  $(".custom-file-input").attr({ // create atribut is jenis di form upload file
     "is_jenis": jenis_data
   })
   let path_file = data.efilling['folder_master'];
   let pathFileUpload = '';
-  if (jenis_data == 1) {
-    pathFileUpload = `${path_file}/`;
-  } else {
+
+  if (jenis_data == 2) {
     // link  http://103.234.254.186/efiling/2018/03/02/02-38-00029-18/fatmah%20-%20PH.pdf
     let tgl_realisasi = '';
     let kode_kantor = '';
@@ -222,12 +224,15 @@ function detailDataEfiling(respon, menu_title) {
     }
 
     pathFileUpload = `http://103.234.254.186/${path_file}/${y}/${m}/${kode_kantor}/${no_rek_webtool}/`;
+  }else{
+    pathFileUpload = `${path_file}/`;
   }
 
-  $("#update_verifikasi_data").attr({
+  $("#update_verifikasi_data").attr({ // create atribut di btn update upload file
     "jenis_data": jenis_data
   });
-  $('#nama_debitur').html(`Data E-Filling ${data.header_efiling['nama_debitur']}`)
+  $('#nama_debitur').html(`Data E-Filling ${data.header_efiling['nama_debitur']}`) // inner nama debitur halaman edit & verifikasi
+  
   // variable get data status verifikasi efilling
   let status_nasabah = data.efilling_nasabah['verifikasi_nasabah'];
   let status_permohonan = data.efilling_permohonan['verifikasi_permohonan'];
@@ -338,7 +343,7 @@ function detailDataEfiling(respon, menu_title) {
   let foto_ft_pengikatan = innerListData(data.efilling_foto['ft_pengikatan'], data.efilling_foto['ft_pengikatan_nama'], jenis_data, pathFileUpload, "foto_pengikatan", no_rekening);
   let foto_ft_usaha = innerListData(data.efilling_foto['ft_usaha'], data.efilling_foto['ft_usaha_nama'], jenis_data, pathFileUpload, "foto_usaha", no_rekening);
 }
-
+// function inner list file e-filling
 function innerListData(file,file_name, jenis_data, pathFileUpload, id, no_rekening) {
   if (file == null || file == "") {
     return $('#file-' + id + '').html("");
