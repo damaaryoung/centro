@@ -306,6 +306,14 @@
               <?php }?>
               <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                 <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>pengcoveran_cit" class="nav-link">
+                    <i class="fas fa-money-bill-wave nav-icon icon_color_sidebar"></i>
+                    <p>Cash In Transit</p>
+                  </a>
+                </li>
+              <?php }?>
+              <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                <li class="nav-item">
                   <a href="<?php echo base_url(); ?>laporan_asuransi" class="nav-link">
                     <i class="fas fa-file-medical-alt nav-icon icon_color_sidebar"></i>
                     <p>Laporan Asuransi</p>

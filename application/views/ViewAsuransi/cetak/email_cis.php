@@ -11,7 +11,7 @@
                         <thead>
                             <tr><th>No</th><th>Nama&nbsp;Cabang</th><th>Limit&nbsp;Kas&nbsp;Utama</th><th>Saldo&nbsp;Akhir&nbsp;Kas&nbsp;Utama</th></tr></thead><tbody><?php echo $get_data_send_mail;?> </tbody>
         </table>
-        <p>Terimakasih.
+        <p>Demikian yang dapat kami sampaikan,terima kasih atas perhatian dan kerjasamanya.
             Regards,
             PIC Asuransi
         </p>
