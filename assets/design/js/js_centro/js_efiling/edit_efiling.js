@@ -297,7 +297,7 @@ function getImg(evt) {
           }).then((result) => {
             if (result.value) {
               $('#' + idFile + '').next('label').html('Choose file');
-              update_detail_data('', is_jenis)
+              update_detail_data('', is_jenis) // get data terbaru
             }
           })
         },
@@ -311,7 +311,7 @@ function getImg(evt) {
     }
   })
 }
-
+// update status verifikasi berdasarkan data efilling nasabah
 $('#update_verifikasi_data').click(function () {
   Swal.fire({
     title: 'Apakah Anda Yakin Ingin Update Verifikasi Data E Filling ?',
@@ -380,13 +380,12 @@ $('#update_verifikasi_data').click(function () {
       }
       let is_jenis = this.getAttribute('jenis_data')
       update_detail_data(data, is_jenis)
-      // console.log(data)
     } else if (result.dismiss === 'Tidak') {
       return false
     }
   })
 })
-
+// function update detail data efilling
 function update_detail_data(data, is_jenis) {
   let dt = {}
   if (data !== undefined) {
@@ -439,7 +438,7 @@ function update_detail_data(data, is_jenis) {
     }
   })
 }
-
+// function close halaman edit & verifikasi
 function closeFormEfiling(evt) {
   $('#modal_pengisian_efiling').modal('hide');
   $('.inner_list_upload').each(function (index, item) {

@@ -1,3 +1,4 @@
+//function inner halaman view
 function detailViewEfiling(respon) {
   let data = respon.data;
   let path_file = data.efilling['folder_master'];
@@ -6,15 +7,14 @@ function detailViewEfiling(respon) {
   let jenis_data = data.efilling['is_jenis']
   let no_rekening = ((data.header_efiling == null) ? '' : data.header_efiling['no_rekening'])
 
-  $(".custom-file-input").attr({
+  $(".custom-file-input").attr({ //create atribut upload file realist asset
     "is_jenis": jenis_data
-  })
-  $("#inputStatusVerifikasi").attr({
+  }) 
+  $("#inputStatusVerifikasi").attr({ // create atribut no rekening di select option update status
     "no_rekening": no_rekening
   })
-  if (jenis_data == 1) {
-    pathFileUpload = `${path_file}/`;
-  } else {
+
+  if (jenis_data == 2) {  // pathfileupload data
     // link  http://103.234.254.186/efiling/2018/03/02/02-38-00029-18/fatmah%20-%20PH.pdf
     let tgl_realisasi = '';
     let kode_kantor = '';
@@ -36,9 +36,12 @@ function detailViewEfiling(respon) {
     }
 
     pathFileUpload = `http://103.234.254.186/${path_file}/${y}/${m}/${kode_kantor}/${no_rek_webtool}/`;
+  }else{
+    pathFileUpload = `${path_file}/`;
   }
-  $('#view_debitur').html(`Data E-Filling ${data.header_efiling['nama_debitur']}`)
 
+  $('#view_debitur').html(`Data E-Filling ${data.header_efiling['nama_debitur']}`) // inner nama debitur dihalaman view
+//Get data status verifikasi 
   let verifikasi_nasabah = status(data.efilling_nasabah['verifikasi_nasabah'], "verifikasi_nasabah")
   let verifikasi_bi_checking = status(data.efilling_bichecking['verifikasi_bichecking'], "verifikasi_bi_checking")
   let verifikasi_credit_analist = status(data.efilling_ca['verifikasi_ca'], "verifikasi_credit_analist")
@@ -47,7 +50,7 @@ function detailViewEfiling(respon) {
   let verifikasi_legal = status(data.efilling_legal['verifikasi_legal'], "verifikasi_legal")
   let verifikasi_permohonan_kredit = status(data.efilling_permohonan['verifikasi_permohonan'], "verifikasi_permohonan_kredit")
   let verifikasi_spk_ndk = status(data.efilling_spkndk['verifikasi_spkndk'], "verifikasi_spk_ndk")
-
+  //inner status verifikasi
   function status(status, id_dt) {
     let text = '';
     if (status == '1') {
@@ -63,7 +66,7 @@ function detailViewEfiling(respon) {
       $('#view_status_' + id_dt).html("")
     }
   }
-
+//Get data notes verifikasi
   let notes_bi_checking = notes(data.efilling_bichecking['notes_bichecking'], data.efilling_bichecking['verifikasi_bichecking'], "notes_bi_checking")
   let notes_credit_analist = notes(data.efilling_ca['notes_ca'], data.efilling_ca['verifikasi_ca'], "notes_credit_analist")
   let notes_foto = notes(data.efilling_foto['notes_foto'], data.efilling_foto['verifikasi_foto'], "notes_foto")
@@ -72,7 +75,7 @@ function detailViewEfiling(respon) {
   let notes_nasabah = notes(data.efilling_nasabah['notes_nasabah'], data.efilling_nasabah['verifikasi_nasabah'], "notes_nasabah")
   let notes_permohonan_kredit = notes(data.efilling_permohonan['notes_permohonan'], data.efilling_permohonan['verifikasi_permohonan'], "notes_permohonan_kredit")
   let notes_spk_ndk = notes(data.efilling_spkndk['notes_spkndk'], data.efilling_spkndk['verifikasi_spkndk'], "notes_spk_ndk")
-
+  // inner notes verifikasi
   function notes(notes, status, id_dt) {
     if (notes == null || status == 1 || status == null) {
       $('#view_' + id_dt).html("-")
@@ -158,7 +161,7 @@ function detailViewEfiling(respon) {
   let foto_ft_pengikatan = innerDataNasabah(data.efilling_foto['ft_pengikatan'], data.efilling_foto['ft_pengikatan_nama'], jenis_data, pathFileUpload, "view_foto_pengikatan");
   let foto_ft_usaha = innerDataNasabah(data.efilling_foto['ft_usaha'], data.efilling_foto['ft_usaha_nama'], jenis_data, pathFileUpload, "view_foto_usaha");
 
-  //Release Aset
+  //Data Release Aset
   if (data.efilling_aset !== null) {
     let ra_tanda_terima = innerDataAsset(data.efilling_aset['ra_tanda_terima'], data.efilling_aset['ra_tanda_terima_nama'], jenis_data, pathFileUpload, "tanda_terima_ra", no_rekening);
     let ra_surat_kuasa = innerDataAsset(data.efilling_aset['ra_surat_kuasa'], data.efilling_aset['ra_surat_kuasa_nama'], jenis_data, pathFileUpload, "surat_kuasa_ra", no_rekening);
@@ -167,7 +170,7 @@ function detailViewEfiling(respon) {
     let ra_serah_terima = innerDataAsset(data.efilling_aset['ra_serah_terima'], data.efilling_aset['ra_serah_terima_nama'], jenis_data, pathFileUpload, "serah_terima_ra", no_rekening);
   }
 }
-
+// inner list data  efiling nasabah, permohonan, jaminan, bi-checking, credit analist, legal, spk&ndk, & foto.
 function innerDataNasabah(file, file_name, jenis_data, pathFileUpload, id) {
   if (file == null || file == '' || JSON.parse(file) == '') {
     return $('#' + id + '').html(`<p class="ket-data-null"> Data tidak ada</p>`);
@@ -191,7 +194,7 @@ function innerDataNasabah(file, file_name, jenis_data, pathFileUpload, id) {
     return $('#' + id + '').html(list_data);
   }
 }
-
+// inner data list Release Aset
 function innerDataAsset(file, file_name, jenis_data, pathFileUpload, id, no_rekening) {
   if (file == null || file == "") {
     return $('#file-' + id + '').html("");
@@ -222,7 +225,7 @@ function innerDataAsset(file, file_name, jenis_data, pathFileUpload, id, no_reke
     return $('#file-' + id + '').html(list_data);
   }
 }
-
+// function update status verifikasi  mengubah jadi (revisi atau done) yang boleh update user id yg memiliki menu update status
 $('#inputStatusVerifikasi').change(function () {
   Swal.fire({
     title: 'Apakah Anda Yakin Ingin Mengubah Status E-Filling?',
@@ -274,7 +277,7 @@ $('#inputStatusVerifikasi').change(function () {
   })
 
 });
-
+// function close halaman view efilling
 function closeViewEfiling() {
   $('#modal_view_efiling').modal('hide');
   $('.custom-file-view').each(function (index, item) {
@@ -284,5 +287,5 @@ function closeViewEfiling() {
   let filter_release = $('#filter_release').val();
   let status = $('#status').val();
   let search = $("#search").val();
-  filter_efiling(kode_area, filter_release, status, search);
+  filter_efiling(kode_area, filter_release, status, search); // close sesuai kondisi terakhir
 }

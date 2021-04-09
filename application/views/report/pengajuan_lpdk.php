@@ -116,7 +116,11 @@
                     $nama_sertifikat = $data['nama_pemilik_sertifikat'];
                     $status_sertifikat1 = $data['status_sertifikat'];
                     $nama_pas_sertifikat = $data['nama_pas_sertifikat'];
-                    $status_pas_sertifikat = $data['status_pas_sertifikat'];
+                    if($nama_pas_sertifikat != ''){
+                        $status_pas_sertifikat = $data['status_pas_sertifikat'];
+                    }else{
+                        $status_pas_sertifikat = '';
+                    }
                     $hub_cadeb = $data['hub_cadeb'];
                     if($jenis_sertifikat == 'SHGB'){
                         $tgl_expired_shgb = $data['tgl_berlaku_shgb'];

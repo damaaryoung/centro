@@ -1,9 +1,9 @@
-let base_url = $('#base_url').val();
-let api_url = $('#api_url').val();
+let base_url = $('#base_url').val(); // get index url
+let api_url = $('#api_url').val(); // get config api url
 
-$(document).ready(function () {
+$(document).ready(function () { // document ready function 
   $('.select2').select2()
-  getAll()
+  getAll() // get list data awal efilling
   bsCustomFileInput.init();
 
   toastr.options = {
@@ -23,12 +23,11 @@ $(document).ready(function () {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   }
-console.log(parseJwt(token))
 })
 
-let token = localStorage.getItem("token");
+let token = localStorage.getItem("token"); // get token di localstorage
 
-function parseJwt(token) {
+function parseJwt(token) { // function parse token 
   let base64Url = token.split('.')[1];
   let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
@@ -38,8 +37,7 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 };
 
-//Get all list Efiling
-
+// Click menu pagination 
 $(document).on("click", ".next", function () {
   let url = $(this).find('[data-dt-href]').attr('data-dt-href')
   getAll(url)
@@ -68,6 +66,7 @@ $(document).on("click", ".pager_info", function (e) {
   return false;
 });
 
+// get data awal
 function getAll(url) {
   let url_api = ''
   if (url == null || url == undefined) {
@@ -98,8 +97,8 @@ function getAll(url) {
     },
     "initComplete": function (settings, json) {
       if (json.status == "success") {
-        list_data(json.data.data)
-        buildPagination(json.data);
+        list_data(json.data.data);
+        buildPagination(json.data); // get pagination 
       } else {
         toastr["info"](json.message)
       }
@@ -146,6 +145,7 @@ $('#search').keypress(function (event) {
   }
 });
 
+//functon get filter data 
 function filter_efiling(kode_area, filter_release, status, search) {
   let data = {
     kode_kantor: kode_area,
@@ -168,7 +168,6 @@ function filter_efiling(kode_area, filter_release, status, search) {
         $('#loading').show();
       },
       success: function (respon) {
-        // userAccess()
         $('#efilingTable1').DataTable().clear();
         $('#efilingTable1').DataTable().destroy();
         $('#loading').hide();
@@ -194,7 +193,7 @@ function filter_efiling(kode_area, filter_release, status, search) {
 
 // inner data efiling
 function list_data(respon) {
-  userAccess()
+  userAccess() // menu user access
   $('#loading').hide();
   let data = respon
   let row = ''
@@ -266,9 +265,10 @@ function list_data(respon) {
             </tr>`
   }
   document.getElementById('list_dt').innerHTML = row
-  action_Data();
+  action_Data(); // click menu list data (edit, verifikasi, view)
 }
 
+//function get menu user access
 function userAccess() {
   let data = {
     user_id: parseJwt(token).id,
