@@ -26,7 +26,7 @@
               <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
       </div>
             <div class="card-body">
-            <table id="TableReceived" class="table table-striped table-bordered table-responsive" style="width:100% text-align:center" >
+            <table id="TableReceived" class="table table-striped table-bordered" style="width:100% text-align:center" >
               <thead>
                   <tr style="text-align: center;">
                     <th>NO.AWAL</th>

@@ -253,7 +253,7 @@ class BSSModel extends CI_Model{
 		$jabatan = $this->jabatan;
 		$userId		= $this->userId;
 		$kode_cabang = $this->kode_cabang;
-		$arr_send_diri_sendiri = array('926','928','933');
+		$arr_send_diri_sendiri = array('926','928','933','938');
 
 		$this->db = $this->load->database('DB_DPM_ONLINE', true);
 		if(in_array($userId, $arr_send_diri_sendiri)) {

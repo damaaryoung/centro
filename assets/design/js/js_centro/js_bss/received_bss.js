@@ -289,18 +289,22 @@ $('#send_approval_reject').click(function () {
 
 //send approval ok
 $('#TableReceived').on('click', '.btn-ok', function () {
-  let data = {
-    id: this.getAttribute('data-id'),
-    no_awal: $(this).parents("tr").find('td.no_awal').text(),
-    no_akhir: $(this).parents("tr").find('td.no_akhir').text(),
-    nama_user_send: $(this).parents("tr").find('td.nama_user_send').text(),
-    is_migrasi: this.getAttribute('migrasi'),
-    user_id_received: this.getAttribute('user_id_received'),
-    kode_kantor_received: this.getAttribute('kode_kantor_received'),
-    appoved: this.getAttribute('appoved')
+  if (confirm("Konfirmasi,Yakin Anda ingin received BSS ini ??") == true) {
+    let data = {
+      id: this.getAttribute('data-id'),
+      no_awal: $(this).parents("tr").find('td.no_awal').text(),
+      no_akhir: $(this).parents("tr").find('td.no_akhir').text(),
+      nama_user_send: $(this).parents("tr").find('td.nama_user_send').text(),
+      is_migrasi: this.getAttribute('migrasi'),
+      user_id_received: this.getAttribute('user_id_received'),
+      kode_kantor_received: this.getAttribute('kode_kantor_received'),
+      appoved: this.getAttribute('appoved')
+    }
+    insertReceived(data)
+    // console.log(data)
+  } else {
+    return false;
   }
-  insertReceived(data)
-  // console.log(data)
 
 });
 
