@@ -525,7 +525,7 @@
                                                                     <input type="file" class="custom-file-input"
                                                                         id="jaminan_skmht" onchange='getImg(event)'>
                                                                     <label class="custom-file-label"
-                                                                        for="jaminan_skmht">Choose file SKMHT</label>
+                                                                        for="jaminan_skmht">Choose file </label>
                                                                 </div>
                                                                 <div class="row inner_list_upload"
                                                                     style="padding-top: 10px;" id="file-jaminan_skmht">
@@ -554,7 +554,7 @@
                                                                         id="jaminan_roya" dir="jaminan"
                                                                         onchange='getImg(event)'>
                                                                     <label class="custom-file-label"
-                                                                        for="jaminan_roya">Choose file Roya</label>
+                                                                        for="jaminan_roya">Choose file </label>
                                                                 </div>
                                                                 <div class="row inner_list_upload"
                                                                     style="padding-top: 10px;" id="file-jaminan_roya">
@@ -923,7 +923,7 @@
                                                                     <input type="file" class="custom-file-input"
                                                                         id="pengajuan" onchange='getImg(event)'>
                                                                     <label class="custom-file-label"
-                                                                        for="pengajuan">Choose file Foto Jaminan</label>
+                                                                        for="pengajuan">Choose file</label>
                                                                 </div>
                                                                 <div class="row inner_list_upload"
                                                                     style="padding-top: 10px;" id="file-pengajuan">
@@ -937,7 +937,7 @@
                                                                     <input type="file" class="custom-file-input"
                                                                         id="lpdk" onchange='getImg(event)'>
                                                                     <label class="custom-file-label" for="lpdk">Choose
-                                                                        file Foto Pengikatan</label>
+                                                                        file</label>
                                                                 </div>
                                                                 <div class="row inner_list_upload"
                                                                     style="padding-top: 10px;" id="file-lpdk"></div>
@@ -950,8 +950,7 @@
                                                                     <input type="file" class="custom-file-input"
                                                                         id="check_pengikatan" onchange='getImg(event)'>
                                                                     <label class="custom-file-label"
-                                                                        for="check_pengikatan">Choose file Foto
-                                                                        Domisili</label>
+                                                                        for="check_pengikatan">Choose file </label>
                                                                 </div>
                                                                 <div class="row inner_list_upload"
                                                                     style="padding-top: 10px;"
@@ -965,8 +964,7 @@
                                                                     <input type="file" class="custom-file-input"
                                                                         id="oder_pengikatan" onchange='getImg(event)'>
                                                                     <label class="custom-file-label"
-                                                                        for="oder_pengikatan">Choose file Foto
-                                                                        Usaha</label>
+                                                                        for="oder_pengikatan">Choose file </label>
                                                                 </div>
                                                                 <div class="row inner_list_upload"
                                                                     style="padding-top: 10px;"
