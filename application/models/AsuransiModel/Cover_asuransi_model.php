@@ -39,7 +39,8 @@ class Cover_asuransi_model extends CI_Model{
 					LEFT JOIN KREDIT K 
 						ON K.`NO_REKENING` = AC.`no_rekening` 
 					LEFT JOIN JAMINAN_HEADER JH 
-						ON JH.`no_rekening` = AC.`no_rekening` 
+						#ON JH.`no_rekening` = AC.`no_rekening` 
+						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
 						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
 					WHERE AC.`jenis_asuransi` = '$jenis' 
@@ -72,7 +73,8 @@ class Cover_asuransi_model extends CI_Model{
 					LEFT JOIN KREDIT K 
 						ON K.`NO_REKENING` = AC.`no_rekening` 
 					LEFT JOIN JAMINAN_HEADER JH 
-						ON JH.`no_rekening` = AC.`no_rekening` 
+						#ON JH.`no_rekening` = AC.`no_rekening` 
+						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
 						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
 					WHERE AC.`jenis_asuransi` = '$jenis'
@@ -265,7 +267,8 @@ class Cover_asuransi_model extends CI_Model{
 					LEFT JOIN KREDIT K 
 						ON K.`NO_REKENING` = AC.`no_rekening` 
 					LEFT JOIN JAMINAN_HEADER JH 
-						ON JH.`no_rekening` = AC.`no_rekening` 
+						#ON JH.`no_rekening` = AC.`no_rekening` 
+						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
 						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
 					WHERE AC.`jenis_asuransi` = '$jenis' 
