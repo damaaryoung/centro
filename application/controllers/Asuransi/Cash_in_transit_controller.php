@@ -252,7 +252,7 @@ class Cash_in_transit_controller extends CI_Controller {
 		$email = array(
 			'subyek' => 'Pengcoveran CIT',
 			'tujuan' => $modal_email_penerima,
-			'cc' => '',//'staf_tisupport@kreditmandiri.co.id, it@kreditmandiri.co.id',
+			'cc' => 'staf_tisupport@kreditmandiri.co.id, it@kreditmandiri.co.id',
 			'pesan' => $email
 			// 'attach1' => $req->file('attach1')
 		);
