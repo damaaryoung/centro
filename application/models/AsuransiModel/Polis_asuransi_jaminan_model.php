@@ -43,7 +43,7 @@ class Polis_asuransi_jaminan_model extends CI_Model{
                             ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
                         WHERE AC.`jenis_asuransi` = 'JAMINAN' 
                         AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$date'
-                        AND AC.`status_cover` = 'SUDAH';";
+                        AND AC.`status_cover` IN ('SUDAH', 'PROSES');";
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
@@ -77,7 +77,7 @@ class Polis_asuransi_jaminan_model extends CI_Model{
 						WHERE AC.`jenis_asuransi` = 'JAMINAN' 
 						AND (AC.`no_rekening` LIKE '$search%'
 							 OR N.NAMA_NASABAH LIKE '$search%')
-						AND AC.`status_cover` = 'SUDAH'
+						AND AC.`status_cover` IN ('SUDAH', 'PROSES')
 						LIMIT 30;";
         $query  = $this->db2->query($str);
         return $query->result_array();

@@ -151,7 +151,7 @@ class Cover_asuransi_model extends CI_Model{
 									AC.`rate`           = '$rate_jaminan',
 									AC.`last_update`    = NOW(),
 									AC.`last_update_by` = '$userID',
-									AC.`status_cover`   = 'SUDAH',
+									AC.`status_cover`   = 'PROSES',
 									AC.`tgl_cover`		= NOW()
 							WHERE AC.`no_rekening`  = '$rekening'
 							AND AC.`jenis_asuransi` = 'JAMINAN';");
@@ -178,7 +178,7 @@ class Cover_asuransi_model extends CI_Model{
 								AC.`root_document`  = '$root_document',
 								AC.`root_address`   = '$root_address',
 								AC.`path_file`      = '$pathFile',
-								AC.`status_cover`   = 'SUDAH',
+								AC.`status_cover`   = 'PROSES',
 								AC.`tgl_cover`		= NOW()
 							WHERE AC.`no_rekening`  = '$rekening'
 							AND AC.`jenis_asuransi` = 'JIWA';");
@@ -273,7 +273,7 @@ class Cover_asuransi_model extends CI_Model{
 						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
 					WHERE AC.`jenis_asuransi` = '$jenis' 
 						AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$date'
-						AND AC.`status_cover` = 'SUDAH';";
+						AND AC.`status_cover` IN ('PROSES','SUDAH');";
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}

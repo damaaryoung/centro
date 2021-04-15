@@ -337,7 +337,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jaminan">Premi</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jaminan" name="modal_premi_jaminan" readonly>
+                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jaminan" name="modal_premi_jaminan">
                                                   </div>
                                                   <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_rate_jaminan">Rate</label>
@@ -396,7 +396,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jiwa">Premi</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jiwa" name="modal_premi_jiwa" readonly>
+                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jiwa" name="modal_premi_jiwa">
                                                   </div>
                                                   <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_extra_premi_jiwa">Extra Premi</label>
