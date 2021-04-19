@@ -386,7 +386,8 @@ class AsetDokumenUpdateModel extends CI_Model{
 		$counter = $query->result_array();
 		$count_slik_agunan =  $counter[0]["counter"];
 								
-		$this->db2->trans_start();
+		//$this->db2->trans_start();
+        $this->db->trans_begin();
 		$this->db2->query("UPDATE jaminan_header 
 							SET tgl              = '$mainTanggal',
 								nama             = '$mainNama',
@@ -506,7 +507,16 @@ class AsetDokumenUpdateModel extends CI_Model{
 																		LIMIT 1),
 								`operasi_data`					  = 'U'
 							WHERE kode_register_agunan = '$sertAgunanID' ;");										
-		$this->db2->trans_complete();
+		
+        //$this->db2->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+                $this->db->trans_rollback();
+        }
+        else
+        {
+                $this->db->trans_commit();
+        }
 						
 	}
 
@@ -661,7 +671,8 @@ class AsetDokumenUpdateModel extends CI_Model{
 	        $counter = $query->result_array();
 	        $count_slik_agunan =  $counter[0]["counter"];
 
-			$this->db2->trans_start();
+			//$this->db2->trans_start();
+			$this->db->trans_begin();
 			$this->db2->query("UPDATE jaminan_header 
 										SET tgl          = '$mainTanggal',
 										nama             = '$mainNama',
@@ -764,7 +775,15 @@ class AsetDokumenUpdateModel extends CI_Model{
 																			LIMIT 1),
 									`operasi_data`					  = 'U'
 								WHERE kode_register_agunan = '$bpkbAgunanID' ;");
-			$this->db2->trans_complete();
+			//$this->db2->trans_complete();
+			if ($this->db->trans_status() === FALSE)
+			{
+				 $this->db->trans_rollback();
+			}
+			else
+			{
+				 $this->db->trans_commit();
+			}
 
 	}
 

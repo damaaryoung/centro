@@ -126,7 +126,8 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 	public function verifikasiHeader($idHeader,$verifHeader,$verifDokument,$varIdAgunanDokument,$idDokument){
 		
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$this->db2->trans_start();
+		//$this->db2->trans_start();
+		$this->db->trans_begin();
 		$this->db2->query("UPDATE jaminan_header 
 							SET
 								#nama = 'TES KALI INI ',
@@ -141,7 +142,15 @@ class AsetDokumenVerifikasiModel extends CI_Model{
 
 		$this->db2->query("UPDATE `jaminan_dokument` SET verifikasi='$verifDokument' WHERE id='$idDokument';"); 
 		$this->db2->query("UPDATE `kre_agunan` SET verifikasi='$verifDokument' WHERE agunan_id='$varIdAgunanDokument';");
-		$this->db2->trans_complete();
+		//$this->db2->trans_complete();
+		if ($this->db->trans_status() === FALSE)
+		{
+				$this->db->trans_rollback();
+		}
+		else
+		{
+				$this->db->trans_commit();
+		}
 						
 	}
 

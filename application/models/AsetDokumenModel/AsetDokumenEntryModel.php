@@ -373,7 +373,8 @@ class AsetDokumenEntryModel extends CI_Model{
 												$sertSlikKeterangan){
 
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$this->db2->trans_start();
+		//$this->db2->trans_start();
+		$this->db->trans_begin();
 		$this->db2->query("INSERT INTO jaminan_header (
 							id,
 							nomor,
@@ -626,7 +627,15 @@ class AsetDokumenEntryModel extends CI_Model{
 																			FROM app_kode_kantor akk
 																			WHERE akk.`kode_kantor` = '$sertKantorLokasi'
 																			LIMIT 1);");
-		$this->db2->trans_complete();
+        //$this->db2->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+                $this->db->trans_rollback();
+        }
+        else
+        {
+                $this->db->trans_commit();
+        }
 	}
 	
 	public function getCIF($mainNomorRekening){
@@ -758,7 +767,8 @@ class AsetDokumenEntryModel extends CI_Model{
 												$sertSlikKeterangan,
 												$verifikasi){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$this->db2->trans_start();
+		//$this->db2->trans_start();
+		$this->db->trans_begin();
 		$this->db2->query("INSERT INTO jaminan_header (
 							id,
 							nomor,
@@ -977,7 +987,15 @@ class AsetDokumenEntryModel extends CI_Model{
 																			WHERE akk.`kode_kantor` = '$bpkbKantorLokasi'
 																			LIMIT 1);");
 
-		$this->db2->trans_complete();
+		//$this->db2->trans_complete();
+		if ($this->db->trans_status() === FALSE)
+		{
+				$this->db->trans_rollback();
+		}
+		else
+		{
+				$this->db->trans_commit();
+		}
 
 	}
 
@@ -1092,7 +1110,8 @@ class AsetDokumenEntryModel extends CI_Model{
 										$dataStatus,
 										$agunanID){
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$this->db2->trans_start();
+		//$this->db2->trans_start();
+		$this->db->trans_begin();
 		// $this->db2->query("UPDATE  `slik_agunan` 
 		// 					SET	`operasi_data`= 'D'
 		// 					WHERE kode_register_agunan = '$agunanID' ;");
@@ -1112,11 +1131,15 @@ class AsetDokumenEntryModel extends CI_Model{
 		$this->db2->query("DELETE 
 							FROM jaminan_dokument 
 							WHERE no_reff = '$nomorRefAgunan';");
-		$this->db2->trans_complete();
-		// if ($this->db2->trans_status() === FALSE)
-		// {
-		// 		// generate an error... or use the log_message() function to log your error
-		// }
+		//$this->db2->trans_complete();
+		if ($this->db->trans_status() === FALSE)
+		{
+		  $this->db->trans_rollback();
+		}
+		else
+		{
+		  $this->db->trans_commit();
+		}
 	}
 	
 	/// searhing ///
