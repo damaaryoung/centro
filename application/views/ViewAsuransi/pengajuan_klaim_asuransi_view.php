@@ -100,9 +100,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                           <i class="fas fa-plus-circle"></i> Pengajuan Klaim Asuransi <?php if($this->session->userdata('pengajuan_klaim') == '1'){ echo "Jaminan";}else { echo "Jiwa";}?>
                                                 </button>
                                             </div>
+                                            <div class="col-sm-8">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button type="button" style="width: 150px;" class="btn btn-success btn-sm"  id="btn_refresh"><i class="fas fa-sync"></i> Refresh</button>
+                                            </div>
                                     </div>
-                                </div><br>
-
+                                </div>
                                 <div class="table-responsive">
                                     <table id="tbl_pengajuan_klaim_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
                                         <thead style="text-align: center;" class="bg-danger">
@@ -130,15 +134,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </table>
                                 </div>
                                 <br>    
-                                <div class="row">
-                                  <div class="col-md-12 mx-auto">
-                                          <div class="form-group row">
-                                              <div class="col-sm-2">
-                                                <button type="button" class="btn btn-success btn-sm"  id="btn_refresh"><i class="fas fa-sync"></i> Refresh</button>
-                                              </div>
-                                          </div>
-                                  </div>
-                                </div>
+                               
                             </div>
                             <!-- /.card-body -->
                   <!-- /.card-body -->

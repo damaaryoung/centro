@@ -217,7 +217,8 @@ class Model_cek_sertifikat extends CI_Model{
        
         //insert jaminan header dan jaminan dokument jika di agunan tanah belum ada agunan id
         if($agunan_id_get == '' || $agunan_id_get == null){
-              $this->db2->trans_start();
+              //$this->db2->trans_start();
+              $this->db->trans_begin();
               // generate agunan_id
               $str1 = "SELECT CONCAT('$kode_kantor','.',LPAD(SUBSTR(agunan_id, 4, 6) + 1, 6, '0')) AS hasil 
                                 FROM kre_agunan 
@@ -474,7 +475,15 @@ class Model_cek_sertifikat extends CI_Model{
                                                 FROM app_kode_kantor akk 
                                                 WHERE akk.`kode_kantor` = '$kode_kantor' 
                                                 LIMIT 1);");
-              $this->db2->trans_complete();
+              //$this->db2->trans_complete();
+              if ($this->db->trans_status() === FALSE)
+              {
+                      $this->db->trans_rollback();
+              }
+              else
+              {
+                      $this->db->trans_commit();
+              }
         }
 
 

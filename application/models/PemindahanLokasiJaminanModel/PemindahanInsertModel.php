@@ -147,7 +147,8 @@ class PemindahanInsertModel extends CI_Model{
         }
                
 
-		$this->db2->trans_start();
+		//$this->db2->trans_start();
+        $this->db->trans_begin();
 		$this->db2->query("INSERT INTO jaminan_pemindahan (
                                 `nomor`,
                                 `tgl`,
@@ -198,7 +199,15 @@ class PemindahanInsertModel extends CI_Model{
             }
 			
         }
-        $this->db2->trans_complete();
+        //$this->db2->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+                $this->db->trans_rollback();
+        }
+        else
+        {
+                $this->db->trans_commit();
+        }
     }
 
 
