@@ -123,7 +123,8 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                                                 $lengthParsed){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
 		
-        $this->db2->trans_start();
+        //$this->db2->trans_start();
+        $this->db->trans_begin();
         $this->db2->query("UPDATE jaminan_request_pemindahan 
                             SET `verifikasi` = '$mainVerifikasi',
                                  `ket`       = '$main_keterangan'
@@ -142,7 +143,15 @@ class Request_Jaminan_Verifikasi_Model extends CI_Model{
                                 and agunan_id = '$agunanIdDetail';"); 
 			
 		}                   
-        $this->db2->trans_complete();
+        //$this->db2->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+                $this->db->trans_rollback();
+        }
+        else
+        {
+                $this->db->trans_commit();
+        }
     }
 
     //cetak

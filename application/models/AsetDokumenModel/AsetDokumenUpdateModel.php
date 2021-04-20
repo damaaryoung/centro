@@ -377,7 +377,17 @@ class AsetDokumenUpdateModel extends CI_Model{
 											$verifikasi){
 
 		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-		$this->db2->trans_start();
+        
+		/// DI CEK TERLEBIH DAHULU JUMLAH DATA SLIK_AGUNAN TERSEBUT KARENA JIKA LEBIH DARI 1 AKAN TERJADI ERROR UPDATE	
+		$str = "SELECT COUNT(*) AS counter
+				FROM slik_agunan
+				WHERE kode_register_agunan = '$sertAgunanID';";
+		$query = $this->db2->query($str);
+		$counter = $query->result_array();
+		$count_slik_agunan =  $counter[0]["counter"];
+								
+		//$this->db2->trans_start();
+        $this->db->trans_begin();
 		$this->db2->query("UPDATE jaminan_header 
 							SET tgl              = '$mainTanggal',
 								nama             = '$mainNama',
@@ -456,7 +466,15 @@ class AsetDokumenUpdateModel extends CI_Model{
 								verifikasi                 = '$verifikasi'		
 								WHERE id = '$sertID'
 								AND agunan_id = '$sertAgunanID';");
-
+		/// CASE YANG SERING TERJADI ADALAH DI MICRO ADA INPUTAN SLIK_AGUNAN DENGAN NOMOR REKENING
+		/// AGAR TIDAK TERJADI ERROR MAKA DIHAPUS TERLEBIH DAHULU DATA INPUTAN TERSEBUT
+		if($count_slik_agunan > 1){
+			$this->db2->query("DELETE 
+							   FROM slik_agunan
+						       WHERE kode_register_agunan = '$sertAgunanID'
+							   AND `no_rekening` <> '';");
+		}
+		///END PENAMBAHAN UPDATE
 		$this->db2->query("UPDATE  `slik_agunan` 
 							SET	`flag_detail`				      = 'D',
 								`no_rekening`      				  = '$mainNomorRekening',
@@ -489,7 +507,16 @@ class AsetDokumenUpdateModel extends CI_Model{
 																		LIMIT 1),
 								`operasi_data`					  = 'U'
 							WHERE kode_register_agunan = '$sertAgunanID' ;");										
-		$this->db2->trans_complete();
+		
+        //$this->db2->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+                $this->db->trans_rollback();
+        }
+        else
+        {
+                $this->db->trans_commit();
+        }
 						
 	}
 
@@ -635,7 +662,17 @@ class AsetDokumenUpdateModel extends CI_Model{
 												$verifikasi){
 
 			$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
-			$this->db2->trans_start();
+			
+			/// DI CEK TERLEBIH DAHULU JUMLAH DATA SLIK_AGUNAN TERSEBUT KARENA JIKA LEBIH DARI 1 AKAN TERJADI ERROR UPDATE				
+			$str = "SELECT COUNT(*) AS counter
+			        FROM slik_agunan
+			        WHERE kode_register_agunan = '$bpkbAgunanID';";
+	        $query = $this->db2->query($str);
+	        $counter = $query->result_array();
+	        $count_slik_agunan =  $counter[0]["counter"];
+
+			//$this->db2->trans_start();
+			$this->db->trans_begin();
 			$this->db2->query("UPDATE jaminan_header 
 										SET tgl          = '$mainTanggal',
 										nama             = '$mainNama',
@@ -697,7 +734,15 @@ class AsetDokumenUpdateModel extends CI_Model{
 							WHERE id = '$bpkbID'
 							AND no_reff = '$bpkbNoReff';
 						");
-
+		    /// CASE YANG SERING TERJADI ADALAH DI MICRO ADA INPUTAN SLIK_AGUNAN DENGAN NOMOR REKENING
+		    /// AGAR TIDAK TERJADI ERROR MAKA DIHAPUS TERLEBIH DAHULU DATA INPUTAN TERSEBUT
+		    if($count_slik_agunan > 1){
+		    	$this->db2->query("DELETE 
+		    					   FROM slik_agunan
+		    				       WHERE kode_register_agunan = '$bpkbAgunanID'
+		    					   AND `no_rekening` <> '';");
+		    }
+		    ///END PERUBAHAN UPDATE
 			$this->db2->query("UPDATE  `slik_agunan` 
 								SET	`flag_detail`				      = 'D',
 									`no_rekening`      				  = '$mainNomorRekening',
@@ -730,7 +775,15 @@ class AsetDokumenUpdateModel extends CI_Model{
 																			LIMIT 1),
 									`operasi_data`					  = 'U'
 								WHERE kode_register_agunan = '$bpkbAgunanID' ;");
-			$this->db2->trans_complete();
+			//$this->db2->trans_complete();
+			if ($this->db->trans_status() === FALSE)
+			{
+				 $this->db->trans_rollback();
+			}
+			else
+			{
+				 $this->db->trans_commit();
+			}
 
 	}
 

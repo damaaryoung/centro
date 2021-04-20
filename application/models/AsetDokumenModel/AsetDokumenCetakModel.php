@@ -16,7 +16,7 @@ class AsetDokumenCetakModel extends CI_Model{
 						JH.alamat, 
 						JH.kelurahan, 
 						JH.kecamatan, 
-						JH.kota,  
+						JH.kota `jaminan_kota`,  
 						JH.propinsi,
 						JH.kode_pos,
 						JH.jenis_jaminan,
@@ -31,7 +31,8 @@ class AsetDokumenCetakModel extends CI_Model{
 						JH.jenis_pengurusan,
 						JH.verifikasi,
 						kk.`kode_cabang`,
-						kk.`nama_kantor`
+						kk.`nama_kantor`,
+						kk.`nama_internal` as `kota`
 					FROM jaminan_header JH,
 						`app_kode_kantor` KK
 					WHERE nomor = '$nomorAgunan'

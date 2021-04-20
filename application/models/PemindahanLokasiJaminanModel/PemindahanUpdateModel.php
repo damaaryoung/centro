@@ -132,7 +132,8 @@ class PemindahanUpdateModel extends CI_Model{
             }
         }
 		
-        $this->db2->trans_start();
+        //$this->db2->trans_start();
+        $this->db->trans_begin();
         $this->db2->query("UPDATE jaminan_pemindahan 
                             SET
                                 `kode_kantor_tujuan` = '$kode_kantor_tujuan',
@@ -175,7 +176,15 @@ class PemindahanUpdateModel extends CI_Model{
                                     AND C.`tahun` =  YEAR(NOW());");
             }
         }
-		$this->db2->trans_complete();
+		//$this->db2->trans_complete();
+        if ($this->db->trans_status() === FALSE)
+        {
+                $this->db->trans_rollback();
+        }
+        else
+        {
+                $this->db->trans_commit();
+        }
     }
 
     public function getJaminanPemindahanHeaderCetak($tblNomor){
