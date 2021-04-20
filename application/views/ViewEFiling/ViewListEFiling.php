@@ -68,16 +68,16 @@ tr.shown td.details-click {
   overflow :unset !important;
 }
 
-tr th{
-  padding-right : 17.5px !important;
-  padding-left : 17.5px !important;
-  text-align : center;
+table.dataTable.table-sm>thead>tr>th {
+    padding-right: 21px;
+    padding-left: 21px;
+    text-align : center;
 }
 </style>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  	<?php 
+  <?php 
 	  echo $navbar;
 	  echo $sidebar;
 	?>
@@ -109,7 +109,6 @@ tr th{
                 <img id="loading-image" style="index:999999;" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
               </div>
           <div class="col-12">
-          
             
             <!-- Horizontal Form -->
           <div class="card card-info">
@@ -123,12 +122,18 @@ tr th{
                     <div class="form-group row">
                       <label class="col col-form-label">Filter Area Kerja</label>
                       <div class="col">
-                        <select class="form-control select2 custom-select" id="kode_kantor" style="width: 200px;">
-                            <option value="all">ALL AREA</option>
-                            <?php foreach ($selectKodeKantor as $row) : ?>
-                            <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
-                            <?php endforeach;?>
-                        </select>
+                        <?php
+                          if($kode_kantor == '00' || $divisi_id == 'IT'){
+                        ?>
+                          <select class="form-control select2 custom-select" id="kode_kantor" style="width: 200px;">
+                              <option value="all">ALL AREA</option>
+                              <?php foreach ($selectKodeKantor as $row) : ?>
+                              <option value="<?php echo $row['kode_kantor'];?>"><?php echo $row['kode_kantor'] .' - ' .$row['nama_kantor'];?></option>
+                              <?php endforeach;?>
+                          </select>
+                        <?php }else if($kode_kantor != '00' || $divisi_id != 'IT'){
+                          echo '<input class="form-control" id="kode_kantor" style="width: 200px;" value="'.$kode_kantor.'" readonly>'; 
+                        } ?>
                       </div>
                     </div>   
                 </div>
@@ -173,26 +178,25 @@ tr th{
                   <div class="card-body">
                     <div class= "row">
                     <div class="table-responsive">
-                        <table id="efilingTable1" class="table table-striped table-bordered table-sm" style="width: 100%;" cellpadding="0" cellspacing="0">
-                          <thead style="text-aligent: center;">
-                              <th scope="col" style="padding-right: 20px !important;">No.Rekening</th>
+                        <table id="efilingTable1" class="table table-striped table-bordered table-sm">
+                            <thead style="text-aligent: center;">
+                              <th scope="col">No.Rekening</th>
                               <th scope="col">Nasabah</th>
                               <th scope="col">Area Kerja</th>
-                              <th scope="col">Tgl.Realisasi</th>
+                              <th scope="col">Tgl Realisasi</th>
                               <th scope="col">Plafon</th>
                               <th scope="col">Tenor</th>
                               <th scope="col">Baki Debet</th>
                               <th scope="col">Status Dokumen</th>
-                              <th scope="col" style="padding-left: 20px!important; padding-right: 20px !important;">Upload User</th>
+                              <th scope="col">Upload User</th>
                               <th scope="col">Verifikasi User</th>
-                              <th scope="col">Tgl.Buat</th>
-                              <th scope="col">Tgl.Update</th>
-                              <th scope="col">Tgl.Verifikasi</th>
+                              <th scope="col">Tgl Buat</th>
+                              <th scope="col">Tgl Update</th>
+                              <th scope="col">Tgl Verifikasi</th>
                               <th scope="col">Status Verifikasi</th>
-                              <th scope="col" style="padding-left: 40px!important; padding-right: 40px !important;">Action</th>
-                          </thead>
+                              <th scope="col">Action</th>
+                            </thead>
                           <tbody style="font-size: 12px; text-align: inherit;" id="list_dt">
-                            
                           </tbody>
                         </table>
                       </div>
@@ -217,11 +221,11 @@ tr th{
 <!-- REQUIRED JS SCRIPTS -->
 
 	<?php
-        echo $footer;
-        echo $ctrlbar;
-        echo $Modaldetail_efiling;
-        echo $Modalview_efiling;
-        echo $js;
+    echo $footer;
+    echo $ctrlbar;
+    echo $Modaldetail_efiling;
+    echo $Modalview_efiling;
+    echo $js;    
 	?>
  
 </body>

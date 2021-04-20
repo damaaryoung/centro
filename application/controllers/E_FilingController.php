@@ -23,7 +23,8 @@ class E_FilingController extends CI_Controller {
 		$data['Modalview_efiling'] = $this->load->view('ViewEFiling/modal_view_efiling', NULL, TRUE);
 
 		if($session != ''){
-			
+			$data['kode_kantor'] = $this->session->userdata('kd_cabang');
+			$data['divisi_id'] = $this->session->userdata('divisi_id'); 
             $data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
 			$this->load->view('ViewEFiling/ViewListEFiling.php', $data);
 		}
