@@ -104,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
 
                       <div class="table-responsive">
-                          <table id="tbl_rekap_titipan_asuransi" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                          <table id="tbl_rekap_titipan_asuransi" class="table table-striped table-bordered" style="width:150% text-align:center" >
                               <thead style="text-align: center;" class="bg-danger">
                                   <tr>
                                       <th>Tgl&nbsp;Realisasi</th>
@@ -113,23 +113,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <th>Jaminan</th>
                                       <th>Nama&nbsp;Asuransi</th>
                                       <th>Titipan&nbsp;Asuransi</th>
+                                      <th>Titipan&nbsp;Asuransi&nbsp;Tambahan</th>
                                       <th>Komisi&nbsp;Asuransi</th>
                                       <th>Premi&nbsp;Asuransi</th>
                                       <th>Sisa&nbsp;Titipan</th>
+                                      <th>Refund&nbsp;Asuransi</th>
+                                      <th>Klaim&nbsp;Asuransi</th>
                                   </tr>
                               </thead>
                               <tbody id="tbl_body_rekap_titipan">
-                                  <tr>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                  </tr>
                               </tbody>
                           </table>
                       </div>

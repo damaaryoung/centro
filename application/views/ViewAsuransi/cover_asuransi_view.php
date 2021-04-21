@@ -71,13 +71,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <input type="month" class="form-control form-control-sm" id="src_tgl_realisasi" name="src_tgl_realisasi">
                                   </div>
                                   <div class="col-sm-1">
+                                      <label style="padding-top: 5px;" class="control-label" for="src_kantor_kas_cabang">Status</label>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <select class="form-control form-control-sm select2 custom-select" id="src_status" name="src_status" onchange="get_search_status()">
+                                        <option value="BELUM">BELUM</option>
+                                        <option value="PROSES">PROSES</option>
+                                        <option value="SUDAH">SUDAH</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="src_search">Search</label>
                                   </div>
-                                  <div class="col-sm-3">
+                                  <div class="col-sm-2">
                                        <input type="text" class="form-control form-control-sm" id="src_search" name="src_search" placeholder="NO REKENING / NAMA NASABAH">
                                   </div>
                                   <div class="col-sm-2">
-                                        <button type="button" class="btn btn-success btn-sm" style="width: 250px;" id="btn_export_report_cover_asuransi"><i class="fas fa-file-export"></i> Export Report Cover Asuransi</button>
+                                        <button type="button" class="btn btn-success btn-sm" style="width: 220px;" id="btn_export_report_cover_asuransi"><i class="fas fa-file-export"></i> Export ALL Report</button>
                                   </div>
                               </div>
                       </div>
@@ -105,7 +115,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="row">
                         <div class="col-md-12 mx-auto">
                                 <div class="form-group row">
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-2">
+                                          <button type="button" class="btn btn-primary btn-sm" style="width: 220px;" id="btn_export_selected"><i class="fas fa-file-export"></i> Export Selected Data</button>
+                                    </div>
+                                    <div class="col-sm-8">
                                     </div>
                                     <div class="col-sm-2">
                                       <button type="button" style="width: 150px;" class="btn btn-success btn-sm"  id="btn_refresh"><i class="fas fa-sync"></i> Refresh</button>
@@ -114,9 +127,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                       </div>
                       <div class="table-responsive">
-                          <table id="tbl_cover_asuransi" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                          <table id="tbl_cover_asuransi" class="table table-striped table-bordered" style="width:150%" >
                               <thead style="text-align: center;" class="bg-danger">
                                   <tr>
+                                      <th></th>
                                       <th>Tgl&nbsp;Realisasi</th>
                                       <th>No&nbsp;Rekening</th>
                                       <th>Nama&nbsp;Nasabah</th>
@@ -131,19 +145,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </tr>
                               </thead>
                               <tbody id="tbl_body_cover_asuransi">
-                                  <tr>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                  </tr>
                               </tbody>
                           </table>
                       </div>

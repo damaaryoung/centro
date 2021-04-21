@@ -18,6 +18,8 @@
     var src_tgl_realisasi      = '';
     var src_search             = '';
     var periode = '';
+    var checkArray = [];
+    var lengthParsed = '';
 
     $(document).ready(function () {     
        
@@ -39,6 +41,31 @@
            no_reff_jaminan   = $(this).data("no-reff-jaminan");
            $('#loading').show();
            get_details();
+           
+    });
+    $('#tbl_body_cover_asuransi').on('click','.btn_done', function () {    
+            rekening          = $(this).data("rekening");
+            agunanid          = $(this).data("agunanid");
+            nasabahid         = $(this).data("nasabahid");
+            no_reff_asuransi  = $(this).data("no-reff-asuransi");
+            no_reff_jaminan   = $(this).data("no-reff-jaminan");
+            Swal.fire({
+               title: 'Apakah Anda Yakin Akan Merubah Status Menjadi SUDAH ?',
+               text: "Lanjutkan ?",
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               confirmButtonText: 'Lanjutkan',
+               cancelButtonText: 'Batalkan',
+               showLoaderOnConfirm: true,
+               reverseButtons: true,
+               preConfirm: function() {
+                return new Promise(function(resolve) {
+                    proses_done();
+                });
+               },
+               allowOutsideClick: false     
+            });
            
     });
 
@@ -88,6 +115,27 @@
     }); 
     $('#btn_export_report_cover_asuransi').click(function() {
         export_to_excel();
+    }); 
+    $('#btn_export_selected').click(function() {
+        checkArray = [];
+        lengthParsed = 0;
+
+        var tbl_cover_asuransi = $('#tbl_cover_asuransi').dataTable();
+        var rowcollection =  tbl_cover_asuransi.$("input:checkbox[name=check]:checked", {"page": "all"});
+        rowcollection.each(function(){
+            checkArray.push([$(this).val(),$(this).data("rekening")]);
+        });
+
+        console.log(checkArray, checkArray.length);
+        lengthParsed = checkArray.length;
+        if(lengthParsed == 0){
+            return Swal.fire({
+                icon: 'error',
+                title: 'Tidak Dapat Memproses Report!',
+                text: 'Tidak Ada Data Yang Dipilih'
+            });
+        }
+        export_selected();
     }); 
     
   
@@ -251,7 +299,7 @@
                         $('#loading-1').hide();
                         return Swal.fire({
                             icon: 'error',
-                            title: 'Gagal Get Data!',
+                            title: 'Proses Gagal!',
                             text: 'Mohon Periksa Jaringan Anda'
                         });
                     }
@@ -317,11 +365,46 @@
                 $('#loading-1').hide();
                 return Swal.fire({
                             icon: 'error',
-                            title: 'Gagal Get Data!',
+                            title: 'Proses Gagal!',
                             text: 'Mohon Periksa Jaringan Anda'
                         });
             }
         });
+   }
+
+   function proses_done(){
+        $.ajax({
+                    url : base_url + "Asuransi/Cover_asuransi_controller/proses_done",
+                    type : "POST",
+                    dataType : "json",
+                    timeout : 180000,
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+                    data:{ "rekening"             : rekening},
+
+                    success : function(response) {
+                        $('#loading-1').hide();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Sukses Ubah Status SUDAH',
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(()=> {
+                            getData();
+                        });  
+
+                        
+                    },
+                    error : function(response) {
+                        console.log('failed :' + response);
+                        $('#loading-1').hide();
+                        return Swal.fire({
+                            icon: 'error',
+                            title: 'Proses Gagal!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                        });
+                    }
+            });         
    }
 
    function search_periode(){
@@ -389,10 +472,52 @@
         });    
        
    }
+
+   function get_search_status(){
+        data = '';
+        src_status = $('#src_status').val();
+        src_tgl_realisasi = $('#src_tgl_realisasi').val();
+        $('#tbl_cover_asuransi').DataTable().clear();
+        $('#tbl_cover_asuransi').DataTable().destroy();
+        $('#loading').show(); 
+        
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/get_search_status",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "src_status" : src_status,
+                        "src_tgl_realisasi" : src_tgl_realisasi},
+
+                success : function(response) {
+                    mapping_search(response);
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Get Data!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                        });
+                }
+        });    
+       
+   }
     
    function mapping_search(response){
         for(i = 0; i < response.rekap_jaminan.length; i++ ){
-            data += `<tr>
+            data += `<tr style="text-align:center">
+                        <td><input type="checkbox" id="check" name="check" 
+                            value="${response.rekap_jaminan[i]['id']}"
+                            data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
+                                        data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
+                                        data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
+                                        data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
+                                        data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}" "></td>
                         <td>${response.rekap_jaminan[i]['TGL_REALISASI']}</td>
                         <td>${response.rekap_jaminan[i]['no_rekening']}</td>
                         <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
@@ -402,18 +527,52 @@
                         <td>${accounting.formatMoney(response.rekap_jaminan[i]['komisi_asuransi'], '', 0, ',', '.')}</td>
                         <td>${accounting.formatMoney(response.rekap_jaminan[i]['premi_asuransi'], '', 0, ',', '.')}</td>
                         <td>${accounting.formatMoney(response.rekap_jaminan[i]['sisa_titipan_asuransi'], '', 0, ',', '.')}</td>
-                        <td>${response.rekap_jaminan[i]['status_cover']}</td>
-                        <td>        
+                        <td>${response.rekap_jaminan[i]['status_cover']}</td>`;
+           
+            if(response.rekap_jaminan[i]['status_cover'] == 'BELUM'){
+                data += `<td>        
+                                <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
+                                        data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
+                                        data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
+                                        data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
+                                        data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
+                                        data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
+                                        'name="btn_proses"
+                                        data-toggle="tooltip" title="PROSES">
+                                        <i class="fa fa-pen"></i> </button>
+                            </td>
+                        </tr>`;
+            }else if(response.rekap_jaminan[i]['status_cover'] == 'PROSES'){
+                data += `<td style="width: 200px;">    
                             <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
                                     data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
                                     data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
                                     data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
                                     data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
                                     data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
-                                    'name="btn_proses">
-                                    <i class="fa fa-pen"></i> </button>
+                                    'name="btn_proses"
+                                    data-toggle="tooltip" title="PROSES">
+                                    <i class="fa fa-pen"></i> </button>    
+                            <button type="button" class="btn btn-success btn-sm btn_done" id="btn_done"
+                                    data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
+                                    data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
+                                    data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
+                                    data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
+                                    data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
+                                    'name="btn_done"
+                                    data-toggle="tooltip" title="DONE">
+                                    <i class="fa fa-check"></i> </button>
                         </td>
                     </tr>`;
+            }else{
+                data += `<td></td>
+                        </tr>`;
+            }
+
+
+            
+            
+            
         }
         $('#tbl_cover_asuransi > tbody:first').html(data);
         
@@ -466,7 +625,44 @@
                 }
         });    
    }
+   function export_selected(){
+        $('#loading').show(); 
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/export_selected",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                data:{  "checkArray" : checkArray,
+                        "lengthParsed" : lengthParsed},
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
 
+                success : function(response) {
+                    console.log(response);
+                    $('#loading').hide(); 
+                    window.location.href = response.download;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Download Report Cover Asuransi',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+   }
+
+   
 
 
 </script>
