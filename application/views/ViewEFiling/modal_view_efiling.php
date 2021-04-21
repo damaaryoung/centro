@@ -68,7 +68,7 @@
                                 </form>
                                 <div class="form-group row">
                                     <div class="col-sm-2">
-                                        <label class="control-label" style="padding-top: 5px;" for="inp_plafon">PLafon &
+                                        <label class="control-label" style="padding-top: 5px;" for="inp_plafon">Plafon &
                                             Tenor</label>
                                     </div>
                                     <div class="col-sm-2">

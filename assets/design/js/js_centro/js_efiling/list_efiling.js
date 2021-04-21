@@ -182,9 +182,25 @@ function filter_efiling(kode_area, filter_release, status, search) {
         });
       },
       error: function (jqXHR, exception) {
-        toastr["error"]("Data Tidak di Temukan")
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Data Tidak di Temukan',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        $('#efilingTable1').DataTable().clear();
+        $('#efilingTable1').DataTable().destroy();
+        $('#efilingTable1 tbody').html("");
+        var table =$('#efilingTable1').DataTable({
+          "destroy": true,
+          "scrollX": true,
+          "autoWidth": false,
+          "aaSorting": [],
+          "searching": false,
+          "searchable": false 
+        });
         $('#loading').hide();
-
       }
     })
   }
