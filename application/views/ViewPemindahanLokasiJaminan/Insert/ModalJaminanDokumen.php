@@ -16,7 +16,12 @@
       <div class="form-inline" style="padding : 10px; float: right">
                     <div class="form-group">
                       <label for="email">Search</label> &nbsp; &nbsp;
-                      <input type="text" class="form-control" name="search" id="search" placeholder="Search" onchange="serchDataJaminan()"> 
+                      <div class="input-group input-group-sm">
+                          <input type="text" class="form-control" name="search" id="search" style="width: 200px;" placeholder="Search" onchange="serchDataJaminan()"> 
+                          <span class="input-group-append">
+                            <button type="button" class="btn btn-info btn-flat"  onclick="serchDataJaminan()">Cari!</button>
+                          </span>
+                      </div> 
                          &nbsp;&nbsp;
                     </div>
       </div>
