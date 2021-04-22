@@ -385,7 +385,13 @@ class AsetDokumenUpdateModel extends CI_Model{
 		$query = $this->db2->query($str);
 		$counter = $query->result_array();
 		$count_slik_agunan =  $counter[0]["counter"];
-								
+
+        $mainNama                  = str_replace("'","\'",$mainNama);
+		$sertNamaPemilik           = str_replace("'","\'",$sertNamaPemilik);
+		$sertAtasNamaSSBBPHTB      = str_replace("'","\'",$sertAtasNamaSSBBPHTB);
+		$sertNamaPPAT	           = str_replace("'","\'",$sertNamaPPAT);
+		$sertSlikNamaPemilikAgunan = str_replace("'","\'",$sertSlikNamaPemilikAgunan);
+		$sertSlikNamaIndependen    = str_replace("'","\'",$sertSlikNamaIndependen);
 		//$this->db2->trans_start();
         $this->db->trans_begin();
 		$this->db2->query("UPDATE jaminan_header 
@@ -670,6 +676,11 @@ class AsetDokumenUpdateModel extends CI_Model{
 	        $query = $this->db2->query($str);
 	        $counter = $query->result_array();
 	        $count_slik_agunan =  $counter[0]["counter"];
+
+			$mainNama                  = str_replace("'","\'",$mainNama);
+		    $bpkbNamaPemilik           = str_replace("'","\'",$bpkbNamaPemilik);
+		    $bpkbSlikNamaPemilikAgunan = str_replace("'","\'",$bpkbSlikNamaPemilikAgunan);
+		    $bpkbSlikNamaIndependen    = str_replace("'","\'",$bpkbSlikNamaIndependen);
 
 			//$this->db2->trans_start();
 			$this->db->trans_begin();

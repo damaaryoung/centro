@@ -169,6 +169,7 @@ class Model_cek_sertifikat extends CI_Model{
         }
         
         $nama                = $result[0]["nama"];
+        $nama                = str_replace("'","\'",$nama);
         $alamat              = $result[0]["alamat"];
         $mainKota            = $result[0]["provinsi"];
         $status              = $result[0]["status"];
