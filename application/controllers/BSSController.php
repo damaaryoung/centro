@@ -124,11 +124,12 @@ class BSSController extends CI_Controller {
 		$model->area_kerja	= $this->input->post('area_kerja');
 		$model->userId = $this->session->userdata('userIdLogin'); 
 		$insertdata = $model->queryInsertBSS();
-		echo json_encode([
-			"success" => true,
-			"message" => $insertdata,
-			"data" => null
-		]);
+		print_r(json_encode([
+			"msg"=> $insertdata["msg"],
+			"success" => $insertdata["success"]
+			]
+		));
+		die();
 	}
 
 	public function get_received_bss(){

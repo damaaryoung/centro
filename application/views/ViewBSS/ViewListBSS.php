@@ -16,6 +16,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
+
 </head>
 <style>
 .kolektorClick:hover td{
@@ -261,7 +263,7 @@ tr.shown td.details-click {
 
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/select2.full.min.js"></script>
-
+<script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/list_bss.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/received_bss.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/js_bss/migrasi_bss.js"></script>

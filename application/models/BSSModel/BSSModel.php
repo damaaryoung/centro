@@ -71,13 +71,16 @@ class BSSModel extends CI_Model{
 		$query = $this->db->query($str);
 		$row = $query->result_array();
 		if($row[0]['total'] > 0){
-			$message  = "Maaf No Range BSS Sudah ada dalam Database, Pastikan No.BSS Yang Anda Kirim Belum tersedia";
+			$message  = array(
+				"success" => false,
+				"msg"=>"Maaf No Range BSS Sudah ada dalam Database, Pastikan No.BSS Yang Anda Kirim Belum tersedia");
 		}else{
 			
 			$str2  = "INSERT INTO bss_notif(kartu_number_awal, kartu_number_akhir, kode_kantor_received,user_id, keterangan)
 						VALUES('$kartu_number_awal','$kartu_number_akhir','$kode_kantor_received', $userId, NULL)";
 			$this->db->query($str2);
-			$message  = "Input data success";
+			$message  = array("success"=> true,
+			"msg"=>"Input data success");
 		}
 		return $message;
 	}
@@ -207,7 +210,7 @@ class BSSModel extends CI_Model{
 							$this->db->query($result);
 						}
 					}
-				
+					
 			}else if($appoved == 'ApprovedToKolektor'){ // Approval dari HEAD OP ke Kolektor
 				$this->db->query("SELECT IFNULL(MAX(bundle_id),0) + 1 INTO @bundle_id FROM bss");
 				for ($kartu_number_awal;$kartu_number_awal <= $kartu_number_akhir; $kartu_number_awal++){
@@ -231,7 +234,7 @@ class BSSModel extends CI_Model{
 		if($appoved == 'Approved'){
 			$str_notif = "UPDATE bss_notif SET
 					tgl_approved=NOW(),
-					status=' 1',keterangan= NULL	
+					status='1',keterangan= NULL	
 					WHERE id=$id ";
 		}elseif ($appoved == 'ApprovedToKolektor') {
 			$str_notif = "UPDATE bss_notif SET
@@ -245,7 +248,6 @@ class BSSModel extends CI_Model{
 					WHERE id= $id ";
 		}
 		return $this->db->query($str_notif);
-			
 		return $message  = "Update status data success";	
 	}
 

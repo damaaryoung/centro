@@ -267,12 +267,22 @@ function send_bss_db(kartu_number_awal, kartu_number_akhir, area_kerja) {
       $('#loading-1').show();
     },
     success: function (respon) {
-      toastr["success"](respon.message)
-      setTimeout(function () {
-        $('#form_send_bss').modal('hide');
-      }, 1000);
-      window.location = base_url + 'bss';
-      $('#loading-1').hide();
+      if(respon.success == false){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: respon.msg,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        $('#loading-1').hide();
+      }else{
+        toastr["success"](respon.msg)
+        $('#loading-1').hide();
+        setTimeout(function () {
+          $('#form_send_bss').modal('hide');
+        }, 1000);
+      }
     }
   });
 }
