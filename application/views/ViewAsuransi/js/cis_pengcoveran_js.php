@@ -40,12 +40,17 @@ $(document).ready(function () {
 $('#btn_refresh').click(function () {
     getData();
 });
+
 $('#btn_email').click(function () {
     checkArray = [];
     lengthParsed = 0;
-    $("input:checkbox[name=check]:checked").each(function(){
+
+    var tbl_cis = $('#tbl_cis').dataTable();
+    var rowcollection =  tbl_cis.$("input:checkbox[name=check]:checked", {"page": "all"});
+    rowcollection.each(function(){
         checkArray.push([$(this).val(),$(this).data("asuransi"),$(this).data("no_trans")]);
     });
+
     console.log(checkArray, checkArray.length);
     lengthParsed = checkArray.length;
     if(lengthParsed == 0){
@@ -73,9 +78,6 @@ $('#btn_email').click(function () {
     // }
     
     $('#modal_send_mail').modal('show');
-
-    
-   //   proses_email_cis(checkArray,lengthParsed);
 });
 $('#send_mail').click(function () {
     modal_email_penerima = $("#modal_email_penerima").val();
@@ -253,7 +255,6 @@ function proses_email_cis(checkArray,lengthParsed,modal_email_penerima){
             }
     });    
 }
-
 function mapping(response){
      for(i = 0; i < response.data_cis.length; i++ ){
          data += `<tr style="text-align:center">
@@ -297,12 +298,6 @@ function mapping(response){
          } );
      } );
      $('#loading').hide(); 
-}
-function toggle(source) {
-  checkboxes = document.getElementsByName('check');
-  for(var i=0, n=checkboxes.length;i<n;i++) {
-    checkboxes[i].checked = source.checked;
-  }
 }
 
 function get_details(){
@@ -461,5 +456,12 @@ function get_data_search(){
            }
    });    
 }
-
+function toggle(source) {
+    
+    var tbl_cis = $('#tbl_cis').dataTable();
+    var rowcollection =  tbl_cis.$("input:checkbox[name=check]", {"page": "all"});
+    for(var i=0, n=rowcollection.length;i<n;i++) {
+        rowcollection[i].checked = source.checked;
+    }
+}
 </script>
