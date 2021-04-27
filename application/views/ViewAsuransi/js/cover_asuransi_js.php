@@ -524,14 +524,18 @@
                         <td>${response.rekap_jaminan[i]['jenis_jaminan']}</td>
                         <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
                         <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi2'], '', 0, ',', '.')}</td>
                         <td>${accounting.formatMoney(response.rekap_jaminan[i]['komisi_asuransi'], '', 0, ',', '.')}</td>
                         <td>${accounting.formatMoney(response.rekap_jaminan[i]['premi_asuransi'], '', 0, ',', '.')}</td>
                         <td>${accounting.formatMoney(response.rekap_jaminan[i]['sisa_titipan_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['pengembalian_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['refund_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['klaim_asuransi'], '', 0, ',', '.')}</td>
                         <td>${response.rekap_jaminan[i]['status_cover']}</td>`;
            
             if(response.rekap_jaminan[i]['status_cover'] == 'BELUM'){
                 data += `<td>        
-                                <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
+                                <button type="button" class="btn btn-primary btn-sm py-0 btn_proses" id="btn_proses" style="font-size: 1  em;"
                                         data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
                                         data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
                                         data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
@@ -544,7 +548,7 @@
                         </tr>`;
             }else if(response.rekap_jaminan[i]['status_cover'] == 'PROSES'){
                 data += `<td style="width: 200px;">    
-                            <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
+                            <button type="button" class="btn btn-primary btn-sm py-0 btn_proses" id="btn_proses" style="font-size: 1  em;"
                                     data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
                                     data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
                                     data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
@@ -553,7 +557,7 @@
                                     'name="btn_proses"
                                     data-toggle="tooltip" title="PROSES">
                                     <i class="fa fa-pen"></i> </button>    
-                            <button type="button" class="btn btn-success btn-sm btn_done" id="btn_done"
+                            <button type="button" class="btn btn-success btn-sm py-0 btn_done" id="btn_done" style="font-size: 1  em;"
                                     data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
                                     data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
                                     data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  

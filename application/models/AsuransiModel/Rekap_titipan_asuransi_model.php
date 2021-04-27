@@ -33,7 +33,8 @@ class Rekap_titipan_asuransi_model extends CI_Model{
 						AC.`sisa_titipan_asuransi`,
 						AC.`titipan_asuransi2`,
 						AC.`refund_asuransi`,
-						AC.`klaim_asuransi`
+						AC.`klaim_asuransi`,
+						AC.`pengembalian_asuransi`
 					FROM
 						asuransi_cover AC 
 					LEFT JOIN NASABAH N 
@@ -66,10 +67,11 @@ class Rekap_titipan_asuransi_model extends CI_Model{
 							AC.`titipan_asuransi`,
 							AC.`komisi_asuransi`,
 							AC.`premi_asuransi`,
-							AC.`sisa_titipan_asuransi`
+							AC.`sisa_titipan_asuransi`,
 						    AC.`titipan_asuransi2`,
 						    AC.`refund_asuransi`,
-						    AC.`klaim_asuransi`
+						    AC.`klaim_asuransi`,
+							AC.`pengembalian_asuransi`
 						FROM
 							asuransi_cover AC 
 						LEFT JOIN NASABAH N 

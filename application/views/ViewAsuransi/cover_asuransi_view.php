@@ -127,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                       </div>
                       <div class="table-responsive">
-                          <table id="tbl_cover_asuransi" class="table table-striped table-bordered" style="width:150%" >
+                          <table id="tbl_cover_asuransi" class="table table-striped table-bordered" style="width:200%" >
                               <thead style="text-align: center;" class="bg-danger">
                                   <tr>
                                       <th></th>
@@ -137,9 +137,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <th>Jaminan</th>
                                       <th>Nama&nbsp;Asuransi</th>
                                       <th>Titipan&nbsp;Asuransi</th>
+                                      <th>Titipan&nbsp;Asuransi&nbsp;Tambahan</th>
                                       <th>Komisi&nbsp;Asuransi</th>
                                       <th>Premi&nbsp;Asuransi</th>
                                       <th>Sisa&nbsp;Titipan</th>
+                                      <th>Pengembalian&nbsp;Asuransi</th>
+                                      <th>Refund&nbsp;Asuransi</th>
+                                      <th>Klaim&nbsp;Asuransi</th>
                                       <th>Cover&nbsp;Asuransi</th>
                                       <th>Action</th>
                                   </tr>
