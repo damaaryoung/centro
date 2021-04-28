@@ -118,7 +118,11 @@ class Polis_asuransi_jiwa_model extends CI_Model{
                         AC.`status_endorsement`,
 						CASE WHEN AC.`no_polis` IS NULL THEN ''
                                 ELSE AC.`no_polis` 
-                                END AS `no_polis`
+                                END AS `no_polis`,
+						AC.`root_document`,
+                        AC.`root_address`,
+                        AC.`path_file`,
+                        AC.`file_name`
 					FROM
 						ASURANSI_COVER AC 
 					LEFT JOIN NASABAH N 

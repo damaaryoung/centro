@@ -12,7 +12,7 @@ class Cover_asuransi_controller extends CI_Controller {
     public function view_cover_jaminan(){
 		$this->session->unset_userdata('menu_cover_asuransi');
         $session         = $this->session->userdata('nama');
-        $kode_kantor     = $this->session->userdata('kd_cabang');
+        $data['kode_kantor']     = $this->session->userdata('kd_cabang');
 		$data['js']      = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css']     = $this->load->view('includes/css.php', NULL, TRUE);
 		$data['navbar']  = $this->load->view('templates/navbar.php', NULL, TRUE);
@@ -34,7 +34,7 @@ class Cover_asuransi_controller extends CI_Controller {
 	public function view_cover_jiwa(){
 		$this->session->unset_userdata('menu_cover_asuransi');
         $session         = $this->session->userdata('nama');
-        $kode_kantor     = $this->session->userdata('kd_cabang');
+        $data['kode_kantor']     = $this->session->userdata('kd_cabang');
 		$data['js']      = $this->load->view('includes/js.php', NULL, TRUE);
 		$data['css']     = $this->load->view('includes/css.php', NULL, TRUE);
 		$data['navbar']  = $this->load->view('templates/navbar.php', NULL, TRUE);
@@ -130,65 +130,19 @@ class Cover_asuransi_controller extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function cover_jiwa_process(){
-		$files	= $this->input->post('files');
 		$rekening			    = $this->input->post('rekening');
 		$modal_rate_jiwa	    = $this->input->post('modal_rate_jiwa');
 		$modal_premi_jiwa	    = $this->input->post('modal_premi_jiwa');
 		$modal_extra_premi_jiwa	= $this->input->post('modal_extra_premi_jiwa');
 		$userID                = $this->session->userdata('nik');
-		if(isset($_FILES["files"])){
-			
-			$fileName 	= $_FILES["files"]["name"];
-			$tmpName  	= $_FILES["files"]["tmp_name"];
-			$error 		= $_FILES["files"]["error"];
-			// $fileName   	= str_replace(", ","-",str_replace(",","-",$fileName));
-			// $fileName   	= str_replace("&","-",$fileName);
-			// $fileName       = str_replace('(','-',$fileName);
-			// $fileName   	= str_replace(')','',$fileName);
-
-			$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
-			$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
-
-			if (!file_exists("$root_document/public_centro")){
-				mkdir("$root_document/public_centro");
-			} 
-				
-			if (!file_exists("$root_document/public_centro/$rekening")) {
-				mkdir("$root_document/public_centro/$rekening");
-			}
-			if (!file_exists("$root_document/public_centro/$rekening/asuransi_jiwa")) {
-				mkdir("$root_document/public_centro/$rekening/asuransi_jiwa");
-			}
-
- 
-			$config['upload_path']   = "$root_document/public_centro/$rekening/asuransi_jiwa";
-			$config['allowed_types'] = "*";
-			$config['overwrite']	 = false;
-			$config['file_name'] = $rekening;
-
-			$this->load->library('upload', $config);
-			if(!$this->upload->do_upload('files') ){
-				echo $this->upload->display_errors();
-			} else{
-				$data = $this->upload->data();
-				$namafileUpload = $data["file_name"];
-				$pathFile = "public_centro/$rekening/asuransi_jiwa/$namafileUpload";
-				$data_details = $this->Cover_asuransi_model->cover_jiwa($rekening,
+		$data_details = $this->Cover_asuransi_model->cover_jiwa($rekening,
 																			$userID,
 																			$modal_rate_jiwa,
 																			$modal_premi_jiwa,
-																			$modal_extra_premi_jiwa,
-																			$root_document,
-																			$root_address,
-																			$pathFile
+																			$modal_extra_premi_jiwa
 																		);
-				echo json_encode([
-					"success" => true,
-					"message" => "",
-					"data" => $data
-				]);
-			}
-		}
+		$data['data_details']       = $data_details;
+		echo json_encode($data);
 	}
 	public function proses_done(){
 		$rekening              = $this->input->post('rekening');
@@ -457,6 +411,110 @@ class Cover_asuransi_controller extends CI_Controller {
 		$data['download'] = $root_address."public_centro/report_cover/".$filename;
 		echo json_encode($data);
 
+	}
+
+	public function proses_upload(){
+		$files	             = $this->input->post('files');
+		$rekening            = $this->input->post('up_rek');
+		$fileUploadsLength	 = $this->input->post('fileUploadsLength');
+		$menu                = $this->session->userdata('menu_cover_asuransi');
+		$userID              = $this->session->userdata('nik');
+		$parsedArray =  explode(",",$this->input->post('fileUploads'));
+		$fileUploads = array();
+		
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}			
+		if($fileUploadsLength > 0){
+			for($i = 0; $i < $fileUploadsLength; $i++){
+				array_push($fileUploads, $parsedArray[$i]);
+			}
+		}
+
+		
+		if(isset($_FILES["files"])){
+			
+			$fileName 	= $_FILES["files"]["name"];
+			$tmpName  	= $_FILES["files"]["tmp_name"];
+			$error 		= $_FILES["files"]["error"];
+
+			$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
+			$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
+
+			if (!file_exists("$root_document/public_centro")){
+				mkdir("$root_document/public_centro");
+			} 
+				
+			if (!file_exists("$root_document/public_centro/$rekening")) {
+				mkdir("$root_document/public_centro/$rekening");
+			}
+			if (!file_exists("$root_document/public_centro/$rekening/asuransi_jiwa")) {
+				mkdir("$root_document/public_centro/$rekening/asuransi_jiwa");
+			}
+
+ 
+			$config['upload_path']   = "$root_document/public_centro/$rekening/asuransi_jiwa";
+			$config['allowed_types'] = "*";
+			$config['overwrite']	 = false;
+			$config['file_name'] = $fileName;
+
+			$this->load->library('upload', $config);
+			if(!$this->upload->do_upload('files') ){
+				echo $this->upload->display_errors();
+			} else{
+				$data = $this->upload->data();
+				$namafileUpload = $data["file_name"];
+				$pathFile = "/public_centro/$rekening/asuransi_jiwa/";
+				array_push($fileUploads, $namafileUpload);
+				$files_upload = json_encode($fileUploads);
+
+
+				$data_details = $this->Cover_asuransi_model->upload_file($rekening,
+																		  $userID,
+																		  $fileUploadsLength,
+																		  $jenis,
+																		  $root_document,
+																		  $root_address,
+																		  $pathFile,
+																		  $files_upload);															
+				echo json_encode([
+					"success" => true,
+					"message" => "",
+					"data" => $data
+				]);
+			}
+		}
+	}
+	public function proses_delete_upload(){
+		$menu                = $this->session->userdata('menu_cover_asuransi');
+		$userID              = $this->session->userdata('nik');
+		$up_rek		         = $this->input->post('up_rek');
+		$fileUploadsLength	 = $this->input->post('fileUploadsLength');
+		$parsedArray = $this->input->post('fileUploads');
+		$fileUploads = array();
+		
+		
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}			
+		if($fileUploadsLength > 0){
+			for($i = 0; $i < $fileUploadsLength; $i++){
+				array_push($fileUploads, $parsedArray[$i]);
+			}
+		}
+		$files_upload = json_encode($fileUploads);
+
+		$delete_process = $this->Cover_asuransi_model->delete_upload_file($up_rek,$jenis,$files_upload);
+
+		echo json_encode($delete_process);
 	}
 
 }

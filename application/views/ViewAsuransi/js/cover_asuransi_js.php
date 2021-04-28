@@ -1,6 +1,7 @@
 <script>
     var menu_kode              = <?php echo $this->session->userdata('menu_cover_asuransi');?>;
     var base_url               = $('#base_url').val(); 
+    var kode_kantor            = $('#kode_kantor').val(); 
     var data                   = '';
     var get_data_url           = '';
     var rekening               = '';
@@ -20,6 +21,16 @@
     var periode = '';
     var checkArray = [];
     var lengthParsed = '';
+
+    var up_rek = '';
+    var up_polis = '';
+    var fileUploads = [];
+    var root_document = '';
+    var root_address = '';
+    var path_file = '';
+    var file_name = '';
+    var parsedArray = [];
+    var fileUploadsLength = '';
 
     $(document).ready(function () {     
        
@@ -49,6 +60,14 @@
             nasabahid         = $(this).data("nasabahid");
             no_reff_asuransi  = $(this).data("no-reff-asuransi");
             no_reff_jaminan   = $(this).data("no-reff-jaminan");
+            console.log(kode_kantor);
+            if(kode_kantor != '00'){
+                return Swal.fire({
+                            icon: 'error',
+                            title: 'Anda Tidak Memiliki Akses!',
+                            text: 'Mohon Hubungi Team Asuransi, Atau Team IT!'
+                });
+            }
             Swal.fire({
                title: 'Apakah Anda Yakin Akan Merubah Status Menjadi SUDAH ?',
                text: "Lanjutkan ?",
@@ -247,6 +266,43 @@
                             $('#modal_rate_jiwa').val(response.data_details[0]['rate']); 
                             $('#modal_premi_jiwa').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.')); 
                             $('#modal_selisih_jiwa').val(0); 
+                            
+                            fileUploads = [];
+                            uploads     = '';
+                            root_document = response.data_details[0]['root_document'];
+                            root_address  = response.data_details[0]['root_address'];
+                            path_file     = response.data_details[0]['path_file'];
+                            file_name     = JSON.parse(response.data_details[0]['file_name']);
+                    
+                            uploads += `<div class="col-sm-2">
+                                            <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment: </label>
+                                        </div>`;
+                            if(file_name == null){
+                                fileUploads = [];
+                            }else if(file_name == ''){
+                                fileUploads = [];
+                            }else{
+                                fileUploads.push(file_name);
+                               // loop_view_file(fileUploads,uploads);
+                                for(i = 0; i < fileUploads[0].length; i++ ){
+                                    uploads += `<div class="col-sm-8" style="padding-top: 5px;">
+                                                    <label  class="control-label">
+                                                      <a href="${root_address+path_file+fileUploads[0][i]}" id="attachment_jaminan" target="_blank">${fileUploads[0][i]}</a>
+                                                    </label>
+                                                    <button type="button" class="btn btn-light btn-sm control-label btn_del_file"
+                                                            data-file-name="${fileUploads[0][i]}" >
+                                                                            <i class="far fa-trash-alt danger" style="color:red"></i> 
+                                                                            
+                                                    </button>
+                                                    
+                                                </div>`;
+                                }
+                            }
+                            
+                            $('#file_uploads_jiwa').html(uploads);
+                            document.getElementById("file_uploads_jiwa").style.display = "block";
+
+
                         }
 
 
@@ -316,24 +372,14 @@
             modal_extra_premi_jiwa = '0';
         }
 
-        if($('#modal_file_spa_spajk_jiwa')[0].files[0] == null){
-            return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Anda Belum Memilih File SPA/SPAJK Untuk Di Upload!'
-            });
-        }
+        
 
         let fd = new FormData();
-        let files = $('#modal_file_spa_spajk_jiwa')[0].files[0];
-
-        fd.append('files',files);
         fd.append('rekening',rekening);
         fd.append('modal_rate_jiwa',modal_rate_jiwa);
         fd.append('modal_premi_jiwa',modal_premi_jiwa);
         fd.append('modal_extra_premi_jiwa',modal_extra_premi_jiwa);
        
-        console.log(files);
         $('#loading-1').show();
         $.ajax({
             url: base_url + "Asuransi/Cover_asuransi_controller/cover_jiwa_process",
@@ -556,7 +602,7 @@
                                     data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
                                     'name="btn_proses"
                                     data-toggle="tooltip" title="PROSES">
-                                    <i class="fa fa-pen"></i> </button>    
+                                    <i class="fa fa-pen"></i> </button>   
                             <button type="button" class="btn btn-success btn-sm py-0 btn_done" id="btn_done" style="font-size: 1  em;"
                                     data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
                                     data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
@@ -665,6 +711,127 @@
                 }
         });    
    }
+
+    $('#btn_upload_jiwa').click(function(event) {
+        prosees_upload();
+    });
+    $('#file_uploads_jiwa').on('click','.btn_del_file', function () { 
+        del_name      = $(this).data("file-name");
+        for(i = 0; i < fileUploads[0].length; i++ ){
+            var del_compare = fileUploads[0][i].toString();
+            if(del_compare == del_name){
+                fileUploads[0].splice(i, 1);
+            }
+        }
+        proses_delete_upload();
+    });
+
+    function prosees_upload(){
+        
+        up_rek    = $('#modal_nomor_rekening').val();
+        var files = $('#modal_upload_jiwa')[0].files[0];
+
+        if(fileUploads.length > 0){
+            fileUploadsLength = fileUploads[0].length;
+        }else{
+            fileUploadsLength = 0;
+        }
+
+        console.log(fileUploads);
+      
+        var fd_up = new FormData();
+        fd_up.append('files',files);
+        fd_up.append('up_rek',up_rek);
+        fd_up.append('fileUploads',fileUploads);
+        fd_up.append('fileUploadsLength',fileUploadsLength);
+        $('#loading-1').show();
+        
+        $.ajax({
+            url: base_url + "Asuransi/Cover_asuransi_controller/proses_upload",
+            type:"POST",
+            timeout : 240000,
+            data:fd_up,
+            processData:false,
+            contentType:false,
+            cache:false,  
+            dataType: 'json',
+            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+            success : function(response) {
+                console.log(response);                    
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Upload File Attachment',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(()=> {
+                        $('#loading-1').hide();
+                        get_details();
+                    });  
+                    
+            },
+            error : function(response) {
+                console.log(response);
+                $('#loading-1').hide();
+                get_details();
+                return Swal.fire({
+                            icon: 'error',
+                            title: 'Proses Gagal!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                });
+            }
+        });
+    }
+
+    function proses_delete_upload(){
+        up_rek    = $('#modal_nomor_rekening').val();
+
+        if(fileUploads.length > 0){
+            fileUploadsLength = fileUploads[0].length;
+        }else{
+            fileUploadsLength = 0;
+        }
+        $('#loading-1').show();
+
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/proses_delete_upload",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "up_rek"            : up_rek,
+                        "fileUploads"       : fileUploads[0],
+                        "fileUploadsLength" : fileUploadsLength
+                    },
+                success : function(response) {
+                    console.log(response);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'File Berhasil Dihapus',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(()=> {
+                        $('#loading-1').hide();
+                        get_details();
+                    });  
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading-1').hide();
+                    get_details();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Proses Gagal',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                    
+                }
+        });   
+    }
+
 
    
 

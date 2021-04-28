@@ -19,6 +19,15 @@
     var src_search             = '';
     var modal_status_endorsement = '';
 
+
+    var fileUploads = [];
+    var root_document = '';
+    var root_address = '';
+    var path_file = '';
+    var file_name = '';
+    var parsedArray = [];
+    var fileUploadsLength = '';
+
     var root_server    = <?php $_SERVER["DOCUMENT_ROOT"]; ?>
 
     $(document).ready(function () {     
@@ -143,6 +152,35 @@
                         }else{
                             document.getElementById("modal_status_endorsement").checked = false;
                         }
+
+                        fileUploads = [];
+                        uploads     = '';
+                        root_document = response.data_details[0]['root_document'];
+                        root_address  = response.data_details[0]['root_address'];
+                        path_file     = response.data_details[0]['path_file'];
+                        file_name     = JSON.parse(response.data_details[0]['file_name']);
+                    
+                        uploads += `<div class="col-sm-3">
+                                        <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment Cover Asuransi: </label>
+                                    </div>`;
+                        if(file_name == null){
+                            fileUploads = [];
+                        }else if(file_name == ''){
+                            fileUploads = [];
+                        }else{
+                            fileUploads.push(file_name);
+                           // loop_view_file(fileUploads,uploads);
+                            for(i = 0; i < fileUploads[0].length; i++ ){
+                                uploads += `<div class="col-sm-8" style="padding-top: 5px;">
+                                                <label  class="control-label">
+                                                  <a href="${root_address+path_file+fileUploads[0][i]}" id="attachment_jaminan" target="_blank">${fileUploads[0][i]}</a>
+                                                </label>
+                                            </div>`;
+                            }
+                        }
+                            
+                            $('#file_uploads_jiwa').html(uploads);
+                            document.getElementById("file_uploads_jiwa").style.display = "block";
                         
                         
                         $('#loading-1').hide();
@@ -290,7 +328,6 @@
                         <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
                         <td>${endorse}</td>
                         <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
-                        <td><a href="${response.rekap_jaminan[i]['root_address']}${response.rekap_jaminan[i]['path_file']}" target="_blank">SPA/SPAJK</a></td>
                         <td>        
                             <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
                                     data-rekening="${response.rekap_jaminan[i]['no_rekening']}"

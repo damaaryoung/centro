@@ -117,13 +117,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <th>Nama&nbsp;Nasabah</th>
                                       <th>Endorsement</th>
                                       <th>Nama&nbsp;Asuransi</th>
-                                      <th>File</th>
                                       <th>Action</th>
                                   </tr>
                               </thead>
                               <tbody id="tbl_body_polis_asuransi_jiwa">
                                   <tr>
-                                      <td></td>
                                       <td></td>
                                       <td></td>
                                       <td></td>
@@ -264,6 +262,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                   <div class="col-sm-4">
                                                         <input type="text" class="form-control form-control-sm" id="modal_rate" name="modal_rate" disabled>
                                                   </div>
+                                  </div>
+                                  <div class="form-group row" id="file_uploads_jiwa">
                                   </div>
                                   <div class="form-group row">
                                                   <div class="col-sm-2">

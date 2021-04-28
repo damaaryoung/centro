@@ -411,7 +411,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <input type="checkbox" class="form-control form-control-sm" id="modal_extra_premi_jiwa" name="modal_extra_premi_jiwa">
                                                   </div>
                                   </div>
-                                  <div class="form-group row">
+                                  <!-- <div class="form-group row">
                                                   <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_file_spa_spajk_jiwa">File SPA/SPAJK</label>
                                                   </div>
@@ -422,6 +422,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         </div>
                                                         
                                                   </div>
+                                  </div> -->
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_upload_jiwa">Attachment</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                      <div class="custom-file">
+                                                        <input type="file" class="custom-file-input form-control form-control-sm" id="modal_upload_jiwa">
+                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                      </div>
+                                                    </div>
+                                                  </div>  
+                                                  <div class="col-sm-4" style="padding-top: 5px;">
+                                                        <button type="button" class="btn btn-success btn-sm control-label" 
+                                                                style=" width: 150px;" id="btn_upload_jiwa">
+                                                                  <i class="fas fa-upload"></i> UPLOAD
+                                                        </button>
+                                                  </div>                                                  
+                                  </div>
+                                  <div class="form-group row" id="file_uploads_jiwa">
                                   </div>
                               </div>
                           </div>
@@ -448,6 +469,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- End Data Tables-->
         <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
+        <input type="hidden" class="form-control" id="kode_kantor" name="kode_kantor" value = "<?php echo $kode_kantor; ?>">
 
     </section>
     <!-- /.content -->

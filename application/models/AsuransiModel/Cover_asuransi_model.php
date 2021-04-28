@@ -162,7 +162,11 @@ class Cover_asuransi_model extends CI_Model{
 						K.`nilai_asuransi_jiwa`,
 						AC.`rate`,
 						AC.`premi_asuransi`,
-						AC.`titipan_asuransi` 
+						AC.`titipan_asuransi`,
+						AC.`root_document`,
+                        AC.`root_address`,
+                        AC.`path_file`,
+                        AC.`file_name`
 					FROM
 						ASURANSI_COVER AC 
 					LEFT JOIN NASABAH N 
@@ -213,10 +217,7 @@ class Cover_asuransi_model extends CI_Model{
 								$userID,
 								$modal_rate_jiwa,
 								$modal_premi_jiwa,
-								$modal_extra_premi_jiwa,
-								$root_document,
-								$root_address,
-								$pathFile){
+								$modal_extra_premi_jiwa){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		
 		$this->db2->trans_start();
@@ -226,9 +227,6 @@ class Cover_asuransi_model extends CI_Model{
 								AC.`last_update`    = NOW(),
 								AC.`last_update_by` = '$userID',
 								AC.`extra_premi`	= '$modal_extra_premi_jiwa',
-								AC.`root_document`  = '$root_document',
-								AC.`root_address`   = '$root_address',
-								AC.`path_file`      = '$pathFile',
 								AC.`status_cover`   = 'PROSES',
 								AC.`tgl_cover`		= NOW()
 							WHERE AC.`no_rekening`  = '$rekening'
@@ -402,6 +400,41 @@ class Cover_asuransi_model extends CI_Model{
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
+	public function upload_file($rekening,
+	                            $userID,
+	                            $fileUploadsLength,
+	                            $jenis,
+	                            $root_document,
+	                            $root_address,
+	                            $pathFile,
+	                            $files_upload){
+        $this->db2 = $this->load->database('DB_CENTRO', true);
+
+		
+        $this->db2->trans_start();
+       
+        $this->db2->query("UPDATE asuransi_cover AC
+                          SET AC.`root_document`  = '$root_document', 
+						      AC.`root_address`   = '$root_address',
+						      AC.`path_file`      = '$pathFile',
+						      AC.`file_name`      = '$files_upload'
+                          WHERE AC.`no_rekening`  = '$rekening'
+                          AND AC.`jenis_asuransi` = '$jenis';");
+       
+        
+        $this->db2->trans_complete();
+        return 'sukses';
+    }
+    public function delete_upload_file($up_rek,$jenis,$files_upload){
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+          $this->db2->trans_start();
+          $this->db2->query("UPDATE asuransi_cover AC
+                              SET AC.`file_name` = '$files_upload'
+                              WHERE AC.`no_rekening` = '$up_rek'
+                              AND AC.`jenis_asuransi` = '$jenis';");
+          $this->db2->trans_complete();
+          return 'sukses';
+    } 
 
 }
 
