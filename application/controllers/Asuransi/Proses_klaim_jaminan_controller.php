@@ -86,6 +86,9 @@ class Proses_klaim_jaminan_controller extends CI_Controller {
         $ket_return = $this->input->post('ket_return');
         $status = '1';
         $userID             = $this->session->userdata('nik');
+		$pic = $this->session->userdata('nama') . " (" . $userID . ")";
+
+		$ket_return = $ket_return . " - PIC : " . $pic;
 
 		$result  = $this->Proses_klaim_asuransi_model->proses_return($rek_update,$no_transaksi,$jenis_asuransi,$status,$userID,$ket_return);
 		$data['result'] = $result;
@@ -111,10 +114,24 @@ class Proses_klaim_jaminan_controller extends CI_Controller {
         $no_transaksi         = $this->input->post('no_transaksi');
 		$modal_email_penerima = $this->input->post('modal_email_penerima');
         $userID               = $this->session->userdata('nik');
+		$jenis                = 'JAMINAN';
+		$file_attach          = [];
         
         $data['nama_nasabah']  = $nama_nasabah_email;
         $data['no_polis']      = $no_polis_email;
+		$data['rek_update']    = $rek_update;
         $data['tgl_klaim']     = $tgl_klaim;
+
+		$get_attachment = $this->Proses_klaim_asuransi_model->get_attachment($rek_update,$jenis,$no_transaksi);
+		$file_attach = json_decode($get_attachment[0]['file_name']);
+		
+		$idx = 1;
+		$attach = '';  
+		foreach ($file_attach as $row){
+			$attach .= $idx . '  <a href="'.$get_attachment[0]['root_address'].$get_attachment[0]['path_file'].$row.'" target="_blank">'.$row.'</a> <br><br>';
+					$idx++;
+		}
+		$data['attach'] = $attach;
 	    $email = $this->load->view('ViewAsuransi/cetak/email_insco.php', $data, TRUE);
 
 		$email = array(

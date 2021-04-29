@@ -103,17 +103,73 @@
     
     $('#btn_simpan_modal').click(function () {
         if(menu_kode == '1'){
-            $('#loading-1').show();
+           // $('#loading-1').show();
             data_okupasi_jaminan = $('#modal_data_okupasi_jaminan').val();
             premi_jaminan        = accounting.unformat($('#modal_premi_jaminan').val());
             rate_jaminan         = $('#modal_rate_jaminan').val();
-           
-            cover_jaminan_process();
+
+            console.log(rate_jaminan);
+
+            if(rate_jaminan <= 0 || rate_jaminan == 0){
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Mohon Masukan Rate Asuransi Jaminan!',
+                    text: 'Rate Asuransi Jaminan Harus Lebih dari 0'
+                });
+            }else{
+                Swal.fire({
+                   title: 'Apakah Anda Yakin Akan Melakukan Cover Asuransi ?',
+                   text: "Aksi ini akan merubah status menjadi PROSES, Lanjutkan ?",
+                   showCancelButton: true,
+                   confirmButtonColor: '#3085d6',
+                   cancelButtonColor: '#d33',
+                   confirmButtonText: 'Lanjutkan',
+                   cancelButtonText: 'Batalkan',
+                   showLoaderOnConfirm: true,
+                   reverseButtons: true,
+                   preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        cover_jaminan_process();
+                    });
+                   },
+                   allowOutsideClick: false     
+                });
+                           
+            }
 
             
         } else if(menu_kode == '2'){
+            modal_rate_jiwa        = $('#modal_rate_jiwa').val();
+            modal_premi_jiwa       = accounting.unformat($('#modal_premi_jiwa').val());
+
+            if(modal_rate_jiwa <= 0 || modal_rate_jiwa == 0){
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Mohon Masukan Rate Asuransi Jaminan!',
+                    text: 'Rate Asuransi Jaminan Harus Lebih dari 0'
+                });
+            }else{
+                Swal.fire({
+                   title: 'Apakah Anda Yakin Akan Melakukan Cover Asuransi ?',
+                   text: "Aksi ini akan merubah status menjadi PROSES, Lanjutkan ?",
+                   showCancelButton: true,
+                   confirmButtonColor: '#3085d6',
+                   cancelButtonColor: '#d33',
+                   confirmButtonText: 'Lanjutkan',
+                   cancelButtonText: 'Batalkan',
+                   showLoaderOnConfirm: true,
+                   reverseButtons: true,
+                   preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        cover_jiwa_process();
+                    });
+                   },
+                   allowOutsideClick: false     
+                });
+            }
             
-            cover_jiwa_process();
+
+            
         }
     });
 
@@ -323,6 +379,7 @@
     }
             
    function cover_jaminan_process(){
+
         $.ajax({
                     url : base_url + "Asuransi/Cover_asuransi_controller/cover_jaminan_process",
                     type : "POST",
@@ -364,8 +421,7 @@
    
    function cover_jiwa_process(){
 
-        modal_rate_jiwa        = $('#modal_rate_jiwa').val();
-        modal_premi_jiwa       = accounting.unformat($('#modal_premi_jiwa').val());
+        
         if (document.getElementById('modal_extra_premi_jiwa').checked) {
             modal_extra_premi_jiwa = '1';
         } else {

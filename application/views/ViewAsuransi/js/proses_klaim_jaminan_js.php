@@ -254,7 +254,7 @@ function get_data_proses(rekening,jenis,no_reff_asuransi,no_transaksi){
             },
             error : function(response) {
                 console.log('failed :' + response);
-                $('#loading-1').hide();
+                $('#loading').hide();
                 return Swal.fire({
                     icon: 'error',
                     title: 'Gagal Get Data!',

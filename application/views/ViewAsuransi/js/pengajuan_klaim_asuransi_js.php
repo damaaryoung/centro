@@ -98,7 +98,24 @@ var fileUploadsLength = '';
         }
     });
     $('#btn_simpan_modal_jaminan_update').click(function () {
-            proses_update();
+            
+            Swal.fire({
+                title: 'Anda Akan Melakukan Update pengajuan Klaim Asuransi',
+                text: "Lanjutkan ?",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Lanjutkan',
+                cancelButtonText: 'Batalkan',
+                showLoaderOnConfirm: true,
+                reverseButtons: true,
+                preConfirm: function() {
+                 return new Promise(function(resolve) {
+                     proses_update();
+                 });
+                },
+                allowOutsideClick: false     
+            });
     });
     $('#src_search').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -138,10 +155,8 @@ var fileUploadsLength = '';
     });
     $('#btn_simpan_modal_jiwa_update').click(function () {
          
-         if($('#modal_upload_jiwa_update')[0].files[0] == null){
-             
-             Swal.fire({
-                title: 'Anda Belum Memilih File Attachment Untuk Di Upload!',
+            Swal.fire({
+                title: 'Anda Akan Melakukan Update pengajuan Klaim Asuransi',
                 text: "Lanjutkan ?",
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -158,13 +173,8 @@ var fileUploadsLength = '';
                  });
                 },
                 allowOutsideClick: false     
-             });
-          
-         }else{
-             upload_update = '1';
-             proses_update_jiwa(upload_update);
-         }
-     });
+            });
+    });
     
     ///END PENGAJUAN KLAIM JIWA ///
 
@@ -725,6 +735,8 @@ var fileUploadsLength = '';
         
     }
     function mapping_modal_jaminan_update(response){
+        
+        $('#modal_jenis_klaim_jaminan_update').find('option').remove().end();
         $('#modal_nama_asuransi_jaminan_update').val(response.data_details[0]['DESKRIPSI_ASURANSI']);
         $('#modal_tanggal_realisasi_jaminan_update').val(response.data_details[0]['TGL_REALISASI']);
         $('#modal_nama_nasabah_jaminan_update').val(response.data_details[0]['NAMA_NASABAH']);
@@ -737,10 +749,18 @@ var fileUploadsLength = '';
         $('#modal_rek_jaminan_update').val(response.data_details[0]['no_rekening']);
         $('#modal_reff_asuransi_jaminan_update').val(response.data_details[0]['no_reff_asuransi']);
         $('#modal_polis_jaminan_update').val(response.data_details[0]['no_polis']);
-        $('#modal_jenis_klaim_jaminan_update').val(response.data_details[0]['jenis_klaim']);
         $('#modal_no_transaksi_jaminan_update').val(response.data_details[0]['no_transaksi']);
         $('#modal_jenis_asuransi_jaminan_update').val(response.data_details[0]['jenis_asuransi']);
         $('#modal_ket_return_update').val(response.data_details[0]['ket_return']);
+
+        
+        $('#modal_jenis_klaim_jaminan_update').append('<option value="'+response.data_details[0]['jenis_klaim']+'" selected>' + response.data_details[0]['jenis_klaim'] +'</option>');
+        $('#modal_jenis_klaim_jaminan_update').append('<option value="Kebakaran">Kebakaran</option>' +
+                                                          '<option value="Meninggal Dunia">Meninggal Dunia</option>' +
+                                                          '<option value="Ketidakmampuan Tetap">Ketidakmampuan Tetap</option>' +
+                                                          '<option value="Kehilangan">Kehilangan</option>');
+        
+        
 
         fileUploads = [];
         uploads     = '';
@@ -1042,10 +1062,16 @@ var fileUploadsLength = '';
         $('#modal_premi_jiwa_update').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.'));
         $('#modal_kantor_jiwa_update').val(response.data_details[0]['nama_kantor']);
         $('#modal_reff_asuransi_jiwa_update').val(response.data_details[0]['no_reff_asuransi']);
-        $('#modal_jenis_klaim_jiwa_update').val(response.data_details[0]['jenis_klaim']);
         $('#modal_jenis_asuransi_jiwa_update').val(response.data_details[0]['jenis_asuransi']);
         $('#modal_no_transaksi_jiwa_update').val(response.data_details[0]['no_transaksi']);
         $('#modal_ket_return_jiwa_update').val(response.data_details[0]['ket_return']);
+        
+        $('#modal_jenis_klaim_jiwa_update').find('option').remove().end();
+        $('#modal_jenis_klaim_jiwa_update').append('<option value="'+response.data_details[0]['jenis_klaim']+'" selected>' + response.data_details[0]['jenis_klaim'] +'</option>');
+        $('#modal_jenis_klaim_jiwa_update').append('<option value="Kebakaran">Kebakaran</option>' +
+                                                          '<option value="Meninggal Dunia">Meninggal Dunia</option>' +
+                                                          '<option value="Ketidakmampuan Tetap">Ketidakmampuan Tetap</option>' +
+                                                          '<option value="Kehilangan">Kehilangan</option>');
 
         fileUploads = [];
         uploads     = '';

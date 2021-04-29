@@ -202,6 +202,21 @@ class Proses_klaim_asuransi_model extends CI_Model{
         $this->db2->trans_complete();
         return 'sukses';
   }
+  public function get_attachment($rek_update,$jenis,$no_transaksi){
+    $this->db2 = $this->load->database('DB_CENTRO', true);
+    $str    = "SELECT 
+                AK.`root_document`,
+                AK.`root_address`,
+                AK.`path_file`,
+                AK.`file_name` 
+              FROM
+                asuransi_klaim AK 
+              WHERE AK.`no_rekening` = '$rek_update' 
+                AND AK.`jenis_asuransi` = '$jenis'
+                AND AK.`no_transaksi` = '$no_transaksi';";
+    $query  = $this->db2->query($str);
+    return $query->result_array();
+  }
 
   /// JIWA ///
  

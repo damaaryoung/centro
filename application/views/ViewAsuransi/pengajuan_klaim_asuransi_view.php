@@ -264,7 +264,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label style="padding-top: 5px;" class="control-label" for="modal_jenis_klaim_jaminan">Jenis Klaim</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jaminan" name="modal_jenis_klaim_jaminan">
+                                                        <!-- <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jaminan" name="modal_jenis_klaim_jaminan"> -->
+                                                        <select class="form-control form-control-sm" id="modal_jenis_klaim_jaminan" name="modal_jenis_klaim_jaminan">
+                                                          <option value="Kebakaran">Kebakaran</option>
+                                                          <option value="Meninggal Dunia">Meninggal Dunia</option>
+                                                          <option value="Ketidakmampuan Tetap">Ketidakmampuan Tetap</option>
+                                                          <option value="Kehilangan">Kehilangan</option>
+                                                        </select>
                                                   </div>
                                   </div>
                                   <div class="form-group row">
@@ -445,7 +451,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label style="padding-top: 5px;" class="control-label" for="modal_jenis_klaim_jiwa">Jenis Klaim</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jiwa" name="modal_jenis_klaim_jiwa">
+                                                        <!-- <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jiwa" name="modal_jenis_klaim_jiwa"> -->
+                                                        <select class="form-control form-control-sm" id="modal_jenis_klaim_jiwa" name="modal_jenis_klaim_jiwa">
+                                                          <option value="Kebakaran">Kebakaran</option>
+                                                          <option value="Meninggal Dunia">Meninggal Dunia</option>
+                                                          <option value="Ketidakmampuan Tetap">Ketidakmampuan Tetap</option>
+                                                          <option value="Kehilangan">Kehilangan</option>
+                                                        </select>
                                                   </div>
                                   </div>
                                   <div class="form-group row">
@@ -598,7 +610,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label style="padding-top: 5px;" class="control-label" for="modal_jenis_klaim_jaminan_update">Jenis Klaim</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jaminan_update" name="modal_jenis_klaim_jaminan_update">
+                                                        <!-- <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jaminan_update" name="modal_jenis_klaim_jaminan_update"> -->
+                                                        <select class="form-control form-control-sm" id="modal_jenis_klaim_jaminan_update" name="modal_jenis_klaim_jaminan_update">
+                                                        </select>
                                                   </div>
                                   </div>
                                   <div class="form-group row">
@@ -764,7 +778,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <label style="padding-top: 5px;" class="control-label" for="modal_jenis_klaim_jiwa_update">Jenis Klaim</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jiwa_update" name="modal_jenis_klaim_jiwa_update">
+                                                        <!-- <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jiwa_update" name="modal_jenis_klaim_jiwa_update"> -->
+                                                        <select class="form-control form-control-sm" id="modal_jenis_klaim_jiwa_update" name="modal_jenis_klaim_jiwa_update">
+                                                        </select>
                                                   </div>
                                   </div>
                                   <div class="form-group row">
