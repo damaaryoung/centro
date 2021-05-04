@@ -658,8 +658,9 @@
                                     data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
                                     'name="btn_proses"
                                     data-toggle="tooltip" title="PROSES">
-                                    <i class="fa fa-pen"></i> </button>   
-                            <button type="button" class="btn btn-success btn-sm py-0 btn_done" id="btn_done" style="font-size: 1  em;"
+                                    <i class="fa fa-pen"></i> </button>`;   
+                if(kode_kantor == '00'){
+                    data +=        `<button type="button" class="btn btn-success btn-sm py-0 btn_done" id="btn_done" style="font-size: 1  em;"
                                     data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
                                     data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
                                     data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
@@ -667,8 +668,9 @@
                                     data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
                                     'name="btn_done"
                                     data-toggle="tooltip" title="DONE">
-                                    <i class="fa fa-check"></i> </button>
-                        </td>
+                                    <i class="fa fa-check"></i> </button>`;
+                }
+                data += `</td>
                     </tr>`;
             }else{
                 data += `<td></td>

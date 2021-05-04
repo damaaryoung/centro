@@ -245,10 +245,11 @@ class Cover_asuransi_controller extends CI_Controller {
 		$activeSheet->setCellValue('N1', 'Pekerjaan');
 		$activeSheet->setCellValue('O1', 'Email');
 		$activeSheet->setCellValue('P1', 'Jumlah Pertanggungan');
-		$activeSheet->setCellValue('Q1', 'Premi');
-		$activeSheet->setCellValue('R1', 'Tenor');
-		$activeSheet->setCellValue('S1', 'Seller Agent Code');
-		$activeSheet->setCellValue('T1', 'Seller Branch Code');
+		$activeSheet->setCellValue('Q1', 'Alamat Jaminan');
+		$activeSheet->setCellValue('R1', 'Premi');
+		$activeSheet->setCellValue('S1', 'Tenor');
+		$activeSheet->setCellValue('T1', 'Seller Agent Code');
+		$activeSheet->setCellValue('U1', 'Seller Branch Code');
  
 
 		$report = $this->Cover_asuransi_model->export_cover($periode,$jenis);
@@ -274,10 +275,11 @@ class Cover_asuransi_controller extends CI_Controller {
 				$activeSheet->setCellValue('N'.$i , $row['pekerjaan'])->getColumnDimension('N')->setAutoSize(true);
 				$activeSheet->setCellValue('O'.$i , $row['email'])->getColumnDimension('O')->setAutoSize(true);
 				$activeSheet->setCellValue('P'.$i , $row['NILAI_ASURANSI'])->getColumnDimension('P')->setAutoSize(true);
-				$activeSheet->setCellValue('Q'.$i , $row['premi_asuransi'])->getColumnDimension('Q')->setAutoSize(true);
-				$activeSheet->setCellValue('R'.$i , $row['jkw_asuransi'])->getColumnDimension('R')->setAutoSize(true);
-				$activeSheet->setCellValue('S'.$i , $row['nama'])->getColumnDimension('S')->setAutoSize(true);
-				$activeSheet->setCellValue('T'.$i , $row['branch_name'])->getColumnDimension('T')->setAutoSize(true);
+				$activeSheet->setCellValue('Q'.$i , $row['alamat_jaminan'])->getColumnDimension('Q')->setAutoSize(true);
+				$activeSheet->setCellValue('R'.$i , $row['premi_asuransi'])->getColumnDimension('R')->setAutoSize(true);
+				$activeSheet->setCellValue('S'.$i , $row['jkw_asuransi'])->getColumnDimension('S')->setAutoSize(true);
+				$activeSheet->setCellValue('T'.$i , $row['nama'])->getColumnDimension('T')->setAutoSize(true);
+				$activeSheet->setCellValue('U'.$i , $row['branch_name'])->getColumnDimension('U')->setAutoSize(true);
 				$i++;
 				$idx++;
 			}
@@ -343,10 +345,11 @@ class Cover_asuransi_controller extends CI_Controller {
 		$activeSheet->setCellValue('N1', 'Pekerjaan');
 		$activeSheet->setCellValue('O1', 'Email');
 		$activeSheet->setCellValue('P1', 'Jumlah Pertanggungan');
-		$activeSheet->setCellValue('Q1', 'Premi');
-		$activeSheet->setCellValue('R1', 'Tenor');
-		$activeSheet->setCellValue('S1', 'Seller Agent Code');
-		$activeSheet->setCellValue('T1', 'Seller Branch Code');
+		$activeSheet->setCellValue('Q1', 'Alamat Jaminan');
+		$activeSheet->setCellValue('R1', 'Premi');
+		$activeSheet->setCellValue('S1', 'Tenor');
+		$activeSheet->setCellValue('T1', 'Seller Agent Code');
+		$activeSheet->setCellValue('U1', 'Seller Branch Code');
  
 		for($i = 0; $i < $lengthParsed; $i++){
 			if($i == 0){
@@ -379,10 +382,11 @@ class Cover_asuransi_controller extends CI_Controller {
 				$activeSheet->setCellValue('N'.$i , $row['pekerjaan'])->getColumnDimension('N')->setAutoSize(true);
 				$activeSheet->setCellValue('O'.$i , $row['email'])->getColumnDimension('O')->setAutoSize(true);
 				$activeSheet->setCellValue('P'.$i , $row['NILAI_ASURANSI'])->getColumnDimension('P')->setAutoSize(true);
-				$activeSheet->setCellValue('Q'.$i , $row['premi_asuransi'])->getColumnDimension('Q')->setAutoSize(true);
-				$activeSheet->setCellValue('R'.$i , $row['jkw_asuransi'])->getColumnDimension('R')->setAutoSize(true);
-				$activeSheet->setCellValue('S'.$i , $row['nama'])->getColumnDimension('S')->setAutoSize(true);
-				$activeSheet->setCellValue('T'.$i , $row['branch_name'])->getColumnDimension('T')->setAutoSize(true);
+				$activeSheet->setCellValue('Q'.$i , $row['alamat_jaminan'])->getColumnDimension('Q')->setAutoSize(true);
+				$activeSheet->setCellValue('R'.$i , $row['premi_asuransi'])->getColumnDimension('R')->setAutoSize(true);
+				$activeSheet->setCellValue('S'.$i , $row['jkw_asuransi'])->getColumnDimension('S')->setAutoSize(true);
+				$activeSheet->setCellValue('T'.$i , $row['nama'])->getColumnDimension('T')->setAutoSize(true);
+				$activeSheet->setCellValue('U'.$i , $row['branch_name'])->getColumnDimension('U')->setAutoSize(true);
 				$i++;
 				$idx++;
 			}

@@ -272,7 +272,8 @@ class Cover_asuransi_model extends CI_Model{
 		                  AC.`premi_asuransi` as `premi_asuransi`,
 		                  K.`jkw_asuransi` as `jkw_asuransi`,
 		                  U.`nama` as `nama`,
-		                  CONCAT('BPR KMI ', AKK.`nama_kantor`) AS `branch_name` 
+		                  CONCAT('BPR KMI ', AKK.`nama_kantor`) AS `branch_name`,
+						  jh.`alamat` AS `alamat_jaminan`
 				    FROM
 				    asuransi_cover AC 
 				    LEFT JOIN NASABAH N 
@@ -280,7 +281,7 @@ class Cover_asuransi_model extends CI_Model{
 				    LEFT JOIN KREDIT K 
 				      ON K.`NO_REKENING` = AC.`no_rekening` 
 				    LEFT JOIN JAMINAN_HEADER JH 
-				      ON JH.`no_rekening` = AC.`no_rekening` 
+				      ON jh.`no_reff` = ac.`no_reff_jaminan`
 				    LEFT JOIN kre_kode_asuransi KKA 
 				      ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
 				    LEFT JOIN slik_agunan SA 
@@ -293,7 +294,7 @@ class Cover_asuransi_model extends CI_Model{
 				    LEFT JOIN css_kode_group1 AS KG 
 				      ON KG.kode_group1 = N.kode_group1 
 				    LEFT JOIN USER U 
-				      ON U.NIK = AC.created_by 
+				      ON u.`user_id` = AC.created_by 
 				    LEFT JOIN app_kode_kantor AKK 
 				      ON AKK.kode_kantor = u.kd_cabang 
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
@@ -328,7 +329,8 @@ class Cover_asuransi_model extends CI_Model{
 		                  AC.`premi_asuransi` as `premi_asuransi`,
 		                  K.`jkw_asuransi` as `jkw_asuransi`,
 		                  U.`nama` as `nama`,
-		                  CONCAT('BPR KMI ', AKK.`nama_kantor`) AS `branch_name` 
+		                  CONCAT('BPR KMI ', AKK.`nama_kantor`) AS `branch_name`,
+						  jh.`alamat` AS `alamat_jaminan`
 				    FROM
 				    asuransi_cover AC 
 				    LEFT JOIN NASABAH N 
@@ -336,7 +338,7 @@ class Cover_asuransi_model extends CI_Model{
 				    LEFT JOIN KREDIT K 
 				      ON K.`NO_REKENING` = AC.`no_rekening` 
 				    LEFT JOIN JAMINAN_HEADER JH 
-				      ON JH.`no_rekening` = AC.`no_rekening` 
+					  ON jh.`no_reff` = ac.`no_reff_jaminan`
 				    LEFT JOIN kre_kode_asuransi KKA 
 				      ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
 				    LEFT JOIN slik_agunan SA 
@@ -349,7 +351,7 @@ class Cover_asuransi_model extends CI_Model{
 				    LEFT JOIN css_kode_group1 AS KG 
 				      ON KG.kode_group1 = N.kode_group1 
 				    LEFT JOIN USER U 
-				      ON U.NIK = AC.created_by 
+				      ON u.`user_id` = AC.created_by 
 				    LEFT JOIN app_kode_kantor AKK 
 				      ON AKK.kode_kantor = u.kd_cabang 
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
