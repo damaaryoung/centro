@@ -210,19 +210,41 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 			$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
 			$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
 
-			if (!file_exists("$root_document/public_centro")){
-				mkdir("$root_document/public_centro");
-			} 
-				
-			if (!file_exists("$root_document/public_centro/$up_rek")) {
-				mkdir("$root_document/public_centro/$up_rek");
-			}
-			if (!file_exists("$root_document/public_centro/$up_rek/klaim_asuransi_jaminan")) {
-				mkdir("$root_document/public_centro/$up_rek/klaim_asuransi_jaminan");
+			if($jenis == 'JAMINAN'){
+				if (!file_exists("$root_document/public_centro")){
+					mkdir("$root_document/public_centro");
+				} 
+					
+				if (!file_exists("$root_document/public_centro/$up_rek")) {
+					mkdir("$root_document/public_centro/$up_rek");
+				}
+				if (!file_exists("$root_document/public_centro/$up_rek/klaim_asuransi_jaminan")) {
+					mkdir("$root_document/public_centro/$up_rek/klaim_asuransi_jaminan");
+				}
+	
+	 
+				$config['upload_path']   = "$root_document/public_centro/$up_rek/klaim_asuransi_jaminan";
+
+				$pathFile = "public_centro/$up_rek/klaim_asuransi_jaminan/";
+			}else if($jenis == 'JIWA'){
+				if (!file_exists("$root_document/public_centro")){
+					mkdir("$root_document/public_centro");
+				} 
+					
+				if (!file_exists("$root_document/public_centro/$up_rek")) {
+					mkdir("$root_document/public_centro/$up_rek");
+				}
+				if (!file_exists("$root_document/public_centro/$up_rek/klaim_asuransi_jiwa")) {
+					mkdir("$root_document/public_centro/$up_rek/klaim_asuransi_jiwa");
+				}
+	
+	 
+				$config['upload_path']   = "$root_document/public_centro/$up_rek/klaim_asuransi_jiwa";
+
+				$pathFile = "public_centro/$up_rek/klaim_asuransi_jiwa/";
 			}
 
- 
-			$config['upload_path']   = "$root_document/public_centro/$up_rek/klaim_asuransi_jaminan";
+			
 			$config['allowed_types'] = "*";
 			$config['overwrite']	 = false;
 			$config['file_name'] = $fileName;
@@ -233,7 +255,6 @@ class Pengajuan_klaim_asuransi_controller extends CI_Controller {
 			} else{
 				$data = $this->upload->data();
 				$namafileUpload = $data["file_name"];
-				$pathFile = "public_centro/$up_rek/klaim_asuransi_jaminan/";
 				array_push($fileUploads, $namafileUpload);
 				$files_upload = json_encode($fileUploads);
 

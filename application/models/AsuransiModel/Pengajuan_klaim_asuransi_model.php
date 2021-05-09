@@ -35,6 +35,10 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                     THEN 'RETURN'
                     WHEN AK.`status_klaim` = '2' 
                     THEN 'PROSES' 
+                    WHEN AK.`status_klaim` = '3' 
+                    THEN 'DONE' 
+                    WHEN AK.`status_klaim` = '4' 
+                    THEN 'REJECT' 
                   END AS `status_klaim`,
                   K.`TGL_REALISASI`,
                   N.`NAMA_NASABAH`,
@@ -72,6 +76,10 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                     THEN 'RETURN'
                     WHEN AK.`status_klaim` = '2' 
                     THEN 'PROSES' 
+                    WHEN AK.`status_klaim` = '3' 
+                    THEN 'DONE' 
+                    WHEN AK.`status_klaim` = '4' 
+                    THEN 'REJECT' 
                   END AS `status_klaim`,
                   K.`TGL_REALISASI`,
                   N.`NAMA_NASABAH`,

@@ -365,6 +365,77 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.modal -->
 
 
+  <div class="modal fade" id="modal_reject">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Reject Pengajuan Klaim</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div id="loading-2">
+                    <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
+           </div>
+        </div>
+        <div class="modal-body" style="height: 450px;">
+          
+          <div class="row" style="padding-top: 20px;">
+            <!-- form atas -->
+            <div class="col-md-12 mx-auto">
+              <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label style="padding-top: 5px;" class="control-label" for="ket_reject">Keterangan Reject</label>
+                    </div>
+                    
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <textarea style="height: 150px;" type="text" class="form-control" id="ket_reject" name="ket_reject"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                            <div class="col-sm-2">
+                                <label class="control-label" style="padding-top: 5px;"  for="modal_jenis_jaminan">Attachment</label>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input form-control form-control-sm" id="modal_upload_reject">
+                                  <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                              </div>
+                            </div>  
+                            <div class="col-sm-4" style="padding-top: 5px;">
+                                  <button type="button" class="btn btn-success btn-sm control-label" 
+                                          style=" width: 150px;" id="btn_upload_reject">
+                                            <i class="fas fa-upload"></i> UPLOAD
+                                  </button>
+                            </div>                                           
+                </div>
+             
+                <div class="form-group row uplpads_list" id="file_uploads_reject">
+                        <div class="col-sm-2">
+                            <label style="padding-top: 5px;" class="control-label" for="modal_kantor_jaminan">File Attachment</label>
+                        </div>
+                    </div>  
+        
+                </div>
+
+            </div>
+        
+        </div>
+        <div class="modal-footer text-center" style="margin: 0 auto;">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="save_reject">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
 
 	<?php
         echo $ctrlbar;

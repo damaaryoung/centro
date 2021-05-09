@@ -36,7 +36,11 @@ class Proses_klaim_asuransi_model extends CI_Model{
                         THEN 'RETURN'
                         WHEN AK.`status_klaim` = '2' 
                         THEN 'PROSES' 
-                      END AS `status_klaim`,
+                        WHEN AK.`status_klaim` = '3' 
+                        THEN 'DONE' 
+                        WHEN AK.`status_klaim` = '4' 
+                        THEN 'REJECT' 
+                        END AS `status_klaim`,
                       K.`TGL_REALISASI`,
                       N.`NAMA_NASABAH`,
                       JH.`jenis_jaminan` 
@@ -53,7 +57,7 @@ class Proses_klaim_asuransi_model extends CI_Model{
                         ON JH.`no_rekening` = AK.`no_rekening` 
                     WHERE AC.`kode_kantor` = '$src_kode_kantor' 
                       AND AK.`jenis_asuransi` = '$jenis' 
-                      AND AK.STATUS_KLAIM IN ('0','2')
+                      AND AK.STATUS_KLAIM IN ('0','2','3','4')
                     ORDER BY AK.STATUS_KLAIM ASC 
                     LIMIT 25;";
         $query  = $this->db2->query($str);
@@ -74,6 +78,10 @@ class Proses_klaim_asuransi_model extends CI_Model{
                       THEN 'RETURN'
                       WHEN AK.`status_klaim` = '2' 
                       THEN 'PROSES' 
+                      WHEN AK.`status_klaim` = '3' 
+                      THEN 'DONE' 
+                      WHEN AK.`status_klaim` = '4' 
+                      THEN 'REJECT' 
                     END AS `status_klaim`,
                     K.`TGL_REALISASI`,
                     N.`NAMA_NASABAH`,
@@ -92,7 +100,7 @@ class Proses_klaim_asuransi_model extends CI_Model{
                   WHERE (AK.`no_rekening` LIKE '$src_search%' 
                           OR AC.`no_polis` LIKE  '$src_search%') 
                     AND AK.`jenis_asuransi` = '$jenis' 
-                    AND AK.STATUS_KLAIM IN ('0','2')
+                    AND AK.STATUS_KLAIM IN ('0','2','3','4')
                   ORDER BY AK.STATUS_KLAIM ASC
                   LIMIT 25;";
           $query  = $this->db2->query($str);
@@ -219,6 +227,77 @@ class Proses_klaim_asuransi_model extends CI_Model{
   }
 
   /// JIWA ///
+
+  public function get_data_reject($rekening,$jenis,$no_reff_asuransi,$no_transaksi){
+		$this->db2 = $this->load->database('DB_CENTRO', true);
+		$str    = "SELECT 
+                  AK.`no_rekening`,
+                  AK.`no_transaksi`,
+                  AK.`jenis_asuransi`,
+                  AK.`jenis_klaim`,
+                  AK.`root_document`,
+                  AK.`root_address`,
+                  AK.`path_file` ,
+                  AK.`file_name`,
+                  AK.`status_klaim`,
+                  AK.`send_mail`,
+                  AK.`create_date`,
+                  AK.`file_name_reject`,
+                  AK.`keterangan`
+                FROM
+                  ASURANSI_KLAIM AK 
+                WHERE AK.`no_rekening` = '$rekening' 
+                  AND AK.`jenis_asuransi` = '$jenis' 
+                  AND AK.`no_transaksi` = '$no_transaksi'
+                LIMIT 1;";
+        $query  = $this->db2->query($str);
+        return $query->result_array();
+	}
+  public function upload_file_reject($rekening,
+																					$jenis,
+																					$no_transaksi,
+																					$userID,
+																					$files_upload){
+    $this->db2 = $this->load->database('DB_CENTRO', true);
+        $this->db2->trans_start();
+        $this->db2->query("UPDATE asuransi_klaim AK
+                           SET AK.`file_name_reject` = '$files_upload',
+                               AK.`updated_by`  = '$userID',
+                               AK.`updated_date`= NOW()
+                           WHERE AK.`no_rekening` = '$rekening'
+                           AND AK.`no_transaksi` = '$no_transaksi'
+                           AND AK.`jenis_asuransi` = '$jenis';");
+        $this->db2->trans_complete();
+        return 'sukses';
+  } 
+  public function delete_file_reject($rekening,$jenis,$userID,$no_transaksi,$files_upload){
+    $this->db2 = $this->load->database('DB_CENTRO', true);
+        $this->db2->trans_start();
+        $this->db2->query("UPDATE asuransi_klaim AK
+                           SET AK.`file_name_reject` = '$files_upload',
+                               AK.`updated_by`  = '$userID',
+                               AK.`updated_date`= NOW()
+                           WHERE AK.`no_rekening` = '$rekening'
+                           AND AK.`no_transaksi` = '$no_transaksi'
+                           AND AK.`jenis_asuransi` = '$jenis';");
+        $this->db2->trans_complete();
+        return 'sukses';
+  } 
+
+  public function proses_reject($rekening,$jenis,$userID,$no_transaksi,$ket_reject){
+    $this->db2 = $this->load->database('DB_CENTRO', true);
+        $this->db2->trans_start();
+        $this->db2->query("UPDATE asuransi_klaim AK
+                           SET AK.`keterangan` = '$ket_reject',
+                               AK.`status_klaim`  = '4',
+                               AK.`updated_by`  = '$userID',
+                               AK.`updated_date`= NOW()
+                           WHERE AK.`no_rekening` = '$rekening'
+                           AND AK.`no_transaksi` = '$no_transaksi'
+                           AND AK.`jenis_asuransi` = '$jenis';");
+        $this->db2->trans_complete();
+        return 'sukses';
+  } 
  
 }
 ?>
