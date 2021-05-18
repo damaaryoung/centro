@@ -637,8 +637,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="form-group row" id="file_uploads_update">
                                   </div>
                                   <div class="form-group row">
-                                        <div class="col-sm-6">
-                                        </div>
                                         <div class="col-sm-2">
                                             <label class="control-label" style="padding-top: 5px;"  for="modal_alamat_jiwa_update">Keterangan Return</label>
                                         </div>

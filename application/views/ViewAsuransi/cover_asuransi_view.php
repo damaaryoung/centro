@@ -68,7 +68,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="src_tgl_realisasi">Periode</label>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="month" class="form-control form-control-sm" id="src_tgl_realisasi" name="src_tgl_realisasi">
+                                    <input type="month" class="form-control form-control-sm" id="src_tgl_realisasi" name="src_tgl_realisasi" onchange="get_search_status()">
                                   </div>
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="src_kantor_kas_cabang">Status</label>
