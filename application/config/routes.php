@@ -71,6 +71,8 @@ $route['cover_asuransi_jaminan'] = 'Asuransi/Cover_asuransi_controller/view_cove
 $route['cover_asuransi_jiwa'] = 'Asuransi/Cover_asuransi_controller/view_cover_jiwa';
 $route['polis_asuransi_jaminan'] = 'Asuransi/Polis_asuransi_jaminan_controller/main_view_polis_asuransi_jaminan';
 $route['polis_asuransi_jiwa'] = 'Asuransi/Polis_asuransi_jiwa_controller/main_view_polis_asuransi_jiwa';
+$route['pengajuan_refund_asuransi_jaminan'] = 'Asuransi/Pengajuan_refund_asuransi_controller/menu_refund_jaminan';
+$route['pengajuan_refund_asuransi_jiwa'] = 'Asuransi/Pengajuan_refund_asuransi_controller/menu_refund_jiwa';
 $route['pengajuan_klaim_asuransi_jaminan'] = 'Asuransi/Pengajuan_klaim_asuransi_controller/menu_klaim_jaminan';
 $route['pengajuan_klaim_asuransi_jiwa'] = 'Asuransi/Pengajuan_klaim_asuransi_controller/menu_klaim_jiwa';
 $route['proses_klaim_jiwa'] = 'Asuransi/Proses_klaim_jiwa_controller/index';
@@ -79,3 +81,4 @@ $route['pengajuan_cis'] = 'Asuransi/Cash_in_save_controller/index';
 $route['pengcoveran_cis'] = 'Asuransi/Cash_in_save_controller/index_cover';
 $route['pengcoveran_cit'] = 'Asuransi/Cash_in_transit_controller/index';
 $route['laporan_asuransi'] = 'Asuransi/Laporan_asuransi_controller/index';
+
