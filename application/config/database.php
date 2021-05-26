@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -77,7 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => '103.31.232.148:3307',
 	'username' => 'u2Qi7Jfui',
-	'password' => 'qJ7ysIkg8ce!',
+	'password' => 'qJ7ysIkg8ce!21!',
 	'database' => 'newwebtool',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
@@ -100,7 +100,7 @@ $db['DB_DPM_ONLINE'] = array(
 	'dsn'	=> '',
 	'hostname' => '103.31.232.148:3307',
 	'username' => 'u2Qi7Jfui',
-	'password' => 'qJ7ysIkg8ce!',
+	'password' => 'qJ7ysIkg8ce!21!',
 	'database' => 'centro',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
@@ -123,7 +123,7 @@ $db['DB_CENTRO'] = array(
 	'dsn'	=> '',
 	'hostname' => '103.31.232.148:3307',
 	'username' => 'u2Qi7Jfui',
-	'password' => 'qJ7ysIkg8ce!',
+	'password' => 'qJ7ysIkg8ce!21!',
 	'database' => 'centro',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
@@ -146,7 +146,7 @@ $db['db2'] = array(
 	'dsn'	=> '',
 	'hostname' => '103.31.232.148:3307',
 	'username' => 'u2Qi7Jfui',
-	'password' => 'qJ7ysIkg8ce!',
+	'password' => 'qJ7ysIkg8ce!21!',
 	'database' => 'dpm_online',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
