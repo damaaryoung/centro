@@ -217,7 +217,7 @@
                   <?php }?>
                   <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
-                      <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jaminan" class="nav-link">
+                      <a href="<?php echo base_url(); ?>proses_refund_jaminan" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Proses Refund Asuransi Jaminan</p>
                       </a>
@@ -285,7 +285,7 @@
                   <?php }?>
                   <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
-                      <a href="<?php echo base_url(); ?>pengajuan_klaim_asuransi_jaminan" class="nav-link">
+                      <a href="<?php echo base_url(); ?>proses_refund_jiwa" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Proses Refund Asuransi Jiwa</p>
                       </a>
