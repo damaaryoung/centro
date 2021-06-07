@@ -104,19 +104,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                       </div>
                       <div class="table-responsive">
-                          <table id="tbl_klaim_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                          <table id="tbl_refund_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
                               <thead style="text-align: center;" class="bg-danger">
                                   <tr>
                                       <th>Tgl&nbsp;Realisasi</th>
                                       <th>No&nbsp;Rekening</th>
                                       <th>Nama</th>
                                       <th>Jaminan</th>
-                                      <th>Jenis&nbsp;Klaim</th>
-                                      <th>Status&nbsp;Klaim</th>
+                                      <th>Jenis&nbsp;Refund</th>
+                                      <th>Status&nbsp;Refund</th>
                                       <th>Action</th>
                                   </tr>
                               </thead>
-                              <tbody id="tbl_body_klaim_jaminan">
+                              <tbody id="tbl_body_refund_jaminan">
                               </tbody>
                           </table>
                       </div>
@@ -130,7 +130,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           
           <!-- INSERT -->
 
-          <div class="modal fade" id="modal_pengajuan_klaim_jaminan"> 
+          <div class="modal fade" id="modal_pengajuan_refund_jaminan"> 
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
                 <div class="modal-header">
@@ -229,10 +229,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <input type="text" class="form-control form-control-sm" id="modal_kantor_jaminan" name="modal_kantor_jaminan" readonly>
                                                       </div>
                                                       <div class="col-sm-2">
-                                                          <label style="padding-top: 5px;" class="control-label" for="modal_jenis_klaim_jaminan">Jenis Refund</label>
+                                                          <label style="padding-top: 5px;" class="control-label" for="modal_jenis_refund_jaminan">Jenis Refund</label>
                                                       </div>
                                                       <div class="col-sm-4">
-                                                            <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jaminan" name="modal_jenis_klaim_jaminan" readonly>
+                                                            <input type="text" class="form-control form-control-sm" id="modal_jenis_refund_jaminan" name="modal_jenis_refund_jaminan" readonly>
                                                       </div>
                                       </div>
                                       <div class="form-group row" id="file_uploads_update">

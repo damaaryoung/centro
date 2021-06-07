@@ -77,7 +77,7 @@ class Pengajuan_refund_asuransi_controller extends CI_Controller {
 	}
     public function get_data_search(){
 		$src_search = $this->input->post('src_search');
-		$menu = $this->session->userdata('pengajuan_klaim');
+		$menu = $this->session->userdata('pengajuan_refund');
 		if($menu == '1'){
 			$jenis = 'JAMINAN';
 		}else if($menu == '2'){

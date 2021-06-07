@@ -104,19 +104,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                       </div>
                       <div class="table-responsive">
-                          <table id="tbl_klaim_jiwa" class="table table-striped table-bordered" style="width:100% text-align:center" >
+                          <table id="tbl_refund_jiwa" class="table table-striped table-bordered" style="width:100% text-align:center" >
                               <thead style="text-align: center;" class="bg-danger">
                                   <tr>
                                       <th>Tgl&nbsp;Realisasi</th>
                                       <th>No&nbsp;Rekening</th>
                                       <th>Nama</th>
                                       <th>Jaminan</th>
-                                      <th>Jenis&nbsp;Klaim</th>
-                                      <th>Status&nbsp;Klaim</th>
+                                      <th>Jenis&nbsp;Refund</th>
+                                      <th>Status&nbsp;Refund</th>
                                       <th>Action</th>
                                   </tr>
                               </thead>
-                              <tbody id="tbl_body_klaim_jiwa">
+                              <tbody id="tbl_body_refund_jiwa">
                               </tbody>
                           </table>
                       </div>
@@ -128,11 +128,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
           
           <!-- INSERT -->
 
-          <div class="modal fade" id="modal_pengajuan_klaim_jiwa">
+          <div class="modal fade" id="modal_pengajuan_refund_jiwa">
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Proses Klaim Asuransi Jiwa</h4>
+                  <h4 class="modal-title">Proses Refund Asuransi Jiwa</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick="close_jiwa()">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -242,10 +242,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <input type="text" class="form-control form-control-sm" id="modal_kantor_jiwa" name="modal_kantor_jiwa" readonly>
                                                   </div>
                                                   <div class="col-sm-2">
-                                                      <label style="padding-top: 5px;" class="control-label" for="modal_jenis_klaim_jiwa">Jenis Klaim</label>
+                                                      <label style="padding-top: 5px;" class="control-label" for="modal_jenis_refund_jiwa">Jenis Refund</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_jenis_klaim_jiwa" name="modal_jenis_klaim_jiwa" readonly>
+                                                        <input type="text" class="form-control form-control-sm" id="modal_jenis_refund_jiwa" name="modal_jenis_refund_jiwa" readonly>
                                                   </div>
                                   </div>   
                                   <div class="form-group row" id="file_uploads_jiwa_update">
@@ -285,7 +285,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Return Pengajuan Klaim</h4>
+          <h4 class="modal-title">Return Pengajuan Refund</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -369,7 +369,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Reject Pengajuan Klaim</h4>
+          <h4 class="modal-title">Reject Pengajuan Refund</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -443,7 +443,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
 	?>
 <script src="<?php echo base_url('assets/dist/js/accounting.min.js')?>"></script>
-<?php $this->view('ViewAsuransi/js/proses_klaim_jiwa_js.php'); ?>
+<?php $this->view('ViewAsuransi/js/refund_jiwa_proses_js.php'); ?>
 <style>
               /* Important part */
               .modal-dialog{
