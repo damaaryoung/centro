@@ -118,28 +118,31 @@ class Cover_asuransi_controller extends CI_Controller {
 
 	}
 	public function cover_jaminan_process(){
-		$rekening              = $this->input->post('rekening');
-		$data_okupasi_jaminan  = $this->input->post('data_okupasi_jaminan');
-		$premi_jaminan         = $this->input->post('premi_jaminan');  
-		$rate_jaminan          = $this->input->post('rate_jaminan');  
-		$userID                = $this->session->userdata('nik');
+		$rekening               = $this->input->post('rekening');
+		$data_okupasi_jaminan   = $this->input->post('data_okupasi_jaminan');
+		$premi_jaminan          = $this->input->post('premi_jaminan'); 
+		$premi_jaminan_request  = $this->input->post('premi_jaminan_request');  
+		$rate_jaminan           = $this->input->post('rate_jaminan');  
+		$userID                 = $this->session->userdata('nik');
 
-		$data_details = $this->Cover_asuransi_model->cover_jaminan($rekening,$data_okupasi_jaminan,$premi_jaminan,$rate_jaminan,$userID);
+		$data_details = $this->Cover_asuransi_model->cover_jaminan($rekening,$data_okupasi_jaminan,$premi_jaminan,$premi_jaminan_request,$rate_jaminan,$userID);
 
 		$data['data_details']       = $data_details;
 		echo json_encode($data);
 	}
 	public function cover_jiwa_process(){
-		$rekening			    = $this->input->post('rekening');
-		$modal_rate_jiwa	    = $this->input->post('modal_rate_jiwa');
-		$modal_premi_jiwa	    = $this->input->post('modal_premi_jiwa');
-		$modal_extra_premi_jiwa	= $this->input->post('modal_extra_premi_jiwa');
-		$userID                = $this->session->userdata('nik');
+		$rekening			      = $this->input->post('rekening');
+		$modal_rate_jiwa	      = $this->input->post('modal_rate_jiwa');
+		$modal_premi_jiwa	      = $this->input->post('modal_premi_jiwa');
+		$modal_extra_premi_jiwa   = $this->input->post('modal_extra_premi_jiwa');
+		$modal_premi_jiwa_request = $this->input->post('modal_premi_jiwa_request'); 
+		$userID                   = $this->session->userdata('nik');
 		$data_details = $this->Cover_asuransi_model->cover_jiwa($rekening,
 																			$userID,
 																			$modal_rate_jiwa,
 																			$modal_premi_jiwa,
-																			$modal_extra_premi_jiwa
+																			$modal_extra_premi_jiwa,
+																			$modal_premi_jiwa_request
 																		);
 		$data['data_details']       = $data_details;
 		echo json_encode($data);

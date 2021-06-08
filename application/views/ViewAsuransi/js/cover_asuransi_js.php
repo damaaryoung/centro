@@ -11,6 +11,7 @@
     var no_reff_jaminan        = '';
     var data_okupasi_jaminan   = '';
     var premi_jaminan          = '';
+    var premi_jaminan_request  = '';
     var rate_jaminan           = '';
     var modal_rate_jiwa        = '';
     var modal_premi_jiwa       = '';
@@ -18,6 +19,7 @@
     var modal_extra_premi_jiwa = '';
     var src_tgl_realisasi      = '';
     var src_search             = '';
+    var modal_premi_jiwa_request = '';
     var periode = '';
     var checkArray = [];
     var lengthParsed = '';
@@ -104,9 +106,10 @@
     $('#btn_simpan_modal').click(function () {
         if(menu_kode == '1'){
            // $('#loading-1').show();
-            data_okupasi_jaminan = $('#modal_data_okupasi_jaminan').val();
-            premi_jaminan        = accounting.unformat($('#modal_premi_jaminan').val());
-            rate_jaminan         = $('#modal_rate_jaminan').val();
+            data_okupasi_jaminan  = $('#modal_data_okupasi_jaminan').val();
+            premi_jaminan         = accounting.unformat($('#modal_premi_jaminan').val());
+            premi_jaminan_request = accounting.unformat($('#modal_premi_jaminan_request').val());
+            rate_jaminan          = $('#modal_rate_jaminan').val();
 
             console.log(rate_jaminan);
 
@@ -139,8 +142,9 @@
 
             
         } else if(menu_kode == '2'){
-            modal_rate_jiwa        = $('#modal_rate_jiwa').val();
-            modal_premi_jiwa       = accounting.unformat($('#modal_premi_jiwa').val());
+            modal_rate_jiwa          = $('#modal_rate_jiwa').val();
+            modal_premi_jiwa         = accounting.unformat($('#modal_premi_jiwa').val());
+            modal_premi_jiwa_request = accounting.unformat($('#modal_premi_jiwa_request').val());
 
             if(modal_rate_jiwa <= 0 || modal_rate_jiwa == 0){
                 return Swal.fire({
@@ -299,6 +303,7 @@
                             $('#modal_pertanggungan_jaminan').val(accounting.formatMoney(response.data_details[0]['NILAI_ASURANSI'], '', 0, ',', '.')); 
                             $('#modal_rate_jaminan').val(response.data_details[0]['rate']); 
                             $('#modal_premi_jaminan').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.')); 
+                            $('#modal_premi_jaminan_request').val(accounting.formatMoney(response.data_details[0]['premi_request'], '', 0, ',', '.')); 
                             $('#modal_selisih_jaminan').val(response.data_details[0]['modal_inp_asuransi_jaminan']); 
 
                             if(response.data_details[0]['id_okupasi'] != null){
@@ -321,6 +326,7 @@
                             $('#modal_berat_badan_jiwa').val(response.data_details[0]['berat_asuransi_jiwa']); 
                             $('#modal_rate_jiwa').val(response.data_details[0]['rate']); 
                             $('#modal_premi_jiwa').val(accounting.formatMoney(response.data_details[0]['premi_asuransi'], '', 0, ',', '.')); 
+                            $('#modal_premi_jiwa_request').val(accounting.formatMoney(response.data_details[0]['premi_request'], '', 0, ',', '.')); 
                             $('#modal_selisih_jiwa').val(0); 
                             
                             fileUploads = [];
@@ -386,10 +392,11 @@
                     dataType : "json",
                     timeout : 180000,
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
-                    data:{  "data_okupasi_jaminan" : data_okupasi_jaminan,
-                            "premi_jaminan"        : premi_jaminan,
-                            "rate_jaminan"         : rate_jaminan,
-                            "rekening"             : rekening},
+                    data:{  "data_okupasi_jaminan"  : data_okupasi_jaminan,
+                            "premi_jaminan"         : premi_jaminan,
+                            "premi_jaminan_request" : premi_jaminan_request,
+                            "rate_jaminan"          : rate_jaminan,
+                            "rekening"              : rekening},
 
                     success : function(response) {
                         $('#loading-1').hide();
@@ -434,8 +441,9 @@
         fd.append('rekening',rekening);
         fd.append('modal_rate_jiwa',modal_rate_jiwa);
         fd.append('modal_premi_jiwa',modal_premi_jiwa);
-        fd.append('modal_extra_premi_jiwa',modal_extra_premi_jiwa);
-       
+        fd.append('modal_extra_premi_jiwa',modal_extra_premi_jiwa); 
+        fd.append('modal_premi_jiwa_request',modal_premi_jiwa_request); 
+        
         $('#loading-1').show();
         $.ajax({
             url: base_url + "Asuransi/Cover_asuransi_controller/cover_jiwa_process",

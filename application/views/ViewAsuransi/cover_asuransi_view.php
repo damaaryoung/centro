@@ -320,6 +320,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                   <div class="col-sm-4">
                                                         <input type="text" class="form-control form-control-sm" id="modal_inp_asuransi_jaminan" name="modal_inp_asuransi_jaminan" readonly>
                                                   </div>
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_data_okupasi_jaminan">Data Okupasi</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <select class="form-control form-control-sm select2 custom-select" id="modal_data_okupasi_jaminan" name="modal_data_okupasi_jaminan" style="width: 100%">
+                                                
+                                                        </select>
+                                                  </div>
                                   </div>
                                   <div class="form-group row">
                                                   <div class="col-sm-2">
@@ -329,21 +337,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <input type="text" class="form-control form-control-sm" id="modal_pertanggungan_jaminan" name="modal_pertanggungan_jaminan" disabled>
                                                   </div>
                                                   <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_data_okupasi_jaminan">Data Okupasi</label>
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jaminan">Pembayaran Premi</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <select class="form-control form-control-sm select2 custom-select" id="modal_data_okupasi_jaminan" name="modal_data_okupasi_jaminan" style="width: 100%">
-                                                
-                                                        </select>
+                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jaminan" name="modal_premi_jaminan" readonly>
                                                   </div>
-                                               
                                   </div>
                                   <div class="form-group row">
                                                   <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jaminan">Premi</label>
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jaminan_request">Premi Request</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jaminan" name="modal_premi_jaminan">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jaminan_request" name="modal_premi_jaminan_request">
                                                   </div>
                                                   <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_rate_jaminan">Rate</label>
@@ -376,6 +381,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                   <div class="col-sm-4">
                                                         <input type="text" class="form-control form-control-sm" id="modal_inp_asuransi_jiwa" name="modal_inp_asuransi_jiwa" readonly>
                                                   </div>
+                                  </div>
+                                  <div class="form-group row">
+                                                  <div class="col-sm-2">
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_berat_badan_jiwa">Berat Badan</label>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_berat_badan_jiwa" name="modal_berat_badan_jiwa" readonly>
+                                                  </div>
                                                   <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_tinggi_badan_jiwa">Tinggi Badan</label>
                                                   </div>
@@ -385,10 +398,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="form-group row">
                                                   <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_berat_badan_jiwa">Berat Badan</label>
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jiwa">Pembayaran Premi</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_berat_badan_jiwa" name="modal_berat_badan_jiwa" readonly>
+                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jiwa" name="modal_premi_jiwa" readonly>
                                                   </div>
                                                   <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_rate_jiwa">Rate</label>
@@ -399,10 +412,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="form-group row">
                                                   <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jiwa">Premi</label>
+                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_premi_jiwa_request">Premi Request</label>
                                                   </div>
                                                   <div class="col-sm-4">
-                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jiwa" name="modal_premi_jiwa">
+                                                        <input type="text" class="form-control form-control-sm" id="modal_premi_jiwa_request" name="modal_premi_jiwa_request">
                                                   </div>
                                                   <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_extra_premi_jiwa">Extra Premi</label>
@@ -411,18 +424,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <input type="checkbox" class="form-control form-control-sm" id="modal_extra_premi_jiwa" name="modal_extra_premi_jiwa">
                                                   </div>
                                   </div>
-                                  <!-- <div class="form-group row">
-                                                  <div class="col-sm-2">
-                                                      <label class="control-label" style="padding-top: 5px;"  for="modal_file_spa_spajk_jiwa">File SPA/SPAJK</label>
-                                                  </div>
-                                                  <div class="col-sm-4">
-                                                        <div class="custom-file">
-                                                          <input type="file" class="custom-file-input" id="modal_file_spa_spajk_jiwa" required>
-                                                          <label class="custom-file-label" for="modal_file_spa_spajk_jiwa">Choose file</label>
-                                                        </div>
-                                                        
-                                                  </div>
-                                  </div> -->
                                   <div class="form-group row">
                                                   <div class="col-sm-2">
                                                       <label class="control-label" style="padding-top: 5px;"  for="modal_upload_jiwa">Attachment</label>

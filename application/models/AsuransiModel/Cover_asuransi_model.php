@@ -162,6 +162,7 @@ class Cover_asuransi_model extends CI_Model{
 						K.`nilai_asuransi_jiwa`,
 						AC.`rate`,
 						AC.`premi_asuransi`,
+						AC.`premi_request`,
 						AC.`titipan_asuransi`,
 						AC.`root_document`,
                         AC.`root_address`,
@@ -196,13 +197,14 @@ class Cover_asuransi_model extends CI_Model{
         $query  = $this->db2->query($str);
 		return $query->result_array();
 	}
-	public function cover_jaminan($rekening,$data_okupasi_jaminan,$premi_jaminan,$rate_jaminan,$userID){
+	public function cover_jaminan($rekening,$data_okupasi_jaminan,$premi_jaminan,$premi_jaminan_request,$rate_jaminan,$userID){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		
 		$this->db2->trans_start();
 		$this->db2->query("UPDATE ASURANSI_COVER AC
-								SET AC.`id_okupasi`   = '$data_okupasi_jaminan',
+								SET AC.`id_okupasi`     = '$data_okupasi_jaminan',
 									AC.`premi_asuransi` = '$premi_jaminan',
+									AC.`premi_request`  = '$premi_jaminan_request',
 									AC.`rate`           = '$rate_jaminan',
 									AC.`last_update`    = NOW(),
 									AC.`last_update_by` = '$userID',
@@ -217,12 +219,14 @@ class Cover_asuransi_model extends CI_Model{
 								$userID,
 								$modal_rate_jiwa,
 								$modal_premi_jiwa,
-								$modal_extra_premi_jiwa){
+								$modal_extra_premi_jiwa,
+								$modal_premi_jiwa_request){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		
 		$this->db2->trans_start();
 		$this->db2->query("UPDATE ASURANSI_COVER AC
 							SET AC.`premi_asuransi` = '$modal_premi_jiwa',
+								AC.`premi_request`  = '$modal_premi_jiwa_request',
 								AC.`rate`           = '$modal_rate_jiwa',
 								AC.`last_update`    = NOW(),
 								AC.`last_update_by` = '$userID',
