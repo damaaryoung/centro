@@ -53,6 +53,12 @@ class Cover_asuransi_controller extends CI_Controller {
 		}
 		
 	}
+	public function get_asuransi(){
+		$asuransi       = $this->Cover_asuransi_model->get_data_asuransi();
+
+		$data['asuransi']       = $asuransi;
+		echo json_encode($data);
+	}
 	public function get_data_rekap_jaminan(){
 		$menu = $this->session->userdata('menu_cover_asuransi');
 		$divisi_id  = $this->session->userdata('divisi_id');
@@ -214,6 +220,26 @@ class Cover_asuransi_controller extends CI_Controller {
 		echo json_encode($data);
 
 	}
+	public function get_search_asuransi(){
+		$src_nama_asuansi  = $this->input->post('src_nama_asuansi');
+		$src_tgl_realisasi = $this->input->post('src_tgl_realisasi');
+		$menu              = $this->session->userdata('menu_cover_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+		
+		$rekap_jaminan = $this->Cover_asuransi_model->get_search_asuransi($jenis,$src_nama_asuansi,$src_tgl_realisasi);
+
+		$data['rekap_jaminan'] = $rekap_jaminan;
+		echo json_encode($data);
+
+	}
+
+	/// EXPORT DATA ////
 	public function export(){
 		$periode        = $this->input->post('periode');
 		$menu          = $this->session->userdata('menu_cover_asuransi');
@@ -419,6 +445,407 @@ class Cover_asuransi_controller extends CI_Controller {
 		echo json_encode($data);
 
 	}
+			//jaminan//
+	public function export_bess(){
+		$periode          = $this->input->post('periode');
+		$src_nama_asuansi = $this->input->post('src_nama_asuansi');
+		$menu          = $this->session->userdata('menu_cover_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+
+		
+		$date       = $this->Cover_asuransi_model->sysdate1();
+
+		require_once("vendor/autoload.php");
+		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+		$Excel_writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+		$alignment_center = \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER;
+
+		$spreadsheet->setActiveSheetIndex(0);
+		$activeSheet = $spreadsheet->getActiveSheet();
+		
+		$activeSheet->mergeCells('A4:K4');
+		$activeSheet->mergeCells('A5:K5');
+		$activeSheet->getStyle('A4:K4')->getAlignment()->setHorizontal($alignment_center);
+		$activeSheet->getStyle('A5:K5')->getAlignment()->setHorizontal($alignment_center);
+		$activeSheet->getStyle('A7:K7')->getAlignment()->setHorizontal($alignment_center);
+		 
+		$activeSheet->setCellValue('A1', 'PT. BPR Kredit Mandiri Indonesia');
+		$activeSheet->setCellValue('A2', 'Jl. Raya Karang Satria No.3, Rt.003, Rw.002, Kel. Karang Satria, Kec. Tambun Utara, Bekasi. Telp. 021-82652929, E-mail : info@kreditmandiri.co.id.');
+		$activeSheet->setCellValue('A4', 'COVER ASURANSI SAHABAT ARTHA PROTEKSI (BESS)');
+		$activeSheet->setCellValue('A5', $date);
+		
+		$activeSheet->setCellValue('A7', 'NO');
+		$activeSheet->setCellValue('B7', 'TGL PENGAJUAN');
+		$activeSheet->setCellValue('C7', 'TGL AKHIR PENGAJUAN');
+		$activeSheet->setCellValue('D7', 'LEBIH HARI');
+		$activeSheet->setCellValue('E7', 'KETERANGAN OKUPASI');
+		$activeSheet->setCellValue('F7', 'RATE');
+		$activeSheet->setCellValue('G7', 'NO PK');
+		$activeSheet->setCellValue('H7', 'NAMA NASABAH');
+		$activeSheet->setCellValue('I7', 'LAMA COVER');
+		$activeSheet->setCellValue('J7', 'NILAI PERTANGGUNGAN');
+		$activeSheet->setCellValue('K7', 'SPESIFIKASI OBJEK YANG DIJAMINKAN');
+ 
+
+		$report = $this->Cover_asuransi_model->export_cover_jaminan($periode,$jenis,$src_nama_asuansi);
+		if($report > 0) {
+			$i = 8;
+			$idx = 1;
+			foreach ($report as $row){
+				$activeSheet->setCellValue('A'.$i , $idx);
+				$activeSheet->setCellValueExplicit('B'.$i , $row['TGL_REALISASI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('B')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('C'.$i , $row['tgl_jt_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('C')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('D'.$i , $row['lebih_hari'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('D')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('E'.$i , $row['TUJUAN_USAHA'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('E')->setWidth(50);
+				$activeSheet->setCellValueExplicit('F'.$i , $row['rate'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('F')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('G'.$i , $row['no_rekening'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('G')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('H'.$i , $row['NAMA_NASABAH'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('H')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('I'.$i , $row['jkw_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('I')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('J'.$i , $row['NILAI_ASURANSI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('J')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('K'.$i , $row['alamat'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('K')->setWidth(50);
+				$i++;
+				$idx++;
+			}
+		}
+		
+		//$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(12);
+
+		$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
+		$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
+
+		if (!file_exists("$root_document/public_centro")){
+			mkdir("$root_document/public_centro");
+		} 
+				
+		if (!file_exists("$root_document/public_centro/report_cover/")) {
+			mkdir("$root_document/public_centro/report_cover/");
+		}
+
+		$filename = 'Report_Cover_Asuransi_'.$jenis.'_BESS_Periode_'.$periode.'.xlsx';
+		 
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename='. $filename);
+		header('Cache-Control: max-age=0');
+		$Excel_writer->save("$root_document"."public_centro/report_cover/".$filename);
+		
+		$data['download'] = $root_address."public_centro/report_cover/".$filename;
+		echo json_encode($data);
+	}
+	public function export_abda(){
+		$periode          = $this->input->post('periode');
+		$src_nama_asuansi = $this->input->post('src_nama_asuansi');
+		$menu          = $this->session->userdata('menu_cover_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+
+		
+		$date       = $this->Cover_asuransi_model->sysdate1();
+
+		require_once("vendor/autoload.php");
+		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+		$Excel_writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+		$alignment_center = \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER;
+
+		$spreadsheet->setActiveSheetIndex(0);
+		$activeSheet = $spreadsheet->getActiveSheet();
+		
+
+		 
+		$activeSheet->mergeCells('A4:K4');
+		$activeSheet->mergeCells('A5:K5');
+		$activeSheet->getStyle('A4:K4')->getAlignment()->setHorizontal($alignment_center);
+		$activeSheet->getStyle('A5:K5')->getAlignment()->setHorizontal($alignment_center);
+		$activeSheet->getStyle('A7:K7')->getAlignment()->setHorizontal($alignment_center);
+		 
+		$activeSheet->setCellValue('A1', 'PT. BPR Kredit Mandiri Indonesia');
+		$activeSheet->setCellValue('A2', 'Jl. Raya Karang Satria No.3, Rt.003, Rw.002, Kel. Karang Satria, Kec. Tambun Utara, Bekasi. Telp. 021-82652929, E-mail : info@kreditmandiri.co.id.');
+		$activeSheet->setCellValue('A4', 'COVER ASURANSI ABDA');
+		$activeSheet->setCellValue('A5', $date);
+		
+		$activeSheet->setCellValue('A7', 'NO');
+		$activeSheet->setCellValue('B7', 'TGL PENGAJUAN');
+		$activeSheet->setCellValue('C7', 'TGL AKHIR PENGAJUAN');
+		$activeSheet->setCellValue('D7', 'LEBIH HARI');
+		$activeSheet->setCellValue('E7', 'KETERANGAN OKUPASI');
+		$activeSheet->setCellValue('F7', 'RATE');
+		$activeSheet->setCellValue('G7', 'NO PK');
+		$activeSheet->setCellValue('H7', 'NAMA NASABAH');
+		$activeSheet->setCellValue('I7', 'LAMA COVER');
+		$activeSheet->setCellValue('J7', 'NILAI PERTANGGUNGAN');
+		$activeSheet->setCellValue('K7', 'SPESIFIKASI OBJEK YANG DIJAMINKAN');
+ 
+
+		$report = $this->Cover_asuransi_model->export_cover_jaminan($periode,$jenis,$src_nama_asuansi);
+		if($report > 0) {
+			$i = 8;
+			$idx = 1;
+			foreach ($report as $row){
+				
+				$activeSheet->setCellValue('A'.$i , $idx);
+				$activeSheet->setCellValueExplicit('B'.$i , $row['TGL_REALISASI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('B')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('C'.$i , $row['tgl_jt_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('C')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('D'.$i , $row['lebih_hari'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('D')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('E'.$i , $row['TUJUAN_USAHA'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('E')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('F'.$i , $row['rate'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('F')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('G'.$i , $row['no_rekening'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('G')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('H'.$i , $row['NAMA_NASABAH'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('H')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('I'.$i , $row['jkw_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('I')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('J'.$i , $row['NILAI_ASURANSI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('J')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('K'.$i , $row['alamat'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('K')->setAutoSize(true);
+				$i++;
+				$idx++;
+			}
+		}
+		
+		//$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(12);
+
+		$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
+		$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
+
+		if (!file_exists("$root_document/public_centro")){
+			mkdir("$root_document/public_centro");
+		} 
+				
+		if (!file_exists("$root_document/public_centro/report_cover/")) {
+			mkdir("$root_document/public_centro/report_cover/");
+		}
+
+		$filename = 'Report_Cover_Asuransi_'.$jenis.'_ABDA_Periode_'.$periode.'.xlsx';
+		 
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename='. $filename);
+		header('Cache-Control: max-age=0');
+		$Excel_writer->save("$root_document"."public_centro/report_cover/".$filename);
+		
+		$data['download'] = $root_address."public_centro/report_cover/".$filename;
+		echo json_encode($data);
+	}
+	public function export_jaminan_lain(){
+		$periode          = $this->input->post('periode');
+		$src_nama_asuansi = $this->input->post('src_nama_asuansi');
+		$menu          = $this->session->userdata('menu_cover_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+
+		
+		$date       = $this->Cover_asuransi_model->sysdate1();
+
+		require_once("vendor/autoload.php");
+		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+		$Excel_writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+		$alignment_center = \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER;
+
+		$spreadsheet->setActiveSheetIndex(0);
+		$activeSheet = $spreadsheet->getActiveSheet();
+		
+		$activeSheet->mergeCells('A4:K4');
+		$activeSheet->mergeCells('A5:K5');
+		$activeSheet->getStyle('A4:K4')->getAlignment()->setHorizontal($alignment_center);
+		$activeSheet->getStyle('A5:K5')->getAlignment()->setHorizontal($alignment_center);
+		$activeSheet->getStyle('A7:K7')->getAlignment()->setHorizontal($alignment_center);
+		 
+		$activeSheet->setCellValue('A1', 'PT. BPR Kredit Mandiri Indonesia');
+		$activeSheet->setCellValue('A2', 'Jl. Raya Karang Satria No.3, Rt.003, Rw.002, Kel. Karang Satria, Kec. Tambun Utara, Bekasi. Telp. 021-82652929, E-mail : info@kreditmandiri.co.id.');
+		$activeSheet->setCellValue('A4', 'COVER ASURANSI JAMINAN');
+		$activeSheet->setCellValue('A5', $date);
+		
+		$activeSheet->setCellValue('A7', 'NO');
+		$activeSheet->setCellValue('B7', 'TGL PENGAJUAN');
+		$activeSheet->setCellValue('C7', 'TGL AKHIR PENGAJUAN');
+		$activeSheet->setCellValue('D7', 'LEBIH HARI');
+		$activeSheet->setCellValue('E7', 'KETERANGAN OKUPASI');
+		$activeSheet->setCellValue('F7', 'RATE');
+		$activeSheet->setCellValue('G7', 'NO PK');
+		$activeSheet->setCellValue('H7', 'NAMA NASABAH');
+		$activeSheet->setCellValue('I7', 'LAMA COVER');
+		$activeSheet->setCellValue('J7', 'NILAI PERTANGGUNGAN');
+		$activeSheet->setCellValue('K7', 'SPESIFIKASI OBJEK YANG DIJAMINKAN');
+ 
+
+		$report = $this->Cover_asuransi_model->export_cover_jaminan($periode,$jenis,$src_nama_asuansi);
+		if($report > 0) {
+			$i = 8;
+			$idx = 1;
+			foreach ($report as $row){
+				
+				$activeSheet->setCellValue('A'.$i , $idx);
+				$activeSheet->setCellValueExplicit('B'.$i , $row['TGL_REALISASI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('B')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('C'.$i , $row['tgl_jt_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('C')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('D'.$i , $row['lebih_hari'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('D')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('E'.$i , $row['TUJUAN_USAHA'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('E')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('F'.$i , $row['rate'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('F')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('G'.$i , $row['no_rekening'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('G')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('H'.$i , $row['NAMA_NASABAH'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('H')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('I'.$i , $row['jkw_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('I')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('J'.$i , $row['NILAI_ASURANSI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('J')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('K'.$i , $row['alamat'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('K')->setAutoSize(true);
+				$i++;
+				$idx++;
+			}
+		}
+		
+		//$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(12);
+
+		$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
+		$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
+
+		if (!file_exists("$root_document/public_centro")){
+			mkdir("$root_document/public_centro");
+		} 
+				
+		if (!file_exists("$root_document/public_centro/report_cover/")) {
+			mkdir("$root_document/public_centro/report_cover/");
+		}
+
+		$filename = 'Report_Cover_Asuransi_'.$jenis.'_Periode_'.$periode.'.xlsx';
+		 
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename='. $filename);
+		header('Cache-Control: max-age=0');
+		$Excel_writer->save("$root_document"."public_centro/report_cover/".$filename);
+		
+		$data['download'] = $root_address."public_centro/report_cover/".$filename;
+		echo json_encode($data);
+	}
+			// end jaminan//
+	public function export_jiwa_generali(){
+		$periode        = $this->input->post('periode');
+		$date_periode  = $periode.'-01';
+		$src_nama_asuansi = $this->input->post('src_nama_asuansi');
+		$menu          = $this->session->userdata('menu_cover_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+		$file_path = './assets/design/images/generali1.png';
+
+		$date      = $this->Cover_asuransi_model->periode($date_periode);
+
+		require_once("vendor/autoload.php");
+		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+		$Excel_writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+		$alignment_center = \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER;
+		$drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+		
+
+		$spreadsheet->setActiveSheetIndex(0);
+		$activeSheet = $spreadsheet->getActiveSheet();
+
+		$drawing->setName('Logo');
+		$drawing->setDescription('Logo');
+		$drawing->setPath($file_path);
+		$drawing->setHeight(150);
+		$drawing->setWidth(150);
+		$drawing->setCoordinates('A1');
+		$drawing->setWorksheet($activeSheet);
+
+		$activeSheet->mergeCells('C6:F6');
+		$activeSheet->getStyle('C6:D6')->getAlignment()->setHorizontal($alignment_center);
+
+		$activeSheet->setCellValue('C6', 'Monthly Recapt '.$date);
+		$activeSheet->getStyle('C6')->getFont()->setBold(true);
+		$activeSheet->getStyle('C6')->getFont()->setSize(14);
+
+		$activeSheet->setCellValue('A11', 'No');
+		$activeSheet->setCellValue('B11', 'No Rekening');
+		$activeSheet->setCellValue('C11', 'Product Code');
+		$activeSheet->setCellValue('D11', 'CIF no');
+		$activeSheet->setCellValue('E11', 'Tanggal Submit');
+		$activeSheet->setCellValue('F11', 'Tanggal Efektif');
+		$activeSheet->setCellValue('G11', 'Nama Tertanggung');
+		$activeSheet->setCellValue('H11', 'Tipe ID');
+		$activeSheet->setCellValue('I11', 'No. ID');
+		$activeSheet->setCellValue('J11', 'Gender');
+		$activeSheet->setCellValue('K11', 'Tempat Lahir');
+		$activeSheet->setCellValue('L11', 'Tanggal Lahir');
+		$activeSheet->setCellValue('M11', 'Domisili');
+		$activeSheet->setCellValue('N11', 'Pekerjaan');
+		$activeSheet->setCellValue('O11', 'Email');
+		$activeSheet->setCellValue('P11', 'Jumlah Pertanggungan');
+		$activeSheet->setCellValue('Q11', 'Alamat Jaminan');
+		$activeSheet->setCellValue('R11', 'Premi');
+		$activeSheet->setCellValue('S11', 'Tenor');
+		$activeSheet->setCellValue('T11', 'Seller Agent Code');
+		$activeSheet->setCellValue('U11', 'Seller Branch Code');
+ 
+
+		$report = $this->Cover_asuransi_model->export_jiwa_generali($periode,$jenis,$src_nama_asuansi);
+
+		if($report > 0) {
+			$i = 12;
+			$idx = 1;
+			foreach ($report as $row){
+				
+				$activeSheet->setCellValue('A'.$i , $idx);
+				$activeSheet->setCellValueExplicit('B'.$i , $row['NO_REKENING'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('B')->setAutoSize(true);
+				$activeSheet->setCellValue('C'.$i , $row['product_code'])->getColumnDimension('C')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('D'.$i , $row['cif'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('D')->setAutoSize(true);
+				$activeSheet->setCellValue('E'.$i , $row['tgl_addendum_old'])->getColumnDimension('E')->setAutoSize(true);
+				$activeSheet->setCellValue('F'.$i , $row['TGL_REALISASI'])->getColumnDimension('F')->setAutoSize(true);
+				$activeSheet->setCellValue('G'.$i , $row['NAMA_NASABAH'])->getColumnDimension('G')->setAutoSize(true);
+				$activeSheet->setCellValue('H'.$i , $row['nama_identitas'])->getColumnDimension('H')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('I'.$i , $row['NO_ID'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('I')->setAutoSize(true);
+				$activeSheet->setCellValue('J'.$i , $row['jenis_kelamin'])->getColumnDimension('J')->setAutoSize(true);
+				$activeSheet->setCellValue('K'.$i , $row['TEMPATLAHIR'])->getColumnDimension('K')->setAutoSize(true);
+				$activeSheet->setCellValue('L'.$i , $row['TGLLAHIR'])->getColumnDimension('L')->setAutoSize(true);
+				$activeSheet->setCellValue('M'.$i , $row['domisili'])->getColumnDimension('M')->setAutoSize(true);
+				$activeSheet->setCellValue('N'.$i , $row['pekerjaan'])->getColumnDimension('N')->setAutoSize(true);
+				$activeSheet->setCellValue('O'.$i , $row['email'])->getColumnDimension('O')->setAutoSize(true);
+				$activeSheet->setCellValue('P'.$i , $row['nilai_asuransi_jiwa'])->getColumnDimension('P')->setAutoSize(true);
+				$activeSheet->setCellValue('Q'.$i , $row['alamat_jaminan'])->getColumnDimension('Q')->setAutoSize(true);
+				$activeSheet->setCellValue('R'.$i , $row['premi_asuransi'])->getColumnDimension('R')->setAutoSize(true);
+				$activeSheet->setCellValue('S'.$i , $row['jkw_asuransi_jiwa'])->getColumnDimension('S')->setAutoSize(true);
+				$activeSheet->setCellValue('T'.$i , $row['seller_agent_code'])->getColumnDimension('T')->setAutoSize(true);
+				$activeSheet->setCellValue('U'.$i , $row['seller_branch_code'])->getColumnDimension('U')->setAutoSize(true);
+				$i++;
+				$idx++;
+			}
+		}
+		
+		//$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(12);
+
+		$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
+		$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
+
+		if (!file_exists("$root_document/public_centro")){
+			mkdir("$root_document/public_centro");
+		} 
+				
+		if (!file_exists("$root_document/public_centro/report_cover/")) {
+			mkdir("$root_document/public_centro/report_cover/");
+		}
+
+		$filename = 'Report_Cover_Asuransi_'.$jenis.'_Periode_'.$periode.'.xlsx';
+		 
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename='. $filename);
+		header('Cache-Control: max-age=0');
+		$Excel_writer->save("$root_document"."public_centro/report_cover/".$filename);
+		
+		$data['download'] = $root_address."public_centro/report_cover/".$filename;
+		echo json_encode($data);
+
+	}
+	/// END EXPORT DATA ////
 
 	public function proses_upload(){
 		$files	             = $this->input->post('files');

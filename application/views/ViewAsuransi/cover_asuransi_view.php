@@ -91,6 +91,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                               </div>
                       </div>
+                      <div class="col-md-12 mx-auto">
+                              <div class="form-group row">
+                                  <div class="col-sm-1">
+                                      <label style="padding-top: 5px;" class="control-label" for="src_nama_asuansi">Asuransi</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <select class="form-control form-control-sm select2 custom-select" id="src_nama_asuansi" name="src_nama_asuansi" onchange="get_search_asuransi()">
+                                      </select>
+                                  </div>
+                                  <div class="col-sm-2">
+                                        <button type="button" class="btn btn-warning btn-sm" style="width: 220px;" id="btn_export_by_asuransi"><i class="fas fa-file-export"></i> Export By Asuransi</button>
+                                  </div>
+                              </div>   
+                      </div>
                 </div>
                    
             </div>            

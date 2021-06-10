@@ -19,6 +19,7 @@
     var modal_extra_premi_jiwa = '';
     var src_tgl_realisasi      = '';
     var src_search             = '';
+    var src_nama_asuansi       = '';
     var modal_premi_jiwa_request = '';
     var periode = '';
     var checkArray = [];
@@ -44,6 +45,7 @@
                 get_data_url = base_url + "Asuransi/Cover_asuransi_controller/get_data_rekap_jiwa";
             }
             getData();
+            getAsuransi();
     });
 
     $('#tbl_body_cover_asuransi').on('click','.btn_proses', function () {    
@@ -217,8 +219,30 @@
         export_selected();
     }); 
     
-  
+    $('#btn_export_by_asuransi').click(function () {
+        src_nama_asuansi = $('#src_nama_asuansi').val();
 
+        if(menu_kode == '1'){
+            if(src_nama_asuansi == '011'){
+                export_bess();
+            }
+            else if(src_nama_asuansi == '004'){
+                export_abda();
+            }
+            else{
+                export_jaminan_lain();
+            }
+        } else if(menu_kode == '2'){
+            if(src_nama_asuansi == '010'){
+                export_jiwa_generali();
+            }
+        }
+
+       
+
+        
+    });
+    
 
     ///// FUNCTION HERE //////
 
@@ -241,6 +265,34 @@
                     //console.log(response);
                     $('#src_tgl_realisasi').val(response.sysdate);
                     mapping_search(response);
+                    
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+    }
+
+    function getAsuransi(){
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/get_asuransi",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                success : function(response) {
+                    console.log(response);
+                    $.each(response.asuransi,function(i,data){
+                        $('#src_nama_asuansi').append('<option value="'+data.kode_asuransi+'">' + data.kode_asuransi + ' - ' + data.deskripsi_asuransi+'</option>');
+                    });
                     
                 },
                 error : function(response) {
@@ -617,6 +669,40 @@
         });    
        
    }
+
+   function get_search_asuransi(){
+        data = '';
+        src_nama_asuansi  = $('#src_nama_asuansi').val();
+        src_tgl_realisasi = $('#src_tgl_realisasi').val();
+        $('#tbl_cover_asuransi').DataTable().clear();
+        $('#tbl_cover_asuransi').DataTable().destroy();
+        $('#loading').show(); 
+        
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/get_search_asuransi",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "src_nama_asuansi" : src_nama_asuansi,
+                        "src_tgl_realisasi" : src_tgl_realisasi},
+
+                success : function(response) {
+                    mapping_search(response);
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Get Data!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                        });
+                }
+        });    
+   }
     
    function mapping_search(response){
         for(i = 0; i < response.rekap_jaminan.length; i++ ){
@@ -750,6 +836,162 @@
                 timeout : 180000,
                 data:{  "checkArray" : checkArray,
                         "lengthParsed" : lengthParsed},
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+
+                success : function(response) {
+                    console.log(response);
+                    $('#loading').hide(); 
+                    window.location.href = response.download;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Download Report Cover Asuransi',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+   }
+   function export_bess(){
+        $('#loading').show(); 
+        periode          = $('#src_tgl_realisasi').val();
+        src_nama_asuansi = $('#src_nama_asuansi').val();
+        console.log(periode,src_nama_asuansi);
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/export_bess",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                data:{  "periode" : periode,
+                        "src_nama_asuansi" : src_nama_asuansi},
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+
+                success : function(response) {
+                    console.log(response);
+                    $('#loading').hide(); 
+                    window.location.href = response.download;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Download Report Cover Asuransi',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+   }
+   function export_abda(){
+        $('#loading').show(); 
+        periode          = $('#src_tgl_realisasi').val();
+        src_nama_asuansi = $('#src_nama_asuansi').val();
+        console.log(periode,src_nama_asuansi);
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/export_abda",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                data:{  "periode" : periode,
+                        "src_nama_asuansi" : src_nama_asuansi},
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+
+                success : function(response) {
+                    console.log(response);
+                    $('#loading').hide(); 
+                    window.location.href = response.download;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Download Report Cover Asuransi',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+   }
+   function export_jaminan_lain(){
+        $('#loading').show(); 
+        periode          = $('#src_tgl_realisasi').val();
+        src_nama_asuansi = $('#src_nama_asuansi').val();
+        console.log(periode,src_nama_asuansi);
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/export_jaminan_lain",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                data:{  "periode" : periode,
+                        "src_nama_asuansi" : src_nama_asuansi},
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+
+                success : function(response) {
+                    console.log(response);
+                    $('#loading').hide(); 
+                    window.location.href = response.download;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Download Report Cover Asuransi',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+   }
+   function export_jiwa_generali(){
+        $('#loading').show(); 
+        periode          = $('#src_tgl_realisasi').val();
+        src_nama_asuansi = $('#src_nama_asuansi').val();
+        console.log(periode,src_nama_asuansi);
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/export_jiwa_generali",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                data:{  "periode" : periode,
+                        "src_nama_asuansi" : src_nama_asuansi},
                 headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('token')
                         },
