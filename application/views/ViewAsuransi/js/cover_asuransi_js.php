@@ -233,6 +233,9 @@
                 export_jaminan_lain();
             }
         } else if(menu_kode == '2'){
+            if(src_nama_asuansi == '005'){
+                export_jiwa_sinarmas();
+            }
             if(src_nama_asuansi == '010'){
                 export_jiwa_generali();
             }
@@ -987,6 +990,45 @@
         console.log(periode,src_nama_asuansi);
         $.ajax({
                 url : base_url + "Asuransi/Cover_asuransi_controller/export_jiwa_generali",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                data:{  "periode" : periode,
+                        "src_nama_asuansi" : src_nama_asuansi},
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+
+                success : function(response) {
+                    console.log(response);
+                    $('#loading').hide(); 
+                    window.location.href = response.download;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sukses Download Report Cover Asuransi',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Get Data!',
+                        text: 'Mohon Periksa Jaringan Anda'
+                    });
+                }
+        });    
+   }
+   function export_jiwa_sinarmas(){
+        $('#loading').show(); 
+        periode          = $('#src_tgl_realisasi').val();
+        src_nama_asuansi = $('#src_nama_asuansi').val();
+        console.log(periode,src_nama_asuansi);
+        $.ajax({
+                url : base_url + "Asuransi/Cover_asuransi_controller/export_jiwa_sinarmas",
                 type : "POST",
                 dataType : "json",
                 timeout : 180000,

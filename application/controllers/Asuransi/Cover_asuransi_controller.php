@@ -845,6 +845,107 @@ class Cover_asuransi_controller extends CI_Controller {
 		echo json_encode($data);
 
 	}
+	public function export_jiwa_sinarmas(){
+		$periode        = $this->input->post('periode');
+		$src_nama_asuansi = $this->input->post('src_nama_asuansi');
+		$menu          = $this->session->userdata('menu_cover_asuransi');
+		if($menu == '1'){
+			$jenis = 'JAMINAN';
+		}else if($menu == '2'){
+			$jenis = 'JIWA';
+		}else{
+			$jenis = '';
+		}
+		require_once("vendor/autoload.php");
+		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+		$Excel_writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+		$format_string = \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING;
+
+		$spreadsheet->setActiveSheetIndex(0);
+		$activeSheet = $spreadsheet->getActiveSheet();
+
+		 
+		$activeSheet->setCellValue('A6', 'No');
+		$activeSheet->setCellValue('B6', 'Nama Tertanggung');
+		$activeSheet->setCellValue('C6', 'No ID');
+		$activeSheet->setCellValue('D6', 'Tempat Lahir');
+		$activeSheet->setCellValue('E6', 'Tanggal Lahir');
+		$activeSheet->setCellValue('F6', 'Alamat');
+		$activeSheet->setCellValue('G6', 'Wilayah');
+		$activeSheet->setCellValue('H6', 'No. Telp');
+		$activeSheet->setCellValue('I6', 'Berat Badan');
+		$activeSheet->setCellValue('J6', 'Tinggi Badan');
+		$activeSheet->setCellValue('K6', 'UP Awal Rp');
+		$activeSheet->setCellValue('L6', 'Thn');
+		$activeSheet->setCellValue('M6', 'Bln');
+		$activeSheet->setCellValue('N6', 'Mulai Pertanggungan');
+		$activeSheet->setCellValue('O6', 'Akhir Pertanggungan');
+		$activeSheet->setCellValue('P6', 'Umur');
+		$activeSheet->setCellValue('Q6', 'Rate Premi');
+		$activeSheet->setCellValue('R6', 'Premi Pokok');
+		$activeSheet->setCellValue('S6', 'Cek Body');
+
+		$activeSheet->setCellValue('U6', 'Rate');
+		$activeSheet->setCellValue('V6', 'Rate +1');
+		$activeSheet->setCellValue('W6', 'Rate Bulanan');
+		$activeSheet->setCellValue('X6', 'Rate Tahun Ke-n');
+
+		$report = $this->Cover_asuransi_model->export_jiwa_sinarmas($periode,$jenis,$src_nama_asuansi);
+
+		if($report > 0) {
+			$i = 7;
+			$idx = 1;
+			foreach ($report as $row){
+				
+				$activeSheet->setCellValue('A'.$i , $idx);
+				$activeSheet->setCellValue('B'.$i , $row['NAMA_NASABAH'])->getColumnDimension('B')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('C'.$i , $row['NO_ID'],$format_string)->getColumnDimension('C')->setAutoSize(true);
+				$activeSheet->setCellValue('D'.$i , $row['TEMPATLAHIR'])->getColumnDimension('D')->setAutoSize(true);
+				$activeSheet->setCellValue('E'.$i , $row['TGLLAHIR'])->getColumnDimension('E')->setAutoSize(true);
+				$activeSheet->setCellValue('F'.$i , $row['domisili'])->getColumnDimension('F')->setAutoSize(true);
+				$activeSheet->setCellValue('G'.$i , $row['wilayah'])->getColumnDimension('G')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('H'.$i , $row['TELPON'],$format_string)->getColumnDimension('H')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('I'.$i , $row['berat_asuransi_jiwa'],$format_string)->getColumnDimension('I')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('J'.$i , $row['tinggi_asuransi_jiwa'],$format_string)->getColumnDimension('J')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('K'.$i , $row['nilai_asuransi_jiwa'],$format_string)->getColumnDimension('K')->setAutoSize(true);
+				$activeSheet->setCellValue('L'.$i , $row['tahun'])->getColumnDimension('L')->setAutoSize(true);
+				$activeSheet->setCellValue('M'.$i , $row['bulan'])->getColumnDimension('M')->setAutoSize(true);
+				$activeSheet->setCellValue('N'.$i , $row['TGL_REALISASI'])->getColumnDimension('N')->setAutoSize(true);
+				$activeSheet->setCellValue('O'.$i , $row['tgl_jt_asuransi_jiwa'])->getColumnDimension('O')->setAutoSize(true);
+				$activeSheet->setCellValue('P'.$i , $row['umur'])->getColumnDimension('P')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('Q'.$i , $row['rate'],$format_string)->getColumnDimension('Q')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('R'.$i , $row['premi_asuransi'],$format_string)->getColumnDimension('R')->setAutoSize(true);
+				$activeSheet->setCellValue('S'.$i , $row['bmi'])->getColumnDimension('S')->setAutoSize(true);
+				$i++;
+				$idx++;
+			}
+		}
+		
+		//$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(12);
+
+		$root_document   = $_SERVER["DOCUMENT_ROOT"].'/';
+		$root_address    = 'http://'.$_SERVER["SERVER_ADDR"].'/';
+
+		if (!file_exists("$root_document/public_centro")){
+			mkdir("$root_document/public_centro");
+		} 
+				
+		if (!file_exists("$root_document/public_centro/report_cover/")) {
+			mkdir("$root_document/public_centro/report_cover/");
+		}
+
+		$filename = 'Report_Cover_Asuransi_'.$jenis.'_SINARMAS_Periode_'.$periode.'.xlsx';
+		 
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename='. $filename);
+		header('Cache-Control: max-age=0');
+		$Excel_writer->save("$root_document"."public_centro/report_cover/".$filename);
+		
+		$data['download'] = $root_address."public_centro/report_cover/".$filename;
+		echo json_encode($data);
+
+	}
+	
 	/// END EXPORT DATA ////
 
 	public function proses_upload(){

@@ -524,6 +524,91 @@ class Cover_asuransi_model extends CI_Model{
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
+	public function export_jiwa_sinarmas($periode,$jenis,$src_nama_asuansi){
+		$this->db2 = $this->load->database('DB_CENTRO', true);
+		$str    = "SELECT DISTINCT
+						K.NO_REKENING,
+						N.`NAMA_NASABAH`,
+						N.`NO_ID` AS `NO_ID`,
+						N.`TEMPATLAHIR` AS `TEMPATLAHIR`,
+						DATE_FORMAT(N.`TGLLAHIR`, '%d %M %Y') AS `TGLLAHIR`,
+						CASE
+						WHEN JH.jenis_jaminan = 'SERTIFIKAT' 
+						THEN CONCAT(
+							JD.`alamat_sertifikat`,
+							' ',
+							JD.`kelurahan_sertifikat`,
+							' ',
+							JD.`kecamatan_sertifikat`,
+							' ',
+							JD.`kota_sertifikat`
+						) 
+						ELSE CONCAT(
+							JD.`alamat_bpkb`,
+							' ',
+							JD.`kelurahan_bpkb`,
+							' ',
+							JD.`kecamatan_bpkb`,
+							' ',
+							JD.`kota_bpkb`
+						) 
+						END AS `domisili` ,
+						CASE WHEN JH.jenis_jaminan = 'SERTIFIKAT' 
+						THEN JD.`kota_sertifikat`
+							ELSE JD.`kota_bpkb`
+						END AS `wilayah`,
+						N.`TELPON`,
+						K.`berat_asuransi_jiwa`,
+						K.`tinggi_asuransi_jiwa`,
+						K.`nilai_asuransi_jiwa`,
+						K.`NILAI_ASURANSI`,
+						k.`jkw_asuransi`,
+						k.`jkw_asuransi_jiwa` AS `tahun`,
+						k.`jkw_asuransi_jiwa` * 12 AS `bulan`,
+						DATE_FORMAT(K.`TGL_REALISASI`, '%d-%m-%Y') AS `TGL_REALISASI`,
+						DATE_FORMAT(K.`tgl_jt_asuransi_jiwa`, '%d-%m-%Y') AS `tgl_jt_asuransi_jiwa`,
+						TIMESTAMPDIFF(YEAR, N.`TGLLAHIR`, CURDATE()) AS `umur`,
+						AC.`rate`,
+						AC.`premi_asuransi`,
+						CASE 
+							WHEN K.`berat_asuransi_jiwa` / ((K.`tinggi_asuransi_jiwa` * 0.01) * (K.`tinggi_asuransi_jiwa` * 0.01)) < 18.5
+							THEN 'UNDERWEIGHT'
+							WHEN 18.5 > K.`berat_asuransi_jiwa` / ((K.`tinggi_asuransi_jiwa` * 0.01) * (K.`tinggi_asuransi_jiwa` * 0.01)) 
+								OR K.`berat_asuransi_jiwa` / ((K.`tinggi_asuransi_jiwa` * 0.01) * (K.`tinggi_asuransi_jiwa` * 0.01))  < 24.9
+							THEN 'NORMAL'
+							WHEN 25.0 > K.`berat_asuransi_jiwa` / ((K.`tinggi_asuransi_jiwa` * 0.01) * (K.`tinggi_asuransi_jiwa` * 0.01)) 
+								OR K.`berat_asuransi_jiwa` / ((K.`tinggi_asuransi_jiwa` * 0.01) * (K.`tinggi_asuransi_jiwa` * 0.01)) < 29.9
+							THEN 'OVERWEIGHT'
+							ELSE 'OBESE'
+						END AS 'bmi',
+						K.`berat_asuransi_jiwa` / ((K.`tinggi_asuransi_jiwa` * 0.01) * (K.`tinggi_asuransi_jiwa` * 0.01))  AS `bmi1`
+					FROM
+						kredit K 
+					LEFT JOIN asuransi_cover ac
+						ON ac.`no_rekening` = K.`NO_REKENING`
+					LEFT JOIN nasabah N
+						ON N.`NASABAH_ID` = K.`NASABAH_ID` 
+					LEFT JOIN css_kode_jenis_identitas CKJI 
+						ON CKJI.`jenis_id` = n.`JENIS_ID` 
+					LEFT JOIN css_kode_dati CKD
+						ON CKD.KODE_DATI = N.`KOTA_KAB` 
+					LEFT JOIN css_kode_group1 AS KG 
+						ON KG.kode_group1 = N.kode_group1 
+					LEFT JOIN jaminan_header JH
+						ON jh.`no_reff` = ac.`no_reff_jaminan` 
+					LEFT JOIN jaminan_dokument JD
+						ON JD.`no_reff` = JH.`no_reff`
+					LEFT JOIN slik_agunan SA 
+						ON K.`NO_REKENING` = SA.`no_rekening` 
+						AND JD.`agunan_id` = SA.`kode_register_agunan`
+				    WHERE AC.`jenis_asuransi` = '$jenis' 
+				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode'
+					AND ac.`kode_asuransi` = '$src_nama_asuansi';
+					#AND AC.`status_cover` = 'SUDAH';";
+
+        $query  = $this->db2->query($str);
+        return $query->result_array();
+	}
 	
 
 	public function get_data_cover_team_asuransi($date,$jenis){
