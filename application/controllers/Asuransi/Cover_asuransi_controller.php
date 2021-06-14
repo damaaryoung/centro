@@ -860,66 +860,118 @@ class Cover_asuransi_controller extends CI_Controller {
 		$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
 		$Excel_writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 		$format_string = \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING;
+		$alignment_center = \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER;
+		$alignment_center_ver = \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER;
+		$border = new PhpOffice\PhpSpreadsheet\Style\Border;
+		$fill   = \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID;
+		
 
 		$spreadsheet->setActiveSheetIndex(0);
 		$activeSheet = $spreadsheet->getActiveSheet();
 
-		 
-		$activeSheet->setCellValue('A6', 'No');
-		$activeSheet->setCellValue('B6', 'Nama Tertanggung');
-		$activeSheet->setCellValue('C6', 'No ID');
-		$activeSheet->setCellValue('D6', 'Tempat Lahir');
-		$activeSheet->setCellValue('E6', 'Tanggal Lahir');
-		$activeSheet->setCellValue('F6', 'Alamat');
-		$activeSheet->setCellValue('G6', 'Wilayah');
-		$activeSheet->setCellValue('H6', 'No. Telp');
-		$activeSheet->setCellValue('I6', 'Berat Badan');
-		$activeSheet->setCellValue('J6', 'Tinggi Badan');
-		$activeSheet->setCellValue('K6', 'UP Awal Rp');
-		$activeSheet->setCellValue('L6', 'Thn');
-		$activeSheet->setCellValue('M6', 'Bln');
-		$activeSheet->setCellValue('N6', 'Mulai Pertanggungan');
-		$activeSheet->setCellValue('O6', 'Akhir Pertanggungan');
-		$activeSheet->setCellValue('P6', 'Umur');
-		$activeSheet->setCellValue('Q6', 'Rate Premi');
-		$activeSheet->setCellValue('R6', 'Premi Pokok');
-		$activeSheet->setCellValue('S6', 'Cek Body');
+		
+		$activeSheet->getStyle('B2:Y15')->getFont()->setBold(true);
+		
 
-		$activeSheet->setCellValue('U6', 'Rate');
-		$activeSheet->setCellValue('V6', 'Rate +1');
-		$activeSheet->setCellValue('W6', 'Rate Bulanan');
-		$activeSheet->setCellValue('X6', 'Rate Tahun Ke-n');
+		/// header ///
+		$activeSheet->getStyle('B2:Y4')->getFont()->setSize(10);
+		$activeSheet->getStyle('B2:C4')->getBorders()->getOutline()->setBorderStyle($border::BORDER_THICK);
+		$activeSheet->getStyle('B2:C4')->getBorders()->getInside()->setBorderStyle($border::BORDER_MEDIUM);
+		$activeSheet->setCellValue('B2', 'NAMA BANK'); $activeSheet->setCellValue('C2', 'PT. BPR KREDIT MANDIRI INDONESIA')->getColumnDimension('B')->setWidth(12); 
+		$activeSheet->setCellValue('B3', 'ALAMAT'); $activeSheet->setCellValue('C3', 'BEKASI UTARA - KAB BEKASI');
+		$activeSheet->setCellValue('B4', 'JENIS PLAN'); $activeSheet->setCellValue('C4', 'BPR KMI(395 - 192)');
+
+		
+		$activeSheet->getStyle('B6:T6')->getFont()->setSize(16); $activeSheet->mergeCells('B6:T6');
+		$activeSheet->getStyle('B7:T7')->getFont()->setSize(14); $activeSheet->mergeCells('B7:T7');
+		$activeSheet->setCellValue('B6', 'DAFTAR PESERTA SEMEMTARA');
+		$activeSheet->setCellValue('B7', 'Lampirkan SPAJ');
+
+		$activeSheet->getStyle('B8:Y10')->getFont()->setSize(12);
+		$activeSheet->mergeCells('B8:F8'); $activeSheet->mergeCells('I8:T8'); 
+		$activeSheet->setCellValue('G8', 'PEMEGANG POLIS'); $activeSheet->setCellValue('H8', ': PT. BPR KREDIT MANDIRI INDONESIA');
+		
+		$activeSheet->mergeCells('B9:F9'); $activeSheet->mergeCells('I9:T9'); 
+		$activeSheet->setCellValue('G9', 'ALAMAT'); $activeSheet->setCellValue('H9', ': BEKASI UTARA - KAB BEKASI');
+
+		$activeSheet->mergeCells('B10:F10'); $activeSheet->mergeCells('I10:T10'); 
+		$activeSheet->setCellValue('G10', 'MACAM ASURANSI'); $activeSheet->setCellValue('H10', ': PR KMI(395 - 192)');
+
+		$activeSheet->getStyle('B12:T12')->getFont()->setSize(11);
+		$activeSheet->mergeCells('B11:T11'); $activeSheet->mergeCells('B12:T12');
+		$activeSheet->setCellValue('B12', 'BPR KREDIT MANDIRI INDONESIA KANTOR PUSAT BEKASI UTARA');
+
+		$activeSheet->getStyle('B6:T12')->getBorders()->getOutline()->setBorderStyle($border::BORDER_THICK);
+		
+
+		/// END HEADER ///
+		$activeSheet->getStyle('B14:Y15')->getAlignment()->setHorizontal($alignment_center);
+		$activeSheet->getStyle('B14:Y15')->getAlignment()->setVertical($alignment_center_ver);
+		$activeSheet->getStyle('B14:T15')->getBorders()->getOutline()->setBorderStyle($border::BORDER_THICK); 
+		$activeSheet->getStyle('B14:T15')->getBorders()->getInside()->setBorderStyle($border::BORDER_MEDIUM); 
+		$activeSheet->setCellValue('B14', 'No');                  $activeSheet->mergeCells('B14:B15');
+		$activeSheet->setCellValue('C14', 'Nama Tertanggung');    $activeSheet->mergeCells('C14:C15');
+		$activeSheet->setCellValue('D14', 'No ID');               $activeSheet->mergeCells('D14:D15');
+		$activeSheet->setCellValue('E14', 'Tempat Lahir');        $activeSheet->mergeCells('E14:E15');
+		$activeSheet->setCellValue('F14', 'Tanggal Lahir');       $activeSheet->mergeCells('F14:F15');
+		$activeSheet->setCellValue('G14', 'Alamat');              $activeSheet->mergeCells('G14:G15');
+		$activeSheet->setCellValue('H14', 'Wilayah');             $activeSheet->mergeCells('H14:H15');
+		$activeSheet->setCellValue('I14', 'No. Telp');            $activeSheet->mergeCells('I14:I15');
+		$activeSheet->setCellValue('J14', 'Berat Badan');         $activeSheet->mergeCells('J14:J15');
+		$activeSheet->setCellValue('K14', 'Tinggi Badan');        $activeSheet->mergeCells('K14:K15');
+		$activeSheet->setCellValue('L14', 'UP. Awal Rp');         $activeSheet->mergeCells('L14:L15');
+		$activeSheet->setCellValue('M14', 'Masa'); $activeSheet->mergeCells('M14:N14');$activeSheet->setCellValue('M15', 'Thn');   
+												   $activeSheet->setCellValue('N15', 'Bln');               
+		$activeSheet->setCellValue('O14', 'Mulai Pertanggungan');$activeSheet->setCellValue('O15', '(DD/MM/YYYY)');  
+		$activeSheet->setCellValue('P14', 'Akhir Pertanggungan'); $activeSheet->mergeCells('P14:P15');
+		$activeSheet->setCellValue('Q14', 'Umur'); $activeSheet->setCellValue('Q15', '(Thn)');  
+		$activeSheet->setCellValue('R14', 'Rate Premi');          $activeSheet->mergeCells('R14:R15');
+		$activeSheet->setCellValue('S14', 'Premi Pokok')->getColumnDimension('S')->setWidth(18); $activeSheet->mergeCells('S14:S15');
+		$activeSheet->setCellValue('T14', 'Cek Body')->getColumnDimension('T')->setWidth(15);    $activeSheet->mergeCells('T14:T15');
+
+
+        $activeSheet->getStyle('V14:Y15')->getBorders()->getOutline()->setBorderStyle($border::BORDER_THICK);           
+		$activeSheet->getStyle('V14:Y15')->getBorders()->getInside()->setBorderStyle($border::BORDER_MEDIUM);                          
+		$activeSheet->setCellValue('V14', 'Rate');           $activeSheet->mergeCells('V14:V15');
+		$activeSheet->setCellValue('W14', 'Rate +1');        $activeSheet->mergeCells('W14:W15');
+		$activeSheet->setCellValue('X14', 'Rate Bulanan')->getColumnDimension('X')->setWidth(15);;   $activeSheet->mergeCells('X14:X15');
+		$activeSheet->setCellValue('Y14', 'Rate Tahun Ke-n')->getColumnDimension('Y')->setWidth(15); $activeSheet->mergeCells('Y14:Y15');
 
 		$report = $this->Cover_asuransi_model->export_jiwa_sinarmas($periode,$jenis,$src_nama_asuansi);
 
 		if($report > 0) {
-			$i = 7;
+			$i = 16;
 			$idx = 1;
 			foreach ($report as $row){
 				
-				$activeSheet->setCellValue('A'.$i , $idx);
-				$activeSheet->setCellValue('B'.$i , $row['NAMA_NASABAH'])->getColumnDimension('B')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('C'.$i , $row['NO_ID'],$format_string)->getColumnDimension('C')->setAutoSize(true);
-				$activeSheet->setCellValue('D'.$i , $row['TEMPATLAHIR'])->getColumnDimension('D')->setAutoSize(true);
-				$activeSheet->setCellValue('E'.$i , $row['TGLLAHIR'])->getColumnDimension('E')->setAutoSize(true);
-				$activeSheet->setCellValue('F'.$i , $row['domisili'])->getColumnDimension('F')->setAutoSize(true);
-				$activeSheet->setCellValue('G'.$i , $row['wilayah'])->getColumnDimension('G')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('H'.$i , $row['TELPON'],$format_string)->getColumnDimension('H')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('I'.$i , $row['berat_asuransi_jiwa'],$format_string)->getColumnDimension('I')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('J'.$i , $row['tinggi_asuransi_jiwa'],$format_string)->getColumnDimension('J')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('K'.$i , $row['nilai_asuransi_jiwa'],$format_string)->getColumnDimension('K')->setAutoSize(true);
-				$activeSheet->setCellValue('L'.$i , $row['tahun'])->getColumnDimension('L')->setAutoSize(true);
-				$activeSheet->setCellValue('M'.$i , $row['bulan'])->getColumnDimension('M')->setAutoSize(true);
-				$activeSheet->setCellValue('N'.$i , $row['TGL_REALISASI'])->getColumnDimension('N')->setAutoSize(true);
-				$activeSheet->setCellValue('O'.$i , $row['tgl_jt_asuransi_jiwa'])->getColumnDimension('O')->setAutoSize(true);
-				$activeSheet->setCellValue('P'.$i , $row['umur'])->getColumnDimension('P')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('Q'.$i , $row['rate'],$format_string)->getColumnDimension('Q')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('R'.$i , $row['premi_asuransi'],$format_string)->getColumnDimension('R')->setAutoSize(true);
-				$activeSheet->setCellValue('S'.$i , $row['bmi'])->getColumnDimension('S')->setAutoSize(true);
+				$activeSheet->setCellValue('B'.$i , $idx);
+				$activeSheet->setCellValue('C'.$i , $row['NAMA_NASABAH'])->getColumnDimension('C')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('D'.$i , $row['NO_ID'],$format_string)->getColumnDimension('D')->setAutoSize(true);
+				$activeSheet->setCellValue('E'.$i , $row['TEMPATLAHIR'])->getColumnDimension('E')->setAutoSize(true);
+				$activeSheet->setCellValue('F'.$i , $row['TGLLAHIR'])->getColumnDimension('F')->setAutoSize(true);
+				$activeSheet->setCellValue('G'.$i , $row['domisili'])->getColumnDimension('G')->setAutoSize(true);
+				$activeSheet->setCellValue('H'.$i , $row['wilayah'])->getColumnDimension('H')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('I'.$i , $row['TELPON'],$format_string)->getColumnDimension('I')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('J'.$i , $row['berat_asuransi_jiwa'],$format_string)->getColumnDimension('J')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('K'.$i , $row['tinggi_asuransi_jiwa'],$format_string)->getColumnDimension('K')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('L'.$i , $row['nilai_asuransi_jiwa'],$format_string)->getColumnDimension('L')->setAutoSize(true);
+				$activeSheet->setCellValue('M'.$i , $row['tahun'])->getColumnDimension('M')->setAutoSize(true);
+				$activeSheet->setCellValue('N'.$i , $row['bulan'])->getColumnDimension('N')->setAutoSize(true);
+				$activeSheet->setCellValue('O'.$i , $row['TGL_REALISASI'])->getColumnDimension('O')->setAutoSize(true);
+				$activeSheet->setCellValue('P'.$i , $row['tgl_jt_asuransi_jiwa'])->getColumnDimension('P')->setAutoSize(true);
+				$activeSheet->setCellValue('Q'.$i , $row['umur'])->getColumnDimension('Q')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('R'.$i , $row['rate'],$format_string)->getColumnDimension('R')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('S'.$i , $row['premi_asuransi'],$format_string)->getColumnDimension('S')->setWidth(18);
+				$activeSheet->setCellValue('T'.$i , $row['bmi'])->getColumnDimension('T')->setWidth(15);
 				$i++;
 				$idx++;
 			}
 		}
+		$activeSheet->getStyle('B16:T'.$i)->getBorders()->getOutline()->setBorderStyle($border::BORDER_THICK);
+		$activeSheet->getStyle('B16:T'.$i)->getBorders()->getInside()->setBorderStyle($border::BORDER_MEDIUM);
+
+		$activeSheet->getStyle('V16:Y'.$i)->getBorders()->getOutline()->setBorderStyle($border::BORDER_THICK);
+		$activeSheet->getStyle('V16:Y'.$i)->getBorders()->getInside()->setBorderStyle($border::BORDER_MEDIUM);
 		
 		//$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(12);
 
