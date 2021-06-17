@@ -258,33 +258,33 @@ class Cover_asuransi_controller extends CI_Controller {
 		$activeSheet = $spreadsheet->getActiveSheet();
 
 		 
-		$activeSheet->setCellValue('A1', 'No');
-		$activeSheet->setCellValue('B1', 'No Rekening');
-		$activeSheet->setCellValue('C1', 'Product Code');
-		$activeSheet->setCellValue('D1', 'CIF no');
-		$activeSheet->setCellValue('E1', 'Tanggal Submit');
-		$activeSheet->setCellValue('F1', 'Tanggal Efektif');
-		$activeSheet->setCellValue('G1', 'Nama Tertanggung');
-		$activeSheet->setCellValue('H1', 'Tipe ID');
-		$activeSheet->setCellValue('I1', 'No. ID');
-		$activeSheet->setCellValue('J1', 'Gender');
-		$activeSheet->setCellValue('K1', 'Tempat Lahir');
-		$activeSheet->setCellValue('L1', 'Tanggal Lahir');
-		$activeSheet->setCellValue('M1', 'Domisili');
-		$activeSheet->setCellValue('N1', 'Pekerjaan');
-		$activeSheet->setCellValue('O1', 'Email');
-		$activeSheet->setCellValue('P1', 'Jumlah Pertanggungan');
-		$activeSheet->setCellValue('Q1', 'Alamat Jaminan');
-		$activeSheet->setCellValue('R1', 'Premi');
-		$activeSheet->setCellValue('S1', 'Tenor');
-		$activeSheet->setCellValue('T1', 'Seller Agent Code');
-		$activeSheet->setCellValue('U1', 'Seller Branch Code');
+		$activeSheet->setCellValue('A4', 'No');
+		$activeSheet->setCellValue('B4', 'No Rekening');
+		$activeSheet->setCellValue('C4', 'Product Code');
+		$activeSheet->setCellValue('D4', 'CIF no');
+		$activeSheet->setCellValue('E4', 'Tanggal Submit');
+		$activeSheet->setCellValue('F4', 'Tanggal Efektif');
+		$activeSheet->setCellValue('G4', 'Nama Tertanggung');
+		$activeSheet->setCellValue('H4', 'Tipe ID');
+		$activeSheet->setCellValue('I4', 'No. ID');
+		$activeSheet->setCellValue('J4', 'Gender');
+		$activeSheet->setCellValue('K4', 'Tempat Lahir');
+		$activeSheet->setCellValue('L4', 'Tanggal Lahir');
+		$activeSheet->setCellValue('M4', 'Domisili');
+		$activeSheet->setCellValue('N4', 'Pekerjaan');
+		$activeSheet->setCellValue('O4', 'Email');
+		$activeSheet->setCellValue('P4', 'Jumlah Pertanggungan');
+		$activeSheet->setCellValue('Q4', 'Alamat Jaminan');
+		$activeSheet->setCellValue('R4', 'Premi');
+		$activeSheet->setCellValue('S4', 'Tenor');
+		$activeSheet->setCellValue('T4', 'Seller Agent Code');
+		$activeSheet->setCellValue('U4', 'Seller Branch Code');
  
 
 		$report = $this->Cover_asuransi_model->export_cover($periode,$jenis);
 
 		if($report > 0) {
-			$i = 2;
+			$i = 5;
 			$idx = 1;
 			foreach ($report as $row){
 				
@@ -358,27 +358,27 @@ class Cover_asuransi_controller extends CI_Controller {
 		$activeSheet = $spreadsheet->getActiveSheet();
 
 		 
-		$activeSheet->setCellValue('A1', 'No');
-		$activeSheet->setCellValue('B1', 'No Rekening');
-		$activeSheet->setCellValue('C1', 'Product Code');
-		$activeSheet->setCellValue('D1', 'CIF no');
-		$activeSheet->setCellValue('E1', 'Tanggal Submit');
-		$activeSheet->setCellValue('F1', 'Tanggal Efektif');
-		$activeSheet->setCellValue('G1', 'Nama Tertanggung');
-		$activeSheet->setCellValue('H1', 'Tipe ID');
-		$activeSheet->setCellValue('I1', 'No. ID');
-		$activeSheet->setCellValue('J1', 'Gender');
-		$activeSheet->setCellValue('K1', 'Tempat Lahir');
-		$activeSheet->setCellValue('L1', 'Tanggal Lahir');
-		$activeSheet->setCellValue('M1', 'Domisili');
-		$activeSheet->setCellValue('N1', 'Pekerjaan');
-		$activeSheet->setCellValue('O1', 'Email');
-		$activeSheet->setCellValue('P1', 'Jumlah Pertanggungan');
-		$activeSheet->setCellValue('Q1', 'Alamat Jaminan');
-		$activeSheet->setCellValue('R1', 'Premi');
-		$activeSheet->setCellValue('S1', 'Tenor');
-		$activeSheet->setCellValue('T1', 'Seller Agent Code');
-		$activeSheet->setCellValue('U1', 'Seller Branch Code');
+		$activeSheet->setCellValue('A4', 'No');
+		$activeSheet->setCellValue('B4', 'No Rekening');
+		$activeSheet->setCellValue('C4', 'Product Code');
+		$activeSheet->setCellValue('D4', 'CIF no');
+		$activeSheet->setCellValue('E4', 'Tanggal Submit');
+		$activeSheet->setCellValue('F4', 'Tanggal Efektif');
+		$activeSheet->setCellValue('G4', 'Nama Tertanggung');
+		$activeSheet->setCellValue('H4', 'Tipe ID');
+		$activeSheet->setCellValue('I4', 'No. ID');
+		$activeSheet->setCellValue('J4', 'Gender');
+		$activeSheet->setCellValue('K4', 'Tempat Lahir');
+		$activeSheet->setCellValue('L4', 'Tanggal Lahir');
+		$activeSheet->setCellValue('M4', 'Domisili');
+		$activeSheet->setCellValue('N4', 'Pekerjaan');
+		$activeSheet->setCellValue('O4', 'Email');
+		$activeSheet->setCellValue('P4', 'Jumlah Pertanggungan');
+		$activeSheet->setCellValue('Q4', 'Alamat Jaminan');
+		$activeSheet->setCellValue('R4', 'Premi');
+		$activeSheet->setCellValue('S4', 'Tenor');
+		$activeSheet->setCellValue('T4', 'Seller Agent Code');
+		$activeSheet->setCellValue('U4', 'Seller Branch Code');
  
 		for($i = 0; $i < $lengthParsed; $i++){
 			if($i == 0){
@@ -391,7 +391,7 @@ class Cover_asuransi_controller extends CI_Controller {
 		$report = $this->Cover_asuransi_model->export_selected($id_data,$jenis);
 
 		if($report > 0) {
-			$i = 2;
+			$i = 5;
 			$idx = 1;
 			foreach ($report as $row){
 				

@@ -70,9 +70,13 @@ class SefinController extends CI_Controller {
 		$data['sidebar'] = $this->load->view('templates/sidebar.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('templates/footer.php', NULL, TRUE);
 		$data['ctrlbar'] = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
-	
 
 		if($session != ''){
+			if($this->session->userdata('kd_cabang') == '00'){
+				$data['selectKodeKantor'] = $this->Model_view_master->selectKodeKantor();
+			}else if($this->session->userdata('kd_cabang') != '00'){
+				$data['selectKodeKantor'] = $this->Model_view_master->select_pic_cabang();
+			}
 			$this->load->view('master/cek_sertifikat/index', $data);
 		}
 		else{

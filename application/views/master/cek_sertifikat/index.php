@@ -81,6 +81,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="callout callout-success">
                   <div class="row">
                     <div class="col-md">
+                      <div class="form-group row">
+                               
+                          <div class="col-md-2">
+                              <label style="padding-top: 5px;" class="control-label" for="main_kode_kantor" style="text-align: left;">Kode Kantor</label>
+                          </div>
+                          <div class="col-md-4">
+                              <select class="form-control form-control-sm select2" id="main_kode_kantor" name="main_kode_kantor" onchange=''>
+                              <?php foreach ($selectKodeKantor as $row) : ?>
+                                  <option value="<?php echo $row['id'];?>"><?php echo $row['id'];?> - <?php echo $row['nama'];?> </option>
+                              <?php endforeach;?>
+                           
+                              </select>
+                          </div>
+                      </div>
                       <div class="input-group mb-3">
                         <input type="text" class="form-control cari-berdasarkan" placeholder="Cari berdasarkan nomor so.....">
                         <div class="input-group-append">

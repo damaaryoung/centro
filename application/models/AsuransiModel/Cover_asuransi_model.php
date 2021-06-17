@@ -319,53 +319,74 @@ class Cover_asuransi_model extends CI_Model{
 	public function export_cover($periode,$jenis){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		$str    = "SELECT 
-		                  AC.`no_rekening` as `no_rekening`,
-		                  '' AS `code`,
-		                  SA.`cif` as `cif`,
-		                  DATE_FORMAT(AC.`created_date`, '%d-%m-%Y') as `created_date`,
-		                  DATE_FORMAT(AC.`tgl_cover`, '%d-%m-%Y') as `tgl_cover`,
-		                  N.`NAMA_NASABAH` as `NAMA_NASABAH`,
-		                  CKJI.`nama_identitas` as `nama_identitas`,
-		                  N.`NO_ID` as `NO_ID`,
-		                  CASE
-		                    WHEN N.`JENIS_KELAMIN` = 'L' 
-		                    THEN 'Laki-Laki' 
-		                    ELSE 'Perempuan' 
-		                  END AS `jenis_kelamin`,
-		                  N.`TEMPATLAHIR` as `TEMPATLAHIR`,
-						  DATE_FORMAT(N.`TGLLAHIR`, '%d-%m-%Y') AS `TGLLAHIR`,
-		                  CKD.`deskripsi_kode_dati` as `deskripsi_kode_dati`,
-		                  KG.deskripsi_group1 AS `pekerjaan`,
-		                  N.EMAIL AS `email`,
-		                  K.`NILAI_ASURANSI` as `NILAI_ASURANSI`,
-		                  AC.`premi_asuransi` as `premi_asuransi`,
-		                  K.`jkw_asuransi` as `jkw_asuransi`,
-		                  U.`nama` as `nama`,
-		                  CONCAT('BPR KMI ', AKK.`nama_kantor`) AS `branch_name`,
-						  jh.`alamat` AS `alamat_jaminan`
-				    FROM
-				    asuransi_cover AC 
-				    LEFT JOIN NASABAH N 
-				      ON N.`NASABAH_ID` = AC.`nasabah_id` 
-				    LEFT JOIN KREDIT K 
-				      ON K.`NO_REKENING` = AC.`no_rekening` 
-				    LEFT JOIN JAMINAN_HEADER JH 
-				      ON jh.`no_reff` = ac.`no_reff_jaminan`
-				    LEFT JOIN kre_kode_asuransi KKA 
-				      ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
-				    LEFT JOIN slik_agunan SA 
-				      ON SA.`no_rekening` = AC.`no_rekening`
-					  AND SA.`kode_register_agunan` = AC.`agunan_id` 
-				    LEFT JOIN css_kode_jenis_identitas CKJI 
-				      ON CKJI.`jenis_id` = n.`JENIS_ID` 
-				    LEFT JOIN css_kode_dati CKD 
-				      ON CKD.KODE_DATI = N.`KOTA_KAB` 
-				    LEFT JOIN css_kode_group1 AS KG 
-				      ON KG.kode_group1 = N.kode_group1 
-				    LEFT JOIN USER U 
-				      ON u.`user_id` = AC.created_by 
-				    LEFT JOIN app_kode_kantor AKK 
-				      ON AKK.kode_kantor = u.kd_cabang 
+					AC.`no_rekening` AS `no_rekening`,
+					'' AS `code`,
+					SA.`cif` AS `cif`,
+					DATE_FORMAT(K.`TGL_REALISASI`, '%d-%m-%Y') AS `created_date`,
+					CASE 
+					WHEN AC.`jenis_asuransi` = 'JAMINAN'
+				    	   THEN K.`tgl_jt_asuransi`
+						 WHEN AC.`jenis_asuransi` = 'JIWA'
+						   THEN K.`tgl_jt_asuransi_jiwa`
+					END AS `tgl_cover`,
+					N.`NAMA_NASABAH` AS `NAMA_NASABAH`,
+					CKJI.`nama_identitas` AS `nama_identitas`,
+					N.`NO_ID` AS `NO_ID`,
+					CASE
+						WHEN N.`JENIS_KELAMIN` = 'L' 
+							THEN 'Laki-Laki' 
+						ELSE 'Perempuan' 
+					END AS `jenis_kelamin`,
+					N.`TEMPATLAHIR` AS `TEMPATLAHIR`,
+					DATE_FORMAT(N.`TGLLAHIR`, '%d-%m-%Y') AS `TGLLAHIR`,
+					CASE 
+						WHEN JH.jenis_jaminan = 'SERTIFIKAT'
+							THEN CONCAT(JD.`alamat_sertifikat`,' ', JD.`kelurahan_sertifikat`, ' ', JD.`kecamatan_sertifikat`, ' ', JD.`kota_sertifikat`) 
+						ELSE CONCAT(JD.`alamat_bpkb`,' ', JD.`kelurahan_bpkb`, ' ', JD.`kecamatan_bpkb`, ' ', JD.`kota_bpkb`)
+					END AS `deskripsi_kode_dati`,
+					KG.deskripsi_group1 AS `pekerjaan`,
+					N.EMAIL AS `email`,
+					CASE
+						WHEN AC.`jenis_asuransi` = 'JAMINAN'
+							THEN K.`NILAI_ASURANSI`
+						WHEN AC.`jenis_asuransi` = 'JIWA'
+							THEN k.`nilai_asuransi_jiwa`
+					END AS `NILAI_ASURANSI`,
+					AC.`premi_asuransi` AS `premi_asuransi`,
+					CASE 
+						WHEN AC.`jenis_asuransi` = 'JAMINAN'
+							THEN K.`jkw_asuransi`
+						WHEN AC.`jenis_asuransi` = 'JIWA'
+							THEN k.`jkw_asuransi_jiwa`
+					END AS `jkw_asuransi`,
+					'' AS `nama`,
+					'BPR Kredit Mandiri Indonesia' AS `branch_name`,
+					jh.`alamat` AS `alamat_jaminan`
+					FROM
+					asuransi_cover AC 
+					LEFT JOIN NASABAH N 
+						ON N.`NASABAH_ID` = AC.`nasabah_id` 
+					LEFT JOIN KREDIT K 
+						ON K.`NO_REKENING` = AC.`no_rekening` 
+					LEFT JOIN JAMINAN_HEADER JH 
+						ON jh.`no_reff` = ac.`no_reff_jaminan`
+					LEFT JOIN kre_kode_asuransi KKA 
+						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+					LEFT JOIN slik_agunan SA 
+						ON SA.`no_rekening` = AC.`no_rekening`
+						AND SA.`kode_register_agunan` = AC.`agunan_id` 
+					LEFT JOIN css_kode_jenis_identitas CKJI 
+						ON CKJI.`jenis_id` = n.`JENIS_ID` 
+					LEFT JOIN css_kode_dati CKD 
+						ON CKD.KODE_DATI = N.`KOTA_KAB` 
+					LEFT JOIN css_kode_group1 AS KG 
+						ON KG.kode_group1 = N.kode_group1 
+					LEFT JOIN USER U 
+						ON u.`user_id` = AC.created_by 
+					LEFT JOIN app_kode_kantor AKK 
+						ON AKK.kode_kantor = u.kd_cabang 
+					LEFT JOIN jaminan_dokument JD
+						ON JD.`no_reff` = JH.`no_reff` 
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
 				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode'
 					AND AC.`status_cover` = 'SUDAH';";
@@ -376,30 +397,49 @@ class Cover_asuransi_model extends CI_Model{
 	public function export_selected($id_data,$jenis){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		$str    = "SELECT 
-		                  AC.`no_rekening` as `no_rekening`,
-		                  '' AS `code`,
-		                  SA.`cif` as `cif`,
-		                  DATE_FORMAT(AC.`created_date`, '%d-%m-%Y') as `created_date`,
-		                  DATE_FORMAT(AC.`tgl_cover`, '%d-%m-%Y') as `tgl_cover`,
+		                AC.`no_rekening` as `no_rekening`,
+		                '' AS `code`,
+		                SA.`cif` as `cif`,
+		                DATE_FORMAT(K.`TGL_REALISASI`, '%d-%m-%Y') AS `created_date`,
+						CASE 
+						WHEN AC.`jenis_asuransi` = 'JAMINAN'
+							THEN K.`tgl_jt_asuransi`
+							WHEN AC.`jenis_asuransi` = 'JIWA'
+							THEN K.`tgl_jt_asuransi_jiwa`
+						END AS `tgl_cover`,
 		                  N.`NAMA_NASABAH` as `NAMA_NASABAH`,
 		                  CKJI.`nama_identitas` as `nama_identitas`,
 		                  N.`NO_ID` as `NO_ID`,
-		                  CASE
-		                    WHEN N.`JENIS_KELAMIN` = 'L' 
-		                    THEN 'Laki-Laki' 
-		                    ELSE 'Perempuan' 
-		                  END AS `jenis_kelamin`,
-		                  N.`TEMPATLAHIR` as `TEMPATLAHIR`,
-						  DATE_FORMAT(N.`TGLLAHIR`, '%d-%m-%Y') AS `TGLLAHIR`,
-		                  CKD.`deskripsi_kode_dati` as `deskripsi_kode_dati`,
-		                  KG.deskripsi_group1 AS `pekerjaan`,
-		                  N.EMAIL AS `email`,
-		                  K.`NILAI_ASURANSI` as `NILAI_ASURANSI`,
-		                  AC.`premi_asuransi` as `premi_asuransi`,
-		                  K.`jkw_asuransi` as `jkw_asuransi`,
-		                  U.`nama` as `nama`,
-		                  CONCAT('BPR KMI ', AKK.`nama_kantor`) AS `branch_name`,
-						  jh.`alamat` AS `alamat_jaminan`
+		                CASE
+		                	WHEN N.`JENIS_KELAMIN` = 'L' 
+		                		THEN 'Laki-Laki' 
+		                	ELSE 'Perempuan' 
+		                END AS `jenis_kelamin`,
+		                N.`TEMPATLAHIR` as `TEMPATLAHIR`,
+						DATE_FORMAT(N.`TGLLAHIR`, '%d-%m-%Y') AS `TGLLAHIR`,
+		                CASE 
+							WHEN JH.jenis_jaminan = 'SERTIFIKAT'
+								THEN CONCAT(JD.`alamat_sertifikat`,' ', JD.`kelurahan_sertifikat`, ' ', JD.`kecamatan_sertifikat`, ' ', JD.`kota_sertifikat`) 
+							ELSE CONCAT(JD.`alamat_bpkb`,' ', JD.`kelurahan_bpkb`, ' ', JD.`kecamatan_bpkb`, ' ', JD.`kota_bpkb`)
+						END AS `deskripsi_kode_dati`,
+		                KG.deskripsi_group1 AS `pekerjaan`,
+		                N.EMAIL AS `email`,
+		                CASE
+							WHEN AC.`jenis_asuransi` = 'JAMINAN'
+								THEN K.`NILAI_ASURANSI`
+							WHEN AC.`jenis_asuransi` = 'JIWA'
+								THEN k.`nilai_asuransi_jiwa`
+						END AS `NILAI_ASURANSI`,
+		                AC.`premi_asuransi` as `premi_asuransi`,
+		                CASE 
+							WHEN AC.`jenis_asuransi` = 'JAMINAN'
+								THEN K.`jkw_asuransi`
+							WHEN AC.`jenis_asuransi` = 'JIWA'
+								THEN k.`jkw_asuransi_jiwa`
+						END AS `jkw_asuransi`,
+						'' AS `nama`,
+						'BPR Kredit Mandiri Indonesia' AS `branch_name`,
+						jh.`alamat` AS `alamat_jaminan`
 				    FROM
 				    asuransi_cover AC 
 				    LEFT JOIN NASABAH N 
@@ -423,9 +463,10 @@ class Cover_asuransi_model extends CI_Model{
 				      ON u.`user_id` = AC.created_by 
 				    LEFT JOIN app_kode_kantor AKK 
 				      ON AKK.kode_kantor = u.kd_cabang 
+					LEFT JOIN jaminan_dokument JD
+						ON JD.`no_reff` = JH.`no_reff`   
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
-				    AND AC.`id` IN ($id_data) #AND AC.`status_cover` = 'SUDAH'
-					;";
+				    AND AC.`id` IN ($id_data);";
 
         $query  = $this->db2->query($str);
         return $query->result_array();
@@ -604,7 +645,7 @@ class Cover_asuransi_model extends CI_Model{
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
 				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode'
 					AND ac.`kode_asuransi` = '$src_nama_asuansi';
-					#AND AC.`status_cover` = 'SUDAH';";
+					AND AC.`status_cover` = 'SUDAH';";
 
         $query  = $this->db2->query($str);
         return $query->result_array();
