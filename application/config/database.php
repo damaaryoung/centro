@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '103.31.232.148:3307',
+	'hostname' => '10.20.30.254:3307',
 	'username' => 'u2Qi7Jfui',
 	'password' => 'qJ9ysIkg9ce!',
 	'database' => 'newwebtool',
@@ -98,7 +98,7 @@ $db['default'] = array(
 
 $db['DB_DPM_ONLINE'] = array(
 	'dsn'	=> '',
-	'hostname' => '103.31.232.148:3307',
+	'hostname' => '10.20.30.254:3307',
 	'username' => 'u2Qi7Jfui',
 	'password' => 'qJ9ysIkg9ce!',
 	'database' => 'centro',
@@ -121,7 +121,7 @@ $db['DB_DPM_ONLINE'] = array(
 
 $db['DB_CENTRO'] = array(
 	'dsn'	=> '',
-	'hostname' => '103.31.232.148:3307',
+	'hostname' => '10.20.30.254:3307',
 	'username' => 'u2Qi7Jfui',
 	'password' => 'qJ9ysIkg9ce!',
 	'database' => 'centro',
@@ -144,7 +144,7 @@ $db['DB_CENTRO'] = array(
 
 $db['db2'] = array(
 	'dsn'	=> '',
-	'hostname' => '103.31.232.148:3307',
+	'hostname' => '10.20.30.254:3307',
 	'username' => 'u2Qi7Jfui',
 	'password' => 'qJ9ysIkg9ce!',
 	'database' => 'dpm_online',
