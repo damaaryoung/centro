@@ -207,7 +207,7 @@
                       </a>
                     </li>
                   <?php }?>
-                  <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <?php if($this->session->userdata('pengajuan_refund_asuransi_jaminan') == 'ok' || $this->session->userdata('pengajuan_refund_asuransi_jaminan_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
                       <a href="<?php echo base_url(); ?>pengajuan_refund_asuransi_jaminan" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -215,7 +215,7 @@
                       </a>
                     </li>
                   <?php }?>
-                  <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <?php if($this->session->userdata('proses_refund_jaminan') == 'ok' || $this->session->userdata('proses_refund_jaminan_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
                       <a href="<?php echo base_url(); ?>proses_refund_jaminan" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -275,7 +275,7 @@
                         </a>
                       </li>
                     <?php }?>
-                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <?php if($this->session->userdata('pengajuan_refund_asuransi_jiwa') == 'ok' || $this->session->userdata('pengajuan_refund_asuransi_jiwa_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
                       <a href="<?php echo base_url(); ?>pengajuan_refund_asuransi_jiwa" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -283,7 +283,7 @@
                       </a>
                     </li>
                   <?php }?>
-                  <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                  <?php if($this->session->userdata('proses_refund_jiwa') == 'ok' || $this->session->userdata('proses_refund_jiwa_group') == 'ok' || $this->session->userdata('divisi_id') == 'IT'){ ?>
                     <li class="nav-item">
                       <a href="<?php echo base_url(); ?>proses_refund_jiwa" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>

@@ -124,6 +124,18 @@ class LoginController extends CI_Controller {
 					else if( $row['access_id'] == '23'){
 						$data1['prosess_klaim_asuransi_jiwa'] = 'ok';
 					}
+					else if( $row['access_id'] == '24'){
+						$data1['pengajuan_refund_asuransi_jaminan'] = 'ok';
+					}
+					else if( $row['access_id'] == '25'){
+						$data1['pengajuan_refund_asuransi_jiwa'] = 'ok';
+					}
+					else if( $row['access_id'] == '26'){
+						$data1['proses_refund_jaminan'] = 'ok';
+					}
+					else if( $row['access_id'] == '27'){
+						$data1['proses_refund_jiwa'] = 'ok';
+					}
 				endforeach;	
 			}
 
@@ -198,6 +210,18 @@ class LoginController extends CI_Controller {
 					}
 					else if( $row['access_id'] == '23'){
 						$data1['prosess_klaim_asuransi_jiwa_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '24'){
+						$data1['pengajuan_refund_asuransi_jaminan_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '25'){
+						$data1['pengajuan_refund_asuransi_jiwa_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '26'){
+						$data1['proses_refund_jaminan_group'] = 'ok';
+					}
+					else if( $row['access_id'] == '27'){
+						$data1['proses_refund_jiwa_group'] = 'ok';
 					}
 				endforeach;	
 			}
