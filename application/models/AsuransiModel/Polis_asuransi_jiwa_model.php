@@ -43,7 +43,14 @@ class Polis_asuransi_jiwa_model extends CI_Model{
                     LEFT JOIN JAMINAN_HEADER JH 
                         ON JH.`no_rekening` = AC.`no_rekening` 
                     LEFT JOIN kre_kode_asuransi KKA 
-                        ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+                        ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`)  
                     WHERE AC.`jenis_asuransi` = 'JIWA' 
 					AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$date'
                     AND AC.`status_cover` IN ('SUDAH', 'PROSES');";
@@ -79,7 +86,14 @@ class Polis_asuransi_jiwa_model extends CI_Model{
                     LEFT JOIN JAMINAN_HEADER JH 
                         ON JH.`no_rekening` = AC.`no_rekening` 
                     LEFT JOIN kre_kode_asuransi KKA 
-                        ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+                        ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`)  
                     WHERE AC.`jenis_asuransi` = 'JIWA' 
 					AND (AC.`no_rekening` LIKE '$search%'
 						 OR N.NAMA_NASABAH LIKE '$search%')
@@ -132,7 +146,14 @@ class Polis_asuransi_jiwa_model extends CI_Model{
 					LEFT JOIN JAMINAN_HEADER JH 
 						ON JH.`no_rekening` = AC.`no_rekening` 
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi`  
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`)    
 					LEFT JOIN ASURANSI_OKUPASI AO
 						ON AO.`id` = AC.`id_okupasi`  
 					WHERE AC.`no_rekening` = '$rekening' 

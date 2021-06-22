@@ -293,7 +293,7 @@
                 headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('token')
                         },
-                data: {  "src_periode"         : src_periode},
+                data: {  "src_search"         : src_search},
                 success : function(response) {
                     console.log(response);
                     mapping_get_data(response);

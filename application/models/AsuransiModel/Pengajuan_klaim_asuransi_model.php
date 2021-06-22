@@ -145,7 +145,14 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                 LEFT JOIN JAMINAN_HEADER JH 
                     ON JH.`no_rekening` = AC.`no_rekening` 
                 LEFT JOIN kre_kode_asuransi KKA 
-                    ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi`  
+                    ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+                                                  WHEN AC.`jenis_asuransi` = 'JAMINAN'
+                                                    THEN K.`KODE_ASURANSI`
+                                                  WHEN AC.`jenis_asuransi` = 'JIWA'
+                                                    THEN K.`kode_asuransi_jiwa`
+                                                END AS `kode_asuransi`
+                                              FROM kredit k1
+                                              WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
                 LEFT JOIN app_kode_kantor AKK
 					          ON AKK.`kode_kantor` = AC.`kode_kantor`
                 LEFT JOIN asuransi_klaim_upload AKU
@@ -280,7 +287,14 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                   LEFT JOIN JAMINAN_HEADER JH 
                     ON JH.`no_rekening` = AC.`no_rekening` 
                   LEFT JOIN kre_kode_asuransi KKA 
-                    ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+                    ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+                                                  WHEN AC.`jenis_asuransi` = 'JAMINAN'
+                                                    THEN K.`KODE_ASURANSI`
+                                                  WHEN AC.`jenis_asuransi` = 'JIWA'
+                                                    THEN K.`kode_asuransi_jiwa`
+                                                END AS `kode_asuransi`
+                                              FROM kredit k1
+                                              WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
                   LEFT JOIN app_kode_kantor AKK 
                     ON AKK.`kode_kantor` = AC.`kode_kantor`
                 WHERE AC.`no_rekening` = '$rekening' 
@@ -349,7 +363,14 @@ class Pengajuan_klaim_asuransi_model extends CI_Model{
                 LEFT JOIN JAMINAN_HEADER JH 
                     ON JH.`no_rekening` = AC.`no_rekening` 
                 LEFT JOIN kre_kode_asuransi KKA 
-                    ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi`  
+                    ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+                                                  WHEN AC.`jenis_asuransi` = 'JAMINAN'
+                                                    THEN K.`KODE_ASURANSI`
+                                                  WHEN AC.`jenis_asuransi` = 'JIWA'
+                                                    THEN K.`kode_asuransi_jiwa`
+                                                END AS `kode_asuransi`
+                                              FROM kredit k1
+                                              WHERE K1.`NO_REKENING` = AC.`no_rekening`)  
                 LEFT JOIN app_kode_kantor AKK
 					          ON AKK.`kode_kantor` = AC.`kode_kantor`
                 LEFT JOIN asuransi_klaim_upload AKU

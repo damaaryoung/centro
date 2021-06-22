@@ -71,7 +71,14 @@ class Cover_asuransi_model extends CI_Model{
 						#ON JH.`no_rekening` = AC.`no_rekening` 
 						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
 					WHERE AC.`jenis_asuransi` = '$jenis' 
 						AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$date';";
         $query  = $this->db2->query($str);
@@ -110,7 +117,14 @@ class Cover_asuransi_model extends CI_Model{
 						#ON JH.`no_rekening` = AC.`no_rekening` 
 						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`)
 					WHERE AC.`jenis_asuransi` = '$jenis'
 					AND (N.`NAMA_NASABAH` LIKE '$search%'
 						 OR AC.`no_rekening` LIKE '$search%')
@@ -152,7 +166,14 @@ class Cover_asuransi_model extends CI_Model{
 						#ON JH.`no_rekening` = AC.`no_rekening` 
 						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
 					WHERE AC.`jenis_asuransi` = '$jenis'
 					AND AC.`status_cover` = '$status'
 					AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$src_tgl_realisasi';";
@@ -193,7 +214,14 @@ class Cover_asuransi_model extends CI_Model{
 						#ON JH.`no_rekening` = AC.`no_rekening` 
 						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
 					WHERE AC.`jenis_asuransi` = '$jenis'
 					AND KKA.`KODE_ASURANSI` = '$src_nama_asuansi'
 					AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$src_tgl_realisasi';";
@@ -242,7 +270,14 @@ class Cover_asuransi_model extends CI_Model{
 					LEFT JOIN JAMINAN_HEADER JH 
 						ON JH.`no_rekening` = AC.`no_rekening` 
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi`  
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`)   
 					LEFT JOIN ASURANSI_OKUPASI AO
 						ON AO.`id` = AC.`id_okupasi`  
 					WHERE AC.`no_rekening` = '$rekening' 
@@ -371,7 +406,14 @@ class Cover_asuransi_model extends CI_Model{
 					LEFT JOIN JAMINAN_HEADER JH 
 						ON jh.`no_reff` = ac.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
 					LEFT JOIN slik_agunan SA 
 						ON SA.`no_rekening` = AC.`no_rekening`
 						AND SA.`kode_register_agunan` = AC.`agunan_id` 
@@ -402,10 +444,10 @@ class Cover_asuransi_model extends CI_Model{
 		                SA.`cif` as `cif`,
 		                DATE_FORMAT(K.`TGL_REALISASI`, '%d-%m-%Y') AS `created_date`,
 						CASE 
-						WHEN AC.`jenis_asuransi` = 'JAMINAN'
-							THEN K.`tgl_jt_asuransi`
+							WHEN AC.`jenis_asuransi` = 'JAMINAN'
+								THEN K.`tgl_jt_asuransi`
 							WHEN AC.`jenis_asuransi` = 'JIWA'
-							THEN K.`tgl_jt_asuransi_jiwa`
+								THEN K.`tgl_jt_asuransi_jiwa`
 						END AS `tgl_cover`,
 		                  N.`NAMA_NASABAH` as `NAMA_NASABAH`,
 		                  CKJI.`nama_identitas` as `nama_identitas`,
@@ -497,7 +539,7 @@ class Cover_asuransi_model extends CI_Model{
 					LEFT JOIN jaminan_header jh
 						ON jh.`no_reff` = ac.`no_reff_jaminan`
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
-					AND ac.`kode_asuransi` = '$src_nama_asuansi'
+					AND K.`KODE_ASURANSI` = '$src_nama_asuansi'
 				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode'
 					AND AC.`status_cover` = 'SUDAH';";
 
@@ -559,7 +601,7 @@ class Cover_asuransi_model extends CI_Model{
 						AND JD.`agunan_id` = SA.`kode_register_agunan`
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
 				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode'
-					AND ac.`kode_asuransi` = '$src_nama_asuansi'
+					AND K.`kode_asuransi_jiwa` = '$src_nama_asuansi'
 					AND AC.`status_cover` = 'SUDAH';";
 
         $query  = $this->db2->query($str);
@@ -644,7 +686,7 @@ class Cover_asuransi_model extends CI_Model{
 						AND JD.`agunan_id` = SA.`kode_register_agunan`
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
 				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode'
-					AND ac.`kode_asuransi` = '$src_nama_asuansi';
+					AND K.`kode_asuransi_jiwa` = '$src_nama_asuansi'
 					AND AC.`status_cover` = 'SUDAH';";
 
         $query  = $this->db2->query($str);
@@ -685,7 +727,14 @@ class Cover_asuransi_model extends CI_Model{
 						#ON JH.`no_rekening` = AC.`no_rekening` 
 						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
 					WHERE AC.`jenis_asuransi` = '$jenis' 
 						AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$date'
 						AND AC.`status_cover` IN ('PROSES','SUDAH');";

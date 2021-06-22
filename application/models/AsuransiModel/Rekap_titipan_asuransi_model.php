@@ -42,10 +42,16 @@ class Rekap_titipan_asuransi_model extends CI_Model{
 					LEFT JOIN KREDIT K 
 						ON K.`NO_REKENING` = AC.`no_rekening` 
 					LEFT JOIN JAMINAN_HEADER JH 
-						#ON JH.`no_rekening` = AC.`no_rekening`
 						ON JH.`no_reff` = AC.`no_reff_jaminan`
 					LEFT JOIN kre_kode_asuransi KKA 
-						ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+						ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
 					WHERE AC.`jenis_asuransi` = '$jenis' 
 						AND K.`TGL_REALISASI` = '$date';";
         $query  = $this->db2->query($str);
@@ -79,10 +85,16 @@ class Rekap_titipan_asuransi_model extends CI_Model{
 						LEFT JOIN KREDIT K 
 							ON K.`NO_REKENING` = AC.`no_rekening` 
 						LEFT JOIN JAMINAN_HEADER JH 
-						#	ON JH.`no_rekening` = AC.`no_rekening`
 							ON JH.`no_reff` = AC.`no_reff_jaminan`
 						LEFT JOIN kre_kode_asuransi KKA 
-							ON KKA.`KODE_ASURANSI` = AC.`kode_asuransi` 
+							ON KKA.`KODE_ASURANSI` = (SELECT CASE 
+															WHEN AC.`jenis_asuransi` = 'JAMINAN'
+																THEN K.`KODE_ASURANSI`
+															WHEN AC.`jenis_asuransi` = 'JIWA'
+																THEN K.`kode_asuransi_jiwa`
+														END AS `kode_asuransi`
+													FROM kredit k1
+													WHERE K1.`NO_REKENING` = AC.`no_rekening`)  
 						WHERE AC.`jenis_asuransi` = '$jenis' 
 						AND (N.`NAMA_NASABAH` LIKE '$search%'
 							OR AC.`no_rekening` LIKE '$search%');";
