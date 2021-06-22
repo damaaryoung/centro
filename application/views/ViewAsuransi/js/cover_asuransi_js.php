@@ -239,6 +239,13 @@
             if(src_nama_asuansi == '010'){
                 export_jiwa_generali();
             }
+            else{
+                return Swal.fire({
+                            icon: 'error',
+                            title: 'Tidak Dapat Export!',
+                            text: 'Format Report Tidak Tersedia, Mohon Hubungi Team Asuransi dan Team IT'
+                });
+            }
         }
 
        
