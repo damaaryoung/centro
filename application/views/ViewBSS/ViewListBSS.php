@@ -119,8 +119,11 @@ tr.shown td.details-click {
                     <div class="form-group row">
                       <label class="col col-form-label">Filter Area</label>
                       <div class="col">
-                      <?php
-                        if($kode_kantor == '00' || $divisi_id == 'IT'){
+                      <?php 
+                        if($jabatan == 'HEAD OPERATIONAL'){
+                              echo '<input class="form-control" id="kode_kantor" style="width: 200px;" value="'.$kode_kantor.'" readonly>'; 
+                        } 
+                        else if($kode_kantor == '00' || $divisi_id == 'IT'){
                       ?>
                       <select class="form-control select2 custom-select" id="kode_kantor" style="width: 200px;">
                             <option value="all">ALL AREA</option>

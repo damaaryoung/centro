@@ -36,6 +36,7 @@ class BSSController extends CI_Controller {
 			$data['divisi_id'] = $this->session->userdata('divisi_id'); 
 			$data['getAll'] = $model->getDataBSS();
 			$data['selectKodeKantor'] = $this->AsetDokumenEntryModel->selectKodeKantor();
+			$data['jabatan'] = $this->session->userdata('jabatan');
 			$this->load->view('ViewBSS/ViewListBSS.php', $data);
 
 		}
