@@ -175,7 +175,7 @@ class Cover_asuransi_model extends CI_Model{
 													FROM kredit k1
 													WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
 					WHERE AC.`jenis_asuransi` = '$jenis'
-					AND AC.`status_cover` = '$status'
+					AND AC.`status_cover` LIKE '$status%'
 					AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$src_tgl_realisasi';";
         $query  = $this->db2->query($str);
         return $query->result_array();
@@ -257,6 +257,7 @@ class Cover_asuransi_model extends CI_Model{
 						AC.`premi_asuransi`,
 						AC.`premi_request`,
 						AC.`titipan_asuransi`,
+						AC.`status_cover`,
 						AC.`root_document`,
                         AC.`root_address`,
                         AC.`path_file`,

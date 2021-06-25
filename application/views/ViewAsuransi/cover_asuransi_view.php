@@ -75,6 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-2">
                                     <select class="form-control form-control-sm select2 custom-select" id="src_status" name="src_status" onchange="get_search_status()">
+                                        <option value="">ALL STATUS</option>
                                         <option value="BELUM">BELUM</option>
                                         <option value="PROSES">PROSES</option>
                                         <option value="SUDAH">SUDAH</option>

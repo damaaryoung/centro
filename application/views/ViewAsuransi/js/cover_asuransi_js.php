@@ -91,6 +91,16 @@
             });
            
     });
+    $('#tbl_body_cover_asuransi').on('click','.btn_view', function () {    
+           rekening          = $(this).data("rekening");
+           agunanid          = $(this).data("agunanid");
+           nasabahid         = $(this).data("nasabahid");
+           no_reff_asuransi  = $(this).data("no-reff-asuransi");
+           no_reff_jaminan   = $(this).data("no-reff-jaminan");
+           $('#loading').show();
+           get_details();
+           
+    });
 
     $('#modal_premi_jaminan').on('input', function() {
         var money = accounting.formatMoney($('#modal_premi_jaminan').val(), '', 0, ',', '.');
@@ -428,6 +438,17 @@
 
 
                         }
+
+                        /// penambahan view untuk proses pengcoveran yang sudah, button save di disabled
+                        if(response.data_details[0]['status_cover'] == "SUDAH"){
+                            $("#btn_simpan_modal").prop("disabled", true);
+                            $("#btn_upload_jiwa").prop("disabled", true);
+                            
+                        }else{
+                            $("#btn_simpan_modal").prop("disabled", false);
+                            $("#btn_upload_jiwa").prop("disabled", false);
+                        }
+                            
 
 
                         $('#loading-1').hide();
@@ -777,7 +798,17 @@
                 data += `</td>
                     </tr>`;
             }else{
-                data += `<td></td>
+                data += `   <td>        
+                                <button type="button" class="btn btn-warning btn-sm py-0 btn_view" id="btn_view" style="font-size: 1  em;"
+                                        data-rekening="${response.rekap_jaminan[i]['no_rekening']}"
+                                        data-agunanid="${response.rekap_jaminan[i]['agunan_id']}"  
+                                        data-nasabahid="${response.rekap_jaminan[i]['nasabah_id']}"  
+                                        data-no-reff-asuransi="${response.rekap_jaminan[i]['no_reff_asuransi']}"  
+                                        data-no-reff-jaminan="${response.rekap_jaminan[i]['no_reff_jaminan']}"  
+                                        'name="btn_view"
+                                        data-toggle="tooltip" title="VIEW">
+                                        <i class="fas fa-eye"></i> </button>
+                            </td>
                         </tr>`;
             }
 
