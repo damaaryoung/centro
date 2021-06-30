@@ -1,21 +1,45 @@
 <script type="text/javascript">
+
+var main_kode_kantor = '';
+var page = '';
+var filter = '';
+
   $(document).ready(function(){
-    tampil_data(filter='',page='');
+    //tampil_data(filter='',page='');
+    tampil_data1();
+   
     $( ".cari-berdasarkan" ).keyup(function() {
-      var filter=$(this).val();
-      tampil_data(filter,page='1');
+      filter=$(this).val();
+        if(filter == ''){
+          tampil_data1()
+        }else{
+          tampil_data(filter,page='1');
+        }
     });
+
   });
 
   function pagination($page){
-    var filter=$('.cari-berdasarkan').val();
-    var page=$page;
-    tampil_data(filter,page);
+    filter=$('.cari-berdasarkan').val();
+    page=$page;
+    tampil_data1();
   }
   function tampil_data(filter='',page=''){
     $.ajax({
       url: "<?= base_url(); ?>index.php/CekSertifikat_controller/tampil_data2",
       data:{page:page,filter:filter},
+      type: "POST",
+      success: function(response) {
+        $('.data').html(response);
+      }
+    });
+  }
+
+  function tampil_data1(){
+    main_kode_kantor = $('#main_kode_kantor').val();
+    $.ajax({
+      url: "<?= base_url(); ?>index.php/CekSertifikat_controller/tampil_data1",
+      data:{page:page,filter:filter,main_kode_kantor:main_kode_kantor},
       type: "POST",
       success: function(response) {
         $('.data').html(response);
@@ -193,3 +217,34 @@
 
   
 </script>
+
+
+
+<!-- <script type="text/javascript">
+  $(document).ready(function(){
+    tampil_data(filter='',page='');
+    $( ".cari-berdasarkan" ).keyup(function() {
+      var filter=$(this).val();
+      tampil_data(filter,page='1');
+    });
+  });
+
+  function pagination($page){
+    var filter=$('.cari-berdasarkan').val();
+    var page=$page;
+    tampil_data(filter,page);
+  }
+  function tampil_data(filter='',page=''){
+    $.ajax({
+      url: "<?php //base_url(); ?>index.php/CekSertifikat_controller/tampil_data2",
+      data:{page:page,filter:filter},
+      type: "POST",
+      success: function(response) {
+        $('.data').html(response);
+      }
+    });
+  }
+
+
+  
+</script> -->

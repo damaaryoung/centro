@@ -87,7 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <label style="padding-top: 5px;" class="control-label" for="main_kode_kantor" style="text-align: left;">Kode Kantor</label>
                           </div>
                           <div class="col-md-4">
-                              <select class="form-control form-control-sm select2" id="main_kode_kantor" name="main_kode_kantor" onchange=''>
+                              <select class="form-control form-control-sm select2" id="main_kode_kantor" name="main_kode_kantor" onchange='tampil_data1()'>
                               <?php foreach ($selectKodeKantor as $row) : ?>
                                   <option value="<?php echo $row['id'];?>"><?php echo $row['id'];?> - <?php echo $row['nama'];?> </option>
                               <?php endforeach;?>

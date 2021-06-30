@@ -1,6 +1,19 @@
 <?php
 class Model_cek_sertifikat extends CI_Model{
 
+  function tampil_data1($filter,$page,$main_kode_kantor){
+    $url     = $this->config->item('api_url') . "api/master/sertifikat/filter1/cari?nomor_so=".$filter."&page=".$page.""."&cabang=".$main_kode_kantor;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Authorization: Bearer '.$this->session->userdata('SESSION_TOKEN')
+    ));
+    $output = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($output, true);
+  }
+
   function tampil_data2($filter,$page){
     $url     = $this->config->item('api_url') . "api/master/sertifikat/filter/cari?nomor_so=".$filter."&page=".$page."";
     $ch = curl_init();
