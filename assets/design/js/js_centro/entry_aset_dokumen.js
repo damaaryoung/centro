@@ -46,6 +46,8 @@ var alamatNotaris = '';
 var kotaNotaris = '';
 var dataTableeee = [];
 var coverNotes = '';
+var mainJenisPengurusanPinjam = '';
+var mainNamaPinjam = '';
 var base_url = $('#base_url').val();
 var menuAsset = $('#menuAsset').val();
 var user_kode_kantor = $('#user_kode_kantor').val();
@@ -178,45 +180,43 @@ $('#emas_button_kembali2').click(function () {
 
 // modal pinjam 
 $('#btn_simpan_modal_pinjam').click(function () {
+    debugger;
+    mainJenisPengurusanPinjam = $('#mainJenisPengurusanPinjam').val();
+    mainNamaPinjam = $('#mainNamaPinjam').val();
    
-    $('#loading').show();
-    $('#loading2').show();
-    $.ajax({
-        url : base_url + "AsetDokumenPinjamController/pinjamData",
-        type : "POST",
-        dataType : "json",
-        data : {"mainIdPinjam"                : $('#mainIdPinjam').val(),
-                "mainNomorPinjam"             : $('#mainNomorPinjam').val(),
-                "mainNoReffPinjam"            : $('#mainNoReffPinjam').val(),
-                "mainAreaKerjaPinjam"         : $('#mainAreaKerjaPinjam').val(),
-                "mainTanggalPinjam"           : $('#mainTanggalPinjam').val(),
-                "mainTransaksiPinjam"         : $('#mainTransaksiPinjam').val(),
-                "mainNamaPinjam"              : $('#mainNamaPinjam').val(),
-                "mainKeteranganPinjam"        : $('#mainKeteranganPinjam').val(),
-                "mainAlamatPinjam"            : $('#mainAlamatPinjam').val(),
-                "mainKotaPinjam"              : $('#mainKotaPinjam').val(),
-                "mainJenisPengurusanPinjam"   : $('#mainJenisPengurusanPinjam').val(),
-                "mainNomorRekeningPinjam"     : $('#mainNomorRekeningPinjam').val(),
-                "mainTanggalRealisasiPinjam"  : $('#mainTanggalRealisasiPinjam').val(),
-                "jenisJaminanPinjam"          : JaminanHeader.jenis_jaminan,
-                "verifikasi"                  : JaminanHeader.verifikasi,
-                "rodaKendaraanPinjam"         : JaminanHeader.roda_kendaraan,
-                "mainTanggalRencanaKembaliPinjam" : $('#mainTanggalRencanaKembaliPinjam').val(),
-                "jaminanDokumentID"           : JaminanDokument.id
+    if(mainNamaPinjam == ''){
+        return Swal.fire({
+            icon: 'error',
+            title: 'Mohon Masukan Nama Notaris !',
+            text: 'Nama Notaris Tidak Boleh Kosong!'
+        });
+    }
+    else if(mainJenisPengurusanPinjam == ''){
+        Swal.fire({
+            title: 'Jenis Pengurusan Belum Diisi!',
+            text: "Tanggal Rencana Kembali Juga Akan Kosong, Lanjutkan Peminjaman ?",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Lanjutkan',
+            cancelButtonText: 'Batalkan',
+            showLoaderOnConfirm: true,
+            reverseButtons: true,
+            preConfirm: function() {
+             return new Promise(function(resolve) {
+                peminjaman_dokument();
+             });
             },
+            allowOutsideClick: false     
+         });
+         console.log("ini dijalanin1");
+         return;
+    }else{
+        console.log("ini dijalanin");
+        peminjaman_dokument();
+    }
 
-        success : function(response) {
-            alert('Peminjaman Data Sukses');
-            $('#loading').hide();
-            window.location = base_url + 'AsetDokumenEntryController/index';  
-        },
-        error : function(response) {
-            console.log('failed :' + response);
-            alert('Gagal Melakukan Peminjaman Data');
-            $('#loading').hide();
-            window.location = base_url + 'AsetDokumenEntryController/index';
-        }
-    });  
+ 
 });
 $('#btn_kembali_pinjam_modal').click(function () { 
     $('#PeminjamanMainModal').modal('hide');
@@ -3668,4 +3668,45 @@ function get_kode_kantor(){
                 
             }
     });    
+}
+
+function peminjaman_dokument(){
+    $('#loading').show();
+    $('#loading2').show();
+    $.ajax({
+        url : base_url + "AsetDokumenPinjamController/pinjamData",
+        type : "POST",
+        dataType : "json",
+        data : {"mainIdPinjam"                : $('#mainIdPinjam').val(),
+                "mainNomorPinjam"             : $('#mainNomorPinjam').val(),
+                "mainNoReffPinjam"            : $('#mainNoReffPinjam').val(),
+                "mainAreaKerjaPinjam"         : $('#mainAreaKerjaPinjam').val(),
+                "mainTanggalPinjam"           : $('#mainTanggalPinjam').val(),
+                "mainTransaksiPinjam"         : $('#mainTransaksiPinjam').val(),
+                "mainNamaPinjam"              : $('#mainNamaPinjam').val(),
+                "mainKeteranganPinjam"        : $('#mainKeteranganPinjam').val(),
+                "mainAlamatPinjam"            : $('#mainAlamatPinjam').val(),
+                "mainKotaPinjam"              : $('#mainKotaPinjam').val(),
+                "mainJenisPengurusanPinjam"   : $('#mainJenisPengurusanPinjam').val(),
+                "mainNomorRekeningPinjam"     : $('#mainNomorRekeningPinjam').val(),
+                "mainTanggalRealisasiPinjam"  : $('#mainTanggalRealisasiPinjam').val(),
+                "jenisJaminanPinjam"          : JaminanHeader.jenis_jaminan,
+                "verifikasi"                  : JaminanHeader.verifikasi,
+                "rodaKendaraanPinjam"         : JaminanHeader.roda_kendaraan,
+                "mainTanggalRencanaKembaliPinjam" : $('#mainTanggalRencanaKembaliPinjam').val(),
+                "jaminanDokumentID"           : JaminanDokument.id
+            },
+
+        success : function(response) {
+            alert('Peminjaman Data Sukses');
+            $('#loading').hide();
+            window.location = base_url + 'AsetDokumenEntryController/index';  
+        },
+        error : function(response) {
+            console.log('failed :' + response);
+            alert('Gagal Melakukan Peminjaman Data');
+            $('#loading').hide();
+            window.location = base_url + 'AsetDokumenEntryController/index';
+        }
+    }); 
 }
