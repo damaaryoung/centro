@@ -180,7 +180,6 @@ $('#emas_button_kembali2').click(function () {
 
 // modal pinjam 
 $('#btn_simpan_modal_pinjam').click(function () {
-    debugger;
     mainJenisPengurusanPinjam = $('#mainJenisPengurusanPinjam').val();
     mainNamaPinjam = $('#mainNamaPinjam').val();
    
