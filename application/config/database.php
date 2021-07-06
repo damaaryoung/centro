@@ -118,7 +118,6 @@ $db['DB_DPM_ONLINE'] = array(
 	'save_queries' => TRUE
 );
 
-
 $db['DB_CENTRO'] = array(
 	'dsn'	=> '',
 	'hostname' => '10.20.30.254:3307',
@@ -141,7 +140,6 @@ $db['DB_CENTRO'] = array(
 	'save_queries' => TRUE
 );
 
-
 $db['db2'] = array(
 	'dsn'	=> '',
 	'hostname' => '10.20.30.254:3307',
@@ -163,7 +161,6 @@ $db['db2'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
 
 
 // $db['DB_DPM_ONLINE'] = array(

@@ -755,6 +755,14 @@ $('#bodyTableAsetDokumen').on('click','.btnPinjam', function () {
                 alert('Maaf, Data belum di verifikasi, Tidak Dapat Di Pinjamkan');
                 $("#btn_simpan_modal_pinjam").prop("disabled", true);
             }
+            if(JaminanHeader.verifikasi == '1' && JaminanDokument.verifikasi == '1'){
+            //    alert('Maaf, Data belum di verifikasi, Tidak Dapat Di Pinjamkan');
+                $("#btn_simpan_modal_pinjam").prop("disabled", false);
+            }
+            else{
+                $("#btn_simpan_modal_pinjam").prop("disabled", true);
+            }
+         
 
             $('#loading2').hide();
             $('#loading').hide();
