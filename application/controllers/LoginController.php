@@ -49,7 +49,6 @@ class LoginController extends CI_Controller {
 		);
 	
 		
-
 		if($this->input->post('nama') != ''){ //ada data di parsing -> set session login
 		
 			$userAccess = $this->LoginModel->userAccess($userId);

@@ -123,9 +123,9 @@ function loginfunction2(nama,
                  window.location = base_url + 'DashboardController/index';  
               },
               error : function(response) {
-                  console.log('failed ' + response);
+                 console.log('failed ' + response);
                  
-                  window.location = base_url + 'LoginController/index'; 
+                 window.location = base_url + 'LoginController/index'; 
               }
           });
 }
