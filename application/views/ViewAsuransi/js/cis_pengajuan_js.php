@@ -147,6 +147,7 @@ function getData(){
                    },
             data:{"src_kode_kantor" : src_kode_kantor},
            success : function(response) {
+               
                mapping(response);
            },
            error : function(response) {
@@ -158,7 +159,10 @@ function getData(){
                    text: 'Mohon Periksa Jaringan Anda'
                });
            }
-   });    
+   });
+
+       
+
 }
 function get_asuransi(){
     $.ajax({
@@ -447,7 +451,26 @@ function mapping(response){
                      <td>${accounting.formatMoney(response.data_cis[i]['limit_kas'], '', 0, ',', '.')}</td>
                      <td>${accounting.formatMoney(response.data_cis[i]['saldo_kas'], '', 0, ',', '.')}</td>
                      <td>${response.data_cis[i]['status']}</td>
-                     <td>        
+                   `;
+                 if(response.data_cis[i]['status']=='DONE')
+                 {
+                     data+=` <td>        
+                         <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses" disabled
+                                 data-id="${response.data_cis[i]['id']}"
+                                 data-no-trans="${response.data_cis[i]['no_transaksi']}"    
+                                 'name="btn_proses">
+                                 <i class="fa fa-pen"></i> </button>
+                         <button type="button" class="btn btn-danger btn-sm btn_delete" id="btn_delete" disabled
+                                 data-id="${response.data_cis[i]['id']}"
+                                 data-no-trans="${response.data_cis[i]['no_transaksi']}"    
+                                 data-status="${response.data_cis[i]['status_no']}"   
+                                 'name="btn_proses">
+                                 <i class="fa fa-trash"></i> </button>
+                     </td>
+                     </tr>`;
+                 }
+                 else{
+                     data+=`  <td>        
                          <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
                                  data-id="${response.data_cis[i]['id']}"
                                  data-no-trans="${response.data_cis[i]['no_transaksi']}"    
@@ -461,6 +484,7 @@ function mapping(response){
                                  <i class="fa fa-trash"></i> </button>
                      </td>
                  </tr>`;
+                 }
      }
      $('#tbl_cis > tbody:first').html(data);
      
