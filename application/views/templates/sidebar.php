@@ -46,7 +46,48 @@
                 <span class="right badge badge-danger">Dashboard</span>
               </p>
             </a>
-          </li>     
+          </li>  
+
+        <!-- START MENU ASURANSI -->
+          <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-book-reader icon_color_sidebar"></i>
+                <p>
+                  Accounting
+                  <i class="fas fa-angle-left right"></i> 
+                </p>
+              </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-asterisk icon_color_sidebar"></i> 
+                  <p>
+                     Rencana Realisasi
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i> 
+                          <p>Rencana Realisasi</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Rencana Realisasi Master</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                </ul>
+            </ul>
+          </li>
+          <!-- END MENU ASURANSI -->
+
           <!-- START MENU ASET DOKUMEN -->
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
