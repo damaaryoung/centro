@@ -136,8 +136,8 @@ class Rencana_realisasi_model extends CI_Model{
                               ac.`last_update` = NOW(),
                               ac.`update_by` = '$userID'
                           WHERE ac.kode_kantor = '$kd_kantor'
-                                AND ac.tgl_laporan = '$jenis'
-                                AND ac.jenis = '$tgl';");
+                                AND ac.tgl_laporan = '$tgl'
+                                AND ac.jenis = '$jenis';");
       $this->db2->trans_complete();
       return 'sukses';
     }

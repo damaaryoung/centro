@@ -102,9 +102,9 @@ class Rencana_realisasi_controller extends CI_Controller {
 		$modal_rencana_update     = $this->input->post('modal_rencana_update');
 		$modal_realisasi_update   = $this->input->post('modal_realisasi_update');		
 		$modal_rasio_update       = $this->input->post('modal_rasio_update');
-		$kd_kantor                = $this->input->post('modal_rasio_update');		
-		$jenis                    = $this->input->post('modal_rasio_update');
-		$tgl                      = $this->input->post('modal_rasio_update');
+		$kd_kantor                = $this->input->post('kd_kantor');		
+		$jenis                    = $this->input->post('jenis');
+		$tgl                      = $this->input->post('tgl');
 		$userID                   = $this->session->userdata('userIdLogin');
 
 		$update = $this->Rencana_realisasi_model->update_rencana($modal_jenis_update,
