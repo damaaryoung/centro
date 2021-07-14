@@ -84,3 +84,5 @@ $route['pengcoveran_cis'] = 'Asuransi/Cash_in_save_controller/index_cover';
 $route['pengcoveran_cit'] = 'Asuransi/Cash_in_transit_controller/index';
 $route['laporan_asuransi'] = 'Asuransi/Laporan_asuransi_controller/index';
 
+//accounting
+$route['rencana_realisasi'] = 'Accounting/Rencana_realisasi_controller/index';
