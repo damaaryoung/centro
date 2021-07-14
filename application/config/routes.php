@@ -86,3 +86,4 @@ $route['laporan_asuransi'] = 'Asuransi/Laporan_asuransi_controller/index';
 
 //accounting
 $route['rencana_realisasi'] = 'Accounting/Rencana_realisasi_controller/index';
+$route['rencana_realisasi_master'] = 'Accounting/Rencana_realisasi_master_controller/index';

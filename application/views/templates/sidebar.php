@@ -77,7 +77,7 @@
                     <?php }?>
                     <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
-                        <a href="<?php echo base_url(); ?>rekap_titipan_asuransi_jiwa" class="nav-link">
+                        <a href="<?php echo base_url(); ?>rencana_realisasi_master" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Rencana Realisasi Master</p>
                         </a>
