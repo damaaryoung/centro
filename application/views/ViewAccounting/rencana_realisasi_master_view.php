@@ -52,28 +52,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- From card Atas -->
           <!-- Horizontal Form -->
-          <!-- <div class="card card-info">
+          <div class="card card-info">
             <div class="card-header with-border">
               <h3 class="card-title"></h3>
-            </div> -->
+            </div>
             <!-- /.card-header -->
-            <!-- <div class="card-body text-center">  
+            <div class="card-body text-center">  
                 <div class="row">
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row">
-                                  <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="src_kantor_kas_cabang">Kode Kantor</label>
-                                  </div>
-                                  <div class="col-sm-3">
-                                    <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor" onchange="getData()">
-                                    </select>
-                                  </div>
+                                 
                                   <div class="col-sm-1">
                                       <label style="padding-top: 5px;" class="control-label" for="src_search">Search</label>
                                   </div>
                                   <div class="col-sm-4">                                       
                                         <div class="input-group mb-3">
-                                          <input type="text" class="form-control form-control-sm" id="src_search" name="src_search" placeholder="NO TRANSAKSI">
+                                          <input type="text" class="form-control form-control-sm" id="src_search" name="src_search" placeholder="Jenis Realisasi">
                                           <div class="input-group-append">
                                             <span class="input-group-text btn btn-sm" id="btn_search"><i class="fas fa-search"></i></span>
                                           </div>
@@ -83,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </div>
                 </div>
             </div>            
-          </div> -->
+          </div>
           <!-- /.card -->
 
           <!-- Data Tables -->
@@ -120,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <tr>
                                                
                                                 <th>Jenis</th>
-                                                <th>Tanggal Pembuatan</th>
+                                                <th>Kode Perk</th>
                                                 <th>Flag Mutasi</th>
                                                 <th>Action</th>
                                             </tr>
@@ -139,7 +133,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- INSERT -->
 
                 <div class="modal fade" id="modal_rencana_realisasi"> 
-                  <div class="modal-dialog modal-xl">
+                  <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title">Rencana Realisasi</h4>
@@ -154,30 +148,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="row" style="padding-top: 20px;">
                                     <!-- form atas -->
                                     <div class="col-md-12 mx-auto">
-                                        <div class="form-group row">
-                                        <div class="col-sm-2">
-                                                          <label class="control-label" style="padding-top: 5px;"  for="modal_jenis">Jenis </label>
-                                                      </div>
-                                                      <div class="col-sm-4">
-                                                            <input type="text" class="form-control form-control-sm" id="modal_jenis" name="modal_jenis">
-                                                      </div>
+                                    <div class="form-group row">
+                                          <label class="col-sm-4 col-form-label">Jenis</label>
+                                          <div class="col-sm-8">
+                                            <input placeholder="Jenis Realisasi"name="modal_jenis" id="modal_jenis" type="text"  class ="form-control">
+                                          </div>
                                         </div>
-                                        <div class="form-group row">
-                                                      <div class="col-sm-2">
-                                                          <label class="control-label" style="padding-top: 5px;"  for="modal_flag_mutasi">Flag Mutasi</label>
-                                                      </div>
-                                                      <div class="col-sm-4">
-                                                            <input type="text" class="form-control form-control-sm" id="modal_flag_mutasi" name="modal_flag_mutasi">
-                                                      </div>
+                                    <div class="form-group row">
+                                          <label class="col-sm-4 col-form-label">Flag Mutasi</label>
+                                          <div class="col-sm-8">
+                                            <input placeholder="Flag Mutasi" name="modal_flag_mutasi" id="modal_flag_mutasi" type="text"  class ="form-control">
+                                          </div>
                                         </div>
-                                        <div class="form-group row">
-                                                      <div class="col-sm-2">
-                                                          <label style="padding-top: 5px;" class="control-label" for="modal_tgl_pembuatan">Tanggal Pembuatan</label>
-                                                      </div>
-                                                      <div class="col-sm-4">
-                                                            <input type="date" class="form-control form-control-sm" id="modal_tgl_pembuatan" name="modal_tgl_pembuatan" style="width: 300px;">
-                                                      </div>  
-                                        </div>   
+                                      
+                                    <div class="form-group row">
+                                          <label class="col-sm-4 col-form-label">Kode Perk</label>
+                                          <div class="col-sm-8">
+                                            <input placeholder="Kode Perk" name="modal_kode_perk" id="modal_kode_perk" type="text"  class ="form-control">
+                                          </div>
+                                        </div>
+                                      
                                     </div>
                       </div>
                       </div>
@@ -193,7 +183,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
 <!-- Modal Update -->
           <div class="modal fade" id="modal_rencana_realisasi_update"> 
-            <div class="modal-dialog modal-xl">
+          <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
                   <h4 class="modal-title">Update Rencana Realisasi Master</h4>
@@ -208,31 +198,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="row" style="padding-top: 20px;">
                               <!-- form atas -->
                               <div class="col-md-12 mx-auto">
-                                        <div class="form-group row">
-                                        <div class="col-sm-2">
-                                                          <label class="control-label" style="padding-top: 5px;"  for="modal_jenis_update">Jenis </label>
-                                                      </div>
-                                                      <div class="col-sm-4">
-                                                            <input type="text" class="form-control form-control-sm" id="modal_jenis_update" name="modal_jenis_update">
-                                                      </div>
+                                    <div class="form-group row">
+                                          <label class="col-sm-4 col-form-label">Jenis</label>
+                                          <div class="col-sm-8">
+                                            <input placeholder="Jenis Realisasi"name="modal_jenis_update" id="modal_jenis_update" type="text"  class ="form-control">
+                                          </div>
                                         </div>
-                                        <div class="form-group row">
-                                                      <div class="col-sm-2">
-                                                          <label class="control-label" style="padding-top: 5px;"  for="modal_flag_mutasi_update">Flag Mutasi</label>
-                                                      </div>
-                                                      <div class="col-sm-4">
-                                                            <input type="text" class="form-control form-control-sm" id="modal_flag_mutasi_update" name="modal_flag_mutasi_update">
-                                                            <!-- <input type="text" class="form-control form-control-sm" id="modal_tgl_pembuatan_update" name="modal_tgl_pembuatan_update"> -->
-                                                      </div>
+                                    <div class="form-group row">
+                                          <label class="col-sm-4 col-form-label">Flag Mutasi</label>
+                                          <div class="col-sm-8">
+                                            <input placeholder="Flag Mutasi" name="modal_flag_mutasi_update" id="modal_flag_mutasi_update" type="text"  class ="form-control">
+                                          </div>
                                         </div>
-                                        <div class="form-group row">
-                                                      <div class="col-sm-2">
-                                                          <label style="padding-top: 5px;" class="control-label" for="modal_tgl_pembuatan_update">Tanggal Pembuatan</label>
-                                                      </div>
-                                                      <div class="col-sm-4">
-                                                      <input type="date" class="form-control form-control-sm" id="modal_tgl_pembuatan_update" name="modal_tgl_pembuatan_update" style="width: 300px;">
-                                                      </div>  
-                                        </div>   
+                                      
+                                    <div class="form-group row">
+                                          <label class="col-sm-4 col-form-label">Kode Perk</label>
+                                          <div class="col-sm-8">
+                                            <input placeholder="Kode Perk" name="modal_kode_perk_update" id="modal_kode_perk_update" type="text"  class ="form-control">
+                                          </div>
+                                        </div>
+                                      
                                     </div>
                 </div>
 

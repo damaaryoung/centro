@@ -23,16 +23,17 @@ class Rencana_realisasi_master_model extends CI_Model{
  
     public function insert_master($modal_jenis,
                                     $modal_flag_mutasi,
-                                    $modal_tgl_pembuatan,
+                                    $modal_kode_perk,
                                     $userID){
         $this->db2 = $this->load->database('DB_CENTRO', true);
    	       
         $this->db2->trans_begin();
         $this->db2->query("INSERT INTO acc_das_rencana_realisasi_master (jenis,
+                                                                    kode_perk,
                                                                     flag_mutasi, 
                                                                     create_date,
                                                                     create_by)
-                                                                    SELECT'$modal_jenis','$modal_flag_mutasi',dpm_online.get_eom('$modal_tgl_pembuatan'), '$userID' FROM DUAL;");
+                                                                    SELECT'$modal_jenis','$modal_kode_perk','$modal_flag_mutasi',NOW(), '$userID' FROM DUAL;");
         if ($this->db2->trans_status() === FALSE)
 		{
 		  $this->db2->trans_rollback();
@@ -66,7 +67,7 @@ class Rencana_realisasi_master_model extends CI_Model{
         $this->db2 = $this->load->database('DB_CENTRO', true);
         $str    = "SELECT a.jenis AS `jenis`,
                             a.flag_mutasi AS `flag_mutasi`,
-                            a.create_date AS `create_date`
+                            a.kode_perk as `kode_perk`  
                      
                     FROM acc_das_rencana_realisasi_master a
                     WHERE a.jenis = '$jenis'
@@ -77,7 +78,7 @@ class Rencana_realisasi_master_model extends CI_Model{
 
     public function update_rencana($modal_jenis_update,
                                     $modal_flag_mutasi_update,
-                                    $modal_tgl_pembuatan_update,
+                                    $modal_kode_perk_update,
                                     $jenis,
                                     $userID){
       $this->db2 = $this->load->database('DB_CENTRO', true);
@@ -86,11 +87,20 @@ class Rencana_realisasi_master_model extends CI_Model{
       $this->db2->query("UPDATE acc_das_rencana_realisasi_master ac
                           SET ac.`jenis` = '$modal_jenis_update',
                               ac.`flag_mutasi` = '$modal_flag_mutasi_update',
-                              ac.`create_date` = '$modal_tgl_pembuatan_update',
+                              ac.`kode_perk`='$modal_kode_perk_update',
                               ac.`last_update` = NOW(),
                               ac.`update_by` = '$userID'
                           WHERE ac.jenis = '$jenis';");
       $this->db2->trans_complete();
       return 'sukses';
+    }
+
+    public function get_search($search){
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+      $str    = "SELECT jenis,flag_mutasi,kode_perk FROM acc_das_rencana_realisasi_master ac
+                  where ac.`jenis` like ('$search%')
+            limit 30;";
+          $query  = $this->db2->query($str);
+          return $query->result_array();
     }
 }

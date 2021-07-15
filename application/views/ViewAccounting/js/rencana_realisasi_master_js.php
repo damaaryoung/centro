@@ -67,7 +67,7 @@ $('#btn_add_rencana').click(function () {
     }); 
 });
 $('#btn_simpan').click(function () {
-    insert_rencana();
+    insert_master();
 });
 $('#tbl_body_rencana_realisasi').on('click','.btn_proses', function () {  
 
@@ -102,8 +102,44 @@ $('#tbl_body_rencana_realisasi').on('click','.btn_delete', function () {
 $('#btn_simpan_update').click(function () {
     update_rencana(); 
 });
+$('#src_search').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            search();
+        }
+    }); 
+    function search(){
+        data = '';
+        src_search = $('#src_search').val();
+        $('#tbl_rencana_realisasi').DataTable().clear();
+        $('#tbl_rencana_realisasi').DataTable().destroy();
+        $('#loading').show(); 
+        
+        $.ajax({
+                url : base_url + "Accounting/Rencana_realisasi_master_controller/search",
+                type : "POST",
+                dataType : "json",
+                timeout : 180000,
+                headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                data:{  "src_search" : src_search},
 
-
+                success : function(response) {
+                    mapping_search(response);
+                },
+                error : function(response) {
+                    console.log('failed :' + response);
+                    $('#loading').hide();
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal Get Data!',
+                            text: 'Mohon Periksa Jaringan Anda'
+                        });
+                }
+        });    
+       
+   }
 
 function get_kode_kantor(){
     $.ajax({
@@ -229,21 +265,21 @@ function get_details(){
 }
 
 function mapping(response){
-    for(i = 0; i < response.data_rencana.length; i++ ){
+    for(i = 0; i < response.data_master.length; i++ ){
          data += `<tr style="text-align: center;">
                    
-                     <td>${response.data_rencana[i]['jenis']}</td>
-                     <td>${response.data_rencana[i]['create_date']}</td>
-                     <td>${response.data_rencana[i]['flag_mutasi']}</td>
+                     <td>${response.data_master[i]['jenis']}</td>
+                     <td>${response.data_master[i]['kode_perk']}</td>
+                     <td>${response.data_master[i]['flag_mutasi']}</td>
                 
                    
                      <td>        
                          <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
-                                 data-jenis="${response.data_rencana[i]['jenis']}"    
+                                 data-jenis="${response.data_master[i]['jenis']}"    
                                  'name="btn_proses">
                                  <i class="fa fa-pen"></i> </button>
                          <button type="button" class="btn btn-danger btn-sm btn_delete" id="btn_delete"   
-                                 data-jenis="${response.data_rencana[i]['jenis']}"    
+                                 data-jenis="${response.data_master[i]['jenis']}"    
                                  'name="btn_delete">
                                  <i class="fa fa-trash"></i> </button>
                      </td>
@@ -269,7 +305,7 @@ function mapping_update(response){
     $('#modal_rencana_realisasi_update').modal('show');
     $('#modal_jenis_update').val(response.data_detail[0]['jenis']);
     $('#modal_flag_mutasi_update').val(response.data_detail[0]['flag_mutasi']);
-    $('#modal_tgl_pembuatan_update').val(response.data_detail[0]['create_date']);
+    $('#modal_kode_perk_update').val(response.data_detail[0]['kode_perk']);
  
   // $('#modal_kode_kantor_update').append('<option value="' + kd_kantor_user + '">'+ kd_kantor_user +'</option>');
 
@@ -301,17 +337,17 @@ function clear_modal_update(){
     $('#modal_rasio_update').val('');
 }
 
-function insert_rencana(){
+function insert_master(){
         var modal_jenis         = $('#modal_jenis').val();
         var modal_flag_mutasi   = $('#modal_flag_mutasi').val();
-        var modal_tgl_pembuatan   = $('#modal_tgl_pembuatan').val();
+        var modal_kode_perk   = $('#modal_kode_perk').val();
         console.log(modal_jenis);
       
 
         let fd = new FormData();
         fd.append('modal_jenis',modal_jenis);
         fd.append('modal_flag_mutasi',modal_flag_mutasi);
-        fd.append('modal_tgl_pembuatan',modal_tgl_pembuatan);
+        fd.append('modal_kode_perk',modal_kode_perk);
       
         $('#loading-1').show();
         
@@ -345,7 +381,7 @@ function insert_rencana(){
                 close_modal()
                 return Swal.fire({
                             icon: 'error',
-                            title: 'Gagal Pengajuan Asuransi Cash In Save!',
+                            title: 'Gagal Insert',
                             text: 'Mohon Periksa Jaringan Anda'
                 });
         }
@@ -389,13 +425,13 @@ function delete_rencana(){
 function update_rencana(){
     var modal_jenis_update       = $('#modal_jenis_update').val();
     var modal_flag_mutasi_update    = $('#modal_flag_mutasi_update').val();
-    var modal_tgl_pembuatan_update    = $('#modal_tgl_pembuatan_update').val();
+    var $modal_kode_perk_update    = $('#modal_kode_perk_update').val();
 
 
     var fd_up = new FormData();
     fd_up.append('modal_jenis_update',modal_jenis_update);
     fd_up.append('modal_flag_mutasi_update',modal_flag_mutasi_update);
-    fd_up.append('modal_tgl_pembuatan_update',modal_tgl_pembuatan_update);  
+    fd_up.append('modal_kode_perk_update',$modal_kode_perk_update);  
     fd_up.append('jenis',jenis);
     $('#loading-2').show();
         $.ajax({
@@ -438,5 +474,39 @@ function update_rencana(){
 
 
 }
+
+function mapping_search(response){
+    
+        for(i = 0; i < response.rekap_jenis.length; i++ ){
+            data += `<tr style="text-align:center">
+                        <td>${response.rekap_jenis[i]['jenis']}</td>
+                        <td>${response.rekap_jenis[i]['flag_mutasi']}</td>
+                        <td>${response.rekap_jenis[i]['kode_perk']}</td>
+                        <td>        
+                         <button type="button" class="btn btn-primary btn-sm btn_proses" id="btn_proses"
+                                 data-jenis="${response.rekap_jenis[i]['jenis']}"    
+                                 'name="btn_proses">
+                                 <i class="fa fa-pen"></i> </button>
+                         <button type="button" class="btn btn-danger btn-sm btn_delete" id="btn_delete"   
+                                 data-jenis="${response.rekap_jenis[i]['jenis']}"    
+                                 'name="btn_delete">
+                                 <i class="fa fa-trash"></i> </button>
+                     </td>
+                        `;
+           
+        }
+        $('#tbl_rencana_realisasi > tbody:first').html(data);
+        
+        $(document).ready(function() {
+            $('#tbl_rencana_realisasi').DataTable( {
+                "destroy": true,
+                "scrollX": true,
+                "autoWidth" : false,
+                "searching": false,
+                "aaSorting" : []
+            } );
+        } );
+        $('#loading').hide(); 
+   }
 
 </script>

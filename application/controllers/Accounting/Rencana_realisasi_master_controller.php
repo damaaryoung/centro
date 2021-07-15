@@ -45,21 +45,21 @@ class Rencana_realisasi_master_controller extends CI_Controller {
 	public function get_data_rencana_realisasi_master(){
 		// $src_kode_kantor = $this->input->post('src_kode_kantor');
 		
-		$data_rencana = $this->Rencana_realisasi_master_model->get_master();
+		$data_master = $this->Rencana_realisasi_master_model->get_master();
 
-		$data['data_rencana'] = $data_rencana;
+		$data['data_master'] = $data_master;
 		echo json_encode($data);
 	}
 	public function insert_master(){
 		$modal_jenis       = $this->input->post('modal_jenis');
 		$modal_flag_mutasi = $this->input->post('modal_flag_mutasi');
-		$modal_tgl_pembuatan = $this->input->post('modal_tgl_pembuatan');	
+		$modal_kode_perk = $this->input->post('modal_kode_perk');	
 		$userID            = $this->session->userdata('userIdLogin');
 
 
 		$data_details = $this->Rencana_realisasi_master_model->insert_master($modal_jenis,
 																	$modal_flag_mutasi,
-																	$modal_tgl_pembuatan,
+																	$modal_kode_perk,
 																	$userID);
 		$data['data_details'] = $data_details;
 		echo json_encode($data);
@@ -86,17 +86,26 @@ class Rencana_realisasi_master_controller extends CI_Controller {
 
 		$modal_jenis_update       = $this->input->post('modal_jenis_update');
 		$modal_flag_mutasi_update = $this->input->post('modal_flag_mutasi_update');
-		$modal_tgl_pembuatan_update = $this->input->post('modal_tgl_pembuatan_update');
+		$modal_kode_perk_update = $this->input->post('modal_kode_perk_update');
 		$jenis                    = $this->input->post('jenis');
 		$userID                   = $this->session->userdata('userIdLogin');
 
 		$update = $this->Rencana_realisasi_master_model->update_rencana($modal_jenis_update,
 		    														         $modal_flag_mutasi_update,
-		    														         $modal_tgl_pembuatan_update,
+                                                                             $modal_kode_perk_update,
                                                                              $jenis,
 		    														         $userID);
 		$data['update'] = $update;
 		echo json_encode($data);
 		
+	}
+
+    public function search(){
+		$search        = $this->input->post('src_search');
+		$rekap_jenis = $this->Rencana_realisasi_master_model->get_search($search);
+
+		$data['rekap_jenis'] = $rekap_jenis;
+		echo json_encode($data);
+
 	}
 }
