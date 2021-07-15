@@ -155,19 +155,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                           </div>
                                         </div>
                                     <div class="form-group row">
-                                          <label class="col-sm-4 col-form-label">Flag Mutasi</label>
-                                          <div class="col-sm-8">
-                                            <input placeholder="Flag Mutasi" name="modal_flag_mutasi" id="modal_flag_mutasi" type="text"  class ="form-control">
-                                          </div>
-                                        </div>
-                                      
-                                    <div class="form-group row">
                                           <label class="col-sm-4 col-form-label">Kode Perk</label>
                                           <div class="col-sm-8">
                                             <input placeholder="Kode Perk" name="modal_kode_perk" id="modal_kode_perk" type="text"  class ="form-control">
                                           </div>
                                         </div>
-                                      
+                                        <div class="form-group row">
+                                          <label class="col-sm-4 col-form-label">Flag Mutasi</label>
+                                          <div class="col-sm-2">
+                                            <input  min ="0" max="1" name="modal_flag_mutasi" id="modal_flag_mutasi"    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                                                                                                              type = "number"
+                                                                                                                                                              maxlength = "1"  class ="form-control"> 
+                                          </div>
+                                        </div>
                                     </div>
                       </div>
                       </div>
@@ -204,20 +204,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <input placeholder="Jenis Realisasi"name="modal_jenis_update" id="modal_jenis_update" type="text"  class ="form-control">
                                           </div>
                                         </div>
-                                    <div class="form-group row">
-                                          <label class="col-sm-4 col-form-label">Flag Mutasi</label>
-                                          <div class="col-sm-8">
-                                            <input placeholder="Flag Mutasi" name="modal_flag_mutasi_update" id="modal_flag_mutasi_update" type="text"  class ="form-control">
-                                          </div>
-                                        </div>
-                                      
+
                                     <div class="form-group row">
                                           <label class="col-sm-4 col-form-label">Kode Perk</label>
                                           <div class="col-sm-8">
-                                            <input placeholder="Kode Perk" name="modal_kode_perk_update" id="modal_kode_perk_update" type="text"  class ="form-control">
+                                            <input placeholder="Kode Perk" name="modal_kode_perk_update" id="modal_kode_perk_update"  class ="form-control">
                                           </div>
                                         </div>
-                                      
+                                        
+                                        <div class="form-group row">
+                                          <label class="col-sm-4 col-form-label">Flag Mutasi</label>
+                                          <div class="col-sm-2">
+                                            <input placeholder="Flag Mutasi" min ="1" max="1"  name="modal_flag_mutasi_update" id="modal_flag_mutasi_update"oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                                                                                                              type = "number"
+                                                                                                                                                              maxlength = "1"  class ="form-control">
+                                          </div>
+                                        </div>
                                     </div>
                 </div>
 

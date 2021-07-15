@@ -5,11 +5,7 @@ var divisi_user                  = $('#user_divisi_id').val();
 var select_kantor                = '';
 
 //update btn
-var kd_kantor = '';
 var jenis     = '';
-var tgl       = '';
-
-
 
 $(document).ready(function () {            
     bsCustomFileInput.init();
@@ -74,7 +70,7 @@ $('#tbl_body_rencana_realisasi').on('click','.btn_proses', function () {
 
     jenis     = $(this).data("jenis");   
 
-    console.log(kd_kantor,jenis, tgl);
+    console.log(jenis);
     get_details();
 });
 $('#tbl_body_rencana_realisasi').on('click','.btn_delete', function () {  
@@ -243,9 +239,7 @@ function get_details(){
            headers: {
                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                    },
-           data:{
-                 "jenis"     : jenis,
-                 "tgl"       : tgl},
+           data:{"jenis"     : jenis,},
            success : function(response) {
                 $('#loading').hide(); 
                 mapping_update(response);
@@ -306,9 +300,6 @@ function mapping_update(response){
     $('#modal_jenis_update').val(response.data_detail[0]['jenis']);
     $('#modal_flag_mutasi_update').val(response.data_detail[0]['flag_mutasi']);
     $('#modal_kode_perk_update').val(response.data_detail[0]['kode_perk']);
- 
-  // $('#modal_kode_kantor_update').append('<option value="' + kd_kantor_user + '">'+ kd_kantor_user +'</option>');
-
 }
 
 function close_modal(){
@@ -397,9 +388,7 @@ function delete_rencana(){
            headers: {
                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                    },
-           data:{"kd_kantor" : kd_kantor,
-                 "jenis"     : jenis,
-                 "tgl"       : tgl},
+           data:{"jenis"     : jenis},
            success : function(response) {
                Swal.fire({
                    position: 'center',
