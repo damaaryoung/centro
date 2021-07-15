@@ -7,13 +7,13 @@ class Rencana_realisasi_model extends CI_Model{
     	$this->load->database();
     }
 
-	public function sysdate(){
-	  	$this->db2 = $this->load->database('DB_CENTRO', true);
-	  	$str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
-          $query  = $this->db2->query($str);
-          $result = $query->result_array();
-          return $result[0]["sysdate"];
-	}
+    public function sysdate(){
+        $this->db2 = $this->load->database('DB_CENTRO', true);
+        $str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
+            $query  = $this->db2->query($str);
+            $result = $query->result_array();
+            return $result[0]["sysdate"];
+    }
     public function get_jenis(){
         $this->db2 = $this->load->database('DB_DPM_ONLINE', true);
         $str = "SELECT * FROM acc_das_rencana_realisasi_master;";
@@ -27,7 +27,7 @@ class Rencana_realisasi_model extends CI_Model{
           $query = $this->db2->query($str);
           return $query->result_array();
   	}
-    public function get_data_rencana_realisasi($src_kode_kantor){
+    public function get_data_rencana_realisasi($src_kode_kantor, $src_tgl_laporan){ 
         $this->db2 = $this->load->database('DB_CENTRO', true);
         $str    = "SELECT a.tgl_laporan AS `tgl_laporan`,
                             a.kode_kantor AS `kode_kantor`,
@@ -39,8 +39,8 @@ class Rencana_realisasi_model extends CI_Model{
                     FROM acc_das_rencana_realisasi a
                     LEFT JOIN app_kode_kantor kk
                     ON kk.kode_kantor = a.kode_kantor 
-                    WHERE a.kode_kantor = '$src_kode_kantor'
-                    LIMIT 25;";
+                    WHERE a.tgl_laporan =  dpm_online.get_eom('$src_tgl_laporan')
+                    AND a.kode_kantor LIKE '$src_kode_kantor%';";
         $query  = $this->db2->query($str);
         return $query->result_array();
     }
@@ -65,15 +65,15 @@ class Rencana_realisasi_model extends CI_Model{
                                   SELECT dpm_online.get_eom('$modal_tgl_laporan'),'$modal_kode_kantor', '$modal_jenis', '$modal_rencana', 
                                          '$modal_realisasi', '$modal_rasio',NOW(), '$userID' FROM DUAL;");
         if ($this->db2->trans_status() === FALSE)
-		{
-		  $this->db2->trans_rollback();
-          return 'fail';
-		}
-		else
-		{
-		  $this->db2->trans_commit();
-          return 'sukses';
-		}
+        {
+          $this->db2->trans_rollback();
+              return 'fail';
+        }
+        else
+        {
+          $this->db2->trans_commit();
+              return 'sukses';
+        }
     }
     public function delete_rencana($kd_kantor,$jenis,$tgl){
         $this->db2 = $this->load->database('DB_CENTRO', true);

@@ -21,8 +21,7 @@ $(document).ready(function () {
     }else{
         $('#src_kode_kantor').append('<option value="' + kd_kantor_user + '" selected>'+ kd_kantor_user +'</option>');
     }
-    getData();
-   
+    get_sysdate();  
    
     $('#loading-1').hide();
 });
@@ -137,6 +136,31 @@ function get_kode_kantor(){
             }
     });    
 }
+function get_sysdate(){
+    $.ajax({
+            url : base_url + "Accounting/Rencana_realisasi_controller/get_sysdate",
+            type : "POST",
+            dataType : "json",
+            timeout : 180000,
+            headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+            success : function(response) {
+                $('#src_tgl_laporan').val(response.sysdate);
+                getData();
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                $('#loading').hide();
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Get Tanggal Sistem!',
+                    text: 'Mohon Periksa Jaringan Anda'
+                });
+                
+            }
+    });    
+}
 function get_jenis(){
     $.ajax({
             url : base_url + "Accounting/Rencana_realisasi_controller/get_jenis",
@@ -172,7 +196,7 @@ function getData(){
    $('#tbl_rencana_realisasi').DataTable().destroy();
    $('#loading').show(); 
    var src_kode_kantor =  $('#src_kode_kantor').val();
-   
+   var src_tgl_laporan = $('#src_tgl_laporan').val();
    $.ajax({
            url : base_url + "Accounting/Rencana_realisasi_controller/get_data_rencana_realisasi",
            type : "POST",
@@ -181,9 +205,10 @@ function getData(){
            headers: {
                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                    },
-            data:{"src_kode_kantor" : src_kode_kantor},
+            data:{"src_kode_kantor" : src_kode_kantor,
+                  "src_tgl_laporan" : src_tgl_laporan},
            success : function(response) {
-               
+               $('#src_tgl_realisasi').val(response.sysdate);
                mapping(response);
            },
            error : function(response) {

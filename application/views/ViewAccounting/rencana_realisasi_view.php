@@ -68,17 +68,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor" onchange="getData()">
                                     </select>
                                   </div>
-                                  <!-- <div class="col-sm-1">
-                                      <label style="padding-top: 5px;" class="control-label" for="src_search">Search</label>
+                                  <div class="col-sm-2">
+                                      <label style="padding-top: 5px;" class="control-label" for="src_tgl_laporan">Tgl Laporan</label>
                                   </div>
-                                  <div class="col-sm-4">                                       
-                                        <div class="input-group mb-3">
-                                          <input type="text" class="form-control form-control-sm" id="src_search" name="src_search" placeholder="NO TRANSAKSI">
-                                          <div class="input-group-append">
-                                            <span class="input-group-text btn btn-sm" id="btn_search"><i class="fas fa-search"></i></span>
-                                          </div>
-                                        </div>
-                                  </div> -->
+                                  <div class="col-sm-3">                                       
+                                      <input type="date" class="form-control form-control-sm" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 300px;"  onchange="getData()">
+                                  </div>
                               </div>
                       </div>
                 </div>

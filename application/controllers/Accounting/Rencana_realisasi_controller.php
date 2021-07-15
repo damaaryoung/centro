@@ -33,6 +33,13 @@ class Rencana_realisasi_controller extends CI_Controller {
 		$data['kode_kantor'] = $kode_kantor;
 		echo json_encode($data);
 	}
+	public function get_sysdate(){
+
+		$sysdate = $this->Rencana_realisasi_model->sysdate();
+
+		$data['sysdate'] = $sysdate;
+		echo json_encode($data);
+	}
 	public function get_jenis(){
 
 		$get_asuransi = $this->Rencana_realisasi_model->get_jenis();
@@ -44,8 +51,9 @@ class Rencana_realisasi_controller extends CI_Controller {
 	}
 	public function get_data_rencana_realisasi(){
 		$src_kode_kantor = $this->input->post('src_kode_kantor');
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
 		
-		$data_rencana = $this->Rencana_realisasi_model->get_data_rencana_realisasi($src_kode_kantor);
+		$data_rencana = $this->Rencana_realisasi_model->get_data_rencana_realisasi($src_kode_kantor, $src_tgl_laporan);
 
 		$data['data_rencana'] = $data_rencana;
 		echo json_encode($data);
