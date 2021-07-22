@@ -69,6 +69,14 @@
                 <ul class="nav nav-treeview">
                     <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>dashboard_finance" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i> 
+                          <p>Dashboard Finance</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
                         <a href="<?php echo base_url(); ?>rencana_realisasi" class="nav-link">
                           <i class="far fa-circle nav-icon"></i> 
                           <p>Rencana Realisasi</p>

@@ -14,9 +14,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
-
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/gauge.min.js"></script>
+  <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -39,9 +38,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <h1> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Rencana Realisasi Master
         <small></small>
       </h1>
-      <ol class="breadcrumb">
-     
-      </ol>
+   
     </section>
 
     <!-- Main content -->
@@ -55,6 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="card card-info">
             <div class="card-header with-border">
               <h3 class="card-title"></h3>
+              
             </div>
             <!-- /.card-header -->
             <div class="card-body text-center">  
@@ -112,7 +110,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <table id="tbl_rencana_realisasi" class="table table-striped table-bordered" style="width:100% text-align:center" >
                                         <thead style="text-align: center;" class="bg-danger">
                                             <tr>
-                                               
                                                 <th>Jenis</th>
                                                 <th>Kode Perk</th>
                                                 <th>Flag Mutasi</th>
@@ -128,24 +125,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <!-- /.card-body -->
                   <!-- /.card-body -->
           </div>
-
-          
           <!-- INSERT -->
 
                 <div class="modal fade" id="modal_rencana_realisasi"> 
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title">Rencana Realisasi</h4>
-                        <button type="button" class="close" onclick="close_modal()" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
+                          <h4 class="modal-title">Rencana Realisasi Master</h4>
+                          <button type="button" class="close" onclick="close_modal()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+
                         <div id="loading-1">
                           <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
                         </div>
+
                       </div>
-                      <div class="modal-body" style="height: 220px;">
-                      <div class="row" style="padding-top: 20px;">
+
+                      <div class="modal-body" style="height: 215px;">
+                        <div class="row" style="padding-top: 20px;">
                                     <!-- form atas -->
                                     <div class="col-md-12 mx-auto">
                                     <div class="form-group row">
@@ -163,16 +161,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <div class="form-group row">
                                           <label class="col-sm-4 col-form-label">Flag Mutasi</label>
                                           <div class="col-sm-2">
-                                            <input  min ="0" max="1" name="modal_flag_mutasi" id="modal_flag_mutasi"    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                                                                                                                                              type = "number"
-                                                                                                                                                              maxlength = "1"  class ="form-control"> 
+                                          <input type="checkbox" id="modal_flag_mutasi" name="modal_flag_mutasi" value="">      
                                           </div>
                                         </div>
                                     </div>
                       </div>
                       </div>
                 <!-- /.modal-body -->
-                <div class="modal-footer text-center" style="margin: 0 auto;">
+                <div class="modal-footer text-center">
                   <button type="button" class="btn btn-danger" onclick="close_modal()">Close</button>
                   <button type="button" class="btn btn-primary" id="btn_simpan">Save changes</button>
                 </div>
@@ -182,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.modal-dialog -->
           </div>
 <!-- Modal Update -->
-          <div class="modal fade" id="modal_rencana_realisasi_update"> 
+          <div class="modal fade " id="modal_rencana_realisasi_update"> 
           <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -194,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
                   </div>
                 </div>
-                <div class="modal-body" style="height: 220px;">
+                <div class="modal-body" style="height: 285px;">
                 <div class="row" style="padding-top: 20px;">
                               <!-- form atas -->
                               <div class="col-md-12 mx-auto">
@@ -215,14 +211,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <div class="form-group row">
                                           <label class="col-sm-4 col-form-label">Flag Mutasi</label>
                                           <div class="col-sm-2">
-                                            <input placeholder="Flag Mutasi" min ="1" max="1"  name="modal_flag_mutasi_update" id="modal_flag_mutasi_update"oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                                                                                                                                              type = "number"
-                                                                                                                                                              maxlength = "1"  class ="form-control">
-                                          </div>
+                                          <input type="checkbox" id="modal_flag_mutasi_update" name="modal_flag_mutasi_update" value="">       
+                                        </div>
                                         </div>
                                     </div>
-                </div>
-
                 </div>
                 <!-- /.modal-body -->
                 <div class="modal-footer text-center" style="margin: 0 auto;">
@@ -231,12 +223,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
               </div>
               <!-- /.modal-content -->
-            </div>
+           
             <!-- /.modal-dialog -->
           </div>
         <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
-        <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
-        <input type="hidden" class="form-control" id="user_divisi_id" name="user_divisi_id" value = "<?php echo $divisi_id; ?>">
+        <!-- <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
+        <input type="hidden" class="form-control" id="user_divisi_id" name="user_divisi_id" value = "<?php echo $divisi_id; ?>"> -->
     </section>
     <!-- /.content -->
   </div>
