@@ -23,6 +23,30 @@ $(document).ready(function () {
     $('#loading-1').hide();
 });
 
+$('#modal_flag_mutasi').on('click', function(){             
+
+if(document.getElementById("modal_flag_mutasi").checked == true){
+   // console.log('di check');
+     $('#modal_flag_mutasi ').val(1);
+}
+if(document.getElementById("modal_flag_mutasi").checked == false){
+   // console.log('tidak');
+    $('#modal_flag_mutasi ').val(0);
+}
+});
+
+$('#modal_flag_mutasi_update').on('click', function(){             
+
+if(document.getElementById("modal_flag_mutasi_update").checked == true){
+   // console.log('di check');
+     $('#modal_flag_mutasi_update ').val(1);
+}
+if(document.getElementById("modal_flag_mutasi_update").checked == false){
+   // console.log('tidak');
+    $('#modal_flag_mutasi_update ').val(0);
+}
+});
+
 $('#modal_rencana').on('change', function() {
     var money = accounting.formatMoney($('#modal_rencana').val(), '', 2, ',', '.');
     $('#modal_rencana').val(money);
@@ -70,7 +94,7 @@ $('#tbl_body_rencana_realisasi').on('click','.btn_proses', function () {
 
     jenis     = $(this).data("jenis");   
 
-    console.log(jenis);
+  //  console.log(jenis);
     get_details();
 });
 $('#tbl_body_rencana_realisasi').on('click','.btn_delete', function () {  
@@ -179,7 +203,7 @@ function get_jenis(){
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     },
             success : function(response) {
-                console.log(response.sysdate);
+             //   console.log(response.sysdate);
                 $.each(response.get_asuransi,function(i,data){
                     $('#modal_jenis').append('<option value="'+data.jenis+'">' + data.jenis +'</option>');
                 });
@@ -300,6 +324,13 @@ function mapping_update(response){
     $('#modal_jenis_update').val(response.data_detail[0]['jenis']);
     $('#modal_flag_mutasi_update').val(response.data_detail[0]['flag_mutasi']);
     $('#modal_kode_perk_update').val(response.data_detail[0]['kode_perk']);
+    
+    if(response.data_detail[0]['flag_mutasi'] == '1'){
+        document.getElementById("modal_flag_mutasi_update").checked = true;
+    }else{
+        document.getElementById("modal_flag_mutasi_update").checked = false;
+    }
+                        
 }
 
 function close_modal(){
