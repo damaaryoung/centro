@@ -397,7 +397,25 @@ class Cover_asuransi_model extends CI_Model{
 					END AS `jkw_asuransi`,
 					'' AS `nama`,
 					'BPR Kredit Mandiri Indonesia' AS `branch_name`,
-					jh.`alamat` AS `alamat_jaminan`
+					CASE
+					        WHEN jd.jenis = 'SERTIFIKAT'
+					         THEN 
+					    	  CONCAT (
+					    	    jd.`alamat_sertifikat`,' ',
+					    	    jd.`kelurahan_sertifikat`,' ',
+					    	    jd.`kecamatan_sertifikat`,' ',
+					    	    jd.`kota_sertifikat`
+					    	  )
+					         WHEN jd.jenis = 'BPKB'
+					          THEN
+					    	  CONCAT(
+					    	    jd.`alamat_bpkb`,' ',
+					    	    jd.`kelurahan_bpkb`,' ',
+					    	    jd.`kecamatan_bpkb`,' ',
+					    	    jd.`kota_bpkb`
+					    	  )
+					        ELSE jd.`alamat_sertifikat` 
+					END AS 'alamat_jaminan'
 					FROM
 					asuransi_cover AC 
 					LEFT JOIN NASABAH N 
@@ -482,7 +500,25 @@ class Cover_asuransi_model extends CI_Model{
 						END AS `jkw_asuransi`,
 						'' AS `nama`,
 						'BPR Kredit Mandiri Indonesia' AS `branch_name`,
-						jh.`alamat` AS `alamat_jaminan`
+						CASE
+					        WHEN jd.jenis = 'SERTIFIKAT'
+					         THEN 
+					    	  CONCAT (
+					    	    jd.`alamat_sertifikat`,' ',
+					    	    jd.`kelurahan_sertifikat`,' ',
+					    	    jd.`kecamatan_sertifikat`,' ',
+					    	    jd.`kota_sertifikat`
+					    	  )
+					         WHEN jd.jenis = 'BPKB'
+					          THEN
+					    	  CONCAT(
+					    	    jd.`alamat_bpkb`,' ',
+					    	    jd.`kelurahan_bpkb`,' ',
+					    	    jd.`kecamatan_bpkb`,' ',
+					    	    jd.`kota_bpkb`
+					    	  )
+					        ELSE jd.`alamat_sertifikat` 
+					    END AS 'alamat_jaminan'
 				    FROM
 				    asuransi_cover AC 
 				    LEFT JOIN NASABAH N 
@@ -525,13 +561,33 @@ class Cover_asuransi_model extends CI_Model{
 					END AS `tgl_jt_asuransi`,
 					'' AS `lebih_hari`,
 					K.`TUJUAN_USAHA`,
+					AO.`deskripsi_okupasi`,
 					AC.`rate`,
 					AC.`no_rekening`,
 					N.`NAMA_NASABAH`,
 					K.`jkw_asuransi`,
 					K.`jkw_asuransi_jiwa`,
 					K.`NILAI_ASURANSI`,
-					JH.`alamat`
+					JH.`alamat`,
+					CASE
+					    WHEN jd.jenis = 'SERTIFIKAT'
+					     THEN 
+						  CONCAT (
+						    jd.`alamat_sertifikat`,' ',
+						    jd.`kelurahan_sertifikat`,' ',
+						    jd.`kecamatan_sertifikat`,' ',
+						    jd.`kota_sertifikat`
+						  )
+					     WHEN jd.jenis = 'BPKB'
+					      THEN
+						  CONCAT(
+						    jd.`alamat_bpkb`,' ',
+						    jd.`kelurahan_bpkb`,' ',
+						    jd.`kecamatan_bpkb`,' ',
+						    jd.`kota_bpkb`
+						  )
+					    ELSE jd.`alamat_sertifikat` 
+					END AS 'alamat_jaminan'
 					FROM kredit k
 					LEFT JOIN nasabah n
 						ON n.`NASABAH_ID` = k.`NASABAH_ID`
@@ -539,6 +595,10 @@ class Cover_asuransi_model extends CI_Model{
 						ON ac.`no_rekening` = k.`NO_REKENING`
 					LEFT JOIN jaminan_header jh
 						ON jh.`no_reff` = ac.`no_reff_jaminan`
+					LEFT JOIN jaminan_dokument jd
+						ON jd.`agunan_id` = ac.`agunan_id`
+					LEFT JOIN asuransi_okupasi AO
+					    ON AO.`id` = ac.`id_okupasi`
 				    WHERE AC.`jenis_asuransi` = '$jenis' 
 					AND K.`KODE_ASURANSI` = '$src_nama_asuansi'
 				    AND DATE_FORMAT(K.`TGL_REALISASI`, '%Y-%m') = '$periode'
@@ -580,7 +640,25 @@ class Cover_asuransi_model extends CI_Model{
 					K.`jkw_asuransi_jiwa`,
 					'' AS `seller_agent_code`,
 					'BPR Kredit Mandiri Indonesia' AS `seller_branch_code`,
-					jh.`alamat` AS `alamat_jaminan`
+					CASE
+					    WHEN jd.jenis = 'SERTIFIKAT'
+					     THEN 
+						  CONCAT (
+						    jd.`alamat_sertifikat`,' ',
+						    jd.`kelurahan_sertifikat`,' ',
+						    jd.`kecamatan_sertifikat`,' ',
+						    jd.`kota_sertifikat`
+						  )
+					     WHEN jd.jenis = 'BPKB'
+					      THEN
+						  CONCAT(
+						    jd.`alamat_bpkb`,' ',
+						    jd.`kelurahan_bpkb`,' ',
+						    jd.`kecamatan_bpkb`,' ',
+						    jd.`kota_bpkb`
+						  )
+					    ELSE jd.`alamat_sertifikat` 
+					END AS 'alamat_jaminan'
 					FROM
 					kredit K 
 					LEFT JOIN asuransi_cover ac
