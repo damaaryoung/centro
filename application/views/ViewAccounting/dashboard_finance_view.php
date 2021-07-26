@@ -38,7 +38,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Financial Dashboard<small></small>
+      <h3> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Financial Dashboard        <small></small>
       </h3>
       <ol class="breadcrumb">
      
@@ -106,21 +106,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card">
                               <div class="card-header">
                               Target vs Realisasi
+                              <div class="card-tools">
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                      </button>
+                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                    </div>
                               </div>
                               <div class="card-body">
-                               
                               <table>
                                 <tr>
                                     <tr>
-                                      <td><canvas id="gaugeAset" style="width: 190px;"></canvas></td>
-                                      <td><canvas id="gaugeAsetKredit"  style="width: 190px;"></canvas></td>
+                                      <td><canvas id="gaugeAset" style="width: 200px;"></canvas></td>
+                                      <td><canvas id="gaugeAsetKredit"  style="width: 200px;"></canvas></td>
                                     </tr>
                                  
                                     <tr style="text-align: center;">
                                     <td style="font-size: 25px;"><output  id="gaugeAset-value"></output>%</td>
                                     <td style="font-size: 25px;"><output id="gaugeAsetKredit-value"></output>%</td>
                                     </tr>
-
                                     <tr>
                                     <td><output id="gaugeAset-value"></output> Aset</td>
                                     <td><output id="gaugeAsetKredit-value"></output> Aset Kredit</td>
@@ -128,8 +131,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </tr>
                                 <tr>
                                     <tr>
-                                      <td><canvas id="gaugNpat"  style="width: 190px;"></canvas></td>
-                                      <td><canvas id="gaugeModal"  style="width: 190px;"></canvas></td>
+                                      <td><canvas id="gaugNpat"  style="width: 200px;"></canvas></td>
+                                      <td><canvas id="gaugeModal"  style="width: 200px;"></canvas></td>
                                     </tr>
                                   <tr style="text-align: center;">
                                     <td style="font-size: 25px;"><output id="gaugNpat-value"></output>%</td>
@@ -144,9 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </table>
                               </div>
                             </div>
-                    
-                            
-       
+
                               <script>
                                 var opts = {
                                     angle: 0.0, /// The span of the gauge arc
@@ -162,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     highDpiSupport: true,
                                     staticLabels: {
                                         font: "12px sans-serif",  // Specifies font
-                                        labels: [0,56,100],  // Print labels at these values
+                                        labels: [0,100],  // Print labels at these values
                                         color: "#000000",  // Optional: Label text color
                                         fractionDigits: 0, // Optional: Numerical precision. 0=round off.
                                     }
@@ -171,7 +172,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
                                 gauge.maxValue = 100; // set max gauge value
                                 gauge.setMinValue(0);  // set min value
-                                gauge.set(22); // set actual value
+                                gauge.set(<?= json_encode($speedometer_aset)?>); // set actual value
                                 gauge.setTextField(document.getElementById("gaugeAset-value"));
 
                                 var opts = {
@@ -188,7 +189,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     highDpiSupport: true,
                                     staticLabels: {
                                         font: "12px sans-serif",  // Specifies font
-                                        labels: [0,44,100],  // Print labels at these values
+                                        labels: [0,100],  // Print labels at these values
                                         color: "#000000",  // Optional: Label text color
                                         fractionDigits: 0, // Optional: Numerical precision. 0=round off.
                                     }
@@ -197,9 +198,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
                                 gauge.maxValue = 100; // set max gauge value
                                 gauge.setMinValue(0);  // set min value
-                                gauge.set(36); // set actual value
+                                gauge.set(<?= json_encode($speedometer_kredit)?>); // set actual value
                                 gauge.setTextField(document.getElementById("gaugeAsetKredit-value"));
-
                                 var opts = {
                                     angle: 0.0, /// The span of the gauge arc
                                     lineWidth: 0.44, // The line thickness
@@ -214,7 +214,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     highDpiSupport: true,
                                     staticLabels: {
                                         font: "12px sans-serif",  // Specifies font
-                                        labels: [0,20,100],  // Print labels at these values
+                                        labels: [0,100],  // Print labels at these values
                                         color: "#000000",  // Optional: Label text color
                                         fractionDigits: 0, // Optional: Numerical precision. 0=round off.
                                     }
@@ -223,7 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
                                 gauge.maxValue = 100; // set max gauge value
                                 gauge.setMinValue(0);  // set min value
-                                gauge.set(26); // set actual value
+                                gauge.set(<?= json_encode($speedometer_npat_monthly)?>); // set actual value
                                 gauge.setTextField(document.getElementById("gaugNpat-value"));
                                 
                                 var opts = {
@@ -240,7 +240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     highDpiSupport: true,
                                     staticLabels: {
                                         font: "12px sans-serif",  // Specifies font
-                                        labels: [0,36,100],  // Print labels at these values
+                                        labels: [0,100],  // Print labels at these values
                                         color: "#000000",  // Optional: Label text color
                                         fractionDigits: 0, // Optional: Numerical precision. 0=round off.
                                     }
@@ -249,9 +249,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
                                 gauge.maxValue = 100; // set max gauge value
                                 gauge.setMinValue(0);  // set min value
-                                gauge.set(38); // set actual value
+                                gauge.set(<?= json_encode($speedometer_npat_ytd)?>); // set actual value
                                 gauge.setTextField(document.getElementById("gaugeModal-value"));
-
                               </script>  
                           </div>
                           
@@ -259,13 +258,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <div class="card">
                             <div class="card-header">
                             Modal
-                           
+                            <div class="card-tools">
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                      </button>
+                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                    </div>
                             </div>
-                            
+
                             <div class="card-body">
                             <br>
                             <canvas id="chart_modal"></canvas>
                               <br>
+                              <br>
+                              <br>
+                       
                               <?php
                                 foreach($chart_modal as $data){
                                     $tgl_laporan_modal[] = $data->tgl_laporan;
@@ -310,11 +316,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <div class="form-group row justify-content-sm-center">
                                   <div class="col-sm-6">
-                                    <div class="card">
+                                    <div class="card ">
                                     <div class="card-header">
                                     Aset Total
                                     <div class="card-tools">
-                                      <button type="button" class="btn btn-tool collapse-hide" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                       </button>
                                       <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                     </div>
@@ -418,7 +424,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                   <div class="form-group row justify-content-sm-center">
                                     <div class="col-sm-6">
-                                    <div class="card">
+                                    <div class="card ">
                                       <div class="card-header">
                                       NPAT Monthly
                                       <div class="card-tools">

@@ -29,6 +29,9 @@ class Dashboard_finance_controller extends CI_Controller {
 		$data['chart_aset_kredit']         = $this->Dashboard_finance_model->get_data_chart_aset_kredit();
 		$data['chart_modal']         = $this->Dashboard_finance_model->get_data_chart_modal();
 		$data['speedometer_aset']         = $speedometer_aset;
+		$data['speedometer_kredit']         = $this->Dashboard_finance_model->get_data_speedometer_kredit();
+		$data['speedometer_npat_monthly']         = $this->Dashboard_finance_model->get_data_speedometer_npat_monthly();
+		$data['speedometer_npat_ytd']         = $this->Dashboard_finance_model->get_data_speedometer_npat_ytd();
 		// $chart          = $this->Dashboard_finance_model->get_data_chart();
 		//  var_dump(	$data['speedometer_aset'] );
 	
