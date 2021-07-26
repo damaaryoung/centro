@@ -9,6 +9,11 @@ class Dashboard_finance_controller extends CI_Controller {
        
     }
     public function index(){
+
+		$speedometer_aset =$this->Dashboard_finance_model->get_data_speedometer();
+
+
+
         $session             = $this->session->userdata('nama');
         $data['kode_kantor'] = $this->session->userdata('kd_cabang');
         $data['divisi_id']   = $this->session->userdata('divisi_id');
@@ -23,8 +28,11 @@ class Dashboard_finance_controller extends CI_Controller {
 		$data['chart_aset']         = $this->Dashboard_finance_model->get_data_chart_aset();
 		$data['chart_aset_kredit']         = $this->Dashboard_finance_model->get_data_chart_aset_kredit();
 		$data['chart_modal']         = $this->Dashboard_finance_model->get_data_chart_modal();
+		$data['speedometer_aset']         = $speedometer_aset;
 		// $chart          = $this->Dashboard_finance_model->get_data_chart();
-
+		//  var_dump(	$data['speedometer_aset'] );
+	
+		
 		if($session != ''){
 			$this->load->view('ViewAccounting/dashboard_finance_view.php', $data);
 		}

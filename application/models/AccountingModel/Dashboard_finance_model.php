@@ -81,4 +81,18 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
+    function get_data_speedometer(){
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+      $str = ("SELECT AVG(realisasi/rencana *100 ) AS total 
+      FROM acc_das_rencana_realisasi WHERE jenis='ASET'");
+      $query  = $this->db2->query($str);
+    
+    if($query->num_rows() > 0){
+              foreach($query->result() as $data){
+                  $hasil = $data;
+              }
+              return $hasil;
+          }
+      }
+
 }

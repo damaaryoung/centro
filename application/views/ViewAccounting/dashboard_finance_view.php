@@ -55,14 +55,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- From card Bawah -->
           <!-- Horizontal Form -->
-          <div class="card card-info">
-            <div class="card-header with-border">
+          <div class="card card-info collapsed-box">
+            <div class="card-header with-border ">
               
               <h3 class="card-title">Filter</h3>
               <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                   </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                 </div>
             </div>
             <!-- /.card-header -->
@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="col-md-12 mx-auto">
                               <div class="form-group row justify-content-sm-center">
                                   <div class="col-sm-1">
-                                      <label style="padding-top: 5px;" class="control-label" for="src_tgl_realisasi">Tahun</label>
+                                      <label style="padding-top: 5px;" class="control-label" for="src_tgl_realisasi">Periode</label>
                                   </div>
                                   <div class="col-sm-2">
                                     <input type="date" class="form-control form-control-sm" id="src_tgl_realisasi" name="src_tgl_realisasi" onchange="search_tanggal()">
@@ -93,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                       </button>
-                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                     </div>
                   </div>
                   <!-- /.card-header -->
@@ -102,28 +102,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                         <div class="form-group row justify-content-sm-center">
-                            <div class="col-sm-7">
+                            <div class="col-sm-6">
                               <h4>Target vs Realisasi</h4>
+                             
                               <table>
                                 <tr>
-                                  <td><canvas id="gaugeAset" style="width: 150px;"></canvas></td>
-                                  <td><canvas id="gaugeAsetKredit"  style="width: 150px;"></canvas></td>
-                                  <td><canvas id="gaugNpat"  style="width: 150px;"></canvas></td>
-                                  <td><canvas id="gaugeModal"  style="width: 150px;"></canvas></td>
-                                </tr>
-                                <tr style="text-align: center;">
-                                  <td style="font-size: 25px;"><output id="gaugeAset-value"></output>%</td>
-                                  <td style="font-size: 25px;"><output id="gaugeAsetKredit-value"></output>%</td>
-                                  <td style="font-size: 25px;"><output id="gaugNpat-value"></output>%</td>
-                                  <td style="font-size: 25px;"><output id="gaugeModal-value"></output>%</td>
+                                    <tr>
+                                      <td><canvas id="gaugeAset" style="width: 220px;"></canvas></td>
+                                      <td><canvas id="gaugeAsetKredit"  style="width: 220px;"></canvas></td>
+                                    </tr>
+                                 
+                                    <tr style="text-align: center;">
+                                    <td style="font-size: 25px;"><output  id="gaugeAset-value"></output>%</td>
+                                    <td style="font-size: 25px;"><output id="gaugeAsetKredit-value"></output>%</td>
+                                    </tr>
+
+                                    <tr>
+                                    <td><output id="gaugeAset-value"value></output> Aset</td>
+                                    <td><output id="gaugeAsetKredit-value"></output> Aset Kredit</td>
+                                    </tr>
                                 </tr>
                                 <tr>
-                                  <td><output id="gaugeAset-value"></output> Aset</td>
-                                  <td><output id="gaugeAsetKredit-value"></output> Aset Kredit</td>
-                                  <td><output id="gaugNpat-value"></output> NPAT</td>
-                                  <td><output id="gaugeModal-value"></output> Modal</td>
+                                    <tr>
+                                      <td><canvas id="gaugNpat"  style="width: 220px;"></canvas></td>
+                                      <td><canvas id="gaugeModal"  style="width: 220px;"></canvas></td>
+                                    </tr>
+                                  <tr style="text-align: center;">
+                                    <td style="font-size: 25px;"><output id="gaugNpat-value"></output>%</td>
+                                    <td style="font-size: 25px;"><output id="gaugeModal-value"></output>%</td>
+                                  </tr>
+                                  <tr>
+                                    <td><output id="gaugNpat-value"></output> NPAT</td>
+                                    <td><output id="gaugeModal-value"></output> Modal</td>
+                                  </tr>
                                 </tr>
+                                
                               </table>
+       
                               <script>
                                 var opts = {
                                     angle: 0.0, /// The span of the gauge arc
@@ -148,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
                                 gauge.maxValue = 100; // set max gauge value
                                 gauge.setMinValue(0);  // set min value
-                                gauge.set(64); // set actual value
+                                gauge.set(<?= json_encode($speedometer_aset=$data['total'])?>); // set actual value
                                 gauge.setTextField(document.getElementById("gaugeAset-value"));
 
                                 var opts = {
@@ -232,7 +247,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </script>  
                           </div>
                           
-                          <div class="col-sm-5">
+                          <div class="col-sm-6">
                           <h4>Modal</h4>
                                       <canvas id="chart_modal"></canvas>
 
@@ -471,7 +486,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $footer;
         
 	?>
-<?php $this->view('ViewAsuransi/js/rekap_titipan_asuransi_js.php'); ?>
+<!--  -->
 <script src="<?php echo base_url('assets/dist/js/accounting.min.js')?>"></script>
 
  
