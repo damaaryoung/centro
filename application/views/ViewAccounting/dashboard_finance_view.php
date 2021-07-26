@@ -38,7 +38,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Financial Dashboard        <small></small>
+      <h3> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Financial Dashboard<small></small>
       </h3>
       <ol class="breadcrumb">
      
@@ -103,13 +103,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="col-md-12 mx-auto">
                         <div class="form-group row justify-content-sm-center">
                             <div class="col-sm-6">
-                              <h4>Target vs Realisasi</h4>
-                             
+                            <div class="card">
+                              <div class="card-header">
+                              Target vs Realisasi
+                              </div>
+                              <div class="card-body">
+                               
                               <table>
                                 <tr>
                                     <tr>
-                                      <td><canvas id="gaugeAset" style="width: 220px;"></canvas></td>
-                                      <td><canvas id="gaugeAsetKredit"  style="width: 220px;"></canvas></td>
+                                      <td><canvas id="gaugeAset" style="width: 190px;"></canvas></td>
+                                      <td><canvas id="gaugeAsetKredit"  style="width: 190px;"></canvas></td>
                                     </tr>
                                  
                                     <tr style="text-align: center;">
@@ -118,14 +122,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tr>
 
                                     <tr>
-                                    <td><output id="gaugeAset-value"value></output> Aset</td>
+                                    <td><output id="gaugeAset-value"></output> Aset</td>
                                     <td><output id="gaugeAsetKredit-value"></output> Aset Kredit</td>
                                     </tr>
                                 </tr>
                                 <tr>
                                     <tr>
-                                      <td><canvas id="gaugNpat"  style="width: 220px;"></canvas></td>
-                                      <td><canvas id="gaugeModal"  style="width: 220px;"></canvas></td>
+                                      <td><canvas id="gaugNpat"  style="width: 190px;"></canvas></td>
+                                      <td><canvas id="gaugeModal"  style="width: 190px;"></canvas></td>
                                     </tr>
                                   <tr style="text-align: center;">
                                     <td style="font-size: 25px;"><output id="gaugNpat-value"></output>%</td>
@@ -138,6 +142,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </tr>
                                 
                               </table>
+                              </div>
+                            </div>
+                    
+                            
        
                               <script>
                                 var opts = {
@@ -163,7 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
                                 gauge.maxValue = 100; // set max gauge value
                                 gauge.setMinValue(0);  // set min value
-                                gauge.set(<?= json_encode($speedometer_aset=$data['total'])?>); // set actual value
+                                gauge.set(22); // set actual value
                                 gauge.setTextField(document.getElementById("gaugeAset-value"));
 
                                 var opts = {
@@ -248,54 +256,73 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </div>
                           
                           <div class="col-sm-6">
-                          <h4>Modal</h4>
-                                      <canvas id="chart_modal"></canvas>
+                          <div class="card">
+                            <div class="card-header">
+                            Modal
+                           
+                            </div>
+                            
+                            <div class="card-body">
+                            <br>
+                            <canvas id="chart_modal"></canvas>
+                              <br>
+                              <?php
+                                foreach($chart_modal as $data){
+                                    $tgl_laporan_modal[] = $data->tgl_laporan;
+                                    $realisasi_modal[] = (float) $data->realisasi;
+                                    $rencana_modal[] = (float) $data->rencana;
+                                }
+                              ?>
+                                <!-- script Aset Total -->
+                                <script>
+                                var data = {
+                                labels: <?php echo json_encode($tgl_laporan_modal);?>,
+                                datasets: [
+                                    {
+                                      backgroundColor: 'rgb(0, 76, 153)',
+                                      data: <?php echo json_encode($rencana_modal);?>,
+                                      label: "Target"
+                                    },
+                                    {
+                                      backgroundColor: 'rgb(255, 128, 0)',
+                                      data: <?php echo json_encode($realisasi_modal);?>,
+                                      label: "Realisasi"
+                                    },
 
-                                      <?php
-                                        foreach($chart_modal as $data){
-                                            $tgl_laporan_modal[] = $data->tgl_laporan;
-                                            $realisasi_modal[] = (float) $data->realisasi;
-                                            $rencana_modal[] = (float) $data->rencana;
-                                        }
-                                    ?>
-                                        <!-- script Aset Total -->
-                                        <script>
-                                        var data = {
-                                        labels: <?php echo json_encode($tgl_laporan_modal);?>,
-                                        datasets: [
-                                            {
-                                              backgroundColor: 'rgb(0, 76, 153)',
-                                              data: <?php echo json_encode($rencana_modal);?>,
-                                              label: "Target"
-                                            },
-                                            {
-                                              backgroundColor: 'rgb(255, 128, 0)',
-                                              data: <?php echo json_encode($realisasi_modal);?>,
-                                              label: "Realisasi"
-                                            },
-                                  
-                                        ]
-                                          };
-                                              const config_5 = {
-                                              type: 'bar',
-                                              data,
-                                              options: {}
-                                            };
-                                            var myChart = new Chart(
-                                            document.getElementById('chart_modal'),
-                                            config_5 
-                                          );
-                                        </script>    
-                          <div>
-                        </div>          
+                                ]
+                                  };
+                                      const config_5 = {
+                                      type: 'bar',
+                                      data,
+                                      options: {}
+                                    };
+                                    var myChart = new Chart(
+                                    document.getElementById('chart_modal'),
+                                    config_5 
+                                  );
+                                </script>    
+                              <div>
+                              </div>     
+                            </div>
+                          </div>             
                       </div>
                     </div>
 
                     <div class="form-group row justify-content-sm-center">
                                   <div class="col-sm-6">
-                                      <h4>Aset Total</h4>
-                                      <canvas id="chart_aset"></canvas>
-
+                                    <div class="card">
+                                    <div class="card-header">
+                                    Aset Total
+                                    <div class="card-tools">
+                                      <button type="button" class="btn btn-tool collapse-hide" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                      </button>
+                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                    </div>
+                                    </div>
+                                    <div class="card-body">
+                                    <canvas id="chart_aset"></canvas>
+                                    </div>
+                                  </div>
                                       <?php
                                         foreach($chart_aset as $data){
                                             $tgl_laporan_aset[] = $data->tgl_laporan;
@@ -334,8 +361,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>    
                                    
                                   <div class="col-sm-6">
-                                      <h4>Aset Kredit</h4>
+                                  <div class="card">
+                                    <div class="card-header">
+                                    Aset Kredit
+                                    <div class="card-tools">
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                      </button>
+                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                    </div>
+                                    </div>
+                                    <div class="card-body">
                                       <canvas id="chart_aset_kredit"></canvas>
+                                    </div>
+                                  </div>
+                         
 
                                       <?php
                                         foreach($chart_aset_kredit as $data){
@@ -379,8 +418,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                   <div class="form-group row justify-content-sm-center">
                                     <div class="col-sm-6">
-                                      <h4>NPAT Monthly</h4>
-                                      <canvas id="chart_npat_monthly"></canvas>
+                                    <div class="card">
+                                      <div class="card-header">
+                                      NPAT Monthly
+                                      <div class="card-tools">
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                      </button>
+                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                    </div>
+                                      </div>
+                                      <div class="card-body">
+                                        <canvas id="chart_npat_monthly"></canvas>
+                                      </div>
+                                    </div>
+                                 
 
                                       <?php
                                         foreach($chart_npat_montly as $data){
@@ -420,8 +471,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </script> 
                                     </div>
                                     <div class="col-sm-6">
-                                    <h4>NPAT YTD</h4>
-                                      <canvas id="chart_npat_ytd"></canvas>
+                                    <div class="card">
+                                      <div class="card-header">
+                                      NPAT YTD
+                                      <div class="card-tools">
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                      </button>
+                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                    </div>
+                                      </div>
+                                      <div class="card-body">
+                                        <canvas id="chart_npat_ytd"></canvas>
+                                      </div>
+                                    </div>
+                                    <h4></h4>
                                       <!-- Chart NPAT YTD -->
                                       <?php
                                         foreach($chart_npat_ytd as $data){
