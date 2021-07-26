@@ -502,13 +502,13 @@ class Cover_asuransi_controller extends CI_Controller {
 				$activeSheet->setCellValueExplicit('B'.$i , $row['TGL_REALISASI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('B')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('C'.$i , $row['tgl_jt_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('C')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('D'.$i , $row['lebih_hari'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('D')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('E'.$i , $row['TUJUAN_USAHA'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('E')->setWidth(50);
+				$activeSheet->setCellValueExplicit('E'.$i , $row['deskripsi_okupasi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('E')->setWidth(50);
 				$activeSheet->setCellValueExplicit('F'.$i , $row['rate'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('F')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('G'.$i , $row['no_rekening'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('G')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('H'.$i , $row['NAMA_NASABAH'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('H')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('I'.$i , $row['jkw_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('I')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('J'.$i , $row['NILAI_ASURANSI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('J')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('K'.$i , $row['alamat'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('K')->setWidth(50);
+				$activeSheet->setCellValueExplicit('K'.$i , $row['alamat_jaminan'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('K')->setWidth(50);
 				$i++;
 				$idx++;
 			}
@@ -596,7 +596,7 @@ class Cover_asuransi_controller extends CI_Controller {
 				$activeSheet->setCellValueExplicit('B'.$i , $row['TGL_REALISASI'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('B')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('C'.$i , $row['tgl_jt_asuransi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('C')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('D'.$i , $row['lebih_hari'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('D')->setAutoSize(true);
-				$activeSheet->setCellValueExplicit('E'.$i , $row['TUJUAN_USAHA'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('E')->setAutoSize(true);
+				$activeSheet->setCellValueExplicit('E'.$i , $row['deskripsi_okupasi'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('E')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('F'.$i , $row['rate'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('F')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('G'.$i , $row['no_rekening'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('G')->setAutoSize(true);
 				$activeSheet->setCellValueExplicit('H'.$i , $row['NAMA_NASABAH'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)->getColumnDimension('H')->setAutoSize(true);
