@@ -18,7 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" style="padding-right: 0 !important">
 <div class="wrapper">
 
   	<?php 
@@ -127,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
           <!-- INSERT -->
 
-                <div class="modal fade" id="modal_rencana_realisasi"> 
+                <div class="modal" id="modal_rencana_realisasi"> 
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -178,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.modal-dialog -->
           </div>
 <!-- Modal Update -->
-          <div class="modal fade " id="modal_rencana_realisasi_update"> 
+          <div class="modal " id="modal_rencana_realisasi_update"> 
           <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -249,7 +249,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   height: 500px;
                   overflow-y: auto;
               }
-              
               .modal-backdrop {
                 width: 100% !important;
                 height: 100% !important;

@@ -88,6 +88,8 @@ $('#btn_add_rencana').click(function () {
 });
 $('#btn_simpan').click(function () {
     insert_master();
+
+
 });
 $('#tbl_body_rencana_realisasi').on('click','.btn_proses', function () {  
 
@@ -384,7 +386,8 @@ function insert_master(){
             dataType: 'json',
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
             success : function(response) {            
-                    $('#loading-1').hide();  
+                    $('#loading-1').hide();
+                    close_modal();
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -392,9 +395,9 @@ function insert_master(){
                         showConfirmButton: false,
                         timer: 2000
                     }).then(()=> {
-                        close_modal();
                         getData();
                     });  
+                  
                     console.log(response);
             },
             error : function(response) {
@@ -467,6 +470,7 @@ function update_rencana(){
             success : function(response) {
                 console.log(response);
                     $('#loading-3').hide();
+                    close_modal_update();
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -474,7 +478,6 @@ function update_rencana(){
                         showConfirmButton: false,
                         timer: 2000
                     }).then(()=> {
-                        close_modal_update();
                         getData();
                     });  
                     
