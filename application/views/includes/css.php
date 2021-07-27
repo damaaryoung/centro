@@ -51,6 +51,12 @@
   left: 35%;
   z-index: 100;
 }
+#loading-image1 {
+  position: relative;
+  top: 35%;
+  left: 35%;
+  z-index: 100;
+}
 
 th { font-size: 12px; }
 td { font-size: 11px; }

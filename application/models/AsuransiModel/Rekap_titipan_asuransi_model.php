@@ -14,7 +14,14 @@ class Rekap_titipan_asuransi_model extends CI_Model{
         $result = $query->result_array();
         return $result[0]["sysdate"];
 	}
-	public function get_data_rekap($jenis, $date){
+	public function selectKodeKantor(){
+		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+		$str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
+					FROM `app_kode_kantor` AKK;";
+		$query = $this->db2->query($str);
+		return $query->result_array();
+	}
+	public function get_data_rekap($jenis, $date, $src_kode_kantor){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		$str    = "SELECT 
 						K.`TGL_REALISASI`,
@@ -53,7 +60,8 @@ class Rekap_titipan_asuransi_model extends CI_Model{
 													FROM kredit k1
 													WHERE K1.`NO_REKENING` = AC.`no_rekening`) 
 					WHERE AC.`jenis_asuransi` = '$jenis' 
-						AND K.`TGL_REALISASI` = '$date';";
+						AND K.`TGL_REALISASI` = '$date'
+						AND AC.`kode_kantor` LIKE '%$src_kode_kantor';";
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
@@ -101,6 +109,25 @@ class Rekap_titipan_asuransi_model extends CI_Model{
         $query  = $this->db2->query($str);
         return $query->result_array();
 	}
+	public function buku_besar($src_kode_kantor,$tanggal,$jenis){
+		$this->db2 = $this->load->database('DB_CENTRO', true);
+		$str    = "SELECT 
+					dpm_online.`get_acc_sisa_asuransi_total`('$src_kode_kantor', '$jenis', '$tanggal') 
+					AS sisa_buku_besar;";
+        $query  = $this->db2->query($str);
+        $result = $query->result_array();
+        return $result[0]["sisa_buku_besar"];
+	}
+	public function web_centro($src_kode_kantor,$tanggal,$jenis){
+		$this->db2 = $this->load->database('DB_CENTRO', true);
+		$str    = "SELECT
+					dpm_online.`get_nominatif_sisa_asuransi_total` ('$src_kode_kantor', '$jenis', '$tanggal') 
+					AS sisa_centro;";
+        $query  = $this->db2->query($str);
+        $result = $query->result_array();
+        return $result[0]["sisa_centro"];
+	}
+
 }
 
 
