@@ -81,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- left column -->
               <div class="col-md-6">
                 <!-- general form elements -->
-                <div class="card card-info">
+                <div class="card card-warning">
                   <div class="card-header">
                     <h3 class="card-title">Rekonsiliasi Hutang Asuransi Jaminan</h3>
                   </div>
@@ -93,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <div class="col-md-12 mx-auto">
                                       <div class="form-group row">
                                           <div class="col-md-12 text-center">
-                                              <button type="button" id="tampil_jaminan" class="btn btn-success btn-sm" style="width: 250px; text-align:center;">Tampilkan Data </i></button> 
+                                              <button type="button" id="tampil_jaminan" class="btn btn-warning btn-sm" style="width: 250px; text-align:center;">Tampilkan Data </i></button> 
                                           </div>
                                         </div>
                               </div>
@@ -118,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                         <div class="table-responsive tbl_recon_jaminan">
                             <table id="tbl_recon_jaminan" class="table table-striped table-bordered" style="width:100% text-align:center" >
-                                <thead style="text-align: center;" class="bg-danger">
+                                <thead style="text-align: center;" class="bg-warning">
                                     <tr>
                                         <th>Kode&nbsp;Kantor</th>
                                         <th>Nama&nbsp;Kantor</th>
@@ -180,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       
                       <div class="table-responsive tbl_recon_jiwa">
                           <table id="tbl_recon_jiwa" class="table table-striped table-bordered" style="width:100% text-align:center" >
-                              <thead style="text-align: center;" class="bg-fuchsia">
+                              <thead style="text-align: center;" class="bg-success">
                                   <tr>
                                       <th>Kode&nbsp;Kantor</th>
                                       <th>Nama&nbsp;Kantor</th>
