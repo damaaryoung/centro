@@ -134,4 +134,12 @@ class Dashboard_finance_model extends CI_Model{
           }
       }
 
+      public function sysdate(){
+        $this->db2 = $this->load->database('DB_CENTRO', true);
+        $str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
+            $query  = $this->db2->query($str);
+            $result = $query->result_array();
+            return $result[0]["sysdate"];
+    }
+
 }
