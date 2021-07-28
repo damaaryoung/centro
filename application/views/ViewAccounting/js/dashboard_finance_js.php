@@ -21,7 +21,10 @@ $(document).ready(function () {
     get_chart_aset();
     get_chart_aset_kredit();
     get_chart_modal();
-   
+    get_speedometer_aset()
+    get_speedometer_aset_kredit()
+    get_speedometer_npat_monthly()
+    get_speedometer_modal()
     $('#loading-1').hide();
 });
 
@@ -378,110 +381,201 @@ function get_speedometer_aset(){
                    },
            success : function(response) {
             $('#loading').hide(); 
-            var opts = {
-                                angle: 0.0, /// The span of the gauge arc
-                                lineWidth: 0.44, // The line thickness
-                                pointer: {
-                                    length: 0.6, // Relative to gauge radius
-                                    strokeWidth: 0.035 // The thickness,
-                                },
-                                colorStart: '#6FADCF',   // Colors
-                                colorStop: '#00E007',    // just experiment with them
-                                strokeColor: '#E0E0E0',   // to see which ones work best for you
-                                generateGradient: true,
-                                highDpiSupport: true,
-                                staticLabels: {
-                                    font: "12px sans-serif",  // Specifies font
-                                    labels: [0,100],  // Print labels at these values
-                                    color: "#000000",  // Optional: Label text color
-                                    fractionDigits: 0, // Optional: Numerical precision. 0=round off.
-                                }
-                                };
-                                var target = document.getElementById('gaugeAset'); // your canvas element
-                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-                                gauge.maxValue = 100; // set max gauge value
-                                gauge.setMinValue(0);  // set min value
-                                gauge.set(12); // set actual value
-                                gauge.setTextField(document.getElementById("gaugeAset-value"));   
-                                //Script Speedometer Aset Kredit
-                                var opts = {
-                                    angle: 0.0, /// The span of the gauge arc
-                                    lineWidth: 0.44, // The line thickness
-                                    pointer: {
-                                        length: 0.6, // Relative to gauge radius
-                                        strokeWidth: 0.035 // The thickness,
-                                    },
-                                    colorStart: '#6FADCF',   // Colors
-                                    colorStop: '#8FC0DA',    // just experiment with them
-                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
-                                    generateGradient: true,
-                                    highDpiSupport: true,
-                                    staticLabels: {
-                                        font: "12px sans-serif",  // Specifies font
-                                        labels: [0,100],  // Print labels at these values
-                                        color: "#000000",  // Optional: Label text color
-                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
-                                    }
-                                };
-                                var target = document.getElementById('gaugeAsetKredit'); // your canvas element
-                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-                                gauge.maxValue = 100; // set max gauge value
-                                gauge.setMinValue(0);  // set min value
-                                gauge.set(83); // set actual value
-                                gauge.setTextField(document.getElementById("gaugeAsetKredit-value"));
-                                //Script Speedometer NPAT monthly
-                                var opts = {
-                                    angle: 0.0, /// The span of the gauge arc
-                                    lineWidth: 0.44, // The line thickness
-                                    pointer: {
-                                        length: 0.6, // Relative to gauge radius
-                                        strokeWidth: 0.035 // The thickness,
-                                    },
-                                    colorStart: '#6FADCF',   // Colors
-                                    colorStop: '#D33A27',    // just experiment with them
-                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
-                                    generateGradient: true,
-                                    highDpiSupport: true,
-                                    staticLabels: {
-                                        font: "12px sans-serif",  // Specifies font
-                                        labels: [0,100],  // Print labels at these values
-                                        color: "#000000",  // Optional: Label text color
-                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
-                                    }
-                                };
-                                var target = document.getElementById('gaugNpat'); // your canvas element
-                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-                                gauge.maxValue = 100; // set max gauge value
-                                gauge.setMinValue(0);  // set min value
-                                gauge.set(45); // set actual value
-                                gauge.setTextField(document.getElementById("gaugNpat-value"));
-                                
-                                //Speedometer NPAT YTD
-                                var opts = {
-                                    angle: 0.0, /// The span of the gauge arc
-                                    lineWidth: 0.44, // The line thickness
-                                    pointer: {
-                                        length: 0.6, // Relative to gauge radius
-                                        strokeWidth: 0.035 // The thickness,
-                                    },
-                                    colorStart: '#6FADCF',   // Colors
-                                    colorStop: '#fcba03',    // just experiment with them
-                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
-                                    generateGradient: true,
-                                    highDpiSupport: true,
-                                    staticLabels: {
-                                        font: "12px sans-serif",  // Specifies font
-                                        labels: [0,100],  // Print labels at these values
-                                        color: "#000000",  // Optional: Label text color
-                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
-                                    }
-                                };
-                                var target = document.getElementById('gaugeModal'); // your canvas element
-                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-                                gauge.maxValue = 100; // set max gauge value
-                                gauge.setMinValue(0);  // set min value
-                                gauge.set(88); // set actual value
-                                gauge.setTextField(document.getElementById("gaugeModal-value"));
+                var label_modal=[]
+
+
+                for (var i =0;i < response.speedometer_aset.length;i++) 
+
+                               //Script Speedometer Aset
+                               var opts = {
+                                   angle: 0.0, /// The span of the gauge arc
+                                   lineWidth: 0.44, // The line thickness
+                                   pointer: {
+                                       length: 0.6, // Relative to gauge radius
+                                       strokeWidth: 0.035 // The thickness,
+                                   },
+                                   colorStart: '#6FADCF',   // Colors
+                                   colorStop: '#00E007',    // just experiment with them
+                                   strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                   generateGradient: true,
+                                   highDpiSupport: true,
+                                   staticLabels: {
+                                       font: "12px sans-serif",  // Specifies font
+                                       labels: [0,100],  // Print labels at these values
+                                       color: "#000000",  // Optional: Label text color
+                                       fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                   }
+                               };
+                               var target = document.getElementById('gaugeAset'); // your canvas element
+                               var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                               gauge.maxValue = 100; // set max gauge value
+                               gauge.setMinValue(0);  // set min value
+                               gauge.set(response.speedometer_aset[0]); // set actual value
+                               console.log(response.speedometer_aset[0])
+                               gauge.setTextField(document.getElementById("gaugeAset-value"));                 
+},
+           error : function(response) {
+               console.log('failed :' + response);
+               $('#loading').hide();
+               return Swal.fire({
+                   icon: 'error',
+                   title: 'Gagal Get Data!',
+                   text: 'Mohon Periksa Jaringan Anda'
+               });
+           }
+   });
+}
+function get_speedometer_aset_kredit(){
+   data = '';
+   $('#loading').show(); 
+   $.ajax({
+           url : base_url + "Accounting/Dashboard_finance_controller/get_data_speedometer_aset_krerdit",
+           type : "POST",
+           dataType : "json",
+           timeout : 180000,
+           headers: {
+                       'Authorization': 'Bearer ' + localStorage.getItem('token')
+                   },
+           success : function(response) {
+            $('#loading').hide(); 
+                             
+                               //Script Speedometer Aset Kredit
+                               var opts = {
+                                   angle: 0.0, /// The span of the gauge arc
+                                   lineWidth: 0.44, // The line thickness
+                                   pointer: {
+                                       length: 0.6, // Relative to gauge radius
+                                       strokeWidth: 0.035 // The thickness,
+                                   },
+                                   colorStart: '#6FADCF',   // Colors
+                                   colorStop: '#8FC0DA',    // just experiment with them
+                                   strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                   generateGradient: true,
+                                   highDpiSupport: true,
+                                   staticLabels: {
+                                       font: "12px sans-serif",  // Specifies font
+                                       labels: [0,100],  // Print labels at these values
+                                       color: "#000000",  // Optional: Label text color
+                                       fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                   }
+                               };
+                               var target = document.getElementById('gaugeAsetKredit'); // your canvas element
+                               var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                               gauge.maxValue = 100; // set max gauge value
+                               gauge.setMinValue(0);  // set min value
+                               gauge.set(response.speedometer_aset_kredit[0]); // set actual value
+                               console.log(response.speedometer_aset_kredit[0])
+                               gauge.setTextField(document.getElementById("gaugeAsetKredit-value"));            
+},
+           error : function(response) {
+               console.log('failed :' + response);
+               $('#loading').hide();
+               return Swal.fire({
+                   icon: 'error',
+                   title: 'Gagal Get Data!',
+                   text: 'Mohon Periksa Jaringan Anda'
+               });
+           }
+   });
+}
+
+function get_speedometer_npat_monthly(){
+   data = '';
+   $('#loading').show(); 
+   $.ajax({
+           url : base_url + "Accounting/Dashboard_finance_controller/get_data_speedometer_npat_monthly",
+           type : "POST",
+           dataType : "json",
+           timeout : 180000,
+           headers: {
+                       'Authorization': 'Bearer ' + localStorage.getItem('token')
+                   },
+           success : function(response) {
+            $('#loading').hide(); 
+                         
+                               //Script Speedometer NPAT monthly
+                               var opts = {
+                                   angle: 0.0, /// The span of the gauge arc
+                                   lineWidth: 0.44, // The line thickness
+                                   pointer: {
+                                       length: 0.6, // Relative to gauge radius
+                                       strokeWidth: 0.035 // The thickness,
+                                   },
+                                   colorStart: '#6FADCF',   // Colors
+                                   colorStop: '#D33A27',    // just experiment with them
+                                   strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                   generateGradient: true,
+                                   highDpiSupport: true,
+                                   staticLabels: {
+                                       font: "12px sans-serif",  // Specifies font
+                                       labels: [0,100],  // Print labels at these values
+                                       color: "#000000",  // Optional: Label text color
+                                       fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                   }
+                               };
+                               var target = document.getElementById('gaugNpat'); // your canvas element
+                               var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                               gauge.maxValue = 100; // set max gauge value
+                               gauge.setMinValue(0);  // set min value
+                               gauge.set(response.speedometer_npat_monthly[0]); // set actual value
+                               console.log(response.speedometer_npat_monthly[0])
+                               gauge.setTextField(document.getElementById("gaugNpat-value"));
+                                         
+},
+           error : function(response) {
+               console.log('failed :' + response);
+               $('#loading').hide();
+               return Swal.fire({
+                   icon: 'error',
+                   title: 'Gagal Get Data!',
+                   text: 'Mohon Periksa Jaringan Anda'
+               });
+           }
+   });
+}
+function get_speedometer_modal(){
+   data = '';
+   $('#loading').show(); 
+   $.ajax({
+           url : base_url + "Accounting/Dashboard_finance_controller/get_data_speedometer_modal",
+           type : "POST",
+           dataType : "json",
+           timeout : 180000,
+           headers: {
+                       'Authorization': 'Bearer ' + localStorage.getItem('token')
+                   },
+           success : function(response) {
+            $('#loading').hide(); 
+                                    //Speedometer NPAT YTD
+                                    var opts = {
+                                   angle: 0.0, /// The span of the gauge arc
+                                   lineWidth: 0.44, // The line thickness
+                                   pointer: {
+                                       length: 0.6, // Relative to gauge radius
+                                       strokeWidth: 0.035 // The thickness,
+                                   },
+                                   colorStart: '#6FADCF',   // Colors
+                                   colorStop: '#fcba03',    // just experiment with them
+                                   strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                   generateGradient: true,
+                                   highDpiSupport: true,
+                                   staticLabels: {
+                                       font: "12px sans-serif",  // Specifies font
+                                       labels: [0,100],  // Print labels at these values
+                                       color: "#000000",  // Optional: Label text color
+                                       fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                   }
+                               };
+                               var target = document.getElementById('gaugeModal'); // your canvas element
+                               var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                               gauge.maxValue = 100; // set max gauge value
+                               gauge.setMinValue(0);  // set min value
+                               gauge.set(response.speedometer_modal[0]); // set actual value
+                               console.log(response.speedometer_modal[0])
+                               gauge.setTextField(document.getElementById("gaugeModal-value"));
+                               
+                     
+                                         
 },
            error : function(response) {
                console.log('failed :' + response);

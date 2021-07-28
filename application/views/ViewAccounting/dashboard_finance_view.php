@@ -37,7 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Financial Dashboard        <small></small>
+      <h3> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Financial Dashboard
       </h3>
       <ol class="breadcrumb">
      
@@ -50,8 +50,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div id="loading">
       <img id="loading-image" src="<?php echo base_url(); ?>assets/design/images/ajax-loader.gif" alt="Loading..." />
     </div>
-
-
       <!-- From card Bawah -->
           <!-- Horizontal Form -->
           <div class="card card-info collapsed-box">
@@ -61,7 +59,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                   </button>
-                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                 </div>
             </div>
             <!-- /.card-header -->
@@ -268,3 +265,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
 </body>
 </html>
+
+<script>         
+       
+                    
+
+                        
+</script>

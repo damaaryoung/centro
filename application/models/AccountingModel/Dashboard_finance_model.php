@@ -120,10 +120,10 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_speedometer_npat_ytd(){
+    function get_data_speedometer_modal(){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT AVG(realisasi/rencana *100 ) AS total 
-      FROM acc_das_rencana_realisasi WHERE jenis='NPAT YTD'");
+      FROM acc_das_rencana_realisasi WHERE jenis='MODAL'");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){

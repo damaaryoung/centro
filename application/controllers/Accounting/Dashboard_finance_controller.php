@@ -22,10 +22,8 @@ class Dashboard_finance_controller extends CI_Controller {
 		$data['sidebar']     = $this->load->view('templates/sidebar.php', NULL, TRUE);
 		$data['footer']      = $this->load->view('templates/footer.php', NULL, TRUE);
 		$data['ctrlbar']     = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
-	
-		$data['speedometer_kredit']         = $this->Dashboard_finance_model->get_data_speedometer_kredit();
-		$data['speedometer_npat_monthly']         = $this->Dashboard_finance_model->get_data_speedometer_npat_monthly();
-		$data['speedometer_npat_ytd'] = $this->Dashboard_finance_model->get_data_speedometer_npat_ytd();
+
+		$data['speedometer_npat_ytd'] = $this->Dashboard_finance_model->get_data_speedometer_modal();
 		// $chart          = $this->Dashboard_finance_model->get_data_chart();
 		//  var_dump(	$data['speedometer_aset'] );	
 		if($session != ''){
@@ -66,6 +64,21 @@ class Dashboard_finance_controller extends CI_Controller {
 	public function get_data_speedometer_aset(){
 		$speedometer_aset =$this->Dashboard_finance_model->get_data_speedometer();
 		$data['speedometer_aset']         = $speedometer_aset;
+		echo json_encode($data);
+	}
+	public function get_data_speedometer_aset_krerdit(){
+		$speedometer_aset_kredit =$this->Dashboard_finance_model->get_data_speedometer_kredit();
+		$data['speedometer_aset_kredit']         = $speedometer_aset_kredit;
+		echo json_encode($data);
+	}
+	public function get_data_speedometer_npat_monthly(){
+		$speedometer_npat_monthly =$this->Dashboard_finance_model->get_data_speedometer_npat_monthly();
+		$data['speedometer_npat_monthly']         = $speedometer_npat_monthly;
+		echo json_encode($data);
+	}
+	public function get_data_speedometer_modal(){
+		$speedometer_modal =$this->Dashboard_finance_model->get_data_speedometer_modal();
+		$data['speedometer_modal']         = $speedometer_modal;
 		echo json_encode($data);
 	}
 
