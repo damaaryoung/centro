@@ -102,22 +102,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                         <div class="form-group row justify-content-sm-center">
-                            <div class="col-sm-6">
+                          <div class="col-sm-6">
                             <div class="card">
                               <div class="card-header">
-                              Target vs Realisasi
+                                Target vs Realisasi
                               <div class="card-tools">
-                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                      </button>
-                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-                                    </div>
-                              </div>
-                              <div class="card-body">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                              </button>
+                              <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="form-group row justify-content-sm-center">
+                                  
                               <table>
                                 <tr>
                                     <tr>
-                                      <td><canvas id="gaugeAset" style="width: 200px;"></canvas></td>
-                                      <td><canvas id="gaugeAsetKredit"  style="width: 200px;"></canvas></td>
+                                      <td><canvas id="gaugeAset" style="width: 13vw;"></canvas></td>
+                                      <td><canvas id="gaugeAsetKredit"  style="width: 13vw;"></canvas></td>
                                     </tr>
                                  
                                     <tr style="text-align: center;">
@@ -131,8 +133,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </tr>
                                 <tr>
                                     <tr>
-                                      <td><canvas id="gaugNpat"  style="width: 200px;"></canvas></td>
-                                      <td><canvas id="gaugeModal"  style="width: 200px;"></canvas></td>
+                                      <td><canvas id="gaugNpat"  style="width: 13vw;"></canvas></td>
+                                      <td><canvas id="gaugeModal"  style="width: 13vw;"></canvas></td>
                                     </tr>
                                   <tr style="text-align: center;">
                                     <td style="font-size: 25px;"><output id="gaugNpat-value"></output>%</td>
@@ -145,112 +147,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </tr>
                                 
                               </table>
+                          </div>
                               </div>
                             </div>
 
                               <script>
-                                var opts = {
-                                    angle: 0.0, /// The span of the gauge arc
-                                    lineWidth: 0.44, // The line thickness
-                                    pointer: {
-                                        length: 0.6, // Relative to gauge radius
-                                        strokeWidth: 0.035 // The thickness,
-                                    },
-                                    colorStart: '#6FADCF',   // Colors
-                                    colorStop: '#00E007',    // just experiment with them
-                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
-                                    generateGradient: true,
-                                    highDpiSupport: true,
-                                    staticLabels: {
-                                        font: "12px sans-serif",  // Specifies font
-                                        labels: [0,100],  // Print labels at these values
-                                        color: "#000000",  // Optional: Label text color
-                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
-                                    }
-                                };
-                                var target = document.getElementById('gaugeAset'); // your canvas element
-                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-                                gauge.maxValue = 100; // set max gauge value
-                                gauge.setMinValue(0);  // set min value
-                                gauge.set(<?= json_encode($speedometer_aset)?>); // set actual value
-                                gauge.setTextField(document.getElementById("gaugeAset-value"));
-
-                                var opts = {
-                                    angle: 0.0, /// The span of the gauge arc
-                                    lineWidth: 0.44, // The line thickness
-                                    pointer: {
-                                        length: 0.6, // Relative to gauge radius
-                                        strokeWidth: 0.035 // The thickness,
-                                    },
-                                    colorStart: '#6FADCF',   // Colors
-                                    colorStop: '#8FC0DA',    // just experiment with them
-                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
-                                    generateGradient: true,
-                                    highDpiSupport: true,
-                                    staticLabels: {
-                                        font: "12px sans-serif",  // Specifies font
-                                        labels: [0,100],  // Print labels at these values
-                                        color: "#000000",  // Optional: Label text color
-                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
-                                    }
-                                };
-                                var target = document.getElementById('gaugeAsetKredit'); // your canvas element
-                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-                                gauge.maxValue = 100; // set max gauge value
-                                gauge.setMinValue(0);  // set min value
-                                gauge.set(<?= json_encode($speedometer_kredit)?>); // set actual value
-                                gauge.setTextField(document.getElementById("gaugeAsetKredit-value"));
-                                var opts = {
-                                    angle: 0.0, /// The span of the gauge arc
-                                    lineWidth: 0.44, // The line thickness
-                                    pointer: {
-                                        length: 0.6, // Relative to gauge radius
-                                        strokeWidth: 0.035 // The thickness,
-                                    },
-                                    colorStart: '#6FADCF',   // Colors
-                                    colorStop: '#D33A27',    // just experiment with them
-                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
-                                    generateGradient: true,
-                                    highDpiSupport: true,
-                                    staticLabels: {
-                                        font: "12px sans-serif",  // Specifies font
-                                        labels: [0,100],  // Print labels at these values
-                                        color: "#000000",  // Optional: Label text color
-                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
-                                    }
-                                };
-                                var target = document.getElementById('gaugNpat'); // your canvas element
-                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-                                gauge.maxValue = 100; // set max gauge value
-                                gauge.setMinValue(0);  // set min value
-                                gauge.set(<?= json_encode($speedometer_npat_monthly)?>); // set actual value
-                                gauge.setTextField(document.getElementById("gaugNpat-value"));
-                                
-                                var opts = {
-                                    angle: 0.0, /// The span of the gauge arc
-                                    lineWidth: 0.44, // The line thickness
-                                    pointer: {
-                                        length: 0.6, // Relative to gauge radius
-                                        strokeWidth: 0.035 // The thickness,
-                                    },
-                                    colorStart: '#6FADCF',   // Colors
-                                    colorStop: '#fcba03',    // just experiment with them
-                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
-                                    generateGradient: true,
-                                    highDpiSupport: true,
-                                    staticLabels: {
-                                        font: "12px sans-serif",  // Specifies font
-                                        labels: [0,100],  // Print labels at these values
-                                        color: "#000000",  // Optional: Label text color
-                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
-                                    }
-                                };
-                                var target = document.getElementById('gaugeModal'); // your canvas element
-                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-                                gauge.maxValue = 100; // set max gauge value
-                                gauge.setMinValue(0);  // set min value
-                                gauge.set(<?= json_encode($speedometer_npat_ytd)?>); // set actual value
-                                gauge.setTextField(document.getElementById("gaugeModal-value"));
+                         
                               </script>  
                           </div>
                           
@@ -269,9 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <br>
                             <canvas id="chart_modal"></canvas>
                               <br>
-                              <br>
-                              <br>
-                       
+                              
                               <?php
                                 foreach($chart_modal as $data){
                                     $tgl_laporan_modal[] = $data->tgl_laporan;
@@ -281,31 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               ?>
                                 <!-- script Aset Total -->
                                 <script>
-                                var data = {
-                                labels: <?php echo json_encode($tgl_laporan_modal);?>,
-                                datasets: [
-                                    {
-                                      backgroundColor: 'rgb(0, 76, 153)',
-                                      data: <?php echo json_encode($rencana_modal);?>,
-                                      label: "Target"
-                                    },
-                                    {
-                                      backgroundColor: 'rgb(255, 128, 0)',
-                                      data: <?php echo json_encode($realisasi_modal);?>,
-                                      label: "Realisasi"
-                                    },
-
-                                ]
-                                  };
-                                      const config_5 = {
-                                      type: 'bar',
-                                      data,
-                                      options: {}
-                                    };
-                                    var myChart = new Chart(
-                                    document.getElementById('chart_modal'),
-                                    config_5 
-                                  );
+                             
                                 </script>    
                               <div>
                               </div>     
@@ -338,31 +214,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     ?>
                                         <!-- script Aset Total -->
                                         <script>
-                                        var data = {
-                                        labels: <?php echo json_encode($tgl_laporan_aset);?>,
-                                        datasets: [
-                                            {
-                                              backgroundColor: 'rgb(0, 76, 153)',
-                                              data: <?php echo json_encode($rencana_aset);?>,
-                                              label: "Target"
-                                            },
-                                            {
-                                              backgroundColor: 'rgb(255, 128, 0)',
-                                              data: <?php echo json_encode($realisasi_aset);?>,
-                                              label: "Realisasi"
-                                            },
-                                  
-                                        ]
-                                          };
-                                              const config_1 = {
-                                              type: 'bar',
-                                              data,
-                                              options: {}
-                                            };
-                                            var myChart = new Chart(
-                                            document.getElementById('chart_aset'),
-                                            config_1
-                                          );
+                                   
                                         </script> 
                                     </div>    
                                    
@@ -393,31 +245,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <!-- script Aset Kredit -->
                                         <script>
 
-                                        var data = {
-                                        labels: <?php echo json_encode($tgl_laporan_aset_kredit);?>,
-                                        datasets: [
-                                            {
-                                              backgroundColor: 'rgb(0, 76, 153)',
-                                              data: <?php echo json_encode($rencana_aset_kredit);?>,
-                                              label: "Target"
-                                            },
-                                            {
-                                              backgroundColor: 'rgb(255, 128, 0)',
-                                              data: <?php echo json_encode($realisasi_aset_kredit);?>,
-                                              label: "Realisasi"
-                                            },
-                                  
-                                        ]
-                                          };
-                                              const config_2 = {
-                                              type: 'bar',
-                                              data,
-                                              options: {}
-                                            };
-                                            var myChart_2 = new Chart(
-                                            document.getElementById('chart_aset_kredit'),
-                                            config_2
-                                          );
+                                   
                                         </script> 
                                     </div>    
                                   </div>
@@ -449,31 +277,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     ?>
                                         <!-- script NPAT Monthly -->
                                         <script>
-                                        var data = {
-                                        labels: <?php echo json_encode($tgl_laporan_npat_montly);?>,
-                                        datasets: [
-                                            {
-                                              backgroundColor: 'rgb(0, 76, 153)',
-                                              data: <?php echo json_encode($rencana_npat_montly);?>,
-                                              label: "Target"
-                                            },
-                                            {
-                                              backgroundColor: 'rgb(255, 128, 0)',
-                                              data: <?php echo json_encode($realisasi_npat_montly);?>,
-                                              label: "Realisasi"
-                                            },
-                                  
-                                        ]
-                                          };
-                                              const config_npat_monthly = {
-                                              type: 'bar',
-                                              data,
-                                              options: {}
-                                            };
-                                            var myChart_npat_monthly = new Chart(
-                                            document.getElementById('chart_npat_monthly'),
-                                            config_npat_monthly
-                                          );
+                                   
                                         </script> 
                                     </div>
                                     <div class="col-sm-6">
@@ -491,7 +295,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       </div>
                                     </div>
                                     <h4></h4>
-                                      <!-- Chart NPAT YTD -->
+                                      <!-- Chart NPAT YTD
                                       <?php
                                         foreach($chart_npat_ytd as $data){
                                             $tgl_laporan_npat_ytd[] = $data->tgl_laporan;
@@ -499,38 +303,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             $rencana_npat_ytd[] = (float) $data->rencana;
 
                                         }
-                                    ?>
-                                 <script>
-                                      
-                                          // Scrip NPAT YTD
-                                        var data = {
-                                        labels:<?php echo json_encode($tgl_laporan_npat_ytd);?>,
-                                        datasets: [
-                                            {
-                                                label: "Target",
-                                                backgroundColor: 'rgb(0, 76, 153)',
-                                                data: <?php echo json_encode($rencana_npat_ytd);?>,
-                                            },
-                                            {
-                                                label: "Realisasi",
-                                                backgroundColor: 'rgb(255, 128, 0)',
-                                                data: <?php echo json_encode($realisasi_npat_ytd);?>,
-                                            },
-                                  
-                                        ]
-                                          };
-                                              const config_npat_tyd = {
-                                              type: 'bar',
-                                              data,
-                                              options: {}
-                                            };
-                                            var npat_tyd = new Chart(
-                                            document.getElementById('chart_npat_ytd'),
-                                            config_npat_tyd
-                                          );
-                                       
-                                        </script> 
-
+                                    ?> -->
                                     </div>             
                                   </div>
                     
@@ -557,7 +330,222 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	?>
 <!--  -->
 <script src="<?php echo base_url('assets/dist/js/accounting.min.js')?>"></script>
-
+<?php $this->view('ViewAccounting/js/dashboard_finance_js.php'); ?>
  
 </body>
 </html>
+
+<script>
+                                    //Script Speedometer Aset
+                                    var opts = {
+                                    angle: 0.0, /// The span of the gauge arc
+                                    lineWidth: 0.44, // The line thickness
+                                    pointer: {
+                                        length: 0.6, // Relative to gauge radius
+                                        strokeWidth: 0.035 // The thickness,
+                                    },
+                                    colorStart: '#6FADCF',   // Colors
+                                    colorStop: '#00E007',    // just experiment with them
+                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                    generateGradient: true,
+                                    highDpiSupport: true,
+                                    staticLabels: {
+                                        font: "12px sans-serif",  // Specifies font
+                                        labels: [0,100],  // Print labels at these values
+                                        color: "#000000",  // Optional: Label text color
+                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                    }
+                                };
+                                var target = document.getElementById('gaugeAset'); // your canvas element
+                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                                gauge.maxValue = 100; // set max gauge value
+                                gauge.setMinValue(0);  // set min value
+                                gauge.set(<?= json_encode($speedometer_aset)?>); // set actual value
+                                gauge.setTextField(document.getElementById("gaugeAset-value"));
+                                //Script Speedometer Aset Kredit
+                                var opts = {
+                                    angle: 0.0, /// The span of the gauge arc
+                                    lineWidth: 0.44, // The line thickness
+                                    pointer: {
+                                        length: 0.6, // Relative to gauge radius
+                                        strokeWidth: 0.035 // The thickness,
+                                    },
+                                    colorStart: '#6FADCF',   // Colors
+                                    colorStop: '#8FC0DA',    // just experiment with them
+                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                    generateGradient: true,
+                                    highDpiSupport: true,
+                                    staticLabels: {
+                                        font: "12px sans-serif",  // Specifies font
+                                        labels: [0,100],  // Print labels at these values
+                                        color: "#000000",  // Optional: Label text color
+                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                    }
+                                };
+                                var target = document.getElementById('gaugeAsetKredit'); // your canvas element
+                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                                gauge.maxValue = 100; // set max gauge value
+                                gauge.setMinValue(0);  // set min value
+                                gauge.set(<?= json_encode($speedometer_kredit)?>); // set actual value
+                                gauge.setTextField(document.getElementById("gaugeAsetKredit-value"));
+                                //Script Speedometer NPAT monthly
+                                var opts = {
+                                    angle: 0.0, /// The span of the gauge arc
+                                    lineWidth: 0.44, // The line thickness
+                                    pointer: {
+                                        length: 0.6, // Relative to gauge radius
+                                        strokeWidth: 0.035 // The thickness,
+                                    },
+                                    colorStart: '#6FADCF',   // Colors
+                                    colorStop: '#D33A27',    // just experiment with them
+                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                    generateGradient: true,
+                                    highDpiSupport: true,
+                                    staticLabels: {
+                                        font: "12px sans-serif",  // Specifies font
+                                        labels: [0,100],  // Print labels at these values
+                                        color: "#000000",  // Optional: Label text color
+                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                    }
+                                };
+                                var target = document.getElementById('gaugNpat'); // your canvas element
+                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                                gauge.maxValue = 100; // set max gauge value
+                                gauge.setMinValue(0);  // set min value
+                                gauge.set(<?= json_encode($speedometer_npat_monthly)?>); // set actual value
+                                gauge.setTextField(document.getElementById("gaugNpat-value"));
+                                
+                                //Speedometer NPAT YTD
+                                var opts = {
+                                    angle: 0.0, /// The span of the gauge arc
+                                    lineWidth: 0.44, // The line thickness
+                                    pointer: {
+                                        length: 0.6, // Relative to gauge radius
+                                        strokeWidth: 0.035 // The thickness,
+                                    },
+                                    colorStart: '#6FADCF',   // Colors
+                                    colorStop: '#fcba03',    // just experiment with them
+                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                    generateGradient: true,
+                                    highDpiSupport: true,
+                                    staticLabels: {
+                                        font: "12px sans-serif",  // Specifies font
+                                        labels: [0,100],  // Print labels at these values
+                                        color: "#000000",  // Optional: Label text color
+                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                    }
+                                };
+                                var target = document.getElementById('gaugeModal'); // your canvas element
+                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                                gauge.maxValue = 100; // set max gauge value
+                                gauge.setMinValue(0);  // set min value
+                                gauge.set(<?= json_encode($speedometer_npat_ytd)?>); // set actual value
+                                gauge.setTextField(document.getElementById("gaugeModal-value"));
+
+                                //Script Chart Modal
+
+                                var data = {
+                                labels: <?php echo json_encode($tgl_laporan_modal);?>,
+                                datasets: [
+                                    {
+                                      backgroundColor: 'rgb(0, 76, 153)',
+                                      data: <?php echo json_encode($rencana_modal);?>,
+                                      label: "Target"
+                                    },
+                                    {
+                                      backgroundColor: 'rgb(255, 128, 0)',
+                                      data: <?php echo json_encode($realisasi_modal);?>,
+                                      label: "Realisasi"
+                                    },
+
+                                ]
+                                  };
+                                      const config_5 = {
+                                      type: 'bar',
+                                      data,
+                                      options: {}
+                                    };
+                                    var myChart = new Chart(
+                                    document.getElementById('chart_modal'),
+                                    config_5 
+                                  );
+                                  //Script Aset Total
+                                  var data = {
+                                        labels: <?php echo json_encode($tgl_laporan_aset);?>,
+                                        datasets: [
+                                            {
+                                              backgroundColor: 'rgb(0, 76, 153)',
+                                              data: <?php echo json_encode($rencana_aset);?>,
+                                              label: "Target"
+                                            },
+                                            {
+                                              backgroundColor: 'rgb(255, 128, 0)',
+                                              data: <?php echo json_encode($realisasi_aset);?>,
+                                              label: "Realisasi"
+                                            },
+                                  
+                                        ]
+                                          };
+                                              const config_1 = {
+                                              type: 'bar',
+                                              data,
+                                              options: {}
+                                            };
+                                            var myChart = new Chart(
+                                            document.getElementById('chart_aset'),
+                                            config_1
+                                          );
+                                    //Script Chart Aset Kredit
+                                    var data = {
+                                        labels: <?php echo json_encode($tgl_laporan_aset_kredit);?>,
+                                        datasets: [
+                                            {
+                                              backgroundColor: 'rgb(0, 76, 153)',
+                                              data: <?php echo json_encode($rencana_aset_kredit);?>,
+                                              label: "Target"
+                                            },
+                                            {
+                                              backgroundColor: 'rgb(255, 128, 0)',
+                                              data: <?php echo json_encode($realisasi_aset_kredit);?>,
+                                              label: "Realisasi"
+                                            },
+                                  
+                                        ]
+                                          };
+                                              const config_2 = {
+                                              type: 'bar',
+                                              data,
+                                              options: {}
+                                            };
+                                            var myChart_2 = new Chart(
+                                            document.getElementById('chart_aset_kredit'),
+                                            config_2
+                                          );
+                                      //Script NPAT Monthly
+                                      var data = {
+                                        labels: <?php echo json_encode($tgl_laporan_npat_montly);?>,
+                                        datasets: [
+                                            {
+                                              backgroundColor: 'rgb(0, 76, 153)',
+                                              data: <?php echo json_encode($rencana_npat_montly);?>,
+                                              label: "Target"
+                                            },
+                                            {
+                                              backgroundColor: 'rgb(255, 128, 0)',
+                                              data: <?php echo json_encode($realisasi_npat_montly);?>,
+                                              label: "Realisasi"
+                                            },
+                                  
+                                        ]
+                                          };
+                                              const config_npat_monthly = {
+                                              type: 'bar',
+                                              data,
+                                              options: {}
+                                            };
+                                            var myChart_npat_monthly = new Chart(
+                                            document.getElementById('chart_npat_monthly'),
+                                            config_npat_monthly
+                                          );
+                                   
+</script>
