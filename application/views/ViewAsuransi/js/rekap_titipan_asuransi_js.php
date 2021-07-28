@@ -109,6 +109,9 @@
         src_tgl_realisasi = $('#src_tgl_realisasi').val();
         src_kode_kantor = $('#src_kode_kantor').val();
 
+        $('#tbl_rekap_titipan_asuransi').DataTable().clear();
+        $('#tbl_rekap_titipan_asuransi').DataTable().destroy();
+
         $('#loading').show(); 
             $.ajax({
                     url : base_url + "Asuransi/Rekap_titipan_asuransi_controller/getSearch_Tanggal",
