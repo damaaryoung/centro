@@ -10,8 +10,7 @@ class Dashboard_finance_controller extends CI_Controller {
     }
     public function index(){
 
-		$speedometer_aset =$this->Dashboard_finance_model->get_data_speedometer();
-
+	
 
 
         $session             = $this->session->userdata('nama');
@@ -23,12 +22,7 @@ class Dashboard_finance_controller extends CI_Controller {
 		$data['sidebar']     = $this->load->view('templates/sidebar.php', NULL, TRUE);
 		$data['footer']      = $this->load->view('templates/footer.php', NULL, TRUE);
 		$data['ctrlbar']     = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
-		$data['chart_npat_montly']         = $this->Dashboard_finance_model->get_data_chart_npat_monthly();
 	
-		$data['chart_aset']         = $this->Dashboard_finance_model->get_data_chart_aset();
-		$data['chart_aset_kredit']         = $this->Dashboard_finance_model->get_data_chart_aset_kredit();
-		$data['chart_modal']         = $this->Dashboard_finance_model->get_data_chart_modal();
-		$data['speedometer_aset']         = $speedometer_aset;
 		$data['speedometer_kredit']         = $this->Dashboard_finance_model->get_data_speedometer_kredit();
 		$data['speedometer_npat_monthly']         = $this->Dashboard_finance_model->get_data_speedometer_npat_monthly();
 		$data['speedometer_npat_ytd'] = $this->Dashboard_finance_model->get_data_speedometer_npat_ytd();
@@ -41,9 +35,37 @@ class Dashboard_finance_controller extends CI_Controller {
 			redirect('LoginController/index'); 
 		}
 	}
-	public function get_data_chart(){
+	public function get_data_chart_npat_ytd(){
 		$chart_npat_ytd 	      =$this->Dashboard_finance_model->get_data_chart_npat_ytd();
 		$data['chart_npat_ytd']   =$chart_npat_ytd; 
+		echo json_encode($data);
+	}
+	public function get_data_chart_npat_monthly(){
+		$chart_npat_monthly 	      =$this->Dashboard_finance_model->get_data_chart_npat_monthly();
+		$data['chart_npat_monthly']   =$chart_npat_monthly; 
+		echo json_encode($data);
+	}
+	public function get_data_chart_aset_kredit(){
+
+		$chart_aset_kredit 	      =$this->Dashboard_finance_model->get_data_chart_aset_kredit();
+		$data['chart_aset_kredit']   =$chart_aset_kredit; 
+		echo json_encode($data);
+	}
+	public function get_data_chart_aset(){
+
+		$chart_aset 	      =$this->Dashboard_finance_model->get_data_chart_aset();
+		$data['chart_aset']   =$chart_aset; 
+		echo json_encode($data);
+	}
+	public function get_data_chart_modal(){
+
+		$chart_modal 	      =$this->Dashboard_finance_model->get_data_chart_modal();
+		$data['chart_modal']   =$chart_modal; 
+		echo json_encode($data);
+	}
+	public function get_data_speedometer_aset(){
+		$speedometer_aset =$this->Dashboard_finance_model->get_data_speedometer();
+		$data['speedometer_aset']         = $speedometer_aset;
 		echo json_encode($data);
 	}
 
