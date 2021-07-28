@@ -127,23 +127,21 @@ function mapping_jaminan(response){
     $('#tbl_recon_jaminan').show(); 
     $('#tbl_recon_jaminan').DataTable().clear();
     $('#tbl_recon_jaminan').DataTable().destroy();
-    for(i = 0; i < response.kode_kantor.length; i++ ){
-        var selisih_jaminan       = response.buku_besar[i]['value_buku_besar'] - response.web_centro[i]['value_web_centro'];
-        var selisih_total_jaminan = response.total_buku_besar -  response.total_centro;
+    for(i = 0; i < response.data_rekon.length; i++ ){
         data += `<tr>
-                    <td>${response.kode_kantor[i]['kode_kantor']}</td>
-                    <td>${response.kode_kantor[i]['nama_kantor']}</td>
-                    <td>${accounting.formatMoney(response.buku_besar[i]['value_buku_besar'], '', 2, ',', '.')}</td>
-                    <td>${accounting.formatMoney(response.web_centro[i]['value_web_centro'], '', 2, ',', '.')}</td>
-                    <td>${accounting.formatMoney(selisih_jaminan, '', 2, ',', '.')}</td>
+                    <td>${response.data_rekon[i]['kode_kantor']}</td>
+                    <td>${response.data_rekon[i]['nama_kantor']}</td>
+                    <td>${accounting.formatMoney(response.data_rekon[i]['sisa_buku_besar'], '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response.data_rekon[i]['sisa_centro'], '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response.data_rekon[i]['selisih'], '', 2, ',', '.')}</td>
                  </tr>`;
     }
-    data += `<tr>
+        data += `<tr>
                     <td></td>
                     <td>Total Konsolidasi</td>
-                    <td>${accounting.formatMoney(response.total_buku_besar, '', 2, ',', '.')}</td>
-                    <td>${accounting.formatMoney(response.total_centro, '', 2, ',', '.')}</td>
-                    <td>${accounting.formatMoney(selisih_total_jaminan, '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response.total_rekon[0]['sisa_buku_besar1'], '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response.total_rekon[0]['sisa_centro1'], '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response.total_rekon[0]['selisih1'], '', 2, ',', '.')}</td>
                  </tr>`;
     $('#tbl_recon_jaminan > tbody:first').html(data);
      
@@ -167,23 +165,21 @@ function mapping_jiwa(response_jiwa){
     $('#tbl_recon_jiwa').show(); 
     $('#tbl_recon_jiwa').DataTable().clear();
     $('#tbl_recon_jiwa').DataTable().destroy();
-    for(i = 0; i < response_jiwa.kode_kantor.length; i++ ){
-        var selisih_jiwa = response_jiwa.buku_besar[i]['value_buku_besar'] - response_jiwa.web_centro[i]['value_web_centro'];
-        var selisih_total_jiwa = response_jiwa.total_buku_besar -  response_jiwa.total_centro;
+    for(i = 0; i < response_jiwa.data_rekon.length; i++ ){
         data1 += `<tr>
-                    <td>${response_jiwa.kode_kantor[i]['kode_kantor']}</td>
-                    <td>${response_jiwa.kode_kantor[i]['nama_kantor']}</td>
-                    <td>${accounting.formatMoney(response_jiwa.buku_besar[i]['value_buku_besar'], '', 2, ',', '.')}</td>
-                    <td>${accounting.formatMoney(response_jiwa.web_centro[i]['value_web_centro'], '', 2, ',', '.')}</td>
-                    <td>${accounting.formatMoney(selisih_jiwa, '', 2, ',', '.')}</td>
+                    <td>${response_jiwa.data_rekon[i]['kode_kantor']}</td>
+                    <td>${response_jiwa.data_rekon[i]['nama_kantor']}</td>
+                    <td>${accounting.formatMoney(response_jiwa.data_rekon[i]['sisa_buku_besar'], '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response_jiwa.data_rekon[i]['sisa_centro'], '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response_jiwa.data_rekon[i]['selisih'], '', 2, ',', '.')}</td>
                  </tr>`;
     }
     data1 += `<tr>
                     <td></td>
                     <td>Total Konsolidasi</td>
-                    <td>${accounting.formatMoney(response_jiwa.total_buku_besar, '', 2, ',', '.')}</td>
-                    <td>${accounting.formatMoney(response_jiwa.total_centro, '', 2, ',', '.')}</td>
-                    <td>${accounting.formatMoney(selisih_total_jiwa, '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response_jiwa.total_rekon[0]['sisa_buku_besar1'], '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response_jiwa.total_rekon[0]['sisa_centro1'], '', 2, ',', '.')}</td>
+                    <td>${accounting.formatMoney(response_jiwa.total_rekon[0]['selisih1'], '', 2, ',', '.')}</td>
                  </tr>`;
     $('#tbl_recon_jiwa > tbody:first').html(data1);
      

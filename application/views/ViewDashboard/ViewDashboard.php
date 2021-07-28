@@ -62,7 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                <div>
                     <div class="form-group" style="">
-                     <img src="<?php //echo base_url(); ?>assets/design/images/kmi_logo.png" 
+                     <img src="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" 
                         id="imgCoverNotes" 
                         alt="Image Centro" 
                         style="width: 150px; height: 150px; text-align: center;">

@@ -27,51 +27,31 @@ class DashboardModel extends CI_Model{
 		$query = $this->db2->query($str);
 		return $query->result_array();
 	}
-	public function buku_besar($src_kode_kantor,$tanggal,$jenis){
+	public function data_rekon($tanggal,$jenis){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
 		$str    = "SELECT 
-					dpm_online.`get_acc_sisa_asuransi_total`('$src_kode_kantor', '$jenis', '$tanggal') 
-					AS sisa_buku_besar;";
-		if(! $this->db2->simple_query($str)){
-			
-			$sisa_buku_besar = "0.00";
-            return $sisa_buku_besar;
-		}else{
-			$query  = $this->db2->query($str);
-			$result = $query->result_array();
-			return $result[0]["sisa_buku_besar"];
-		}
-		// if($result[0]["sisa_buku_besar"] != null){
-        //     return $result[0]["sisa_buku_besar"];
-        // }
-        // if($result[0]["sisa_buku_besar"] == null){
-        //     $sisa_buku_besar = 0;
-        //     return $sisa_buku_besar;
-        // }
-        // return $result[0]["sisa_buku_besar"];
+						ak.kode_kantor,
+						ak.nama_kantor,
+						dpm_online.`get_acc_sisa_asuransi_total`(ak.kode_kantor,'$jenis','$tanggal') AS sisa_buku_besar,
+						dpm_online.`get_nominatif_sisa_asuransi_total` (ak.kode_kantor, '$jenis', '$tanggal') AS sisa_centro,
+						dpm_online.`get_acc_sisa_asuransi_total`(ak.kode_kantor,'$jenis','$tanggal') - 
+						dpm_online.`get_nominatif_sisa_asuransi_total` (ak.kode_kantor, '$jenis', '$tanggal') AS selisih    
+					FROM
+						dpm_online.`app_kode_kantor` ak 
+					WHERE `flg_aktif` = 1;";
+		$query = $this->db2->query($str);
+		return $query->result_array();
 	}
-	public function web_centro($src_kode_kantor,$tanggal,$jenis){
+	public function total_rekon($src_kode_kantor,$tanggal,$jenis){
 		$this->db2 = $this->load->database('DB_CENTRO', true);
-		$str    = "SELECT
-					dpm_online.`get_nominatif_sisa_asuransi_total` ('$src_kode_kantor', '$jenis', '$tanggal') 
-					AS sisa_centro;";
-        if($query  = $this->db2->query($str)){
-			$result = $query->result_array();
-			return $result[0]["sisa_centro"];
-		}else{
-			$sisa_centro = 0;
-            return $sisa_centro;
-		}
-		// if($result[0]["sisa_centro"] != null){
-        //     return $result[0]["sisa_centro"];
-        // }
-        // if($result[0]["sisa_centro"] == null){
-        //     $sisa_centro = 0;
-        //     return $sisa_centro;
-        // }
-        // return $result[0]["sisa_centro"];
+		$str    = "SELECT 
+					dpm_online.`get_acc_sisa_asuransi_total`('$src_kode_kantor', '$jenis', '$tanggal') AS sisa_buku_besar1,
+					dpm_online.`get_nominatif_sisa_asuransi_total` ('$src_kode_kantor', '$jenis', '$tanggal') AS sisa_centro1,
+					dpm_online.`get_acc_sisa_asuransi_total`('$src_kode_kantor', '$jenis', '$tanggal') - 
+					dpm_online.`get_nominatif_sisa_asuransi_total` ('$src_kode_kantor', '$jenis', '$tanggal') as selisih1;";
+		$query = $this->db2->query($str);
+		return $query->result_array();
 	}
-
 
 
 }
