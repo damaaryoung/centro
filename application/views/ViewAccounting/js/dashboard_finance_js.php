@@ -14,7 +14,14 @@ var tgl       = '';
 $(document).ready(function () {            
     bsCustomFileInput.init();
     $('.select2').select2();
-   
+
+    if(kd_kantor_user == '00' || divisi_user == 'IT'){
+        select_kantor = '0';
+        $('#src_kode_kantor').append('<option value="" selected>ALL</option>');
+        get_kode_kantor();
+    }else{
+        $('#src_kode_kantor').append('<option value="' + kd_kantor_user + '" selected>'+ kd_kantor_user +'</option>');
+    }
     get_sysdate();  
     get_chart_npat_ytd();
     get_chart_npat_month();
@@ -56,6 +63,8 @@ function get_sysdate(){
 function get_chart_npat_ytd(){
    data = '';
    $('#loading').show(); 
+   var src_kode_kantor =  $('#src_kode_kantor').val();
+   var src_tgl_laporan = $('#src_tgl_laporan').val();
    $.ajax({
            url : base_url + "Accounting/Dashboard_finance_controller/get_data_chart_npat_ytd",
            type : "POST",
@@ -64,6 +73,8 @@ function get_chart_npat_ytd(){
            headers: {
                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                    },
+            data:{"src_kode_kantor" : src_kode_kantor,
+            "src_tgl_laporan" : src_tgl_laporan},       
            success : function(response) {
             $('#loading').hide(); 
                 var label=[]
@@ -411,7 +422,7 @@ function get_speedometer_aset(){
                                gauge.maxValue = 100; // set max gauge value
                                gauge.setMinValue(0);  // set min value
                                gauge.set(response.speedometer_aset[0]); // set actual value
-                               console.log(response.speedometer_aset[0])
+                              
                                gauge.setTextField(document.getElementById("gaugeAset-value"));                 
 },
            error : function(response) {
@@ -464,7 +475,7 @@ function get_speedometer_aset_kredit(){
                                gauge.maxValue = 100; // set max gauge value
                                gauge.setMinValue(0);  // set min value
                                gauge.set(response.speedometer_aset_kredit[0]); // set actual value
-                               console.log(response.speedometer_aset_kredit[0])
+                              
                                gauge.setTextField(document.getElementById("gaugeAsetKredit-value"));            
 },
            error : function(response) {
@@ -518,7 +529,7 @@ function get_speedometer_npat_monthly(){
                                gauge.maxValue = 100; // set max gauge value
                                gauge.setMinValue(0);  // set min value
                                gauge.set(response.speedometer_npat_monthly[0]); // set actual value
-                               console.log(response.speedometer_npat_monthly[0])
+                              
                                gauge.setTextField(document.getElementById("gaugNpat-value"));
                                          
 },
@@ -571,7 +582,7 @@ function get_speedometer_modal(){
                                gauge.maxValue = 100; // set max gauge value
                                gauge.setMinValue(0);  // set min value
                                gauge.set(response.speedometer_modal[0]); // set actual value
-                               console.log(response.speedometer_modal[0])
+                             
                                gauge.setTextField(document.getElementById("gaugeModal-value"));
                                
                      
@@ -589,6 +600,38 @@ function get_speedometer_modal(){
    });
 }
 
+function get_kode_kantor(){
+    $.ajax({
+            url : base_url + "Accounting/Dashboard_finance_controller/get_kode_kantor",
+            type : "POST",
+            dataType : "json",
+            timeout : 180000,
+            headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+            success : function(response) {
+                if(select_kantor == '0'){
+                    $.each(response.kode_kantor,function(i,data){
+                        $('#src_kode_kantor').append('<option value="'+data.kode_kantor+'">' + data.kode_kantor + ' - ' + data.nama_kantor+'</option>');
+                    });
+                }else if(select_kantor == '1'){
+                    $.each(response.kode_kantor,function(i,data){
+                        $('#modal_kode_kantor').append('<option value="'+data.kode_kantor+'">' + data.kode_kantor + ' - ' + data.nama_kantor+'</option>');
+                    });
+                }
+            },
+            error : function(response) {
+                console.log('failed :' + response);
+                $('#loading').hide();
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Get List Kode Kantor!',
+                    text: 'Mohon Periksa Jaringan Anda'
+                });
+                
+            }
+    });    
+}
 
 
 

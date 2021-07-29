@@ -94,5 +94,12 @@ class Dashboard_finance_controller extends CI_Controller {
 		$data['sysdate'] = $sysdate;
 		echo json_encode($data);
 	}
+	public function get_kode_kantor(){
+
+		$kode_kantor = $this->Dashboard_finance_model->selectKodeKantor();
+
+		$data['kode_kantor'] = $kode_kantor;
+		echo json_encode($data);
+	}
 
 }

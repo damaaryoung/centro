@@ -33,7 +33,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Content Wrapper. Contains page content -->
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -65,12 +64,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="card-body text-center">  
                 <div class="row">
                       <div class="col-md-12 mx-auto">
-                              <div class="form-group row justify-content-sm-center">
-                                  <div class="col-sm-1">
-                                      <label style="padding-top: 5px;" class="control-label" for="src_tgl_realisasi">Periode</label>
+                      <div class="form-group row">
+                                  <div class="col-sm-2">
+                                      <label style="padding-top: 5px;" class="control-label" for="src_kantor_kas_cabang">Kode Kantor</label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor" onchange="get_chart_npat_ytd()">
+                                    </select>
                                   </div>
                                   <div class="col-sm-2">
-                                    <input type="date" class="form-control form-control-sm" id="src_tgl_realisasi" name="src_tgl_realisasi" onchange="search_tanggal()">
+                                      <label style="padding-top: 5px;" class="control-label" for="src_tgl_laporan">Periode</label>
+                                  </div>
+                                  <div class="col-sm-3">                                       
+                                      <input type="date" class="form-control form-control-sm" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 300px;"  onchange="get_chart_npat_ytd()">
                                   </div>
                               </div>
                       </div>
@@ -119,12 +125,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tr>
                                  
                                     <tr style="text-align: center;">
-                                    <td style="font-size: 25px;"><output  id="gaugeAset-value"></output>%</td>
-                                    <td style="font-size: 25px;"><output id="gaugeAsetKredit-value"></output>%</td>
-                                    </tr>
-                                    <tr>
-                                    <td><output id="gaugeAset-value"></output> Aset</td>
-                                    <td><output id="gaugeAsetKredit-value"></output> Aset Kredit</td>
+                                    <td style="font-size: 25px;"><output  id="gaugeAset-value"></output>%
+                                    <output id="gaugeAset-value"></output><h6>Aset</h6></td>
+                                    <td style="font-size: 25px;"><output id="gaugeAsetKredit-value"></output>%
+                                    <output id="gaugeAsetKredit-value"></output><h6>Aset Kredit</h6></td>
                                     </tr>
                                 </tr>
                                 <tr>
@@ -133,12 +137,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <td><canvas id="gaugeModal"  style="width: 13vw;"></canvas></td>
                                     </tr>
                                   <tr style="text-align: center;">
-                                    <td style="font-size: 25px;"><output id="gaugNpat-value"></output>%</td>
-                                    <td style="font-size: 25px;"><output id="gaugeModal-value"></output>%</td>
-                                  </tr>
-                                  <tr>
-                                    <td><output id="gaugNpat-value"></output> NPAT</td>
-                                    <td><output id="gaugeModal-value"></output> Modal</td>
+                                    <td style="font-size: 25px;"><output id="gaugNpat-value"></output>%
+                                    <output id="gaugNpat-value"></output><h6>NPAT</h6></td>
+                                    <td style="font-size: 25px;"><output id="gaugeModal-value"></output>%
+                                    <output id="gaugeModal-value"></output><h6>Modal</h6></td>
                                   </tr>
                                 </tr>
                                 
@@ -158,10 +160,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                     </div>
                             </div>
-
                             <div class="card-body">
                             <br>
+                            <br>
                             <canvas id="chart_modal"></canvas>
+                              <br>
                               <br>
                               <div>
                               </div>     
@@ -176,26 +179,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="card-header">
                                     Aset Total
                                     <div class="card-tools">
-                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                      </button>
-                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                     </div>
                                     </div>
                                     <div class="card-body">
                                     <canvas id="chart_aset"></canvas>
                                     </div>
                                   </div>
-        
                                 </div>    
-                                   
                                   <div class="col-sm-6">
                                   <div class="card">
                                     <div class="card-header">
                                     Aset Kredit
                                     <div class="card-tools">
-                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                      </button>
-                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                     </div>
                                     </div>
                                     <div class="card-body">
@@ -213,7 +210,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <div class="card-tools">
                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                       </button>
-                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                     </div>
                                       </div>
                                       <div class="card-body">
@@ -226,9 +222,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <div class="card-header">
                                       NPAT YTD
                                       <div class="card-tools">
-                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                      </button>
-                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                     </div>
                                       </div>
                                       <div class="card-body">
@@ -237,14 +231,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                     </div>             
                                   </div>
-                    
-                      <br>    
-                     
                   </div>
                   <!-- /.card-body -->
           </div>
         <!-- End Data Tables-->
-
+        <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
           <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
 
     </section>
@@ -265,10 +256,3 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
 </body>
 </html>
-
-<script>         
-       
-                    
-
-                        
-</script>

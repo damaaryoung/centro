@@ -141,5 +141,12 @@ class Dashboard_finance_model extends CI_Model{
             $result = $query->result_array();
             return $result[0]["sysdate"];
     }
+    public function selectKodeKantor(){
+  		$this->db2 = $this->load->database('DB_DPM_ONLINE', true);
+  		$str = "SELECT AKK.kode_kantor, AKK.kode_cabang, AKK.nama_kantor, AKK.`flg_aktif` 
+  				    FROM `app_kode_kantor` AKK;";
+          $query = $this->db2->query($str);
+          return $query->result_array();
+  	}
 
 }
