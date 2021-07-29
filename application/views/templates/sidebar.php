@@ -48,7 +48,7 @@
             </a>
           </li>  
 
-        <!-- START MENU ASURANSI -->
+        <!-- START MENU Accounting -->
           <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-book-reader icon_color_sidebar"></i>
@@ -58,23 +58,23 @@
                 </p>
               </a>
             <ul class="nav nav-treeview">
+              <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                <li class="nav-item">
+                   <a href="<?php echo base_url(); ?>dashboard_finance" class="nav-link">
+                    <i class="nav-icon fas fa-chart-line icon_color_sidebar"></i> 
+                    <p>Dashboard Finance</p>
+                  </a>
+                </li>
+              <?php }?>
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-asterisk icon_color_sidebar"></i> 
+                  <i class="nav-icon fas fa-tools icon_color_sidebar"></i>
                   <p>
-                     Rencana Realisasi
+                     Setting
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url(); ?>dashboard_finance" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i> 
-                          <p>Dashboard Finance</p>
-                        </a>
-                      </li>
-                    <?php }?>
                     <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
                       <li class="nav-item">
                         <a href="<?php echo base_url(); ?>rencana_realisasi" class="nav-link">
@@ -92,9 +92,10 @@
                       </li>
                     <?php }?>
                 </ul>
+              </li>
             </ul>
           </li>
-          <!-- END MENU ASURANSI -->
+          <!-- END MENU Accounting -->
 
           <!-- START MENU ASET DOKUMEN -->
             <li class="nav-item has-treeview">
