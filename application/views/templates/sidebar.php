@@ -58,14 +58,25 @@
                 </p>
               </a>
             <ul class="nav nav-treeview">
-              <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                <li class="nav-item">
-                   <a href="<?php echo base_url(); ?>dashboard_finance" class="nav-link">
-                    <i class="nav-icon fas fa-chart-line icon_color_sidebar"></i> 
-                    <p>Dashboard Finance</p>
-                  </a>
-                </li>
-              <?php }?>
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt icon_color_sidebar"></i>
+                  <p>
+                     Dashboard
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>dashboard_finance" class="nav-link">
+                        <i class="nav-icon fas fa-chart-line icon_color_sidebar"></i> 
+                        <p>Financial Dashboard</p>
+                      </a>
+                    </li>
+                  <?php }?>
+                </ul>
+              </li>
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-tools icon_color_sidebar"></i>
@@ -88,6 +99,22 @@
                         <a href="<?php echo base_url(); ?>rencana_realisasi_master" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Rencana Realisasi Master</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>rasio_setting" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i> 
+                          <p>Rasio</p>
+                        </a>
+                      </li>
+                    <?php }?>
+                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                      <li class="nav-item">
+                        <a href="<?php echo base_url(); ?>rasio_master" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Rasio Master</p>
                         </a>
                       </li>
                     <?php }?>

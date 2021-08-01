@@ -88,3 +88,5 @@ $route['laporan_asuransi'] = 'Asuransi/Laporan_asuransi_controller/index';
 $route['rencana_realisasi'] = 'Accounting/Rencana_realisasi_controller/index';
 $route['rencana_realisasi_master'] = 'Accounting/Rencana_realisasi_master_controller/index';
 $route['dashboard_finance'] = 'Accounting/Dashboard_finance_controller/index';
+$route['rasio_setting'] = 'Accounting/Rasio_setting_controller/rasio_setting';
+$route['rasio_master'] = 'Accounting/Rasio_setting_controller/rasio_master';
