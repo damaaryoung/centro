@@ -69,14 +69,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label style="padding-top: 5px;" class="control-label" for="src_kantor_kas_cabang">Kode Kantor</label>
                                   </div>
                                   <div class="col-sm-3">
-                                    <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor" onchange="get_chart_npat_ytd()">
+                                    <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor" onchange="search()">
                                     </select>
                                   </div>
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="src_tgl_laporan">Periode</label>
                                   </div>
                                   <div class="col-sm-3">                                       
-                                      <input type="date" class="form-control form-control-sm" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 300px;"  onchange="get_chart_npat_ytd()">
+                                  <input type="month" class="form-control form-control-sm" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 300px;"  onchange="search()">
                                   </div>
                               </div>
                       </div>
@@ -104,75 +104,89 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                         <div class="form-group row justify-content-sm-center">
-                          <div class="col-sm-6">
-                            <div class="card">
-                              <div class="card-header">
-                                Target vs Realisasi
-                              <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                              </button>
-                              <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-                            </div>
-                          </div>
-                          <div class="card-body">
-                            <div class="form-group row justify-content-sm-center">
-                                  
-                              <table>
-                                <tr>
-                                    <tr>
-                                      <td><canvas id="gaugeAset" style="width: 13vw;"></canvas></td>
-                                      <td><canvas id="gaugeAsetKredit"  style="width: 13vw;"></canvas></td>
-                                    </tr>
-                                 
-                                    <tr style="text-align: center;">
-                                    <td style="font-size: 25px;"><output  id="gaugeAset-value"></output>%
-                                    <output id="gaugeAset-value"></output><h6>Aset</h6></td>
-                                    <td style="font-size: 25px;"><output id="gaugeAsetKredit-value"></output>%
-                                    <output id="gaugeAsetKredit-value"></output><h6>Aset Kredit</h6></td>
-                                    </tr>
-                                </tr>
-                                <tr>
-                                    <tr>
-                                      <td><canvas id="gaugNpat"  style="width: 13vw;"></canvas></td>
-                                      <td><canvas id="gaugeModal"  style="width: 13vw;"></canvas></td>
-                                    </tr>
-                                  <tr style="text-align: center;">
-                                    <td style="font-size: 25px;"><output id="gaugNpat-value"></output>%
-                                    <output id="gaugNpat-value"></output><h6>NPAT</h6></td>
-                                    <td style="font-size: 25px;"><output id="gaugeModal-value"></output>%
-                                    <output id="gaugeModal-value"></output><h6>Modal</h6></td>
-                                  </tr>
-                                </tr>
-                                
-                              </table>
-                          </div>
-                              </div>
-                            </div>
-                          </div>
+
+                              <div class="col-sm-6">
+                                  <div class="card">
+
+                                        <div class="card-header">
+                                          Target vs Realisasi
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                          </div>
+                                        </div>
+      
+                                      <div class="card-body">
+                                               <div class="form-group row justify-content-sm-center">
+                                                    <div class="col-md-4" >
+                                                      <div class="container" id="gaugeAset_container">
+                                                        <canvas id="gaugeAset" style="width: 10vw;"></canvas>
+                                                      </div>
+
+                                                      <div class="container" id="gaugeAset-value_container">
+                                                        <p id="label_aset"><output  id="gaugeAset-value"></output></p>                                             
+                                                      </div>
+
+                                                      </div>
+
+                                                    <div class="col-md-4">
+                                                      <div class="container" id="gaugeAsetKredit_container">
+                                                          <canvas id="gaugeAsetKredit" style="width: 10vw;"></canvas>
+                                                      </div>
+
+                                                      <div class="container" id="gaugeAsetKredit-value_container">
+                                                        <p id="label_aset_kredit"><output  id="gaugeAsetKredit-value"></output></p>                                             
+                                                      </div>
+
+                                                    </div>       
+                                                    <div class="col-md-4">
+
+                                                    <div class="container" id="gaugNpat_container">
+                                                          <canvas id="gaugNpat" style="width: 10vw;"></canvas>
+                                                    </div>
+
+                                                    <div class="container" id="gaugNpat-value_container">
+                                                        <p id="label_gaugNpat"><output  id="gaugNpat-value"></output></p>                                             
+                                                    </div>
+                                                    
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                      <div class="container" id="gaugeModal_container">
+                                                            <canvas id="gaugeModal" style="width: 10vw;"></canvas>
+                                                      </div>
+    
+                                                      <div class="container" id="gaugeModal-value_container">
+                                                          <p id="label_gaugeModal"><output  id="gaugeModal-value"></output></p>                                             
+                                                      </div>
+                                                    </div>   
+                                                </div>
+                                         
+                                        
+                                      </div>
+                              
+                                  </div>
+                                </div>
                           
                           <div class="col-sm-6">
-                          <div class="card">
-                            <div class="card-header">
-                            Modal
-                            <div class="card-tools">
+                              <div class="card">
+                                 <div class="card-header">
+                                    Modal
+                                      <div class="card-tools">
                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                       </button>
                                       <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-                                    </div>
-                            </div>
-                            <div class="card-body">
-                            <br>
-                            <br>
-                            <canvas id="chart_modal"></canvas>
-                              <br>
-                              <br>
-                              <div>
-                              </div>     
-                            </div>
-                          </div>             
-                      </div>
-                    </div>
+                                      </div>
+                                  </div>
 
+                                  <div class="card-body"id="chart_modal_container">
+                                    <canvas id="chart_modal"></canvas>
+
+                                  <div>
+                                </div>     
+                              </div>
+                            </div>             
+                        </div>
+                    </div>
                     <div class="form-group row justify-content-sm-center">
                                   <div class="col-sm-6">
                                     <div class="card ">
@@ -182,7 +196,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                     </div>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body" id="chart_aset_total_container">
                                     <canvas id="chart_aset"></canvas>
                                     </div>
                                   </div>
@@ -195,8 +209,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                     </div>
                                     </div>
-                                    <div class="card-body">
-                                      <canvas id="chart_aset_kredit"></canvas>
+                                    <div class="card-body" id="chart_aset_kredit_container">
+                                      <canvas id="chart_aset_kredit"  ></canvas>
                                     </div>
                                   </div>
                                     </div>    
@@ -212,7 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       </button>
                                     </div>
                                       </div>
-                                      <div class="card-body">
+                                      <div class="card-body" id="chart_npat_monthly_container">
                                         <canvas id="chart_npat_monthly"></canvas>
                                       </div>
                                     </div>
@@ -225,7 +239,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                     </div>
                                       </div>
-                                      <div class="card-body">
+                                      <div class="card-body" id="chart_npat_ytd_container">
                                         <canvas id="chart_npat_ytd"></canvas>
                                       </div>
                                     </div>

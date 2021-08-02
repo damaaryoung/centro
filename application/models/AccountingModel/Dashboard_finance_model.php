@@ -16,10 +16,11 @@ class Dashboard_finance_model extends CI_Model{
           return $query->result_array();
     }
 
-    function get_data_chart_npat_monthly(){
+    function get_data_chart_npat_monthly($src_kode_kantor){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
-      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='NPAT MONTHLY' GROUP BY ac.`tgl_laporan`");
+      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='NPAT MONTHLY'  AND ac.kode_kantor like '$src_kode_kantor%'
+      GROUP BY DATE_FORMAT(tgl_laporan,'%M') desc");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -29,10 +30,28 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_chart_npat_ytd(){
+    function get_data_chart_npat_ytd($src_kode_kantor){ 
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
-      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='NPAT YTD' GROUP BY ac.`tgl_laporan`");
+      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='NPAT YTD' AND ac.kode_kantor like '$src_kode_kantor%'
+      GROUP BY DATE_FORMAT(tgl_laporan,'%M') desc");
+     $query  = $this->db2->query($str);
+     
+     
+     if($query->num_rows() > 0){
+       foreach($query->result() as $data){
+         $hasil[] = $data;
+        }
+        return $hasil;
+        echo $this->db2->last_query;
+      }
+   
+    }
+    function get_data_chart_aset($src_kode_kantor){
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+      $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
+      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='ASET' AND ac.kode_kantor like '$src_kode_kantor%'
+      GROUP BY ac.`tgl_laporan`");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -42,10 +61,11 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_chart_aset(){
+    function get_data_chart_aset_kredit($src_kode_kantor){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
-      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='ASET' GROUP BY ac.`tgl_laporan`");
+      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='ASET KREDIT' AND ac.kode_kantor like '$src_kode_kantor%'
+      GROUP BY ac.`tgl_laporan`");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -55,10 +75,12 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_chart_aset_kredit(){
+    function get_data_chart_modal($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
-      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='ASET KREDIT' GROUP BY ac.`tgl_laporan`");
+      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='MODAL'AND ac.kode_kantor like '$src_kode_kantor%' 
+
+      GROUP BY ac.`tgl_laporan`");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -68,23 +90,11 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_chart_modal(){
-      $this->db2 = $this->load->database('DB_CENTRO', true);
-      $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
-      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='MODAL' GROUP BY ac.`tgl_laporan`");
-     $query  = $this->db2->query($str);
-    
-    if($query->num_rows() > 0){
-              foreach($query->result() as $data){
-                  $hasil[] = $data;
-              }
-              return $hasil;
-          }
-      }
-    function get_data_speedometer(){
+    function get_data_speedometer($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT AVG(realisasi/rencana *100 ) AS total 
-      FROM acc_das_rencana_realisasi WHERE jenis='ASET'");
+      FROM acc_das_rencana_realisasi WHERE jenis='ASET'AND kode_kantor like '$src_kode_kantor%'
+      and date_format(tgl_laporan,'%Y-%m')like '$src_tgl_laporan%'");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -94,10 +104,11 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_speedometer_kredit(){
+    function get_data_speedometer_kredit($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT AVG(realisasi/rencana *100 ) AS total 
-      FROM acc_das_rencana_realisasi WHERE jenis='ASET KREDIT'");
+       FROM acc_das_rencana_realisasi WHERE jenis='ASET KREDIT'AND kode_kantor like '$src_kode_kantor%'
+       and date_format(tgl_laporan,'%Y-%m')like '$src_tgl_laporan%'");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -107,10 +118,11 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_speedometer_npat_monthly(){
+    function get_data_speedometer_npat_monthly($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT AVG(realisasi/rencana *100 ) AS total 
-      FROM acc_das_rencana_realisasi WHERE jenis='NPAT MONTHLY'");
+      FROM acc_das_rencana_realisasi WHERE jenis='NPAT MONTHLY'AND kode_kantor like '$src_kode_kantor%'
+      and date_format(tgl_laporan,'%Y-%m')like '$src_tgl_laporan%'");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -120,10 +132,11 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_speedometer_modal(){
+    function get_data_speedometer_modal($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT AVG(realisasi/rencana *100 ) AS total 
-      FROM acc_das_rencana_realisasi WHERE jenis='MODAL'");
+        FROM acc_das_rencana_realisasi WHERE jenis='MODAL'AND kode_kantor like '$src_kode_kantor%'
+        and date_format(tgl_laporan,'%Y-%m')like '$src_tgl_laporan%'");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -136,7 +149,7 @@ class Dashboard_finance_model extends CI_Model{
 
       public function sysdate(){
         $this->db2 = $this->load->database('DB_CENTRO', true);
-        $str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m-%d') AS 'sysdate';";
+        $str = "SELECT DATE_FORMAT(SYSDATE(), '%Y-%m') AS 'sysdate';";
             $query  = $this->db2->query($str);
             $result = $query->result_array();
             return $result[0]["sysdate"];
