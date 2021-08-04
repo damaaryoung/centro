@@ -9,10 +9,6 @@ class Dashboard_finance_controller extends CI_Controller {
        
     }
     public function index(){
-
-	
-
-
         $session             = $this->session->userdata('nama');
         $data['kode_kantor'] = $this->session->userdata('kd_cabang');
         $data['divisi_id']   = $this->session->userdata('divisi_id');
@@ -35,25 +31,29 @@ class Dashboard_finance_controller extends CI_Controller {
 	}
 	public function get_data_chart_npat_ytd(){
 		$src_kode_kantor = $this->input->post('src_kode_kantor');
-		$chart_npat_ytd 	      =$this->Dashboard_finance_model->get_data_chart_npat_ytd(($src_kode_kantor));
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
+		$chart_npat_ytd 	      =$this->Dashboard_finance_model->get_data_chart_npat_ytd($src_kode_kantor,$src_tgl_laporan);
 		$data['chart_npat_ytd']   =$chart_npat_ytd; 
 		echo json_encode($data);
 	}
 	public function get_data_chart_npat_monthly(){
 		$src_kode_kantor = $this->input->post('src_kode_kantor');
-		$chart_npat_monthly 	      =$this->Dashboard_finance_model->get_data_chart_npat_monthly($src_kode_kantor);
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
+		$chart_npat_monthly 	      =$this->Dashboard_finance_model->get_data_chart_npat_monthly($src_kode_kantor,$src_tgl_laporan);
 		$data['chart_npat_monthly']   =$chart_npat_monthly; 
 		echo json_encode($data);
 	}
 	public function get_data_chart_aset_kredit(){
 		$src_kode_kantor = $this->input->post('src_kode_kantor');
-		$chart_aset_kredit 	      =$this->Dashboard_finance_model->get_data_chart_aset_kredit($src_kode_kantor);
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
+		$chart_aset_kredit 	      =$this->Dashboard_finance_model->get_data_chart_aset_kredit($src_kode_kantor,$src_tgl_laporan);
 		$data['chart_aset_kredit']   =$chart_aset_kredit; 
 		echo json_encode($data);
 	}
 	public function get_data_chart_aset(){
 		$src_kode_kantor = $this->input->post('src_kode_kantor');
-		$chart_aset 	      =$this->Dashboard_finance_model->get_data_chart_aset($src_kode_kantor);
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
+		$chart_aset 	      =$this->Dashboard_finance_model->get_data_chart_aset($src_kode_kantor,$src_tgl_laporan);
 		$data['chart_aset']   =$chart_aset; 
 		
 		echo json_encode($data);

@@ -16,10 +16,12 @@ class Dashboard_finance_model extends CI_Model{
           return $query->result_array();
     }
 
-    function get_data_chart_npat_monthly($src_kode_kantor){
+    function get_data_chart_npat_monthly($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
       FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='NPAT MONTHLY'  AND ac.kode_kantor like '$src_kode_kantor%'
+      AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
+      INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
       GROUP BY DATE_FORMAT(tgl_laporan,'%M') desc");
      $query  = $this->db2->query($str);
     
@@ -30,10 +32,12 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_chart_npat_ytd($src_kode_kantor){ 
+    function get_data_chart_npat_ytd($src_kode_kantor,$src_tgl_laporan){ 
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
       FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='NPAT YTD' AND ac.kode_kantor like '$src_kode_kantor%'
+      AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
+      INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
       GROUP BY DATE_FORMAT(tgl_laporan,'%M') desc");
      $query  = $this->db2->query($str);
      
@@ -47,10 +51,12 @@ class Dashboard_finance_model extends CI_Model{
       }
    
     }
-    function get_data_chart_aset($src_kode_kantor){
+    function get_data_chart_aset($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
       FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='ASET' AND ac.kode_kantor like '$src_kode_kantor%'
+      AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
+      INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
       GROUP BY ac.`tgl_laporan`");
      $query  = $this->db2->query($str);
     
@@ -61,10 +67,12 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_chart_aset_kredit($src_kode_kantor){
+    function get_data_chart_aset_kredit($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
       FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='ASET KREDIT' AND ac.kode_kantor like '$src_kode_kantor%'
+      AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
+      INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
       GROUP BY ac.`tgl_laporan`");
      $query  = $this->db2->query($str);
     
@@ -75,12 +83,16 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_chart_modal($src_kode_kantor,$src_tgl_laporan){
-      $this->db2 = $this->load->database('DB_CENTRO', true);
-      $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
-      FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='MODAL'AND ac.kode_kantor like '$src_kode_kantor%' 
 
-      GROUP BY ac.`tgl_laporan`");
+    function get_data_chart_modal($src_kode_kantor,$src_tgl_laporan){
+        
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+      $str = ("	SELECT SUM(realisasi) AS realisasi,SUM(rencana) AS rencana,DATE_FORMAT(tgl_laporan, '%M') AS tgl_laporan,kode_kantor,
+      tgl_laporan AS `asd`FROM acc_das_rencana_realisasi ac WHERE ac.`jenis` = 'modal'AND kode_kantor like '$src_kode_kantor%' 
+      AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
+      INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
+      GROUP BY DATE_FORMAT(tgl_laporan, '%M') desc");
+     // echo $str;
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
