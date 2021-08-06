@@ -750,14 +750,14 @@
                         <td>${response.rekap_jaminan[i]['NAMA_NASABAH']}</td>
                         <td>${response.rekap_jaminan[i]['jenis_jaminan']}</td>
                         <td>${response.rekap_jaminan[i]['DESKRIPSI_ASURANSI']}</td>
-                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi'], '', 0, ',', '.')}</td>
-                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi2'], '', 0, ',', '.')}</td>
-                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['komisi_asuransi'], '', 0, ',', '.')}</td>
-                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['premi_asuransi'], '', 0, ',', '.')}</td>
-                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['sisa_titipan_asuransi'], '', 0, ',', '.')}</td>
-                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['pengembalian_asuransi'], '', 0, ',', '.')}</td>
-                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['refund_asuransi'], '', 0, ',', '.')}</td>
-                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['klaim_asuransi'], '', 0, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi'], '', 2, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['titipan_asuransi2'], '', 2, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['komisi_asuransi'], '', 2, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['premi_asuransi'], '', 2, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['sisa_titipan_asuransi'], '', 2, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['pengembalian_asuransi'], '', 2, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['refund_asuransi'], '', 2, ',', '.')}</td>
+                        <td>${accounting.formatMoney(response.rekap_jaminan[i]['klaim_asuransi'], '', 2, ',', '.')}</td>
                         <td>${response.rekap_jaminan[i]['status_cover']}</td>`;
            
             if(response.rekap_jaminan[i]['status_cover'] == 'BELUM'){

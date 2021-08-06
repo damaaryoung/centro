@@ -64,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="card-body text-center">  
                 <div class="row">
                       <div class="col-md-12 mx-auto">
-                      <div class="form-group row">
+                      <div class="form-group row justify-content-sm-center">
                                   <div class="col-sm-2">
                                       <label style="padding-top: 5px;" class="control-label" for="src_kantor_kas_cabang">Kode Kantor</label>
                                   </div>
@@ -77,6 +77,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                   <div class="col-sm-3">                                       
                                   <input type="month" class="form-control form-control-sm" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 300px;"  onchange="search()">
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <br>                                       
+                                  <button type="button" class="btn btn-warning btn-sm" style="width: 220px;" id="btn_export_by_asuransi"><i class="fas fa-file-export"></i> Export to PDF</button>
                                   </div>
                               </div>
                       </div>

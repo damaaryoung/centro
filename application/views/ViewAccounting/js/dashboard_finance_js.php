@@ -23,12 +23,11 @@ $(document).ready(function () {
     }else{
         $('#src_kode_kantor').append('<option value="' + kd_kantor_user + '" selected>'+ kd_kantor_user +'</option>');
     }
-    get_sysdate();  
-    get_chart_npat_ytd();
-    get_chart_npat_month();
-    get_chart_aset();
-    get_chart_aset_kredit();
-    get_chart_modal();
+ 
+
+    
+ 
+   
     get_speedometer_aset()
     get_speedometer_aset_kredit()
     get_speedometer_npat_monthly()
@@ -59,6 +58,13 @@ function get_sysdate(){
                     },
             success : function(response) {
                 $('#src_tgl_laporan').val(response.sysdate);
+                console.log($('#src_tgl_laporan').val())
+                get_chart_modal();
+                get_chart_aset_kredit();
+                get_chart_aset();
+                get_chart_npat_month();
+                get_chart_npat_ytd();
+                
             },
             error : function(response) {
                 console.log('failed :' + response);
@@ -529,7 +535,7 @@ function get_speedometer_aset(){
                                        length: 0.6, // Relative to gauge radius
                                        strokeWidth: 0.035 // The thickness,
                                    },
-                                   colorStart: '#6FADCF',   // Colors
+                                   colorStart: '#00E007',   // Colors
                                    colorStop: '#00E007',    // just experiment with them
                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
                                    generateGradient: true,
@@ -551,7 +557,7 @@ function get_speedometer_aset(){
                                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
                                gauge.maxValue = 100; // set max gauge value
                                gauge.setMinValue(0);  // set min value
-                               gauge.set(parseFloat(response.speedometer_aset[0])); // set actual value
+                               gauge.set(parseFloat(response.speedometer_aset[0]).toFixed(2)); // set actual value
                                gauge.setTextField(document.getElementById("gaugeAset-value"));                 
 },
            error : function(response) {
@@ -804,6 +810,7 @@ function get_kode_kantor(){
                         $('#modal_kode_kantor').append('<option value="'+data.kode_kantor+'">' + data.kode_kantor + ' - ' + data.nama_kantor+'</option>');
                     });
                 }
+                get_sysdate();  
             },
             error : function(response) {
                 console.log('failed :' + response);
