@@ -21,7 +21,7 @@ class E_FilingController extends CI_Controller {
 
 		$data['Modaldetail_efiling'] = $this->load->view('ViewEFiling/modal_detail_efiling', NULL, TRUE);
 		$data['Modalview_efiling'] = $this->load->view('ViewEFiling/modal_view_efiling', NULL, TRUE);
-
+		$data['Modalduplikat_efiling'] = $this->load->view('ViewEFiling/modal_duplikat', NULL, TRUE);
 		if($session != ''){
 			$data['kode_kantor'] = $this->session->userdata('kd_cabang');
 			$data['divisi_id'] = $this->session->userdata('divisi_id'); 
@@ -48,6 +48,22 @@ class E_FilingController extends CI_Controller {
 		$model->userID = $this->input->post('user_id');
 		$model->status = $this->input->post('status');
 		$data = $model->update_status_verifikasi();
+		echo json_encode($data);
+	}
+	public function cek_rekening(){
+		$model = new EFilingModel();
+		$model->no_rekening_search = $this->input->post('no_rekening_search');
+		$data = $model->cek_rekening();
+		echo json_encode($data);
+
+	}
+	public function duplikat_data(){
+		$model = new EFilingModel();
+
+		$model->no_rekening_awal = $this->input->post('no_rekening_awal');
+		$model->no_rekening_lama = $this->input->post('no_rekening_lama');
+		$model->user_id          = $this->session->userdata('userIdLogin');
+		$data = $model->duplikat_data();
 		echo json_encode($data);
 	}
 }

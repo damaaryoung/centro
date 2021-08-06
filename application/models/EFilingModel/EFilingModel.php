@@ -259,4 +259,216 @@ class EFilingModel extends CI_Model{
 		}
 		return $result;
 	}
+	public function cek_rekening(){
+		$no_rekening_search = $this->no_rekening_search;
+		$this->db= $this->load->database('DB_CENTRO', true);
+		$str = "SELECT * FROM centro.view_efiling_header WHERE no_rekening='$no_rekening_search';";
+		$query = $this->db->query($str);
+		return $query->row_array();
+	}
+	public function duplikat_data(){
+		$norek_baru  = $this->no_rekening_awal;
+		$norek_lama  = $this->no_rekening_lama;
+		$user_id     = $this->user_id;
+
+        $where_baru = "WHERE no_rekening='$norek_baru'";
+		$where_lama = "WHERE no_rekening='$norek_lama'";
+		$multiQueryDelete = array();
+
+		$this->db= $this->load->database('DB_CENTRO', true);
+
+		$query  = $this->db->query("SELECT no_rekening, is_jenis FROM centro.efiling $where_baru");
+		$cek_efiling_data =  $query->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling` $where_baru";
+		}
+
+		$query  = $this->db->query("SELECT no_rekening FROM centro.efiling_bi_checking $where_baru");
+		$cek_efiling_data =  $query->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_bi_checking` $where_baru";
+		}
+		
+		$cek_efiling_data = $this->db->query("SELECT no_rekening FROM centro.efiling_credit_analist $where_baru")->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_credit_analist` $where_baru";
+		}
+		
+		$cek_efiling_data = $this->db->query("SELECT no_rekening FROM centro.efiling_foto $where_baru")->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_foto` $where_baru";
+		}
+		
+		$cek_efiling_data = $this->db->query("SELECT no_rekening FROM centro.efiling_jaminan $where_baru")->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_jaminan` $where_baru";
+		}
+		
+		$cek_efiling_data = $this->db->query("SELECT no_rekening FROM centro.efiling_legal $where_baru")->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_legal` $where_baru";
+		}
+		
+		$cek_efiling_data = $this->db->query("SELECT no_rekening FROM centro.efiling_nasabah $where_baru")->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_nasabah` $where_baru";
+		}
+		
+		$cek_efiling_data = $this->db->query("SELECT no_rekening FROM centro.efiling_permohonan_kredit $where_baru")->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_permohonan_kredit` $where_baru";
+		}
+		
+		$cek_efiling_data = $this->db->query("SELECT no_rekening FROM centro.efiling_release_aset $where_baru")->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_release_aset` $where_baru";
+		}
+		
+		$cek_efiling_data = $this->db->query("SELECT no_rekening FROM centro.efiling_spk_ndk $where_baru")->num_rows();
+		if($cek_efiling_data > 0) {
+			$multiQueryDelete[] = "DELETE FROM `centro`.`efiling_spk_ndk` $where_baru";
+		}
+
+		/// ASAL DATA DUPLIKAT ////
+		/// cek dulu data lama datangnya dari mana, sefin or webtool
+		$query  = $this->db->query("SELECT no_rekening, is_jenis FROM centro.efiling $where_lama");
+		$cek_efiling_data =  $query->num_rows();
+		if($cek_efiling_data > 0) {
+			$efilings_jenis = $query->result_array();	
+			$is_jenis = $efilings_jenis[0]['is_jenis'];
+		}
+
+		///Cek dulu apakah ada data di upload lewat webtool kalau ada ambil datanya dari webtool///
+		$query  = $this->db->query("SELECT no_rekening FROM webtool.efiling $where_lama");
+		$cek_efiling_data_lama =  $query->num_rows();
+		if($cek_efiling_data_lama > 0) {
+			//// is_jenis 2 dari webtool ////
+			$str = "SELECT `kode_kantor`, `tgl_realisasi_eng` FROM webtool.`view_efiling_header` WHERE no_rekening='$norek_lama';";
+			$query  = $this->db->query($str);
+			$row_view_efiling_header = $query->result_array();
+			$row_view_efiling_header1 = $query->result();
+			
+			$tgl_realisasi_eng = $row_view_efiling_header[0]['tgl_realisasi_eng'];
+			$kode_kantor       = $row_view_efiling_header[0]['kode_kantor'];
+			     
+			$efiling_header = "SELECT '$norek_baru', '3', `root_server`, `folder_master`, '$user_id', NULL, NOW(), NULL, NOW(), '$norek_lama', '$tgl_realisasi_eng', '$kode_kantor' FROM webtool.`efiling` $where_lama";
+					
+			$efiling_bi_checking = "SELECT '$norek_baru', `pengajuan_bi`, `persetujuan`, `hasil`, `verifikasi`, `notes` FROM `webtool`.`efiling_bi_checking` $where_lama";
+						
+			$efiling_credit_analist = "SELECT '$norek_baru', `memo_ao`, `memo_ca`, `offering_letter`, `penilaian_jaminan`, `cheklist_survey`, `persetujuan_kredit`, `verifikasi`, `notes` FROM `webtool`.`efiling_credit_analist` $where_lama";
+					
+			$efiling_foto = "SELECT '$norek_baru', `ft_jaminan`, `ft_pengikatan`, `ft_domisili`, `ft_usaha`, `verifikasi`, `notes` FROM `webtool`.`efiling_foto` $where_lama";
+				
+			$efiling_jaminan = "SELECT '$norek_baru', `sertifikat`, `skmht`, `apht`, `cabut_roya`, `sht`, `pbb`, `imb`, `ajb`, `bpkb`, `ahli_waris`, `pengakuan_hutang`, `akta_pengakuan_hak_bersama`, `adendum`, `fidusia`, `verifikasi`, `notes` FROM `webtool`.`efiling_jaminan` $where_lama";
+				 
+			$efiling_legal = "SELECT '$norek_baru', `pengajuan_lpdk`, `lpdk`, `cheklist_pengikatan`, `order_pengikatan`, `verifikasi`, `notes` FROM `webtool`.`efiling_legal` $where_lama";
+			
+			$efiling_nasabah = "SELECT '$norek_baru', `ktp`, `npwp`, `kk`, `domisili`, `surat_nikah`, `surat_cerai`, `surat_lahir`, `surat_kematian`, `skd`, `slip_gaji`, `take_over`, `sk_kerja`, `sk_usaha`, `rek_koran`, `tdp`, `bon_usaha`, `verifikasi`, `notes` FROM `webtool`.`efiling_nasabah` $where_lama";
+					
+			$efiling_permohonan_kredit = "SELECT '$norek_baru', `aplikasi`, `denah_lokasi`, `checklist_kelengkapan`, `verifikasi`, `notes` FROM `webtool`.`efiling_permohonan_kredit` $where_lama";
+					
+			$efiling_release_aset = "SELECT '$norek_baru', `ra_tanda_terima`, `ra_surat_kuasa`, `ra_identitas_pengambilan`, `ra_lainnya`, `ra_serah_terima`, `verifikasi`, `notes` FROM `webtool`.`efiling_release_aset` $where_lama";
+			
+			$efiling_spk_ndk = "SELECT '$norek_baru', `spk_ndk`, `asuransi`, `sp_no_imb`, `jadwal_angsuran`, `personal_guarantee`, `hold_dana`, `surat_transfer`, `keabsahan_data`, `sp_beda_jt_tempo`, `sp_authentic`, `sp_penyerahan_jaminan`, `surat_aksep`, `tt_uang`, `sp_pendebetan_rekening`, `sp_plang`, `hal_penting`, `restruktur_bunga_denda`, `verifikasi`, `notes` FROM `webtool`.`efiling_spk_ndk` $where_lama";
+				
+			// DUPLIKAT EFILING
+			$multiQuery = array();
+			$errorQuery = array();
+			$multiQuery[] = "INSERT INTO `centro`.`efiling`(`no_rekening`, `status_verif`, `root_server`, `folder_master`, `user_id`, `user_verif`, `tgl_buat`, `tgl_verif`, `tgl_update`, `no_rekening_lama`, `tgl_realisasi_eng_lama`, `kode_kantor_lama`) $efiling_header";
+				
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_bi_checking`(`no_rekening`, `pengajuan_bi`, `persetujuan`, `hasil`, `verifikasi`, `notes`) $efiling_bi_checking";
+				
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_credit_analist` (`no_rekening`, `memo_ao`, `memo_ca`, `offering_letter`, `penilaian_jaminan`, `cheklist_survey`, `persetujuan_kredit`, `verifikasi`, `notes`) $efiling_credit_analist";
+					
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_foto` (`no_rekening`, `ft_jaminan`, `ft_pengikatan`, `ft_domisili`, `ft_usaha`, `verifikasi`, `notes`) $efiling_foto";
+				
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_jaminan` (`no_rekening`, `sertifikat`, `skmht`, `apht`, `cabut_roya`, `sht`, `pbb`, `imb`, `ajb`, `bpkb`, `ahli_waris`, `pengakuan_hutang`, `akta_pengakuan_hak_bersama`, `adendum`, `fidusia`, `verifikasi`, `notes`) $efiling_jaminan";
+					
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_legal` (`no_rekening`, `pengajuan_lpdk`, `lpdk`, `cheklist_pengikatan`, `order_pengikatan`, `verifikasi`, `notes`) $efiling_legal";
+				
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_nasabah` (`no_rekening`, `ktp`, `npwp`, `kk`, `domisili`, `surat_nikah`, `surat_cerai`, `surat_lahir`, `surat_kematian`, `skd`, `slip_gaji`, `take_over`, `sk_kerja`, `sk_usaha`, `rek_koran`, `tdp`, `bon_usaha`, `verifikasi`, `notes`) $efiling_nasabah";
+				
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_permohonan_kredit` (`no_rekening`, `aplikasi`, `denah_lokasi`, `checklist_kelengkapan`, `verifikasi`, `notes`) $efiling_permohonan_kredit";
+				
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_release_aset` (`no_rekening`, `ra_tanda_terima`, `ra_surat_kuasa`, `ra_identitas_pengambilan`, `ra_lainnya`, `ra_serah_terima`, `verifikasi`, `notes`) $efiling_release_aset";
+				
+			$multiQuery[] = "INSERT INTO `centro`.`efiling_spk_ndk` (`no_rekening`, `spk_ndk`, `asuransi`, `sp_no_imb`, `jadwal_angsuran`, `personal_guarantee`, `hold_dana`, `surat_transfer`, `keabsahan_data`, `sp_beda_jt_tempo`, `sp_authentic`, `sp_penyerahan_jaminan`, `surat_aksep`, `tt_uang`, `sp_pendebetan_rekening`, `sp_plang`, `hal_penting`, `restruktur_bunga_denda`, `verifikasi`, `notes`) $efiling_spk_ndk";
+	
+		}
+		else if($is_jenis == 1){ /// is_jenis 1 data dari migrasi sefin,get nya dari table centro
+
+				//// is_jenis 1 dari SEFIN ////
+				$str = "SELECT `kode_kantor`, `tgl_realisasi_eng` FROM webtool.`view_efiling_header` WHERE no_rekening='$norek_lama';";
+				$query  = $this->db->query($str);
+				$row_view_efiling_header = $query->result_array();
+				$row_view_efiling_header1 = $query->result();
+				
+				$tgl_realisasi_eng = $row_view_efiling_header[0]['tgl_realisasi_eng'];
+				$kode_kantor       = $row_view_efiling_header[0]['kode_kantor'];
+				$efiling_header = "SELECT '$norek_baru', '3', `root_server`, `folder_master`, '$user_id', NULL, NOW(), NULL, NOW(), `status_dokument`, '$norek_lama', '$tgl_realisasi_eng', '$kode_kantor', `is_jenis` FROM centro.`efiling` $where_lama";
+				 
+				$efiling_bi_checking = "SELECT '$norek_baru', `pengajuan_bi`, `persetujuan`, `hasil`, `verifikasi`, `notes` FROM `centro`.`efiling_bi_checking` $where_lama";
+                   	
+				$efiling_credit_analist = "SELECT '$norek_baru', `memo_ao`, `memo_ca`, `offering_letter`, `penilaian_jaminan`, `cheklist_survey`, `persetujuan_kredit`, `verifikasi`, `notes` FROM `centro`.`efiling_credit_analist` $where_lama";
+						
+				$efiling_foto = "SELECT '$norek_baru', `ft_jaminan`, `ft_pengikatan`, `ft_domisili`, `ft_usaha`, `verifikasi`, `notes` FROM `centro`.`efiling_foto` $where_lama";
+					
+				$efiling_jaminan = "SELECT '$norek_baru', `sertifikat`, `skmht`, `apht`, `cabut_roya`, `sht`, `pbb`, `imb`, `ajb`, `bpkb`, `ahli_waris`, `pengakuan_hutang`, `akta_pengakuan_hak_bersama`, `adendum`, `fidusia`, `verifikasi`, `notes` FROM `centro`.`efiling_jaminan` $where_lama";
+					 
+				$efiling_legal = "SELECT '$norek_baru', `pengajuan_lpdk`, `lpdk`, `cheklist_pengikatan`, `order_pengikatan`, `verifikasi`, `notes` FROM `centro`.`efiling_legal` $where_lama";
+				
+				$efiling_nasabah = "SELECT '$norek_baru', `ktp`, `ktp2`, `npwp`, `kk`, `domisili`, `surat_nikah`, `surat_cerai`, `surat_lahir`, `surat_kematian`, `skd`, `slip_gaji`, `take_over`, `sk_kerja`, `sk_usaha`, `rek_koran`, `tdp`, `bon_usaha`, `verifikasi`, `notes` FROM `centro`.`efiling_nasabah` $where_lama";
+						
+				$efiling_permohonan_kredit = "SELECT '$norek_baru', `aplikasi`, `denah_lokasi`, `checklist_kelengkapan`, `verifikasi`, `notes` FROM `centro`.`efiling_permohonan_kredit` $where_lama";
+						
+				$efiling_release_aset = "SELECT '$norek_baru', `ra_tanda_terima`, `ra_surat_kuasa`, `ra_identitas_pengambilan`, `ra_lainnya`, `ra_serah_terima`, `verifikasi`, `notes` FROM `centro`.`efiling_release_aset` $where_lama";
+				
+				$efiling_spk_ndk = "SELECT '$norek_baru', `spk_ndk`, `asuransi`, `sp_no_imb`, `jadwal_angsuran`, `personal_guarantee`, `hold_dana`, `surat_transfer`, `keabsahan_data`, `sp_beda_jt_tempo`, `sp_authentic`, `sp_penyerahan_jaminan`, `surat_aksep`, `tt_uang`, `sp_pendebetan_rekening`, `sp_plang`, `hal_penting`, `restruktur_bunga_denda`, `spajk_spa_fpk`, `verifikasi`, `notes` FROM `centro`.`efiling_spk_ndk` $where_lama";
+					
+				// DUPLIKAT EFILING
+				$multiQuery = array();
+				$errorQuery = array();
+				$multiQuery[] = "INSERT INTO `centro`.`efiling`(`no_rekening`, `status_verif`, `root_server`, `folder_master`, `user_id`, `user_verif`, `tgl_buat`, `tgl_verif`, `tgl_update`, `status_dokument`, `no_rekening_lama`, `tgl_realisasi_eng_lama`, `kode_kantor_lama`, `is_jenis`) $efiling_header";
+					
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_bi_checking`(`no_rekening`, `pengajuan_bi`, `persetujuan`, `hasil`, `verifikasi`, `notes`) $efiling_bi_checking";
+					
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_credit_analist` (`no_rekening`, `memo_ao`, `memo_ca`, `offering_letter`, `penilaian_jaminan`, `cheklist_survey`, `persetujuan_kredit`, `verifikasi`, `notes`) $efiling_credit_analist";
+						
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_foto` (`no_rekening`, `ft_jaminan`, `ft_pengikatan`, `ft_domisili`, `ft_usaha`, `verifikasi`, `notes`) $efiling_foto";
+					
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_jaminan` (`no_rekening`, `sertifikat`, `skmht`, `apht`, `cabut_roya`, `sht`, `pbb`, `imb`, `ajb`, `bpkb`, `ahli_waris`, `pengakuan_hutang`, `akta_pengakuan_hak_bersama`, `adendum`, `fidusia`, `verifikasi`, `notes`) $efiling_jaminan";
+						
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_legal` (`no_rekening`, `pengajuan_lpdk`, `lpdk`, `cheklist_pengikatan`, `order_pengikatan`, `verifikasi`, `notes`) $efiling_legal";
+					
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_nasabah` (`no_rekening`, `ktp`, `ktp2`, `npwp`, `kk`, `domisili`, `surat_nikah`, `surat_cerai`, `surat_lahir`, `surat_kematian`, `skd`, `slip_gaji`, `take_over`, `sk_kerja`, `sk_usaha`, `rek_koran`, `tdp`, `bon_usaha`, `verifikasi`, `notes`) $efiling_nasabah";
+					
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_permohonan_kredit` (`no_rekening`, `aplikasi`, `denah_lokasi`, `checklist_kelengkapan`, `verifikasi`, `notes`) $efiling_permohonan_kredit";
+					
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_release_aset` (`no_rekening`, `ra_tanda_terima`, `ra_surat_kuasa`, `ra_identitas_pengambilan`, `ra_lainnya`, `ra_serah_terima`, `verifikasi`, `notes`) $efiling_release_aset";
+					
+				$multiQuery[] = "INSERT INTO `centro`.`efiling_spk_ndk` (`no_rekening`, `spk_ndk`, `asuransi`, `sp_no_imb`, `jadwal_angsuran`, `personal_guarantee`, `hold_dana`, `surat_transfer`, `keabsahan_data`, `sp_beda_jt_tempo`, `sp_authentic`, `sp_penyerahan_jaminan`, `surat_aksep`, `tt_uang`, `sp_pendebetan_rekening`, `sp_plang`, `hal_penting`, `restruktur_bunga_denda`, `spajk_spa_fpk`, `verifikasi`, `notes`) $efiling_spk_ndk";
+		
+		}
+		
+		// var_dump($multiQuery);
+		$this->db->trans_begin();
+				foreach ($multiQueryDelete as $delete){
+					$this->db->query($delete);
+				}
+	    		foreach ($multiQuery as $insert){
+					$this->db->query($insert);
+				}
+        if ($this->db->trans_status() === FALSE)
+        {
+          $this->db->trans_rollback();
+              return 'Error Duplikat Efilling';
+        }
+        else
+        {
+          $this->db->trans_commit();
+              return 'Sukses';
+        }
+
+
+	}
 }

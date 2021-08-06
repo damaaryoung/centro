@@ -219,6 +219,7 @@ table.dataTable.table-sm>thead>tr>th {
     echo $ctrlbar;
     echo $Modaldetail_efiling;
     echo $Modalview_efiling;
+    echo $Modalduplikat_efiling;
     echo $js;    
 	?>
  
