@@ -24,19 +24,15 @@ $(document).ready(function () {
         $('#src_kode_kantor').append('<option value="' + kd_kantor_user + '" selected>'+ kd_kantor_user +'</option>');
     }
  
-
-    
- 
-   
-    get_speedometer_aset()
-    get_speedometer_aset_kredit()
-    get_speedometer_npat_monthly()
-    get_speedometer_modal()
     $('#loading-1').hide();
 });
-
+                get_speedometer_aset()
+                get_speedometer_aset_kredit()
+                get_speedometer_npat_monthly()
+                get_speedometer_modal()
 function search()
 {
+    bulan_target()
     get_speedometer_modal()
     get_speedometer_npat_monthly()
     get_speedometer_aset_kredit()
@@ -47,6 +43,67 @@ function search()
     get_chart_npat_ytd();
     get_chart_npat_month();
 }
+
+                // $('#btn_export_chart').click(function(event) {
+                    
+                //     html2canvas(document.getElementById('reportPage'),{
+                //         onrendered:function (canvas){
+                //             var img =canvas.toDataURL('image/png')
+                //             var doc=new jsPDF("p", "pt", "a4")
+                //             doc.text(220,25,'Financial Dashboard')
+                //             doc.addImage(img, 'PNG',-88, 75, 680, 700)
+                //             doc.save('dashboard.pdf')
+                //         }
+                //     })
+                // });
+                //    $('#tvsr_btn').click(function(event) {
+                    
+                //     html2canvas(document.getElementById('tvsrealisasi_report'),{
+                //         onrendered:function (canvas){
+                            
+                //             var img =  canvas.toDataURL('image/png', 1.0);
+                //             var doc = new jsPDF("l", "pt", "a4", [canvas.width, canvas.height]);
+                //            // doc.text(120, 15, "Diagram NPAT YTD");
+                //             doc.addImage(img, 'png', -60,50, canvas.width, canvas.height); 
+                //             doc.save('target-vs-realisasi.pdf')
+                //         }
+                //     })
+                // })
+                $('#btn_export_chart').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('reportPage'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('p', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
+                            pdf.text(400,25,'Financial Dashboard')
+                            pdf.addImage(canvas, 'jpeg', 0, 50, $('#reportPage').width(), $('#reportPage').height());
+                            pdf.save("dashboard.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                });
+                $('#tvsr_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('tvsrealisasi_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#tvsrealisasi_report').width(), $('#tvsrealisasi_report').height()]);
+                            
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#tvsrealisasi_report').width(), $('#tvsrealisasi_report').height());
+                            pdf.save("target-vs-realisasi.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                });
+
+function bulan_target(){
+    
+    var periode = $('#src_tgl_laporan').val();
+        $('#bulan_target').val(periode); 
+
+   // console.log(response.periode)
+}
+
 function get_sysdate(){
     $.ajax({
             url : base_url + "Accounting/Dashboard_finance_controller/get_sysdate",
@@ -58,12 +115,16 @@ function get_sysdate(){
                     },
             success : function(response) {
                 $('#src_tgl_laporan').val(response.sysdate);
-                console.log($('#src_tgl_laporan').val())
-                get_chart_modal();
-                get_chart_aset_kredit();
-                get_chart_aset();
-                get_chart_npat_month();
-                get_chart_npat_ytd();
+                $('#bulan_target').val(response.sysdate);
+
+              //  console.log($('#src_tgl_laporan').val())
+                get_chart_modal()
+                get_chart_aset_kredit()
+                get_chart_aset()
+                get_chart_npat_month()
+                get_chart_npat_ytd()
+
+     
                 
             },
             error : function(response) {
@@ -99,13 +160,41 @@ function get_chart_npat_ytd(){
            success : function(response) {
             $('#loading').hide(); 
 
-                console.log("response chart npat ytd",response)
+             //   console.log("response chart npat ytd",response)
                 if(!response.chart_npat_ytd)
                 {
-                    $("canvas#chart_npat_ytd").remove();
-                    $('#loading').hide();
-                    console.log("data tidak npat ytd ada")
-                    return 
+                    var data_chart_npat_ytd = 
+            {
+                labels:['January','February','Maret','April','May','June','July','August','Septermber','Oktober','November','Desember'],
+                datasets: [
+                    {
+                        label: "Target",
+                        backgroundColor: 'rgb(0, 76, 153)',
+                        data:0,
+                    },
+                    {
+                        label: "Realisasi",
+                        backgroundColor: 'rgb(255, 128, 0)',
+                        data:0,
+                    },
+            
+                ]
+            };
+                var config_npat_tyd = 
+            {
+                type: 'bar',
+                data:data_chart_npat_ytd,
+                options: {}
+            };
+                 // $('#chart_npat_ytd').remove()
+                 $("canvas#chart_npat_ytd").remove();
+                 $("canvas#chart_npat_ytd_container").remove();
+                 $("#chart_npat_ytd_container").append('<canvas id="chart_npat_ytd"></canvas>'); 
+                 var grapharea = document.getElementById("chart_npat_ytd").getContext("2d")
+                   var npat_tyd = new Chart(
+                    grapharea,config_npat_tyd
+                    ); 
+                    return
                 }
                 var label=[]
                 var realisasi=[]
@@ -152,6 +241,32 @@ function get_chart_npat_ytd(){
                    var npat_tyd = new Chart(
                     grapharea,config_npat_tyd
                     ); 
+                    // $('#npat_ytd_btn').click(function(event) {          
+                    //     var canvas = document.querySelector('#chart_npat_ytd');
+                    //     //creates image
+                    //     var canvasImg = canvas.toDataURL("image/png", 1.0);
+                    //     //creates PDF from img
+                    //     var doc = new jsPDF('landscape');
+                    //     doc.setFillColor(204, 204,204,204);
+                    //     doc.setFontSize(20);
+                    //     doc.text(120, 15, "Diagram NPAT YTD");
+                    //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
+                    //     doc.save('npat-ytd.pdf');
+                    // });
+                    $('#npat_ytd_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('npat_ytd_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#npat_ytd_report').width(), $('#npat_ytd_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#npat_ytd_report').width(), $('#npat_ytd_report').height());
+                            pdf.save("test.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                });
+                    
+                    
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -165,6 +280,7 @@ function get_chart_npat_ytd(){
    });
 }
 
+                
 function get_chart_npat_month(){
    data = '';
    $('#loading').show(); 
@@ -185,13 +301,40 @@ function get_chart_npat_month(){
            success : function(response) {
             $('#loading').hide(); 
 
-                console.log("response chart npat Monthly",response)
+            //    console.log("response chart npat Monthly",response)
                 if(!response.chart_npat_monthly)
                 {
-                    $("canvas#chart_npat_monthly").remove();
-                    $('#loading').hide();
-                    console.log("data npat monthly tidak ada")
-                    return 
+                    var data_chart_npat_monthly = 
+            {
+                labels:['January','February','Maret','April','May','June','July','August','Septermber','Oktober','November','Desember'],
+                datasets: [
+                    {
+                        label: "Target",
+                        backgroundColor: 'rgb(0, 76, 153)',
+                        data:0,
+                    },
+                    {
+                        label: "Realisasi",
+                        backgroundColor: 'rgb(255, 128, 0)',
+                        data:0,
+                    },
+            
+                ]
+            };
+                var config_npat_monthly = 
+            {
+                type: 'bar',
+                data:data_chart_npat_monthly,
+                options: {}
+            };
+               
+                 $("canvas#chart_npat_monthly").remove();
+                 $("#chart_npat_monthly_container").append('<canvas id="chart_npat_monthly"></canvas>'); 
+                 var grapharea = document.getElementById("chart_npat_monthly").getContext("2d")
+                   var npat_monthly = new Chart(
+                    grapharea,config_npat_monthly
+                    ); 
+                    return
                 }
                 var label=[]
                 var realisasi=[]
@@ -235,6 +378,31 @@ function get_chart_npat_month(){
                    var npat_monthly = new Chart(
                     grapharea,config_npat_monthly
                     ); 
+                    // $('#npat_monthly_btn').click(function(event) {          
+                    //     var canvas = document.querySelector('#chart_npat_monthly');
+                    //     //creates image
+                    //     var canvasImg = canvas.toDataURL("image/png", 1.0);
+                    //     //creates PDF from img
+                    //     var doc = new jsPDF('landscape');
+                    //     doc.setFillColor(204, 204,204,204);
+                    //     doc.setFontSize(20);
+                    //     doc.text(120, 15, "Diagram NPAT MONTHLY");
+                    //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
+                    //     doc.save('npat-motnhly.pdf');
+                    // });
+                    $('#npat_monthly_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('npat_monthly_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#npat_monthly_report').width(), $('#npat_monthly_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#npat_monthly_report').width(), $('#npat_monthly_report').height());
+                            pdf.save("npat-monthly.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                });
+
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -268,13 +436,40 @@ function get_chart_aset_kredit(){
            success : function(response) {
             $('#loading').hide(); 
 
-            console.log("response chart Aset Kredit",response)
+        //    console.log("response chart Aset Kredit",response)
             if(!response.chart_aset_kredit)
             {
-                $("canvas#chart_aset_kredit").remove();
-                $('#loading').hide();
-                console.log("data aset kredit tidak ada")
-                return 
+                var data_chart_aset_kredit = 
+            {
+            labels:['January','February','Maret','April','May','June','July','August','Septermber','Oktober','November','Desember'],
+            datasets: [
+                {
+                    label: "Target",
+                    backgroundColor: 'rgb(0, 76, 153)',
+                    data:0,
+                },
+                {
+                    label: "Realisasi",
+                    backgroundColor: 'rgb(255, 128, 0)',
+                    data:0,
+                },
+
+            ]
+            };
+            var config_aset_kredit = 
+            {
+            type: 'bar',
+            data:data_chart_aset_kredit,
+            options: {}
+            };
+
+            $("canvas#chart_aset_kredit").remove();
+            $("#chart_aset_kredit_container").append('<canvas id="chart_aset_kredit"></canvas>'); 
+            var grapharea = document.getElementById("chart_aset_kredit").getContext("2d")
+            var aset_kredit = new Chart(
+                grapharea,config_aset_kredit
+                );
+                return
             }
             var label=[]
             var realisasi=[]
@@ -317,7 +512,32 @@ function get_chart_aset_kredit(){
             var grapharea = document.getElementById("chart_aset_kredit").getContext("2d")
             var aset_kredit = new Chart(
                 grapharea,config_aset_kredit
-                ); 
+                );
+                // $('#aset_kredit_btn').click(function(event) {          
+                //         var canvas = document.querySelector('#chart_aset_kredit');
+                //         //creates image
+                //         var canvasImg = canvas.toDataURL("image/png", 1.0);
+                //         //creates PDF from img
+                //         var doc = new jsPDF('landscape');
+                //         doc.setFillColor(204, 204,204,204);
+                //         doc.setFontSize(20);
+                //         doc.text(120, 15, "Diagram Aset Kredit");
+                //         doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
+                //         doc.save('aset-kredit.pdf');
+                //     });
+
+                    $('#aset_kredit_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('aset_kredit_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#aset_kredit_report').width(), $('#aset_kredit_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#aset_kredit_report').width(), $('#aset_kredit_report').height());
+                            pdf.save("aset-kredit.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
             },
             error : function(response) {
             console.log('failed :' + response);
@@ -352,13 +572,41 @@ function get_chart_aset(){
            success : function(response) {
             $('#loading').hide(); 
 
-                console.log("response chart Asert Total",response)
+            //    console.log("response chart Asert Total",response)
                 if(!response.chart_aset)
                 {
-                    $("canvas#chart_aset").remove();
-                    $('#loading').hide();
-                    console.log("data Asert Total tidak ada")
-                    return 
+                  //Script NPAT monthly
+            var data_chart_aset = 
+            {
+                labels:['January','February','Maret','April','May','June','July','August','Septermber','Oktober','November','Desember'],
+                datasets: [
+                    {
+                        label: "Target",
+                        backgroundColor: 'rgb(0, 76, 153)',
+                        data:0,
+                    },
+                    {
+                        label: "Realisasi",
+                        backgroundColor: 'rgb(255, 128, 0)',
+                        data:0,
+                    },
+            
+                ]
+            };
+                var config_chart_aset = 
+            {
+                type: 'bar',
+                data:data_chart_aset,
+                options: {}
+            };
+               
+                 $("canvas#chart_aset").remove();
+                 $("#chart_aset_total_container").append('<canvas id="chart_aset"></canvas>'); 
+                 var grapharea = document.getElementById("chart_aset").getContext("2d")
+                   var npat_monthly = new Chart(
+                    grapharea,config_chart_aset
+                    ); 
+                    return
                 }
                 var label=[]
                 var realisasi=[]
@@ -402,6 +650,32 @@ function get_chart_aset(){
                    var npat_monthly = new Chart(
                     grapharea,config_chart_aset
                     ); 
+                    
+
+                    // $('#aset_btn').click(function(event) {          
+                    //     var canvas = document.querySelector('#chart_aset');
+                    //     //creates image
+                    //     var canvasImg = canvas.toDataURL("image/png", 1.0);
+                    //     //creates PDF from img
+                    //     var doc = new jsPDF('landscape');
+                    //     doc.setFillColor(204, 204,204,204);
+                    //     doc.setFontSize(20);
+                    //     doc.text(120, 15, "Diagram Aset Total");
+                    //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
+                    //     doc.save('aset-total.pdf');
+                    // }); 
+                    $('#aset_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('aset_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#aset_report').width(), $('#aset_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#aset_report').width(), $('#aset_report').height());
+                            pdf.save("aset.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -414,6 +688,8 @@ function get_chart_aset(){
            }
    });
 }
+
+                 
 
 function get_chart_modal(){
     data = '';
@@ -435,13 +711,40 @@ function get_chart_modal(){
            success : function(response) {
             $('#loading').hide(); 
 
-                console.log("response chart Modal",response)
+            //    console.log("response chart Modal",response)
                 if(!response.chart_modal)
                 {
-                    $("canvas#chart_modal").remove();
-                    $('#loading').hide();
-                    console.log("data Modal tidak ada")
-                    return 
+                                var data_chart_modal = 
+                        {
+                            labels:['January','February','Maret','April','May','June','July','August','Septermber','Oktober','November','Desember'],
+                            datasets: [
+                                {
+                                    label: "Target",
+                                    backgroundColor: 'rgb(0, 76, 153)',
+                                    data:0,
+                                },
+                                {
+                                    label: "Realisasi",
+                                    backgroundColor: 'rgb(255, 128, 0)',
+                                    data:0,
+                                },
+                        
+                            ]
+                        };
+                            var config_chart_modal = 
+                        {
+                            type: 'bar',
+                            data:data_chart_modal,
+                            options: {}
+                        };
+                        
+                            $("canvas#chart_modal").remove();
+                            $("#chart_modal_container").append('<canvas id="chart_modal"></canvas>'); 
+                            var grapharea = document.getElementById("chart_modal").getContext("2d")
+                            var npat_monthly = new Chart(
+                                grapharea,config_chart_modal
+                                );
+                                return
                 }
                 var label=[]
                 var realisasi=[]
@@ -485,6 +788,36 @@ function get_chart_modal(){
                    var npat_monthly = new Chart(
                     grapharea,config_chart_modal
                     ); 
+
+                    // $('#modal_btn').click(function(event) {          
+                    //     var canvas = document.querySelector('#chart_modal');
+                    //     //creates image
+                    //     var canvasImg = canvas.toDataURL("image/png", 1.0);
+                    //     //creates PDF from img
+                    //     var doc = new jsPDF('landscape');
+                    //     doc.setFillColor(204, 204,204,204);
+                    //     doc.setFontSize(20);
+                    //     doc.text(120, 15, "Diagram Modal");
+                    //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
+                    //     doc.save('modal.pdf');
+                    // }); 
+
+                    $('#modal_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('modal_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#modal_report').width(), $('#modal_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#modal_report').width(), $('#modal_report').height());
+                            pdf.save("modal.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
+
+                
+                
+
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -514,10 +847,9 @@ function get_speedometer_aset(){
             data:{"src_kode_kantor" : src_kode_kantor,
             "src_tgl_laporan" : src_tgl_laporan},   
            success : function(response) {
-            console.log("response speedometer Aset",response)
+        //    console.log("response speedometer Aset",response)
                 if(!response.speedometer_aset)
                 {
-                    
                     $("canvas#gaugeAset").remove();
                     $("canvas#gaugeAset-value").remove();
                     $('#loading').hide();
@@ -558,7 +890,39 @@ function get_speedometer_aset(){
                                gauge.maxValue = 100; // set max gauge value
                                gauge.setMinValue(0);  // set min value
                                gauge.set(parseFloat(response.speedometer_aset[0]).toFixed(2)); // set actual value
-                               gauge.setTextField(document.getElementById("gaugeAset-value"));                 
+                               gauge.setTextField(document.getElementById("gaugeAset-value"));   
+                           //    console.log(response.speedometer_aset[0]) 
+                               if(response.speedometer_aset[0]==null)
+                               {
+                                var opts = {
+                                   angle: 0.0, /// The span of the gauge arc
+                                   lineWidth: 0.64, // The line thickness
+                                   pointer: {
+                                       length: 0.6, // Relative to gauge radius
+                                       strokeWidth: 0.035 // The thickness,
+                                   },
+                                   colorStart: '#00E007',   // Colors
+                                   colorStop: '#00E007',    // just experiment with them
+                                   strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                   generateGradient: true,
+                                   highDpiSupport: true,
+                                   staticLabels: {
+                                       font: "12px sans-serif",  // Specifies font
+                                       labels: [0,100],  // Print labels at these values
+                                       color: "#000000",  // Optional: Label text color
+                                       fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                   }
+                               };
+
+                               var target = document.getElementById('gaugeAset'); // your canvas element
+                               var label = document.getElementById('label'); // your canvas element
+                               var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                               gauge.maxValue = 100; // set max gauge value
+                               gauge.setMinValue(0);  // set min value
+                               gauge.set(parseFloat(0).toFixed(2)); // set actual value
+                               gauge.setTextField(document.getElementById("gaugeAset-value"));
+                             //  console.log('data null aset')
+                               }             
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -587,16 +951,8 @@ function get_speedometer_aset_kredit(){
                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                    },
            success : function(response) {
-            console.log("response speedometer Aset Kredit",response)
-                if(!response.speedometer_aset_kredit)
-                {
-                    
-                    $("canvas#gaugeAsetKredit").remove();
-                    $("canvas#gaugeAsetKredit-value").remove();
-                    $('#loading').hide();
-                    console.log("speedometer aset kredit tidak ada")
-                    return 
-                }
+        //    console.log("response speedometer Aset Kredit",response)
+
             $('#loading').hide(); 
                 var label_modal=[]
 
@@ -630,7 +986,36 @@ function get_speedometer_aset_kredit(){
                                gauge.maxValue = 100; // set max gauge value
                                gauge.setMinValue(0);  // set min value
                                gauge.set(parseFloat(response.speedometer_aset_kredit[0])); // set actual value
-                               gauge.setTextField(document.getElementById("gaugeAsetKredit-value"));          
+                               gauge.setTextField(document.getElementById("gaugeAsetKredit-value")); 
+                               if(response.speedometer_aset_kredit[0]==null)
+                               {
+                                var opts = {
+                                    angle: 0.0, /// The span of the gauge arc
+                                    lineWidth: 0.64, // The line thickness
+                                    pointer: {
+                                        length: 0.6, // Relative to gauge radius
+                                        strokeWidth: 0.035 // The thickness,
+                                    },
+                                    colorStart: '#8FC0DA',   // Colors
+                                    colorStop: '#8FC0DA',    // just experiment with them
+                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                    generateGradient: true,
+                                    highDpiSupport: true,
+                                    staticLabels: {
+                                        font: "12px sans-serif",  // Specifies font
+                                        labels: [0,100],  // Print labels at these values
+                                        color: "#000000",  // Optional: Label text color
+                                        fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                    }
+                                };
+                               var target = document.getElementById('gaugeAsetKredit'); // your canvas element
+                               var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                               gauge.maxValue = 100; // set max gauge value
+                               gauge.setMinValue(0);  // set min value
+                               gauge.set(0); // set actual value
+                               gauge.setTextField(document.getElementById("gaugeAsetKredit-value"));  
+                            //   console.log('data null aset kredit')
+                               }         
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -643,7 +1028,7 @@ function get_speedometer_aset_kredit(){
            }
    });
 }
-
+    
 function get_speedometer_npat_monthly(){
     data = '';
    $('#loading').show(); 
@@ -661,16 +1046,8 @@ function get_speedometer_npat_monthly(){
                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                    },
            success : function(response) {
-            console.log("response speedometer NPAT",response)
-                if(!response.speedometer_npat_monthly)
-                {
-                    
-                    $("canvas#gaugNpat").remove();
-                    $("canvas#gaugNpat-value").remove();
-                    $('#loading').hide();
-                    console.log("speedometer NPAT tidak ada")
-                    return 
-                }
+        //    console.log("response speedometer NPAT",response)
+
             $('#loading').hide(); 
                          
                                //Script Speedometer NPAT monthly
@@ -704,6 +1081,36 @@ function get_speedometer_npat_monthly(){
                                gauge.setMinValue(0);  // set min value
                                gauge.set(parseFloat(response.speedometer_npat_monthly[0])); // set actual value
                                gauge.setTextField(document.getElementById("gaugNpat-value"));
+                               if(response.speedometer_npat_monthly[0]==null)
+                               {
+                                var opts = {
+                                   angle: 0.0, /// The span of the gauge arc
+                                   lineWidth: 0.64, // The line thickness
+                                   pointer: {
+                                       length: 0.6, // Relative to gauge radius
+                                       strokeWidth: 0.035 // The thickness,
+                                   },
+                                   colorStart: '#D33A27',   // Colors
+                                   colorStop: '#D33A27',    // just experiment with them
+                                   strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                   generateGradient: true,
+                                   highDpiSupport: true,
+                                   staticLabels: {
+                                       font: "12px sans-serif",  // Specifies font
+                                       labels: [0,100],  // Print labels at these values
+                                       color: "#000000",  // Optional: Label text color
+                                       fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                   }
+                               };
+
+                               var target = document.getElementById('gaugNpat'); // your canvas element
+                               var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                               gauge.maxValue = 100; // set max gauge value
+                               gauge.setMinValue(0);  // set min value
+                               gauge.set(0); // set actual value
+                               gauge.setTextField(document.getElementById("gaugNpat-value"));
+                             //  console.log('data null npat')
+                               }
                                   
 },
            error : function(response) {
@@ -733,7 +1140,7 @@ function get_speedometer_modal(){
                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                    },
            success : function(response) {
-            console.log("response speedometer NPAT",response)
+        //    console.log("response speedometer NPAT",response)
                 if(!response.speedometer_modal)
                 {
                     
@@ -775,9 +1182,34 @@ function get_speedometer_modal(){
                                gauge.setMinValue(0);  // set min value
                                gauge.set(parseFloat(response.speedometer_modal[0])); // set actual value
                                gauge.setTextField(document.getElementById("gaugeModal-value"));
-                               
-                     
-                                         
+                               if(response.speedometer_modal[0]=null)
+                               {
+                                var opts = {
+                                   angle: 0.0, /// The span of the gauge arc
+                                   lineWidth: 0.64, // The line thickness
+                                   pointer: {
+                                       length: 0.6, // Relative to gauge radius
+                                       strokeWidth: 0.035 // The thickness,
+                                   },
+                                   colorStart: '#fcba03',   // Colors
+                                   colorStop: '#fcba03',    // just experiment with them
+                                   strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                   generateGradient: true,
+                                   highDpiSupport: true,
+                                   staticLabels: {
+                                       font: "12px sans-serif",  // Specifies font
+                                       labels: [0,100],  // Print labels at these values
+                                       color: "#000000",  // Optional: Label text color
+                                       fractionDigits: 0, // Optional: Numerical precision. 0=round off.
+                                   }
+                               };
+                               var target = document.getElementById('gaugeModal'); // your canvas element
+                               var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                               gauge.maxValue = 100; // set max gauge value
+                               gauge.setMinValue(0);  // set min value
+                               gauge.set(0); // set actual value
+                               gauge.setTextField(document.getElementById("gaugeModal-value"))
+                               }                                         
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -820,11 +1252,8 @@ function get_kode_kantor(){
                     title: 'Gagal Get List Kode Kantor!',
                     text: 'Mohon Periksa Jaringan Anda'
                 });
-                
             }
     });    
 }
-
-
 
 </script>

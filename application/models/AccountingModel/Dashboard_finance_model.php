@@ -6,24 +6,15 @@ class Dashboard_finance_model extends CI_Model{
     	parent:: __construct();
     	$this->load->database();
     }
-
-    public function get_search($search){
-      $this->db2 = $this->load->database('DB_CENTRO', true);
-      $str    = "SELECT jenis,flag_mutasi,kode_perk FROM acc_das_rencana_realisasi_master ac
-                  where ac.`jenis` like ('$search%')
-            limit 30;";
-          $query  = $this->db2->query($str);
-          return $query->result_array();
-    }
-
-    function get_data_chart_npat_monthly($src_kode_kantor,$src_tgl_laporan){
+    function get_data_chart_npat_monthly($src_kode_kantor,$src_tgl_laporan)
+    {
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
       FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='NPAT MONTHLY'  AND ac.kode_kantor like '$src_kode_kantor%'
       AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
       INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
-      GROUP BY DATE_FORMAT(tgl_laporan,'%M') desc");
-     $query  = $this->db2->query($str);
+      GROUP BY tgl_laporan asc");
+      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
               foreach($query->result() as $data){
@@ -32,14 +23,15 @@ class Dashboard_finance_model extends CI_Model{
               return $hasil;
           }
       }
-    function get_data_chart_npat_ytd($src_kode_kantor,$src_tgl_laporan){ 
+    
+      function get_data_chart_npat_ytd($src_kode_kantor,$src_tgl_laporan){ 
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT SUM(realisasi) AS realisasi,SUM(rencana) as rencana ,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
       FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='NPAT YTD' AND ac.kode_kantor like '$src_kode_kantor%'
       AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
       INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
-      GROUP BY DATE_FORMAT(tgl_laporan,'%M') desc");
-     $query  = $this->db2->query($str);
+      GROUP BY tgl_laporan asc");
+      $query  = $this->db2->query($str);
      
      
      if($query->num_rows() > 0){
@@ -57,7 +49,7 @@ class Dashboard_finance_model extends CI_Model{
       FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='ASET' AND ac.kode_kantor like '$src_kode_kantor%'
       AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
       INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
-      GROUP BY ac.`tgl_laporan`");
+      GROUP BY tgl_laporan asc");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -73,7 +65,7 @@ class Dashboard_finance_model extends CI_Model{
       FROM acc_das_rencana_realisasi ac WHERE ac.`jenis`='ASET KREDIT' AND ac.kode_kantor like '$src_kode_kantor%'
       AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
       INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
-      GROUP BY ac.`tgl_laporan`");
+      GROUP BY tgl_laporan asc");
      $query  = $this->db2->query($str);
     
     if($query->num_rows() > 0){
@@ -91,7 +83,7 @@ class Dashboard_finance_model extends CI_Model{
       tgl_laporan AS `asd`FROM acc_das_rencana_realisasi ac WHERE ac.`jenis` = 'modal'AND kode_kantor like '$src_kode_kantor%' 
       AND tgl_laporan BETWEEN DATE_ADD('$src_tgl_laporan-01',
       INTERVAL - 2 MONTH) AND DATE_ADD('$src_tgl_laporan-01',INTERVAL + 1 MONTH)
-      GROUP BY DATE_FORMAT(tgl_laporan, '%M') desc");
+      GROUP BY tgl_laporan asc");
      // echo $str;
      $query  = $this->db2->query($str);
     
@@ -133,7 +125,7 @@ class Dashboard_finance_model extends CI_Model{
     function get_data_speedometer_npat_monthly($src_kode_kantor,$src_tgl_laporan){
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT AVG(realisasi/rencana *100 ) AS total 
-      FROM acc_das_rencana_realisasi WHERE jenis='NPAT MONTHLY'AND kode_kantor like '$src_kode_kantor%'
+      FROM acc_das_rencana_realisasi WHERE jenis in('NPAT MONTHLY','NPAT YTD') AND  kode_kantor like '$src_kode_kantor%'
       and date_format(tgl_laporan,'%Y-%m')like '$src_tgl_laporan%'");
      $query  = $this->db2->query($str);
     

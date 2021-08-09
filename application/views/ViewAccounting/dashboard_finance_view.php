@@ -15,6 +15,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
   <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -30,14 +32,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/chart.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/gauge.min.js"></script>
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+ integrity="sha256-c9vxcXyAG4paArQG3xk6DjyW/9aHxai2ef9RpMWO44A=" crossorigin="anonymous"></script>
   <!-- Content Wrapper. Contains page content -->
 
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Financial Dashboard
-      </h3>
+      <h4> <img src="<?= base_url(); ?>assets/dist/img/rekap_asuransi.svg" width="5%"> Financial Dashboard
+      </h4>
       <ol class="breadcrumb">
      
       </ol>
@@ -66,21 +71,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="col-md-12 mx-auto">
                       <div class="form-group row justify-content-sm-center">
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="src_kantor_kas_cabang">Kode Kantor</label>
+                                      <h7 style="padding-top: 3px;" class="control-label" for="src_kantor_kas_cabang">Kode Kantor</h7>
                                   </div>
                                   <div class="col-sm-3">
-                                    <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor" onchange="search()">
-                                    </select>
+                                    <select class="form-control form-control-sm select2 custom-select" id="src_kode_kantor" name="src_kode_kantor" onchange="search()"></select>
                                   </div>
                                   <div class="col-sm-2">
-                                      <label style="padding-top: 5px;" class="control-label" for="src_tgl_laporan">Periode</label>
+                                      <h7 style="padding-top: 3px;" class="control-label" for="src_tgl_laporan">Periode</h7>
                                   </div>
                                   <div class="col-sm-3">                                       
-                                  <input type="month" class="form-control form-control-sm" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 300px;"  onchange="search()">
+                                  <input type="month" class="form-control form-control-sm" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 200px;"  onchange="search()">
                                   </div>
-                                  <div class="col-sm-3">
-                                    <br>                                       
-                                  <button type="button" class="btn btn-warning btn-sm" style="width: 220px;" id="btn_export_by_asuransi"><i class="fas fa-file-export"></i> Export to PDF</button>
+                                  <div class="col-sm-2">                                      
+                                  <button type="button" class="btn btn-warning btn-sm" style="width: 140px;" id="btn_export_chart"><i class="fas fa-file-export"></i> Export to PDF</button>
                                   </div>
                               </div>
                       </div>
@@ -93,7 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <!-- Data Dashboard -->
-          <div class="card card-danger">
+          <div class="card card-danger" >
                   <div class="card-header">
                   <h3 class="card-title">Dashboard</h3>
                       <div class="card-tools">
@@ -103,58 +106,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body">
+                  <div class="card-body"id="reportPage" >
                       
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                         <div class="form-group row justify-content-sm-center">
-
-                              <div class="col-sm-6">
-                                  <div class="card">
-
+                              <div class="col-sm-6" >
+                                <div class="container" ></div>
+                                  <div class="card" id="tvsrealisasi_report">
                                         <div class="card-header">
                                           Target vs Realisasi
-                                            <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-                                          </div>
-                                        </div>
-      
+                                              <!-- <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button> -->
+                                                <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                              <!-- </div> -->
+                                              <div class="card-tools">
+                                                <button type="submit" class="btn btn-warning btn-sm" id="tvsr_btn" title="Export to PDF" name="btnKembali"> 
+                                                  <i class="fa fa-print"></i>
+                                              </button>
+                                              </div>
+
+                                              <div class="card-tools">
+                                                  <div class="col-sm-2">   
+                                                      <input type="month" class="form-control form-control-sm" id="bulan_target" name="src_tgl_laporan" style="width: 170px" disabled onchange="bulan_target()">
+                                                  </div>
+                                              </div>
+                                      </div>
+
                                       <div class="card-body">
+                     
                                                <div class="form-group row justify-content-sm-center">
-                                                    <div class="col-md-4" >
+                                                    <div class="col-md-5" >
                                                       <div class="container" id="gaugeAset_container">
-                                                        <canvas id="gaugeAset" style="width: 10vw;"></canvas>
+                                                        <canvas id="gaugeAset" style="width: 15vw;"></canvas>
                                                       </div>
 
-                                                      <div class="container" id="gaugeAset-value_container">
-                                                        <p id="label_aset"><output  id="gaugeAset-value"></output></p>                                             
+                                                      <div class="container" id="gaugeAset-value_container" >
+                                                          <p id="label_aset"><output style="width: 15vw;" id="gaugeAset-value"></output></p>                                             
                                                       </div>
+                                                    </div>
 
-                                                      </div>
-
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-5">
                                                       <div class="container" id="gaugeAsetKredit_container">
-                                                          <canvas id="gaugeAsetKredit" style="width: 10vw;"></canvas>
+                                                          <canvas id="gaugeAsetKredit" style="width: 15vw;"></canvas>
                                                       </div>
-
+                                                      
                                                       <div class="container" id="gaugeAsetKredit-value_container">
                                                         <p id="label_aset_kredit"><output  id="gaugeAsetKredit-value"></output></p>                                             
                                                       </div>
-
-                                                    </div>       
-                                                    <div class="col-md-4">
-
-                                                    <div class="container" id="gaugNpat_container">
-                                                          <canvas id="gaugNpat" style="width: 10vw;"></canvas>
                                                     </div>
 
-                                                    <div class="container" id="gaugNpat-value_container">
-                                                        <p id="label_gaugNpat"><output  id="gaugNpat-value"></output></p>                                             
+                                                    <div class="col-md-5">
+                                                        <div class="container" id="gaugNpat_container">
+                                                              <canvas id="gaugNpat" style="width: 15vw;"></canvas>
+                                                        </div>
+
+                                                        <div class="container" id="gaugNpat-value_container">
+                                                            <p id="label_gaugNpat"><output  id="gaugNpat-value"></output></p>                                             
+                                                        </div>
                                                     </div>
-                                                    
-                                                  </div>
-                                                  <div class="col-md-4">
+
+                                                  <div class="col-md-5">
                                                       <div class="container" id="gaugeModal_container">
                                                             <canvas id="gaugeModal" style="width: 10vw;"></canvas>
                                                       </div>
@@ -164,41 +176,56 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       </div>
                                                     </div>   
                                                 </div>
-                                         
-                                        
+
+                                          </div> 
                                       </div>
-                              
-                                  </div>
                                 </div>
                           
                           <div class="col-sm-6">
-                              <div class="card">
-                                 <div class="card-header">
-                                    Modal
-                                      <div class="card-tools">
-                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                      </button>
-                                      <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-                                      </div>
-                                  </div>
+                              <div class="card "id="modal_report">
+                                            <div class="card-header">
+                                              Modal
+                                  
+                                                <!-- <div class="card-tools">
+                                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                </div> -->
 
-                                  <div class="card-body"id="chart_modal_container">
-                                    <canvas id="chart_modal"></canvas>
+                                              <div class="card-tools">
+                                                      <button type="submit" class="btn btn-warning btn-sm" id="modal_btn" title="Export to PDF" name="btnKembali"> 
+                                                        <i class="fa fa-print"></i>
+                                                    </button>
+                                                </div> 
 
-                                  <div>
+                                            </div>
+
+                                              <div class="container">
+                                                  <br>
+                                                    <div class="card-body"id="chart_modal_container">
+                                                        <canvas id="chart_modal"></canvas>
+                                                    </div>
+                                                  <br>
+                                              <div>
+                                    
                                 </div>     
                               </div>
-                            </div>             
+                            </div>
+
                         </div>
                     </div>
                     <div class="form-group row justify-content-sm-center">
                                   <div class="col-sm-6">
-                                    <div class="card ">
+                                    <div class="card" id="aset_report">
                                     <div class="card-header">
                                     Aset Total
-                                    <div class="card-tools">
-                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                    </div>
+                                        <div class="card-tools">
+                                          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        </div>
+
+                                        <div class="card-tools">
+                                            <button type="submit" class="btn btn-warning btn-sm" id="aset_btn" title="Export to PDF" name="btnKembali"> 
+                                              <i class="fa fa-print"></i>
+                                          </button>
+                                          </div>
                                     </div>
                                     <div class="card-body" id="chart_aset_total_container">
                                     <canvas id="chart_aset"></canvas>
@@ -206,12 +233,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   </div>
                                 </div>    
                                   <div class="col-sm-6">
-                                  <div class="card">
+                                  <div class="card"id="aset_kredit_report">
                                     <div class="card-header">
                                     Aset Kredit
-                                    <div class="card-tools">
-                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                    </div>
+                                        <div class="card-tools">
+                                          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        </div>
+                                        <div class="card-tools">
+                                            <button type="submit" class="btn btn-warning btn-sm" id="aset_kredit_btn" title="Export to PDF" name="btnKembali"> 
+                                              <i class="fa fa-print"></i>
+                                          </button>
+                                          </div>
                                     </div>
                                     <div class="card-body" id="chart_aset_kredit_container">
                                       <canvas id="chart_aset_kredit"  ></canvas>
@@ -222,13 +254,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                   <div class="form-group row justify-content-sm-center">
                                     <div class="col-sm-6">
-                                    <div class="card ">
+                                    <div class="card "id="npat_monthly_report">
                                       <div class="card-header">
                                       NPAT Monthly
                                       <div class="card-tools">
                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                       </button>
                                     </div>
+                                    <div class="card-tools">
+                                            <button type="submit" class="btn btn-warning btn-sm" id="npat_monthly_btn" title="Export to PDF" name="btnKembali"> 
+                                              <i class="fa fa-print"></i>
+                                          </button>
+                                          </div>
                                       </div>
                                       <div class="card-body" id="chart_npat_monthly_container">
                                         <canvas id="chart_npat_monthly"></canvas>
@@ -236,12 +273,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                     </div>
                                     <div class="col-sm-6">
-                                    <div class="card">
+                                    <div class="card"id="npat_ytd_report">
                                       <div class="card-header">
                                       NPAT YTD
                                       <div class="card-tools">
                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                     </div>
+                                    <div class="card-tools">
+                                            <button type="submit" class="btn btn-warning btn-sm" id="npat_ytd_btn" title="Export to PDF" name="btnKembali"> 
+                                              <i class="fa fa-print"></i>
+                                          </button>
+                                          </div>
                                       </div>
                                       <div class="card-body" id="chart_npat_ytd_container">
                                         <canvas id="chart_npat_ytd"></canvas>
