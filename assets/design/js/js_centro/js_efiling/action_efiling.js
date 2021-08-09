@@ -1,3 +1,7 @@
+// global variable
+var no_rekening  = "";
+var nama_debitur = "";
+
 // function get date time now
 function get_date_time_now(){
   let today = new Date();
@@ -37,6 +41,11 @@ function action_Data() {
     class: "verifikasi",
     action: "click",
     method: detailData_toFormEfiling,
+    seveOrNot: false,
+  },  {
+    class: "duplikat",
+    action: "click",
+    method: duplikat,
     seveOrNot: false,
   }]);
 }
@@ -424,4 +433,159 @@ function innertNotes(data, id, status, menu_title) {
     return text_notes
   }
 
+}
+
+
+// function untuk duplikat
+$('#btn_simpan_duplikat').click(function () {
+    Swal.fire({
+      title: 'System akan mencari data-data, jika ditemukan data di no rekening baru maka data tersebut akan di hapus dan di ganti dengan data-data no rekening lama, Lanjutkan duplikat data efiling no rekening baru dengan yang lama ?',
+      text: "Lanjutkan ?",
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Lanjutkan',
+      cancelButtonText: 'Batalkan',
+      showLoaderOnConfirm: true,
+      reverseButtons: true,
+      preConfirm: function() {
+       return new Promise(function(resolve) {
+        duplikatData();
+       });
+      },
+      allowOutsideClick: false     
+    });
+});
+function duplikat(){
+  
+  no_rekening  = this.getAttribute('no_rekening');
+  nama_debitur = this.getAttribute('nama_debitur');
+  Swal.fire({
+      title: 'Apakah anda akan melakukan duplikat data E-Filing ?',
+      text: "Lanjutkan ?",
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Lanjutkan',
+      cancelButtonText: 'Batalkan',
+      showLoaderOnConfirm: true,
+      reverseButtons: true,
+      preConfirm: function() {
+        return new Promise(function(resolve) {
+          show_duplikat();
+        });
+      },
+      allowOutsideClick: false     
+  });
+}
+function show_duplikat(){
+  Swal.fire({
+      position: 'center',
+      icon: 'warning',
+      title: 'Mohon Isi Data Dengan Benar',
+      showConfirmButton: false,
+      timer: 2000
+  }); 
+
+  $('#no_rekening_awal').val(no_rekening);
+  $('#nama_debitur_awal').val(nama_debitur);
+  
+  $('#modal_duplikat').modal('show');
+  $('#loading-duplikat').hide();
+  $('.data_akhir').hide(); 
+  $('.not_found').hide();
+  $("#btn_simpan_duplikat").prop("disabled", true);
+}
+function close_modal_duplikat() {
+  $('#modal_duplikat').modal('hide');
+  $('.form_duplikat').each(function (index, item) {
+    $(item).val('');
+  });
+  let kode_area = $('#kode_kantor').val();
+  let filter_release = $('#filter_release').val();
+  let status = $('#status').val();
+  let search = $("#search").val();
+  filter_efiling(kode_area, filter_release, status, search); // close sesuai kondisi terakhir
+}
+function serchDataRekening(){
+  var no_rekening_search =  $('#no_rekening_search').val();
+  $('#loading-duplikat').show(); 
+  
+  $.ajax({
+          url : base_url + "E_FilingController/cek_rekening",
+          type : "POST",
+          dataType : "json",
+          timeout : 180000,
+          headers: {
+                      'Authorization': 'Bearer ' + localStorage.getItem('token')
+                  },
+          data: {'no_rekening_search' : no_rekening_search},          
+          success : function(response) {
+              console.log(response);
+              $('#loading-duplikat').hide(); 
+              if(response == null){
+                $('.not_found').show();
+                $('.data_akhir').hide();
+                $("#btn_simpan_duplikat").prop("disabled", true);
+
+              }else{
+                $('#no_rekening_lama').val(response.no_rekening);
+                $('#nama_debitur_lama').val(response.nama_debitur);
+                $('#area_kerja_akhir').val(response.nama_kantor);
+                $('#tgl_realisasi_akhir').val(response.tgl_realisasi);
+                $('.data_akhir').show();
+                $('.not_found').hide();
+                $("#btn_simpan_duplikat").prop("disabled", false);
+              }
+              
+          },
+          error : function(response) {
+              console.log('failed :' + response);
+              $('#loading-duplikat').hide();
+              return Swal.fire({
+                  icon: 'error',
+                  title: 'Gagal Get Data!',
+                  text: 'Mohon Periksa Jaringan Anda'
+              });
+          }
+  });    
+
+}
+function duplikatData(){
+  var no_rekening_awal  = $('#no_rekening_awal').val();
+  var no_rekening_lama = $('#no_rekening_lama').val();
+  $.ajax({
+    url : base_url + "E_FilingController/duplikat_data",
+    type : "POST",
+    dataType : "json",
+    timeout : 180000,
+    headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+    data: {'no_rekening_awal' : no_rekening_awal,
+           'no_rekening_lama' : no_rekening_lama},          
+    success : function(response) {
+        console.log(response);
+        $('#loading').hide();
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sukses Duplikat Data',
+            showConfirmButton: false,
+            timer: 2000
+        }).then(()=> {
+          close_modal_duplikat();
+        });  
+        
+    },
+    error : function(response) {
+        console.log('failed :' + response);
+        $('#loading-duplikat').hide();
+        return Swal.fire({
+            icon: 'error',
+            title: 'Gagal Duplikat Data!',
+            text: 'Mohon Periksa Jaringan Anda Atau Hubungi Team IT'
+        });
+    }
+  }); 
 }

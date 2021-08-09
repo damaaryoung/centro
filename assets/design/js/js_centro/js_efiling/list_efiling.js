@@ -266,12 +266,18 @@ function list_data(respon) {
                   ((data[i]['nama_user'] == 'WAITING')?
                   `<div class="btn-action">
                     <button type="button" class="btn btn-info btn-sm edit" title="Edit" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top" ><i class="fas fa-pencil-alt"></i></button>
+                  </div>
+                  <div class="btn-action">
+                    <button type="button" class="btn btn-danger btn-sm duplikat" title="Duplikat" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}"  no_rekening ="${data[i]['no_rekening']}" nama_debitur = "${data[i]['nama_debitur']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-copy"></i></button>
                   </div>`:
                   `<div class="btn-action">
                     <button type="button" class="btn btn-info btn-sm edit" title="Edit" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top" ><i class="fas fa-pencil-alt"></i></button>
                   </div>
                   <div class="btn-action">
                     <button type="button" class="btn btn-success btn-sm verifikasi" title="Verifikasi" style="display:none;"   kode_kantor ="${data[i]['kode_kantor']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-user-check"></i></button>
+                  </div>
+                  <div class="btn-action">
+                    <button type="button" class="btn btn-danger btn-sm duplikat" title="Duplikat" style="display:none;" kode_kantor ="${data[i]['kode_kantor']}"  no_rekening ="${data[i]['no_rekening']}" nama_debitur = "${data[i]['nama_debitur']}" data-toggle="tooltip" data-placement="top"><i style="color: #fff;" class="fas fa-copy"></i></button>
                   </div>`
                   )
                   )}
@@ -312,6 +318,9 @@ function userAccess() {
         if (menu.find(element => element == 3)) {
           $('.verifikasi').show();
         } 
+        if (menu.find(element => element == 3)) {
+          $('.duplikat').show();
+        }
         if (menu.find(element => element == 4)) {
           $('#vert-tabs-status-tab').show();
         }

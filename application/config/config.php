@@ -36,8 +36,8 @@ $config['img_url'] = 'http://103.31.232.146/API_WEBTOOL3/';
 // $config['api_url'] = 'http://103.31.232.146/API_WEBTOOL3_2/';
 // $config['img_url'] = 'http://103.31.232.146/API_WEBTOOL3_2/';
 
-// $config['api_url'] = 'http://localhost:8000/';
-// $config['img_url'] = 'http://localhost:8000/';
+// $config['api_url'] = 'http://localhost/API_WEBTOOL3/';
+// $config['img_url'] = 'http://localhost/API_WEBTOOL3/';
 
 
 /*
