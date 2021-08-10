@@ -13,10 +13,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?php echo $css; ?>
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/bootstrapcdn.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
   <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ 
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -32,10 +32,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/chart.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/gauge.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/dom-image.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/jspdf.min.js"></script>
+
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
- integrity="sha256-c9vxcXyAG4paArQG3xk6DjyW/9aHxai2ef9RpMWO44A=" crossorigin="anonymous"></script>
+
+
   <!-- Content Wrapper. Contains page content -->
 
   <div class="content-wrapper">
@@ -138,17 +140,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                <div class="form-group row justify-content-sm-center">
                                                     <div class="col-md-5" >
                                                       <div class="container" id="gaugeAset_container">
-                                                        <canvas id="gaugeAset" style="width: 15vw;"></canvas>
+                                                        <canvas id="gaugeAset" ></canvas>
                                                       </div>
 
                                                       <div class="container" id="gaugeAset-value_container" >
-                                                          <p id="label_aset"><output style="width: 15vw;" id="gaugeAset-value"></output></p>                                             
+                                                          <p id="label_aset"><output  id="gaugeAset-value"></output></p>                                             
                                                       </div>
                                                     </div>
 
                                                     <div class="col-md-5">
                                                       <div class="container" id="gaugeAsetKredit_container">
-                                                          <canvas id="gaugeAsetKredit" style="width: 15vw;"></canvas>
+                                                          <canvas id="gaugeAsetKredit" ></canvas>
                                                       </div>
                                                       
                                                       <div class="container" id="gaugeAsetKredit-value_container">
@@ -158,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                                     <div class="col-md-5">
                                                         <div class="container" id="gaugNpat_container">
-                                                              <canvas id="gaugNpat" style="width: 15vw;"></canvas>
+                                                              <canvas id="gaugNpat" ></canvas>
                                                         </div>
 
                                                         <div class="container" id="gaugNpat-value_container">

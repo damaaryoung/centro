@@ -75,7 +75,62 @@
                       </a>
                     </li>
                   <?php }?>
+                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-bar icon_color_sidebar"></i>
+                        <p>
+                         Ratio Dashboard
+                          <i class="fas fa-angle-left right"></i>
+                        </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                          <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>dashboard_ratio" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                              <p>Ratio Dashboard Capital</p>
+                            </a>
+                          </li>
+                        <?php }?>
+                      </ul>
+
+                      <ul class="nav nav-treeview">
+                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                          <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>dashboard_asset" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                              <p>Ratio Dashboard Asset</p>
+                            </a>
+                          </li>
+                        <?php }?>
+                      </ul>
+
+                      <ul class="nav nav-treeview">
+                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                          <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>dashboard_earning" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                              <p>Ratio Dashboard Earning</p>
+                            </a>
+                          </li>
+                        <?php }?>
+                      </ul>
+                      
+                      <ul class="nav nav-treeview">
+                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                          <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>dashboard_liquidity" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                              <p>Ratio Dashboard Liquidity</p>
+                            </a>
+                          </li>
+                        <?php }?>
+                      </ul>
+
+                    </li>
+                  
                 </ul>
+                
               </li>
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">

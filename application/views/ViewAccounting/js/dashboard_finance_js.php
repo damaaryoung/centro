@@ -77,6 +77,7 @@ function search()
                             var pdf = new jsPDF('p', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
                             pdf.text(400,25,'Financial Dashboard')
                             pdf.addImage(canvas, 'jpeg', 0, 50, $('#reportPage').width(), $('#reportPage').height());
+                           
                             pdf.save("dashboard.pdf");
 
                        // that.options.api.optionsChanged();

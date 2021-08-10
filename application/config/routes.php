@@ -90,3 +90,7 @@ $route['rencana_realisasi_master'] = 'Accounting/Rencana_realisasi_master_contro
 $route['dashboard_finance'] = 'Accounting/Dashboard_finance_controller/index';
 $route['rasio_setting'] = 'Accounting/Rasio_setting_controller/rasio_setting';
 $route['rasio_master'] = 'Accounting/Rasio_setting_controller/rasio_master';
+$route['dashboard_ratio'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_capital';
+$route['dashboard_asset'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_asset';
+$route['dashboard_earning'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_earning';
+$route['dashboard_liquidity'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_liquidity';
