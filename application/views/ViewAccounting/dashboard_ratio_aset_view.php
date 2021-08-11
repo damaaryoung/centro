@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -13,10 +13,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <?php echo $css; ?>
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/toastr/toastr.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/bootstrapcdn.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/design/css/select2.min.css') ?>">
   <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
- 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -32,8 +32,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="<?php echo base_url();?>assets/design/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/chart.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/gauge.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/dom-image.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>node_modules/chart.js/dist/jspdf.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+ integrity="sha256-c9vxcXyAG4paArQG3xk6DjyW/9aHxai2ef9RpMWO44A=" crossorigin="anonymous"></script>
+  <!-- Content Wrapper. Contains page content -->
 
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -109,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                       <div class="col-md-12 mx-auto">
                          <div class="form-group row justify-content-sm-center">
-                                  <div class="col-sm-9">
+                                  <div class="col-sm-7">
                                     <div class="card" id="capital_report">
                                           <div class="card-header">
                                               KAP
@@ -130,17 +133,109 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       </div>
                                   </div>    
 
-                                  <div class="col-sm-3">
-                                        <div class="card">
-                                          <div class="card-body" >
+                                  <div class="col-sm-5">
+                                  <br>
+                                    <br>
+                                    <div class="card">
+                                        <div class="card-body" >
+                                            <div class="from-group row justify-content-sm-center">
+                                                <table>
+                                                  <tr>
+                                                    <th style="background-color:red ; width:100px;text-align:center;"; >
+                                                        > 14.85%
+                                                    </th>
+                                                    <th style="background-color:blue ; width:100px;text-align:center;"; >
+                                                        <= 14.85%
+                                                    </th>
+                                                    <th style=" background-color:yellow;width:100px;text-align:center;";>
+                                                      <= 12.60%
+                                                    
+                                                    </th>
+                                                    <th  style=" background-color:green;width:100px;height:50px; text-align:center;";>   
+                                                      <= 10.35 
+                                                    </th>
+                                                  </tr>
+                                                </table>
+                                            </div>
+                                                  <br>
+                                  
+                                              <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div style="color:green">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">sehat</output>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div style="color:yellow">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">cukup sehat</output>
+                                                </div>
+                                                
+
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div style="color:blue">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">kurang sehat</output>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div style="color:red">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p style="padding-top: -5px;">tidak sehat</p>
+                                                </div>
+                                              </div>
 
                                           </div>
+
+
+                                          
+                                    </div>
+                                    <div class="card">
+                                
+                                    <div class="card-body ">
+                                      <div class="from-group row justify-content-sm-center">
+                                        <table>
+                                            <tr>
+                                              <td>
+                                                <strong>KAP = </strong>
+                                              </td>
+                                              <td >
+                                                  <output>
+                                                   Aktiva produktif yang diklasifikasikan
+                                                    <hr>
+                                                   Total aktiva produktif
+                                                  </output>
+                                              </td>
+                                              <td>
+                                                <output style="padding-top: -5px;"> x 100%</output>
+                                              </td>
+                                              
+                                            </tr>
+                                        </table>
                                         </div>
+                                    </div>
+                            
+                                  </div>
                                   </div>  
+                                  
 
                             </div>
-                         <div class="form-group row justify-content-sm-center">
-                                  <div class="col-sm-9">
+                         
+
+
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 mx-auto">
+                      <div class="form-group row justify-content-sm-center">
+                                  <div class="col-sm-7">
                                     <div class="card" id="asset_ppap_report">
                                           <div class="card-header">
                                               PPAP
@@ -161,16 +256,97 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       </div>
                                   </div>    
 
-                                  <div class="col-sm-3">
-                                        <div class="card">
-                                          <div class="card-body" >
-
-                                          </div>
+                               <div class="col-sm-5">
+                               <br>
+                                    <br>
+                                      <div class="card">
+                                        <div class="card-body" >
+                                        <div class="from-group row justify-content-sm-center">
+                                            <table>
+                                            <tr>
+                                                    <th style="background-color:red ; width:100px;text-align:center;"; >
+                                                        > 14.85%
+                                                    </th>
+                                                    <th style="background-color:blue ; width:100px;text-align:center;"; >
+                                                        <= 14.85%
+                                                    </th>
+                                                    <th style=" background-color:yellow;width:100px;text-align:center;";>
+                                                      <= 12.60%
+                                                    
+                                                    </th>
+                                                    <th  style=" background-color:green;width:100px;height:50px; text-align:center;";>   
+                                                      <= 10.35 
+                                                    </th>
+                                                  </tr>
+                                            </table>
                                         </div>
-                                  </div>  
+                                        <br>
+                                  
+                                        <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div style="color:green">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">sehat</output>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div style="color:yellow">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">cukup sehat</output>
+                                                </div>
+                                                
+
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div style="color:blue">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">kurang sehat</output>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div style="color:red">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p style="padding-top: -5px;">tidak sehat</p>
+                                                </div>
+                                              </div>
+                                        
+                                          </div>
+                            
+                                  </div>
+                                  <div class="card">
+                                
+                                    <div class="card-body ">
+                                      <div class="from-group row justify-content-sm-center">
+
+                                        <table>
+                                            <tr>
+                                              <td>
+                                                <strong>KPPM = </strong>
+                                              </td>
+                                              <td >
+                                                  <output>
+                                                    Jumlah Modal Bank(Modal Inti + Modal pelengkap) 
+                                                    <hr>
+                                                    Aktiva Tertimbang Menurut Resiko (ATMR)
+                                                  </output>
+                                              </td>
+                                              <td>
+                                                <output style="padding-top: -5px;"> x 100%</output>
+                                              </td>
+                                              
+                                            </tr>
+                                        </table>
+                                        </div>
+                                    </div>
+                            
+                                  </div>
 
                             </div>
-
 
                       </div>
                     </div>

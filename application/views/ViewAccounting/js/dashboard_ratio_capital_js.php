@@ -171,7 +171,7 @@ function get_chart_rasio_capital(){
                         {
                             color.push('rgb(255, 255, 51)')
                         }
-                        else{
+                        else if(int_rasio[i]>=12){ 
                             color.push('rgb(51, 235, 51)')
                         }
                     }
