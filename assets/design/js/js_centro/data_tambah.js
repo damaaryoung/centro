@@ -1,6 +1,7 @@
 var persenDefault = '';
 var jenisSertifikat = '';
 var base_url = $('#base_url').val();    
+var default_date = '1900-01-01';
 
 
 
@@ -9,6 +10,10 @@ $(document).ready(function () {
          persenDefault = $(this).find('option:selected').attr('data-persen');
         $('#sertPersenDijamin').val(persenDefault);
     });
+    $('#bpkbKodeIkatanAgunan').change(function(){
+        persenDefault = $(this).find('option:selected').attr('data-persen');
+       $('#bpkbPersenDijamin').val(persenDefault);
+   });
 
     jenisSertifikat = $('#sertJenisSertifikat').val();
     if(jenisSertifikat != 'SHGB'){
@@ -33,9 +38,41 @@ $(document).ready(function () {
        
     });
 
-    
+    $("#sertSlikTanggalPengikatan").val(default_date);
+    $("#sertSlikTanggalLJK").val(default_date);
+    $("#sertSlikTglIndependen").val(default_date);
+   
+    $("#sertSlikNilaiNJOP").val('0');
+    $("#sertSlikNilaiLJK").val('0');
+    $("#sertSlikNilaiIndependen").val('0');
+    $("#sertSlikNamaIndependen").val('0');
+    $("#sertSlikParipasuPersen").val('0');
+
+});
 
 
+$('#btnSubmit').on('click', function(){                  
+    if($("#sertSlikNamaPemilikAgunan").val() == ''){ 
+        Swal.fire({
+            icon: 'error',
+            title: 'Slik Nama Pemilik Agunan Tidak Boleh Kosong!',
+            text: 'Mohon Periksa Input Form Anda'
+        });
+    }
+    else if($("#sertSlikBuktiKepemilikanAgunan").val() == ''){ 
+        Swal.fire({
+            icon: 'error',
+            title: 'Slik Bukti Kepemilikan Agunan Tidak Boleh Kosong!',
+            text: 'Mohon Periksa Input Form Anda'
+        });
+    }
+    else if($("#sertSlikAlamat").val() == ''){ 
+        Swal.fire({
+            icon: 'error',
+            title: 'Slik Alamat Agunan Tidak Boleh Kosong!',
+            text: 'Mohon Periksa Input Form Anda'
+        });
+    }
 });
 
 $(function(){
@@ -68,7 +105,7 @@ $(function(){
     $('#check_sk_trayek').on('click', function(){                  
         $("#noSKTrayek").prop("disabled", !this.checked); 
         $("#bpkbBerlakuSD").prop("disabled", !this.checked); 
-    });
+    });    
 });
 
 

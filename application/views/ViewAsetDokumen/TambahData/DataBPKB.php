@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="icon" type="image/jpeg" href="<?php echo base_url(); ?>assets/design/images/kmi_logo.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $css; ?>
-
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')?>">
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -569,8 +569,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         echo '<option value="1" >1 - Tersedia</option>
                                                               <option value="2" selected>2 - Indent</option>';
                                                       }else{
-                                                        echo '<option value="1">1 - Tersedia</option>
-                                                              <option value="2" selected>2 - Indent</option>';
+                                                        echo '<option value="1" selected>1 - Tersedia</option>
+                                                              <option value="2">2 - Indent</option>';
                                                       }
                                                 ?>
                                         </select>
@@ -603,8 +603,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <select class="form-control select2" id="sertSlikJenisAgunan" name="sertSlikJenisAgunan">
                                         <?php if($this->session->tempdata('sertSlikJenisAgunan') != '') {
                                                         echo '<option value="'.$this->session->tempdata('sertSlikJenisAgunan').'" selected>'.$this->session->tempdata('sertSlikJenisAgunan').'</option>';
-                                              } else{
-                                                  echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
                                               }
                                         ?>
                                                 <?php foreach ($SlikKodeJenisAgunan as $row) : ?>
@@ -656,8 +654,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <select class="form-control select2" id="sertSlikLembagaPemeringkat" name="sertSlikLembagaPemeringkat">
                                                 <?php if($this->session->tempdata('sertSlikLembagaPemeringkat') != '') {
                                                         echo '<option value="'.$this->session->tempdata('sertSlikLembagaPemeringkat').'" selected>'.$this->session->tempdata('sertSlikLembagaPemeringkat').'</option>';
-                                                    } else{
-                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
                                                     }
                                                 ?>
                                                 <?php foreach ($SlikLembagaPemeringkat as $row) : ?>
@@ -692,8 +688,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <select class="form-control select2" id="sertSlikJenisPengikatan" name="sertSlikJenisPengikatan">
                                                 <?php if($this->session->tempdata('sertSlikJenisPengikatan') != '') {
                                                         echo '<option value="'.$this->session->tempdata('sertSlikJenisPengikatan').'" selected>'.$this->session->tempdata('sertSlikJenisPengikatan').'</option>';
-                                                    } else{
-                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
                                                     }
                                                 ?>
                                                 <?php foreach ($SlikJenisPengikatan as $row) : ?>
@@ -715,7 +709,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="">Nama Pemilik Agunan</label>
                                   </div>
                                   <div class="col-sm-6">
-                                      <input type="text" class="form-control" id="sertSlikNamaPemilikAgunan" name="sertSlikNamaPemilikAgunan" value="<?php echo $this->session->tempdata('sertSlikNamaPemilikAgunan');?>">
+                                      <input type="text" class="form-control" id="sertSlikNamaPemilikAgunan" name="sertSlikNamaPemilikAgunan" value="<?php echo $this->session->tempdata('sertSlikNamaPemilikAgunan');?>" required>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -723,7 +717,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="">Bukti Kepemilikan</label>
                                   </div>
                                   <div class="col-sm-6">
-                                      <input type="text" class="form-control" id="sertSlikBuktiKepemilikanAgunan" name="sertSlikBuktiKepemilikanAgunan" value="<?php echo $this->session->tempdata('sertSlikBuktiKepemilikanAgunan');?>">
+                                      <input type="text" class="form-control" id="sertSlikBuktiKepemilikanAgunan" name="sertSlikBuktiKepemilikanAgunan" value="<?php echo $this->session->tempdata('sertSlikBuktiKepemilikanAgunan');?>" required>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -731,7 +725,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <label class="control-label" style="padding-top: 5px;" for="">Alamat</label>
                                   </div>
                                   <div class="col-sm-6">
-                                      <textarea style="height: 115px;" type="text" class="form-control" id="sertSlikAlamat" name="sertSlikAlamat"><?php echo $this->session->tempdata('sertSlikAlamat');?></textarea>
+                                      <textarea style="height: 115px;" type="text" class="form-control" id="sertSlikAlamat" name="sertSlikAlamat" required><?php echo $this->session->tempdata('sertSlikAlamat');?></textarea>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -742,8 +736,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <select class="form-control select2" id="sertSlikKodeDati2" name="sertSlikKodeDati2">
                                                 <?php if($this->session->tempdata('sertSlikKodeDati2') != '') {
                                                         echo '<option value="'.$this->session->tempdata('sertSlikKodeDati2').'" selected>'.$this->session->tempdata('sertSlikKodeDati2').'</option>';
-                                                    } else{
-                                                        echo '<option value="" selected disabled hidden>Silahkan Pilih</option>';
                                                     }
                                                 ?>
                                                 <?php foreach ($SlikDati2 as $row) : ?>
@@ -833,7 +825,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         echo $ctrlbar;
 	    echo $js;
 	?>
-
+    <script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
                     <!-- Style untuk Tab Pane -->
         <style>
               /* Style the tab */
@@ -893,6 +885,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             
 
         </script>
-         <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/data_tambah.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/design/js/js_centro/data_tambah.js"></script>
 </body>
 </html>
