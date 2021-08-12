@@ -140,37 +140,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                <div class="form-group row justify-content-sm-center">
                                                     <div class="col-md-5" >
                                                       <div class="container" id="gaugeAset_container">
-                                                        <canvas id="gaugeAset" ></canvas>
+                                                        <canvas id="gaugeAset" style="width: 15vw;" ></canvas>
                                                       </div>
 
                                                       <div class="container" id="gaugeAset-value_container" >
-                                                          <p id="label_aset"><output  id="gaugeAset-value"></output></p>                                             
+                                                          <p id="label_aset"><output  id="gaugeAset-value" ></output></p>                                             
                                                       </div>
                                                     </div>
 
                                                     <div class="col-md-5">
                                                       <div class="container" id="gaugeAsetKredit_container">
-                                                          <canvas id="gaugeAsetKredit" ></canvas>
+                                                          <canvas id="gaugeAsetKredit" style="width: 15vw;"></canvas>
                                                       </div>
                                                       
                                                       <div class="container" id="gaugeAsetKredit-value_container">
-                                                        <p id="label_aset_kredit"><output  id="gaugeAsetKredit-value"></output></p>                                             
+                                                        <p id="label_aset_kredit"><output  id="gaugeAsetKredit-value" ></output></p>                                             
                                                       </div>
                                                     </div>
 
                                                     <div class="col-md-5">
-                                                        <div class="container" id="gaugNpat_container">
-                                                              <canvas id="gaugNpat" ></canvas>
+                                                        <div class="container"  id="gaugNpat_container">
+                                                              <canvas id="gaugNpat"style="width: 15vw;" ></canvas>
                                                         </div>
 
                                                         <div class="container" id="gaugNpat-value_container">
-                                                            <p id="label_gaugNpat"><output  id="gaugNpat-value"></output></p>                                             
+                                                            <p id="label_gaugNpat"><output  id="gaugNpat-value" ></output></p>                                             
                                                         </div>
                                                     </div>
 
                                                   <div class="col-md-5">
                                                       <div class="container" id="gaugeModal_container">
-                                                            <canvas id="gaugeModal" style="width: 10vw;"></canvas>
+                                                            <canvas id="gaugeModal" style="width: 15vw;"></canvas>
                                                       </div>
     
                                                       <div class="container" id="gaugeModal-value_container">
@@ -191,7 +191,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <!-- <div class="card-tools">
                                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                                 </div> -->
-
                                               <div class="card-tools">
                                                       <button type="submit" class="btn btn-warning btn-sm" id="modal_btn" title="Export to PDF" name="btnKembali"> 
                                                         <i class="fa fa-print"></i>
@@ -205,7 +204,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="card-body"id="chart_modal_container">
                                                         <canvas id="chart_modal"></canvas>
                                                     </div>
-                                                  <br>
                                               <div>
                                     
                                 </div>     

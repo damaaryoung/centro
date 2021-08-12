@@ -46,27 +46,15 @@ function search()
                 //         }
                 //     })
                 // });
-                //    $('#tvsr_btn').click(function(event) {
-                    
-                //     html2canvas(document.getElementById('tvsrealisasi_report'),{
-                //         onrendered:function (canvas){
-                            
-                //             var img =  canvas.toDataURL('image/png', 1.0);
-                //             var doc = new jsPDF("l", "pt", "a4", [canvas.width, canvas.height]);
-                //            // doc.text(120, 15, "Diagram NPAT YTD");
-                //             doc.addImage(img, 'png', -60,50, canvas.width, canvas.height); 
-                //             doc.save('target-vs-realisasi.pdf')
-                //         }
-                //     })
-                // })
                 $('#btn_export_chart').click(function () 
                 {
                      domtoimage.toPng(document.getElementById('reportPage'))
                         .then(function (canvas) 
                         {
                             var pdf = new jsPDF('p', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
-                            pdf.text(400,25,'Financial Dashboard')
+                            pdf.text(400,25,'Ratio Dashboard Liquidity')
                             pdf.addImage(canvas, 'jpeg', 0, 50, $('#reportPage').width(), $('#reportPage').height());
+                           
                             pdf.save("dashboard.pdf");
 
                        // that.options.api.optionsChanged();
@@ -228,7 +216,7 @@ function get_chart_rasio_earning_bopo(){
                         {
                             var pdf = new jsPDF('l', 'pt',[$('#ldr_report').width(), $('#ldr_report').height()]);
                             pdf.addImage(canvas, 'jpeg', 0, 0, $('#ldr_report').width(), $('#ldr_report').height());
-                            pdf.save("rasio.pdf");
+                            pdf.save("rasio-liquidity-ldr.pdf");
 
                        // that.options.api.optionsChanged();
                     });

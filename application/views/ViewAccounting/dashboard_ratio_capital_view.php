@@ -93,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <!-- Data Dashboard -->
-          <div class="card card-danger" >
+          <div class="card card-danger" id="reportPage">
                   <div class="card-header">
                   <h3 class="card-title">Dashboard</h3>
                       <div class="card-tools">
@@ -103,40 +103,114 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body"id="reportPage" >
+                  <div class="card-body" >
                       
-                    <div class="row">
-                      <div class="col-md-12 mx-auto">
-                      <div class="form-group row justify-content-sm-center">
-                                  <div class="col-sm-9">
-                                    <div class="card" id="capital_report">
-                                    <div class="card-header">
-                                    KPMM
-                                        <div class="card-tools">
-                                          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                          <div class="row">
+                            <div class="col-md-12 mx-auto">
+                            <div class="form-group row justify-content-sm-center">
+                                        <div class="col-sm-7">
+                                          <div class="card" id="capital_report">
+                                          <div class="card-header">
+                                          KPMM
+                                              <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                              </div>
+
+                                              <div class="card-tools">
+                                                  <button type="submit" class="btn btn-warning btn-sm" id="aset_btn" title="Export to PDF" name="btnKembali"> 
+                                                    <i class="fa fa-print"></i>
+                                                </button>
+                                                </div>
+                                          </div>
+                                          <div class="card-body" id="chart_rasio_capital_container">
+                                          <canvas id="chart_rasio_capital"></canvas>
+                                          </div>
+                                        </div>
+                                      </div>    
+                                        <div class="col-sm-5">
+                                          <br>
+                                          <br>
+                                        <div class="card">
+                                          <div class="card-body" >
+                                          <div class="from-group row justify-content-sm-center">
+                                              <table>
+                                                <tr>
+                                                  <th style="background-color:red ; width:100px;text-align:center;"; >
+                                                      < 8%
+                                                  </th>
+                                                  <th style=" background-color:yellow;width:100px;text-align:center;";>
+                                                    > 8% - < 12%
+                                                  
+                                                  </th>
+                                                  <th  style=" background-color:green;width:100px;height:50px; text-align:center;";>   
+                                                    > 12% 
+                                                  </th>
+                                                </tr>
+                                              </table>
+                                          </div>
+                                          <br>
+                                    
+                                            <div class="row">
+                                              <div class="col-sm-1">
+                                                  <div style="color:green">&#9632;</div>  
+                                              </div>
+                                              <div class="col-sm-3">
+                                                  <output style="padding-top: -5px;">sehat</output>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-sm-1">
+                                                  <div style="color:yellow">&#9632;</div>  
+                                              </div>
+                                              <div class="col-sm-9">
+                                                  <output style="padding-top: -5px;">kurang sehat</output>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-sm-1">
+                                                  <div style="color:red">&#9632;</div>  
+                                              </div>
+                                              <div class="col-sm-9">
+                                                  <p style="padding-top: -5px;">tidak sehat</p>
+                                              </div>
+                                            </div>
+                                          
+                                          
+                                            </div>
+                                  
+                                        </div>
+                                        <div class="card">
+                                      
+                                          <div class="card-body ">
+                                            <div class="from-group row justify-content-sm-center">
+
+                                              <table>
+                                                  <tr>
+                                                    <td>
+                                                      <strong>KPPM = </strong>
+                                                    </td>
+                                                    <td >
+                                                        <output>
+                                                          Jumlah Modal Bank(Modal Inti + Modal pelengkap) 
+                                                          <hr>
+                                                          Aktiva Tertimbang Menurut Resiko (ATMR)
+                                                        </output>
+                                                    </td>
+                                                    <td>
+                                                      <output style="padding-top: -5px;"> x 100%</output>
+                                                    </td>
+                                                    
+                                                  </tr>
+                                              </table>
+                                              </div>
+                                          </div>
+                                  
                                         </div>
 
-                                        <div class="card-tools">
-                                            <button type="submit" class="btn btn-warning btn-sm" id="aset_btn" title="Export to PDF" name="btnKembali"> 
-                                              <i class="fa fa-print"></i>
-                                          </button>
-                                          </div>
-                                    </div>
-                                    <div class="card-body" id="chart_rasio_capital_container">
-                                    <canvas id="chart_rasio_capital"></canvas>
-                                    </div>
-                                  </div>
-                                </div>    
-                                  <div class="col-sm-3">
-                                  <div class="card">
-                                    <div class="card-body" >
-
-                                    </div>
-                                  </div>
-                                    </div>    
-                                  </div>
-                      </div>
-                    </div>
+                                          </div>    
+                                        </div>
+                            </div>
+                         
                      
                   </div>
                   <!-- /.card-body -->
