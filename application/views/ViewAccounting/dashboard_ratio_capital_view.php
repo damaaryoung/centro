@@ -109,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-md-12 mx-auto">
                             <div class="form-group row justify-content-sm-center">
                                         <div class="col-sm-7">
-                                          <div class="card" id="capital_report">
+                                          <div class="card" id="aset_kap_report">
                                           <div class="card-header">
                                           KPMM
                                               <div class="card-tools">
@@ -133,50 +133,59 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <div class="card">
                                           <div class="card-body" >
                                           <div class="from-group row justify-content-sm-center">
-                                              <table>
-                                                <tr>
-                                                  <th style="background-color:red ; width:100px;text-align:center;"; >
-                                                      < 8%
-                                                  </th>
-                                                  <th style=" background-color:yellow;width:100px;text-align:center;";>
-                                                    > 8% - < 12%
-                                                  
-                                                  </th>
-                                                  <th  style=" background-color:green;width:100px;height:50px; text-align:center;";>   
+                                          <table>
+                                            <tr>
+                                                    <th style="background-color:#dc474f;color:white; width:100px;text-align:center;"; >
+                                                    < 6 %
+                                                    </th>
+                                                    <th style="background-color:#ffac0e;color:white; width:100px;text-align:center;"; >
+                                                    < 8 % - > 6 %
+                                                    </th>
+                                                    <th style=" background-color:#3bb0ba;color:white;width:100px;text-align:center;";>
+                                                    < 12% - > 8 %
+                                                    </th>
+                                                    <th  style=" background-color:#a1dd70;color:white;width:100px;height:50px; text-align:center;";>   
                                                     > 12% 
-                                                  </th>
-                                                </tr>
-                                              </table>
+                                                    </th>
+                                                  </tr>
+                                            </table>
                                           </div>
                                           <br>
                                     
-                                            <div class="row">
-                                              <div class="col-sm-1">
-                                                  <div style="color:green">&#9632;</div>  
+                                          <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div style="color:#a1dd70">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">sehat</output>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div style="color:#3bb0ba">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">cukup sehat</output>
+                                                </div>
+                                                
+
                                               </div>
-                                              <div class="col-sm-3">
-                                                  <output style="padding-top: -5px;">sehat</output>
+                                              <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div style="color:#ffac0e">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">kurang sehat</output>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <div style="color:#dc474f">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p style="padding-top: -5px;">tidak sehat</p>
+                                                </div>
                                               </div>
-                                            </div>
-                                            <div class="row">
-                                              <div class="col-sm-1">
-                                                  <div style="color:yellow">&#9632;</div>  
-                                              </div>
-                                              <div class="col-sm-9">
-                                                  <output style="padding-top: -5px;">kurang sehat</output>
-                                              </div>
-                                            </div>
-                                            <div class="row">
-                                              <div class="col-sm-1">
-                                                  <div style="color:red">&#9632;</div>  
-                                              </div>
-                                              <div class="col-sm-9">
-                                                  <p style="padding-top: -5px;">tidak sehat</p>
-                                              </div>
-                                            </div>
-                                          
-                                          
-                                            </div>
+                                        
+                                          </div>
                                   
                                         </div>
                                         <div class="card">

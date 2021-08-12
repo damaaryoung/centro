@@ -44,39 +44,15 @@ function search()
     get_chart_npat_month();
 }
 
-                // $('#btn_export_chart').click(function(event) {
-                    
-                //     html2canvas(document.getElementById('reportPage'),{
-                //         onrendered:function (canvas){
-                //             var img =canvas.toDataURL('image/png')
-                //             var doc=new jsPDF("p", "pt", "a4")
-                //             doc.text(220,25,'Financial Dashboard')
-                //             doc.addImage(img, 'PNG',-88, 75, 680, 700)
-                //             doc.save('dashboard.pdf')
-                //         }
-                //     })
-                // });
-                //    $('#tvsr_btn').click(function(event) {
-                    
-                //     html2canvas(document.getElementById('tvsrealisasi_report'),{
-                //         onrendered:function (canvas){
-                            
-                //             var img =  canvas.toDataURL('image/png', 1.0);
-                //             var doc = new jsPDF("l", "pt", "a4", [canvas.width, canvas.height]);
-                //            // doc.text(120, 15, "Diagram NPAT YTD");
-                //             doc.addImage(img, 'png', -60,50, canvas.width, canvas.height); 
-                //             doc.save('target-vs-realisasi.pdf')
-                //         }
-                //     })
-                // })
+           
                 $('#btn_export_chart').click(function () 
                 {
                      domtoimage.toPng(document.getElementById('reportPage'))
                         .then(function (canvas) 
                         {
                             var pdf = new jsPDF('p', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
-                            pdf.text(400,25,'Financial Dashboard')
-                            pdf.addImage(canvas, 'jpeg', 0, 50, $('#reportPage').width(), $('#reportPage').height());
+                            pdf.text(530,25,'Financial Dashboard')
+                            pdf.addImage(canvas, 'jpeg', 0, 25, $('#reportPage').width(), $('#reportPage').height());
                            
                             pdf.save("dashboard.pdf");
 
@@ -96,6 +72,67 @@ function search()
                        // that.options.api.optionsChanged();
                     });
                 });
+                $('#npat_ytd_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('npat_ytd_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#npat_ytd_report').width(), $('#npat_ytd_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#npat_ytd_report').width(), $('#npat_ytd_report').height());
+                            pdf.save("npat-ytd.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                });
+                $('#npat_monthly_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('npat_monthly_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#npat_monthly_report').width(), $('#npat_monthly_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#npat_monthly_report').width(), $('#npat_monthly_report').height());
+                            pdf.save("npat-monthly.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                });
+                $('#aset_kredit_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('aset_kredit_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#aset_kredit_report').width(), $('#aset_kredit_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#aset_kredit_report').width(), $('#aset_kredit_report').height());
+                            pdf.save("aset-kredit.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
+                $('#aset_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('aset_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#aset_report').width(), $('#aset_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#aset_report').width(), $('#aset_report').height());
+                            pdf.save("aset.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
+                $('#modal_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('modal_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#modal_report').width(), $('#modal_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#modal_report').width(), $('#modal_report').height());
+                            pdf.save("modal.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
+
 
 function bulan_target(){
     
@@ -170,12 +207,12 @@ function get_chart_npat_ytd(){
                 datasets: [
                     {
                         label: "Target",
-                        backgroundColor: 'rgb(0, 76, 153)',
+                        backgroundColor: '#3bb0ba',
                         data:0,
                     },
                     {
                         label: "Realisasi",
-                        backgroundColor: 'rgb(255, 128, 0)',
+                        backgroundColor: '#ffac0e',
                         data:0,
                     },
             
@@ -217,12 +254,12 @@ function get_chart_npat_ytd(){
                 datasets: [
                     {
                         label: "Target",
-                        backgroundColor: 'rgb(0, 76, 153)',
+                        backgroundColor: '#3bb0ba',
                         data:rencana,
                     },
                     {
                         label: "Realisasi",
-                        backgroundColor: 'rgb(255, 128, 0)',
+                        backgroundColor: '#ffac0e',
                         data:realisasi,
                     },
             
@@ -254,18 +291,7 @@ function get_chart_npat_ytd(){
                     //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
                     //     doc.save('npat-ytd.pdf');
                     // });
-                    $('#npat_ytd_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('npat_ytd_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#npat_ytd_report').width(), $('#npat_ytd_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#npat_ytd_report').width(), $('#npat_ytd_report').height());
-                            pdf.save("test.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                });
+                    
                     
                     
 },
@@ -311,12 +337,12 @@ function get_chart_npat_month(){
                 datasets: [
                     {
                         label: "Target",
-                        backgroundColor: 'rgb(0, 76, 153)',
+                        backgroundColor: '#3bb0ba',
                         data:0,
                     },
                     {
                         label: "Realisasi",
-                        backgroundColor: 'rgb(255, 128, 0)',
+                        backgroundColor: '#ffac0e',
                         data:0,
                     },
             
@@ -355,12 +381,12 @@ function get_chart_npat_month(){
                 datasets: [
                     {
                         label: "Target",
-                        backgroundColor: 'rgb(0, 76, 153)',
+                        backgroundColor: '#3bb0ba',
                         data:rencana,
                     },
                     {
                         label: "Realisasi",
-                        backgroundColor: 'rgb(255, 128, 0)',
+                        backgroundColor: '#ffac0e',
                         data:realisasi,
                     },
             
@@ -391,18 +417,7 @@ function get_chart_npat_month(){
                     //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
                     //     doc.save('npat-motnhly.pdf');
                     // });
-                    $('#npat_monthly_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('npat_monthly_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#npat_monthly_report').width(), $('#npat_monthly_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#npat_monthly_report').width(), $('#npat_monthly_report').height());
-                            pdf.save("npat-monthly.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                });
+                    
 
 },
            error : function(response) {
@@ -446,12 +461,12 @@ function get_chart_aset_kredit(){
             datasets: [
                 {
                     label: "Target",
-                    backgroundColor: 'rgb(0, 76, 153)',
+                    backgroundColor: '#3bb0ba',
                     data:0,
                 },
                 {
                     label: "Realisasi",
-                    backgroundColor: 'rgb(255, 128, 0)',
+                    backgroundColor: '#ffac0e',
                     data:0,
                 },
 
@@ -490,12 +505,12 @@ function get_chart_aset_kredit(){
             datasets: [
                 {
                     label: "Target",
-                    backgroundColor: 'rgb(0, 76, 153)',
+                    backgroundColor: '#3bb0ba',
                     data:rencana,
                 },
                 {
                     label: "Realisasi",
-                    backgroundColor: 'rgb(255, 128, 0)',
+                    backgroundColor: '#ffac0e',
                     data:realisasi,
                 },
 
@@ -527,18 +542,7 @@ function get_chart_aset_kredit(){
                 //         doc.save('aset-kredit.pdf');
                 //     });
 
-                    $('#aset_kredit_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('aset_kredit_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#aset_kredit_report').width(), $('#aset_kredit_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#aset_kredit_report').width(), $('#aset_kredit_report').height());
-                            pdf.save("aset-kredit.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
+                   
             },
             error : function(response) {
             console.log('failed :' + response);
@@ -583,12 +587,12 @@ function get_chart_aset(){
                 datasets: [
                     {
                         label: "Target",
-                        backgroundColor: 'rgb(0, 76, 153)',
+                        backgroundColor: '#3bb0ba',
                         data:0,
                     },
                     {
                         label: "Realisasi",
-                        backgroundColor: 'rgb(255, 128, 0)',
+                        backgroundColor: '#ffac0e',
                         data:0,
                     },
             
@@ -627,12 +631,12 @@ function get_chart_aset(){
                 datasets: [
                     {
                         label: "Target",
-                        backgroundColor: 'rgb(0, 76, 153)',
+                        backgroundColor: '#3bb0ba',
                         data:rencana,
                     },
                     {
                         label: "Realisasi",
-                        backgroundColor: 'rgb(255, 128, 0)',
+                        backgroundColor: '#ffac0e',
                         data:realisasi,
                     },
             
@@ -665,18 +669,7 @@ function get_chart_aset(){
                     //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
                     //     doc.save('aset-total.pdf');
                     // }); 
-                    $('#aset_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('aset_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#aset_report').width(), $('#aset_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#aset_report').width(), $('#aset_report').height());
-                            pdf.save("aset.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
+                   
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -721,12 +714,12 @@ function get_chart_modal(){
                             datasets: [
                                 {
                                     label: "Target",
-                                    backgroundColor: 'rgb(0, 76, 153)',
+                                    backgroundColor: '#3bb0ba',
                                     data:0,
                                 },
                                 {
                                     label: "Realisasi",
-                                    backgroundColor: 'rgb(255, 128, 0)',
+                                    backgroundColor: '#ffac0e',
                                     data:0,
                                 },
                         
@@ -765,12 +758,12 @@ function get_chart_modal(){
                 datasets: [
                     {
                         label: "Target",
-                        backgroundColor: 'rgb(0, 76, 153)',
+                        backgroundColor: '#3bb0ba',
                         data:rencana,
                     },
                     {
                         label: "Realisasi",
-                        backgroundColor: 'rgb(255, 128, 0)',
+                        backgroundColor: '#ffac0e',
                         data:realisasi,
                     },
             
@@ -803,18 +796,7 @@ function get_chart_modal(){
                     //     doc.save('modal.pdf');
                     // }); 
 
-                    $('#modal_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('modal_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#modal_report').width(), $('#modal_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#modal_report').width(), $('#modal_report').height());
-                            pdf.save("modal.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
+                 
 
                 
                 
@@ -868,8 +850,8 @@ function get_speedometer_aset(){
                                        length: 0.6, // Relative to gauge radius
                                        strokeWidth: 0.035 // The thickness,
                                    },
-                                   colorStart: '#00E007',   // Colors
-                                   colorStop: '#00E007',    // just experiment with them
+                                   colorStart: '#a1dd70',   // Colors
+                                   colorStop: '#a1dd70',    // just experiment with them
                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
                                    generateGradient: true,
                                    highDpiSupport: true,
@@ -965,8 +947,8 @@ function get_speedometer_aset_kredit(){
                                         length: 0.6, // Relative to gauge radius
                                         strokeWidth: 0.035 // The thickness,
                                     },
-                                    colorStart: '#8FC0DA',   // Colors
-                                    colorStop: '#8FC0DA',    // just experiment with them
+                                    colorStart: '#3bb0ba',   // Colors
+                                    colorStop: '#3bb0ba',    // just experiment with them
                                     strokeColor: '#E0E0E0',   // to see which ones work best for you
                                     generateGradient: true,
                                     highDpiSupport: true,
@@ -1059,8 +1041,8 @@ function get_speedometer_npat_monthly(){
                                        length: 0.6, // Relative to gauge radius
                                        strokeWidth: 0.035 // The thickness,
                                    },
-                                   colorStart: '#D33A27',   // Colors
-                                   colorStop: '#D33A27',    // just experiment with them
+                                   colorStart: '#dc474f',   // Colors
+                                   colorStop: '#dc474f',    // just experiment with them
                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
                                    generateGradient: true,
                                    highDpiSupport: true,
@@ -1160,8 +1142,8 @@ function get_speedometer_modal(){
                                        length: 0.6, // Relative to gauge radius
                                        strokeWidth: 0.035 // The thickness,
                                    },
-                                   colorStart: '#fcba03',   // Colors
-                                   colorStop: '#fcba03',    // just experiment with them
+                                   colorStart: '#ffac0e',   // Colors
+                                   colorStop: '#ffac0e',    // just experiment with them
                                    strokeColor: '#E0E0E0',   // to see which ones work best for you
                                    generateGradient: true,
                                    highDpiSupport: true,

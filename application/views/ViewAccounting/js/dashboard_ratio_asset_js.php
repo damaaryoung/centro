@@ -34,31 +34,6 @@ function search()
 
 }
 
-                // $('#btn_export_chart').click(function(event) {
-                    
-                //     html2canvas(document.getElementById('reportPage'),{
-                //         onrendered:function (canvas){
-                //             var img =canvas.toDataURL('image/png')
-                //             var doc=new jsPDF("p", "pt", "a4")
-                //             doc.text(220,25,'Financial Dashboard')
-                //             doc.addImage(img, 'PNG',-88, 75, 680, 700)
-                //             doc.save('dashboard.pdf')
-                //         }
-                //     })
-                // });
-                //    $('#tvsr_btn').click(function(event) {
-                    
-                //     html2canvas(document.getElementById('tvsrealisasi_report'),{
-                //         onrendered:function (canvas){
-                            
-                //             var img =  canvas.toDataURL('image/png', 1.0);
-                //             var doc = new jsPDF("l", "pt", "a4", [canvas.width, canvas.height]);
-                //            // doc.text(120, 15, "Diagram NPAT YTD");
-                //             doc.addImage(img, 'png', -60,50, canvas.width, canvas.height); 
-                //             doc.save('target-vs-realisasi.pdf')
-                //         }
-                //     })
-                // })
                 $('#btn_export_chart').click(function () 
                 {
                      domtoimage.toPng(document.getElementById('reportPage'))
@@ -72,6 +47,31 @@ function search()
                        // that.options.api.optionsChanged();
                     });
                 });
+                $('#aset_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('capital_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#capital_report').width(), $('#capital_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#capital_report').width(), $('#capital_report').height());
+                            pdf.save("rasio-aset-kap.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
+                $('#aset_ppap_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('asset_ppap_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#asset_ppap_report').width(), $('#asset_ppap_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#asset_ppap_report').width(), $('#asset_ppap_report').height());
+                            pdf.save("rasio-aset-ppap.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
+
              
 
 
@@ -166,15 +166,19 @@ function get_chart_aset_kap(){
                         label.push(response.rasio_asset_kap[i]['tgl_laporan']);
                         rasio.push(response.rasio_asset_kap[i]['rasio']);
                         var int_rasio= rasio.map(i=>Number(i));
-                        if(int_rasio[i] < 8)
+                        if(int_rasio[i] >= 14.85)
                         {
-                            color.push('rgb(235, 0, 0)')
-                        }else if(int_rasio[i] < 12 && int_rasio[i] >= 8)
+                            color.push('#dc474f')
+                        }else if(int_rasio[i] < 14.85 && int_rasio[i] >= 12.60)
                         {
-                            color.push('rgb(255, 255, 51)')
-                        }
-                        else{
-                            color.push('rgb(51, 235, 51)')
+                            color.push('#ffac0e')
+                        }else if(int_rasio[i] < 12.60 && int_rasio[i] >= 10.35)
+                        {
+                            color.push('#3bb0ba')
+                        
+                        }else if(int_rasio[i] < 10.35 && int_rasio[i] >= 0)
+                        {
+                            color.push('#a1dd70')
                         }
                     }
                    // console.log(parseFloat(response.rasio_capital[i]['rasio']))
@@ -207,34 +211,7 @@ function get_chart_aset_kap(){
                    var npat_monthly = new Chart(
                     grapharea,config_chart_rasio_capital
                     ); 
-
-           
-            npat_monthly.update()
-
-                    // $('#aset_btn').click(function(event) {          
-                    //     var canvas = document.querySelector('#chart_aset');
-                    //     //creates image
-                    //     var canvasImg = canvas.toDataURL("image/png", 1.0);
-                    //     //creates PDF from img
-                    //     var doc = new jsPDF('landscape');
-                    //     doc.setFillColor(204, 204,204,204);
-                    //     doc.setFontSize(20);
-                    //     doc.text(120, 15, "Diagram Aset Total");
-                    //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
-                    //     doc.save('aset-total.pdf');
-                    // }); 
-                    $('#aset_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('capital_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#capital_report').width(), $('#capital_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#capital_report').width(), $('#capital_report').height());
-                            pdf.save("rasio.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
+                 
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -312,15 +289,18 @@ function get_chart_aset_ppap(){
                         label.push(response.rasio_asset_ppap[i]['tgl_laporan']);
                         rasio.push(response.rasio_asset_ppap[i]['rasio']);
                         var int_rasio= rasio.map(i=>Number(i));
-                        if(int_rasio[i] < 8)
+                        if(int_rasio[i] < 51)
                         {
-                            color.push('rgb(235, 0, 0)')
-                        }else if(int_rasio[i] < 12 && int_rasio[i] >= 8)
+                            color.push('#dc474f')
+                        }else if(int_rasio[i] < 66 && int_rasio[i] >= 51)
                         {
-                            color.push('rgb(255, 255, 51)')
+                            color.push('#ffac0e')
+                        }else if(int_rasio[i] < 81 && int_rasio[i] >=66 )
+                        {
+                            color.push('#3bb0ba')
                         }
-                        else{
-                            color.push('rgb(51, 235, 51)')
+                        else if(int_rasio[i] >= 81 ){
+                            color.push('#a1dd70')
                         }
                     }
                    // console.log(parseFloat(response.rasio_capital[i]['rasio']))
@@ -357,30 +337,8 @@ function get_chart_aset_ppap(){
            
                     rasio_aset_ppap.update()
 
-                    // $('#aset_btn').click(function(event) {          
-                    //     var canvas = document.querySelector('#chart_aset');
-                    //     //creates image
-                    //     var canvasImg = canvas.toDataURL("image/png", 1.0);
-                    //     //creates PDF from img
-                    //     var doc = new jsPDF('landscape');
-                    //     doc.setFillColor(204, 204,204,204);
-                    //     doc.setFontSize(20);
-                    //     doc.text(120, 15, "Diagram Aset Total");
-                    //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
-                    //     doc.save('aset-total.pdf');
-                    // }); 
-                    $('#aset_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('capital_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#capital_report').width(), $('#capital_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#capital_report').width(), $('#capital_report').height());
-                            pdf.save("rasio.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
+               
+              
 },
            error : function(response) {
                console.log('failed :' + response);

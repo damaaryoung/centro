@@ -138,18 +138,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="from-group row justify-content-sm-center">
                                                         <table>
                                                           <tr>
-                                                            <th style="background-color:red ; width:100px;text-align:center;"; >
-                                                                > 14.85%
+                                                          <th style="background-color:#dc474f;color:white; width:120px;text-align:center;"; >
+                                                            < 2.55 %
+
                                                             </th>
-                                                            <th style="background-color:blue ; width:100px;text-align:center;"; >
-                                                                <= 14.85%
+                                                            <th style="background-color:#ffac0e;color:white; width:120px;text-align:center;"; >
+                                                            ≥ 2.55 % - ≤ 3.30 %
+
                                                             </th>
-                                                            <th style=" background-color:yellow;width:100px;text-align:center;";>
-                                                              <= 12.60%
+                                                            <th style=" background-color:#3bb0ba;color:white;width:120px;text-align:center;";>
+                                                            ≥ 3.30 % - ≤ 4.05  %
+
                                                             
                                                             </th>
-                                                            <th  style=" background-color:green;width:100px;height:50px; text-align:center;";>   
-                                                              <= 10.35 
+                                                            <th  style=" background-color:#a1dd70;color:white;width:120px;height:50px; text-align:center;";>   
+                                                            ≥ 4.05 %
+
                                                             </th>
                                                           </tr>
                                                         </table>
@@ -157,37 +161,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                           <br>
                                           
                                                       <div class="row">
-                                                        <div class="col-sm-1">
-                                                            <div style="color:green">&#9632;</div>  
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <output style="padding-top: -5px;">sehat</output>
-                                                        </div>
+                                                      <div class="col-sm-1">
+                                                    <div style="color:#a1dd70">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">sehat</output>
+                                                </div>
 
-                                                        <div class="col-sm-1">
-                                                            <div style="color:yellow">&#9632;</div>  
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <output style="padding-top: -5px;">cukup sehat</output>
-                                                        </div>
-                                                        
+                                                <div class="col-sm-1">
+                                                    <div style="color:#3bb0ba">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">cukup sehat</output>
+                                                </div>
+                                                
 
-                                                      </div>
-                                                      <div class="row">
-                                                        <div class="col-sm-1">
-                                                            <div style="color:blue">&#9632;</div>  
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <output style="padding-top: -5px;">kurang sehat</output>
-                                                        </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div style="color:#ffac0e">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">kurang sehat</output>
+                                                </div>
 
-                                                        <div class="col-sm-1">
-                                                            <div style="color:red">&#9632;</div>  
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <p style="padding-top: -5px;">tidak sehat</p>
-                                                        </div>
-                                                      </div>
+                                                <div class="col-sm-1">
+                                                    <div style="color:#dc474f">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p style="padding-top: -5px;">tidak sehat</p>
+                                                </div>
+                                              </div>
 
                                                   </div>
 
@@ -201,13 +205,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <table>
                                                     <tr>
                                                       <td>
-                                                        <strong>KAP = </strong>
+                                                        <strong>Cash Ratio = </strong>
                                                       </td>
                                                       <td >
-                                                          <output>
-                                                          Aktiva produktif yang diklasifikasikan
+                                                          <output style="text-align:center";>
+                                                          Alat Likuid (Kas, Dep < 1 bln,Tab) 
                                                             <hr>
-                                                          Total aktiva produktif
+                                                            Hutang Lancar (Tab, Dep, Pinj Jk Pendek, Kewajiban YSHD)
                                                           </output>
                                                       </td>
                                                       <td>
@@ -262,18 +266,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <div class="from-group row justify-content-sm-center">
                                                     <table>
                                                     <tr>
-                                                            <th style="background-color:red ; width:100px;text-align:center;"; >
-                                                                > 14.85%
+                                                    <th style="background-color:#dc474f;color:white; width:120px;text-align:center;"; >
+                                                            > 102.25 %
+
                                                             </th>
-                                                            <th style="background-color:blue ; width:100px;text-align:center;"; >
-                                                                <= 14.85%
+                                                            <th style="background-color:#ffac0e;color:white; width:120px;text-align:center;"; >
+                                                            > 98.50 % - ≤ 102.25  %
+
                                                             </th>
-                                                            <th style=" background-color:yellow;width:100px;text-align:center;";>
-                                                              <= 12.60%
-                                                            
+                                                            <th style=" background-color:#3bb0ba;color:white;width:120px;text-align:center;";>
+                                                            >  94.75 % - ≤ 98.50  %
+
                                                             </th>
-                                                            <th  style=" background-color:green;width:100px;height:50px; text-align:center;";>   
-                                                              <= 10.35 
+                                                            <th  style=" background-color:#a1dd70;color:white;width:120px;height:50px; text-align:center;";>   
+                                                            ≤  94.75 %
+
                                                             </th>
                                                           </tr>
                                                     </table>
@@ -281,37 +288,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <br>
                                           
                                                 <div class="row">
-                                                        <div class="col-sm-1">
-                                                            <div style="color:green">&#9632;</div>  
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <output style="padding-top: -5px;">sehat</output>
-                                                        </div>
+                                                <div class="col-sm-1">
+                                                    <div style="color:#a1dd70">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">sehat</output>
+                                                </div>
 
-                                                        <div class="col-sm-1">
-                                                            <div style="color:yellow">&#9632;</div>  
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <output style="padding-top: -5px;">cukup sehat</output>
-                                                        </div>
-                                                        
+                                                <div class="col-sm-1">
+                                                    <div style="color:#3bb0ba">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">cukup sehat</output>
+                                                </div>
+                                                
 
-                                                      </div>
-                                                      <div class="row">
-                                                        <div class="col-sm-1">
-                                                            <div style="color:blue">&#9632;</div>  
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <output style="padding-top: -5px;">kurang sehat</output>
-                                                        </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div style="color:#ffac0e">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <output style="padding-top: -5px;">kurang sehat</output>
+                                                </div>
 
-                                                        <div class="col-sm-1">
-                                                            <div style="color:red">&#9632;</div>  
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <p style="padding-top: -5px;">tidak sehat</p>
-                                                        </div>
-                                                      </div>
+                                                <div class="col-sm-1">
+                                                    <div style="color:#dc474f">&#9632;</div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <p style="padding-top: -5px;">tidak sehat</p>
+                                                </div>
+                                              </div>
                                                 
                                                   </div>
                                     
@@ -324,13 +331,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <table>
                                                     <tr>
                                                       <td>
-                                                        <strong>KPPM = </strong>
+                                                        <strong>LDR = </strong>
                                                       </td>
                                                       <td >
-                                                          <output>
-                                                            Jumlah Modal Bank(Modal Inti + Modal pelengkap) 
+                                                      <output style="text-align:center";>
+                                                          Kredit yang diberikan
                                                             <hr>
-                                                            Aktiva Tertimbang Menurut Resiko (ATMR)
+                                                            Dana yang diterima (Tab + Dep + Pinj > 3bln + Modal Inti)
                                                           </output>
                                                       </td>
                                                       <td>

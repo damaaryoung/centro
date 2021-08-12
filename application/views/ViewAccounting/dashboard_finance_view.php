@@ -200,7 +200,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
 
                                               <div class="container">
-                                                  <br>
+                                             
                                                     <div class="card-body"id="chart_modal_container">
                                                         <canvas id="chart_modal"></canvas>
                                                     </div>

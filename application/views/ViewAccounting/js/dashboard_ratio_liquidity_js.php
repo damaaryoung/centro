@@ -29,23 +29,12 @@ $(document).ready(function () {
              
 function search()
 {
-    bulan_target()
-    get_chart_aset()
+    get_chart_rasio_liquidity_cash_ratio()
+           get_chart_rasio_earning_bopo()
 
 }
 
-                // $('#btn_export_chart').click(function(event) {
-                    
-                //     html2canvas(document.getElementById('reportPage'),{
-                //         onrendered:function (canvas){
-                //             var img =canvas.toDataURL('image/png')
-                //             var doc=new jsPDF("p", "pt", "a4")
-                //             doc.text(220,25,'Financial Dashboard')
-                //             doc.addImage(img, 'PNG',-88, 75, 680, 700)
-                //             doc.save('dashboard.pdf')
-                //         }
-                //     })
-                // });
+          
                 $('#btn_export_chart').click(function () 
                 {
                      domtoimage.toPng(document.getElementById('reportPage'))
@@ -60,6 +49,33 @@ function search()
                        // that.options.api.optionsChanged();
                     });
                 });
+
+                
+                $('#ldr_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('ldr_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#ldr_report').width(), $('#ldr_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#ldr_report').width(), $('#ldr_report').height());
+                            pdf.save("rasio-liquidity-ldr.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
+                
+                $('#cash_ratio_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('cash_ratio_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#cash_ratio_report').width(), $('#cash_ratio_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#cash_ratio_report').width(), $('#cash_ratio_report').height());
+                            pdf.save("rasio-liquidity-cash-ratio.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
              
 
 
@@ -155,15 +171,18 @@ function get_chart_rasio_earning_bopo(){
                         label.push(response.rasio_liquidity_ldr[i]['tgl_laporan']);
                         rasio.push(response.rasio_liquidity_ldr[i]['rasio']);
                         var int_rasio= rasio.map(i=>Number(i));
-                        if(int_rasio[i] < 8)
+                        if(int_rasio[i] > 102.25)
                         {
-                            color.push('rgb(235, 0, 0)')
-                        }else if(int_rasio[i] < 12 && int_rasio[i] >= 8)
+                            color.push('#dc474f')
+                        }else if(int_rasio[i] > 98.50 && int_rasio[i] <=102.25)
                         {
-                            color.push('rgb(255, 255, 51)')
+                            color.push('#ffac0e')
+                        }else if(int_rasio[i] >94.75 && int_rasio[i] <=98.50 )
+                        {
+                            color.push('#3bb0ba')
                         }
-                        else{
-                            color.push('rgb(51, 235, 51)')
+                        else if(int_rasio[i] <= 94.75 ){
+                            color.push('#a1dd70')
                         }
                     }
                    // console.log(parseFloat(response.rasio_capital[i]['rasio']))
@@ -197,30 +216,6 @@ function get_chart_rasio_earning_bopo(){
                     grapharea,config_chart_rasio_liquidity_ldr
                     ); 
 
-                    // $('#aset_btn').click(function(event) {          
-                    //     var canvas = document.querySelector('#chart_aset');
-                    //     //creates image
-                    //     var canvasImg = canvas.toDataURL("image/png", 1.0);
-                    //     //creates PDF from img
-                    //     var doc = new jsPDF('landscape');
-                    //     doc.setFillColor(204, 204,204,204);
-                    //     doc.setFontSize(20);
-                    //     doc.text(120, 15, "Diagram Aset Total");
-                    //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
-                    //     doc.save('aset-total.pdf');
-                    // }); 
-                    $('#ldr_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('ldr_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#ldr_report').width(), $('#ldr_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#ldr_report').width(), $('#ldr_report').height());
-                            pdf.save("rasio-liquidity-ldr.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -301,15 +296,18 @@ function get_chart_rasio_liquidity_cash_ratio(){
                         label.push(response.rasio_liquidity_cash_ratio[i]['tgl_laporan']);
                         rasio.push(response.rasio_liquidity_cash_ratio[i]['rasio']);
                         var int_rasio= rasio.map(i=>Number(i));
-                        if(int_rasio[i] < 8)
+                        if(int_rasio[i] < 2.55)
                         {
-                            color.push('rgb(235, 0, 0)')
-                        }else if(int_rasio[i] < 12 && int_rasio[i] >= 8)
+                            color.push('#dc474f')
+                        }else if(int_rasio[i] >=2.55  && int_rasio[i] <3.30)
                         {
-                            color.push('rgb(255, 255, 51)')
+                            color.push('#ffac0e')
+                        }else if(int_rasio[i] >=3.30  && int_rasio[i] <4.05 )
+                        {
+                            color.push('#3bb0ba')
                         }
-                        else{
-                            color.push('rgb(51, 235, 51)')
+                        else if(int_rasio[i] >= 4.05 ){
+                            color.push('#a1dd70')
                         }
                     }
                    // console.log(parseFloat(response.rasio_capital[i]['rasio']))
@@ -343,30 +341,7 @@ function get_chart_rasio_liquidity_cash_ratio(){
                     grapharea,config_chart_rasio_liquidity_cash_ratio
                     ); 
 
-                    // $('#aset_btn').click(function(event) {          
-                    //     var canvas = document.querySelector('#chart_aset');
-                    //     //creates image
-                    //     var canvasImg = canvas.toDataURL("image/png", 1.0);
-                    //     //creates PDF from img
-                    //     var doc = new jsPDF('landscape');
-                    //     doc.setFillColor(204, 204,204,204);
-                    //     doc.setFontSize(20);
-                    //     doc.text(120, 15, "Diagram Aset Total");
-                    //     doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
-                    //     doc.save('aset-total.pdf');
-                    // }); 
-                    $('#cash_ratio_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('cash_ratio_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#cash_ratio_report').width(), $('#cash_ratio_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#cash_ratio_report').width(), $('#cash_ratio_report').height());
-                            pdf.save("rasio.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
+   
 },
            error : function(response) {
                console.log('failed :' + response);

@@ -75,7 +75,8 @@ class Dashboard_ratio_model extends CI_Model{
     {
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT avg(rasio) AS rasio,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
-      FROM acc_das_rasio ac WHERE ac.`jenis`='BOPO' AND ac.`kode_kantor` like '$src_kode_kantor%'
+      FROM acc_das_rasio ac WHERE ac.`jenis`='BOPO' 
+      AND ac.`kode_kantor` like '$src_kode_kantor%'
       AND tgl_laporan like '$src_tgl_laporan%'
      
       GROUP BY tgl_laporan asc");
@@ -93,7 +94,8 @@ class Dashboard_ratio_model extends CI_Model{
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT avg(rasio) AS rasio,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
       FROM acc_das_rasio ac WHERE ac.`jenis`='CASH RATIO' 
-     
+      AND ac.`kode_kantor` like '$src_kode_kantor%'
+      AND tgl_laporan like '$src_tgl_laporan%'
       GROUP BY tgl_laporan asc");
       $query  = $this->db2->query($str);
     
@@ -109,7 +111,8 @@ class Dashboard_ratio_model extends CI_Model{
       $this->db2 = $this->load->database('DB_CENTRO', true);
       $str = ("SELECT avg(rasio) AS rasio,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
       FROM acc_das_rasio ac WHERE ac.`jenis`='LDR' 
-     
+      AND ac.`kode_kantor` like '$src_kode_kantor%'
+      AND tgl_laporan like '$src_tgl_laporan%'
       GROUP BY tgl_laporan asc");
       $query  = $this->db2->query($str);
     

@@ -138,18 +138,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <div class="from-group row justify-content-sm-center">
                                                 <table>
                                                   <tr>
-                                                    <th style="background-color:red ; width:100px;text-align:center;"; >
-                                                        > 14.85%
+                                                  <th style="background-color:#dc474f;color:white; width:100px;text-align:center;"; >
+                                                    < 0.765 %
+
                                                     </th>
-                                                    <th style="background-color:blue ; width:100px;text-align:center;"; >
-                                                        <= 14.85%
+                                                    <th style="background-color:#ffac0e;color:white; width:100px;text-align:center;"; >
+                                                    ≥ 0.765 % - ≤ 0.999 %
+
                                                     </th>
-                                                    <th style=" background-color:yellow;width:100px;text-align:center;";>
-                                                      <= 12.60%
+                                                    <th style=" background-color:#3bb0ba;color:white;width:100px;text-align:center;";>
+                                                    ≥ 0.999 % - ≤ 1.215 %
+
                                                     
                                                     </th>
-                                                    <th  style=" background-color:green;width:100px;height:50px; text-align:center;";>   
-                                                      <= 10.35 
+                                                    <th  style=" background-color:#a1dd70;color:white;width:100px;height:50px; text-align:center;";> 
+                                                    ≥ 1.215 %
+
                                                     </th>
                                                   </tr>
                                                 </table>
@@ -158,14 +162,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   
                                               <div class="row">
                                                 <div class="col-sm-1">
-                                                    <div style="color:green">&#9632;</div>  
+                                                    <div style="color:#a1dd70">&#9632;</div>  
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <output style="padding-top: -5px;">sehat</output>
                                                 </div>
 
                                                 <div class="col-sm-1">
-                                                    <div style="color:yellow">&#9632;</div>  
+                                                    <div style="color:#3bb0ba">&#9632;</div>  
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <output style="padding-top: -5px;">cukup sehat</output>
@@ -175,14 +179,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                               </div>
                                               <div class="row">
                                                 <div class="col-sm-1">
-                                                    <div style="color:blue">&#9632;</div>  
+                                                    <div style="color:#ffac0e">&#9632;</div>  
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <output style="padding-top: -5px;">kurang sehat</output>
                                                 </div>
 
                                                 <div class="col-sm-1">
-                                                    <div style="color:red">&#9632;</div>  
+                                                    <div style="color:#dc474f">&#9632;</div>  
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <p style="padding-top: -5px;">tidak sehat</p>
@@ -201,13 +205,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <table>
                                             <tr>
                                               <td>
-                                                <strong>KAP = </strong>
+                                                <strong>ROA = </strong>
                                               </td>
                                               <td >
-                                                  <output>
-                                                   Aktiva produktif yang diklasifikasikan
+                                                  <output style="text-align:center";>
+                                                  Laba Sebelum Pajak 12 bulan
                                                     <hr>
-                                                   Total aktiva produktif
+                                                   Rata-rata Aset 12 bulan
                                                   </output>
                                               </td>
                                               <td>
@@ -261,18 +265,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <div class="from-group row justify-content-sm-center">
                                             <table>
                                             <tr>
-                                                    <th style="background-color:red ; width:100px;text-align:center;"; >
-                                                        > 14.85%
+                                            <th style="background-color:#dc474f;color:white; width:100px;text-align:center;"; >
+                                                    > 95.92 %
+
                                                     </th>
-                                                    <th style="background-color:blue ; width:100px;text-align:center;"; >
-                                                        <= 14.85%
+                                                    <th style="background-color:#ffac0e;color:white; width:100px;text-align:center;"; >
+                                                    ≥ 94.72 % - ≤ 95.92 %
+
                                                     </th>
-                                                    <th style=" background-color:yellow;width:100px;text-align:center;";>
-                                                      <= 12.60%
-                                                    
+                                                    <th style=" background-color:#3bb0ba;color:white;width:100px;text-align:center;";>
+                                                    ≥ 93.52 % - ≤ 94.72  %
+
                                                     </th>
-                                                    <th  style=" background-color:green;width:100px;height:50px; text-align:center;";>   
-                                                      <= 10.35 
+                                                    <th  style=" background-color:#a1dd70;color:white;width:100px;height:50px; text-align:center;";>  
+                                                    ≤ 93.52 %
+
                                                     </th>
                                                   </tr>
                                             </table>
@@ -281,14 +288,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   
                                         <div class="row">
                                                 <div class="col-sm-1">
-                                                    <div style="color:green">&#9632;</div>  
+                                                    <div style="color:#a1dd70">&#9632;</div>  
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <output style="padding-top: -5px;">sehat</output>
                                                 </div>
 
                                                 <div class="col-sm-1">
-                                                    <div style="color:yellow">&#9632;</div>  
+                                                    <div style="color:#3bb0ba">&#9632;</div>  
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <output style="padding-top: -5px;">cukup sehat</output>
@@ -298,14 +305,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                               </div>
                                               <div class="row">
                                                 <div class="col-sm-1">
-                                                    <div style="color:blue">&#9632;</div>  
+                                                    <div style="color:#ffac0e">&#9632;</div>  
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <output style="padding-top: -5px;">kurang sehat</output>
                                                 </div>
 
                                                 <div class="col-sm-1">
-                                                    <div style="color:red">&#9632;</div>  
+                                                    <div style="color:#dc474f">&#9632;</div>  
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <p style="padding-top: -5px;">tidak sehat</p>
@@ -323,13 +330,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <table>
                                             <tr>
                                               <td>
-                                                <strong>KPPM = </strong>
+                                                <strong>BOPO = </strong>
                                               </td>
                                               <td >
-                                                  <output>
-                                                    Jumlah Modal Bank(Modal Inti + Modal pelengkap) 
+                                              <output style="text-align:center";>
+                                              By Operasional 12 Bulan 
                                                     <hr>
-                                                    Aktiva Tertimbang Menurut Resiko (ATMR)
+                                                    Pendapatan Operasional 12 bulan
                                                   </output>
                                               </td>
                                               <td>
