@@ -51,7 +51,8 @@ function search()
                         .then(function (canvas) 
                         {
                             var pdf = new jsPDF('p', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
-                            pdf.text(530,25,'Financial Dashboard')
+                            //pdf.text(530,25,'Financial Dashboard')
+                            pdf.text(25,25, "Financial Dashboard ");
                             pdf.addImage(canvas, 'jpeg', 0, 25, $('#reportPage').width(), $('#reportPage').height());
                            
                             pdf.save("dashboard.pdf");
