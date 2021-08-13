@@ -5,6 +5,8 @@ var mainTable           = [];
 var arrNomorReff        = [];
 var arrAgunanID         = [];
 var parsedDataDetailArr = [];
+var email               = [];
+var emailData           = [];
 var lengthParsed               = '';
 var nomorreff                  = '';
 var agunan_id                  = '';
@@ -38,9 +40,11 @@ $(document).ready(function () {
                 mainTable.push(response[i][0]);
                 arrNomorReff.push(response[i][1]);
                 arrAgunanID.push(response[i][2]);
+                emailData.push(response[i][3]);
             }
             $('#table_request_jaminan > tbody:first').html(mainTable);
 
+            // console.log(emailData);
             $('#loading').hide(); 
             if(mainVerifikasi == '1'){
                 Swal.fire({
@@ -162,7 +166,12 @@ $('#bodyTableModalJaminan').on('click','.btnPilihJaminan', function () {
                     +           'data-jenis="'+ jenis +'"'
                     +           'data-deskripsi="'+deskripsi+'"'
                     +           'name="btnDeleteJaminanData">' 
-                    +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>'];   
+                    +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>'];  
+    email = ['<tr> <td>'+ nomorreff + '</td> <td>'
+                    + agunan_id + '</td> <td>'
+                    + jenis +'</td> <td>'
+                    + deskripsi +'</td>'
+                    + '</tr>'];   
    
     if(arrNomorReff.includes(nomorreff) == true && arrAgunanID.includes(agunan_id) == true){
         alert('Data Dengan Nomor Ref ' + nomorreff + ' dan Agunan ID ' +agunan_id+' Sudah Ada Dalam List');
@@ -171,8 +180,10 @@ $('#bodyTableModalJaminan').on('click','.btnPilihJaminan', function () {
         mainTable.push(selectedData);
         arrNomorReff.push(nomorreff);
         arrAgunanID.push(agunan_id);
+        emailData.push(email);
     }
     $('#table_request_jaminan > tbody:first').html(mainTable);
+    // console.log(emailData);
     closeModalJaminanDokumen();
 
 });
@@ -201,6 +212,11 @@ $('#table_body_request_jaminan').on('click','.btnDeleteJaminanData', function ()
                     +           'data-deskripsi="'+deskripsi+'"'
                     +           'name="btnDeleteJaminanData">' 
                     +           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>'];  
+    email = ['<tr> <td>'+ nomorreff + '</td> <td>'
+                    + agunan_id + '</td> <td>'
+                    + jenis +'</td> <td>'
+                    + deskripsi +'</td>'
+                    + '</tr>'];
     $('#loading').show();  
     if (confirm("Apakah Anda Yakin Akan Menghapus Data Dengan No. Reff " + nomorreff)) {
         for(i = 0; i < mainTable.length; i++ ){
@@ -209,6 +225,7 @@ $('#table_body_request_jaminan').on('click','.btnDeleteJaminanData', function ()
                 mainTable.splice (i, 1);
                 arrNomorReff.splice (i, 1);
                 arrAgunanID.splice (i, 1);
+                emailData.splice (i, 1);
             }
         }
         $('#table_request_jaminan > tbody:first').html(mainTable);
@@ -218,6 +235,7 @@ $('#table_body_request_jaminan').on('click','.btnDeleteJaminanData', function ()
         alert('Data Batal Di Hapus');
         $('#loading').hide();  
     }
+    // console.log(emailData);
 
 });
 
@@ -233,7 +251,7 @@ $('#btn_simpan').click(function () {
     mainVerifikasi             = $('#mainVerifikasi').val();
 
     for(i = 0; i < mainTable.length; i++ ){
-        var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString()];
+        var data = [arrNomorReff[i].toString(), arrAgunanID[i].toString(), emailData[i].toString()];
         parsedDataDetailArr.push(data);
     }
     lengthParsed = parsedDataDetailArr.length;

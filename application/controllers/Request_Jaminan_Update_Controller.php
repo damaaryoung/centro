@@ -58,7 +58,14 @@ class Request_Jaminan_Update_Controller extends CI_Controller {
 										.           'data-jenis="'. $row['jenis'] .'"'
 										.           'data-deskripsi="'.$row['deskripsi_ringkas'].'"'
 										.           'name="btnDeleteJaminanData">' 
-										.           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>',$row['no_reff'], $row['agunan_id']];
+										.           '<i style="padding-left: 5px;" class="fa fa-trash"></i> </button>  </td> </tr>',
+							$row['no_reff'], 
+							$row['agunan_id'],
+							['<tr> <td>'. $row['no_reff'] . '</td> <td>'
+								. $row['agunan_id'] . '</td> <td>'
+                                . $row['jenis'] .'</td> <td>'
+						        . $row['deskripsi_ringkas'] .'</td>'
+						        . '</tr>']];   
 
 		endforeach;	
 		echo json_encode($data);
@@ -110,6 +117,25 @@ class Request_Jaminan_Update_Controller extends CI_Controller {
 			$this->Request_Jaminan_Update_Model->updateDataRequestPemindahanDetail($main_nomor,$nomorReffDeatail,$agunanIdDetail);
 			
 		}
+
+		$email_to = $this->Request_Jaminan_Update_Model->getEmailCentro($kode_custodian);
+		$email = $this->load->view('ViewCustodian/Cetak/email_revisi_update.php', $data, TRUE);
+
+		$email = array(
+			'subyek' => 'Revisi Permintaan Aset Jaminan',
+			'tujuan' => $email_to,
+			'cc' => 'staf_tisupport@kreditmandiri.co.id',
+			'pesan' => $email
+			// 'attach1' => $req->file('attach1')
+		);
+		require_once("vendor/autoload.php");
+		$client = new \GuzzleHttp\Client();
+		$request = $client->request('POST', 'http://103.31.232.149:3838/email',  [
+			'Content-type' => 'application/x-www-form-urlencoded',
+			'form_params'          => $email
+		]);
+		$response = $request->getBody()->getContents();
+		$sendEmail = json_decode($response, true);
 		echo json_encode($data);
 	}
 
