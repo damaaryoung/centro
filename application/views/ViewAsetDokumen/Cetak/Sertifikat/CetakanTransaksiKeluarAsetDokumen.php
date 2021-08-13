@@ -21,7 +21,7 @@
                 </tr>
             </table>
 
-            <p style="font-size: 10px;">Telah Dipinjamkan oleh BPR Kredit Mandiri Indonesia<?php echo $nama_kantor;?> , kepada :</p>
+            <p style="font-size: 10px;">Telah diserahkan oleh BPR Kredit Mandiri Indonesia <?php echo $nama_kantor;?> , kepada :</p>
             <table border="0" style="width: 100%;
                                      font-size: 10px; 
                                      vertical-align:top; 

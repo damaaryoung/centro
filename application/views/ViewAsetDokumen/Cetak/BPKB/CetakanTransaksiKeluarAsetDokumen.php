@@ -21,7 +21,7 @@
                 </tr>
             </table>
 
-            <p style="font-size: 12px;">Telah Dipinjamkan oleh <?php echo $nama_kantor;?>, kepada :</p>
+            <p style="font-size: 12px;">Telah diserahkan oleh <?php echo $nama_kantor;?>, kepada :</p>
             <table border="0" style="width: 100%;
                                      font-size: 12px; 
                                      vertical-align:top; 
