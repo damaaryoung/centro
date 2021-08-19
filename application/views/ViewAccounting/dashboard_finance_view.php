@@ -114,7 +114,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="col-md-12 mx-auto">
                         <div class="form-group row justify-content-sm-center">
                               <div class="col-sm-6" >
-                                <div class="container" ></div>
                                   <div class="card" id="tvsrealisasi_report">
                                         <div class="card-header">
                                           Target vs Realisasi
@@ -168,18 +167,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         </div>
                                                     </div>
 
-                                                  <div class="col-md-5">
-                                                      <div class="container" id="gaugeModal_container">
-                                                            <canvas id="gaugeModal" style="width: 15vw;"></canvas>
-                                                      </div>
-    
-                                                      <div class="container" id="gaugeModal-value_container">
-                                                          <p id="label_gaugeModal"><output  id="gaugeModal-value"></output></p>                                             
-                                                      </div>
+                                                    <div class="col-md-5">
+                                                          <div class="container" id="gaugeModal_container">
+                                                                <canvas id="gaugeModal" style="width: 15vw;"></canvas>
+                                                          </div>
+        
+                                                          <div class="container" id="gaugeModal-value_container">
+                                                              <p id="label_gaugeModal"><output  id="gaugeModal-value"></output></p>                                             
+                                                          </div>
                                                     </div>   
                                                 </div>
 
-                                          </div> 
+                                          </div>  
                                       </div>
                                 </div>
                           
@@ -196,11 +195,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <i class="fa fa-print"></i>
                                                     </button>
                                                 </div> 
-
                                             </div>
 
                                               <div class="container">
-                                             
+                                             <br>
                                                     <div class="card-body"id="chart_modal_container">
                                                         <canvas id="chart_modal"></canvas>
                                                     </div>

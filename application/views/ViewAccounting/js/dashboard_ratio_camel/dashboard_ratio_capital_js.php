@@ -39,27 +39,30 @@ function search()
                      domtoimage.toPng(document.getElementById('reportPage'))
                         .then(function (canvas) 
                         {
-                            var pdf = new jsPDF('p', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
-                            pdf.text(400,25,'Financial Dashboard')
-                            pdf.addImage(canvas, 'jpeg', 0, 50, $('#reportPage').width(), $('#reportPage').height());
+                            var pdf = new jsPDF('l', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
+                            //pdf.text(530,25,'Financial Dashboard')
+                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#reportPage').width(), $('#reportPage').height());
+
                             pdf.save("dashboard.pdf");
 
                        // that.options.api.optionsChanged();
                     });
+
                 });
 
-                $('#aset_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('capital_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#aset_kap_report').width(), $('#aset_kap_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#capital_aset_kap_reportreport').width(), $('#aset_kap_report').height());
-                            pdf.save("rasio-capital-kpmm.pdf");
 
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
+                // $('#aset_btn').click(function () 
+                // {
+                //      domtoimage.toPng(document.getElementById('capital_report'))
+                //         .then(function (canvas) 
+                //         {
+                //             var pdf = new jsPDF('l', 'pt',[$('#capital_report').width(), $('#capital_report').height()]);
+                //             pdf.addImage(canvas, 'jpeg', 0, 0, $('#capital_report').width(), $('#capital_report').height());
+                //             pdf.save("rasio-capital-kpmm.pdf");
+
+                //        // that.options.api.optionsChanged();
+                //     });
+                // }); 
              
 
 

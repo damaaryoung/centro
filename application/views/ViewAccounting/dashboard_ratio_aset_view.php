@@ -83,7 +83,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <input type="number" min="1900" max="2099" step="1" class="date-own form-control" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 200px;"  onchange="search()">
                                   </div>
                                   <div class="col-sm-2">                                      
-                                  <button type="button" class="btn btn-warning btn-sm" style="width: 140px;" id="btn_export_chart"><i class="fas fa-file-export"></i> Export to PDF</button>
+                                  <button type="button" class="btn btn-warning btn-sm" style="width: 140px;" id="btn_export_chart_aset"><i class="fas fa-file-export"></i> Export to PDF</button>
                                   </div>
                               </div>
                       </div>
@@ -99,278 +99,271 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="card card-danger" >
 
                   <div class="card-header">
-                        <h3 class="card-title">Dashboard</h3>
-                          <div class="card-tools">
+                              <h3 class="card-title">Dashboard</h3>
+                            <div class="card-tools">
                               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                               </button>
                               <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
-                          </div>
+                            </div>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body"id="reportPage" >
-                      
-                    <div class="row">
-                      <div class="col-md-12 mx-auto">
-                         <div class="form-group row justify-content-sm-center">
-                                  <div class="col-sm-7">
-                                    <div class="card" id="capital_report">
-                                          <div class="card-header">
-                                              KAP
-                                              <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                              </div>
+                  <div class="card-body"id="reportPage_aset" >
+                    
+                          <div class="container"  id="asset_kap_report">
+                                    <div class="row">
+                                              <div class="col-md-12 mx-auto">
+                                                        <div class="form-group row justify-content-sm-center">
+                                                                    <div class="col-sm-7">
+                                                                          <div class="card">
+                                                                                      <div class="card-header">
+                                                                                      KAP
+                                                                                            <div class="card-tools">
+                                                                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                                                            </div>
+                                                                                            <div class="card-tools">
+                                                                                                <button type="submit" class="btn btn-warning btn-sm" id="aset_kap_btn" title="Export to PDF" name="btnKembali"> 
+                                                                                                  <i class="fa fa-print"></i></button>
+                                                                                            </div>
+                                                                                      </div>
 
-                                              <div class="card-tools">
-                                                  <button type="submit" class="btn btn-warning btn-sm" id="aset_btn" title="Export to PDF" name="btnKembali"> 
-                                                    <i class="fa fa-print"></i>
-                                                  </button>
-                                              </div>
-                                          </div>
-                                         
-                                            <div class="card-body" id="chart_rasio_capital_container">
-                                                <canvas id="chart_rasio_capital"></canvas>
-                                            </div>
-                                      </div>
-                                  </div>    
+                                                                                      <div class="card-body" id="chart_rasio_capital_container">
+                                                                                          <canvas id="chart_rasio_capital"></canvas>
+                                                                                      </div>
+                                                                          </div>
 
-                                  <div class="col-sm-5">
-                                  <br>
-                                    <br>
-                                    <div class="card">
-                                        <div class="card-body" >
-                                            <div class="from-group row justify-content-sm-center">
-                                                <table>
-                                                  <tr>
-                                                  <th style="background-color:#dc474f;color:white; width:100px;text-align:center;"; >
-                                                    < 14.85 %
-                                                    </th>
-                                                    <th style="background-color:#ffac0e;color:white; width:100px;text-align:center;"; >
-                                                    < 12.60 % - ≤ 14.85 %
-                                                    </th>
-                                                    <th style=" background-color:#3bb0ba;color:white;width:100px;text-align:center;";>
-                                                    < 10.35 % - ≤ 12.60 %
-                                                    </th>
-                                                    <th  style=" background-color:#a1dd70;color:white;width:100px;height:50px; text-align:center;";>   
-                                                    0 % - ≤ 10.35 %
-                                                    </th>
-                                                  </tr>
-                                                </table>
-                                            </div>
-                                                  <br>
-                                  
-                                              <div class="row">
-                                                <div class="col-sm-1">
-                                                    <div style="color:#a1dd70">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">sehat</output>
-                                                </div>
+                                                                    </div>   
+                                                                    
+                                                                    <div class="col-sm-5">
+                                                                          <br>
+                                                                          <br> 
+                                                                          <div class="card">
+                                                                                  <div class="card-body" >
 
-                                                <div class="col-sm-1">
-                                                    <div style="color:#3bb0ba">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">cukup sehat</output>
-                                                </div>
-                                                
+                                                                                  <div class="row">
+                                                                                            <div class="col-sm-3"style="background-color:#dc474f;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                            <strong>  < 14.85 %</strong> 
+                                                                                            </div>
 
-                                              </div>
-                                              <div class="row">
-                                                <div class="col-sm-1">
-                                                    <div style="color:#ffac0e">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">kurang sehat</output>
-                                                </div>
-
-                                                <div class="col-sm-1">
-                                                    <div style="color:#dc474f">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <p style="padding-top: -5px;">tidak sehat</p>
-                                                </div>
-                                              </div>
-
-                                          </div>
-
-
+                                                                                            <div class="col-sm-3"style="background-color:#ffac0e;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                              <strong>< 12.60 % - ≤ 14.85 %</strong> 
+                                                                                            </div>
+                                                                                          
+                                                                                            <div class="col-sm-3"style="background-color:#3bb0ba;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                            <strong>  < 10.35 % - ≤ 12.60 %</strong> 
+                                                                                            </div>
+                                                                                          
+                                                                                            <div class="col-sm-3"style="background-color:#a1dd70;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                            <strong> 0 % - ≤ 10.35 %</strong> 
+                                                                                            </div>
+                                                                                          
+                                                                                  </div>
+                                                                                  
+                                                                                          <br>
+                                                                  
+                                                                                          <div class="row">
+                                                                                            <div class="col-sm-1">
+                                                                                                <div style="color:#a1dd70">&#9632;</div>  
+                                                                                            </div>
+                                                                                            <div class="col-sm-4">
+                                                                                                <output style="padding-top: -5px;">sehat</output>
+                                                                                            </div>
+                                                                                            <div class="col-sm-1">
+                                                                                                <div style="color:#3bb0ba">&#9632;</div>  
+                                                                                            </div>
+                                                                                            <div class="col-sm-4">
+                                                                                                <output style="padding-top: -5px;">cukup sehat</output>
+                                                                                            </div>
+                                                                                        </div>
                                           
-                                    </div>
-                                    <div class="card">
-                                
-                                    <div class="card-body ">
-                                      <div class="from-group row justify-content-sm-center">
-                                        <table>
-                                            <tr>
-                                              <td>
-                                                <strong>KAP = </strong>
-                                              </td>
-                                              <td >
-                                                  <output style="text-align:center";>
-                                                   Aktiva produktif yang diklasifikasikan
-                                                    <hr>
-                                                   Total aktiva produktif
-                                                  </output>
-                                              </td>
-                                              <td>
-                                                <output style="padding-top: -5px;"> x 100%</output>
-                                              </td>
-                                              
-                                            </tr>
-                                        </table>
-                                        </div>
-                                    </div>
-                            
-                                  </div>
-                                  </div>  
+                                                                                          <div class="row">
+                                                                                              <div class="col-sm-1">
+                                                                                                  <div style="color:#ffac0e">&#9632;</div>  
+                                                                                              </div>
+                                                                                              <div class="col-sm-4">
+                                                                                                  <output style="padding-top: -5px;">kurang sehat</output>
+                                                                                              </div>
+
+                                                                                              <div class="col-sm-1">
+                                                                                                  <div style="color:#dc474f">&#9632;</div>  
+                                                                                              </div>
+                                                                                              <div class="col-sm-4">
+                                                                                                  <p style="padding-top: -5px;">tidak sehat</strong>
+                                                                                              </div>
+                                                                                          </div>
+                                                                                
+                                                                                  </div>  
+                                                                          </div>
+                                                                    
+                                                                          <div class="card">
+                                                                        
+                                                                                  <div class="card-body ">
+                                                                                          <div class="from-group row justify-content-sm-center">
+
+                                                                                                <table>
+                                                                                                    <tr>
+                                                                                                      <td>
+                                                                                                        <strong>KAP = </strong>
+                                                                                                      </td>
+                                                                                                      <td >
+                                                                                                          <output>
+                                                                                                          Aktiva produktif yang diklasifikasikan 
+                                                                                                            <hr>
+                                                                                                            Total aktiva produktif
+                                                                                                          </output>
+                                                                                                      </td>
+                                                                                                      <td>
+                                                                                                        <output style="padding-top: -5px;"> x 100%</output>
+                                                                                                      </td>
+                                                                                                      
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                          </div>
+                                                                                  </div>
+                                                                          </div>
+
+                                                                    </div>
+
+                                                          </div>
+
+                                              </div>
                                   
-
-                            </div>
-                         
-
-
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12 mx-auto">
-                      <div class="form-group row justify-content-sm-center">
-                                  <div class="col-sm-7">
-                                    <div class="card" id="asset_ppap_report">
-                                          <div class="card-header">
-                                              PPAP
-                                              <div class="card-tools">
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                              </div>
-
-                                              <div class="card-tools">
-                                                  <button type="submit" class="btn btn-warning btn-sm" id="aset_ppap_btn" title="Export to PDF" name="btnKembali"> 
-                                                    <i class="fa fa-print"></i>
-                                                  </button>
-                                              </div>
-                                          </div>
-                                         
-                                            <div class="card-body" id="chart_rasio_aset_ppap_container">
-                                                <canvas id="chart_rasio_asset_ppap"></canvas>
-                                            </div>
-                                      </div>
-                                  </div>    
-
-                               <div class="col-sm-5">
-                               <br>
-                                    <br>
-                                      <div class="card">
-                                        <div class="card-body" >
-                                        <div class="from-group row justify-content-sm-center">
-                                            <table>
-                                            <tr>
-                                            <th style="background-color:#dc474f;color:white; width:100px;text-align:center;"; >
-                                                    < 51 %
-
-                                                    </th>
-                                                    <th style="background-color:#ffac0e;color:white; width:100px;text-align:center;"; >
-                                                    ≥ 51 % - ≤ 66 %
-                                                    </th>
-                                                    <th style=" background-color:#3bb0ba;color:white;width:100px;text-align:center;";>
-                                                    ≥ 66 % - ≤ 81 %
-                                                    </th>
-                                                    <th  style=" background-color:#a1dd70;color:white;width:100px;height:50px; text-align:center;";>     
-                                                    ≥ 81 % 
-                                                    </th>
-                                                  </tr>
-                                            </table>
-                                        </div>
-                                        <br>
-                                  
-                                        <div class="row">
-                                        <div class="col-sm-1">
-                                                    <div style="color:#a1dd70">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">sehat</output>
-                                                </div>
-
-                                                <div class="col-sm-1">
-                                                    <div style="color:#3bb0ba">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">cukup sehat</output>
-                                                </div>
-                                                
-
-                                              </div>
-                                              <div class="row">
-                                                <div class="col-sm-1">
-                                                    <div style="color:#ffac0e">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">kurang sehat</output>
-                                                </div>
-
-                                                <div class="col-sm-1">
-                                                    <div style="color:#dc474f">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <p style="padding-top: -5px;">tidak sehat</p>
-                                                </div>
-                                              </div>
-                                        
-                                          </div>
-                            
-                                  </div>
-                                  <div class="card">
-                                
-                                    <div class="card-body ">
-                                      <div class="from-group row justify-content-sm-center">
-
-                                        <table>
-                                            <tr>
-                                              <td>
-                                                <strong>PPAP = </strong>
-                                              </td>
-                                              <td >
-                                                  <output style="text-align:center";>
-                                                  PPAP Yang Dibentuk Bank
-                                                    <hr>
-                                                    PPAP Yang Wajib Dibentuk Bank
-                                                  </output>
-                                              </td>
-                                              <td>
-                                                <output style="padding-top: -5px;"> x 100%</output>
-                                              </td>
-                                              
-                                            </tr>
-                                        </table>
-                                        </div>
                                     </div>
-                            
-                                  </div>
+                          </div>
 
-                            </div>
+                          <div class="container"  id="asset_ppap_report">
+                                    <div class="row">
+                                              <div class="col-md-12 mx-auto">
+                                                        <div class="form-group row justify-content-sm-center">
+                                                                    <div class="col-sm-7">
+                                                                          <div class="card">
+                                                                                      <div class="card-header">
+                                                                                      PPAP
+                                                                                            <div class="card-tools">
+                                                                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                                                            </div>
+                                                                                            <div class="card-tools">
+                                                                                                <button type="submit" class="btn btn-warning btn-sm" id="aset_ppap_btn" title="Export to PDF" name="btnKembali"> 
+                                                                                                  <i class="fa fa-print"></i></button>
+                                                                                            </div>
+                                                                                      </div>
 
-                      </div>
-                    </div>
-               
-                  <!-- /.card-body -->
-          </div>
-        <!-- End Data Tables-->
-        <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
+                                                                                      <div class="card-body" id="chart_rasio_aset_ppap_container">
+                                                                                          <canvas id="chart_rasio_asset_ppap"></canvas>
+                                                                                      </div>
+                                                                          </div>
+
+                                                                    </div>   
+                                                                    
+                                                                    <div class="col-sm-5">
+                                                                          <br>
+                                                                          <br> 
+                                                                          <div class="card">
+                                                                                  <div class="card-body" >
+
+                                                                                      <div class="row">
+                                                                                        <div class="col-sm-3"style="background-color:#dc474f;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                        <strong> < 51 %</strong> 
+                                                                                        </div>
+
+                                                                                        <div class="col-sm-3"style="background-color:#ffac0e;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                          <strong>≥ 51 % - ≤ 66 %</strong> 
+                                                                                        </div>
+                                                                                      
+                                                                                        <div class="col-sm-3"style="background-color:#3bb0ba;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                        <strong> ≥ 66 % - ≤ 81 %</strong> 
+                                                                                        </div>
+                                                                                      
+                                                                                        <div class="col-sm-3"style="background-color:#a1dd70;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                        <strong>≥ 81 % </strong> 
+                                                                                        </div>
+                                                                                      </div>
+                                                                                      <br>
+                                                                      
+                                                                                      <div class="row">
+                                                                                              <div class="col-sm-1">
+                                                                                                  <div style="color:#a1dd70">&#9632;</div>  
+                                                                                              </div>
+                                                                                              <div class="col-sm-4">
+                                                                                                  <output style="padding-top: -5px;">sehat</output>
+                                                                                              </div>
+
+                                                                                              <div class="col-sm-1">
+                                                                                                  <div style="color:#3bb0ba">&#9632;</div>  
+                                                                                              </div>
+                                                                                              <div class="col-sm-4">
+                                                                                                  <output style="padding-top: -5px;">cukup sehat</output>
+                                                                                              </div>
+                                                                                      </div>
+
+                                                                                      <div class="row">
+                                                                                        <div class="col-sm-1">
+                                                                                            <div style="color:#ffac0e">&#9632;</div>  
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <output style="padding-top: -5px;">kurang sehat</output>
+                                                                                        </div>
+
+                                                                                        <div class="col-sm-1">
+                                                                                            <div style="color:#dc474f">&#9632;</div>  
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <p style="padding-top: -5px;">tidak sehat</p>
+                                                                                        </div>
+                                                                                      </div>
+                                                                                
+                                                                                  </div>  
+                                                                          </div>
+                                                                    
+                                                                          <div class="card">
+                                                                        
+                                                                                  <div class="card-body ">
+                                                                                          <div class="from-group row justify-content-sm-center">
+
+                                                                                                <table>
+                                                                                                    <tr>
+                                                                                                      <td>
+                                                                                                        <strong>PPAP = </strong>
+                                                                                                      </td>
+                                                                                                      <td >
+                                                                                                          <output>
+                                                                                                          PPAP Yang Dibentuk Bank
+                                                                                                            <hr>
+                                                                                                            PPAP Yang Wajib Dibentuk Bank
+                                                                                                          </output>
+                                                                                                      </td>
+                                                                                                      <td>
+                                                                                                        <output style="padding-top: -5px;"> x 100%</output>
+                                                                                                      </td>
+                                                                                                      
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                          </div>
+                                                                                  </div>
+                                                                          </div>
+
+                                                                    </div>
+
+                                                          </div>
+
+                                              </div>
+                                  
+                                    </div>
+                          </div>
+
+                  </div> 
+            </div>
+          <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
           <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
-
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-
 
 	<?php
         echo $ctrlbar;
-        echo $footer;
-        
+        echo $footer;        
 	?>
-<!--  -->
+  
 <script src="<?php echo base_url('assets/dist/js/accounting.min.js')?>"></script>
-<?php $this->view('ViewAccounting/js/dashboard_ratio_asset_js.php'); ?>
+<?php $this->view('ViewAccounting/js/dashboard_ratio_camel/dashboard_ratio_asset_js.php'); ?>
  
 </body>
 </html>

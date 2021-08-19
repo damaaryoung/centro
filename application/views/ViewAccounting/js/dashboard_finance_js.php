@@ -514,7 +514,6 @@ function get_chart_aset_kredit(){
                     backgroundColor: '#ffac0e',
                     data:realisasi,
                 },
-
             ]
             };
             var config_aset_kredit = 
@@ -542,18 +541,18 @@ function get_chart_aset_kredit(){
                 //         doc.addImage(canvasImg, 'PNG', 30, 55, 230, 100 );
                 //         doc.save('aset-kredit.pdf');
                 //     });
-
-                   
+ 
             },
-            error : function(response) {
-            console.log('failed :' + response);
-            $('#loading').hide();
-            return Swal.fire({
-            icon: 'error',
-            title: 'Gagal Get Data!',
-            text: 'Mohon Periksa Jaringan Anda'
-            });
-            }
+            error : function(response) 
+            {
+                console.log('failed :' + response);
+                $('#loading').hide();
+                return Swal.fire
+                ({
+                icon: 'error',
+                title: 'Gagal Get Data!',
+                text: 'Mohon Periksa Jaringan Anda'
+                }); }
             });
           
 }

@@ -29,50 +29,52 @@ $(document).ready(function () {
              
 function search()
 {
-    get_chart_rasio_earning_roa()
-    get_chart_rasio_earning_bopo()
+        get_chart_rasio_liquidity_cash_ratio()
+           get_chart_rasio_earning_bopo()
 
 }
 
-                $('#roa_btn').click(function () 
+          
+                $('#btn_export_chart_liquidity').click(function () 
                 {
-                     domtoimage.toPng(document.getElementById('roa_report'))
+                     domtoimage.toPng(document.getElementById('reportPage_liquidity'))
                         .then(function (canvas) 
                         {
-                            var pdf = new jsPDF('l', 'pt',[$('#roa_report').width(), $('#roa_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#roa_report').width(), $('#roa_report').height());
-                            pdf.save("rasio-earning-roa.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
-
-                
-                $('#earning_bopo_btn').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('earning_bopo_report'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('l', 'pt',[$('#earning_bopo_report').width(), $('#earning_bopo_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#earning_bopo_report').width(), $('#earning_bopo_report').height());
-                            pdf.save("rasio-earning-bopo.pdf");
-
-                       // that.options.api.optionsChanged();
-                    });
-                }); 
-                $('#btn_export_chart').click(function () 
-                {
-                     domtoimage.toPng(document.getElementById('reportPage'))
-                        .then(function (canvas) 
-                        {
-                            var pdf = new jsPDF('p', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
-                            pdf.text(400,25,'Financial Dashboard')
-                            pdf.addImage(canvas, 'jpeg', 0, 50, $('#reportPage').width(), $('#reportPage').height());
-                            pdf.save("dashboard.pdf");
+                            var pdf = new jsPDF('l', 'pt',[$('#reportPage_liquidity').width(), $('#reportPage_liquidity').height()]);
+                            pdf.text(25,25,'Ratio Dashboard Liquidity')
+                            pdf.addImage(canvas, 'jpeg', 0, 25, $('#reportPage_liquidity').width(), $('#reportPage_liquidity').height());
+                            pdf.save("dashboard-ratio-liquidity.pdf");
 
                        // that.options.api.optionsChanged();
                     });
                 });
+
+                
+                $('#ldr_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('ldr_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#ldr_report').width(), $('#ldr_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 10, $('#ldr_report').width(), $('#ldr_report').height());
+                            pdf.save("rasio-liquidity-ldr.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
+                
+                $('#cash_ratio_btn').click(function () 
+                {
+                     domtoimage.toPng(document.getElementById('cash_ratio_report'))
+                        .then(function (canvas) 
+                        {
+                            var pdf = new jsPDF('l', 'pt',[$('#cash_ratio_report').width(), $('#cash_ratio_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 10, $('#cash_ratio_report').width(), $('#cash_ratio_report').height());
+                            pdf.save("rasio-liquidity-cash-ratio.pdf");
+
+                       // that.options.api.optionsChanged();
+                    });
+                }); 
              
 
 
@@ -87,8 +89,8 @@ function get_sysdate(){
                     },
             success : function(response) {
                 $('#src_tgl_laporan').val(response.sysdate);
-                get_chart_rasio_earning_roa()
-                get_chart_rasio_earning_bopo()
+                get_chart_rasio_liquidity_cash_ratio()
+           get_chart_rasio_earning_bopo()
             },
             error : function(response) {
                 console.log('failed :' + response);
@@ -112,7 +114,7 @@ function get_chart_rasio_earning_bopo(){
    
 //    console.log(src_kode_kantor);
    $.ajax({
-           url : base_url + "Accounting/Dashboard_ratio_controller/get_data_chart_bopo",
+           url : base_url + "Accounting/Dashboard_ratio_controller/get_data_chart_ldr",
            type : "POST",
            dataType : "json",
            timeout : 180000,
@@ -126,34 +128,34 @@ function get_chart_rasio_earning_bopo(){
             $('#loading').hide(); 
 
             //    console.log("response chart Asert Total",response)
-                if(!response.rasio_earning_bopo)
+                if(!response.rasio_liquidity_ldr)
                 {
-                    var data_chart_rasio_earning_bopo = 
+                    var data_chart_rasio_liquidity_ldr = 
             {
 
                 labels:['January','February','Maret','April','May','June','July','August','Septermber','Oktober','November','Desember'],
                 datasets: [
                     {
-                        label: "BOPO",
+                        label: "LDR",
                         data:0,
                         backgroundColor: color,
                     },
                 ]
             };
             
-                var config_chart_rasio_earning_bopo = 
+                var config_chart_rasio_liquidity_ldr = 
             {
                 type: 'bar',
-                data:data_chart_rasio_earning_bopo,
+                data:data_chart_rasio_liquidity_ldr,
                 options: {}
             };
                
-                 $("canvas#chart_rasio_earning_bopo").remove();
-                 $("#chart_rasio_earning_bopo_container ").append('<canvas id="chart_rasio_earning_bopo"></canvas>'); 
-                 var grapharea = document.getElementById("chart_rasio_earning_bopo").getContext("2d")
+                 $("canvas#chart_rasio_liquidity_ldr").remove();
+                 $("#chart_rasio_liquidity_ldr_container ").append('<canvas id="chart_rasio_liquidity_ldr"></canvas>'); 
+                 var grapharea = document.getElementById("chart_rasio_liquidity_ldr").getContext("2d")
                    var npat_monthly = new Chart(
-                    grapharea,config_chart_rasio_earning_bopo
-                    );  
+                    grapharea,config_chart_rasio_liquidity_ldr
+                    );
                     return 
                 }
                 var label=[]
@@ -163,22 +165,22 @@ function get_chart_rasio_earning_bopo(){
             red: 'rgb(255, 99, 132)',
             blue: 'rgb(54, 162, 235)'
             };
-                for (var i =0;i < response.rasio_earning_bopo.length;i++) 
+                for (var i =0;i < response.rasio_liquidity_ldr.length;i++) 
                     {
-                        label.push(response.rasio_earning_bopo[i]['tgl_laporan']);
-                        rasio.push(response.rasio_earning_bopo[i]['rasio']);
+                        label.push(response.rasio_liquidity_ldr[i]['tgl_laporan']);
+                        rasio.push(response.rasio_liquidity_ldr[i]['rasio']);
                         var int_rasio= rasio.map(i=>Number(i));
-                        if(int_rasio[i] > 95.92)
+                        if(int_rasio[i] > 102.25)
                         {
                             color.push('#dc474f')
-                        }else if(int_rasio[i] > 94.72 && int_rasio[i] <= 95.92)
+                        }else if(int_rasio[i] > 98.50 && int_rasio[i] <=102.25)
                         {
                             color.push('#ffac0e')
-                        }else if(int_rasio[i] > 93.52 && int_rasio[i] <=94.72 )
+                        }else if(int_rasio[i] >94.75 && int_rasio[i] <=98.50 )
                         {
                             color.push('#3bb0ba')
                         }
-                        else if(int_rasio[i] <= 93.52 ){
+                        else if(int_rasio[i] <= 94.75 ){
                             color.push('#a1dd70')
                         }
                     }
@@ -186,34 +188,33 @@ function get_chart_rasio_earning_bopo(){
                  //   console.log(int_rasio)
                   
             //Script NPAT monthly
-            var data_chart_rasio_earning_bopo = 
+            var data_chart_rasio_liquidity_ldr = 
             {
 
                 labels:label,
                 datasets: [
                     {
-                        label: "BOPO",
+                        label: "LDR",
                         data:int_rasio,
                         backgroundColor: color,
                     },
                 ]
             };
             
-                var config_chart_rasio_earning_bopo = 
+                var config_chart_rasio_liquidity_ldr = 
             {
                 type: 'bar',
-                data:data_chart_rasio_earning_bopo,
+                data:data_chart_rasio_liquidity_ldr,
                 options: {}
             };
                
-                 $("canvas#chart_rasio_earning_bopo").remove();
-                 $("#chart_rasio_earning_bopo_container ").append('<canvas id="chart_rasio_earning_bopo"></canvas>'); 
-                 var grapharea = document.getElementById("chart_rasio_earning_bopo").getContext("2d")
+                 $("canvas#chart_rasio_liquidity_ldr").remove();
+                 $("#chart_rasio_liquidity_ldr_container ").append('<canvas id="chart_rasio_liquidity_ldr"></canvas>'); 
+                 var grapharea = document.getElementById("chart_rasio_liquidity_ldr").getContext("2d")
                    var npat_monthly = new Chart(
-                    grapharea,config_chart_rasio_earning_bopo
+                    grapharea,config_chart_rasio_liquidity_ldr
                     ); 
 
-      
 },
            error : function(response) {
                console.log('failed :' + response);
@@ -231,7 +232,7 @@ function get_chart_rasio_earning_bopo(){
 }
 
 
-function get_chart_rasio_earning_roa(){
+function get_chart_rasio_liquidity_cash_ratio(){
     data = '';
    $('#loading').show(); 
    var src_tgl_laporan = $('#src_tgl_laporan').val();
@@ -239,7 +240,7 @@ function get_chart_rasio_earning_roa(){
    
 //    console.log(src_kode_kantor);
    $.ajax({
-           url : base_url + "Accounting/Dashboard_ratio_controller/get_data_chart_roa",
+           url : base_url + "Accounting/Dashboard_ratio_controller/get_data_chart_cash_ratio",
            type : "POST",
            dataType : "json",
            timeout : 180000,
@@ -253,35 +254,34 @@ function get_chart_rasio_earning_roa(){
             $('#loading').hide(); 
 
              //   console.log("response chart Asert Total",response)
-                if(!response.rasio_earning_roa)
+                if(!response.rasio_liquidity_cash_ratio)
                 {
-                    var data_chart_rasio_earning_roa = 
+                    var data_chart_rasio_liquidity_cash_ratio = 
             {
 
                 labels:['January','February','Maret','April','May','June','July','August','Septermber','Oktober','November','Desember'],
                 datasets: [
                     {
-                        label: "ROA",
+                        label: "Cash Ratio",
                         data:0,
                         backgroundColor: color,
                     },
                 ]
             };
             
-                var config_chart_rasio_earning_roa = 
+                var config_chart_rasio_liquidity_cash_ratio = 
             {
                 type: 'bar',
-                data:data_chart_rasio_earning_roa,
+                data:data_chart_rasio_liquidity_cash_ratio,
                 options: {}
             };
-              console.log(data_chart_rasio_earning_roa) 
-                 $("canvas#chart_earning_roa").remove();
-                 $("#chart_rasio_earning_roa_container ").append('<canvas id="chart_earning_roa"></canvas>'); 
-                 var grapharea = document.getElementById("chart_earning_roa").getContext("2d")
-                   var npat_monthly = new Chart(
-                    grapharea,config_chart_rasio_earning_roa
-                    );
-                    return
+              console.log(data_chart_rasio_liquidity_cash_ratio) 
+                 $("canvas#chart_liquidity_cash_ratio").remove();
+                 $("#chart_rasio_liquidity_cash_ratio_container ").append('<canvas id="chart_liquidity_cash_ratio"></canvas>'); 
+                 var grapharea = document.getElementById("chart_liquidity_cash_ratio").getContext("2d")
+                   var liquidity_cash_ratio = new Chart(
+                    grapharea,config_chart_rasio_liquidity_cash_ratio
+                    );return 
                 }
                 var label=[]
                 var rasio=[]
@@ -290,57 +290,57 @@ function get_chart_rasio_earning_roa(){
             red: 'rgb(255, 99, 132)',
             blue: 'rgb(54, 162, 235)'
             };
-                for (var i =0;i < response.rasio_earning_roa.length;i++) 
+                for (var i =0;i < response.rasio_liquidity_cash_ratio.length;i++) 
                     {
-                        label.push(response.rasio_earning_roa[i]['tgl_laporan']);
-                        rasio.push(response.rasio_earning_roa[i]['rasio']);
+                        label.push(response.rasio_liquidity_cash_ratio[i]['tgl_laporan']);
+                        rasio.push(response.rasio_liquidity_cash_ratio[i]['rasio']);
                         var int_rasio= rasio.map(i=>Number(i));
-                        if(int_rasio[i] < 0.765)
+                        if(int_rasio[i] < 2.55)
                         {
-                            color.push('rgb(235, 0, 0)')
-                        }else if(int_rasio[i] < 0.999 && int_rasio[i] >= 0.765)
+                            color.push('#dc474f')
+                        }else if(int_rasio[i] >=2.55  && int_rasio[i] <3.30)
                         {
-                            color.push('rgb(255, 255, 51)')
-                        }else if(int_rasio[i] < 1.215 && int_rasio[i] >=0.999 )
+                            color.push('#ffac0e')
+                        }else if(int_rasio[i] >=3.30  && int_rasio[i] <4.05 )
                         {
-                            color.push('rgb(0, 128, 255)')
+                            color.push('#3bb0ba')
                         }
-                        else if(int_rasio[i] >= 1.215 ){
-                            color.push('rgb(51, 235, 51)')
+                        else if(int_rasio[i] >= 4.05 ){
+                            color.push('#a1dd70')
                         }
                     }
                    // console.log(parseFloat(response.rasio_capital[i]['rasio']))
                   //  console.log(int_rasio)
                   
             //Script NPAT monthly
-            var data_chart_rasio_earning_roa = 
+            var data_chart_rasio_liquidity_cash_ratio = 
             {
 
                 labels:label,
                 datasets: [
                     {
-                        label: "ROA",
+                        label: "Cash Ratio",
                         data:int_rasio,
                         backgroundColor: color,
                     },
                 ]
             };
             
-                var config_chart_rasio_earning_roa = 
+                var config_chart_rasio_liquidity_cash_ratio = 
             {
                 type: 'bar',
-                data:data_chart_rasio_earning_roa,
+                data:data_chart_rasio_liquidity_cash_ratio,
                 options: {}
             };
-              console.log(data_chart_rasio_earning_roa) 
-                 $("canvas#chart_earning_roa").remove();
-                 $("#chart_rasio_earning_roa_container ").append('<canvas id="chart_earning_roa"></canvas>'); 
-                 var grapharea = document.getElementById("chart_earning_roa").getContext("2d")
-                   var npat_monthly = new Chart(
-                    grapharea,config_chart_rasio_earning_roa
+              console.log(data_chart_rasio_liquidity_cash_ratio) 
+                 $("canvas#chart_liquidity_cash_ratio").remove();
+                 $("#chart_rasio_liquidity_cash_ratio_container ").append('<canvas id="chart_liquidity_cash_ratio"></canvas>'); 
+                 var grapharea = document.getElementById("chart_liquidity_cash_ratio").getContext("2d")
+                   var liquidity_cash_ratio = new Chart(
+                    grapharea,config_chart_rasio_liquidity_cash_ratio
                     ); 
 
-
+   
 },
            error : function(response) {
                console.log('failed :' + response);

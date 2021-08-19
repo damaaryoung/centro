@@ -34,26 +34,26 @@ function search()
 
 }
 
-                $('#btn_export_chart').click(function () 
+                $('#btn_export_chart_aset').click(function () 
                 {
-                     domtoimage.toPng(document.getElementById('reportPage'))
+                     domtoimage.toPng(document.getElementById('reportPage_aset'))
                         .then(function (canvas) 
                         {
-                            var pdf = new jsPDF('p', 'pt',[$('#reportPage').width(), $('#reportPage').height()]);
-                            pdf.text(400,25,'Financial Dashboard')
-                            pdf.addImage(canvas, 'jpeg', 0, 50, $('#reportPage').width(), $('#reportPage').height());
-                            pdf.save("dashboard.pdf");
+                            var pdf = new jsPDF('l', 'pt',[$('#reportPage_aset').width(), $('#reportPage_aset').height()]);
+                            pdf.text(25,25, "Ratio Camel Aset");
+                            pdf.addImage(canvas, 'jpeg', 0, 25, $('#reportPage_aset').width(), $('#reportPage_aset').height());
+                            pdf.save("dashboard-ratio-aset.pdf");
 
                        // that.options.api.optionsChanged();
                     });
                 });
-                $('#aset_btn').click(function () 
+                $('#aset_kap_btn').click(function () 
                 {
-                     domtoimage.toPng(document.getElementById('capital_report'))
+                     domtoimage.toPng(document.getElementById('asset_kap_report'))
                         .then(function (canvas) 
                         {
-                            var pdf = new jsPDF('l', 'pt',[$('#capital_report').width(), $('#capital_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#capital_report').width(), $('#capital_report').height());
+                            var pdf = new jsPDF('l', 'pt',[$('#asset_kap_report').width(), $('#asset_kap_report').height()]);
+                            pdf.addImage(canvas, 'jpeg', 0, 10, $('#asset_kap_report').width(), $('#asset_kap_report').height());
                             pdf.save("rasio-aset-kap.pdf");
 
                        // that.options.api.optionsChanged();
@@ -65,7 +65,7 @@ function search()
                         .then(function (canvas) 
                         {
                             var pdf = new jsPDF('l', 'pt',[$('#asset_ppap_report').width(), $('#asset_ppap_report').height()]);
-                            pdf.addImage(canvas, 'jpeg', 0, 0, $('#asset_ppap_report').width(), $('#asset_ppap_report').height());
+                            pdf.addImage(canvas, 'jpeg', 0, 10, $('#asset_ppap_report').width(), $('#asset_ppap_report').height());
                             pdf.save("rasio-aset-ppap.pdf");
 
                        // that.options.api.optionsChanged();

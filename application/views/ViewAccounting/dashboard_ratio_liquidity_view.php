@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <input type="number" min="1900" max="2099" step="1" class="date-own form-control" id="src_tgl_laporan" name="src_tgl_laporan" style="width: 200px;"  onchange="search()">
                                   </div>
                                   <div class="col-sm-2">                                      
-                                  <button type="button" class="btn btn-warning btn-sm" style="width: 140px;" id="btn_export_chart"><i class="fas fa-file-export"></i> Export to PDF</button>
+                                  <button type="button" class="btn btn-warning btn-sm" style="width: 140px;" id="btn_export_chart_liquidity"><i class="fas fa-file-export"></i> Export to PDF</button>
                                   </div>
                               </div>
                       </div>
@@ -104,260 +104,252 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </div>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body"id="reportPage" >
+                  <div class="card-body"id="reportPage_liquidity" >
                       
-                            <div class="row">
-                              <div class="col-md-12 mx-auto">
-                                <div class="form-group row justify-content-sm-center">
-                                          <div class="col-sm-7">
-                                            <div class="card" id="cash_ratio_report">
-                                                  <div class="card-header">
-                                                      Cash Ratio
-                                                      <div class="card-tools">
-                                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                                      </div>
+               
+                  <div class="container"  id="cash_ratio_report">
+                                    <div class="row">
+                                              <div class="col-md-12 mx-auto">
+                                                        <div class="form-group row justify-content-sm-center">
+                                                                    <div class="col-sm-7">
+                                                                          <div class="card">
+                                                                                      <div class="card-header">
+                                                                                      Cash Ratio
+                                                                                            <div class="card-tools">
+                                                                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                                                            </div>
+                                                                                            <div class="card-tools">
+                                                                                                <button type="submit" class="btn btn-warning btn-sm" id="cash_ratio_btn" title="Export to PDF" name="btnKembali"> 
+                                                                                                  <i class="fa fa-print"></i></button>
+                                                                                            </div>
+                                                                                      </div>
 
-                                                      <div class="card-tools">
-                                                          <button type="submit" class="btn btn-warning btn-sm" id="cash_ratio_btn" title="Export to PDF" name="btnKembali"> 
-                                                            <i class="fa fa-print"></i>
-                                                          </button>
-                                                      </div>
-                                                  </div>
-                                                
-                                                    <div class="card-body" id="chart_rasio_liquidity_cash_ratio_container">
-                                                        <canvas id="chart_liquidity_cash_ratio"></canvas>
-                                                    </div>
-                                              </div>
-                                          </div>    
+                                                                                      <div class="card-body" id="chart_rasio_liquidity_cash_ratio_container">
+                                                                                          <canvas id="chart_liquidity_cash_ratio"></canvas>
+                                                                                      </div>
+                                                                          </div>
 
-                                          <div class="col-sm-5">
-                                          <br>
-                                            <br>
-                                            <div class="card">
-                                                <div class="card-body" >
-                                                    <div class="from-group row justify-content-sm-center">
-                                                        <table>
-                                                          <tr>
-                                                          <th style="background-color:#dc474f;color:white; width:120px;text-align:center;"; >
-                                                            < 2.55 %
+                                                                    </div>   
+                                                                    
+                                                                    <div class="col-sm-5">
+                                                                          <br>
+                                                                          <br> 
+                                                                          <div class="card">
+                                                                                  <div class="card-body" >
 
-                                                            </th>
-                                                            <th style="background-color:#ffac0e;color:white; width:120px;text-align:center;"; >
-                                                            ≥ 2.55 % - ≤ 3.30 %
+                                                                                  <div class="row">
+                                                                                            <div class="col-sm-3"style="background-color:#dc474f;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                            <strong>< 2.55 %</strong> 
+                                                                                            </div>
 
-                                                            </th>
-                                                            <th style=" background-color:#3bb0ba;color:white;width:120px;text-align:center;";>
-                                                            ≥ 3.30 % - ≤ 4.05  %
-
-                                                            
-                                                            </th>
-                                                            <th  style=" background-color:#a1dd70;color:white;width:120px;height:50px; text-align:center;";>   
-                                                            ≥ 4.05 %
-
-                                                            </th>
-                                                          </tr>
-                                                        </table>
-                                                    </div>
-                                                          <br>
+                                                                                            <div class="col-sm-3"style="background-color:#ffac0e;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                              <strong>≥ 2.55 % - ≤ 3.30 %</strong> 
+                                                                                            </div>
+                                                                                          
+                                                                                            <div class="col-sm-3"style="background-color:#3bb0ba;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                            <strong>≥ 3.30 % - ≤ 4.05 %</strong> 
+                                                                                            </div>
+                                                                                          
+                                                                                            <div class="col-sm-3"style="background-color:#a1dd70;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                            <strong>≥ 4.05 %</strong> 
+                                                                                            </div>
+                                                                                          
+                                                                                  </div>
+                                                                                  
+                                                                                          <br>
+                                                                  
+                                                                                          <div class="row">
+                                                                                            <div class="col-sm-1">
+                                                                                                <div style="color:#a1dd70">&#9632;</div>  
+                                                                                            </div>
+                                                                                            <div class="col-sm-4">
+                                                                                                <output style="padding-top: -5px;">sehat</output>
+                                                                                            </div>
+                                                                                            <div class="col-sm-1">
+                                                                                                <div style="color:#3bb0ba">&#9632;</div>  
+                                                                                            </div>
+                                                                                            <div class="col-sm-4">
+                                                                                                <output style="padding-top: -5px;">cukup sehat</output>
+                                                                                            </div>
+                                                                                        </div>
                                           
-                                                      <div class="row">
-                                                      <div class="col-sm-1">
-                                                    <div style="color:#a1dd70">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">sehat</output>
-                                                </div>
+                                                                                          <div class="row">
+                                                                                              <div class="col-sm-1">
+                                                                                                  <div style="color:#ffac0e">&#9632;</div>  
+                                                                                              </div>
+                                                                                              <div class="col-sm-4">
+                                                                                                  <output style="padding-top: -5px;">kurang sehat</output>
+                                                                                              </div>
 
-                                                <div class="col-sm-1">
-                                                    <div style="color:#3bb0ba">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">cukup sehat</output>
-                                                </div>
-                                                
+                                                                                              <div class="col-sm-1">
+                                                                                                  <div style="color:#dc474f">&#9632;</div>  
+                                                                                              </div>
+                                                                                              <div class="col-sm-4">
+                                                                                                  <p style="padding-top: -5px;">tidak sehat</strong>
+                                                                                              </div>
+                                                                                          </div>
+                                                                                
+                                                                                  </div>  
+                                                                          </div>
+                                                                    
+                                                                          <div class="card">
+                                                                        
+                                                                                  <div class="card-body ">
+                                                                                          <div class="from-group row justify-content-sm-center">
+
+                                                                                                <table>
+                                                                                                    <tr>
+                                                                                                      <td>
+                                                                                                        <strong>Cash Ratio = </strong>
+                                                                                                      </td>
+                                                                                                      <td >
+                                                                                                          <output>
+                                                                                                          Alat Likuid (Kas, Dep < 1 bln,Tab) 
+                                                                                                            <hr>
+                                                                                                          Hutang Lancar (Tab, Dep, Pinj Jk Pendek, Kewajiban YSHD)
+                                                                                                          </output>
+                                                                                                      </td>
+                                                                                                      <td>
+                                                                                                        <output style="padding-top: -5px;"> x 100%</output>
+                                                                                                      </td>
+                                                                                                      
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                          </div>
+                                                                                  </div>
+                                                                          </div>
+
+                                                                    </div>
+
+                                                          </div>
 
                                               </div>
-                                              <div class="row">
-                                                <div class="col-sm-1">
-                                                    <div style="color:#ffac0e">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">kurang sehat</output>
-                                                </div>
-
-                                                <div class="col-sm-1">
-                                                    <div style="color:#dc474f">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <p style="padding-top: -5px;">tidak sehat</p>
-                                                </div>
-                                              </div>
-
-                                                  </div>
-
-
-                                                  
-                                            </div>
-                                            <div class="card">
-                                        
-                                            <div class="card-body ">
-                                              <div class="from-group row justify-content-sm-center">
-                                                <table>
-                                                    <tr>
-                                                      <td>
-                                                        <strong>Cash Ratio = </strong>
-                                                      </td>
-                                                      <td >
-                                                          <output style="text-align:center";>
-                                                          Alat Likuid (Kas, Dep < 1 bln,Tab) 
-                                                            <hr>
-                                                            Hutang Lancar (Tab, Dep, Pinj Jk Pendek, Kewajiban YSHD)
-                                                          </output>
-                                                      </td>
-                                                      <td>
-                                                        <output style="padding-top: -5px;"> x 100%</output>
-                                                      </td>
-                                                      
-                                                    </tr>
-                                                </table>
-                                                </div>
-                                            </div>
-                                    
-                                          </div>
-                                          </div>  
-                                          
-
+                                  
                                     </div>
-                                
+                          </div>
 
+                          <div class="container"  id="ldr_report">
+                                    <div class="row">
+                                              <div class="col-md-12 mx-auto">
+                                                        <div class="form-group row justify-content-sm-center">
+                                                                    <div class="col-sm-7">
+                                                                          <div class="card">
+                                                                                      <div class="card-header">
+                                                                                      LDR
+                                                                                            <div class="card-tools">
+                                                                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                                                            </div>
+                                                                                            <div class="card-tools">
+                                                                                                <button type="submit" class="btn btn-warning btn-sm" id="ldr_btn" title="Export to PDF" name="btnKembali"> 
+                                                                                                  <i class="fa fa-print"></i></button>
+                                                                                            </div>
+                                                                                      </div>
 
-                              </div>
-                            </div>
-                          <div class="row">
-                            <div class="col-md-12 mx-auto">
-                                    
-                                <div class="form-group row justify-content-sm-center">
-                                          <div class="col-sm-7">
-                                            <div class="card" id="ldr_report">
-                                                  <div class="card-header">
-                                                      LDR
-                                                      <div class="card-tools">
-                                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                                      </div>
+                                                                                      <div class="card-body" id="chart_rasio_liquidity_ldr_container">
+                                                                                          <canvas id="chart_rasio_liquidity_ldr"></canvas>
+                                                                                      </div>
+                                                                          </div>
 
-                                                      <div class="card-tools">
-                                                          <button type="submit" class="btn btn-warning btn-sm" id="ldr_btn" title="Export to PDF" name="btnKembali"> 
-                                                            <i class="fa fa-print"></i>
-                                                          </button>
-                                                      </div>
-                                                  </div>
-                                                
-                                                    <div class="card-body" id="chart_rasio_liquidity_ldr_container">
-                                                        <canvas id="chart_rasio_liquidity_ldr"></canvas>
-                                                    </div>
+                                                                    </div>   
+                                                                    
+                                                                    <div class="col-sm-5">
+                                                                          <br>
+                                                                          <br> 
+                                                                          <div class="card">
+                                                                                  <div class="card-body" >
+
+                                                                                      <div class="row">
+                                                                                        <div class="col-sm-3"style="background-color:#dc474f;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                        <strong>> 102.25 %</strong> 
+                                                                                        </div>
+
+                                                                                        <div class="col-sm-3"style="background-color:#ffac0e;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                          <strong>> 98.50 % - ≤ 102.25 %</strong> 
+                                                                                        </div>
+                                                                                      
+                                                                                        <div class="col-sm-3"style="background-color:#3bb0ba;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                        <strong> > 94.75 % - ≤ 98.50  %</strong> 
+                                                                                        </div>
+                                                                                      
+                                                                                        <div class="col-sm-3"style="background-color:#a1dd70;;height:50px;color:white;text-align:center; align-items: center;font-size:12px;">
+                                                                                        <strong>≤ 94.75 %</strong> 
+                                                                                        </div>
+                                                                                      </div>
+                                                                                      <br>
+                                                                      
+                                                                                      <div class="row">
+                                                                                              <div class="col-sm-1">
+                                                                                                  <div style="color:#a1dd70">&#9632;</div>  
+                                                                                              </div>
+                                                                                              <div class="col-sm-4">
+                                                                                                  <output style="padding-top: -5px;">sehat</output>
+                                                                                              </div>
+
+                                                                                              <div class="col-sm-1">
+                                                                                                  <div style="color:#3bb0ba">&#9632;</div>  
+                                                                                              </div>
+                                                                                              <div class="col-sm-4">
+                                                                                                  <output style="padding-top: -5px;">cukup sehat</output>
+                                                                                              </div>
+                                                                                      </div>
+
+                                                                                      <div class="row">
+                                                                                        <div class="col-sm-1">
+                                                                                            <div style="color:#ffac0e">&#9632;</div>  
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <output style="padding-top: -5px;">kurang sehat</output>
+                                                                                        </div>
+
+                                                                                        <div class="col-sm-1">
+                                                                                            <div style="color:#dc474f">&#9632;</div>  
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <p style="padding-top: -5px;">tidak sehat</p>
+                                                                                        </div>
+                                                                                      </div>
+                                                                                
+                                                                                  </div>  
+                                                                          </div>
+                                                                    
+                                                                          <div class="card">
+                                                                        
+                                                                                  <div class="card-body ">
+                                                                                          <div class="from-group row justify-content-sm-center">
+
+                                                                                                <table>
+                                                                                                    <tr>
+                                                                                                      <td>
+                                                                                                        <strong>LDR = </strong>
+                                                                                                      </td>
+                                                                                                      <td >
+                                                                                                          <output>
+                                                                                                          Kredit yang diberikan
+                                                                                                            <hr>
+                                                                                                          Dana yang diterima (Tab + Dep + Pinj > 3bln + Modal Inti)
+                                                                                                          </output>
+                                                                                                      </td>
+                                                                                                      <td>
+                                                                                                        <output style="padding-top: -5px;"> x 100%</output>
+                                                                                                      </td>
+                                                                                                      
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                          </div>
+                                                                                  </div>
+                                                                          </div>
+
+                                                                    </div>
+
+                                                          </div>
+
                                               </div>
-                                          </div>    
-
-                                          <div class="col-sm-5">
-                                      <br>
-                                            <br>
-                                              <div class="card">
-                                                <div class="card-body" >
-                                                <div class="from-group row justify-content-sm-center">
-                                                    <table>
-                                                    <tr>
-                                                    <th style="background-color:#dc474f;color:white; width:120px;text-align:center;"; >
-                                                            > 102.25 %
-
-                                                            </th>
-                                                            <th style="background-color:#ffac0e;color:white; width:120px;text-align:center;"; >
-                                                            > 98.50 % - ≤ 102.25  %
-
-                                                            </th>
-                                                            <th style=" background-color:#3bb0ba;color:white;width:120px;text-align:center;";>
-                                                            >  94.75 % - ≤ 98.50  %
-
-                                                            </th>
-                                                            <th  style=" background-color:#a1dd70;color:white;width:120px;height:50px; text-align:center;";>   
-                                                            ≤  94.75 %
-
-                                                            </th>
-                                                          </tr>
-                                                    </table>
-                                                </div>
-                                                <br>
-                                          
-                                                <div class="row">
-                                                <div class="col-sm-1">
-                                                    <div style="color:#a1dd70">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">sehat</output>
-                                                </div>
-
-                                                <div class="col-sm-1">
-                                                    <div style="color:#3bb0ba">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">cukup sehat</output>
-                                                </div>
-                                                
-
-                                              </div>
-                                              <div class="row">
-                                                <div class="col-sm-1">
-                                                    <div style="color:#ffac0e">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <output style="padding-top: -5px;">kurang sehat</output>
-                                                </div>
-
-                                                <div class="col-sm-1">
-                                                    <div style="color:#dc474f">&#9632;</div>  
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <p style="padding-top: -5px;">tidak sehat</p>
-                                                </div>
-                                              </div>
-                                                
-                                                  </div>
-                                    
-                                          </div>
-                                          <div class="card">
-                                        
-                                            <div class="card-body ">
-                                              <div class="from-group row justify-content-sm-center">
-
-                                                <table>
-                                                    <tr>
-                                                      <td>
-                                                        <strong>LDR = </strong>
-                                                      </td>
-                                                      <td >
-                                                      <output style="text-align:center";>
-                                                          Kredit yang diberikan
-                                                            <hr>
-                                                            Dana yang diterima (Tab + Dep + Pinj > 3bln + Modal Inti)
-                                                          </output>
-                                                      </td>
-                                                      <td>
-                                                        <output style="padding-top: -5px;"> x 100%</output>
-                                                      </td>
-                                                      
-                                                    </tr>
-                                                </table>
-                                                </div>
-                                            </div>
-                                    
-                                          </div>
-
+                                  
                                     </div>
+                          </div>
 
-                              </div>
-                            </div>
-                      
-                          <!-- /.card-body -->
-                   </div>
+                  </div> 
+            </div>
         <!-- End Data Tables-->
         <input type="hidden" class="form-control" id="user_kode_kantor" name="user_kode_kantor" value = "<?php echo $kode_kantor; ?>">
           <input type="hidden" class="form-control" id="base_url" name="base_url" value = "<?php echo base_url(); ?>">
@@ -376,7 +368,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	?>
 <!--  -->
 <script src="<?php echo base_url('assets/dist/js/accounting.min.js')?>"></script>
-<?php $this->view('ViewAccounting/js/dashboard_ratio_liquidity_js.php'); ?>
+<?php $this->view('ViewAccounting/js/dashboard_ratio_camel/dashboard_ratio_liquidity_js.php'); ?>
  
 </body>
 </html>
