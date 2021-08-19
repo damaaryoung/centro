@@ -83,49 +83,116 @@
                           <i class="fas fa-angle-left right"></i>
                         </p>
                       </a>
-                      <ul class="nav nav-treeview">
-                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                          <li class="nav-item">
-                            <a href="<?php echo base_url(); ?>dashboard_ratio" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                              <p>Ratio Dashboard Capital</p>
-                            </a>
-                          </li>
-                        <?php }?>
-                      </ul>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i> 
+                                <p>Ratio Dashboard Camel
+                                <i class="fas fa-angle-left right"></i>
+                                </p>
+                              </a>
+                              <ul class="nav nav-treeview">
+                            <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>dashboard_ratio" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                  <p>Ratio Dashboard Capital</p>
+                                </a>
+                              </li>
+                            <?php }?>
+                          </ul>
 
-                      <ul class="nav nav-treeview">
-                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                          <li class="nav-item">
-                            <a href="<?php echo base_url(); ?>dashboard_asset" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                              <p>Ratio Dashboard Asset</p>
-                            </a>
-                          </li>
-                        <?php }?>
-                      </ul>
+                          <ul class="nav nav-treeview">
+                            <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>dashboard_asset" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                  <p>Ratio Dashboard Asset</p>
+                                </a>
+                              </li>
+                            <?php }?>
+                          </ul>
 
-                      <ul class="nav nav-treeview">
-                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                          <li class="nav-item">
-                            <a href="<?php echo base_url(); ?>dashboard_earning" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                              <p>Ratio Dashboard Earning</p>
-                            </a>
-                          </li>
-                        <?php }?>
-                      </ul>
-                      
-                      <ul class="nav nav-treeview">
-                        <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
-                          <li class="nav-item">
-                            <a href="<?php echo base_url(); ?>dashboard_liquidity" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                              <p>Ratio Dashboard Liquidity</p>
-                            </a>
-                          </li>
-                        <?php }?>
-                      </ul>
+                          <ul class="nav nav-treeview">
+                            <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>dashboard_earning" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                  <p>Ratio Dashboard Earning</p>
+                                </a>
+                              </li>
+                            <?php }?>
+                          </ul>
+                          
+                          <ul class="nav nav-treeview">
+                            <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>dashboard_liquidity" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                  <p>Ratio Dashboard Liquidity</p>
+                                </a>
+                              </li>
+                            <?php }?>
+                          </ul>
+                            </li>
+                            <li class="nav-item">
+                              <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i> 
+                                <p>Ratio Dashboard Tambahan
+                                <i class="fas fa-angle-left right"></i>
+                                </p>
+                              </a>
+
+                                    <ul class="nav nav-treeview">
+                                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                                    <li class="nav-item">
+                                      <a href="<?php echo base_url(); ?>dashboard_ratio_roe" class="nav-link">
+                                      <i class="far fa-circle nav-icon"></i>
+                                        <p>Ratio Dashboard ROE</p>
+                                      </a>
+                                    </li>
+                                  <?php }?>
+                                </ul>
+                                
+                                    <ul class="nav nav-treeview">
+                                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                                    <li class="nav-item">
+                                      <a href="<?php echo base_url(); ?>dashboard_ratio_npl_gross" class="nav-link">
+                                      <i class="far fa-circle nav-icon"></i>
+                                        <p>Ratio Dashboard NPL Gross</p>
+                                      </a>
+                                    </li>
+                                  <?php }?>
+                                </ul>
+                                
+                                    <ul class="nav nav-treeview">
+                                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                                    <li class="nav-item">
+                                      <a href="<?php echo base_url(); ?>dashboard_ratio_npl_net" class="nav-link">
+                                      <i class="far fa-circle nav-icon"></i>
+                                        <p>Ratio Dashboard NPL Net</p>
+                                      </a>
+                                    </li>
+                                  <?php }?>
+                                </ul>
+                                
+                                    <ul class="nav nav-treeview">
+                                    <?php if($this->session->userdata('divisi_id') == 'IT'){ ?>
+                                    <li class="nav-item">
+                                      <a href="<?php echo base_url(); ?>dashboard_ratio_nim" class="nav-link">
+                                      <i class="far fa-circle nav-icon"></i>
+                                        <p>Ratio Dashboard NIM</p>
+                                      </a>
+                                    </li>
+                                  <?php }?>
+                                </ul>
+                                
+
+                            </li>
+                          </ul>
+
+
+                        
 
                     </li>
                   

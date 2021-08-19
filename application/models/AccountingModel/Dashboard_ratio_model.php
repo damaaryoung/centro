@@ -123,6 +123,74 @@ class Dashboard_ratio_model extends CI_Model{
               return $hasil;
           }
       }
+    function get_data_chart_rasio_tambahan_roe($src_kode_kantor,$src_tgl_laporan)
+    {
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+      $str = ("SELECT avg(rasio) AS rasio,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
+      FROM acc_das_rasio ac WHERE ac.`jenis`='ROE' 
+      AND ac.`kode_kantor` like '$src_kode_kantor%'
+      AND tgl_laporan like '$src_tgl_laporan%'
+      GROUP BY tgl_laporan asc");
+      $query  = $this->db2->query($str);
+    
+    if($query->num_rows() > 0){
+              foreach($query->result() as $data){
+                  $hasil[] = $data;
+              }
+              return $hasil;
+          }
+      }
+    function get_data_chart_rasio_tambahan_npl_gross($src_kode_kantor,$src_tgl_laporan)
+    {
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+      $str = ("SELECT avg(rasio) AS rasio,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
+      FROM acc_das_rasio ac WHERE ac.`jenis`='NPL GROSS' 
+      AND ac.`kode_kantor` like '$src_kode_kantor%'
+      AND tgl_laporan like '$src_tgl_laporan%'
+      GROUP BY tgl_laporan asc");
+      $query  = $this->db2->query($str);
+    
+    if($query->num_rows() > 0){
+              foreach($query->result() as $data){
+                  $hasil[] = $data;
+              }
+              return $hasil;
+          }
+      }
+    function get_data_chart_rasio_tambahan_npl_net($src_kode_kantor,$src_tgl_laporan)
+    {
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+      $str = ("SELECT avg(rasio) AS rasio,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
+      FROM acc_das_rasio ac WHERE ac.`jenis`='NPL NET' 
+      AND ac.`kode_kantor` like '$src_kode_kantor%'
+      AND tgl_laporan like '$src_tgl_laporan%'
+      GROUP BY tgl_laporan asc");
+      $query  = $this->db2->query($str);
+    
+    if($query->num_rows() > 0){
+              foreach($query->result() as $data){
+                  $hasil[] = $data;
+              }
+              return $hasil;
+          }
+      }
+    function get_data_chart_rasio_tambahan_nim($src_kode_kantor,$src_tgl_laporan)
+    {
+      $this->db2 = $this->load->database('DB_CENTRO', true);
+      $str = ("SELECT avg(rasio) AS rasio,DATE_FORMAT(tgl_laporan,'%M') AS tgl_laporan 
+      FROM acc_das_rasio ac WHERE ac.`jenis`='NIM' 
+      AND ac.`kode_kantor` like '$src_kode_kantor%'
+      AND tgl_laporan like '$src_tgl_laporan%'
+      GROUP BY tgl_laporan asc");
+      $query  = $this->db2->query($str);
+    
+    if($query->num_rows() > 0){
+              foreach($query->result() as $data){
+                  $hasil[] = $data;
+              }
+              return $hasil;
+          }
+      }
     
    
       public function sysdate(){

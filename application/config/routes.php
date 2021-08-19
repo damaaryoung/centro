@@ -94,3 +94,7 @@ $route['dashboard_ratio'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboa
 $route['dashboard_asset'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_asset';
 $route['dashboard_earning'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_earning';
 $route['dashboard_liquidity'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_liquidity';
+$route['dashboard_ratio_roe'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_tambahan_roe';
+$route['dashboard_ratio_npl_gross'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_tambahan_npl_gross';
+$route['dashboard_ratio_npl_net'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_tambahan_npl_net';
+$route['dashboard_ratio_nim'] = 'Accounting/Dashboard_ratio_controller/rasio_dashboard_tambahan_nim';

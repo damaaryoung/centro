@@ -36,7 +36,7 @@ class Dashboard_ratio_controller extends CI_Controller {
 		// $chart          = $this->Dashboard_finance_model->get_data_chart();
 		//  var_dump(	$data['speedometer_aset'] );	
 		if($session != ''){
-			$this->load->view('ViewAccounting/dashboard_ratio_capital_view.php', $data);
+			$this->load->view('ViewAccounting/dashboard_ratio_camel/dashboard_ratio_capital_view.php', $data);
 		}
 		else{
 			redirect('LoginController/index'); 
@@ -67,7 +67,7 @@ class Dashboard_ratio_controller extends CI_Controller {
 		// $chart          = $this->Dashboard_finance_model->get_data_chart();
 		//  var_dump(	$data['speedometer_aset'] );	
 		if($session != ''){
-			$this->load->view('ViewAccounting/dashboard_ratio_aset_view.php', $data);
+			$this->load->view('ViewAccounting/dashboard_ratio_camel/dashboard_ratio_aset_view.php', $data);
 		}
 		else{
 			redirect('LoginController/index'); 
@@ -104,7 +104,7 @@ class Dashboard_ratio_controller extends CI_Controller {
 		// $chart          = $this->Dashboard_finance_model->get_data_chart();
 		//  var_dump(	$data['speedometer_aset'] );	
 		if($session != ''){
-			$this->load->view('ViewAccounting/dashboard_ratio_earning_view.php', $data);
+			$this->load->view('ViewAccounting/dashboard_ratio_camel/dashboard_ratio_earning_view.php', $data);
 		}
 		else{
 			redirect('LoginController/index'); 
@@ -140,7 +140,7 @@ class Dashboard_ratio_controller extends CI_Controller {
 		// $chart          = $this->Dashboard_finance_model->get_data_chart();
 		//  var_dump(	$data['speedometer_aset'] );	
 		if($session != ''){
-			$this->load->view('ViewAccounting/dashboard_ratio_liquidity_view.php', $data);
+			$this->load->view('ViewAccounting/dashboard_ratio_camel/dashboard_ratio_liquidity_view.php', $data);
 		}
 		else{
 			redirect('LoginController/index'); 
@@ -160,5 +160,123 @@ class Dashboard_ratio_controller extends CI_Controller {
 		$data['rasio_liquidity_ldr']   =$rasio_liquidity_ldr; 
 		echo json_encode($data);
 	}
+
+	public function rasio_dashboard_tambahan_roe()
+	{
+        $session             = $this->session->userdata('nama');
+        $data['kode_kantor'] = $this->session->userdata('kd_cabang');
+        $data['divisi_id']   = $this->session->userdata('divisi_id');
+		$data['js']          = $this->load->view('includes/js.php', NULL, TRUE);
+		$data['css']         = $this->load->view('includes/css.php', NULL, TRUE);
+		$data['navbar']      = $this->load->view('templates/navbar.php', NULL, TRUE);
+		$data['sidebar']     = $this->load->view('templates/sidebar.php', NULL, TRUE);
+		$data['footer']      = $this->load->view('templates/footer.php', NULL, TRUE);
+		$data['ctrlbar']     = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
+
+		//	$data['speedometer_npat_ytd'] = $this->Dashboard_finance_model->get_data_speedometer_modal();
+		// $chart          = $this->Dashboard_finance_model->get_data_chart();
+		//  var_dump(	$data['speedometer_aset'] );	
+		if($session != ''){
+			$this->load->view('ViewAccounting/dashboard_ratio_tambahan/dashboard_ratio_roe_view.php', $data);
+		}
+		else{
+			redirect('LoginController/index'); 
+		}
+	}
+	public function get_data_chart_roe(){
+		$src_kode_kantor = $this->input->post('src_kode_kantor');
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
+		$rasio_tambahan_roe 	      =$this->Dashboard_ratio_model->get_data_chart_rasio_tambahan_roe($src_kode_kantor,$src_tgl_laporan);
+		$data['rasio_tambahan_roe']   =$rasio_tambahan_roe; 
+		echo json_encode($data);
+	}
+	public function rasio_dashboard_tambahan_npl_gross()
+	{
+        $session             = $this->session->userdata('nama');
+        $data['kode_kantor'] = $this->session->userdata('kd_cabang');
+        $data['divisi_id']   = $this->session->userdata('divisi_id');
+		$data['js']          = $this->load->view('includes/js.php', NULL, TRUE);
+		$data['css']         = $this->load->view('includes/css.php', NULL, TRUE);
+		$data['navbar']      = $this->load->view('templates/navbar.php', NULL, TRUE);
+		$data['sidebar']     = $this->load->view('templates/sidebar.php', NULL, TRUE);
+		$data['footer']      = $this->load->view('templates/footer.php', NULL, TRUE);
+		$data['ctrlbar']     = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
+
+		//	$data['speedometer_npat_ytd'] = $this->Dashboard_finance_model->get_data_speedometer_modal();
+		// $chart          = $this->Dashboard_finance_model->get_data_chart();
+		//  var_dump(	$data['speedometer_aset'] );	
+		if($session != ''){
+			$this->load->view('ViewAccounting/dashboard_ratio_tambahan/dashboard_ratio_npl_gross_view.php', $data);
+		}
+		else{
+			redirect('LoginController/index'); 
+		}
+	}
+	public function get_data_chart_npl_gross(){
+		$src_kode_kantor = $this->input->post('src_kode_kantor');
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
+		$rasio_tambahan_npl_gross 	      =$this->Dashboard_ratio_model->get_data_chart_rasio_tambahan_npl_gross($src_kode_kantor,$src_tgl_laporan);
+		$data['rasio_tambahan_npl_gross']   =$rasio_tambahan_npl_gross; 
+		echo json_encode($data);
+	}
+	public function rasio_dashboard_tambahan_npl_net()
+	{
+        $session             = $this->session->userdata('nama');
+        $data['kode_kantor'] = $this->session->userdata('kd_cabang');
+        $data['divisi_id']   = $this->session->userdata('divisi_id');
+		$data['js']          = $this->load->view('includes/js.php', NULL, TRUE);
+		$data['css']         = $this->load->view('includes/css.php', NULL, TRUE);
+		$data['navbar']      = $this->load->view('templates/navbar.php', NULL, TRUE);
+		$data['sidebar']     = $this->load->view('templates/sidebar.php', NULL, TRUE);
+		$data['footer']      = $this->load->view('templates/footer.php', NULL, TRUE);
+		$data['ctrlbar']     = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
+
+		//	$data['speedometer_npat_ytd'] = $this->Dashboard_finance_model->get_data_speedometer_modal();
+		// $chart          = $this->Dashboard_finance_model->get_data_chart();
+		//  var_dump(	$data['speedometer_aset'] );	
+		if($session != ''){
+			$this->load->view('ViewAccounting/dashboard_ratio_tambahan/dashboard_ratio_npl_net_view.php', $data);
+		}
+		else{
+			redirect('LoginController/index'); 
+		}
+	}
+	public function get_data_chart_npl_net(){
+		$src_kode_kantor = $this->input->post('src_kode_kantor');
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
+		$rasio_tambahan_npl_net 	      =$this->Dashboard_ratio_model->get_data_chart_rasio_tambahan_npl_net($src_kode_kantor,$src_tgl_laporan);
+		$data['rasio_tambahan_npl_net']   =$rasio_tambahan_npl_net; 
+		echo json_encode($data);
+	}
+	public function rasio_dashboard_tambahan_nim()
+	{
+        $session             = $this->session->userdata('nama');
+        $data['kode_kantor'] = $this->session->userdata('kd_cabang');
+        $data['divisi_id']   = $this->session->userdata('divisi_id');
+		$data['js']          = $this->load->view('includes/js.php', NULL, TRUE);
+		$data['css']         = $this->load->view('includes/css.php', NULL, TRUE);
+		$data['navbar']      = $this->load->view('templates/navbar.php', NULL, TRUE);
+		$data['sidebar']     = $this->load->view('templates/sidebar.php', NULL, TRUE);
+		$data['footer']      = $this->load->view('templates/footer.php', NULL, TRUE);
+		$data['ctrlbar']     = $this->load->view('templates/ControlSidebar.php', NULL, TRUE);
+
+		//	$data['speedometer_npat_ytd'] = $this->Dashboard_finance_model->get_data_speedometer_modal();
+		// $chart          = $this->Dashboard_finance_model->get_data_chart();
+		//  var_dump(	$data['speedometer_aset'] );	
+		if($session != ''){
+			$this->load->view('ViewAccounting/dashboard_ratio_tambahan/dashboard_ratio_nim_view.php', $data);
+		}
+		else{
+			redirect('LoginController/index'); 
+		}
+	}
+	public function get_data_chart_nim(){
+		$src_kode_kantor = $this->input->post('src_kode_kantor');
+		$src_tgl_laporan = $this->input->post('src_tgl_laporan');
+		$rasio_tambahan_nim 	      =$this->Dashboard_ratio_model->get_data_chart_rasio_tambahan_nim($src_kode_kantor,$src_tgl_laporan);
+		$data['rasio_tambahan_nim']   =$rasio_tambahan_nim; 
+		echo json_encode($data);
+	}
+
 
 }
